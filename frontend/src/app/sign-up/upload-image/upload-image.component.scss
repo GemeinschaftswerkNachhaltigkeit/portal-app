@@ -1,0 +1,55 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+dropzone {
+  // background: url(http://localhost:8081/api/v1/files/7a5774a8-beec-41ea-95ee-9e5e1b3d8c15.png);
+  aspect-ratio: 473 / 116;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+dropzone.logo,
+dropzone.contact {
+  aspect-ratio: 1/ 1;
+}
+dropzone.image {
+  aspect-ratio: 473 / 116;
+}
+
+.upload-label,
+.upload-error {
+  flex: 0 0 100%;
+}
+
+.upload-wrapper {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  .dropzone-wrapper {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    .uploaded-image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.disabled {
+  //border-color: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.38);
+}

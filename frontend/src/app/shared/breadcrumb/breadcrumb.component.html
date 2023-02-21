@@ -1,0 +1,15 @@
+<div class="breadcrumb">
+  <a
+    *ngIf="route; else label"
+    class="breadcrumb-link"
+    [ngClass]="{ isLast: isLast }"
+    [routerLink]="route"
+    >{{ name }}</a
+  >
+  <ng-template #label>
+    <div class="breadcrumb-label">{{ name }}</div>
+  </ng-template>
+  <div class="icon" *ngIf="!isLast">
+    <mat-icon>chevron_right</mat-icon>
+  </div>
+</div>

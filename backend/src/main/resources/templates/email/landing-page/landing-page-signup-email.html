@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="DE">
+<head>
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <title></title>
+    <style th:replace="email/shared/style :: style">
+        <!-- style block -->
+    </style>
+</head>
+<body>
+<div class="es-wrapper-color"> <!--[if gte mso 9]>
+    <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+        <v:fill type="tile" color="#ffffff" origin="0.5, 0" position="0.5, 0"></v:fill>
+    </v:background><![endif]-->
+    <table role="presentation" class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td valign="top">
+                <table role="presentation" cellpadding="0" cellspacing="0" class="es-content" align="center">
+                    <tr>
+                        <td class="es-info-area" align="center">
+                            <table role="presentation"  bgcolor="rgba(0, 0, 0, 0)" class="es-content-body" align="center" cellpadding="0"
+                                   cellspacing="0" width="600" style="background-color: transparent">
+                                <tr>
+                                    <td class="es-p10t es-p10b es-p20r es-p20l" align="left">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td width="560" align="center" valign="top">
+                                                    <table cellpadding="0" cellspacing="0" width="100%"
+                                                           role="presentation">
+                                                        <tr>
+                                                            <td class="es-infoblock es-m-txt-c" align="center">
+                                                                <p>Registrierung einer neuen Initiative auf der LandingPage</p></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table role="presentation" class="es-content" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td align="center">
+                            <table role="presentation" class="es-content-body" style="background-color: transparent" width="600"
+                                   cellspacing="0" cellpadding="0" bgcolor="transparent" align="center">
+                                <tr>
+                                    <td class="es-p20r es-p20l"
+                                        style="background-position: center top;background-color: #ffffff"
+                                        bgcolor="#ffffff" align="left">
+                                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="560" valign="top" align="center">
+                                                    <table style="background-position: center bottom;background-color: transparent"
+                                                           width="100%" cellspacing="0" cellpadding="0"
+                                                           bgcolor="transparent" role="presentation">
+                                                        <tr>
+                                                            <td class="es-p10t es-p5b" bgcolor="transparent"
+                                                                align="left">
+                                                                <h3 style="color: #13486a">Neue Initiative</h3>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td bgcolor="transparent" align="left">
+                                                                <dl>
+                                                                    <dt class="es-p20t">Name:</dt>
+                                                                    <dd th:text="${signupForm.name}">
+                                                                        Nina Nachhaltig
+                                                                    </dd>
+                                                                    <dt class="es-p20t">E-Mail:</dt>
+                                                                    <dd th:text="${signupForm.emailAddress}">
+                                                                        Nina.Nachhaltig@exxeta.com
+                                                                    </dd>
+
+                                                                    <dt class="es-p20t">Nachhaltigkeitsziele:</dt>
+                                                                    <dd th:text="${#strings.arrayJoin(signupForm.sustainabilityGoals, ', ')}">
+                                                                        1, 2 ,6
+                                                                    </dd>
+
+                                                                    <dt class="es-p20t">Nachhaltigkeitsbeitrag der Initiative:</dt>
+                                                                    <dd th:text="${signupForm.contribution}">
+                                                                        Ich find die neue Seite echt super. Danke dafür.
+                                                                    </dd>
+                                                                </dl>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

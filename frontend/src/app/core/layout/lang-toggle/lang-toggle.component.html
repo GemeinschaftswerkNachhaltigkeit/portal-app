@@ -1,0 +1,12 @@
+<div class="lang-switch">
+  <ng-container *ngFor="let lang of availableLangs">
+    <a
+      title="lang.name"
+      class="lang-option"
+      (click)="selectLang(lang.key)"
+      *ngIf="lang.key !== selectedLang"
+    >
+      <div [ngClass]="['flag', lang.key]"></div>
+    </a>
+  </ng-container>
+</div>

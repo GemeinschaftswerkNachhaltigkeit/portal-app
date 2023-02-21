@@ -1,0 +1,24 @@
+<article class="content-section">
+  <header class="header">
+    <div class="subtitle-wrapper">
+      <h3 class="subtitle">{{ subtitle }}</h3>
+      <p
+        class="info"
+        [ngClass]="{
+          activity: infoType === 'ACTIVITY',
+          organisation: infoType === 'ORGANISATION'
+        }"
+      >
+        {{ info }}
+      </p>
+    </div>
+
+    <div class="title-wrapper">
+      <app-heading type="h2" size="xl" color="blue">{{ title }}</app-heading>
+      <ng-content select="[badge]"></ng-content>
+    </div>
+  </header>
+  <div class="body">
+    <ng-content></ng-content>
+  </div>
+</article>

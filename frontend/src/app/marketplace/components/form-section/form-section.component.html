@@ -1,0 +1,14 @@
+<section class="form-section">
+  <header class="header">
+    <div class="header-content">
+      <app-heading size="sm" color="none">{{ title }}</app-heading>
+      <app-text-block
+        ><p class="description">{{ description }}</p></app-text-block
+      >
+    </div>
+  </header>
+
+  <div class="content-wrapper" [class]="colStyle">
+    <ng-content></ng-content>
+  </div>
+</section>

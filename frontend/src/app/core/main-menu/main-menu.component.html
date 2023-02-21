@@ -1,0 +1,102 @@
+<nav class="menu highlighted-links" [ngClass]="{ vertical: vertical }">
+  <app-menu-entry
+    [url]="'/map'"
+    (routeClicked)="closeNavHandler()"
+    [underline]="mobile"
+  >
+    {{ 'menu.search' | translate }}
+  </app-menu-entry>
+
+  <app-menu-entry
+    [url]="'/marketplace/search'"
+    (routeClicked)="closeNavHandler()"
+    [underline]="mobile"
+  >
+    {{ 'menu.marketplace' | translate }}
+  </app-menu-entry>
+
+  <div class="dropdown-wrapper">
+    <app-dropdown-menu [title]="'menu.about' | translate">
+      <div>
+        <app-menu-entry
+          [internal]="false"
+          [url]="lpService.getAboutUrl()"
+          [underline]="true"
+          [blue]="true"
+        >
+          {{ 'menu.project' | translate }}
+        </app-menu-entry>
+      </div>
+      <div>
+        <app-menu-entry
+          [internal]="false"
+          [url]="lpService.getRoadmapUrl()"
+          [underline]="true"
+          [blue]="true"
+        >
+          {{ 'menu.roadmap' | translate }}</app-menu-entry
+        >
+      </div>
+      <div>
+        <app-menu-entry
+          [internal]="false"
+          [url]="lpService.getPartnerUrl()"
+          [underline]="true"
+          [blue]="true"
+          [last]="true"
+        >
+          {{ 'menu.partner' | translate }}</app-menu-entry
+        >
+      </div>
+    </app-dropdown-menu>
+  </div>
+  <div class="mobile-dropdown-wrapper">
+    <app-accordion-menu>
+      <app-accordion-menu-item [title]="'menu.about' | translate">
+        <div>
+          <app-menu-entry
+            [internal]="false"
+            [url]="lpService.getAboutUrl()"
+            [underline]="true"
+            [blue]="true"
+          >
+            {{ 'menu.project' | translate }}
+          </app-menu-entry>
+        </div>
+        <div>
+          <app-menu-entry
+            [internal]="false"
+            [url]="lpService.getRoadmapUrl()"
+            [underline]="true"
+            [blue]="true"
+          >
+            {{ 'menu.roadmap' | translate }}</app-menu-entry
+          >
+        </div>
+        <div>
+          <app-menu-entry
+            [internal]="false"
+            [url]="lpService.getPartnerUrl()"
+            [underline]="true"
+            [blue]="true"
+          >
+            {{ 'menu.partner' | translate }}</app-menu-entry
+          >
+        </div>
+      </app-accordion-menu-item>
+    </app-accordion-menu>
+  </div>
+  <div class="user">
+    <app-menu-entry
+      *ngIf="isLoggedIn()"
+      [url]="'/account'"
+      (routeClicked)="closeNavHandler()"
+      [underline]="mobile"
+    >
+      <div class="user-content">
+        <span class="icon"><app-outlined-icon>person</app-outlined-icon></span>
+        <div>{{ getUser()?.firstName + ' ' + getUser()?.lastName }}</div>
+      </div>
+    </app-menu-entry>
+  </div>
+</nav>

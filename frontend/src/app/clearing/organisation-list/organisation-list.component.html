@@ -1,0 +1,155 @@
+<mat-sidenav-container>
+  <mat-sidenav position="end" #sidenav mode="side" [(opened)]="opened">
+    <button mat-button (click)="closeSidenav()">
+      <app-outlined-icon>close</app-outlined-icon>
+    </button>
+    <div class="side-nav-content">
+      <ng-container *ngIf="orgData$ | async as orgData">
+        <ng-container
+          *ngIf="selectedOrgId && sidebarContentType === 'duplicates'"
+        >
+          <app-duplicate [duplicate]="orgDuplicate$ | async"></app-duplicate>
+        </ng-container>
+        <ng-container
+          *ngIf="selectedOrgId && sidebarContentType === 'feedback'"
+        >
+          <app-feedback-history
+            [feedback]="getFeedbackHistory(orgData)"
+          ></app-feedback-history>
+        </ng-container>
+      </ng-container>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-content-wrapper>
+      <header class="header">
+        <h1 class="title">Clearing</h1>
+
+        <div class="actions">
+          <mat-slide-toggle
+            class="switch"
+            color="primary"
+            [checked]="showWatingForFeedbackEntries"
+            (change)="toggleShowInFeedbackHandler()"
+          >
+            {{ 'clearing.btn.showInFeedback' | translate }}
+          </mat-slide-toggle>
+          <button
+            mat-flat-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Sort menu button"
+          >
+            <div class="sort-btn-content" *ngIf="sortDirection === 'desc'">
+              <mat-icon>sort</mat-icon>
+              <div>{{ 'clearing.btn.sortDesc' | translate }}</div>
+            </div>
+            <div class="sort-btn-content" *ngIf="sortDirection === 'asc'">
+              <mat-icon>sort</mat-icon>
+              <div>{{ 'clearing.btn.sortAsc' | translate }}</div>
+            </div>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button
+              class="sort-menu-btn"
+              mat-menu-item
+              (click)="setSortHandler('asc')"
+            >
+              <span>{{ 'clearing.btn.sortAsc' | translate }}</span>
+            </button>
+            <button
+              class="sort-menu-btn"
+              mat-menu-item
+              (click)="setSortHandler('desc')"
+            >
+              <span>{{ 'clearing.btn.sortDesc' | translate }}</span>
+            </button>
+          </mat-menu>
+        </div>
+      </header>
+      <div class="results">
+        <div class="cards">
+          <app-organisation-card
+            *ngFor="let orgWIP of orgData$ | async; index as i"
+            [orgWIP]="orgWIP"
+            [active]="
+              selectedOrgId === orgWIP.id?.toString() ||
+              orgFeedbackHistory === i
+            "
+            (toggleFeedbackHistory)="openSidebar(orgWIP.id!, 'feedback')"
+          >
+            <button
+              mat-flat-button
+              color="blue-navy"
+              (click)="openSidebar(orgWIP.id!, 'duplicates')"
+              *ngIf="orgWIP.hasDuplicates"
+            >
+              <app-outlined-icon>content_copy</app-outlined-icon>
+              {{ 'clearing.btn.showDuplicates' | translate }}
+            </button>
+            <a
+              *ngIf="orgWIP.randomUniqueId"
+              [href]="
+                'sign-up/organisation/' +
+                orgWIP.randomUniqueId +
+                '?next=/clearing'
+              "
+              target="_blank"
+              class="details-btn"
+              mat-flat-button
+            >
+              <app-outlined-icon>info</app-outlined-icon> Alle Infos anzeigen</a
+            >
+            <!--           <button><app-outlined-icon>content_copy</app-outlined-icon></button> -->
+            <button
+              mat-flat-button
+              color="green"
+              (click)="publishOrg(orgWIP.id!)"
+              [disabled]="!isAllowedToPublish(orgWIP.status!)"
+            >
+              <app-outlined-icon>publish</app-outlined-icon>
+              {{ 'clearing.btn.publish' | translate }}
+            </button>
+            <button
+              mat-flat-button
+              color="yellow"
+              (click)="requireFeedback(orgWIP.id!, orgWIP.name!)"
+              [disabled]="!isAllowedToRequestFeedback(orgWIP.status!)"
+            >
+              <app-outlined-icon> help_outline </app-outlined-icon>
+              {{ 'clearing.btn.requireFeedback' | translate }}
+            </button>
+            <button
+              mat-flat-button
+              color="accent"
+              (click)="rejectOrg(orgWIP.id!, orgWIP.name!)"
+              [disabled]="!isAllowedToReject(orgWIP.status!)"
+            >
+              <app-outlined-icon> close </app-outlined-icon>
+              {{ 'clearing.btn.reject' | translate }}
+            </button>
+          </app-organisation-card>
+          <div
+            *ngIf="(orgData$ | async)?.length === 0"
+            class="mat-elevation-z8 org-details card"
+          >
+            {{ 'clearing.no-data' | translate }}
+          </div>
+        </div>
+
+        <mat-paginator
+          class="mat-elevation-z8"
+          *ngIf="(orgData$ | async)?.length"
+          color="accent"
+          [length]="(orgListPaging$ | async)?.totalElements"
+          [pageIndex]="(orgListPaging$ | async)?.number"
+          [pageSize]="(orgListPaging$ | async)?.size || pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true"
+          aria-label="Select page"
+          (page)="pageChangedHandler($event)"
+        >
+        </mat-paginator>
+      </div>
+    </app-content-wrapper>
+  </mat-sidenav-content>
+</mat-sidenav-container>

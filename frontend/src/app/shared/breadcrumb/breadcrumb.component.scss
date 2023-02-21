@@ -1,0 +1,22 @@
+@use 'palette' as *;
+@use 'theme' as *;
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $spacing-3;
+  color: $blue-navy;
+  .icon {
+    display: flex;
+    align-items: center;
+  }
+  .breadcrumb-link {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .breadcrumb-label {
+    text-decoration: none;
+    cursor: default;
+  }
+}

@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: white;
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .logo-placeholder {
+    background-color: $gray-light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: $gray;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,7 @@
+<div class="feedback">
+  <div class="icon">
+    <mat-icon *ngIf="data?.type === 'success'">check</mat-icon>
+    <mat-icon *ngIf="data?.type === 'error'">error</mat-icon>
+  </div>
+  <p>{{ data.msg }}</p>
+</div>

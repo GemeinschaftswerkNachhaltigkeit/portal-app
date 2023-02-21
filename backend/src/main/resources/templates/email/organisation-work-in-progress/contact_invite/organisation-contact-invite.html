@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="DE">
+<head th:replace="email/shared/head :: head">
+    <title>Organisation contact invite</title>
+    header
+</head>
+<body style="width:100%;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;margin:0">
+<div class="es-wrapper-color" style="background-color:#FAFAFA"><!--[if gte mso 9]>
+    <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+        <v:fill type="tile" color="#fafafa"></v:fill>
+    </v:background>
+    <![endif]-->
+    <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" role="presentation"
+           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FAFAFA">
+        <tr>
+            <td valign="top" style="padding:0;margin:0">
+                <header th:replace="email/shared/header :: header">
+                    header
+                </header>
+                <!-- BEGIN Content -->
+                <table class="es-content" cellspacing="0" cellpadding="0" align="center" role="presentation"
+                       style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;color:#19486A">
+                    <tr>
+                        <td align="center" style="padding:0;margin:0">
+                            <table class="es-content-body" role="presentation"
+                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:500px"
+                                   cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
+                                <tr>
+                                    <td align="left"
+                                        style="margin:0;padding-top:20px;padding-left:50px;padding-right:50px;padding-bottom:30px">
+                                        <table width="100%" cellspacing="0" cellpadding="0" role="presentation"
+                                               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                            <tr>
+                                                <td valign="top" align="center" style="padding:0;margin:0;width:950px">
+                                                    <table width="100%" cellspacing="0" cellpadding="0"
+                                                           role="presentation"
+                                                           style="
+                                                           max-width: 500px;
+                                                           table-layout: fixed;
+                                                           mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+
+                                                        <!-- BEGIN: english below -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                --- english below ---
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: english below -->
+
+                                                        <!-- BEGIN: Headline -->
+                                                        <tr>
+                                                            <td class="es-m-txt-l" align="center"
+                                                                style="padding:0;margin:0;padding-top:20px;padding-bottom:25px">
+                                                                <h1 style="margin:0;line-height:48px;mso-line-height-rule:exactly;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-size:36px;font-style:normal;font-weight:bold;color:#19486a">
+                                                                    <strong>Werde Organisationskontakt!</strong></h1></td>
+                                                        </tr>
+                                                        <!-- END: Headline -->
+
+                                                        <!-- BEGIN: Hero Image -->
+                                                        <tr>
+                                                            <td style="padding:0;margin:0;padding-bottom:20px;font-size:0px,"
+                                                                align="center"><img th:src="@{${emailAssetsBasePath} + 'email/images/email-hero.jpg'}"
+                                                                                    alt="Und jetzt alle"
+                                                                                    style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px;width:500px; height:325px; object-fit:cover;"
+                                                                                    title="Und jetzt alle" /></td>
+                                                        </tr>
+                                                        <!-- END: Hero Image -->
+
+                                                        <!-- BEGIN: Text Body -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                Hallo<span style="font-weight: bold" th:text="' ' + ${contactInvite.contact.firstName}"></span>,<br/><br/>
+                                                                <span style="font-weight: bold" th:text="${organisation.contact.firstName} + ' '"></span>lädt dich ein, als Kontaktperson
+                                                                für <span style="font-weight: bold" th:text="${organisation.name}"></span> auf der Webplattform des Gemeinschaftswerk
+                                                                Nachhaltigkeit gelistet zu werden. Die bundesweite offene Plattform wird vom Rat für
+                                                                Nachhaltige Entwicklung (RNE) auf Initiative von Bund und Ländern aufgebaut, um
+                                                                Engagement für Nachhaltigkeit in Politik, Wirtschaft, Wissenschaft und Zivilgesellschaft
+                                                                sichtbarer zu machen und mehr Menschen und Organisationen dazu zu bewegen, sich für eine
+                                                                nachhaltige Entwicklung einzusetzen.<br/><br/>
+
+                                                                Folgende Kontaktdaten würden auf der Organisationsseite dargestellt:
+                                                                <p>
+                                                                Name: <span th:text="${contactInvite.contact.firstName}"></span> <span th:text="${contactInvite.contact.lastName}"></span><br/>
+                                                                E-Mail: <span th:text="${contactInvite.contact.email}"></span><br>
+                                                                Position: <span th:text="${contactInvite.contact.position}"></span><br>
+                                                                Telefon: <span th:text="${contactInvite.contact.phone}"></span><br>
+                                                                </p>
+                                                                <p>Möchtest du die Aufnahme in die Listung eurer Organisation bestätigen?</p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Text Body -->
+
+                                                        <!-- BEGIN: Call-to-Action Button -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="es-button-border"
+                                                                      style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:200px">
+                                                                    <a  href="" class="es-button" target="_blank"
+                                                                        style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                        th:href="${urlPrefix} + 'sign-up/contact-invite/'+${contactInvite.getRandomUniqueId()}+'?action=ALLOW'">
+                                                                        Bestätigen
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="" style="margin-left:24px;display:inline-block;width:200px">
+                                                                    <a  href="" class="es-button" target="_blank"
+                                                                        style="mso-style-priority:100 !important;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:20px;padding:10px 30px 10px 30px;display:inline-block;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                        th:href="${urlPrefix} + 'sign-up/contact-invite/'+${contactInvite.getRandomUniqueId()}+'?action=DENY'">
+                                                                        Ablehnen
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Call-to-Action Button -->
+
+                                                        <!-- BEGIN: Text Body Part II -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                Um auf dem Laufenden zu bleiben, folge dem Gemeinschaftswerk Nachhaltigkeit auf Social Media.
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Text Body Part II -->
+
+                                                        <!-- BEGIN: Spacer -->
+                                                        <tr>
+                                                            <td style="border-collapse:collapse;border-spacing:0px;background-color:transparent;border-bottom:2px solid #cccccc;">
+                                                                &nbsp;
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Spacer -->
+
+                                                        <!-- EN BEGIN: Headline -->
+                                                        <tr>
+                                                            <td class="es-m-txt-l" align="center"
+                                                                style="padding:0;margin:0;padding-top:20px;padding-bottom:25px">
+                                                                <h1 style="margin:0;line-height:48px;mso-line-height-rule:exactly;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-size:36px;font-style:normal;font-weight:bold;color:#19486a">
+                                                                    <strong>Become a contact person!</strong></h1></td>
+                                                        </tr>
+                                                        <!-- EN END: Headline -->
+
+                                                        <!-- EN BEGIN: Text Body -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                Dear<span style="font-weight: bold" th:text="' ' + ${contactInvite.contact.firstName}"></span>,<br/><br/>
+                                                                <span style="font-weight: bold" th:text="${organisation.contact.firstName} + ' '"></span>invites you to be listed as a contact person
+                                                                for <span style="font-weight: bold" th:text="${organisation.name}"></span> on the Joint Action for Sustainable
+                                                                Development’s online platform. This nationwide open platform is being developed by the German Council for Sustainable
+                                                                Development (RNE) at the initiative of the Federal and Länder Governments in order to draw more attention to
+                                                                sustainability efforts in politics, business, science and civil society and inspire more people and organisations to
+                                                                support sustainable development.<br/><br/>
+                                                                The following items would be listed on the organization profile:
+                                                                <p>
+                                                                    Name: <span th:text="${contactInvite.contact.firstName}"></span> <span th:text="${contactInvite.contact.lastName}"></span><br/>
+                                                                    Email: <span th:text="${contactInvite.contact.email}"></span><br>
+                                                                    Your Position: <span th:text="${contactInvite.contact.position}"></span><br>
+                                                                    Phone number: <span th:text="${contactInvite.contact.phone}"></span><br>
+                                                                </p>
+                                                                <p>Would you like to accept your inclusion in the listing for your organisation?</p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Text Body -->
+
+                                                        <!-- EN BEGIN: Call-to-Action Button -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="es-button-border"
+                                                                      style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:200px">
+                                                                    <a  href="" class="es-button" target="_blank"
+                                                                        style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                        th:href="${urlPrefix} + 'sign-up/contact-invite/'+${contactInvite.getRandomUniqueId()}+'?action=ALLOW'">
+                                                                        Accept
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="" style="margin-left:24px;display:inline-block;width:200px">
+                                                                    <a  href="" class="es-button" target="_blank"
+                                                                        style="mso-style-priority:100 !important;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:20px;padding:10px 30px 10px 30px;display:inline-block;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                        th:href="${urlPrefix} + 'sign-up/contact-invite/'+${contactInvite.getRandomUniqueId()}+'?action=DENY'">
+                                                                        Decline
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Call-to-Action Button -->
+
+                                                        <!-- EN BEGIN: Text Body Part II -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                To stay up to date, please follow the Joint Action for Sustainable Development on social media.
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Text Body Part II -->
+
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr th:replace="email/shared/invitation :: invite">
+                                    invite
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- END Content -->
+                <footer th:replace="email/shared/footer :: footer">
+                    footer
+                </footer>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<div class="icon accepted" *ngIf="status === 'ACCEPTED'">
+  <mat-icon class="material-icons-outlined">check</mat-icon>
+</div>
+<div class="icon open" *ngIf="status === 'OPEN'">
+  <mat-icon class="material-icons-outlined">hourglass_empty</mat-icon>
+</div>
+<div class="icon expired" *ngIf="status === 'EXPIRED'">
+  <mat-icon class="material-icons-outlined">auto_delte</mat-icon>
+</div>

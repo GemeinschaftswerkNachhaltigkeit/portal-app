@@ -1,0 +1,67 @@
+<article class="item">
+  <div class="expired" *ngIf="isExpired()">
+    <app-expired-badge></app-expired-badge>
+  </div>
+  <div [ngClass]="{ disabled: isExpired() }">
+    <app-category [type]="getType()" [category]="category"></app-category>
+    <app-heading size="sm" type="h3" color="none">
+      {{ title }}
+    </app-heading>
+    <div class="info">
+      <p class="description">{{ utils.excerpt(description) }}</p>
+      <dl class="attributes">
+        <ng-container>
+          <dt class="key">{{ 'profile.labels.dateRange' | translate }}</dt>
+          <dd class="value">
+            {{ utils.dateRangeString(period) }}
+          </dd>
+        </ng-container>
+        <dt class="key">{{ 'profile.labels.impactArea' | translate }}</dt>
+        <dd class="value">
+          {{ 'impactArea.' + impactArea | translate }}
+        </dd>
+        <dt class="key">{{ 'profile.labels.activityLocation' | translate }}</dt>
+        <dd class="value">
+          <span *ngIf="profileUtils.addressString(location?.address)">
+            {{ profileUtils.addressString(location?.address) }}
+          </span>
+          <span *ngIf="profileUtils.cityString(location?.address)">
+            {{ profileUtils.cityString(location?.address) }}
+          </span>
+          <span *ngIf="location?.online">
+            {{ 'profile.labels.online' | translate }}
+          </span>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <aside class="aside" [ngClass]="{ disabled: isExpired() }">
+    <div class="image-wrapper">
+      <div class="image" *ngIf="!sdgs">
+        <img [src]="imgService.url(image)" [alt]="title" />
+      </div>
+      <div class="sdgs" *ngIf="!image">
+        <ng-container *ngFor="let sdg of utils.limitedSdgs(sdgs, 3)">
+          <div class="sdg">
+            <app-sdg-icon [goal]="sdg"></app-sdg-icon>
+          </div>
+        </ng-container>
+        <div class="remaining" *ngIf="utils.remainingSdgs(sdgs, 3).length">
+          +{{ utils.remainingSdgs(sdgs, 3).length }}
+        </div>
+      </div>
+    </div>
+    <div class="thematic-focus" *ngIf="thematicFocus?.length">
+      <app-heading type="h4" size="xs" color="none"
+        >{{ 'labels.tags' | translate }}:</app-heading
+      >
+      {{ getThematicFocus() }}
+    </div>
+    <div class="actions">
+      <ng-content></ng-content>
+      <a [routerLink]="openLink" mat-flat-button color="accent">
+        {{ openTitle | translate }}
+      </a>
+    </div>
+  </aside>
+</article>

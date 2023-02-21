@@ -1,0 +1,42 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.status-info {
+  margin-bottom: $spacing-2;
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+
+  &.progress {
+    color: $bordeauxe;
+  }
+
+  &.clearing {
+    color: $green;
+  }
+}
+
+.orga-wrapper {
+  position: relative;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    opacity: 0.7;
+    z-index: 100;
+  }
+}
+
+.no-coordinates-hint {
+  margin-bottom: $spacing-4;
+}
+
+.user-management {
+  margin-top: $spacing-20;
+  display: grid;
+  gap: $spacing-10;
+}

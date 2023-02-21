@@ -1,0 +1,47 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+:host {
+  height: fit-content;
+}
+
+.content-row {
+  color: $text-color;
+  position: relative;
+
+  &.small {
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 0;
+  }
+  mark {
+    box-decoration-break: clone;
+    background: transparent;
+    box-shadow: 0 -7px 0 inset $blue-light, 0 4px 0 $blue-light;
+    color: $blue-navy;
+  }
+
+  .content {
+    position: relative;
+    z-index: $z1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  .decorator {
+    z-index: $z0;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 16px;
+    background-color: $blue-light;
+  }
+}

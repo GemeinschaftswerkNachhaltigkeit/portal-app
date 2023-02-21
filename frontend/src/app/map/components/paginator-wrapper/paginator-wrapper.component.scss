@@ -1,0 +1,22 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.wrapper {
+  position: relative;
+  .total {
+    position: absolute;
+    left: $spacing-4;
+    top: -$spacing-6;
+  }
+  .noBreak {
+    white-space: nowrap;
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .wrapper {
+    .total {
+      top: $spacing-4;
+    }
+  }
+}

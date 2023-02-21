@@ -1,0 +1,15 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.contact-form {
+  display: grid;
+  gap: $spacing-2;
+  .row {
+    display: grid;
+    gap: $spacing-2;
+    grid-template-columns: 1fr;
+    &.cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

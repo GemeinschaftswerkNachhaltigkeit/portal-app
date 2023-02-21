@@ -1,0 +1,47 @@
+<mat-sidenav-container class="sidenav-container" autosize>
+  <div class="content">
+    <app-main-header
+      *ngIf="!noHeader"
+      [mobile]="mobile"
+      [open]="sidenav.opened"
+      (openToggled)="sidenav.toggle()"
+    ></app-main-header>
+
+    <main
+      class="main-content"
+      [class.mobile]="mobile"
+      [ngClass]="{ 'no-header': noHeader }"
+    >
+      <ng-content></ng-content>
+    </main>
+
+    <app-footer></app-footer>
+  </div>
+  <mat-sidenav
+    #sidenav
+    class="example-sidenav"
+    mode="over"
+    [fixedInViewport]="mobile"
+    fixedTopGap="0"
+    [opened]="sidenav.opened && mobile"
+  >
+    <aside class="sidebar">
+      <app-sidebar-content (closeNav)="sidenav.toggle()"></app-sidebar-content>
+    </aside>
+  </mat-sidenav>
+</mat-sidenav-container>
+
+<ng-container *ngIf="mobile">
+  <div class="hamburger-wrapper">
+    <button
+      class="hamburger hamburger--collapse"
+      [class.is-active]="sidenav.opened"
+      type="button"
+      (click)="sidenav.toggle()"
+    >
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+    </button>
+  </div>
+</ng-container>

@@ -1,0 +1,28 @@
+<ng-container *ngIf="activitySubscriptions$ | async as activities">
+  <ng-container *ngIf="activities">
+    <app-page-with-header-layout
+      [title]="'account.titles.activitySubs' | translate"
+      [noEntriesTitle]="'account.titles.noActivitySubs' | translate"
+      [showNoEntriesWarning]="(loading$ | async) !== true && !activities.length"
+    >
+      <ng-container headerContent>{{
+        'account.texts.activitySubs' | translate
+      }}</ng-container>
+      <ng-container noEntriesContent>
+        {{ 'account.texts.noActivitySubs' | translate }}
+      </ng-container>
+      <app-spinner></app-spinner>
+      <app-card-list *ngIf="(loading$ | async) !== true">
+        <ng-container *ngFor="let activity of activities">
+          <app-base-card
+            [entity]="activity"
+            type="ACTIVITY"
+            [bookmarked]="true"
+            (cardClicked)="openActivity(activity)"
+          >
+          </app-base-card>
+        </ng-container>
+      </app-card-list>
+    </app-page-with-header-layout>
+  </ng-container>
+</ng-container>

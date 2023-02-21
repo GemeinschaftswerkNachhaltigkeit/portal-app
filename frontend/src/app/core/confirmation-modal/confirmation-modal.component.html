@@ -1,0 +1,24 @@
+<div mat-dialog-content class="confrimation-modal">
+  <header class="header">
+    <app-heading type="h4" color="none">{{
+      data.title || ('confirmationModal.title' | translate)
+    }}</app-heading>
+    <p>
+      {{ data.description || ('confirmationModal.description' | translate) }}
+    </p>
+  </header>
+  <div mat-dialog-actions class="actions">
+    <button mat-button class="login-btn" (click)="cancel()">
+      {{ 'confirmationModal.cancel' | translate }}
+    </button>
+
+    <button
+      mat-flat-button
+      color="accent"
+      class="register-btn"
+      (click)="confirm()"
+    >
+      {{ data.button || ('confirmationModal.confirm' | translate) }}
+    </button>
+  </div>
+</div>

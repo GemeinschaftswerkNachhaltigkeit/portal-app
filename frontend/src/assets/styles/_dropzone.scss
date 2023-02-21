@@ -1,0 +1,12 @@
+.dropzone.dz-wrapper.dz-single .dz-message {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+.dropzone.dz-wrapper {
+  height: 100%;
+  overflow: hidden !important;
+}
+
+.dropzone.dz-wrapper.dz-single .dz-message {
+  margin: 0;
+  max-width: none;
+}

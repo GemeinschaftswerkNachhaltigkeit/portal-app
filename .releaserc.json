@@ -1,0 +1,19 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    ["@semantic-release/npm", {
+      "npmPublish": false
+    }],
+    ["@semantic-release/exec", {
+      "prepareCmd": "cd backend && mvn -s /secrets/settings_m3.xml versions:set -DnewVersion=${nextRelease.version}"
+    }],
+    ["@semantic-release/git",
+      {
+        "assets": ["package.json", "backend/pom.xml"],
+        "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,169 @@
+<mat-stepper [linear]="true" #stepper color="accent">
+  <mat-step
+    [stepControl]="formStepOne!"
+    [label]="'sign-up.step.labels.organization' | translate"
+    [editable]="isEditable"
+  >
+    <div class="form-container">
+      <app-form-step-description
+        [content]="activityContent$ | async"
+        [stepDescriptionId]="0"
+      ></app-form-step-description>
+
+      <app-activity-form
+        #stepOne
+        [activity]="activityData$ | async"
+        [orgId]="orgId"
+        [enableAutosave]="enableAutosave"
+        [isEditAllowed]="isAllowedToEdit()"
+        (saveData)="saveActivity($event, 'ACTIVITY')"
+        [isActiveStep]="isActiveStep(0)"
+        (deleteImage)="deleteHandler($event)"
+      ></app-activity-form>
+      <app-form-step-actions
+        [showPrevBtn]="false"
+        [formStepKey]="'ACTIVITY'"
+        [stepState$]="activityStepState$"
+      >
+      </app-form-step-actions>
+    </div>
+    <app-form-advatages
+      [content]="activityContent$ | async"
+    ></app-form-advatages>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="formStepTwo!"
+    [label]="'sign-up.step.labels.topics' | translate"
+    [editable]="isEditable"
+  >
+    <div class="form-container">
+      <app-form-step-description
+        [content]="activityContent$ | async"
+        [stepDescriptionId]="1"
+      ></app-form-step-description>
+
+      <app-topics-form
+        #stepTwo
+        [data]="activityData$ | async"
+        [enableAutosave]="enableAutosave"
+        [isEditAllowed]="isAllowedToEdit()"
+        (saveData)="saveActivity($event, 'topics')"
+        [isLocationRequired]="false"
+        [isAddressNameVisible]="true"
+        [isActiveStep]="isActiveStep(1)"
+      ></app-topics-form>
+      <app-form-step-actions
+        [formStepKey]="'topics'"
+        [stepState$]="activityStepState$"
+      >
+      </app-form-step-actions>
+    </div>
+    <app-form-advatages
+      [content]="activityContent$ | async"
+    ></app-form-advatages>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="formStepThree!"
+    [label]="'sign-up.step.labels.externalLinks' | translate"
+    [editable]="isEditable"
+  >
+    <div class="form-container">
+      <app-form-step-description
+        [content]="activityContent$ | async"
+        [stepDescriptionId]="2"
+      ></app-form-step-description>
+
+      <app-external-links-form
+        #stepThree
+        [data]="activityData$ | async"
+        [enableAutosave]="enableAutosave"
+        [isEditAllowed]="isAllowedToEdit()"
+        (saveData)="saveActivity($event, 'externalLinks')"
+        [isActiveStep]="isActiveStep(2)"
+      ></app-external-links-form>
+      <app-form-step-actions
+        [formStepKey]="'externalLinks'"
+        [stepState$]="activityStepState$"
+      >
+      </app-form-step-actions>
+    </div>
+    <app-form-advatages
+      [content]="activityContent$ | async"
+    ></app-form-advatages>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="formStepFour!"
+    [label]="'sign-up.step.labels.user' | translate"
+    [editable]="isEditable"
+  >
+    <div class="form-container">
+      <app-form-step-description
+        [content]="activityContent$ | async"
+        [stepDescriptionId]="3"
+      ></app-form-step-description>
+
+      <app-user-form
+        #stepFour
+        [data]="activityData$ | async"
+        [orgId]="orgId"
+        [enableAutosave]="enableAutosave"
+        [isEditAllowed]="isAllowedToEdit()"
+        (saveData)="saveActivity($event, 'user')"
+        [isActiveStep]="isActiveStep(3)"
+        (deleteImage)="deleteHandler($event)"
+      ></app-user-form>
+      <app-form-step-actions
+        [formStepKey]="'user'"
+        [nextBtnCallback]="submit"
+        [stepState$]="activityStepState$"
+      >
+      </app-form-step-actions>
+    </div>
+    <app-form-advatages
+      [content]="activityContent$ | async"
+    ></app-form-advatages>
+  </mat-step>
+
+  <mat-step class="final-step">
+    <app-content-wrapper *ngIf="loading$ | async" size="xl">
+      <app-spinner></app-spinner>
+    </app-content-wrapper>
+    <app-content-wrapper
+      *ngIf="isSubmissionSuccess && (loading$ | async) === false"
+      size="xl"
+    >
+      <div class="final-step-content-wrapper">
+        <div [innerHTML]="(activityContent$ | async)?.completedMessage"></div>
+        <div class="actions">
+          <a mat-flat-button color="accent" [href]="shareLink()">
+            {{ 'btn.share' | translate }}
+          </a>
+          <a
+            mat-flat-button
+            color="accent"
+            [routerLink]="['/', 'account', 'activities']"
+            [queryParams]="{ update: 'success' }"
+          >
+            {{ 'btn.backToActivityOverview' | translate }}
+          </a>
+        </div>
+      </div>
+    </app-content-wrapper>
+    <app-content-wrapper
+      *ngIf="!isSubmissionSuccess && (loading$ | async) === false"
+      size="xl"
+    >
+      <div class="final-step-content-wrapper">
+        <p>
+          {{ 'error.unknown' | translate }}
+        </p>
+        <button mat-flat-button color="accent" matStepperPrevious>
+          {{ 'btn.back' | translate }}
+        </button>
+      </div>
+    </app-content-wrapper>
+  </mat-step>
+</mat-stepper>

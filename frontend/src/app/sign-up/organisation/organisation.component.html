@@ -1,0 +1,154 @@
+<ng-container *ngIf="orgData$ | async as orgaData">
+  <mat-stepper [linear]="linarMode" #stepper color="accent">
+    <mat-step
+      [stepControl]="formStepOne!"
+      [label]="'sign-up.step.labels.organization' | translate"
+      [editable]="isEditable"
+    >
+      <div class="form-container">
+        <app-form-step-description
+          [content]="orgContent$ | async"
+          [stepDescriptionId]="0"
+        ></app-form-step-description>
+        <app-form-feedback
+          [org]="orgaData"
+          class="bg-yellow"
+        ></app-form-feedback>
+        <app-admin-warning *ngIf="isAdmin()">
+          {{ 'clearing.adminWarning' | translate }}
+        </app-admin-warning>
+
+        <app-organisation-form
+          #stepOne
+          [org]="orgaData"
+          [enableAutosave]="enableAutosave"
+          [isEditAllowed]="isAllowedToEdit(orgaData)"
+          [isActiveStep]="isActiveStep(0)"
+          (saveData)="saveOrg($event, 'ORGANISATION')"
+          (deleteImage)="deleteHandler($event)"
+        ></app-organisation-form>
+        <app-form-step-actions
+          [showPrevBtn]="false"
+          [formStepKey]="'ORGANISATION'"
+          [stepState$]="orgStepState$"
+        >
+        </app-form-step-actions>
+      </div>
+      <app-form-advatages [content]="orgContent$ | async"></app-form-advatages>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepTwo!"
+      [label]="'sign-up.step.labels.topics' | translate"
+      [editable]="isEditable"
+    >
+      <div class="form-container">
+        <app-form-step-description
+          [content]="orgContent$ | async"
+          [stepDescriptionId]="1"
+        ></app-form-step-description>
+        <app-form-feedback
+          [org]="orgaData"
+          class="bg-yellow"
+        ></app-form-feedback>
+        <app-admin-warning *ngIf="isAdmin()">
+          {{ 'clearing.adminWarning' | translate }}
+        </app-admin-warning>
+        <app-topics-form
+          #stepTwo
+          [data]="orgaData"
+          [enableAutosave]="enableAutosave"
+          (saveData)="saveOrg($event, 'topics')"
+          [isEditAllowed]="isAllowedToEdit(orgaData)"
+          [isActiveStep]="isActiveStep(1)"
+        ></app-topics-form>
+        <app-form-step-actions
+          [formStepKey]="'topics'"
+          [stepState$]="orgStepState$"
+        >
+        </app-form-step-actions>
+      </div>
+      <app-form-advatages [content]="orgContent$ | async"></app-form-advatages>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepThree!"
+      [label]="'sign-up.step.labels.externalLinks' | translate"
+      [editable]="isEditable"
+    >
+      <div class="form-container">
+        <app-form-step-description
+          [content]="orgContent$ | async"
+          [stepDescriptionId]="2"
+        ></app-form-step-description>
+        <app-form-feedback
+          [org]="orgaData"
+          class="bg-yellow"
+        ></app-form-feedback>
+        <app-admin-warning *ngIf="isAdmin()">
+          {{ 'clearing.adminWarning' | translate }}
+        </app-admin-warning>
+        <app-external-links-form
+          #stepThree
+          [data]="orgaData"
+          [enableAutosave]="enableAutosave"
+          [isEditAllowed]="isAllowedToEdit(orgaData)"
+          (saveData)="saveOrg($event, 'externalLinks')"
+          [isActiveStep]="isActiveStep(2)"
+        ></app-external-links-form>
+        <app-form-step-actions
+          [formStepKey]="'externalLinks'"
+          [stepState$]="orgStepState$"
+        >
+        </app-form-step-actions>
+      </div>
+      <app-form-advatages [content]="orgContent$ | async"></app-form-advatages>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepFour!"
+      [label]="'sign-up.step.labels.user' | translate"
+      [editable]="isEditable"
+    >
+      <div class="form-container">
+        <app-form-step-description
+          [content]="orgContent$ | async"
+          [stepDescriptionId]="3"
+        ></app-form-step-description>
+        <app-form-feedback
+          [org]="orgaData"
+          class="bg-yellow"
+        ></app-form-feedback>
+        <app-admin-warning *ngIf="isAdmin()">
+          {{ 'clearing.adminWarning' | translate }}
+        </app-admin-warning>
+        <app-user-form
+          #stepFour
+          [data]="orgaData"
+          [enableAutosave]="enableAutosave"
+          [isEditAllowed]="isAllowedToEdit(orgaData)"
+          (saveData)="saveOrg($event, 'user')"
+          (deleteImage)="deleteHandler($event)"
+          [isActiveStep]="isActiveStep(3)"
+        ></app-user-form>
+        <app-form-step-actions
+          [formStepKey]="'user'"
+          [nextBtnCallback]="submitForApproval"
+          [disableNextBtn]="disableSubmitBtn"
+          [stepState$]="orgStepState$"
+          [last]="true"
+          [modification]="isModification"
+          (canceled)="backToProile()"
+        >
+        </app-form-step-actions>
+      </div>
+      <app-form-advatages [content]="orgContent$ | async"></app-form-advatages>
+    </mat-step>
+
+    <mat-step class="final-step">
+      <app-content-wrapper *ngIf="loading$ | async" size="xl">
+        <app-spinner></app-spinner>
+      </app-content-wrapper>
+    </mat-step>
+  </mat-stepper>
+</ng-container>

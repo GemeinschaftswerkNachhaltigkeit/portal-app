@@ -1,0 +1,43 @@
+<form [formGroup]="linksFormGroup">
+  <mat-form-field>
+    <mat-label>{{
+      'sign-up.form.labels.externalLinks.url' | translate
+    }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'sign-up.form.labels.externalLinks.url' | translate"
+      formControlName="url"
+    />
+    <app-valid-check
+      [form]="linksFormGroup"
+      controlName="url"
+    ></app-valid-check>
+    <mat-error>
+      <app-form-field-error
+        [field]="linksFormGroup.get('url')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let type of socialMediaTypes">
+    <mat-label>{{
+      'sign-up.form.labels.externalLinks.' + type | translate
+    }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'sign-up.form.labels.externalLinks.' + type | translate"
+      [formControlName]="type"
+    />
+
+    <app-valid-check
+      [form]="linksFormGroup"
+      [controlName]="type"
+    ></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="linksFormGroup.get(type)"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+</form>

@@ -1,0 +1,22 @@
+<ng-container>
+  <ng-container>
+    <app-spinner></app-spinner>
+  </ng-container>
+  <ng-container>
+    <app-page-with-header-layout
+      [title]="'account.titles.myData' | translate"
+      [firstName]="userData?.firstName"
+    >
+      <ng-container headerContent>{{
+        'account.texts.myData' | translate
+      }}</ng-container>
+      <div class="form-wrapper" *ngIf="userData">
+        <app-my-data-form
+          [userData]="userData"
+          (submitted)="submitHandler($event)"
+          (delete)="deleteAccountHandler()"
+        ></app-my-data-form>
+      </div>
+    </app-page-with-header-layout>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,12 @@
+<div
+  class="spinner"
+  *ngIf="loading$ && (loading$ | async)"
+  [ngClass]="{
+    small: small,
+    miniFixed: miniSpinnerInTopRightCorner,
+    noPadding: noPadding
+  }"
+>
+  <h3 class="title" *ngIf="title">{{ title }}</h3>
+  <div class="shapes"></div>
+</div>

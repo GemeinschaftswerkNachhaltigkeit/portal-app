@@ -1,0 +1,13 @@
+.text-block {
+  margin: 0;
+  padding: 0;
+  &.narrow {
+    max-width: 80ch;
+  }
+  &.default {
+    max-width: 100ch;
+  }
+  &.wide {
+    max-width: 120ch;
+  }
+}

@@ -1,0 +1,22 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.icon {
+  display: flex;
+  align-items: center;
+  &.accepted {
+    color: $green;
+  }
+  &.open {
+    color: $magenta;
+  }
+  &.expired {
+    color: $orange;
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .icon {
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,28 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.category-select {
+  display: flex;
+  gap: $spacing-2;
+  flex-wrap: wrap;
+  .option {
+    width: fit-content;
+    border: 2px solid $bordeauxe;
+    white-space: normal;
+    text-align: left;
+    display: inline-block;
+
+    &.selected,
+    &:hover {
+      background-color: $bordeauxe;
+      color: white;
+    }
+
+    mat-icon {
+      margin-left: $spacing-2;
+    }
+  }
+}
+.error {
+  margin-top: $spacing-2;
+}

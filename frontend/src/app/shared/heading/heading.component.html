@@ -1,0 +1,33 @@
+<h1
+  class="title"
+  [ngClass]="options()"
+  *ngIf="type === 'h1'"
+  [class]="getClasses('xl')"
+>
+  <mark> <ng-container *ngTemplateOutlet="contentTpl"></ng-container> </mark>
+</h1>
+<h2
+  class="title"
+  [ngClass]="options()"
+  *ngIf="type === 'h2'"
+  [class]="getClasses('lg')"
+>
+  <mark> <ng-container *ngTemplateOutlet="contentTpl"></ng-container> </mark>
+</h2>
+<h3
+  class="title"
+  [ngClass]="options()"
+  *ngIf="type === 'h3'"
+  [class]="getClasses('md')"
+>
+  <mark> <ng-container *ngTemplateOutlet="contentTpl"></ng-container> </mark>
+</h3>
+<h4
+  class="title"
+  [ngClass]="options()"
+  *ngIf="type === 'h4'"
+  [class]="getClasses('sm')"
+>
+  <mark> <ng-container *ngTemplateOutlet="contentTpl"></ng-container> </mark>
+</h4>
+<ng-template #contentTpl><ng-content></ng-content></ng-template>

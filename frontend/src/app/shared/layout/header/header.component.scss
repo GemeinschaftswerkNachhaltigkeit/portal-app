@@ -1,0 +1,11 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+.header {
+  display: grid;
+  gap: $spacing-8;
+}
+
+.action {
+  padding: $spacing-8 0;
+}

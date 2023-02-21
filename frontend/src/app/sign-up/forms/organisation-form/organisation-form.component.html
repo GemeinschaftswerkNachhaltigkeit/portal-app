@@ -1,0 +1,124 @@
+<form [formGroup]="organisationFormGroup">
+  <!--  <p>{{orgId}}</p>
+  <ng-template matStepLabel>Fill out your name</ng-template>-->
+  <mat-form-field>
+    <mat-label>{{
+      'sign-up.form.labels.organization.name' | translate
+    }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'sign-up.form.labels.organization.name' | translate"
+      formControlName="name"
+    />
+
+    <app-valid-check
+      [form]="organisationFormGroup"
+      controlName="name"
+    ></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('name')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{
+      'sign-up.form.labels.organization.organisationType' | translate
+    }}</mat-label>
+    <mat-select formControlName="organisationType">
+      <mat-option *ngFor="let orgType of orgTypeOpts" [value]="orgType">
+        {{ 'organisationType.' + orgType | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('organisationType')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- WYSIWYG Input -->
+  <div
+    class="mat-form-field-appearance-outline wysiwyg-form-field"
+    [class.ng-invalid]="
+      organisationFormGroup.get('description')?.invalid &&
+      (organisationFormGroup.get('description')?.dirty ||
+        organisationFormGroup.get('description')?.touched)
+    "
+    [class.mat-form-field-disabled]="
+      organisationFormGroup.get('description')?.disabled
+    "
+  >
+    <div class="mat-form-field-wrapper tip-tap-wrapper">
+      <app-tiptap-menu-bar
+        [editor]="editor"
+        [disabled]="organisationFormGroup.get('description')?.disabled!"
+        >{{
+          'sign-up.form.labels.organization.description' | translate
+        }}
+        *</app-tiptap-menu-bar
+      >
+      <tiptap-editor
+        [editor]="editor"
+        formControlName="description"
+      ></tiptap-editor>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentChars()"
+          [total]="1000"
+        ></app-char-count>
+      </div>
+      <div class="mat-form-field-subscript-wrapper">
+        <mat-error>
+          <app-form-field-error
+            [field]="organisationFormGroup.get('description')"
+          ></app-form-field-error>
+        </mat-error>
+      </div>
+    </div>
+  </div>
+
+  <div class="file-uploads" *ngIf="org && org.randomUniqueId && isActiveStep">
+    <app-upload-image
+      [orgId]="org.randomUniqueId"
+      [type]="'logo'"
+      [labelTranslationKey]="'sign-up.form.labels.organization.logo'"
+      [disabled]="organisationFormGroup.disabled"
+      [fileId]="org.logo"
+      imageSizeTranslationKey="sign-up.upload.logoWidthTooltipExt"
+      imageFillType="contain"
+      style="max-width: 21.5%; min-width: 200px"
+      (delete)="deleteHandler(imageTypes.LOGO)"
+    ></app-upload-image>
+
+    <app-upload-image
+      [orgId]="org.randomUniqueId"
+      [type]="'image'"
+      [labelTranslationKey]="'sign-up.form.labels.organization.image'"
+      [disabled]="organisationFormGroup.disabled"
+      [fileId]="org.image"
+      imageSizeTranslationKey="sign-up.upload.titleImageWidthTooltipExt"
+      (delete)="deleteHandler(imageTypes.TITLE)"
+    ></app-upload-image>
+  </div>
+  <div>
+    <mat-checkbox matInput formControlName="privacyConsent"
+      ><span
+        [innerHTML]="
+          'sign-up.form.labels.organization.privacyConsent'
+            | translate
+              : {
+                  participationdeclaration: participationDeclarationUrl
+                }
+        "
+      ></span
+    ></mat-checkbox>
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('privacyConsent')"
+      ></app-form-field-error>
+    </mat-error>
+  </div>
+</form>

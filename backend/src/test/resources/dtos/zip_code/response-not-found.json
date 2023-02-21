@@ -1,0 +1,10 @@
+{
+  "status": 404,
+  "error": "Not Found",
+  "errorMessages": [
+    {
+      "fieldName": "id",
+      "message": "No zip code information found for [222]"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<app-action
+  [clickable]="true"
+  [stroked]="stroked"
+  [small]="small"
+  [full]="full"
+  *ngIf="!subscriptionFacade.activityIsSubcribed(activity?.id)"
+  icon="bookmark_add"
+  (clicked)="bookmarkHandler()"
+>
+  <span [ngClass]="{ small: small }">
+    <span *ngIf="!short">{{ 'btn.bookmark' | translate }}</span>
+    <span *ngIf="short">{{ 'btn.bookmarkShort' | translate }}</span>
+  </span>
+</app-action>
+<app-action
+  [clickable]="true"
+  [stroked]="stroked"
+  [small]="small"
+  [full]="full"
+  *ngIf="subscriptionFacade.activityIsSubcribed(activity?.id)"
+  icon="bookmark_added"
+  (clicked)="unbookmarkHandler()"
+>
+  <span [ngClass]="{ small: small }">
+    <span *ngIf="!short">{{ 'btn.unbookmark' | translate }}</span>
+    <span *ngIf="short">{{ 'btn.unbookmarkShort' | translate }}</span>
+  </span>
+</app-action>

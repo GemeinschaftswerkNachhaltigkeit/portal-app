@@ -1,0 +1,17 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.mat-snack-bar-container {
+  &.feedback {
+    background-color: $blue-navy;
+    color: white;
+
+    &-success {
+      background-color: $green;
+    }
+
+    &-error {
+      background-color: $bordeauxe;
+    }
+  }
+}

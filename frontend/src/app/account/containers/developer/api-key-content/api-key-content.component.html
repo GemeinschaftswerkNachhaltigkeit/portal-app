@@ -1,0 +1,29 @@
+<div class="api-key" [ngClass]="{ noKey: !apiKey }">
+  <div class="key" (click)="copyHandler()" *ngIf="apiKey">
+    <ng-container *ngIf="visible; else dots">
+      <div class="key-text">
+        <div>{{ apiKey }}</div>
+        <div class="copied">
+          <ng-container *ngIf="copied; else copyIcon">{{
+            'labels.copied' | translate
+          }}</ng-container>
+          <ng-template #copyIcon><mat-icon>file_copy</mat-icon></ng-template>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #dots>
+      <div class="dots">
+        <div class="dot" *ngFor="let dot of getDots(apiKey)"></div>
+      </div>
+    </ng-template>
+  </div>
+  <button mat-icon-button (click)="toggle()" *ngIf="apiKey">
+    <mat-icon *ngIf="visible; else notVisible">visibility_off</mat-icon>
+    <ng-template #notVisible>
+      <mat-icon>visibility</mat-icon>
+    </ng-template>
+  </button>
+  <ng-container *ngIf="!apiKey">
+    <span class="placeholder">{{ 'account.labels.noApiKey' | translate }}</span>
+  </ng-container>
+</div>

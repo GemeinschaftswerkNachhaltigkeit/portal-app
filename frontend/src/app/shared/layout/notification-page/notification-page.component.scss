@@ -1,0 +1,99 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.notification-page {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr;
+  .column > div {
+    padding: $spacing-16;
+  }
+  .title {
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+
+  .icon {
+    color: $blue-navy;
+    mat-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 60px;
+    }
+  }
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.continue-btn {
+  margin-top: 24px;
+}
+
+.links {
+  display: grid;
+  gap: $spacing-20;
+
+  .orga-link {
+    background-color: $yellow;
+    color: $magenta;
+  }
+}
+
+.bg-blue-light {
+  height: 100%;
+  font-size: 1.25em;
+}
+
+.title-wrapper {
+  margin-top: $spacing-2;
+  margin-bottom: $spacing-6;
+}
+
+.content-title-wrapper {
+  margin-bottom: $spacing-6;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  padding-top: $spacing-16;
+  margin-top: $spacing-4;
+}
+
+ul li {
+  padding: 2em 0;
+  display: flex;
+  align-items: center;
+}
+
+ul li:before {
+  font-family: 'Material Icons', sans-serif;
+  content: '\e876';
+  font-weight: bold;
+  font-size: 2em;
+  padding-right: 0.25em;
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .notification-page {
+    grid-template-columns: 1fr 1fr;
+
+    &.no-adv {
+      grid-template-columns: 1fr;
+      max-width: 120ch;
+    }
+  }
+}

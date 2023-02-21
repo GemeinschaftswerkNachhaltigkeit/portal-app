@@ -1,0 +1,17 @@
+<div class="no-data mat-elevation-z8">
+  <div class="icon-wrapper" *ngIf="showIcon">
+    <div class="bg-icon">
+      <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
+    </div>
+
+    <div class="fg-icon">
+      <mat-icon class="material-icons-outlined" color="accent">{{
+        fgIcon
+      }}</mat-icon>
+    </div>
+  </div>
+  <div class="msg">
+    <h3 class="title">{{ title }}</h3>
+    <p class="text"><ng-content></ng-content></p>
+  </div>
+</div>

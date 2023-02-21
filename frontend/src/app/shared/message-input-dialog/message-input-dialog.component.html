@@ -1,0 +1,33 @@
+<h3 mat-dialog-title>
+  {{ data.translationKeys.title! | translate: data.titleParams }}
+</h3>
+<div mat-dialog-content>
+  <form [formGroup]="msgForm">
+    <mat-form-field>
+      <mat-label>
+        {{ data.translationKeys.messageFieldLabel! | translate }}
+      </mat-label>
+      <textarea matInput formControlName="message"></textarea>
+      <mat-error>
+        <app-form-field-error
+          [field]="msgForm.get('message')"
+        ></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>
+    {{ 'btn.cancel' | translate }}
+  </button>
+  <button
+    mat-flat-button
+    [color]="'primary'"
+    (click)="confirm()"
+    cdkFocusInitial
+    [disabled]="!msgForm.valid"
+  >
+    {{ data.translationKeys.confirmBtn! | translate }}
+  </button>
+</mat-dialog-actions>

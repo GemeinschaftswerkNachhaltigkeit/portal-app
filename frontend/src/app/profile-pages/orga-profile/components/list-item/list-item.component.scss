@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+.item {
+  padding: $spacing-6 0;
+  display: grid;
+  gap: $spacing-2;
+  position: relative;
+  color: $blue-navy;
+  border-top: 2px solid $gray-light;
+
+  .expired {
+    position: absolute;
+    z-index: $z3;
+    left: 0;
+    top: $spacing-10;
+    width: fit-content;
+  }
+
+  .disabled {
+    opacity: 0.3;
+  }
+
+  .info {
+    .description {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+    .attributes {
+      display: none;
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+
+      .key {
+        color: $magenta;
+        font-weight: bold;
+      }
+      .value {
+        margin: 0;
+      }
+    }
+  }
+
+  .aside {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+
+    .image-wrapper {
+      margin-bottom: $spacing-4;
+      .image {
+        width: $spacing-22;
+        height: $spacing-22;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .sdgs {
+        display: grid;
+        grid-template-columns:
+          fit-content($spacing-22)
+          fit-content($spacing-22)
+          fit-content($spacing-22)
+          2rem;
+        gap: $spacing-2;
+        height: fit-content;
+
+        .remaining {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $blue-navy;
+        }
+      }
+    }
+  }
+  .actions {
+    width: fit-content;
+    display: grid;
+    justify-items: end;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-2;
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .item {
+    grid-template-columns: 2fr 1fr;
+    gap: $spacing-20;
+    .info {
+      .attributes {
+        grid-template-columns: 12rem 1fr;
+      }
+    }
+  }
+}

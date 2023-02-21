@@ -1,0 +1,13 @@
+<div class="form-step-description">
+  <div
+    class="description-content-wrapper"
+    *ngIf="
+         content?.stepDescriptions &&
+         content?.stepDescriptions !== null &&
+         stepDescriptionId !== null &&
+         content?.stepDescriptions?.[stepDescriptionId] !== undefined && 
+         content?.stepDescriptions?.[stepDescriptionId]?.description !== undefined
+        "
+    [innerHTML]=" content?.stepDescriptions?.[stepDescriptionId]?.description"
+  ></div>
+</div>

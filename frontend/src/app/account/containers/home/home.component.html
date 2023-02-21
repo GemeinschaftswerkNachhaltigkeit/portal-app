@@ -1,0 +1,20 @@
+<app-page-with-header-layout
+  [title]="('account.titles.welcome' | translate) + ' ' + userData?.firstName"
+>
+  <ng-container headerContent>{{
+    'account.texts.welcome' | translate
+  }}</ng-container>
+  <div class="tiles">
+    <ng-container *ngFor="let tile of tiles">
+      <app-info-card
+        *ngIf="tile.onlyOrga ? hasOrga() : true"
+        [route]="tile.route"
+        [extUrl]="tile.extUrl"
+        minHeight="18rem"
+      >
+        <span title>{{ tile.title | translate }}</span>
+        <span body>{{ tile.description | translate }}</span>
+      </app-info-card>
+    </ng-container>
+  </div>
+</app-page-with-header-layout>

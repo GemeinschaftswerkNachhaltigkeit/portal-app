@@ -1,0 +1,80 @@
+<ng-container>
+  <ng-container *ngIf="field?.invalid && (field?.dirty || field?.touched)">
+    <span *ngIf="field?.errors?.['required']">{{
+      translationPrefix + '.required' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['maxlength']">{{
+      translationPrefix + '.maxLength' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['minlength']">{{
+      translationPrefix + '.minLength' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['max']">{{
+      translationPrefix + '.max' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['min']">{{
+      translationPrefix + '.min' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['email']">{{
+      translationPrefix + '.email' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordLength']">{{
+      translationPrefix + '.passwordLength' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordNumber']">{{
+      translationPrefix + '.passwordNumber' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordCapitalLetter']">{{
+      translationPrefix + '.passwordCapitalLetter' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordLowercaseLetter']">{{
+      translationPrefix + '.passwordLowercaseLetter' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordSymbol']">{{
+      translationPrefix + '.passwordSymbol' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['passwordMismatch']">{{
+      translationPrefix + '.passwordMismatch' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['userExists']">{{
+      translationPrefix + '.userExists' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['matDatepickerMin']">{{
+      translationPrefix + '.matDatepickerMin' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['leadingZeros']">{{
+      translationPrefix + '.leadingZeros' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['pattern']">{{
+      translationPrefix + '.pattern' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['invalidUrl']">{{
+      translationPrefix + '.invalidUrl' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['invalidWysiwygContentLength']">{{
+      translationPrefix + '.invalidWysiwygContentLength' + translationSuffix
+        | translate: translationParams
+    }}</span>
+    <span *ngIf="field?.errors?.['loadingOptionsError']">{{
+      translationPrefix + '.loadingOptionsError' + translationSuffix
+        | translate: translationParams
+    }}</span>
+  </ng-container>
+</ng-container>

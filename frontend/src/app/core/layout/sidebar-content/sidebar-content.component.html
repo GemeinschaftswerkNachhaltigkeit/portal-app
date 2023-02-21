@@ -1,0 +1,12 @@
+<div class="sidebar-content">
+  <div class="logo-wrapper">
+    <app-logo></app-logo>
+  </div>
+  <app-main-menu
+    [vertical]="true"
+    (closeNav)="closeHandler()"
+    [mobile]="true"
+  ></app-main-menu>
+  <div class="separator"></div>
+  <app-nav-actions [mobile]="true"></app-nav-actions>
+</div>

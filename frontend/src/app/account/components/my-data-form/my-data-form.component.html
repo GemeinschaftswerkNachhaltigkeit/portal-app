@@ -1,0 +1,29 @@
+<form class="form" novalidate (submit)="submitHandler()" [formGroup]="userForm">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'account.labels.firstName' | translate }}</mat-label>
+    <input formControlName="firstName" matInput />
+    <mat-error
+      ><app-form-field-error
+        [field]="userForm.get('firstName')"
+      ></app-form-field-error
+    ></mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'account.labels.lastName' | translate }}</mat-label>
+    <input formControlName="lastName" matInput />
+    <mat-error
+      ><app-form-field-error
+        [field]="userForm.get('lastName')"
+      ></app-form-field-error
+    ></mat-error>
+  </mat-form-field>
+  <footer class="footer">
+    <button type="submit" mat-flat-button color="accent">
+      {{ 'account.buttons.saveUserData' | translate }}
+    </button>
+
+    <button type="button" mat-button color="accent" (click)="deleteHandler()">
+      {{ 'account.buttons.deleteAccount' | translate }}
+    </button>
+  </footer>
+</form>

@@ -1,0 +1,47 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.form-wrapper {
+  .hint {
+    margin-top: $spacing-2;
+  }
+  .add-user-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2;
+    margin-top: $spacing-4;
+    .names {
+      width: 100%;
+      display: grid;
+      gap: $spacing-2;
+      grid-template-columns: 1fr;
+    }
+    .other-form-fields {
+      width: 100%;
+      display: grid;
+      gap: $spacing-2;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .button-wrapper {
+    .submit-button {
+      width: 100%;
+      margin-top: 3px;
+      height: 52px;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .form-wrapper {
+    .add-user-form {
+      .names {
+        grid-template-columns: 1fr 1fr;
+      }
+      .other-form-fields {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  }
+}

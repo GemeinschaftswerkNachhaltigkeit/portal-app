@@ -1,0 +1,12 @@
+<div class="user-list">
+  <app-heading size="sm" type="h2" color="none">{{
+    'account.titles.orgaUserList' | translate
+  }}</app-heading>
+  <div class="list">
+    <app-orga-user-list-header></app-orga-user-list-header>
+    <div class="list-row" *ngFor="let user of users">
+      <app-orga-user-list-entry [user]="user" (delete)="deleteHandler(user)">
+      </app-orga-user-list-entry>
+    </div>
+  </div>
+</div>

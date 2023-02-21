@@ -1,0 +1,52 @@
+{
+  "content": [
+    {
+      "name": "Test Angebot",
+      "description": "Beschreibung meines Testangebots",
+      "offerCategory": "JOBS",
+      "location": null,
+      "thematicFocus": [
+        "CIRCULAR_ECONOMY",
+        "PEACE"
+      ],
+      "contact": {
+        "lastName": "Ansprechpartner Nachname",
+        "firstName": "Ansprechpartner Vorname",
+        "position": null,
+        "email": "Ansprechpartner_email@test.io",
+        "phone": null,
+        "image": null
+      },
+      "organisation": {
+        "name": "Müllfreie Spree e. V.",
+        "logo": null,
+        "image": null
+      }
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "unsorted": false,
+      "empty": false,
+      "sorted": true
+    },
+    "offset": 0,
+    "pageSize": 20,
+    "pageNumber": 0,
+    "unpaged": false,
+    "paged": true
+  },
+  "totalPages": 1,
+  "totalElements": 1,
+  "last": true,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "unsorted": false,
+    "empty": false,
+    "sorted": true
+  },
+  "first": true,
+  "numberOfElements": 1,
+  "empty": false
+}

@@ -1,0 +1,15 @@
+{
+  "members": [
+    {
+      "randomUniqueId": "94eeced5-a8ca-4635-92c8-90cb6790b43b",
+      "organisation": {
+        "name": "Müllfreie Spree e. V."
+      },
+      "email": "invited.user@test.exxeta.com",
+      "status": "OPEN",
+      "closedAt": "2022-09-08T18:22:27.605+02:00",
+      "expiresAt": "2022-09-08T18:22:27.605+02:00",
+      "emailSent": null
+    }
+  ]
+}

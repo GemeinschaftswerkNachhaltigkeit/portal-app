@@ -1,0 +1,10 @@
+include:
+  - project: 'wpgwn/wpgwn-ci'
+    ref: main
+    file: 'scs.yaml'
+
+variables:
+  BASE_HREF: '/app/'
+  PROJECT_KEY: 'com.exxeta.wpgwn:wpgwn'
+  PROJECT_NAME: WPGWN-App
+

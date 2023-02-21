@@ -1,0 +1,7 @@
+<app-collapsible-filter
+  [filterName]="filterName"
+  [selected]="selected"
+  [options]="createOptions()"
+  (filterChanged)="filterChanged.emit($event)"
+  >{{ 'labels.activityType' | translate }}</app-collapsible-filter
+>

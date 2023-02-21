@@ -1,0 +1,9 @@
+<app-menu-entry [cdkMenuTriggerFor]="menu" [button]="true">
+  {{ title }}
+</app-menu-entry>
+
+<ng-template #menu>
+  <div class="dropdown-menu highlighted-links mat-elevation-z8" cdkMenu>
+    <ng-content></ng-content>
+  </div>
+</ng-template>

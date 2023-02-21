@@ -1,0 +1,75 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+:host {
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-2;
+
+  .title {
+    margin: 0;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+    .sort-btn-content {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      color: $blue-navy;
+      .sort-menu-btn {
+        color: $blue-navy;
+      }
+    }
+    .switch {
+    }
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  justify-content: space-between;
+  //height: 100%;
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-4;
+  }
+}
+
+mat-sidenav {
+  width: 80%;
+}
+@media only screen and (min-width: $breakpoint-md) {
+  mat-sidenav {
+    width: 30%;
+  }
+}
+
+.side-nav-content {
+  padding: $spacing-8;
+}
+
+.details-btn {
+  margin-right: auto;
+}
+
+.duplicate {
+  //margin: 2em;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+  display: block;
+}

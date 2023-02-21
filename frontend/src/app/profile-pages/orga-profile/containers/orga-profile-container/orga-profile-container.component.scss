@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+.main-content {
+  display: grid;
+  gap: $spacing-18;
+}
+
+.article-wrapper {
+  scroll-margin-top: $top-nav-height;
+  .top-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-right: -$spacing-4;
+  }
+}
+
+.sdgs {
+  display: grid;
+  grid-template-columns: repeat(4, fit-content(12.4rem));
+  gap: $spacing-4;
+}
+
+.activities {
+  display: grid;
+  gap: $spacing-20;
+}
+
+.desc {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}

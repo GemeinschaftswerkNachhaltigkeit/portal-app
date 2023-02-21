@@ -1,0 +1,25 @@
+<app-notification-page
+  [title]="'emailVerifySuccessPage.titles.main' | translate"
+  [content]="'emailVerifySuccessPage.texts.continue' | translate"
+  [advantagesTitle]="'emailVerifySuccessPage.titles.advantages' | translate"
+  [advantages]="[
+    'emailVerifySuccessPage.advantages.follow' | translate,
+    'emailVerifySuccessPage.advantages.bookmark' | translate,
+    'emailVerifySuccessPage.advantages.createOrga' | translate,
+    'emailVerifySuccessPage.advantages.createActivity' | translate
+  ]"
+  (continue)="goTo()"
+>
+  <section *ngIf="!hideOrgaButton(goToPath)">
+    <p>
+      {{ 'emailVerifySuccessPage.texts.orga' | translate }}
+    </p>
+    <a
+      [routerLink]="['/', 'account', 'my-organisation']"
+      mat-flat-button
+      class="orga-link"
+    >
+      {{ 'emailVerifySuccessPage.buttons.orga' | translate }}
+    </a>
+  </section>
+</app-notification-page>

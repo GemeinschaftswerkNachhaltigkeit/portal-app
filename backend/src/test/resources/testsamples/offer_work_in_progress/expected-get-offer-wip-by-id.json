@@ -1,0 +1,23 @@
+{
+  "createdBy": "12345-6789-123456",
+  "lastModifiedBy": "12345-6789-123456",
+  "createdAt": "2022-09-08T02:00:00+02:00",
+  "modifiedAt": "2022-09-08T02:00:00+02:00",
+  "version": 0,
+  "name": "Test Angebot",
+  "description": "Beschreibung meines Testangebots",
+  "offerCategory": "JOBS",
+  "location": null,
+  "thematicFocus": [
+    "CIRCULAR_ECONOMY",
+    "PEACE"
+  ],
+  "contact": {
+    "lastName": "Ansprechpartner Nachname",
+    "firstName": "Ansprechpartner Vorname",
+    "position": null,
+    "email": "Ansprechpartner_email@test.io",
+    "phone": null,
+    "image": null
+  }
+}

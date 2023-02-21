@@ -1,0 +1,10 @@
+<div
+  class="badge"
+  (click)="deleteHandler($event)"
+  [ngClass]="{ active: active }"
+>
+  <div class="number"><ng-content></ng-content></div>
+  <div class="clear">
+    <mat-icon>close</mat-icon>
+  </div>
+</div>

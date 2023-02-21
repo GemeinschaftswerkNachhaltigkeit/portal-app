@@ -1,0 +1,44 @@
+<div *ngIf="editor !== undefined" class="wysiwig-toolbar">
+  <!--disabled={!editor.can().liftListItem('listItem')}-->
+  <label class="label">
+    <ng-content></ng-content>
+  </label>
+  <ng-container *ngIf="!disabled">
+    <!-- <button type="button" (click)="editor.chain().focus().liftListItem('listItem').run()">
+      <mat-icon>format_indent_decrease</mat-icon>
+    </button>
+    <button type="button" (click)="editor.chain().focus().sinkListItem('listItem').run()">
+      <mat-icon>format_indent_increase</mat-icon>
+    </button> -->
+    <button
+      type="button"
+      (click)="editor.chain().focus().toggleOrderedList().run()"
+    >
+      <mat-icon>format_list_numbered</mat-icon>
+    </button>
+    <button
+      type="button"
+      (click)="editor.chain().focus().toggleBulletList().run()"
+    >
+      <mat-icon>format_list_bulleted</mat-icon>
+    </button>
+    <button type="button" (click)="editor.chain().focus().toggleBold().run()">
+      <mat-icon>format_bold</mat-icon>
+    </button>
+    <button type="button" (click)="editor.chain().focus().toggleItalic().run()">
+      <mat-icon>format_italic</mat-icon>
+    </button>
+    <button
+      type="button"
+      (click)="editor.chain().focus().toggleUnderline().run()"
+    >
+      <mat-icon>format_underlined</mat-icon>
+    </button>
+    <!--     <button type="button" (click)="editor.chain().focus().toggleStrike().run()">
+      <mat-icon>format_strikethrough</mat-icon>
+    </button> -->
+  </ng-container>
+  <ng-container *ngIf="disabled">
+    <button type="button"><mat-icon></mat-icon></button
+  ></ng-container>
+</div>

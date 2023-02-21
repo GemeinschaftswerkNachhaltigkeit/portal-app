@@ -1,0 +1,26 @@
+<form [formGroup]="userFormGroup">
+  <app-contact-controls formGroupName="contact"></app-contact-controls>
+  <div *ngIf="data && data.randomUniqueId && orgId === null && isActiveStep">
+    <app-upload-image
+      [orgId]="data.randomUniqueId"
+      [type]="'contact'"
+      [labelTranslationKey]="'sign-up.form.labels.user.image'"
+      [disabled]="userFormGroup.disabled"
+      [fileId]="data.contact?.image"
+      style="max-width: 21.5%; min-width: 200px"
+      (delete)="deleteHandler(imageType.CONTACT)"
+    ></app-upload-image>
+  </div>
+  <div *ngIf="data && data.randomUniqueId && orgId !== null">
+    <app-upload-image
+      [orgId]="orgId"
+      [activityWipId]="data.randomUniqueId"
+      [type]="'contact'"
+      [labelTranslationKey]="'sign-up.form.labels.user.image'"
+      [disabled]="userFormGroup.disabled"
+      [fileId]="data.contact?.image"
+      style="max-width: 21.5%; min-width: 200px"
+      (delete)="deleteHandler(imageType.CONTACT)"
+    ></app-upload-image>
+  </div>
+</form>

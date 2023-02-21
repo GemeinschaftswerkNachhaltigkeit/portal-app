@@ -1,0 +1,57 @@
+@use 'theme' as *;
+:host {
+  width: 100%;
+  height: 100%;
+}
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: $spacing-4 $spacing-8;
+  position: relative;
+  &.mobileNoMargin {
+    padding: $spacing-4 0;
+  }
+  &.narrow {
+    padding: $spacing-2 $spacing-8;
+  }
+  &.onlyX {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  margin: auto;
+  &.full {
+    width: 100%;
+  }
+  &.xs {
+    width: auto;
+    max-width: 60rem;
+  }
+  &.sm {
+    width: auto;
+    max-width: 75rem;
+  }
+  &.md {
+    width: auto;
+    max-width: 90rem;
+  }
+  &.lg {
+    width: auto;
+    max-width: 105rem;
+  }
+  &.xl {
+    width: auto;
+    max-width: 140rem;
+  }
+}
+
+@media screen and (min-width: $breakpoint-mobile-menu) {
+  .content-wrapper {
+    padding: $spacing-8 $spacing-14;
+    &.mobileNoMargin {
+      padding: $spacing-8 $spacing-14;
+    }
+    &.narrow {
+      padding: $spacing-4 $spacing-14;
+    }
+  }
+}

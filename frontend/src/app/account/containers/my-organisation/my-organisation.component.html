@@ -1,0 +1,81 @@
+<ng-container>
+  <app-page-with-header-layout [title]="'account.titles.myOrga' | translate">
+    <ng-container headerContent>{{
+      'account.texts.myOrga' | translate
+    }}</ng-container>
+    <ng-container headerAction
+      ><button
+        *ngIf="!hasOrgaOrWip()"
+        action
+        mat-flat-button
+        color="accent"
+        (click)="createHandler()"
+      >
+        {{ 'account.buttons.addOrganisation' | translate }}
+      </button></ng-container
+    >
+    <app-spinner></app-spinner>
+    <ng-container *ngIf="(loading$ | async) !== true">
+      <ng-container *ngIf="organisation$ | async as orga">
+        <div
+          class="no-coordinates-hint"
+          *ngIf="
+            !orga.location?.coordinate &&
+            !isClearing(orga) &&
+            !isInProgress(orga)
+          "
+        >
+          <app-alert
+            [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
+            [showIcon]="true"
+            bgIcon="travel_explore"
+            fgIcon="priority_high"
+          >
+            {{ 'validationErrors.coordinatesNotFound' | translate }}
+          </app-alert>
+        </div>
+        <div *ngIf="isClearing(orga)" class="status-info clearing">
+          <app-outlined-icon>hourglass_empty</app-outlined-icon>
+          <div>
+            {{ 'account.texts.orgaInClearing' | translate }}
+          </div>
+        </div>
+
+        <div class="orga-wrapper" *ngIf="hasOrgaOrWip()">
+          <div *ngIf="isInProgress(orga)" class="status-info progress">
+            <app-outlined-icon>running_with_errors</app-outlined-icon>
+            <div>
+              {{ 'account.texts.orgaInProgress' | translate }}
+            </div>
+          </div>
+          <div class="overlay" *ngIf="isClearing(orga)"></div>
+          <app-base-card
+            [entity]="orga"
+            [type]="'ORGANISATION'"
+            [showActions]="true"
+            [editVisible]="isOrgaAdmin()"
+            [deleteVisible]="isOrgaAdmin()"
+            (delete)="deleteHandler()"
+            (edit)="editHandler()"
+            (leave)="leaveHandler()"
+            (cardClicked)="openOrga(orga)"
+          >
+          </app-base-card>
+        </div>
+        <ng-container *appAuthenticated="['MANAGE_ORGANISATION_USERS']">
+          <section
+            class="user-management"
+            *ngIf="hasOrga() && !isClearing(orga) && !isInProgress(orga)"
+          >
+            <app-orga-user-form [orgId]="orga.id"></app-orga-user-form>
+            <app-orga-user-list
+              [users]="(users$ | async) || []"
+              (deleteUser)="deleteUserHandler($event, orga.id)"
+            >
+            </app-orga-user-list>
+          </section>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </app-page-with-header-layout>
+</ng-container>

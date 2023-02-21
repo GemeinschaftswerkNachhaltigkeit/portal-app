@@ -1,0 +1,24 @@
+<app-content-wrapper *ngIf="!error">
+  <div class="error-content-wrapper">
+    <div>
+      <h1>{{ 'error.title' | translate }}</h1>
+      <p *ngIf="!error">{{ 'error.unknown' | translate }}</p>
+    </div>
+    <div>
+      <button mat-flat-button color="accent" (click)="goToLandingpage()">
+        {{ 'btn.goToLandingpage' | translate }}
+      </button>
+    </div>
+  </div>
+</app-content-wrapper>
+
+<app-content-wrapper *ngIf="error">
+  <div class="error-content-wrapper">
+    <div [innerHTML]="'error.' + error | translate"></div>
+    <div>
+      <button mat-flat-button color="accent" (click)="goToLandingpage()">
+        {{ 'btn.goToLandingpage' | translate }}
+      </button>
+    </div>
+  </div>
+</app-content-wrapper>

@@ -1,0 +1,32 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  background-color: $blue-navy;
+  color: white;
+  font-size: 2rem;
+  line-height: 110%;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: $spacing-10;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-4;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-12;
+}
+
+.action {
+  background-color: $yellow;
+  color: $blue-navy;
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  :host {
+    gap: $spacing-60;
+    flex-wrap: nowrap;
+  }
+}

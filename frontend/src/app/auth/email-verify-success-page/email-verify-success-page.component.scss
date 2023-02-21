@@ -1,0 +1,7 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.orga-link {
+  background-color: $yellow;
+  color: $magenta;
+}

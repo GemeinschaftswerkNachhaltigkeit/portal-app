@@ -1,0 +1,63 @@
+// Spacing
+
+// 1rem === 10px -> This is adjusted in the base.scss for the hole document
+
+// 4px grid => everything should be dividable by 4
+// is also in alignment with the 4 and 8 px grid of material design
+
+$spacing-1: 0.4rem;
+$spacing-2: 0.8rem;
+$spacing-3: 1.2rem;
+$spacing-4: 1.6rem;
+$spacing-5: 2rem;
+$spacing-6: 2.4rem;
+$spacing-7: 2.8rem;
+$spacing-8: 3.2rem;
+$spacing-9: 3.6rem;
+$spacing-10: 4rem;
+$spacing-11: 4.4rem;
+$spacing-12: 4.8rem;
+$spacing-13: 5.2rem;
+$spacing-14: 5.6rem;
+$spacing-15: 6rem;
+$spacing-16: 6.4rem;
+$spacing-17: 6.8rem;
+$spacing-18: 7.2rem;
+$spacing-19: 7.6rem;
+$spacing-20: 8rem;
+$spacing-22: 8.6rem;
+$spacing-24: 9.2rem;
+$spacing-30: 12rem;
+$spacing-48: 19.2rem;
+$spacing-60: 24rem;
+
+$spacing-xs: $spacing-2;
+$spacing-sm: $spacing-6;
+$spacing-md: $spacing-12;
+$spacing-lg: $spacing-24;
+$spacing-xl: $spacing-48;
+
+$top-nav-height: 7rem;
+
+// z-index
+$z0: 0;
+$z1: 10;
+$z2: 40;
+$z3: 80;
+$z4: 100;
+$z5: 200;
+$z6: 300;
+$z7: 600;
+$z8: 800;
+$z9: 900;
+$z10: 1000;
+$z11: 1100;
+$z12: 1200;
+
+// breakpoints
+
+$breakpoint-xs: 768px;
+$breakpoint-sm: 960px;
+$breakpoint-md: 1200px;
+$breakpoint-lg: 1600px;
+$breakpoint-mobile-menu: 1280px;

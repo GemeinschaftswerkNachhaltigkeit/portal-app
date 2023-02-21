@@ -1,0 +1,9 @@
+<nav class="page-menu highlighted-links">
+  <ul class="content">
+    <ng-container *ngFor="let item of listItems">
+      <li class="entry">
+        <ng-container [ngTemplateOutlet]="item.itemTemplate"></ng-container>
+      </li>
+    </ng-container>
+  </ul>
+</nav>

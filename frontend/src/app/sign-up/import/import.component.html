@@ -1,0 +1,39 @@
+<div style="height: 100%">
+  <app-content-wrapper>
+    <div class="import-decision-content" *ngIf="!denied">
+      <div [innerHTML]="(orgImportContent$ | async)?.description"></div>
+      <!--       <span
+        [innerHTML]="
+          'sign-up.form.labels.user.privacyConsent'
+            | translate
+              : {
+                  participationdeclaration: participationDeclarationUrl,
+                  privacyPolicy: lpService.getPrivacyPolicyUrl()
+                }
+        "
+      ></span> -->
+      <div class="decision-action-btns">
+        <button
+          mat-flat-button
+          color="accent"
+          (click)="accept()"
+          [disabled]="!orgId"
+        >
+          {{ 'sign-up.import-decision.btn.accept' | translate }}
+        </button>
+
+        <button mat-flat-button (click)="deny()" [disabled]="!orgId">
+          {{ 'sign-up.import-decision.btn.deny' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="import-decision-content" *ngIf="denied">
+      <div [innerHTML]="(orgImportContent$ | async)?.denyCompleteMessage"></div>
+      <div class="decision-action-btns">
+        <button mat-flat-button color="accent" (click)="goToLandingpage()">
+          {{ 'btn.goToLandingpage' | translate }}
+        </button>
+      </div>
+    </div>
+  </app-content-wrapper>
+</div>

@@ -1,0 +1,14 @@
+<header header class="header">
+  <div>
+    <app-heading *ngIf="hello()" type="h4" size="xs" color="none">{{
+      hello()
+    }}</app-heading>
+    <app-heading type="h1">{{ title }}</app-heading>
+  </div>
+  <app-text-block>
+    <ng-content></ng-content>
+  </app-text-block>
+</header>
+<div class="action">
+  <ng-content select="[action]"></ng-content>
+</div>
