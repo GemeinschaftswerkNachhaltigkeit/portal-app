@@ -534,6 +534,9 @@
                                         <include>*.woff2</include>
                                         <include>*.png</include>
                                         <include>*.css</include>
+                                        <include>*.jpg</include>
+                                        <include>*.jpeg</include>
+                                        <include>*.svg</include>
                                     </includes>
                                 </resource>
                             </resources>
