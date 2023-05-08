@@ -523,21 +523,6 @@
                             <resources>
                                 <resource>
                                     <directory>../frontend/dist</directory>
-                                    <includes>
-                                        <include>static/</include>
-                                        <include>assets/</include>
-                                        <include>index.html</include>
-                                        <include>favicon.ico</include>
-                                        <include>*.js</include>
-                                        <include>*.txt</include>
-                                        <include>*.ttf</include>
-                                        <include>*.woff2</include>
-                                        <include>*.png</include>
-                                        <include>*.css</include>
-                                        <include>*.jpg</include>
-                                        <include>*.jpeg</include>
-                                        <include>*.svg</include>
-                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
