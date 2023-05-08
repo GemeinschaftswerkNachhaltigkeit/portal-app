@@ -22,8 +22,6 @@ export class SearchFormComponent implements OnInit {
     SecondaryFilters.SDGS,
     SecondaryFilters.IMPACT_AREAS,
     SecondaryFilters.ORGA_TYPES,
-    SecondaryFilters.ACTIVITY_TYPES,
-    SecondaryFilters.ACTIVITY_PERIOD,
     SecondaryFilters.SPECIAL_ORGAS
   ];
   searchForm = this.fb.group({
