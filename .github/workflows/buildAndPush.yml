@@ -9,7 +9,7 @@ on:
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/backend"
   REGISTRY: ghcr.io
-  GITHUB_NAME:  gemeinschaftswerk-nachhaltigkeit
+  GITHUB_NAME:  gemeinschaftswerknachhaltigkeit
   IMAGE_NAME: gw-portal-app
 
 jobs:
