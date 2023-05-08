@@ -24,15 +24,8 @@
 
           <app-card-label
             [type]="currentResult.resultType"
-            [dan]="
-              card.isActivity(currentResult.resultType) &&
-              utils.asActivity(currentResult).activityType === 'DAN'
-            "
-            [activityTypeLabel]="
-              getActivityType(currentResult)
-                ? ('activityType.' + getActivityType(currentResult) | translate)
-                : ''
-            "
+            [dan]="currentResult.resultType === 'DAN'"
+            [activityTypeLabel]="'activityType.DAN' | translate"
             [organisationTypeLabel]="
               'organisationType.' + currentResult.organisationType | translate
             "
@@ -75,7 +68,7 @@
           <h4 class="subtitle">{{ 'map.labels.info' | translate }}</h4>
           <ng-container
             *ngIf="
-              card.isActivity(currentResult.resultType) &&
+              currentResult.resultType === 'DAN' &&
               utils.dateRangeString(currentResult.period)
             "
           >
@@ -163,7 +156,7 @@
         <div
           class="group"
           *ngIf="
-            card.isActivity(currentResult.resultType) &&
+            currentResult.resultType === 'DAN' &&
             currentResult.organisation?.name
           "
         >
@@ -192,7 +185,7 @@
     >
     </app-organisation-subscription-action>
     <app-activity-subscription-action
-      *ngIf="card.isActivity(currentResult?.resultType)"
+      *ngIf="currentResult?.resultType === 'DAN'"
       [short]="true"
       [stroked]="true"
       [activity]="utils.asActivity(currentResult)"

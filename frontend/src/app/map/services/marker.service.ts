@@ -29,17 +29,6 @@ const getIcon = (type: string, isActive = false, isHovered = false) => {
     </div>`
   });
 
-  const activityIcon = L.divIcon({
-    className: 'custom-pin',
-    iconAnchor: [0, 24],
-    popupAnchor: [0, -36],
-    html: `<div class="map-marker activity ${
-      isActive ? 'highlighted active ' : ''
-    } ${isHovered ? 'highlighted' : ''}" >
-      <div class="inner"></div>
-    </div>`
-  });
-
   const danIcon = L.divIcon({
     className: 'custom-pin',
     iconAnchor: [0, 24],
@@ -53,9 +42,6 @@ const getIcon = (type: string, isActive = false, isHovered = false) => {
 
   if (type === 'ORGANISATION') {
     return orgaIcon;
-  }
-  if (type === 'ACTIVITY') {
-    return activityIcon;
   }
   if (type === 'DAN') {
     return danIcon;
@@ -85,7 +71,6 @@ const getClusterIcon = (
 export class MarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
-  activityMarkers: L.MarkerClusterGroup | null = null;
   danMarkers: L.MarkerClusterGroup | null = null;
   markers: {
     [key: string]: {
@@ -106,17 +91,9 @@ export class MarkerService {
 
   makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number): void {
     this.organisationMarkers?.clearLayers();
-    this.activityMarkers?.clearLayers();
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
 
-    this.activityMarkers = L.markerClusterGroup({
-      iconCreateFunction: function (cluster) {
-        return getClusterIcon(cluster.getChildCount(), 'ACTIVITY', '');
-      },
-      showCoverageOnHover: false,
-      spiderfyOnMaxZoom: false
-    });
     this.danMarkers = L.markerClusterGroup({
       iconCreateFunction: function (cluster) {
         return getClusterIcon(cluster.getChildCount(), 'DAN', '');
@@ -149,9 +126,6 @@ export class MarkerService {
         if (c.data.resultType === 'DAN') {
           this.danMarkers.addLayer(marker);
         }
-        if (c.data.resultType === 'ACTIVITY') {
-          this.activityMarkers.addLayer(marker);
-        }
         if (c.data.resultType === 'ORGANISATION') {
           this.organisationMarkers.addLayer(marker);
         }
@@ -162,7 +136,6 @@ export class MarkerService {
       }
     }
 
-    this.activityMarkers.addTo(map);
     this.danMarkers.addTo(map);
     this.organisationMarkers.addTo(map);
     this.setExitingActiveMarker(map, data);
@@ -238,13 +211,6 @@ export class MarkerService {
         if (card.resultType === 'ORGANISATION') {
           return m.resultType === 'ORGANISATION' && m.id === card.id;
         }
-        if (card.resultType === 'ACTIVITY' && card.activityType !== 'DAN') {
-          return m.resultType === 'ACTIVITY' && m.id === card.id;
-        }
-        // If backend sets Resulttype to dan correctly, this one can be removed
-        if (card.resultType === 'ACTIVITY' && card.activityType === 'DAN') {
-          return m.resultType === 'DAN' && m.id === card.id;
-        }
         if (card.resultType === 'DAN') {
           return m.resultType === 'DAN' && m.id === card.id;
         }
@@ -286,9 +252,6 @@ export class MarkerService {
         const orgaCluster: any = this.organisationMarkers?.getVisibleParent(
           marker.marker
         );
-        const actiCluster: any = this.activityMarkers?.getVisibleParent(
-          marker.marker
-        );
         const danCluster: any = this.danMarkers?.getVisibleParent(
           marker.marker
         );
@@ -303,14 +266,6 @@ export class MarkerService {
               'ORGANISATION',
               ''
             )
-          );
-        } else if (
-          actiCluster &&
-          actiCluster.getChildCount &&
-          res.resultType === 'ACTIVITY'
-        ) {
-          actiCluster.setIcon(
-            getClusterIcon((actiCluster as any).getChildCount(), 'ACTIVITY', '')
           );
         } else if (
           danCluster &&
@@ -335,7 +290,6 @@ export class MarkerService {
     if (marker) {
       const orgaCluster: any =
         this.organisationMarkers?.getVisibleParent(marker);
-      const actiCluster: any = this.activityMarkers?.getVisibleParent(marker);
       const danCluster: any = this.danMarkers?.getVisibleParent(marker);
       if (
         orgaCluster &&
@@ -346,18 +300,6 @@ export class MarkerService {
           getClusterIcon(
             (orgaCluster as any).getChildCount(),
             'ORGANISATION',
-            res.resultType
-          )
-        );
-      } else if (
-        actiCluster &&
-        actiCluster.getChildCount &&
-        res.resultType === 'ACTIVITY'
-      ) {
-        actiCluster.setIcon(
-          getClusterIcon(
-            (actiCluster as any).getChildCount(),
-            'ACTIVITY',
             res.resultType
           )
         );
@@ -380,14 +322,6 @@ export class MarkerService {
       }
     }
   }
-
-  // setHoveredMarkerIcon(res: SearchResult): void {
-  //   this.clearMarkerIcons();
-  //   const m = this.findMarker(res);
-  //   const marker = this.getMarker(res)?.marker;
-  //   const activeIcon = getIcon(res.resultType, true, true);
-  //   marker?.setIcon(activeIcon);
-  // }
 
   handlerHoveredMarker(map: L.Map, hoverdMarkerData: MarkerDto): void {
     if (hoverdMarkerData) {
@@ -468,7 +402,6 @@ export class MarkerService {
       setTimeout(() => {
         this.searchOnMove = true;
       }, 1000);
-      // this.scrollToCard(activeMarker.data.resultType, activeMarker.data.id);
     }
   }
 

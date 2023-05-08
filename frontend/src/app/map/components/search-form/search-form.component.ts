@@ -44,9 +44,6 @@ export class SearchFormComponent implements OnInit {
         selectedImpactAreas: filters.impactAreas,
         selectedSdgValues: filters.sdgs,
         selectedOrgaTypes: filters.orgaTypes,
-        selectedActivityTypes: filters.activityTypes,
-        selectedStartDate: filters.startDate,
-        selectedEndDate: filters.endDate,
         initiator: filters.initiator,
         projectSustainabilityWinner: filters.projectSustainabilityWinner
       }

@@ -104,7 +104,7 @@
         <div
           class="orga-name"
           [ngClass]="{ dan: utils.asActivity(entity).activityType === 'DAN' }"
-          *ngIf="type === 'ACTIVITY'"
+          *ngIf="type === 'ACTIVITY' || type === 'DAN'"
         >
           {{ utils.asActivity(entity).organisation?.name }}
         </div>
