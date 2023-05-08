@@ -34,23 +34,15 @@
           [ngModelOptions]="{ standalone: true }"
           >{{ 'map.labels.dan' | translate }}</mat-checkbox
         >
+        <mat-checkbox
+          class="orga"
+          color="primary"
+          [(ngModel)]="showOrga"
+          (ngModelChange)="viewTypeHandler()"
+          [ngModelOptions]="{ standalone: true }"
+          >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+        >
       </app-feature>
-      <mat-checkbox
-        class="orga"
-        color="primary"
-        [(ngModel)]="showOrga"
-        (ngModelChange)="viewTypeHandler()"
-        [ngModelOptions]="{ standalone: true }"
-        >{{ 'map.labels.organisation' | translate }}</mat-checkbox
-      >
-      <mat-checkbox
-        class="activity"
-        color="primary"
-        [(ngModel)]="showActivity"
-        (ngModelChange)="viewTypeHandler()"
-        [ngModelOptions]="{ standalone: true }"
-        >{{ 'map.labels.ACTIVITY' | translate }}</mat-checkbox
-      >
     </div>
   </div>
 </div>
