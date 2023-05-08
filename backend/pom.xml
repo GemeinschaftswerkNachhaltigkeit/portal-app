@@ -519,10 +519,13 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>${basedir}/src/main/resources/public</outputDirectory>
+                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>../frontend/dist</directory>
+                                    <includes>
+                                        <include>**/*.*</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
