@@ -1,0 +1,44 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.ng-valid .mat-select-arrow-wrapper::after {
+  font-family: 'Material Icons';
+  content: '\e876';
+  color: $green;
+  font-size: 24px;
+}
+
+.ng-valid + app-outlined-icon {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  color: $green;
+  // background-color: rgb(37, 9, 9);
+}
+input.mat-input-element {
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  overflow: hidden;
+  display: block;
+  width: 93%;
+}
+
+.sidebar {
+  .mat-expansion-panel-body {
+    padding: $spacing-2 0;
+  }
+  .mat-expansion-panel-header {
+    font-weight: bold;
+    padding: 0 $spacing-2 0 0;
+  }
+  .filter-checkbox-entries {
+    .entry {
+      list-style-type: none;
+      width: 100%;
+      .label {
+        // width: 280px !important;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

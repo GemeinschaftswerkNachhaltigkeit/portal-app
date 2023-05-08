@@ -1,0 +1,79 @@
+<mat-accordion class="headers" *ngIf="filters" [multi]="true">
+  <div class="ordered-list">
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.THEMATIC_FOCUS)"
+      ><app-thematic-focus-filter
+        *ngIf="useFilter(filterTypes.THEMATIC_FOCUS)"
+        [selected]="filters.thematicFocus || []"
+        (filterChanged)="thematicFocusHandler($event)"
+      ></app-thematic-focus-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.SDGS)"
+      ><app-sdg-filter
+        *ngIf="useFilter(filterTypes.SDGS)"
+        [selected]="filters.sdgs || []"
+        (filterChanged)="sdgsHandler($event)"
+      ></app-sdg-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.IMPACT_AREAS)"
+      ><app-impact-areas-filter
+        *ngIf="useFilter(filterTypes.IMPACT_AREAS)"
+        [selected]="filters.impactAreas || []"
+        (filterChanged)="impactAreaHandler($event)"
+      ></app-impact-areas-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.ORGA_TYPES)"
+      ><app-orga-types-filter
+        *ngIf="useFilter(filterTypes.ORGA_TYPES)"
+        [selected]="filters.orgaTypes || []"
+        (filterChanged)="orgaTypeHandler($event)"
+      ></app-orga-types-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.ACTIVITY_TYPES)"
+      ><app-acti-types-filter
+        *ngIf="useFilter(filterTypes.ACTIVITY_TYPES)"
+        [selected]="filters.activityTypes || []"
+        (filterChanged)="activityTypeHandler($event)"
+      ></app-acti-types-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.SPECIAL_ORGAS)">
+      <app-special-orgas-filter
+        *ngIf="useFilter(filterTypes.SPECIAL_ORGAS)"
+        [initiator]="filters.initiator || false"
+        [projectSustainabilityWinner]="
+          filters.projectSustainabilityWinner || false
+        "
+        (filterChanged)="specialOrgaHandler($event)"
+      ></app-special-orgas-filter>
+    </app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.OFFER_CATS)"
+      ><app-offer-category-filter
+        *ngIf="useFilter(filterTypes.OFFER_CATS)"
+        [selected]="filters.offerCat || []"
+        (filterChanged)="offerCategoriesHandler($event)"
+      ></app-offer-category-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.BEST_PRACTICE_CATS)"
+      ><app-best-practice-category-filter
+        *ngIf="useFilter(filterTypes.BEST_PRACTICE_CATS)"
+        [selected]="filters.bestPractiseCat || []"
+        (filterChanged)="bestPracticeCategoriesHandler($event)"
+      ></app-best-practice-category-filter
+    ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.ACTIVITY_PERIOD)"
+      ><app-activity-period-filter
+        *ngIf="useFilter(filterTypes.ACTIVITY_PERIOD)"
+        [startDate]="filters.startDate"
+        [endDate]="filters.endDate"
+        (filterChanged)="dateRangeHandler($event)"
+      ></app-activity-period-filter
+    ></app-ordered-filter>
+  </div>
+</mat-accordion>

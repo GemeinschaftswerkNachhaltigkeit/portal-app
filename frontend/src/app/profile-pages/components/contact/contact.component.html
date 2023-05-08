@@ -1,0 +1,123 @@
+<div class="contact-wrapper">
+  <div
+    class="inner-wrapper"
+    [ngClass]="{ orga: type === 'ORGANISATION', activity: type === 'ACTIVITY' }"
+  >
+    <div class="contact-information" [ngClass]="{ noImage: !contactImage }">
+      <div class="image" *ngIf="contactImage">
+        <img
+          *ngIf="contactImage"
+          [src]="contactImage"
+          [alt]="profileUtils.contactString(contact)"
+        />
+      </div>
+      <div class="info">
+        <h4 class="title">{{ 'profile.titles.contact' | translate }}</h4>
+        <div class="info-row">
+          <h4 class="subtitle">
+            {{ 'profile.titles.contactPerson' | translate }}
+          </h4>
+          <p>{{ profileUtils.contactString(contact) }}</p>
+        </div>
+        <button
+          *ngIf="!showContact"
+          class="show-contact-btn"
+          mat-flat-button
+          [attr.data-track]="type"
+          (click)="toggleShowContact()"
+        >
+          {{ 'profile.buttons.contactNow' | translate }}
+        </button>
+        <ng-container *ngIf="showContact"
+          ><div class="info-row">
+            <h4 class="subtitle">
+              {{ 'profile.titles.email' | translate }}
+            </h4>
+            <p>{{ contact?.email }}</p>
+          </div>
+          <div class="info-row" *ngIf="contact?.phone">
+            <h4 class="subtitle">
+              {{ 'profile.titles.phone' | translate }}
+            </h4>
+            <p>{{ contact?.phone }}</p>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="further-information">
+      <div class="info-row">
+        <h4 class="subtitle">
+          <span *ngIf="type === 'ACTIVITY'">
+            {{ 'profile.labels.activityLocation' | translate }}
+          </span>
+          <span *ngIf="type === 'ORGANISATION'">
+            {{ 'profile.labels.address' | translate }}
+          </span>
+        </h4>
+        <div class="info-wrapper">
+          <app-outlined-icon>pin_drop</app-outlined-icon>
+          <div class="value-column">
+            <div>{{ name }}</div>
+            <div *ngIf="profileUtils.addressString(location?.address)">
+              {{ profileUtils.addressString(location?.address) }}
+            </div>
+            <div *ngIf="profileUtils.cityString(location?.address)">
+              {{ profileUtils.cityString(location?.address) }}
+            </div>
+            <span *ngIf="location?.online">
+              {{ 'profile.labels.online' | translate }}
+            </span>
+            <div *ngIf="location?.url" class="link">
+              <a target="_blank" [href]="location?.url">{{ location?.url }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-row" *ngIf="impactArea">
+        <h4 class="subtitle">
+          {{ 'profile.titles.impactArea' | translate }}
+        </h4>
+        <div class="info-wrapper">
+          <app-outlined-icon>location_searching</app-outlined-icon>
+          <div class="value-column">
+            <div>{{ 'impactArea.' + impactArea | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-row" *ngIf="socialMedia?.length">
+        <h4 class="subtitle">
+          {{ 'profile.titles.socialMedia' | translate }}
+        </h4>
+        <div class="info-wrapper">
+          <app-social-media-links
+            [socialMediaLinks]="socialMedia || []"
+          ></app-social-media-links>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="activity-orga" *ngIf="type === 'ACTIVITY' && activityOrga">
+    <div class="info-row no-icon">
+      <h4 class="subtitle">
+        {{ 'profile.titles.relatedOrganisation' | translate }}
+      </h4>
+      <div class="info-wrapper">
+        <a [routerLink]="['/', 'organisations', orgaId]">
+          <div class="value-column link">
+            <div>{{ activityOrga }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="thematic-focus-wrapper">
+    <h4 class="title">
+      {{ 'profile.titles.thematicFocus' | translate }}
+    </h4>
+    <div class="thematic-focus">
+      <ng-container *ngFor="let topic of thematicFocus">
+        <app-topic>{{ 'thematicFocus.' + topic | translate }}</app-topic>
+      </ng-container>
+    </div>
+  </div>
+</div>

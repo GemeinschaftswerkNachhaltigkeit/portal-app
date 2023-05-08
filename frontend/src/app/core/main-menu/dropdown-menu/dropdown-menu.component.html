@@ -1,0 +1,25 @@
+<div
+  [cdkMenuTriggerFor]="menu"
+  (click)="toggle()"
+  class="dropdown-wrapper"
+  [ngClass]="{ open: open }"
+>
+  <app-menu-entry [button]="true" [new]="new">
+    <div class="wrapper">
+      <div>{{ title }}</div>
+      <div class="icon" [ngClass]="{ open: open }">
+        <mat-icon>expand_more</mat-icon>
+      </div>
+    </div>
+  </app-menu-entry>
+</div>
+
+<ng-template #menu>
+  <div
+    class="dropdown-menu highlighted-links mat-elevation-z8"
+    cdkMenu
+    (closed)="setClosed()"
+  >
+    <ng-content></ng-content>
+  </div>
+</ng-template>

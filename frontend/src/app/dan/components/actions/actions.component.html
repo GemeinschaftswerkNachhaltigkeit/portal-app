@@ -1,0 +1,45 @@
+<div class="actions-container">
+  <div>
+    <button
+      mat-flat-button
+      matStepperPrevious
+      *ngIf="showPrevBtn"
+      id="prev-step"
+    >
+      {{ 'btn.back' | translate }}
+    </button>
+  </div>
+  <div>
+    <ng-content></ng-content>
+    <button
+      mat-flat-button
+      color="accent"
+      matStepperNext
+      *ngIf="showNextBtn && !finalStep"
+      id="next-step"
+    >
+      {{ 'btn.next' | translate }}
+    </button>
+    <button
+      mat-stroked-button
+      color="accent"
+      matStepperNext
+      *ngIf="finalStep && !modification"
+      (click)="cancelHandler()"
+      id="next-step"
+    >
+      {{ 'btn.saveCurrentState' | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="accent"
+      matStepperNext
+      *ngIf="showNextBtn && finalStep"
+      (click)="completedHandler()"
+      id="next-step"
+    >
+      <span *ngIf="!modification">{{ completedButtonText }}</span>
+      <span *ngIf="modification">{{ updateButtonText }}</span>
+    </button>
+  </div>
+</div>

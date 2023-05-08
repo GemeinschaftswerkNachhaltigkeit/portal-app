@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+a,
+a:hover {
+  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  cursor: pointer;
+}
+a.accent {
+  text-decoration: none;
+  color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+}
+a.accent:hover {
+  text-decoration: underline;
+}
+
+.highlighted-links a {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  z-index: $z1;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.2rem;
+    background-color: $yellow;
+    height: 1.2rem;
+    width: 0%;
+    z-index: -1;
+    transition: width 200ms;
+  }
+
+  &.blue {
+    &::after {
+      background-color: $blue-light;
+    }
+  }
+}
+
+.page-menu {
+  .highlighted-links {
+    &::after {
+      left: -$spacing-6;
+    }
+  }
+}
+
+a.active,
+a.isActive,
+.highlighted-links a:hover,
+.page-menu a:hover,
+[aria-expanded='true'] a {
+  &::after {
+    width: 100%;
+  }
+}

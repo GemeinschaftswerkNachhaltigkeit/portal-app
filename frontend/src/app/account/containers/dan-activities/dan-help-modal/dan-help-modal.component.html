@@ -1,0 +1,32 @@
+<div mat-dialog-content class="dan-help-modal">
+  <ng-container *ngIf="content$ | async as content">
+    <header class="header">
+      <div class="close">
+        <button mat-icon-button (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <h1 class="title">{{ content.title || '' }}</h1>
+      <p class="subtitle">{{ content.subtitle || '' }}</p>
+    </header>
+    <div class="content">
+      <div class="left">
+        <ng-container *ngFor="let entry of content.entries">
+          <div class="entry" *ngIf="entry.text">
+            <div class="check"><mat-icon>check</mat-icon></div>
+            <div class="text" [innerHTML]="entry.text"></div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="right">
+        <img [src]="content.image" alt="" />
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>
+    {{ 'btn.close' | translate }}
+  </button>
+</mat-dialog-actions>

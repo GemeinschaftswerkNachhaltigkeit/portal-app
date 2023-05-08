@@ -1,0 +1,22 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.pager {
+  margin-top: $spacing-4;
+}
+
+.filters {
+  display: grid;
+  gap: $spacing-4;
+  grid-auto-rows: min-content;
+  top: 102px;
+}
+
+.line {
+  padding: $spacing-10 0;
+  hr {
+    border: none;
+    background-color: $gray-light;
+    height: 1px;
+  }
+}

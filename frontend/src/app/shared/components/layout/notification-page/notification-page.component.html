@@ -1,0 +1,48 @@
+<div class="notification-page" [ngClass]="{ 'no-adv': !advantages?.length }">
+  <section class="column">
+    <div class="wrapper">
+      <div class="icon" [ngStyle]="{ color: iconColor }">
+        <mat-icon class="material-icons-outlined">{{ icon }}</mat-icon>
+      </div>
+      <div>
+        <div class="content-title-wrapper">
+          <app-heading *ngIf="title">
+            {{ title }}
+          </app-heading>
+        </div>
+        <div class="links">
+          <section>
+            <app-html-wrapper
+              *ngIf="content"
+              [html]="content"
+            ></app-html-wrapper>
+
+            <div class="continue-btn">
+              <button
+                mat-flat-button
+                color="accent"
+                (click)="continueHandler()"
+              >
+                {{ buttonText | translate }}
+              </button>
+            </div>
+          </section>
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="column" *ngIf="advantages?.length">
+    <div class="benefits bg-blue-light">
+      <div class="title-wrapper">
+        <app-heading type="h3" color="none">
+          {{ advantagesTitle }}
+        </app-heading>
+      </div>
+      <ul>
+        <li *ngFor="let adv of advantages">{{ adv }}</li>
+      </ul>
+    </div>
+  </section>
+</div>

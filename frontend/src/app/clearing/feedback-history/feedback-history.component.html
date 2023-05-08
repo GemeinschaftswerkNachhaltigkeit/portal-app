@@ -1,0 +1,15 @@
+<div class="feedback-wrapper">
+  <app-heading size="md" color="none">{{
+    'clearing.titles.feedback' | translate
+  }}</app-heading>
+  <div class="feedback-list">
+    <ng-container *ngFor="let feedbackEntry of feedback">
+      <div class="feedbackEntry">
+        <strong>{{
+          feedbackEntry.feedbackRequestSent | date: 'dd.MM.yyyy HH:mm'
+        }}</strong>
+        {{ feedbackEntry.feedbackRequest }}
+      </div>
+    </ng-container>
+  </div>
+</div>

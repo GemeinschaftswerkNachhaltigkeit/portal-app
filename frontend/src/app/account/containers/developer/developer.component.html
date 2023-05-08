@@ -1,0 +1,21 @@
+<ng-container>
+  <ng-container>
+    <app-page-with-header-layout
+      [title]="'account.titles.developer' | translate"
+    >
+      <ng-container headerContent>{{
+        'account.texts.developer' | translate
+      }}</ng-container>
+      <div class="content">
+        <app-api-key-doc-links>
+          <ng-container *ngFor="let l of links">
+            <app-api-key-doc-link [url]="l.url" [absouteUrl]="!!l.absoluteUrl">
+              {{ l.title }}
+            </app-api-key-doc-link>
+          </ng-container>
+        </app-api-key-doc-links>
+        <app-api-key></app-api-key>
+      </div>
+    </app-page-with-header-layout>
+  </ng-container>
+</ng-container>

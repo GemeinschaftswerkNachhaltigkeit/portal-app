@@ -1,0 +1,14 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.admin-warning {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  background-color: $magenta;
+  color: white;
+
+  app-outlined-icon {
+    margin-right: 2em;
+  }
+}

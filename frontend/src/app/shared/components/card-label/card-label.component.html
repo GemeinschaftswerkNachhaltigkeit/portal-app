@@ -1,0 +1,12 @@
+<ng-container *ngIf="(activityTypeLabel || organisationTypeLabel) && type">
+  <ng-container *ngIf="card.isActivity(type) && activityTypeLabel">
+    <app-label [color]="dan ? 'blue' : 'green'" [limitedWidth]="limitedWidth">
+      {{ activityTypeLabel }}
+    </app-label>
+  </ng-container>
+  <ng-container *ngIf="card.isOrga(type) && organisationTypeLabel">
+    <app-label color="orange" [limitedWidth]="limitedWidth">
+      {{ organisationTypeLabel }}
+    </app-label>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,196 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+// Must be px fixed as the design is created for a specific width
+$card-width: fit-content;
+$card-height: 300px;
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+.card {
+  width: 100%;
+  padding-bottom: $spacing-8;
+  background: white;
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  position: relative;
+  gap: $spacing-3;
+  &.draft {
+    opacity: 0.6;
+  }
+  &:hover {
+    cursor: pointer;
+    &.notClickable,
+    &.draft {
+      cursor: default;
+    }
+  }
+
+  overflow: hidden;
+  transition: transform 200ms;
+
+  .expiredBadge {
+    z-index: $z4;
+    position: absolute;
+    left: $spacing-1;
+    top: 2.2rem;
+  }
+
+  .active-maker {
+    opacity: 0;
+    position: absolute;
+    background-color: $blue-light;
+    width: 50rem;
+    height: 50rem;
+    border-radius: 50%;
+    right: -5rem;
+    top: -2rem;
+    transition: opacity 200ms;
+    z-index: 0;
+  }
+
+  &.is-active {
+    .active-maker {
+      opacity: 1;
+    }
+  }
+
+  .clickable-area {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: $z2;
+
+    &.expired {
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .action {
+    position: absolute;
+    left: 8rem;
+    right: auto;
+    top: $spacing-14;
+    z-index: $z3;
+    align-self: center;
+    margin-left: -16px;
+  }
+
+  .logo-column {
+    padding: $spacing-4 0 $spacing-4 $spacing-4;
+    position: relative;
+
+    .logo-wrapper {
+      height: $spacing-14;
+      width: $spacing-14;
+      z-index: $z1;
+    }
+  }
+
+  .content-column {
+    display: grid;
+    gap: $spacing-2;
+    position: relative;
+    z-index: $z1;
+    padding: $spacing-4 $spacing-4 $spacing-4 0;
+
+    .card-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      position: relative;
+      z-index: $z4;
+      .type {
+        display: inline-block;
+        margin-bottom: $spacing-8;
+      }
+    }
+
+    .title {
+      color: $text-color;
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.4rem;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    .orga-name {
+      color: $green;
+      font-weight: bold;
+      margin-bottom: $spacing-1;
+
+      &.dan {
+        color: $dan-blue;
+      }
+    }
+
+    .infos {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $spacing-4;
+
+      .description {
+        .description-text {
+          font-size: 1.2rem;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
+          hyphens: auto;
+        }
+      }
+
+      .details {
+        .info-title {
+          color: $text-color;
+          font-weight: bold;
+          font-size: 1.2rem;
+          margin: 0;
+          margin-bottom: $spacing-2;
+        }
+        .details-entries {
+          display: grid;
+          gap: $spacing-4;
+          height: fit-content;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .card {
+    .active-maker {
+      width: 40rem;
+      height: 40rem;
+    }
+    &.is-active,
+    &:hover {
+      transform: translateX(2rem);
+    }
+    .action {
+      left: auto;
+      right: $spacing-4;
+      top: $spacing-4;
+    }
+    .content-column {
+      display: grid;
+      gap: $spacing-4;
+      .card-header {
+        grid-template-columns: 2fr minmax(24rem, 1fr);
+        .type {
+          display: inline-block;
+          margin-bottom: 0;
+        }
+      }
+
+      .infos {
+        grid-template-columns: 2fr minmax(24rem, 1fr);
+        gap: $spacing-6;
+      }
+    }
+  }
+}

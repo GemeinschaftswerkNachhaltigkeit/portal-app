@@ -1,0 +1,28 @@
+<div class="user-list-entry" *ngIf="user">
+  <div class="col">
+    <label>{{ 'account.labels.email' | translate }}</label>
+    <div class="value">{{ user.email }}</div>
+  </div>
+  <div class="col">
+    <label>{{ 'account.labels.userType' | translate }}</label>
+    <div class="value">{{ 'account.labels.' + user.userType | translate }}</div>
+  </div>
+  <div class="col status">
+    <label>{{ 'account.labels.status' | translate }}</label>
+    <div class="value">
+      <app-orga-user-list-status
+        [status]="user.status"
+      ></app-orga-user-list-status>
+    </div>
+  </div>
+  <div class="col action">
+    <label></label>
+    <button class="desktop value" mat-button (click)="deleteHandler()">
+      <app-outlined-icon>delete</app-outlined-icon>
+    </button>
+    <button class="mobile" mat-flat-button (click)="deleteHandler()">
+      <app-outlined-icon>delete</app-outlined-icon>
+      <span>{{ 'account.buttons.delete' | translate }}</span>
+    </button>
+  </div>
+</div>

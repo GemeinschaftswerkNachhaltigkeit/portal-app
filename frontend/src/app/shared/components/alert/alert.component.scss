@@ -1,0 +1,95 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+.no-data {
+  padding: $spacing-6 $spacing-4;
+  background: white;
+  width: 100%;
+  border-left: $spacing-4 solid $magenta;
+  color: $blue-navy;
+  display: flex;
+  gap: $spacing-4;
+  flex-direction: column;
+  .msg {
+    .title {
+      font-weight: bold;
+    }
+  }
+
+  .icon-wrapper {
+    position: relative;
+    width: 7.2rem;
+    height: 7.2rem;
+    flex-shrink: 0;
+    .bg-icon {
+      position: absolute;
+      left: 2.4rem;
+      top: 2.4rem;
+      z-index: 1;
+      mat-icon {
+        opacity: 0.1;
+        transform: scaleY(3) scaleX(-3);
+      }
+    }
+    .fg-icon {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      mat-icon {
+        transform: scale(2);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .no-data {
+    flex-direction: row;
+  }
+}
+
+// .coordinates-error {
+//   display: grid;
+//   grid-template-columns: 7.2rem 1fr;
+//   gap: $spacing-4;
+//   padding: $spacing-2;
+//   border: 2px solid $bordeauxe;
+//   .msg {
+//     height: 100%;
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//     gap: $spacing-1;
+
+//     .title {
+//       color: $bordeauxe;
+//       font-weight: bold;
+//     }
+//   }
+//   .icon-wrapper {
+//     position: relative;
+//     width: 7.2rem;
+//     height: 7.2rem;
+//     .bg-icon {
+//       position: absolute;
+//       left: 2.4rem;
+//       top: 2.4rem;
+//       z-index: 1;
+//       mat-icon {
+//         opacity: 0.1;
+//         transform: scaleY(3) scaleX(-3);
+//       }
+//     }
+//     .fg-icon {
+//       position: absolute;
+//       right: 0;
+//       bottom: 0;
+//       z-index: 2;
+//       mat-icon {
+//         transform: scale(2);
+//       }
+//     }
+//   }
+// }

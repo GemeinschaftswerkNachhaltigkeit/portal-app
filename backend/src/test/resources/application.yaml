@@ -1,0 +1,132 @@
+management:
+  endpoints:
+    security:
+      username: monitor
+      password: monitor
+
+access-log:
+  enabled: true
+  config-path: test-folder
+
+debug: false
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:tc:postgis:13-3.2-alpine:///test
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: test
+    password: test
+    hikari:
+      maximum-pool-size: 2
+  jpa:
+    # In Produktion auf false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    database-platform: com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextDialect
+    database: postgresql
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _AUDIT_LOG
+  mail:
+    host: localhost
+    port: 36015
+  messages:
+    basename: i18n/message
+  profiles:
+    group:
+      ci:
+        - prod
+        - ci
+    active:
+      - prod
+email:
+  default-from: test-from@exxeta.com
+  prefix-for-subject: "Unit Test - "
+
+landing-page:
+  email:
+    recipients:
+      - ingo.initiative@exxeta.com
+      - test-empfang@exxeta.com
+contact-form:
+  recipients:
+    content:
+      - content@exxeta.com
+    idea:
+      - idea@exxeta.com
+    tech:
+      - ingo.initiative@exxeta.com
+      - test-empfang@exxeta.com
+
+building-housing-contact:
+  recipients:
+    - gemeinschaftswerk@nachhaltigkeitsrat.de
+  station: '/items/building_and_living_translations?filter=%7B%22languages_code%22:%22de-DE%22%7D&fields=turnaround_steps'
+
+wpgwn:
+  organisation:
+    dan-id: 0
+    random-id-life-time: 3m
+    url: http://test.io/
+    email-asset-base-path: http://localhost/test
+    privacy-content-url: http://localhost/mme
+    opt-out-url: http://localhost/opt-out/{uuid}?email={email}
+    reminder-email:
+      duration-between-reminders: 7d
+      max-reminders: 2
+      cron: 0 0 7 * * *
+      batch-size: 250
+    import-privacy-consent-email:
+      cron: 0 0 7 * * *
+    invitation-mail-subject: test
+    invitation-mail-body: Test body with url https://test.io?queryParam=linkLink
+    duplicate:
+      nameSimilarityThreshold: 0.7
+    contactInvite:
+      expireFromCreationInDays: 42
+    organisationMembership:
+      oneTimePasswordLength: 12
+      expireFromCreationInDays: 42
+    marketplace:
+        max-offers: 10
+        max-best-practises: 10
+file:
+  base-directory: ${java.io.tmpdir}
+keycloak:
+  admin:
+    server-url: http://localhost/keycloak
+    admin-realm: master
+    admin-user: test
+    admin-password: test
+    client-id: test
+    client-secret: test
+    realm: wpgwn
+    organisation-group-id: "1"
+    newly-sign-up-users: "5"
+    connection-pool-size: 10
+    read-timeout: 10
+    connection-timeout: 10
+
+ui-config:
+  api-url: '/app/api/v1'
+  context-path: '/'
+  directus-base-url: 'http://localhost:8055' #'/cms' auf testsystem
+  landing-page-url: '/cms/'
+  production: false
+  matomoUrl: 'http://localhost'
+  matomoSiteId: 1
+  keycloak:
+    issuer: 'http://test.local'
+    clientId: 'wpgwn'
+    debug: true

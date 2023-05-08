@@ -1,0 +1,8 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+.layout {
+  width: 100%;
+  max-width: 110rem;
+  margin: 8rem auto;
+}

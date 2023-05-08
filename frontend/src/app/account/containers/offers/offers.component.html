@@ -1,0 +1,170 @@
+<ng-container *ngIf="offers$ | async as offers">
+  <ng-container *ngIf="offerWips$ | async as offerWips">
+    <app-page-with-header-layout
+      [title]="'account.titles.offers' | translate"
+      [noEntriesTitle]="'account.titles.noOffers' | translate"
+      [showNoEntriesWarning]="
+        (loading$ | async) !== true && !offers.length && !offerWips.length
+      "
+    >
+      <ng-container headerContent>
+        {{ 'account.texts.offers' | translate }}
+      </ng-container>
+      <ng-container headerAction>
+        <div class="actions-wrapper">
+          <ng-container *ngIf="offersPaging$ | async as paging">
+            <button
+              action
+              mat-flat-button
+              color="accent"
+              (click)="handleNew()"
+              [disabled]="(paging.totalElements || 0) >= 10"
+            >
+              {{ 'account.buttons.addOffer' | translate }}
+            </button>
+            <app-char-count
+              [count]="paging.totalElements || 0"
+              [total]="10"
+            ></app-char-count>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container noEntriesContent>
+        {{ 'account.texts.noOffers' | translate }}
+      </ng-container>
+
+      <app-spinner></app-spinner>
+
+      <ng-container *ngIf="(loading$ | async) !== true">
+        <section class="lists">
+          <app-list-with-heading-layout
+            *ngIf="offerWips.length"
+            [title]="'account.titles.offerWips' | translate"
+          >
+            <div>
+              <app-card-list>
+                <ng-container *ngFor="let offerWip of offerWips">
+                  <div class="card-wrapper">
+                    <app-card
+                      [featuredText]="offerWip.featuredText"
+                      [imageId]="offerWip.image"
+                      [title]="offerWip.name"
+                      [content]="offerWip.description"
+                      [type]="type.OFFER"
+                      [category]="
+                        offerWip.offerCategory &&
+                        'marketplace.labels.' + offerWip.offerCategory
+                      "
+                      [location]="offerWip.location"
+                      [thematicFocus]="offerWip.thematicFocus"
+                      [draft]="true"
+                      (edit)="handleEditOfferWip(offerWip)"
+                      (delete)="handleDeleteOfferWip(offerWip)"
+                    ></app-card>
+                  </div>
+                </ng-container>
+              </app-card-list>
+              <ng-container *ngIf="offerWipsPaging$ | async as wipsPaging">
+                <div class="pager">
+                  <mat-paginator
+                    class="mat-elevation-z8"
+                    *ngIf="offerWips?.length"
+                    color="accent"
+                    [length]="wipsPaging?.totalElements"
+                    [pageIndex]="wipsPaging?.number"
+                    [pageSize]="wipsPaging?.size || pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [showFirstLastButtons]="true"
+                    (page)="handleWipsPageChanged($event)"
+                    aria-label="Select page"
+                  >
+                  </mat-paginator>
+                </div>
+              </ng-container>
+            </div>
+          </app-list-with-heading-layout>
+          <app-list-with-heading-layout
+            *ngIf="offers.length"
+            [title]="'account.titles.releasedOffers' | translate"
+          >
+            <div>
+              <app-card-list>
+                <ng-container *ngFor="let offer of offers">
+                  <div class="card-wrapper">
+                    <app-card
+                      [featured]="offer.featured"
+                      [featuredText]="offer.featuredText"
+                      [imageId]="offer.image"
+                      [title]="offer.name"
+                      [content]="offer.description"
+                      [type]="type.OFFER"
+                      [category]="
+                        offer.offerCategory &&
+                        'marketplace.labels.' + offer.offerCategory
+                      "
+                      [location]="offer.location"
+                      [thematicFocus]="offer.thematicFocus"
+                      [draft]="offer.status === status.INACTIVE"
+                      (edit)="handleEditOffer(offer)"
+                      (delete)="handleDeleteOffer(offer)"
+                      (cardClicked)="open(offer)"
+                      ><ng-container actionMenu>
+                        <button
+                          *ngIf="
+                            offer.status === status.INACTIVE ||
+                            offer.status === status.ACTIVE
+                          "
+                          color="accent"
+                          mat-icon-button
+                          [matMenuTriggerFor]="menu"
+                          aria-label="actions menu"
+                        >
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button
+                            class="action-option"
+                            *ngIf="offer.status === status.INACTIVE"
+                            mat-menu-item
+                            (click)="handleStatusChange(offer, status.ACTIVE)"
+                          >
+                            <app-outlined-icon>check_circle</app-outlined-icon>
+                            <span>{{ 'labels.activate' | translate }}</span>
+                          </button>
+                          <button
+                            class="action-option"
+                            *ngIf="offer.status === status.ACTIVE"
+                            mat-menu-item
+                            (click)="handleStatusChange(offer, status.INACTIVE)"
+                          >
+                            <app-outlined-icon>cancel</app-outlined-icon>
+                            <span>{{ 'labels.deactivate' | translate }}</span>
+                          </button>
+                        </mat-menu>
+                      </ng-container>
+                    </app-card>
+                  </div>
+                </ng-container>
+              </app-card-list>
+              <ng-container *ngIf="offersPaging$ | async as paging">
+                <div class="pager">
+                  <mat-paginator
+                    class="mat-elevation-z8"
+                    *ngIf="offers?.length"
+                    color="accent"
+                    [length]="paging?.totalElements"
+                    [pageIndex]="paging?.number"
+                    [pageSize]="paging?.size || pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [showFirstLastButtons]="true"
+                    (page)="handlePageChanged($event)"
+                    aria-label="Select page"
+                  >
+                  </mat-paginator>
+                </div>
+              </ng-container>
+            </div>
+          </app-list-with-heading-layout>
+        </section>
+      </ng-container> </app-page-with-header-layout></ng-container
+></ng-container>

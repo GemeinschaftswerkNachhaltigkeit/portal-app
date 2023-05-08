@@ -1,0 +1,9 @@
+<div class="content-row font-2" *ngIf="content" [ngClass]="{ small: small }">
+  <div class="content">
+    <app-outlined-icon>{{ icon }}</app-outlined-icon>
+    <p class="text">
+      <mark>{{ content }}</mark>
+    </p>
+  </div>
+  <!--<div class="decorator" *ngIf="!noDecorator"></div>-->
+</div>

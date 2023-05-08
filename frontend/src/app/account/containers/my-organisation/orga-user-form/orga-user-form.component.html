@@ -1,0 +1,76 @@
+<div class="form-wrapper">
+  <app-heading size="sm" type="h2" color="none">{{
+    'account.titles.orgaUserForm' | translate
+  }}</app-heading>
+  <p class="hint">{{ 'account.texts.addUserHint' | translate }}</p>
+  <form
+    class="add-user-form"
+    novalidate
+    [formGroup]="userForm"
+    (submit)="submitHandler(formDirective)"
+    #formDirective="ngForm"
+  >
+    <div class="names">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'account.labels.firstName' | translate }}</mat-label>
+        <input matInput formControlName="firstName" />
+
+        <mat-error>
+          <app-form-field-error
+            [field]="userForm.get('firstName')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'account.labels.lastName' | translate }}</mat-label>
+        <input matInput formControlName="lastName" />
+
+        <mat-error>
+          <app-form-field-error
+            [field]="userForm.get('lastName')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="other-form-fields">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'account.labels.email' | translate }}</mat-label>
+        <input matInput formControlName="email" />
+
+        <mat-error>
+          <app-form-field-error
+            [field]="userForm.get('email')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'account.labels.userType' | translate }}</mat-label>
+        <mat-select formControlName="userType">
+          <mat-option *ngFor="let type of userTypes" [value]="type">
+            {{ 'account.labels.' + type | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-form-field-error
+            [field]="userForm.get('userType')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-wrapper">
+        <button
+          class="submit-button"
+          mat-flat-button
+          color="accent"
+          [disabled]="userForm.invalid || (isLoading$ | async) === true"
+        >
+          <span *ngIf="(isLoading$ | async) === false">{{
+            'account.buttons.addNewUser' | translate
+          }}</span>
+          <span *ngIf="(isLoading$ | async) === true">{{
+            'btn.loading' | translate
+          }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

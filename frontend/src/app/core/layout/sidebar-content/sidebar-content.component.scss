@@ -1,0 +1,19 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.sidebar-content {
+  height: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+
+  .separator {
+    height: 2px;
+    background-color: $blue-navy;
+    margin: $spacing-8 0;
+  }
+
+  .logo-wrapper {
+    height: 7rem;
+  }
+}

@@ -1,0 +1,15 @@
+<a
+  rel="noopener"
+  [href]="
+    card.isOrga(currentResult?.resultType)
+      ? contextPath + 'organisations/' + currentResult?.id
+      : contextPath +
+        'organisations/' +
+        currentResult?.organisation?.id +
+        '/' +
+        currentResult?.id
+  "
+  target="_blank"
+>
+  <ng-content></ng-content>
+</a>

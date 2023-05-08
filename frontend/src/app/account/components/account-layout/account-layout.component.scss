@@ -1,0 +1,62 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+$navColumn: 16.8rem;
+$rightColumn: 37.6rem;
+
+.profile {
+  display: grid;
+  gap: $spacing-18;
+
+  .body {
+    display: grid;
+
+    .content {
+      display: grid;
+      gap: $spacing-4;
+      margin-top: $spacing-4;
+      margin-bottom: $spacing-8;
+
+      .content-with-contact {
+        display: grid;
+        gap: $spacing-4;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .profile {
+    .body {
+      display: grid;
+      grid-template-columns: $navColumn 1fr;
+      gap: $spacing-20;
+      position: relative;
+
+      .nav {
+        height: fit-content;
+        position: sticky;
+        top: calc(#{$top-nav-height} + #{$spacing-4});
+
+        .nav-wrapper {
+          position: relative;
+          width: calc(3rem + 100%);
+          left: -3rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .profile {
+    .body {
+      .nav {
+        .nav-wrapper {
+          width: calc(6rem + 100%);
+          left: -6rem;
+        }
+      }
+    }
+  }
+}

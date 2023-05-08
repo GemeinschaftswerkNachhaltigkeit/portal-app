@@ -1,0 +1,7 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.list-wrapper {
+  display: grid;
+  gap: $spacing-4;
+}

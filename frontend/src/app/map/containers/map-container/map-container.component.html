@@ -1,0 +1,100 @@
+<app-map-layout>
+  <app-search-form
+    filter
+    [activeFilters]="filters$ | async"
+    (searchParamsChanged)="searchChangedHandler($event)"
+  ></app-search-form>
+
+  <div class="results-wrapper" results>
+    <div class="results">
+      <div class="spinner-wrapper">
+        <app-spinner forId="map-search"></app-spinner>
+      </div>
+      <ng-container *ngIf="(loading$ | async) === false">
+        <div
+          class="no-data"
+          *ngIf="
+            !(searchResults$ | async)?.length &&
+            (mapInitialised$ | async) === true
+          "
+        >
+          <app-alert [title]="'map.titles.noData' | translate">
+            {{ 'map.texts.noData.0' | translate }}
+          </app-alert>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="(searchResults$ | async)?.length">
+        <app-paginator-wrapper
+          [total]="paging.totalElements"
+          *ngIf="searchPaging$ | async as paging"
+        >
+          <mat-paginator
+            class="mat-elevation-z8"
+            color="accent"
+            [length]="paging?.totalElements"
+            [pageIndex]="paging?.number"
+            [pageSize]="paging?.size || pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            [showFirstLastButtons]="true"
+            (page)="pageChangedHandler($event)"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        </app-paginator-wrapper>
+      </ng-container>
+
+      <div class="cards" [@addRemove]="(searchResults$ | async)?.length">
+        <div
+          [id]="'card-' + result.resultType + result.id"
+          class="card-entry"
+          *ngFor="let result of searchResults$ | async"
+        >
+          <div (mouseenter)="cardHover(result)" (mouseleave)="clearHovered()">
+            <app-base-card
+              [entity]="result"
+              [type]="result.resultType"
+              [narrow]="true"
+              [isActive]="isActive(result)"
+              [followed]="subscription.oganisationIsSubcribed(result.id)"
+              [bookmarked]="subscription.activityIsSubcribed(result.id)"
+              (cardClicked)="openCard(result)"
+            >
+              <ng-container badge
+                ><app-initiator-badge
+                  *ngIf="utils.asOrga(result)?.initiator"
+                ></app-initiator-badge
+                ><app-project-sustainability-winner-badge
+                  *ngIf="utils.asOrga(result)?.projectSustainabilityWinner"
+                ></app-project-sustainability-winner-badge
+              ></ng-container>
+            </app-base-card>
+          </div>
+        </div>
+      </div>
+
+      <mat-paginator
+        class="mat-elevation-z8"
+        *ngIf="(searchResults$ | async)?.length"
+        color="accent"
+        [length]="(searchPaging$ | async)?.totalElements"
+        [pageIndex]="(searchPaging$ | async)?.number"
+        [pageSize]="(searchPaging$ | async)?.size || pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+        (page)="pageChangedHandler($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+  <div map>
+    <app-map
+      *ngIf="markers$ | async as markers"
+      [center]="germanyCenter"
+      [data]="markers"
+      (mapMoved)="mapMovedHandler($event)"
+    ></app-map>
+  </div>
+  <app-details-card detailsDesktop></app-details-card>
+  <app-details-card detailsMobile [mobile]="true"></app-details-card>
+</app-map-layout>

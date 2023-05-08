@@ -1,0 +1,23 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+:host {
+  width: 100%;
+}
+
+.filter-btn-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-left: -16px;
+  .filter-btn-text {
+    margin-left: $spacing-2;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .filter-btn-wrapper {
+    margin-left: 0;
+  }
+}

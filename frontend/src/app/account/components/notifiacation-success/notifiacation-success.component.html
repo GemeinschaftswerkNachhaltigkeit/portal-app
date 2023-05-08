@@ -1,0 +1,9 @@
+<app-notification-page
+  *ngIf="isValidType()"
+  [title]="getTitle() | translate"
+  [content]="getContent() | translate"
+  [icon]="getIcon()"
+  [buttonText]="'btn.goToApp'"
+  (continue)="close()"
+>
+</app-notification-page>

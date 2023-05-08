@@ -1,0 +1,74 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+.slider-wrapper {
+  background-color: $gray-light;
+  padding: $spacing-10 0;
+  position: relative;
+
+  .slide-wrapper {
+    display: block;
+    height: 200px;
+    background-color: white;
+    padding: $spacing-4;
+    margin: $spacing-4 0;
+    text-decoration: none;
+    color: $blue-navy;
+
+    .image-wrapper {
+      height: 80px;
+      margin-bottom: $spacing-4;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    // width: 200px;
+  }
+
+  .no-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    .slide-wrapper {
+      padding: $spacing-4;
+      max-width: 220px;
+    }
+  }
+
+  .title {
+    text-align: center;
+    padding: 0 $spacing-8 $spacing-4 $spacing-8;
+  }
+
+  .buttons {
+    display: flex;
+    position: absolute;
+    right: $spacing-10;
+    bottom: -2rem;
+    gap: $spacing-1;
+
+    .button {
+      width: 4rem;
+      height: 4rem;
+      color: white;
+      background-color: $blue-navy;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      transition: transform 300ms;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

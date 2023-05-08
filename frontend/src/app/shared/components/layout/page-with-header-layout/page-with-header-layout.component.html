@@ -1,0 +1,12 @@
+<app-header [title]="title" [firstName]="firstName">
+  <ng-content select="[headerContent]"></ng-content>
+  <ng-content action select="[headerAction]"></ng-content>
+</app-header>
+
+<ng-container *ngIf="showNoEntriesWarning">
+  <app-alert [title]="noEntriesTitle">
+    <ng-content select="[noEntriesContent]"></ng-content>
+  </app-alert>
+</ng-container>
+
+<ng-content></ng-content>

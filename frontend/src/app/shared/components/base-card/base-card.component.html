@@ -1,0 +1,140 @@
+<div
+  class="card mat-elevation-z8"
+  [ngClass]="{
+    'is-active': isActive,
+    notClickable: !clickable,
+    draft: draft
+  }"
+>
+  <div class="active-maker"></div>
+  <div class="expiredBadge" *ngIf="showAsExpired(entity, type)">
+    <app-expired-badge></app-expired-badge>
+  </div>
+  <div
+    class="clickable-area"
+    [ngClass]="{ expired: showAsExpired(entity, type) }"
+    (click)="cardClickHandler()"
+  ></div>
+  <div class="action">
+    <ng-container *ngIf="!showActions">
+      <app-organisation-subscription-action
+        *ngIf="card.isOrga(type)"
+        [small]="true"
+        [organisation]="utils.asOrga(entity)"
+      >
+      </app-organisation-subscription-action>
+      <app-activity-subscription-action
+        *ngIf="card.isActivity(type)"
+        [small]="true"
+        [activity]="utils.asActivity(entity)"
+      >
+      </app-activity-subscription-action>
+    </ng-container>
+    <ng-container *ngIf="showActions">
+      <app-action
+        *ngIf="toggleInitiatiorVisible"
+        [onlyIcon]="true"
+        [icon]="'verified'"
+        [toggle]="true"
+        [toggleValue]="isInitiator"
+        (clicked)="handleToggleInitiator()"
+      ></app-action>
+      <app-action
+        *ngIf="type === 'ORGANISATION' && leaveVisible"
+        [onlyIcon]="true"
+        [icon]="'logout'"
+        (clicked)="leaveOrgaHandler()"
+      ></app-action>
+      <app-action
+        *ngIf="editVisible"
+        [onlyIcon]="true"
+        [icon]="'edit'"
+        (clicked)="editHandler()"
+      ></app-action>
+      <app-action
+        *ngIf="deleteVisible"
+        [onlyIcon]="true"
+        [icon]="'delete'"
+        (clicked)="deleteHandler()"
+      ></app-action>
+    </ng-container>
+  </div>
+  <div class="logo-column">
+    <div class="logo-wrapper">
+      <app-card-logo
+        [logoUrl]="entity?.logo"
+        [name]="entity?.name"
+      ></app-card-logo>
+    </div>
+  </div>
+
+  <div class="content-column">
+    <header class="card-header">
+      <div class="type">
+        <app-card-label
+          [limitedWidth]="narrow"
+          [type]="type"
+          [dan]="
+            card.isActivity(type) &&
+            utils.asActivity(entity).activityType === 'DAN'
+          "
+          [activityTypeLabel]="
+            card.isActivity(type) && utils.asActivity(entity).activityType
+              ? ('activityType.' + utils.asActivity(entity).activityType
+                | translate)
+              : ''
+          "
+          [organisationTypeLabel]="
+            card.isOrga(type) && utils.asOrga(entity).organisationType
+              ? ('organisationType.' + utils.asOrga(entity).organisationType
+                | translate)
+              : ''
+          "
+        ></app-card-label>
+      </div>
+    </header>
+    <div>
+      <h3 class="title" #contentRef>
+        {{ entity?.name }}
+      </h3>
+      <ng-content select="[badge]"></ng-content>
+    </div>
+    <div class="infos">
+      <div class="description">
+        <div
+          class="orga-name"
+          [ngClass]="{ dan: utils.asActivity(entity).activityType === 'DAN' }"
+          *ngIf="type === 'ACTIVITY'"
+        >
+          {{ utils.asActivity(entity).organisation?.name }}
+        </div>
+        <p class="description-text">{{ utils.excerpt(entity?.description) }}</p>
+      </div>
+      <div class="details">
+        <h4 class="info-title">{{ 'map.labels.info' | translate }}</h4>
+
+        <div class="details-entries">
+          <ng-container *ngIf="card.isActivity(type)">
+            <app-content-row
+              *ngIf="card.isActivity(type)"
+              [small]="true"
+              icon="calendar_today"
+              [content]="utils.dateRangeString(utils.asActivity(entity).period)"
+            ></app-content-row>
+          </ng-container>
+          <app-content-row
+            [small]="true"
+            [content]="utils.locationString(entity?.location)"
+          ></app-content-row>
+          <ng-container *ngIf="entity?.impactArea">
+            <app-content-row
+              [small]="true"
+              icon="location_searching"
+              [content]="'impactArea.' + entity?.impactArea | translate"
+            ></app-content-row>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

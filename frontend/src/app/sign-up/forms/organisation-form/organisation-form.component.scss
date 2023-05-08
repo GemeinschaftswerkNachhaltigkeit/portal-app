@@ -1,0 +1,48 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+::ng-deep {
+  label.mat-checkbox-layout {
+    white-space: normal;
+  }
+}
+
+.char-count {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+}
+
+.tip-tap-wrapper {
+  position: relative;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2em;
+}
+
+.file-uploads {
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  margin-bottom: $spacing-4;
+}
+
+.wysiwyg-form-field {
+  .mat-form-field-subscript-wrapper {
+    position: static;
+  }
+  .mat-form-field-label {
+    display: block;
+    padding-left: 0.75em;
+    top: 2.3em;
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .file-uploads {
+    flex-direction: row;
+  }
+}

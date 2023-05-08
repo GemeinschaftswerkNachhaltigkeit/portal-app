@@ -1,0 +1,11 @@
+<header (click)="toggle()" class="header">
+  <app-menu-entry [button]="true" [active]="expanded" [new]="new">
+    {{ title }}
+  </app-menu-entry>
+  <mat-icon [@indicatorRotate]="expanded">keyboard_arrow_down</mat-icon>
+</header>
+<div class="content" [@bodyExpansion]="expanded">
+  <div class="content-body">
+    <ng-content></ng-content>
+  </div>
+</div>

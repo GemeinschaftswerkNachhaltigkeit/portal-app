@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <app-secondary-filters
+    *ngIf="data"
+    [data]="data"
+    (filtersChanged)="handleFiltersChanged($event)"
+  ></app-secondary-filters>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button cdkFocusInitial (click)="apply()" color="accent">
+    {{ 'btn.apply' | translate }}
+  </button>
+  <button mat-button mat-dialog-close>
+    {{ 'btn.close' | translate }}
+  </button>
+</div>

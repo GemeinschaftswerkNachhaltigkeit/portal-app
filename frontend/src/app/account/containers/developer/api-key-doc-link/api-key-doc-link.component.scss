@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.doc-link {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  font-size: 1.4rem;
+  gap: $spacing-2;
+  height: 8rem;
+  padding: $spacing-2;
+  font-weight: bold;
+  position: relative;
+  text-decoration: none;
+
+  .label {
+    position: relative;
+    top: 1px;
+  }
+  .link-icon {
+    position: absolute;
+    right: $spacing-2;
+    bottom: $spacing-2;
+    opacity: 0.5;
+  }
+}

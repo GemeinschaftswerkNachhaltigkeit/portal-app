@@ -1,0 +1,94 @@
+<div class="contact-form">
+  <ng-container [formGroup]="contactFormGroup">
+    <div class="row cols-2">
+      <mat-form-field appearance="outline">
+        <mat-label>{{
+          translationOverrides.firstName || 'forms.labels.firstName' | translate
+        }}</mat-label>
+        <input matInput formControlName="firstName" />
+
+        <app-valid-check
+          [form]="contactFormGroup"
+          controlName="firstName"
+        ></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="contactFormGroup.get('firstName')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{
+          translationOverrides.lastName || 'forms.labels.lastName' | translate
+        }}</mat-label>
+        <input matInput formControlName="lastName" />
+
+        <app-valid-check
+          [form]="contactFormGroup"
+          controlName="lastName"
+        ></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="contactFormGroup.get('lastName')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row" *ngIf="position">
+      <mat-form-field appearance="outline">
+        <mat-label>{{
+          translationOverrides.position || 'forms.labels.position' | translate
+        }}</mat-label>
+        <input matInput formControlName="position" />
+
+        <app-valid-check
+          [form]="contactFormGroup"
+          controlName="position"
+        ></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="contactFormGroup.get('position')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>{{
+          translationOverrides.email || 'forms.labels.email' | translate
+        }}</mat-label>
+        <input matInput formControlName="email" />
+
+        <app-valid-check
+          [form]="contactFormGroup"
+          controlName="email"
+        ></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="contactFormGroup.get('email')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{
+        translationOverrides.phone || 'forms.labels.phone' | translate
+      }}</mat-label>
+      <input matInput formControlName="phone" />
+
+      <app-valid-check
+        [form]="contactFormGroup"
+        controlName="phone"
+      ></app-valid-check>
+      <mat-error>
+        <app-form-field-error
+          [field]="contactFormGroup.get('phone')"
+        ></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+  </ng-container>
+</div>

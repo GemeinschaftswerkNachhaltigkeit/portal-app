@@ -1,0 +1,56 @@
+<div class="form-wrapper map-filters">
+  <div class="left">
+    <form novalidate [formGroup]="searchForm" *ngIf="searchForm">
+      <div class="what-and-where">
+        <div class="field">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>{{ 'map.labels.query' | translate }}</mat-label>
+            <input matInput formControlName="query" />
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>{{ 'map.labels.location' | translate }}</mat-label>
+            <input matInput formControlName="location" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <app-filter-modal-button
+      [count]="filterCount()"
+      (clear)="clearAll()"
+      (openModal)="openFilters()"
+    ></app-filter-modal-button>
+  </div>
+
+  <div class="right">
+    <div class="view-type">
+      <app-feature feature="dan-range">
+        <mat-checkbox
+          class="dan"
+          color="primary"
+          [(ngModel)]="showDan"
+          (ngModelChange)="viewTypeHandler()"
+          [ngModelOptions]="{ standalone: true }"
+          >{{ 'map.labels.dan' | translate }}</mat-checkbox
+        >
+      </app-feature>
+      <mat-checkbox
+        class="orga"
+        color="primary"
+        [(ngModel)]="showOrga"
+        (ngModelChange)="viewTypeHandler()"
+        [ngModelOptions]="{ standalone: true }"
+        >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+      >
+      <mat-checkbox
+        class="activity"
+        color="primary"
+        [(ngModel)]="showActivity"
+        (ngModelChange)="viewTypeHandler()"
+        [ngModelOptions]="{ standalone: true }"
+        >{{ 'map.labels.ACTIVITY' | translate }}</mat-checkbox
+      >
+    </div>
+  </div>
+</div>

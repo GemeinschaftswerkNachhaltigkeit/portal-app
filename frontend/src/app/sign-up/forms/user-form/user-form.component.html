@@ -1,0 +1,37 @@
+<form [formGroup]="userFormGroup">
+  <app-contact-controls formGroupName="contact"></app-contact-controls>
+  <div *ngIf="data && data.randomUniqueId && orgId === null && isActiveStep">
+    <app-upload-image
+      [config]="dzService.getImageConfig('contact', data.randomUniqueId)"
+      [aspectRatio]="dzService.getAspectRatio('contact')"
+      [labelTranslationKey]="'forms.labels.profileImage'"
+      [disabled]="userFormGroup.disabled"
+      [fileId]="data.contact?.image"
+      style="width: 200px"
+      [errorMsg]="'error.unknown' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.logoWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageType.CONTACT)"
+    ></app-upload-image>
+  </div>
+  <div *ngIf="data && data.randomUniqueId && orgId !== null">
+    <app-upload-image
+      [config]="dzService.getImageConfig('contact', orgId, data.randomUniqueId)"
+      [aspectRatio]="dzService.getAspectRatio('contact')"
+      [labelTranslationKey]="'forms.labels.profileImage'"
+      [disabled]="userFormGroup.disabled"
+      [fileId]="data.contact?.image"
+      style="width: 200px"
+      [errorMsg]="'error.unknown' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.logoWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageType.CONTACT)"
+    ></app-upload-image>
+  </div>
+</form>

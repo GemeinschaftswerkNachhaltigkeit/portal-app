@@ -1,0 +1,43 @@
+<app-content-wrapper *ngIf="(loading$ | async) === false">
+  <div class="invite-content-wrapper">
+    <mat-icon class="material-icons-outlined">{{
+      action === 'ALLOW' && !invalid ? 'done' : 'close'
+    }}</mat-icon>
+    <div class="invite-content">
+      <app-html-wrapper
+        *ngIf="action === 'ALLOW' && !invalid"
+        [html]="(content$ | async)?.allowed || ''"
+      ></app-html-wrapper>
+      <app-html-wrapper
+        *ngIf="action === 'DENY' && !invalid"
+        [html]="(content$ | async)?.denied || ''"
+      ></app-html-wrapper>
+      <app-html-wrapper
+        *ngIf="invalid"
+        [html]="(content$ | async)?.invalid || ''"
+      ></app-html-wrapper>
+
+      <div>
+        <button
+          mat-flat-button
+          color="accent"
+          *ngIf="action === 'ALLOW'"
+          (click)="registerUser()"
+        >
+          {{ 'btn.registration' | translate }}
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          *ngIf="action !== 'ALLOW'"
+          (click)="goToLandingpage()"
+        >
+          {{ 'btn.goToLandingpage' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</app-content-wrapper>
+<app-content-wrapper *ngIf="loading$ | async" size="xl">
+  <app-spinner></app-spinner>
+</app-content-wrapper>

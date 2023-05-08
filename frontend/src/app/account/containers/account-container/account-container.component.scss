@@ -1,0 +1,12 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.indented {
+  margin-left: $spacing-8;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: $spacing-1;
+}

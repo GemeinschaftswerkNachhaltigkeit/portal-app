@@ -1,0 +1,35 @@
+<mat-expansion-panel class="filter mat-elevation-z0">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ 'labels.specialOrgas' | translate }}
+    </mat-panel-title>
+    <mat-panel-description>
+      <app-filter-count-badge
+        [active]="activeFilters() > 0"
+        (clicked)="clear()"
+        >{{ activeFilters() }}</app-filter-count-badge
+      >
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <ul class="filter-checkbox-entries">
+    <li class="entry">
+      <mat-checkbox
+        (change)="handleProjectSustainabilityWinnerFilter($event)"
+        [checked]="projectSustainabilityWinner"
+        ><span class="label">{{
+          'labels.projectSustainabilityWinnerLong' | translate
+        }}</span></mat-checkbox
+      >
+    </li>
+    <li class="entry">
+      <mat-checkbox
+        (change)="handleInitatorFilter($event)"
+        [checked]="initiator"
+        ><span class="label">{{
+          'labels.initiator' | translate
+        }}</span></mat-checkbox
+      >
+    </li>
+  </ul>
+</mat-expansion-panel>

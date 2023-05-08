@@ -1,0 +1,136 @@
+<form [formGroup]="activityFormGroup">
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.activityTitle' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.activityTitle' | translate"
+      formControlName="name"
+    />
+    <mat-error>
+      <app-form-field-error
+        [field]="activityFormGroup.get('name')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.activityType' | translate }}</mat-label>
+    <mat-select formControlName="activityType">
+      <mat-option
+        *ngFor="let activityType of activityTypeOpts"
+        [value]="activityType"
+      >
+        {{ 'activityType.' + activityType | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="activityFormGroup.get('activityType')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <div
+    class="mat-form-field-appearance-outline wysiwyg-form-field"
+    [class.ng-invalid]="
+      activityFormGroup.get('description')?.invalid &&
+      (activityFormGroup.get('description')?.dirty ||
+        activityFormGroup.get('description')?.touched)
+    "
+  >
+    <div class="mat-form-field-wrapper">
+      <app-tiptap-menu-bar [editor]="editor"
+        >{{
+          'forms.labels.activityDescription' | translate
+        }}
+        *</app-tiptap-menu-bar
+      >
+      <tiptap-editor
+        [editor]="editor"
+        formControlName="description"
+      ></tiptap-editor>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentChars()"
+          [total]="1500"
+        ></app-char-count>
+      </div>
+      <div class="mat-form-field-subscript-wrapper">
+        <mat-error>
+          <app-form-field-error
+            [field]="activityFormGroup.get('description')"
+          ></app-form-field-error>
+        </mat-error>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-cols">
+    <mat-form-field>
+      <mat-label> {{ 'forms.labels.period' | translate }}</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          [placeholder]="'forms.labels.start' | translate"
+          formControlName="start"
+        />
+        <input
+          matEndDate
+          [placeholder]="'forms.labels.end' | translate"
+          formControlName="end"
+        />
+      </mat-date-range-input>
+      <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <mat-checkbox matInput formControlName="permanent">
+      <span>
+        {{ 'forms.labels.permanet' | translate }}
+      </span>
+    </mat-checkbox>
+  </div>
+
+  <mat-date-range-picker #picker></mat-date-range-picker>
+
+  <div
+    class="file-uploads"
+    *ngIf="activity && activity.randomUniqueId && isActiveStep"
+  >
+    <app-upload-image
+      [config]="
+        dzService.getImageConfig('logo', orgId, activity.randomUniqueId)
+      "
+      [aspectRatio]="dzService.getAspectRatio('logo')"
+      [labelTranslationKey]="'forms.labels.activityLogo'"
+      [disabled]="activityFormGroup.disabled"
+      [fileId]="activity.logo"
+      style="width: 200px"
+      [errorMsg]="'sign-up.upload.error' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.logoWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageTypes.LOGO)"
+    ></app-upload-image>
+
+    <app-upload-image
+      [config]="
+        dzService.getImageConfig('image', orgId, activity.randomUniqueId)
+      "
+      [aspectRatio]="dzService.getAspectRatio('banner')"
+      [labelTranslationKey]="'forms.labels.activityImage'"
+      [disabled]="activityFormGroup.disabled"
+      [fileId]="activity.image"
+      [errorMsg]="'sign-up.upload.error' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.titleImageWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageTypes.TITLE)"
+    ></app-upload-image>
+  </div>
+</form>

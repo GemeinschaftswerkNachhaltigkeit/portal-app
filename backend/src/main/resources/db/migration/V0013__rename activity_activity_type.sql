@@ -1,0 +1,2 @@
+ALTER TABLE activity_type rename to activity_activity_types;
+ALTER TABLE activity_work_in_progress_type rename to activity_work_in_progress_activity_types;

@@ -1,0 +1,32 @@
+<footer class="footer">
+  <app-content-wrapper>
+    <div class="footer-content">
+      <div class="copyright">
+        <span class="footer__copyright"
+          >Gemeinschaftswerk Nachhaltigkeit © {{ copyrightYear }} | All rights
+          reserved.</span
+        >
+      </div>
+      <div class="links font-2">
+        <a
+          href="{{ lpService.getImprintUrl() }}"
+          target="_blank"
+          rel="noopener"
+          >{{ 'footer.imprint' | translate }}</a
+        >
+        <a
+          href="{{ lpService.getPrivacyPolicyUrl() }}"
+          target="_blank"
+          rel="noopener"
+          >{{ 'footer.privacy' | translate }}</a
+        >
+        <a
+          href="{{ participationDeclarationUrl }}"
+          target="_blank"
+          rel="noopener"
+          >{{ 'footer.participation' | translate }}</a
+        >
+      </div>
+    </div>
+  </app-content-wrapper>
+</footer>

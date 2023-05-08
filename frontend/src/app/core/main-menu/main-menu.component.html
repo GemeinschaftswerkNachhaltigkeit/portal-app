@@ -1,0 +1,58 @@
+<nav class="menu highlighted-links" [ngClass]="{ vertical: vertical }">
+  <ng-container *ngIf="navContent$ | async as navContent">
+    <ng-container *ngFor="let item of navContent">
+      <app-menu-entry
+        *ngIf="!item.submenu"
+        [url]="'/' + item.target"
+        (routeClicked)="closeNavHandler()"
+        [underline]="mobile"
+      >
+        {{ item.name }}
+      </app-menu-entry>
+      <div class="dropdown-wrapper" *ngIf="item.submenu">
+        <app-dropdown-menu [title]="item.name" [new]="!!item.new">
+          <div *ngFor="let subitem of item.submenu">
+            <app-menu-entry
+              [internal]="false"
+              [url]="lpService.getBaseUrl() + '/' + subitem.target"
+              [underline]="true"
+              [blue]="true"
+            >
+              {{ subitem.name }}
+            </app-menu-entry>
+          </div>
+        </app-dropdown-menu>
+      </div>
+      <div class="mobile-dropdown-wrapper" *ngIf="item.submenu">
+        <app-accordion-menu-item
+          [title]="'menu.about' | translate"
+          [new]="!!item.new"
+        >
+          <div *ngFor="let subitem of item.submenu">
+            <app-menu-entry
+              [internal]="false"
+              [url]="lpService.getBaseUrl() + '/' + subitem.target"
+              [underline]="true"
+              [blue]="true"
+            >
+              {{ subitem.name }}
+            </app-menu-entry>
+          </div>
+        </app-accordion-menu-item>
+      </div>
+    </ng-container>
+  </ng-container>
+  <div class="user">
+    <app-menu-entry
+      *ngIf="isLoggedIn()"
+      [url]="'/account'"
+      (routeClicked)="closeNavHandler()"
+      [underline]="mobile"
+    >
+      <div class="user-content">
+        <span class="icon"><app-outlined-icon>person</app-outlined-icon></span>
+        <div>{{ getUser()?.firstName + ' ' + getUser()?.lastName }}</div>
+      </div>
+    </app-menu-entry>
+  </div>
+</nav>

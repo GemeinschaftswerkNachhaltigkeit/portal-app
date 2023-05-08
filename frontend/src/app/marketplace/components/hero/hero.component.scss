@@ -1,0 +1,23 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.header {
+  height: 21.6rem;
+  width: 100%;
+  position: relative;
+  z-index: $z1;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .type {
+    position: absolute;
+    left: $spacing-8;
+    bottom: 0;
+    z-index: 3;
+    transform: translateY(50%);
+  }
+}

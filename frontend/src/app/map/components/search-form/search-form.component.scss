@@ -1,0 +1,95 @@
+@use 'theme' as *;
+
+:host {
+  height: 100%;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 100%;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    width: 100%;
+    align-items: center;
+    form {
+      width: 100%;
+    }
+    .what-and-where {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-2;
+      align-items: center;
+      width: 100%;
+    }
+
+    .field {
+      flex-grow: 1;
+      flex-shrink: 1;
+      width: 100%;
+    }
+  }
+
+  .right {
+    width: 100%;
+    margin: $spacing-2 0;
+
+    .view-type {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: $spacing-2;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .form-wrapper {
+    .left {
+      .what-and-where {
+        flex-direction: row;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .form-wrapper {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .left {
+      flex-direction: row;
+      width: auto;
+
+      .what-and-where {
+        flex-direction: row;
+      }
+    }
+
+    .field {
+      flex-grow: 0;
+      flex-shrink: 1;
+      width: auto;
+      min-width: none;
+    }
+
+    .right {
+      width: auto;
+
+      .view-type {
+        justify-content: flex-end;
+        gap: $spacing-4;
+      }
+    }
+  }
+}

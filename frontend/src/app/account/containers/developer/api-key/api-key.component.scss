@@ -1,0 +1,24 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.api-key-container {
+  border: 2px solid $blue-navy;
+  padding: $spacing-6;
+  position: relative;
+
+  .label {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1rem;
+    left: $spacing-1;
+    top: $spacing-1;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-1;
+  margin-top: $spacing-1;
+}

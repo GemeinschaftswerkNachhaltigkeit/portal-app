@@ -1,0 +1,12 @@
+<div class="filter-btn-wrapper">
+  <button mat-button (click)="openFilters()">
+    <mat-icon>tune</mat-icon>
+    <span class="filter-btn-text">{{ 'btn.filters' | translate }}</span>
+  </button>
+  <app-filter-count-badge
+    [active]="true"
+    *ngIf="count"
+    (clicked)="clearAll()"
+    >{{ count }}</app-filter-count-badge
+  >
+</div>

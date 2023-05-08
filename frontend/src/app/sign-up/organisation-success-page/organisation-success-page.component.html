@@ -1,0 +1,21 @@
+<ng-container *ngIf="orgContent$ | async as orgContent">
+  <ng-container *ngIf="orgData$ | async as orgData">
+    <app-notification-page
+      [title]="
+        isContactSameAsCurrentUser(orgData)
+          ? orgContent?.completedMessageTitle
+          : orgContent?.completedMessageVerifyContactTitle
+      "
+      [content]="
+        isContactSameAsCurrentUser(orgData)
+          ? orgContent?.completedMessage
+          : orgContent?.completedMessageVerifyContact
+      "
+      [icon]="
+        isContactSameAsCurrentUser(orgData) ? 'check' : 'perm_contact_calendar'
+      "
+      (continue)="leaveWizard()"
+    >
+    </app-notification-page>
+  </ng-container>
+</ng-container>

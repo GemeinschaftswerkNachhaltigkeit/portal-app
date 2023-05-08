@@ -1,0 +1,80 @@
+<ng-container [formGroup]="form">
+  <div class="fields">
+    <div class="field">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.title' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.title' | translate"
+          formControlName="name"
+        />
+        <app-valid-check [form]="form" controlName="name"></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('name')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentChars('name')"
+          [total]="100"
+        ></app-char-count>
+      </div>
+    </div>
+
+    <!-- WYSIWYG Input -->
+    <div
+      class="mat-form-field-appearance-outline wysiwyg-form-field"
+      [class.ng-invalid]="
+        form.get('description')?.invalid &&
+        (form.get('description')?.dirty || form.get('description')?.touched)
+      "
+      [class.mat-form-field-disabled]="form.get('description')?.disabled"
+    >
+      <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
+        <app-tiptap-menu-bar
+          [editor]="editor"
+          [disabled]="form.get('description')?.disabled!"
+          >{{ 'forms.labels.description' | translate }} *</app-tiptap-menu-bar
+        >
+        <tiptap-editor
+          [editor]="editor"
+          formControlName="description"
+        ></tiptap-editor>
+        <div class="char-count">
+          <app-char-count
+            [count]="currentCharsHtml('description')"
+            [total]="1500"
+          ></app-char-count>
+        </div>
+        <div class="mat-form-field-subscript-wrapper">
+          <mat-error>
+            <app-form-field-error
+              [field]="form.get('description')"
+            ></app-form-field-error>
+          </mat-error>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ urlLabel || 'forms.labels.url' | translate }}</mat-label>
+        <input matInput formControlName="url" />
+        <app-valid-check [form]="form" controlName="url"></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('url')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentChars('url')"
+          [total]="1000"
+        ></app-char-count>
+      </div>
+    </div>
+  </div>
+</ng-container>

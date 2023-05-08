@@ -1,0 +1,16 @@
+.actions-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 2em;
+}
+
+@media screen and (min-width: 800px) {
+  .actions-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,0 +1,23 @@
+<ng-container [formGroup]="form">
+  <div class="address">
+    <mat-checkbox matInput formControlName="featured"
+      ><span>{{
+        'marketplace.labels.featured' | translate
+      }}</span></mat-checkbox
+    >
+    <mat-form-field appearance="outline" *ngIf="form.get('featured')?.value">
+      <mat-label>{{ 'marketplace.labels.featuredText' | translate }}</mat-label>
+      <input matInput formControlName="featuredText" />
+      <app-valid-check
+        [form]="form"
+        controlName="featuredText"
+      ></app-valid-check>
+
+      <mat-error>
+        <app-form-field-error
+          [field]="form.get('featuredText')"
+        ></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</ng-container>

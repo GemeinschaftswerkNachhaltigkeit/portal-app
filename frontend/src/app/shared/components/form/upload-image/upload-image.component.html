@@ -1,0 +1,42 @@
+<ng-container *ngIf="configuration">
+  <div class="upload-label" [class.disabled]="disabled">
+    {{ labelTranslationKey | translate }}
+  </div>
+
+  <div class="dropzone-wrapper">
+    <div class="uploaded-image" [ngClass]="{ disabled: disabled }">
+      <img
+        *ngIf="fileId"
+        [src]="dropzoneService.getFileUrl(fileId)"
+        [ngStyle]="{ 'object-fit': imageFillType }"
+        alt="upload-image"
+      />
+    </div>
+    <dropzone
+      [config]="config"
+      [message]="'forms.labels.upload' | translate"
+      [disabled]="disabled"
+      (init)="onDropZoneInit($event)"
+      (success)="onUploadSuccess($event)"
+      (error)="onUploadError($event)"
+      [style]="'aspect-ratio: ' + aspectRatio"
+    >
+    </dropzone>
+    <button
+      class="button"
+      *ngIf="fileId"
+      mat-icon-button
+      (click)="deleteHandler()"
+      [disabled]="disabled"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="info font-2">
+    <div *ngIf="error" class="upload-error mat-error">
+      {{ errorMsg }}
+    </div>
+    <div *ngIf="info && !error">{{ info }}</div>
+  </div>
+</ng-container>

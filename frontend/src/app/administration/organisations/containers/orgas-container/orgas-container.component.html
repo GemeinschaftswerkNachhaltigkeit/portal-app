@@ -1,0 +1,64 @@
+<app-content-wrapper size="xl">
+  <ng-container *ngIf="orgas$ | async as orgas">
+    <div class="top">
+      <app-header [title]="'administration.titles.organisations' | translate">
+        {{ 'administration.texts.organisations' | translate }}
+      </app-header>
+    </div>
+    <app-filters
+      (filtersChanged)="filtersChangedHandler($event)"
+      (sortChanged)="sortChangedHandler($event)"
+      [filters]="filters$ | async"
+    ></app-filters>
+    <ng-container *ngIf="!orgas.length">
+      <app-alert
+        *ngIf="(isLoading$ | async) === false"
+        [title]="'administration.titles.noOrgas' | translate"
+      >
+        {{ 'administration.texts.noOrgas' | translate }}
+      </app-alert>
+      <div>
+        <app-spinner *ngIf="isLoading$ | async"></app-spinner>
+      </div>
+    </ng-container>
+    <app-card-list>
+      <ng-container *ngFor="let orga of orgas">
+        <div class="card-wrapper">
+          <app-base-card
+            [entity]="orga"
+            type="organisation"
+            [showActions]="true"
+            [leaveVisible]="false"
+            [toggleInitiatiorVisible]="true"
+            [isInitiator]="orga.initiator"
+            (delete)="deleteHandler(orga)"
+            (edit)="editHandler(orga)"
+            (cardClicked)="open(orga)"
+            (toggleInitatior)="handleToggleInitiator(orga)"
+          >
+          </app-base-card>
+          <div class="error-badge" *ngIf="noLocation(orga)">
+            <mat-icon
+              color="accent"
+              [matTooltip]="'profile.labels.noCoordinates' | translate"
+              >error</mat-icon
+            >
+          </div>
+        </div>
+      </ng-container>
+      <mat-paginator
+        class="mat-elevation-z8"
+        *ngIf="orgas?.length"
+        color="accent"
+        [length]="(paging$ | async)?.totalElements"
+        [pageIndex]="(paging$ | async)?.number"
+        [pageSize]="(paging$ | async)?.size || pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="true"
+        (page)="pageChangedHandler($event)"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </app-card-list>
+  </ng-container>
+</app-content-wrapper>

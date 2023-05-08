@@ -1,0 +1,42 @@
+<div
+  class="map-layout"
+  [ngClass]="{
+    'map-open': (showFullMap$ | async),
+    'details-open': hasDetail()
+  }"
+>
+  <header class="filters mat-elevation-z4">
+    <app-content-wrapper [narrow]="true">
+      <ng-content select="[filter]"></ng-content>
+    </app-content-wrapper>
+  </header>
+  <div class="content">
+    <section class="result-list">
+      <app-content-wrapper [onlyX]="true">
+        <ng-content select="[results]"></ng-content>
+      </app-content-wrapper>
+    </section>
+    <section class="details-wrapper">
+      <ng-content select="[detailsMobile]"></ng-content>
+    </section>
+    <section class="map-wrapper">
+      <div
+        class="details"
+        [ngClass]="{ clickable: hasDetail() }"
+        *ngIf="hasDetail()"
+      >
+        <div class="outlet">
+          <ng-content select="[detailsDesktop]"></ng-content>
+        </div>
+      </div>
+
+      <ng-content select="[map]"></ng-content>
+    </section>
+  </div>
+
+  <div class="toggle">
+    <app-toggle-button color="accent" (toggled)="toggleMap()">{{
+      (showFullMap$ | async) ? 'list' : 'map'
+    }}</app-toggle-button>
+  </div>
+</div>

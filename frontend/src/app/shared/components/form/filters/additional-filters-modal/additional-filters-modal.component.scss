@@ -1,0 +1,30 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+div.mat-dialog-content {
+  padding: 0;
+}
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  color: $blue-navy;
+  flex-basis: 0;
+}
+.mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  align-items: center;
+  width: 3.2rem;
+  flex-grow: 0;
+}
+
+.filter {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hidden {
+  height: 0;
+  opacity: 0;
+}

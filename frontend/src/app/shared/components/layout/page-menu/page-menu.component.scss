@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+.page-menu {
+  background-color: transparent;
+  box-shadow: 14rem 0 0 0 $blue-light inset;
+  font-size: 1.2rem;
+  padding: 0 $spacing-2 0 3rem;
+  .content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    position: relative;
+    top: -1rem;
+    list-style-type: none;
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .page-menu {
+    padding: 0 $spacing-2 $spacing-20 3rem;
+    padding-left: 0rem;
+  }
+}

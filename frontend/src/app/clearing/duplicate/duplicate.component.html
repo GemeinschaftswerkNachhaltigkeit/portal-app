@@ -1,0 +1,44 @@
+<div class="duplicates-wrapper">
+  <div>
+    <app-heading size="md" color="none">{{
+      'clearing.titles.duplicates' | translate
+    }}</app-heading>
+    <div class="legend">
+      <div class="icon">!</div>
+      <div class="text">= {{ 'clearing.labels.duplicate' | translate }}</div>
+    </div>
+  </div>
+  <ng-container *ngIf="duplicate">
+    <div class="duplicates-list">
+      <ng-container *ngFor="let dup of duplicate?.duplicateListItems">
+        <a
+          target="_blank"
+          *ngIf="dup.organisationWorkInProgress"
+          [href]="
+            'sign-up/organisation/' +
+            dup.organisationWorkInProgress.randomUniqueId
+          "
+          class="duplicate"
+        >
+          <app-duplicate-entry
+            [duplicateFields]="dup.duplicateForFields"
+            [duplicate]="dup.organisationWorkInProgress"
+          ></app-duplicate-entry>
+        </a>
+        <a
+          target="_blank"
+          *ngIf="dup.organisation"
+          [href]="'organisations/' + dup.organisation.id"
+          class="duplicate"
+        >
+          <app-duplicate-entry
+            [duplicateFields]="dup.duplicateForFields"
+            [duplicate]="dup.organisation"
+          ></app-duplicate-entry>
+          ></a
+        >
+      </ng-container>
+    </div>
+  </ng-container>
+  <app-spinner *ngIf="!duplicate"></app-spinner>
+</div>

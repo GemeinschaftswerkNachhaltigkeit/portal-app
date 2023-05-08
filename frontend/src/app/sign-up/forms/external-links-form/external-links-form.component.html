@@ -1,0 +1,39 @@
+<form [formGroup]="linksFormGroup">
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.url' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.url' | translate"
+      formControlName="url"
+    />
+    <app-valid-check
+      [form]="linksFormGroup"
+      controlName="url"
+    ></app-valid-check>
+    <mat-error>
+      <app-form-field-error
+        [field]="linksFormGroup.get('url')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let type of socialMediaTypes">
+    <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.' + type | translate"
+      [formControlName]="type"
+    />
+
+    <app-valid-check
+      [form]="linksFormGroup"
+      [controlName]="type"
+    ></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="linksFormGroup.get(type)"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+</form>

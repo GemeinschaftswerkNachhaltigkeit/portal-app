@@ -1,0 +1,166 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.mat-horizontal-stepper-header-container {
+  background-color: $blue-navy;
+  padding: 2em;
+}
+.mat-horizontal-stepper-header {
+  height: 50px !important;
+}
+.mat-step-header[aria-selected='true'] {
+  & div.mat-step-label.mat-step-label-active.mat-step-label-selected {
+    font-weight: bold;
+  }
+}
+.mat-step-header {
+  border-right: 10px solid $blue-navy;
+  border-left: 10px solid $blue-navy;
+}
+.mat-step-header,
+.mat-step-header .mat-step-label,
+.mat-step-header.cdk-program-focused {
+  background-color: $blue-navy;
+  color: white;
+}
+.mat-step-header:hover:not([aria-disabled]),
+.mat-step-header:hover:not([aria-disabled]),
+.mat-step-header:hover[aria-disabled='false'] {
+  cursor: pointer;
+  background-color: $blue-navy !important;
+  color: white;
+}
+
+.mat-stepper-horizontal-line {
+  border-top-color: transparent !important;
+  border-top-width: 1px !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 60%,
+    rgba(255, 255, 255, 0) 0%
+  );
+  background-position: bottom;
+  background-size: 21px 1px;
+  background-repeat: repeat-x;
+}
+.mat-step-header .mat-step-header-ripple mat-focus-indicator {
+  display: none !important;
+}
+.mat-stepper-horizontal-line:last-of-type,
+.mat-step-header:last-of-type {
+  display: none;
+}
+.mat-step-header {
+  .mat-step-icon {
+    background-color: transparent !important;
+    transform: scale(1.2);
+  }
+  .mat-step-icon-selected {
+    .mat-step-icon-content {
+      position: relative;
+      &::after {
+        content: '';
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: $yellow;
+        position: absolute;
+        top: 6px;
+        right: 2px;
+      }
+    }
+  }
+  .mat-step-icon-state-number {
+    display: none;
+
+    &.mat-step-icon-selected {
+      display: block;
+    }
+  }
+  &.mat-accent .mat-step-icon-selected {
+    color: $yellow !important;
+  }
+}
+.mat-step-text-label {
+  color: white;
+}
+
+@media only screen and (max-width: $breakpoint-md) {
+  .mat-horizontal-stepper-content > .form-container {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 999px) {
+  div.mat-step {
+    position: relative;
+  }
+  div.mat-step::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 2px;
+    background-color: white;
+  }
+
+  div.mat-step:last-of-type .mat-stepper-horizontal-line:last-of-type,
+  div.mat-step:last-of-type .mat-step-header:last-of-type {
+    background-color: white;
+    color: white;
+    height: 2rem;
+    padding: 0;
+  }
+  div.mat-step:last-of-type
+    .mat-step-header:last-of-type[ng-reflect-active='true'] {
+    display: none;
+  }
+  mat-step-header.mat-vertical-stepper-header {
+    padding: 24px 24px;
+  }
+  .mat-stepper-horizontal-line:last-of-type,
+  .mat-step-header:last-of-type {
+    display: flex;
+    background-color: $blue-navy;
+  }
+  .mat-step-header.cdk-program-focused {
+    background-color: $blue-navy !important;
+  }
+  .mat-step-header {
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    padding: 0;
+  }
+  .mat-step-header,
+  .mat-step-header .mat-step-label,
+  .mat-step-header.cdk-program-focused {
+    background-color: transparent;
+    color: white;
+  }
+  .mat-step-header:hover:not([aria-disabled]),
+  .mat-step-header:hover:not([aria-disabled]),
+  .mat-step-header:hover[aria-disabled='false'] {
+    cursor: pointer;
+    color: white;
+  }
+  .mat-horizontal-stepper-header-container {
+    background-color: transparent;
+    padding: 0;
+  }
+  .mat-step-text-label {
+    color: white;
+  }
+  .mat-vertical-content-container.mat-stepper-vertical-line::before {
+    border-left-color: $blue-navy;
+    border-left-width: 1px;
+    border-left-style: dashed;
+  }
+}
+.mat-horizontal-content-container {
+  padding: 0 !important;
+  height: 100%;
+}
+
+.mat-stepper-horizontal {
+  overflow: hidden;
+}

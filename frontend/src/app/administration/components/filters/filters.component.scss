@@ -1,0 +1,43 @@
+@use 'theme' as *;
+@use 'palette' as *;
+.filters {
+  display: flex;
+
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: $spacing-8;
+  gap: $spacing-2;
+  align-items: center;
+
+  .filter-form {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .sort-btn-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .filters {
+    flex-direction: row;
+    gap: $spacing-8;
+    align-items: flex-start;
+    margin-bottom: $spacing-4;
+
+    .filter-form {
+      width: auto;
+    }
+
+    .sort-btn-content {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      margin-top: $spacing-3;
+    }
+  }
+}

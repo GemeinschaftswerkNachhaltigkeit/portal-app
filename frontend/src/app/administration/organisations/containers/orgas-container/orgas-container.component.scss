@@ -1,0 +1,20 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.top {
+  margin-top: $spacing-4;
+}
+
+.card-wrapper {
+  position: relative;
+
+  .error-badge {
+    position: absolute;
+    left: -4rem;
+    top: $spacing-4;
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,34 @@
+<div class="buttons" [class.mobile]="mobile">
+  <div class="menu highlighted-links font-2">
+    <a
+      *ngIf="!isLoggedIn()"
+      class="menu-entry"
+      color="primary"
+      (click)="login()"
+    >
+      {{ 'btn.login' | translate }}
+    </a>
+    <a
+      *ngIf="isLoggedIn()"
+      class="menu-entry"
+      color="primary"
+      (click)="logout()"
+    >
+      {{ 'btn.logout' | translate }}
+    </a>
+  </div>
+
+  <button
+    class="registration-btn"
+    mat-flat-button
+    color="accent"
+    (click)="registerUser()"
+    *ngIf="!isLoggedIn()"
+  >
+    {{ 'btn.registration' | translate }}
+  </button>
+</div>
+
+<div class="toggle" [class.mobile]="mobile">
+  <app-lang-toggle></app-lang-toggle>
+</div>

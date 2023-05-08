@@ -1,0 +1,21 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.address {
+  display: grid;
+  gap: $spacing-2;
+  .address-row-1,
+  .address-row-2 {
+    display: grid;
+    gap: $spacing-2;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .address-row-1 {
+    grid-template-columns: 4fr 2fr 2fr;
+  }
+  .address-row-2 {
+    grid-template-columns: 2fr 4fr 2fr;
+  }
+}

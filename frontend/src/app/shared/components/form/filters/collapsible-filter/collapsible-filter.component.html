@@ -1,0 +1,17 @@
+<mat-expansion-panel class="filter mat-elevation-z0" [expanded]="filterOpen()">
+  <mat-expansion-panel-header>
+    <mat-panel-title> <ng-content></ng-content> </mat-panel-title>
+    <mat-panel-description>
+      <app-filter-count-badge
+        [active]="!!selected.length"
+        (clicked)="clear()"
+        >{{ selected.length }}</app-filter-count-badge
+      >
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <app-checkbox-filter
+    [options]="options"
+    (valueChanged)="handleChange($event)"
+  ></app-checkbox-filter>
+</mat-expansion-panel>

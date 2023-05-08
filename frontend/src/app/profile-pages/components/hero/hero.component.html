@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="expiredOverlay" *ngIf="isExpired"></div>
+
+  <img [src]="bgImage" alt="header" *ngIf="bgImage" />
+  <div class="expiredBadge" *ngIf="isExpired">
+    <app-expired-badge></app-expired-badge>
+  </div>
+  <div class="type">
+    <app-card-label
+      [type]="types?.resultType"
+      [dan]="dan"
+      [activityTypeLabel]="activityTypeLabel"
+      [organisationTypeLabel]="organisationTypeLabel"
+    ></app-card-label>
+  </div>
+  <div
+    id="profile-logo"
+    class="logo"
+    [class]="types?.resultType || ''"
+    [ngClass]="{ noLogo: !logo }"
+  >
+    <div class="expiredOverlay logo-overlay" *ngIf="isExpired"></div>
+    <app-card-logo *ngIf="logo" [logoUrl]="logo" [name]="name"></app-card-logo>
+    <div
+      *ngIf="period && utils.dateRangeString(period)"
+      class="label"
+      [ngClass]="{ dan: dan }"
+    >
+      <div class="expiredOverlay" *ngIf="isExpired"></div>
+      {{ utils.dateRangeString(period) }}
+    </div>
+  </div>
+</header>

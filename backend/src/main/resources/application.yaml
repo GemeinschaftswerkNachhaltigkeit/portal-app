@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: wpgwn-app
+  datasource:
+    driverClassName: org.postgresql.Driver
+  jpa:
+    # In Produktion auf false
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      # In Produktion auf validate oder none
+      ddl-auto: validate
+    database-platform: com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextDialect
+    database: postgresql
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _AUDIT_LOG
+  messages:
+    basename: i18n/message
+  flyway:
+    enabled: true
+  mvc:
+    log-resolved-exception: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/wpgwn-app
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  default-produces-media-type:
+    application/json
+  packages-to-scan:
+    - "com.exxeta.wpgwn.wpgwnapp.api.controller"
+    - "com.exxeta.wpgwn.wpgwnapp.files"
+server:
+  port: 8080
+
+wpgwn:
+  cache:
+    max-age: 30d
+    cache-public: true
+  feature-setting-url: '/items/features'
+  organisation:
+    dan-id: 0
+    random-id-life-time: 5d
+    reminder-email:
+      cron: "-"
+      max-reminders: 2
+      duration-between-reminders: 7d
+      batch-size: 250
+    import-privacy-consent-email:
+      cron: 0 0 0 * * *
+    #      cron: 0/10 * * * * *
+    duplicate:
+      nameSimilarityThreshold: 0.7
+    contactInvite:
+      expireFromCreationInDays: 42
+    organisationMembership:
+      oneTimePasswordLength: 12
+      expireFromCreationInDays: 42
+    marketplace:
+      max-offers: 10
+      max-best-practises: 10
+keycloak:
+  admin:
+    admin-realm: master
+    connection-pool-size: 10
+    read-timeout: 10
+    connection-timeout: 10
+
+feign:
+  client:
+    config:
+      cms-client:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: basic
+  httpclient:
+    disable-ssl-validation: true
+    enabled: false
+  okhttp:
+    enabled: true
+

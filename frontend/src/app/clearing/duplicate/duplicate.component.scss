@@ -1,0 +1,37 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.duplicates-wrapper {
+  display: grid;
+  gap: $spacing-10;
+  .duplicates-list {
+    display: grid;
+    gap: $spacing-2;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+
+    .icon {
+      width: $spacing-6;
+      height: $spacing-6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $magenta;
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .text {
+      color: $blue-navy;
+      font-size: 1.2rem;
+    }
+  }
+}

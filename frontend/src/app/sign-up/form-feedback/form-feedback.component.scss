@@ -1,0 +1,13 @@
+:host {
+  //background-color: orange;
+}
+
+.form-feedback {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+
+  app-outlined-icon {
+    margin-right: 2em;
+  }
+}

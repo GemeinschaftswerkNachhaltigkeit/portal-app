@@ -1,0 +1,27 @@
+<div mat-dialog-content class="auth-modal">
+  <header class="header">
+    <div class="close">
+      <button mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <h1 class="title">{{ data.title || 'authModal.title' | translate }}</h1>
+    <p class="subtitle">{{ data.subtitle }}</p>
+  </header>
+  <div class="content">
+    <button
+      mat-flat-button
+      color="accent"
+      class="login-btn"
+      (click)="loginHandler()"
+    >
+      {{ 'authModal.login' | translate }}
+    </button>
+    <div class="spacer">
+      <div class="text">{{ 'authModal.or' | translate }}</div>
+    </div>
+    <button mat-flat-button class="register-btn" (click)="registerHandler()">
+      {{ 'authModal.register' | translate }}
+    </button>
+  </div>
+</div>

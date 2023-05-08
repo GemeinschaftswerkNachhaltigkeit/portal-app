@@ -1,0 +1,11 @@
+@use 'theme' as *;
+@use 'palette' as *;
+.form {
+  max-width: 60rem;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 60rem;
+}

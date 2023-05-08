@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="de" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Invitation</title>
+</head>
+<body>
+
+<tr th:fragment="invite">
+    <!-- BEGIN: Einladung Freunde -->
+    <td align="left" bgcolor="#D1FFFF"
+        style="margin:0;padding:30px;background-color:#d1ffff">
+        <!--[if mso]>
+        <table style="width:950px" cellpadding="0" role="presentation"
+               cellspacing="0">
+            <tr>
+                <td style="width:362px" valign="top"><![endif]-->
+        <table class="es-left" cellspacing="0" cellpadding="0" align="left" role="presentation"
+               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
+            <tr>
+                <td align="left" style="padding:0;margin:0;width:512px">
+                    <table width="100%" cellspacing="0" cellpadding="0"
+                           role="presentation"
+                           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                        <tr>
+                            <td align="left" style="padding:0;margin:0"><p
+                                    style="margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;line-height:18px;color:#19486a;font-size:12px">
+                                Du kennst weitere Organisationen, die sich für
+                                ökologische, soziale oder ökonomische Nachhaltigkeit
+                                einsetzen? Lade diese gerne ein, sich auch zu
+                                registrieren.</p></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!--[if mso]></td>
+    <td style="width:20px"></td>
+    <td style="width:178px" valign="top"><![endif]-->
+        <table class="es-right" cellspacing="0" cellpadding="0" align="right" role="presentation"
+               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
+            <tr>
+                <td align="left" style="padding:0;margin:0;width:178px">
+                    <table width="100%" cellspacing="0" cellpadding="0"
+                           role="presentation"
+                           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                        <tr>
+                            <td class="es-m-txt-c" align="right"
+                                style="padding:0;margin:0;padding-top:10px"><span
+                                    class="es-button-border"
+                                    style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a
+                                    th:href="${invitationMailToLink}"
+                                    class="es-button es-button-1" target="_blank"
+                                    style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;border-style:solid;border-color:#dd1367;border-width:10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:19px;width:auto;text-align:center">Einladen</a></span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!--[if mso]></td></tr></table><![endif]--></td>
+    <!-- END: Einladung Freunde -->
+</tr>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<app-content-wrapper size="xl"
+  ><app-page-with-header-layout
+    [title]="'marketplace.titles.newBestPractice' | translate"
+  >
+    <ng-container headerContent>
+      <p>{{ 'marketplace.texts.newBestPractice' | translate }}</p>
+      <p>{{ 'marketplace.texts.requiredFields' | translate }}</p>
+    </ng-container>
+    <button (click)="handleCancelation()" mat-icon-button class="closeX">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <div><app-spinner *ngIf="loading$ | async"></app-spinner></div>
+
+    <ng-container *ngIf="(loading$ | async) !== true">
+      <ng-container *ngIf="orgId && uuid">
+        <form
+          [formGroup]="formGroup"
+          (ngSubmit)="handleSubmit()"
+          #form="ngForm"
+        >
+          <app-form-section-list>
+            <app-form-section
+              [title]="'marketplace.titles.step1BestPractice' | translate"
+              [description]="'marketplace.texts.step1BestPractice' | translate"
+            >
+              <app-category-control
+                formControlName="bestPractiseCategory"
+                [options]="categories"
+              ></app-category-control>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step2BestPractice' | translate"
+              [description]="'marketplace.texts.step2BestPractice' | translate"
+              colStyle="twoCols"
+            >
+              <app-thematic-focus-control
+                controlName="thematicFocus"
+                [maxSelectable]="2"
+                [label]="'forms.labels.thematicFocus' | translate"
+              ></app-thematic-focus-control>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step3BestPractice' | translate"
+              [description]="'marketplace.texts.step3BestPractice' | translate"
+              colStyle="twoCols"
+            >
+              <app-content-controls
+                formGroupName="content"
+                [urlLabel]="'marketplace.labels.urlBestPractice' | translate"
+                [descriptionPlaceholder]="
+                  'marketplace.placeholders.descriptionBestPractice' | translate
+                "
+              ></app-content-controls>
+              <div class="image-upload">
+                <app-upload-image
+                  [config]="getImageUploadConfig(orgId, uuid)"
+                  [aspectRatio]="dzService.getAspectRatio('marketplace')"
+                  [labelTranslationKey]="'forms.labels.optionalImage'"
+                  [fileId]="image"
+                  [token]="token"
+                  [errorMsg]="'marketplace.labels.imageError' | translate"
+                  [info]="'marketplace.labels.imageHelp' | translate"
+                  (delete)="handleDelteImage()"
+                ></app-upload-image>
+              </div>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step4BestPractice' | translate"
+              [description]="'marketplace.texts.step4BestPractice' | translate"
+              colStyle="twoCols"
+            >
+              <app-contact-controls
+                formGroupName="contact"
+              ></app-contact-controls>
+            </app-form-section>
+          </app-form-section-list>
+          <div class="actions">
+            <button type="button" mat-button (click)="handleCancelation()">
+              {{ 'btn.cancel' | translate }}
+            </button>
+            <button type="submit" mat-flat-button color="accent">
+              <span *ngIf="!isModification">{{
+                'marketplace.buttons.submitBestPractice' | translate
+              }}</span>
+              <span *ngIf="isModification">{{
+                'marketplace.buttons.updateBestPractice' | translate
+              }}</span>
+            </button>
+          </div>
+        </form>
+      </ng-container>
+    </ng-container>
+  </app-page-with-header-layout>
+</app-content-wrapper>

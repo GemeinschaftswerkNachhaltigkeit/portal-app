@@ -1,0 +1,268 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+.map-marker {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -1.5rem;
+  top: -1.5rem;
+  position: relative;
+  border-radius: 3rem 3rem 0;
+  transform: rotate(45deg);
+  border: 1px solid #ffffff;
+  overflow: hidden;
+
+  &.highlighted {
+    animation-name: growAndRotate;
+    animation-duration: 200ms;
+    animation-timing-function: cubic-bezier(0.18, 0.89, 0.36, 1.68);
+    animation-fill-mode: forwards;
+  }
+
+  &.active {
+    transform: rotate(45deg) scale(1.5);
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+
+    &.orga {
+      animation-name: pulse_orange;
+    }
+    &.activity {
+      animation-name: pulse_green;
+    }
+    &.dan {
+      animation-name: pulse_blue;
+    }
+  }
+
+  &:hover {
+    transform: rotate(45deg) scale(1.5);
+  }
+
+  .inner {
+    width: 1rem;
+    height: 1rem;
+    background-color: transparent;
+    box-shadow: 0 0 0 50px mat.get-color-from-palette($wpgwn-app-primary, 500);
+    border-radius: 50%;
+  }
+
+  &.orga {
+    .inner {
+      box-shadow: 0 0 0 50px mat.get-color-from-palette($orange-palette, 500);
+    }
+  }
+  &.activity {
+    .inner {
+      box-shadow: 0 0 0 50px mat.get-color-from-palette($green-palette, 500);
+    }
+  }
+  &.dan {
+    .inner {
+      box-shadow: 0 0 0 50px $dan-blue;
+    }
+  }
+
+  &.hovered {
+    .inner {
+      box-shadow: 0 0 0 50px mat.get-color-from-palette($magenta-palette, 500);
+    }
+  }
+}
+
+@keyframes growAndRotate {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  100% {
+    transform: rotate(45deg) scale(2);
+  }
+}
+
+@keyframes pulse_green {
+  0% {
+    box-shadow: 0 0 0 0px
+      transparentize(
+        $color: mat.get-color-from-palette($green-palette, 500),
+        $amount: 0.3
+      );
+  }
+
+  100% {
+    box-shadow: 0 0 0 30px
+      transparentize(
+        $color: mat.get-color-from-palette($green-palette, 500),
+        $amount: 1
+      );
+  }
+}
+@keyframes pulse_orange {
+  0% {
+    box-shadow: 0 0 0 0px
+      transparentize(
+        $color: mat.get-color-from-palette($orange-palette, 500),
+        $amount: 0.3
+      );
+  }
+
+  100% {
+    box-shadow: 0 0 0 30px
+      transparentize(
+        $color: mat.get-color-from-palette($orange-palette, 500),
+        $amount: 1
+      );
+  }
+}
+@keyframes pulse_blue {
+  0% {
+    box-shadow: 0 0 0 0px transparentize($color: $dan-blue, $amount: 0.3);
+  }
+
+  100% {
+    box-shadow: 0 0 0 30px transparentize($color: $dan-blue, $amount: 1);
+  }
+}
+
+.map-wrapper {
+  .marker-popup {
+    display: none;
+  }
+  .map-frame {
+    .marker-popup {
+      display: block;
+    }
+    .leaflet-popup-content-wrapper {
+      padding: 0;
+      .leaflet-popup-content {
+        margin: 0;
+      }
+    }
+    .leaflet-popup-tip-container {
+      display: none;
+    }
+    .leaflet-popup-tip-container {
+      border-color: green;
+    }
+    .leaflet-layer {
+      filter: brightness(0.95) saturate(2.5) contrast(1.3) grayscale(1);
+    }
+
+    .leaflet-div-icon {
+      border: none;
+      background: transparent;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        border-radius: 2rem;
+      }
+      &::after {
+        content: '';
+        opacity: 0.1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 2rem;
+      }
+
+      &:hover {
+        opacity: 1;
+        .cluster-marker {
+          transform: scale(1.5);
+        }
+      }
+    }
+    .cluster-marker {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.7);
+
+      border-radius: 2rem;
+      transition: transform 200ms;
+
+      &.ACTIVITY {
+        color: $green;
+        border: 4px solid $green;
+      }
+      &.DAN {
+        color: $dan-blue;
+        border: 4px solid $dan-blue;
+      }
+      &.ORGANISATION {
+        color: $orange;
+        border: 4px solid $orange;
+      }
+
+      &.highlighted {
+        animation-name: grow;
+        animation-duration: 200ms;
+        animation-timing-function: cubic-bezier(0.18, 0.89, 0.36, 1.68);
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes grow {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(2);
+        }
+      }
+
+      &.active {
+        transform: rotate(45deg) scale(1.5);
+        animation-duration: 2s;
+        animation-timing-function: ease-out;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+
+        &.orga {
+          animation-name: pulse_orange;
+        }
+        &.activity {
+          animation-name: pulse_green;
+        }
+        &.dan {
+          animation-name: pulse_blue;
+        }
+      }
+
+      @keyframes pulse_green {
+        0% {
+          box-shadow: 0 0 0 0px
+            transparentize(
+              $color: mat.get-color-from-palette($green-palette, 500),
+              $amount: 0.3
+            );
+        }
+
+        100% {
+          box-shadow: 0 0 0 30px
+            transparentize(
+              $color: mat.get-color-from-palette($green-palette, 500),
+              $amount: 1
+            );
+        }
+      }
+    }
+  }
+}

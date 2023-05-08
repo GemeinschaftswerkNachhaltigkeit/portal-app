@@ -1,0 +1,12 @@
+<div class="button-wrapper">
+  <div class="tab-protection"></div>
+  <button
+    [ngStyle]="customStyles"
+    mat-flat-button
+    [color]="color"
+    class="slide-button"
+    (click)="onToggle()"
+  >
+    <mat-icon><ng-content></ng-content></mat-icon>
+  </button>
+</div>

@@ -1,0 +1,11 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.feedback-wrapper {
+  display: grid;
+  gap: $spacing-6;
+  .feedback-list {
+    display: grid;
+    gap: $spacing-2;
+  }
+}

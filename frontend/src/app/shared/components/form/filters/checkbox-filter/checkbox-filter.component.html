@@ -1,0 +1,14 @@
+<ul class="filter-checkbox-entries">
+  <li class="entry" *ngFor="let fv of filterValues">
+    <mat-checkbox
+      color="primary"
+      [(ngModel)]="fv.checked"
+      (ngModelChange)="checkBoxValueChangedHandler()"
+    >
+      <span class="label"
+        ><span class="prefix" *ngIf="fv.labelPrefix">{{ fv.labelPrefix }}</span
+        >{{ fv.labelKey | translate }}</span
+      >
+    </mat-checkbox>
+  </li>
+</ul>

@@ -1,0 +1,191 @@
+<ng-container *ngIf="orgData$ | async as orgaData">
+  <mat-stepper
+    [linear]="linarMode"
+    #stepper
+    color="accent"
+    [orientation]="(stepperOrientation | async)!"
+    [disableRipple]="true"
+  >
+    <mat-step
+      [stepControl]="formStepOne!"
+      [label]="'labels.wizard.masterData' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout>
+        <div step class="form-container">
+          <app-form-step-description
+            [content]="orgContent$ | async"
+            [stepDescriptionId]="0"
+          ></app-form-step-description>
+          <app-form-feedback
+            [org]="orgaData"
+            class="bg-yellow"
+          ></app-form-feedback>
+          <app-admin-warning *ngIf="isAdmin()">
+            {{ 'clearing.adminWarning' | translate }}
+          </app-admin-warning>
+
+          <app-organisation-form
+            #stepOne
+            [org]="orgaData"
+            [enableAutosave]="enableAutosave"
+            [isEditAllowed]="isAllowedToEdit(orgaData)"
+            [isActiveStep]="isActiveStep(0)"
+            (saveData)="saveOrg($event, 'ORGANISATION')"
+            (deleteImage)="deleteHandler($event)"
+          ></app-organisation-form>
+          <app-form-step-actions
+            [showPrevBtn]="false"
+            [formStepKey]="'ORGANISATION'"
+            [stepState$]="orgStepState$"
+          >
+          </app-form-step-actions>
+        </div>
+        <app-form-advatages
+          sidebar
+          [content]="orgContent$ | async"
+        ></app-form-advatages>
+      </app-wizard-sidebar-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepTwo!"
+      [label]="'labels.wizard.topics' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout>
+        <div step class="form-container">
+          <app-form-step-description
+            [content]="orgContent$ | async"
+            [stepDescriptionId]="1"
+          ></app-form-step-description>
+          <app-form-feedback
+            [org]="orgaData"
+            class="bg-yellow"
+          ></app-form-feedback>
+          <app-admin-warning *ngIf="isAdmin()">
+            {{ 'clearing.adminWarning' | translate }}
+          </app-admin-warning>
+          <app-topics-form
+            #stepTwo
+            [data]="orgaData"
+            [enableAutosave]="enableAutosave"
+            (saveData)="saveOrg($event, 'topics')"
+            [isEditAllowed]="isAllowedToEdit(orgaData)"
+            [isActiveStep]="isActiveStep(1)"
+          ></app-topics-form>
+          <app-form-step-actions
+            [formStepKey]="'topics'"
+            [stepState$]="orgStepState$"
+          >
+          </app-form-step-actions>
+        </div>
+        <app-form-advatages
+          sidebar
+          [content]="orgContent$ | async"
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepThree!"
+      [label]="'labels.wizard.externalLinks' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout
+        ><div step class="form-container">
+          <app-form-step-description
+            [content]="orgContent$ | async"
+            [stepDescriptionId]="2"
+          ></app-form-step-description>
+          <app-form-feedback
+            [org]="orgaData"
+            class="bg-yellow"
+          ></app-form-feedback>
+          <app-admin-warning *ngIf="isAdmin()">
+            {{ 'clearing.adminWarning' | translate }}
+          </app-admin-warning>
+          <app-external-links-form
+            #stepThree
+            [data]="orgaData"
+            [enableAutosave]="enableAutosave"
+            [isEditAllowed]="isAllowedToEdit(orgaData)"
+            (saveData)="saveOrg($event, 'externalLinks')"
+            [isActiveStep]="isActiveStep(2)"
+          ></app-external-links-form>
+          <app-form-step-actions
+            [formStepKey]="'externalLinks'"
+            [stepState$]="orgStepState$"
+          >
+          </app-form-step-actions>
+        </div>
+        <app-form-advatages
+          sidebar
+          [content]="orgContent$ | async"
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="formStepFour!"
+      [label]="'labels.wizard.contact' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout
+        ><div step class="form-container">
+          <app-form-step-description
+            [content]="orgContent$ | async"
+            [stepDescriptionId]="3"
+          ></app-form-step-description>
+          <app-form-feedback
+            [org]="orgaData"
+            class="bg-yellow"
+          ></app-form-feedback>
+          <app-admin-warning *ngIf="isAdmin()">
+            {{ 'clearing.adminWarning' | translate }}
+          </app-admin-warning>
+          <app-user-form
+            #stepFour
+            [data]="orgaData"
+            [enableAutosave]="enableAutosave"
+            [isEditAllowed]="isAllowedToEdit(orgaData)"
+            (saveData)="saveOrg($event, 'user')"
+            (deleteImage)="deleteHandler($event)"
+            [isActiveStep]="isActiveStep(3)"
+          ></app-user-form>
+          <app-form-step-actions
+            [formStepKey]="'user'"
+            [nextBtnCallback]="submitForApproval"
+            [disableNextBtn]="disableSubmitBtn"
+            [stepState$]="orgStepState$"
+            [last]="true"
+            [modification]="isModification"
+            (canceled)="backToProile()"
+          >
+          </app-form-step-actions>
+        </div>
+        <app-form-advatages
+          sidebar
+          [content]="orgContent$ | async"
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+
+    <mat-step class="final-step">
+      <app-content-wrapper *ngIf="loading$ | async" size="xl">
+        <app-spinner></app-spinner>
+      </app-content-wrapper>
+    </mat-step>
+
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="edit">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="number">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="done">
+      <mat-icon>check</mat-icon>
+    </ng-template>
+  </mat-stepper>
+</ng-container>

@@ -1,0 +1,37 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.home-tile {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  padding: $spacing-8;
+  background: white;
+  text-decoration: none;
+  height: 100%;
+  transition: all 200ms;
+
+  &:hover {
+    transform: rotate(2deg);
+  }
+
+  &.noHover {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  &.noPadding {
+    padding: 0;
+  }
+
+  .description {
+    margin: 0;
+  }
+
+  .inline {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+  }
+}

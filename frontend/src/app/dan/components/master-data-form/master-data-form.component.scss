@@ -1,0 +1,22 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2em;
+}
+
+.wysiwyg-form-field {
+  margin-bottom: $spacing-4;
+}
+
+.char-count {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+}
+
+.tip-tap-wrapper {
+  position: relative;
+}

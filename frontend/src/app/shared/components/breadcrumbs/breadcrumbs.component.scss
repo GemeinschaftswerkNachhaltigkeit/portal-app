@@ -1,0 +1,9 @@
+@use 'palette' as *;
+@use 'theme' as *;
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-3;
+  color: $blue-navy;
+}

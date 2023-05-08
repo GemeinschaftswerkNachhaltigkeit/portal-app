@@ -1,0 +1,20 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.dropzone.dz-wrapper.dz-single .dz-message {
+  background-color: transparent !important;
+}
+.dropzone.dz-wrapper {
+  height: 100%;
+  overflow: hidden !important;
+}
+
+.dropzone.dz-wrapper.dz-single .dz-message {
+  margin: 0;
+  max-width: none;
+}
+
+div.dropzone.dz-wrapper div.dz-message {
+  border-color: transparent;
+  color: $blue-navy;
+}

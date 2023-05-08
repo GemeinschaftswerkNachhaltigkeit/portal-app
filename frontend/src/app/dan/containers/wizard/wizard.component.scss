@@ -1,0 +1,33 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  height: 100%;
+}
+
+.final-step-content-wrapper {
+  margin-top: 4em;
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2;
+
+    .long {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .final-step-content-wrapper {
+    .actions {
+      .long {
+        display: block;
+      }
+      .short {
+        display: none;
+      }
+    }
+  }
+}

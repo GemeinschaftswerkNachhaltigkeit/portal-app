@@ -1,0 +1,75 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.duplicate {
+  display: grid;
+  gap: $spacing-2;
+  border-bottom: 1px solid $blue-navy;
+  margin-bottom: $spacing-4;
+
+  .title-wrapper {
+    width: 100%;
+    display: grid;
+    gap: $spacing-2;
+    grid-template-columns: 1fr 1fr;
+
+    .title {
+      height: fit-content;
+    }
+
+    .title-info {
+      font-size: 1.2rem;
+      text-align: right;
+
+      p {
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  .meta-infos {
+    width: 100%;
+    display: grid;
+    gap: $spacing-2;
+    grid-template-columns: 1fr 1fr;
+    padding: $spacing-4 0;
+
+    .noValue {
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    .info {
+      display: grid;
+      gap: $spacing-1;
+      justify-self: flex-end;
+    }
+
+    p {
+      margin-bottom: 2px;
+    }
+  }
+}
+
+.duplicateField {
+  display: flex;
+  width: fit-content;
+  padding: $spacing-1 $spacing-2;
+  border: 2px solid $magenta;
+  position: relative;
+  &::after {
+    content: '!';
+    position: absolute;
+    right: -$spacing-3;
+    top: -$spacing-3;
+    background: $magenta;
+    color: white;
+    width: $spacing-6;
+    height: $spacing-6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $spacing-6;
+    font-weight: bold;
+  }
+}

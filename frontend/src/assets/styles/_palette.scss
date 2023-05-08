@@ -1,0 +1,357 @@
+@use 'sass:map';
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$magenta: #dd1367;
+$orange: #fd6925;
+$orange-light: #fcba03;
+$green: #4c9f38;
+$blue-light: #d1ffff;
+$blue-navy: #19486a;
+$bordeauxe: #a21942;
+$yellow: #f5fd00;
+$project-n: #c8d400;
+$dan-blue: #009ee3;
+
+$gray-light: #f2f2f2;
+$gray: #6b7280;
+$gray-dark: #374151;
+$background: #fafafa;
+
+$magenta-palette: mat.define-palette(
+  (
+    50: #fbe3ed,
+    100: #f5b8d1,
+    200: #ee89b3,
+    300: #e75a95,
+    400: #e2367e,
+    500: $magenta,
+    600: #d9115f,
+    700: #d40e54,
+    800: #cf0b4a,
+    900: #c70639,
+    A100: #fff0f3,
+    A200: #ffbdcb,
+    A400: #ff8aa2,
+    A700: #ff708e,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #ffffff,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+$orange-palette: mat.define-palette(
+  (
+    50: #ffede5,
+    100: #fed2be,
+    200: #feb492,
+    300: #fe9666,
+    400: #fd8046,
+    500: $orange,
+    600: #fd6121,
+    700: #fc561b,
+    800: #fc4c16,
+    900: #fc3b0d,
+    A100: #ffffff,
+    A200: #fff5f3,
+    A400: #ffcac0,
+    A700: #ffb4a7,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #000000,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+$yellow-palette: mat.define-palette(
+  (
+    50: #feffe0,
+    100: #fcfeb3,
+    200: #fafe80,
+    300: #f8fe4d,
+    400: #f7fd26,
+    500: $yellow,
+    600: #f4fd00,
+    700: #f2fc00,
+    800: #f0fc00,
+    900: #eefc00,
+    A100: #ffffff,
+    A200: #feffef,
+    A400: #fbffbc,
+    A700: #f9ffa2,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #000000,
+      500: #000000,
+      600: #000000,
+      700: #000000,
+      800: #000000,
+      900: #000000,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+
+$bordeauxe-palette: mat.define-palette(
+  (
+    50: #f4e3e8,
+    100: #e3bac6,
+    200: #d18ca1,
+    300: #be5e7b,
+    400: #b03c5e,
+    500: $bordeauxe,
+    600: #9a163c,
+    700: #901233,
+    800: #860e2b,
+    900: #75081d,
+    A100: #ffa5b2,
+    A200: #ff7287,
+    A400: #ff3f5c,
+    A700: #ff2546,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #ffffff,
+      400: #ffffff,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #ffffff,
+      A700: #ffffff
+    )
+  )
+);
+$blue-navy-palette: mat.define-palette(
+  (
+    50: #e3e9ed,
+    100: #bac8d2,
+    200: #8ca4b5,
+    300: #5e7f97,
+    400: #3c6380,
+    500: $blue-navy,
+    600: #164162,
+    700: #123857,
+    800: #0e304d,
+    900: #08213c,
+    A100: #74afff,
+    A200: #4192ff,
+    A400: #0e75ff,
+    A700: #0068f3,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #ffffff,
+      400: #ffffff,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #ffffff,
+      A700: #ffffff
+    )
+  )
+);
+$blue-light-palette: mat.define-palette(
+  (
+    50: #f9ffff,
+    100: #f1ffff,
+    200: #e8ffff,
+    300: #dfffff,
+    400: #d8ffff,
+    500: $blue-light,
+    600: #ccffff,
+    700: #c6ffff,
+    800: #c0ffff,
+    900: #b5ffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #000000,
+      500: $blue-navy,
+      600: #000000,
+      700: #000000,
+      800: #000000,
+      900: #000000,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+$green-palette: mat.define-palette(
+  (
+    50: #eaf3e7,
+    100: #c9e2c3,
+    200: #a6cf9c,
+    300: #82bc74,
+    400: #67ad56,
+    500: $green,
+    600: #459732,
+    700: #3c8d2b,
+    800: #338324,
+    900: #247217,
+    A100: #b4ffab,
+    A200: #87ff78,
+    A400: #5aff45,
+    A700: #44ff2b,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #000000,
+      500: #ffffff,
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+//#fcba03
+$orange-light-palette: mat.define-palette(
+  (
+    50: #fff7e1,
+    100: #feeab3,
+    200: #fedd81,
+    300: #fdcf4f,
+    400: #fcc429,
+    500: $orange-light,
+    600: #fcb303,
+    700: #fbab02,
+    800: #fba302,
+    900: #fa9401,
+    A100: #ffffff,
+    A200: #fff7ed,
+    A400: #ffdfba,
+    A700: #ffd4a1,
+    contrast: (
+      50: #000000,
+      100: #000000,
+      200: #000000,
+      300: #000000,
+      400: #000000,
+      500: #000000,
+      600: #000000,
+      700: #000000,
+      800: #000000,
+      900: #000000,
+      A100: #000000,
+      A200: #000000,
+      A400: #000000,
+      A700: #000000
+    )
+  )
+);
+
+$wpgwn-app-primary: $blue-navy-palette; //mat.define-palette($blue-navy-palette,500);
+$wpgwn-app-accent: $magenta-palette; //mat.define-palette($magenta-palette);//mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$wpgwn-app-warn: $bordeauxe-palette; // mat.define-palette(mat.$red-palette);
+
+@each $colorName,
+  $palette
+    in (
+      'accent': $wpgwn-app-accent,
+      'primary': $wpgwn-app-primary,
+      'magenta': $magenta-palette,
+      'bordeauxe': $bordeauxe-palette,
+      'yellow': $yellow-palette,
+      'blue-navy': $wpgwn-app-primary,
+      'blue-light': $blue-light-palette,
+      'orange': $orange-palette,
+      'orange-light': $orange-light-palette,
+      'green': $green-palette
+    )
+{
+  .bg-#{$colorName} {
+    background-color: mat.get-color-from-palette($palette, default);
+    color: mat.get-color-from-palette(
+      $palette,
+      default-contrast
+    ); //mat.get-color-from-palette($palette, '500-contrast') //mat.get-color-from-palette($palette, '500-contrast');
+  }
+}
+
+@each $colorName,
+  $palette
+    in (
+      'magenta': $magenta-palette,
+      'bordeauxe': $bordeauxe-palette,
+      'yellow': $yellow-palette,
+      'blue-navy': $wpgwn-app-primary,
+      'blue-light': $blue-light-palette,
+      'orange': $orange-palette,
+      'orange-light': $orange-light-palette,
+      'green': $green-palette
+    )
+{
+  .mat-button.mat-#{$colorName} {
+    color: mat.get-color-from-palette($palette, default);
+  }
+  .mat-flat-button.mat-#{$colorName},
+  .mat-raised-button.mat-#{$colorName} {
+    background-color: mat.get-color-from-palette($palette, default);
+    color: mat.get-color-from-palette($palette, default-contrast);
+  }
+  .mat-flat-button.mat-button-disabled.mat-#{$colorName},
+  .mat-raised-button.mat-button-disabled.mat-#{$colorName} {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.26);
+  }
+}

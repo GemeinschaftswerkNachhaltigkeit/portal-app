@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="DE">
+<head th:replace="email/shared/head :: head">
+    <title>Organisation contact invite</title>
+    header
+</head>
+<body style="width:100%;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;margin:0">
+<div class="es-wrapper-color" style="background-color:#FAFAFA"><!--[if gte mso 9]>
+    <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+        <v:fill type="tile" color="#fafafa"></v:fill>
+    </v:background>
+    <![endif]-->
+    <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" role="presentation"
+           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;background-color:#FAFAFA">
+        <tr>
+            <td valign="top" style="padding:0;margin:0">
+                <header th:replace="email/shared/header :: header">
+                    header
+                </header>
+                <!-- BEGIN Content -->
+                <table class="es-content" cellspacing="0" cellpadding="0" align="center" role="presentation"
+                       style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;color:#19486A">
+                    <tr>
+                        <td align="center" style="padding:0;margin:0">
+                            <table class="es-content-body" role="presentation"
+                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:750px"
+                                   cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
+                                <tr>
+                                    <td align="left"
+                                        style="margin:0;padding-top:20px;padding-left:50px;padding-right:50px;padding-bottom:30px">
+                                        <table width="100%" cellspacing="0" cellpadding="0" role="presentation"
+                                               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+                                            <tr>
+                                                <td valign="top" align="center" style="padding:0;margin:0;width:950px">
+                                                    <table width="100%" cellspacing="0" cellpadding="0"
+                                                           role="presentation"
+                                                           style="
+                                                           max-width: 500px;
+                                                           table-layout: fixed;
+                                                           mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
+
+                                                        <!-- BEGIN: english below -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                --- english below ---
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: english below -->
+
+                                                        <!-- BEGIN: Headline -->
+                                                        <tr>
+                                                            <td class="es-m-txt-l" align="center"
+                                                                style="padding:0;margin:0;padding-top:20px;padding-bottom:25px">
+                                                                <h1 style="margin:0;line-height:48px;mso-line-height-rule:exactly;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-size:36px;font-style:normal;font-weight:bold;color:#19486a">
+                                                                    <strong>Werde Redakteur:in deiner Organisation!</strong></h1></td>
+                                                        </tr>
+                                                        <!-- END: Headline -->
+
+                                                        <!-- BEGIN: Hero Image -->
+                                                        <tr>
+                                                            <td style="padding:0;margin:0;padding-bottom:20px;font-size:0px"
+                                                                align="center"><img th:src="@{${emailAssetsBasePath} + 'email/images/email-hero.jpg'}"
+                                                                                    alt="Und jetzt alle"
+                                                                                    style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px;width:500px; height:250px; object-fit:cover;"
+                                                                                    title="Und jetzt alle" /></td>
+                                                        </tr>
+                                                        <!-- END: Hero Image -->
+
+                                                        <!-- BEGIN: Text Body -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                <p>Hallo
+                                                                    <span style="font-weight: bold" th:text="${organisationMembership.firstName}">FIRSTNAME</span>
+                                                                    <span style="font-weight: bold" th:text="${organisationMembership.lastName}">LASTNAME</span>,
+                                                                </p>
+                                                                <p>
+                                                                    deine Organisation,
+                                                                    <span style="font-weight: bold" th:text="${organisation.name}">ORGNAME</span>,
+                                                                    ist Teil des Gemeinschaftswerk Nachhaltigkeit.
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${adminFirstName}">CURRENT_FIRSTNAME</span>
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${adminLastName}">CURRENT_LASTNAME</span>
+                                                                    hat bereits eure Organisationsdaten eingetragen und
+                                                                    lädt dich ein, Redakteur:in zu werden.
+                                                                </p>
+                                                                <p>
+                                                                    Dazu wurde für dich ein Account für die Email-Adresse
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${organisationMembership.email}">EMAIL</span>
+                                                                    und dem einmaligen Passwort
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${oneTimePassword}">ONE_TIME_PASSWORD</span>
+                                                                    angelegt.
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Text Body -->
+
+                                                        <!-- BEGIN: Call-to-Action Button -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="es-button-border"
+                                                                      style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:200px">
+                                                                    <a href="" class="es-button" target="_blank"
+                                                                       style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                       th:href="${urlPrefix} + 'sign-up/organisation-membership/'+${organisationMembership.getRandomUniqueId()}">
+                                                                        Anfrage bestätigen
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Call-to-Action Button -->
+
+
+                                                        <!-- BEGIN: Text Body Part II -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                <p>
+                                                                    Als Redakteur:in kannst du neue Aktivitäten, Angebote sowie Praxisbeispiele
+                                                                    erstellen und Aktualisierungen der Organisationsdaten vornehmen. 
+                                                                </p>
+                                                                <p>
+                                                                    <a href="" target="_blank"
+                                                                       th:href="${urlPrefix} + 'organisations/' + ${organisation.getId()}">
+                                                                        Hier
+                                                                    </a> findest du eine Übersicht über die bereits
+                                                                    eingetragenen Organisationsdaten.
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Text Body Part II -->
+
+                                                        <!-- BEGIN: Spacer -->
+                                                        <tr>
+                                                            <td style="border-collapse:collapse;border-spacing:0px;background-color:transparent;border-bottom:2px solid #cccccc;">
+                                                                &nbsp;
+                                                            </td>
+                                                        </tr>
+                                                        <!-- END: Spacer -->
+
+                                                        <!-- EN BEGIN: Headline -->
+                                                        <tr>
+                                                            <td class="es-m-txt-l" align="center"
+                                                                style="padding:0;margin:0;padding-top:40px;padding-bottom:25px">
+                                                                <h1 style="margin:0;line-height:58px;mso-line-height-rule:exactly;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-size:36px;font-style:normal;font-weight:bold;color:#19486a">
+                                                                    <strong>Become an editor of your organisation!</strong></h1></td>
+                                                        </tr>
+                                                        <!-- EN END: Headline -->
+
+                                                        <!-- EN BEGIN: Text Body -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                <p>Hello
+                                                                    <span style="font-weight: bold" th:text="${organisationMembership.firstName}">FIRSTNAME</span>
+                                                                    <span style="font-weight: bold" th:text="${organisationMembership.lastName}">LASTNAME</span>,
+                                                                </p>
+                                                                <p>
+                                                                    Your organisation,
+                                                                    <span style="font-weight: bold" th:text="${organisation.name}"></span>,
+                                                                    is part of the Joint Action for Sustainable Development.
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${adminFirstName}">CURRENT_FIRSTNAME</span>
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${adminLastName}">CURRENT_LASTNAME</span>
+                                                                    has already entered your organisation’s details and invites 
+                                                                    you to become an editor. 
+                                                                </p>
+                                                                <p>
+                                                                    An account has been created for you for the email address
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${organisationMembership.email}">EMAIL</span>
+                                                                    with the one-time password
+                                                                    <span style="font-weight: bold"
+                                                                          th:text="${oneTimePassword}">ONE_TIME_PASSWORD</span>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Text Body -->
+
+                                                        <!-- EN BEGIN: Call-to-Action Button -->
+                                                        <tr>
+                                                            <td align="center"
+                                                                style="padding:0;margin:0;padding-bottom: 20px;">
+                                                                <span class="es-button-border"
+                                                                      style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:200px">
+                                                                    <a href="" class="es-button" target="_blank"
+                                                                       style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
+                                                                       th:href="${urlPrefix} + 'sign-up/organisation-membership/'+${organisationMembership.getRandomUniqueId()}">
+                                                                        Confirm request
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Call-to-Action Button -->
+
+                                                        <!-- EN BEGIN: Text Body Part II -->
+                                                        <tr>
+                                                            <td align="left"
+                                                                style="margin:0;padding-top:30px;padding-bottom:30px">
+                                                                <p>
+                                                                    As an editor for your organisation, you can create new activities, 
+                                                                    share offers as well as practical examples and edit your 
+                                                                    organisation’s information.
+                                                                </p>
+                                                                <p>
+                                                                    <a href="" target="_blank"
+                                                                       th:href="${urlPrefix} + 'organisations/' + ${organisation.getId()}">
+                                                                        Here
+                                                                    </a> you will find an overview of the organizational
+                                                                    data that has already been entered.
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- EN END: Text Body Part II -->
+
+
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr th:replace="email/shared/invitation :: invite">
+                                    invite
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- END Content -->
+                <footer th:replace="email/shared/footer :: footer">
+                    footer
+                </footer>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

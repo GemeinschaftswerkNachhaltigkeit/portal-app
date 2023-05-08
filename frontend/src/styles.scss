@@ -1,0 +1,341 @@
+@use 'sass:map';
+@use 'map' as *;
+@use 'wysiwyg' as *;
+@use 'dropzone' as *;
+@use 'links' as *;
+@use 'feedback' as *;
+@use 'inputs' as *;
+@use 'swiper/scss';
+@use 'swiper/scss/navigation';
+@use 'swiper/scss/pagination';
+@use 'slider' as *;
+@use 'wizard' as *;
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+// Plus imports for other components in your app.
+
+@use 'assets/styles/palette' as *;
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+//@include mat.core();
+
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'AzeretMono';
+  src: url('~/assets/fonts/AzeretMono-Black.ttf') format('truetype');
+  font-weight: 900;
+}
+
+$wpgwn-app-typography: mat.define-typography-config(
+  $font-family: 'AzeretMono',
+  $body-1:
+    mat.define-typography-level(
+      $font-family: Verdana,
+      $font-size: 1.4rem,
+      $line-height: 24px
+    ),
+  $body-2:
+    mat.define-typography-level(
+      $font-family: Verdana,
+      $font-size: 1.4rem,
+      $line-height: 24px,
+      $font-weight: 600
+    ),
+  $button:
+    mat.define-typography-level(
+      $font-size: 1.4rem,
+      $line-height: 1.4rem
+    ),
+  $headline:
+    mat.define-typography-level(
+      $font-size: 3.2rem,
+      $line-height: 150%,
+      $font-weight: 900
+    ),
+  $title:
+    mat.define-typography-level(
+      $font-size: 2.4rem,
+      $line-height: 150%,
+      $font-weight: 900
+    )
+);
+@include mat.core($wpgwn-app-typography);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$wpgwn-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $wpgwn-app-primary,
+      accent: $wpgwn-app-accent,
+      warn: $wpgwn-app-warn
+    )
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($wpgwn-app-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  color: $blue-navy;
+  font-family: 'Verdana', sans-serif;
+}
+body {
+  margin: 0;
+  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  background-color: $background;
+  //font-family: mat.font-family($wpgwn-app-typography);/*font-family: Roboto, "Helvetica Neue", sans-serif;*/
+}
+html {
+  font-size: 62.5%; //.1rem === 1px and 1rem === 10px
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'AzeretMono', monospace;
+}
+
+.font-2 {
+  font-family: 'AzeretMono', monospace;
+}
+
+/**
+  Material Overrides
+**/
+[class^='mat-'] {
+  border-radius: 0 !important;
+}
+.mat-form-field,
+.mat-select,
+.mat-textarea {
+  font-family: 'Verdana', sans-serif;
+}
+.mat-slide-toggle-thumb {
+  background-color: #c0c0c0;
+}
+.mat-drawer-container {
+  color: $blue-navy;
+}
+.mat-flat-button {
+  color: $blue-navy;
+}
+.mat-flat-button,
+.mat-stroke-button {
+  text-transform: uppercase;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  background: white;
+
+  &.mat-accent {
+    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end {
+      color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    }
+  }
+}
+.mat-form-field-appearance-outline.mat-accent .mat-form-field-outline {
+  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+  color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+  .mat-form-field-outline-start,
+  .mat-form-field-outline-gap,
+  .mat-form-field-outline-end {
+    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    background: white;
+  }
+}
+mat-form-field {
+  width: 100%;
+  max-width: 98vw;
+  .mat-form-field-infix {
+    width: auto !important;
+  }
+}
+.mat-radio-label-content {
+  font-family: 'Verdana', sans-serif;
+}
+.mat-primary {
+  .mat-form-field-label {
+    color: $blue-navy;
+  }
+  .mat-checkbox-frame {
+    border-color: $blue-navy;
+  }
+}
+.mat-accent {
+  .mat-form-field-label {
+    color: $magenta;
+  }
+  .mat-checkbox-frame {
+    border-color: $magenta;
+  }
+}
+.mat-drawer-container {
+  background-color: white;
+}
+.mat-drawer-content {
+  scroll-padding-top: 202px;
+}
+.mat-dialog-container,
+.mat-expansion-panel {
+  color: $blue-navy;
+}
+mat-dialog-container.mat-dialog-container {
+  padding-top: 0;
+}
+.map-filters {
+  .mat-form-field-wrapper {
+    padding: 0;
+  }
+  .view-type {
+    .orga {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
+        background: $orange;
+      }
+      &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+        background: $orange;
+      }
+    }
+    .activity {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
+        background: $green;
+      }
+      &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+        background: $green;
+      }
+    }
+    .dan {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
+        background: $dan-blue;
+      }
+      &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+        background: $dan-blue;
+      }
+    }
+  }
+}
+
+.dan-help-modal {
+  .entry {
+    .text {
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.mat-option-text,
+.mat-select-value-text,
+.mat-menu-item,
+.mat-menu-item[disabled],
+.mat-menu-item .mat-icon-no-color,
+.mat-menu-item[disabled] .mat-icon-no-color {
+  color: $blue-navy;
+}
+
+.mat-menu-item[disabled] {
+  opacity: 0.5;
+}
+
+/* 
+  Material Icons 
+*/
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~/assets/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~/assets/fonts/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2')
+    format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

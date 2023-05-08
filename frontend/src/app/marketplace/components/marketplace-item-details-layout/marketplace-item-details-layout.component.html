@@ -1,0 +1,22 @@
+<app-content-wrapper size="xl" [mobileNoMargin]="true">
+  <div class="profile" @slideIn>
+    <main id="main-container">
+      <section class="breadcrumbs">
+        <ng-content select="[breadcrumbs]"></ng-content>
+      </section>
+      <header class="header">
+        <section class="hero">
+          <ng-content select="[hero]"></ng-content>
+        </section>
+      </header>
+      <section class="body">
+        <div class="content">
+          <ng-content select="[content]"></ng-content>
+        </div>
+      </section>
+    </main>
+    <aside id="sidebar" class="sidebar">
+      <ng-content select="[sidebar]"></ng-content>
+    </aside>
+  </div>
+</app-content-wrapper>

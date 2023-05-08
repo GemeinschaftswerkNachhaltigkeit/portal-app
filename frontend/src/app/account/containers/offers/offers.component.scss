@@ -1,0 +1,34 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.pager {
+  padding-top: $spacing-4;
+}
+.action-option {
+  span {
+    padding-left: $spacing-2;
+  }
+}
+.actions-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lists {
+  display: grid;
+  gap: $spacing-20;
+
+  .card-wrapper {
+    position: relative;
+
+    .error-badge {
+      position: absolute;
+      left: -4rem;
+      top: $spacing-4;
+      width: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

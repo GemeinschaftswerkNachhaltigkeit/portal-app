@@ -1,0 +1,55 @@
+version: '3'
+
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  postgres:
+    image: postgis/postgis:13-3.2-alpine
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: 'directus,keycloak,wpgwn_app'
+      POSTGRES_MULTIPLE_DATABASES_USERNAMES: 'directus,keycloak,wpgwn_user'
+      POSTGRES_MULTIPLE_DATABASES_PASSWORDS: 'directus,keycloak,wpgwn_user'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+  mail:
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+  pgadmin:
+    image: dpage/pgadmin4:7
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
+
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:20.0.3
+#    environment:
+#      KC_DB_SCHEMA: public
+#      KC_DB: postgres
+#      KC_DB_URL_HOST: postgres
+#      KC_DB_URL_DATABASE: keycloak
+#      KC_DB_USERNAME: keycloak
+#      KC_DB_PASSWORD: keycloak
+#      KEYCLOAK_ADMIN: admin
+#      KEYCLOAK_ADMIN_PASSWORD: pass
+#    ports:
+#      - "8080:8080"
+#    entrypoint:
+#      - /opt/keycloak/bin/kc.sh
+#     - start-dev
+#     - --import-realm
+#    volumes:
+#      - "./keycloak:/opt/keycloak/data/import"
+#    depends_on:
+#      - postgres

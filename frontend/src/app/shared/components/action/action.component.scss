@@ -1,0 +1,29 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+:host(.full) {
+  width: 100%;
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.action {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-2;
+  text-transform: uppercase;
+
+  &.small {
+    height: 28px;
+  }
+}
+.disabled {
+  opacity: 0.5;
+}

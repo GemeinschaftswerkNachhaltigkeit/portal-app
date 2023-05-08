@@ -1,0 +1,55 @@
+@use 'theme' as *;
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    &.mobile {
+      width: 100%;
+      display: flex;
+      gap: 1rem;
+
+      button {
+        flex-grow: 1;
+      }
+
+      .registration-btn {
+        flex-grow: 0;
+      }
+    }
+    .highlighted-links {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      a {
+        text-transform: uppercase;
+        font-weight: 600;
+        height: 2rem;
+        margin: $spacing-2;
+        margin-left: 0;
+        line-height: 2rem;
+      }
+    }
+  }
+
+  .toggle {
+    &.mobile {
+      order: -1;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .buttons {
+      .highlighted-links {
+        a {
+          margin-left: $spacing-2;
+        }
+      }
+    }
+  }
+}

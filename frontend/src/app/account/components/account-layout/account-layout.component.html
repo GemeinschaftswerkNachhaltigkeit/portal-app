@@ -1,0 +1,16 @@
+<app-content-wrapper size="xl">
+  <div class="profile">
+    <section class="body">
+      <aside class="nav">
+        <ng-container *appAuthenticated>
+          <div class="nav-wrapper">
+            <ng-content select="[nav]"></ng-content>
+          </div>
+        </ng-container>
+      </aside>
+      <main class="content">
+        <ng-content select="[content]"></ng-content>
+      </main>
+    </section>
+  </div>
+</app-content-wrapper>

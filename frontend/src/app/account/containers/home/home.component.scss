@@ -1,0 +1,15 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-4;
+  grid-auto-flow: row;
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .tiles {
+    grid-template-columns: 1fr 1fr;
+  }
+}

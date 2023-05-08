@@ -1,0 +1,11 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.expired-badge {
+  color: white;
+  background-color: $blue-navy;
+  transform: rotate(-5deg);
+  padding: $spacing-2 $spacing-6;
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+}

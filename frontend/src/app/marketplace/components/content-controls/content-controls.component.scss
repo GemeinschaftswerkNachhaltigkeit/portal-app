@@ -1,0 +1,20 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  min-width: 0;
+}
+
+.field {
+  position: relative;
+  min-width: 0;
+}
+
+.char-count {
+  position: absolute;
+  bottom: -0rem;
+  right: 1rem;
+}

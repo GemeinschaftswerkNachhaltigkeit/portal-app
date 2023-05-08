@@ -1,0 +1,104 @@
+<ng-container *ngIf="paging$ | async as paging">
+  <app-marketplace-layout
+    [total]="paging.totalElements || 0"
+    [loading]="loading$ | async"
+  >
+    <ng-container banner
+      ><app-add-banner (add)="handleAdd()"></app-add-banner
+    ></ng-container>
+    <ng-container filters>
+      <div class="filters">
+        <app-heading size="sm" color="none">{{
+          'marketplace.titles.filters' | translate
+        }}</app-heading>
+        <div>
+          <button mat-stroked-button color="accent" (click)="clearAll()">
+            {{ 'marketplace.buttons.resetFilters' | translate }}
+          </button>
+        </div>
+        <app-secondary-filters
+          [data]="getFilterData()"
+          (filtersChanged)="handleFiltersChanged($event)"
+        ></app-secondary-filters>
+      </div>
+    </ng-container>
+    <app-search-input
+      search-field
+      [value]="searchValue"
+      [placeholder]="'marketplace.placeholders.search' | translate"
+      (search)="handleSearch($event)"
+      (searchValueChanged)="handleSearchValueChanged($event)"
+    ></app-search-input>
+
+    <ng-container filter-bar>
+      <div>
+        <app-filter-modal-button
+          [count]="countFilters()"
+          (clear)="clearAll()"
+          (openModal)="openFilters()"
+        ></app-filter-modal-button>
+      </div>
+    </ng-container>
+    <div results>
+      <ng-container *ngIf="featuredItems$ | async as featuredItems">
+        <app-card-list>
+          <ng-container *ngFor="let featuredItem of featuredItems">
+            <app-card
+              [featuredText]="featuredItem.featuredText"
+              [imageId]="featuredItem.image"
+              [title]="featuredItem.name"
+              [content]="featuredItem.description"
+              [type]="featuredItem.marketplaceType"
+              [category]="getMarketplaceCategory(featuredItem)"
+              [location]="featuredItem.location"
+              [thematicFocus]="featuredItem.thematicFocus"
+              [showActions]="false"
+              (cardClicked)="open(featuredItem.id)"
+            ></app-card>
+          </ng-container>
+        </app-card-list>
+        <div class="line"><hr /></div>
+      </ng-container>
+
+      <ng-container *ngIf="items$ | async as items">
+        <app-card-list>
+          <ng-container *ngFor="let item of items">
+            <app-card
+              [imageId]="item.image"
+              [title]="item.name"
+              [content]="item.description"
+              [type]="item.marketplaceType"
+              [category]="getMarketplaceCategory(item)"
+              [location]="item.location"
+              [thematicFocus]="item.thematicFocus"
+              [showActions]="false"
+              (cardClicked)="open(item.id)"
+            ></app-card>
+          </ng-container>
+        </app-card-list>
+
+        <div class="pager">
+          <mat-paginator
+            class="mat-elevation-z8"
+            *ngIf="items?.length"
+            color="accent"
+            [length]="paging?.totalElements"
+            [pageIndex]="paging?.number"
+            [pageSize]="paging?.size || pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            [showFirstLastButtons]="true"
+            (page)="handlePageChanged($event)"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        </div>
+      </ng-container>
+    </div>
+    <div slider *ngIf="links$ | async as links">
+      <app-partner-links
+        [links]="links"
+        [selectedCategories]="getCategories()"
+      ></app-partner-links>
+    </div>
+  </app-marketplace-layout>
+</ng-container>

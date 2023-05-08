@@ -1,0 +1,40 @@
+{
+  "name": "Müllfreie Spree e. V. Familienfest",
+  "description": "Lorem Ipsum dolor sit amet, …",
+  "sustainableDevelopmentGoals": [],
+  "impactArea": "LOCAL",
+  "contact": {
+    "lastName": "lastname contact",
+    "firstName": "firstname contact",
+    "position": null,
+    "email": "kontakt@test.com",
+    "phone": null,
+    "image": null
+  },
+  "location": {
+    "address": {
+      "street": "Tucholskystraße",
+      "streetNo": "2",
+      "zipCode": "10117",
+      "city": "Berlin",
+      "state": "Berlin",
+      "country": "DE"
+    },
+    "online": null,
+    "url": "http://…",
+    "coordinate": {
+      "type": "Point",
+      "coordinates": [
+        13.405837,
+        52.515607
+      ]
+    }
+  },
+  "thematicFocus": [],
+  "importProcess": null,
+  "activityType": null,
+  "socialMediaContacts": [],
+  "period": null,
+  "logo": null,
+  "image": null
+}

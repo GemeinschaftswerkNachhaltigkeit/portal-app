@@ -1,0 +1,54 @@
+<div class="filters">
+  <form [formGroup]="filterForm" class="filter-form">
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>{{ 'administration.labels.query' | translate }}</mat-label>
+      <input matInput formControlName="query" />
+      <button
+        *ngIf="filterForm.get('query')?.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearQuery()"
+        type="button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <button
+    mat-flat-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Sort menu button"
+  >
+    <div class="sort-btn-content" *ngIf="sort === 'newestFirst'">
+      <mat-icon>sort</mat-icon>
+      <div>{{ 'administration.buttons.newestFirst' | translate }}</div>
+    </div>
+    <div class="sort-btn-content" *ngIf="sort === 'oldestFirst'">
+      <mat-icon>sort</mat-icon>
+      <div>{{ 'administration.buttons.oldestFirst' | translate }}</div>
+    </div>
+    <div class="sort-btn-content" *ngIf="sort === 'aToZ'">
+      <mat-icon>sort</mat-icon>
+      <div>{{ 'administration.buttons.aToZ' | translate }}</div>
+    </div>
+    <div class="sort-btn-content" *ngIf="sort === 'zToA'">
+      <mat-icon>sort</mat-icon>
+      <div>{{ 'administration.buttons.zToA' | translate }}</div>
+    </div>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="setSortHandler('newestFirst')">
+      <span>{{ 'administration.buttons.newestFirst' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="setSortHandler('oldestFirst')">
+      <span>{{ 'administration.buttons.oldestFirst' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="setSortHandler('aToZ')">
+      <span>{{ 'administration.buttons.aToZ' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="setSortHandler('zToA')">
+      <span>{{ 'administration.buttons.zToA' | translate }}</span>
+    </button>
+  </mat-menu>
+</div>

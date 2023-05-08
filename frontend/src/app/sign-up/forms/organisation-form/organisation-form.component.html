@@ -1,0 +1,130 @@
+<form [formGroup]="organisationFormGroup">
+  <!--  <p>{{orgId}}</p>
+  <ng-template matStepLabel>Fill out your name</ng-template>-->
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.organisationName' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.organisationName' | translate"
+      formControlName="name"
+    />
+
+    <app-valid-check
+      [form]="organisationFormGroup"
+      controlName="name"
+    ></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('name')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.organisationType' | translate }}</mat-label>
+    <mat-select formControlName="organisationType">
+      <mat-option *ngFor="let orgType of orgTypeOpts" [value]="orgType">
+        {{ 'organisationType.' + orgType | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('organisationType')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- WYSIWYG Input -->
+  <div
+    class="mat-form-field-appearance-outline wysiwyg-form-field"
+    [class.ng-invalid]="
+      organisationFormGroup.get('description')?.invalid &&
+      (organisationFormGroup.get('description')?.dirty ||
+        organisationFormGroup.get('description')?.touched)
+    "
+    [class.mat-form-field-disabled]="
+      organisationFormGroup.get('description')?.disabled
+    "
+  >
+    <div class="mat-form-field-wrapper tip-tap-wrapper">
+      <app-tiptap-menu-bar
+        [editor]="editor"
+        [disabled]="organisationFormGroup.get('description')?.disabled!"
+        >{{
+          'forms.labels.organisationDescription' | translate
+        }}
+        *</app-tiptap-menu-bar
+      >
+      <tiptap-editor
+        [editor]="editor"
+        formControlName="description"
+      ></tiptap-editor>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentChars()"
+          [total]="1500"
+        ></app-char-count>
+      </div>
+      <div class="mat-form-field-subscript-wrapper">
+        <mat-error>
+          <app-form-field-error
+            [field]="organisationFormGroup.get('description')"
+          ></app-form-field-error>
+        </mat-error>
+      </div>
+    </div>
+  </div>
+
+  <div class="file-uploads" *ngIf="org && org.randomUniqueId && isActiveStep">
+    <app-upload-image
+      [config]="dzService.getImageConfig('logo', org.randomUniqueId)"
+      [aspectRatio]="dzService.getAspectRatio('logo')"
+      [labelTranslationKey]="'forms.labels.organisationLogo'"
+      [disabled]="organisationFormGroup.disabled"
+      [fileId]="org.logo"
+      imageFillType="contain"
+      style="width: 200px"
+      [errorMsg]="'sign-up.upload.error' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.logoWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageTypes.LOGO)"
+    ></app-upload-image>
+
+    <app-upload-image
+      [config]="dzService.getImageConfig('logo', org.randomUniqueId)"
+      [aspectRatio]="dzService.getAspectRatio('banner')"
+      [labelTranslationKey]="'forms.labels.organisationImage'"
+      [disabled]="organisationFormGroup.disabled"
+      [fileId]="org.image"
+      [errorMsg]="'sign-up.upload.error' | translate"
+      [info]="
+        ('sign-up.upload.tooltip' | translate) +
+        ', ' +
+        ('sign-up.upload.titleImageWidthTooltipExt' | translate)
+      "
+      (delete)="deleteHandler(imageTypes.TITLE)"
+    ></app-upload-image>
+  </div>
+  <div>
+    <mat-checkbox matInput formControlName="privacyConsent"
+      ><span
+        [innerHTML]="
+          'forms.labels.privacyConsent'
+            | translate
+              : {
+                  participationdeclaration: participationDeclarationUrl
+                }
+        "
+      ></span
+    ></mat-checkbox>
+    <mat-error>
+      <app-form-field-error
+        [field]="organisationFormGroup.get('privacyConsent')"
+      ></app-form-field-error>
+    </mat-error>
+  </div>
+</form>

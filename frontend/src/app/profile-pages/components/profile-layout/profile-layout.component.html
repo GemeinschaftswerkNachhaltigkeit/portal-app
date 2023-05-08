@@ -1,0 +1,31 @@
+<app-content-wrapper size="xl">
+  <div class="profile" @slideIn>
+    <header class="header">
+      <section class="breadcrumbs">
+        <ng-content select="[breadcrumbs]"></ng-content>
+      </section>
+      <section class="hero">
+        <ng-content select="[hero]"></ng-content>
+      </section>
+    </header>
+    <section class="body">
+      <aside class="nav">
+        <div class="nav-wrapper">
+          <ng-content select="[nav]"></ng-content>
+        </div>
+      </aside>
+      <main class="content">
+        <div class="content-with-contact">
+          <ng-content select="[content1]"></ng-content>
+
+          <aside id="contact" class="contact">
+            <ng-content select="[contact]"></ng-content>
+          </aside>
+        </div>
+        <div class="content-no-contact">
+          <ng-content select="[content2]"></ng-content>
+        </div>
+      </main>
+    </section>
+  </div>
+</app-content-wrapper>

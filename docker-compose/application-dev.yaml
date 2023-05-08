@@ -1,0 +1,106 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wpgwn_app
+    username: wpgwn_user
+    password: wpgwn_user
+  jpa:
+    # In Produktion auf false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      # In Produktion auf validate oder none
+      # create-drop or update
+      ddl-auto: update
+  messages:
+    basename: i18n/message
+  flyway:
+    enabled: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/wpgwn
+  mail:
+    host: localhost
+    port: 1025
+
+management:
+  endpoints:
+    security:
+      username: monitor
+      password: monitor
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8081
+
+springdoc:
+  swagger-ui:
+    enabled: true
+  packages-to-scan:
+    - "com.exxeta.wpgwn.wpgwnapp"
+
+landing-page:
+  email:
+    recipients:
+      - landing-page-contact@exxeta.com
+
+contact-form:
+  recipients:
+    content:
+      - content@exxeta.com
+    idea:
+      - idea@exxeta.com
+    tech:
+      - tech@exxeta.com
+
+email:
+  default-from: no-reply@test.io
+  prefix-for-subject: "Test Intern - "
+logging:
+  level:
+    org.springframework.security: INFO
+    org.apache: INFO
+access-log:
+  enabled: true
+
+
+keycloak:
+  admin:
+    server-url: http://localhost:8080/
+    admin-realm: master
+    admin-user: backend-admin
+    admin-password: top-secret
+    client-id: wpgwn-admin-develop
+    client-secret: !!for-your-eyes-only!?
+    realm: wpgwn
+#    proxy-host: proxy.domain.network
+#    proxy-port: 8080
+    organisation-group-id: "583f14b0-8d09-4292-bd50-b8790f342f02"
+    newly-sign-up-users: "51961466-4309-4095-8c37-b1ba73be0ddf"
+
+file:
+  base-directory: C:/Temp/wpgwn
+
+wpgwn:
+  organisation:
+    url: http://localhost:4200/
+    email-asset-base-path: http://localhost:8081/
+    privacy-content-url: http://localhost:8080/privacy-notice
+    opt-out-url: http://localhost:4200/account/notifications/{uuid}?email={email}
+    invitation-mail-subject: "UND JETZT ALLE - Werde Teil des Gemeinschaftswerk Nachhaltigkeit!"
+    invitation-mail-body: "Hallo, hiermit möchte ich deine Organisation herzlich einladen, Teil des Gemeinschaftswerk Nachhaltigkeit zu werden! Wir sind auch schon dabei. Melde deine Organisation jetzt an unter gemeinschaftswerk-nachhaltigkeit.de. Das Gemeinschaftswerk Nachhaltigkeit ist eine bundesweite offene Plattform, die der Rat für Nachhaltige Entwicklung (RNE) auf Initiative von Bund und Ländern aufbaut, um Engagement für Nachhaltigkeit in Politik, Wirtschaft, Wissenschaft und Zivilgesellschaft sichtbarer zu machen und mehr Menschen und Organisationen dazu zu bewegen, sich für eine nachhaltige Entwicklung einzusetzen. Auf der Webplattform kannst du die Aktivitäten deiner Organisation sichtbar machen, dich mit anderen Organisationen vernetzen, nach Inspiration suchen und ins gemeinsame Handeln kommen. Lass uns gemeinsam die Nachhaltigkeitstransformation voranbringen! https://google.de?param1=true&param2=string-value schau mal vorbei. Danke Anke."
+ui-config:
+  api-url: 'http://localhost:8081/api/v1'
+  directus-base-url: 'http://localhost:8055' #'/cms' auf testsystem
+  context-path: '/'
+  landing-page-url: 'http://localhost:3000'
+  matomoUrl: 'http://localhost'
+  matomoSiteId: 1
+  production: false
+  keycloak:
+    issuer: 'http://localhost:8080/realms/wpgwn'
+    clientId: 'wpgwn-app'
+    debug: true

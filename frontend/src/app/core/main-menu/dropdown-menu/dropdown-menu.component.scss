@@ -1,0 +1,26 @@
+@use 'theme' as *;
+.dropdown-wrapper {
+  &.open {
+    pointer-events: none;
+  }
+}
+.dropdown-menu {
+  background-color: white;
+  padding: 0 $spacing-4;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+
+  .icon {
+    transform: rotate(0);
+    transition: transform 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.open {
+      transform: rotate(-180deg);
+    }
+  }
+}

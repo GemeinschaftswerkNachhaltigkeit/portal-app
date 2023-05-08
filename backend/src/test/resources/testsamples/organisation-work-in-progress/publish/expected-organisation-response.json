@@ -1,0 +1,41 @@
+{
+  "createdBy": "org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_RNE_ADMIN]]",
+  "lastModifiedBy": "org.springframework.security.core.userdetails.User [Username=user, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_RNE_ADMIN]]",
+  "createdAt": "2022-08-01T18:22:27.605+02:00",
+  "modifiedAt": "2022-08-01T18:22:27.605+02:00",
+  "version": 0,
+  "name": "Testorganisation",
+  "description": "Testorganisationsbeschreibung",
+  "sustainableDevelopmentGoals": [
+    1,
+    2,
+    3
+  ],
+  "contact": {
+    "lastName": "Musterperson",
+    "firstName": "Maxime Beatrix",
+    "position": null,
+    "email": "contactAddress@exxeta.com",
+    "phone": "+49 1111 5555",
+    "image": null
+  },
+  "location": {
+    "address": null,
+    "online": true,
+    "url": "http://localhost-test/123",
+    "coordinate": {
+      "type": "Point",
+      "coordinates": [
+        1,
+        2.5
+      ]
+    }
+  },
+  "thematicFocus": [],
+  "logo": null,
+  "privacyConsent": true,
+  "socialMediaContacts": [],
+  "externalId": "1234",
+  "impactArea": "STATE",
+  "organisationType": "EDUCATION"
+}

@@ -1,0 +1,133 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+$mobile-xs: 1rem;
+$mobile-sm: 1.2rem;
+$mobile-md: 1.6rem;
+$mobile-lg: 2rem;
+$mobile-xl: 2.4rem;
+$xs: 1.4rem;
+$sm: 1.8rem;
+$md: 2.4rem;
+$lg: 2.8rem;
+$xl: 3.2rem;
+
+.title {
+  margin: 0;
+  font-weight: 800;
+
+  &.thin:not(.active) {
+    font-weight: normal;
+  }
+
+  --shadow-color: #{$yellow};
+
+  &.blue {
+    --shadow-color: #{$blue-light};
+  }
+  &.none {
+    --shadow-color: transparent;
+    &.hoverable:hover {
+      --shadow-color: #{$yellow};
+
+      &.blue {
+        --shadow-color: #{$blue-light};
+      }
+    }
+  }
+
+  mark {
+    box-decoration-break: clone;
+    background: transparent;
+    box-shadow: 0 -16px 0 inset var(--shadow-color), 0 6px 0 var(--shadow-color);
+    color: $blue-navy;
+    position: relative;
+    z-index: $z1;
+    padding: 0 $spacing-2;
+    margin: 0 -$spacing-2;
+    transition: all 500ms;
+  }
+
+  &.xl {
+    font-size: $mobile-xl;
+    mark {
+      box-shadow: 0 -16px 0 inset var(--shadow-color),
+        0 6px 0 var(--shadow-color);
+    }
+  }
+  &.lg {
+    font-size: $mobile-lg;
+    mark {
+      box-shadow: 0 -14px 0 inset var(--shadow-color),
+        0 4px 0 var(--shadow-color);
+    }
+  }
+  &.md {
+    font-size: $mobile-md;
+    mark {
+      box-shadow: 0 -13px 0 inset var(--shadow-color),
+        0 4px 0 var(--shadow-color);
+    }
+  }
+  &.sm {
+    font-size: $mobile-sm;
+    mark {
+      box-shadow: 0 -10px 0 inset var(--shadow-color),
+        0 2px 0 var(--shadow-color);
+    }
+  }
+  &.xs {
+    font-size: $mobile-xs;
+    mark {
+      box-shadow: 0 -8px 0 inset var(--shadow-color),
+        0 2px 0 var(--shadow-color);
+    }
+  }
+
+  &.uppercase {
+    text-transform: uppercase;
+  }
+
+  &.mobileOff {
+    &.xs {
+      font-size: $xs;
+    }
+    &.sm {
+      font-size: $sm;
+    }
+    &.md {
+      font-size: $md;
+    }
+    &.lg {
+      font-size: $lg;
+    }
+    &.xl {
+      font-size: $xl;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-sm) {
+  .title {
+    font-family: 'AzeretMono', monospace;
+    margin: 0;
+    font-weight: 800;
+
+    &.xl {
+      font-size: $xl;
+    }
+    &.lg {
+      font-size: $lg;
+    }
+    &.md {
+      font-size: $md;
+    }
+    &.sm {
+      font-size: $sm;
+    }
+    &.xs {
+      font-size: $xs;
+    }
+  }
+}

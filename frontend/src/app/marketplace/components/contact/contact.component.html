@@ -1,0 +1,43 @@
+<div class="contact-wrapper">
+  <div class="contact-person">
+    <h4 class="title">{{ 'marketplace.titles.contactPerson' | translate }}</h4>
+    <div class="name">{{ getName(contact) }}</div>
+    <button
+      *ngIf="!showContact"
+      class="show-contact-btn"
+      mat-flat-button
+      (click)="toggleShowContact()"
+      [attr.data-track]="type"
+    >
+      {{ 'profile.buttons.contactNow' | translate }}
+    </button>
+    <ng-container *ngIf="showContact"
+      ><div class="info-row">
+        <h4 class="subtitle">
+          {{ 'profile.titles.email' | translate }}
+        </h4>
+        <p>{{ contact.email }}</p>
+      </div>
+      <div class="info-row" *ngIf="contact?.phone">
+        <h4 class="subtitle">
+          {{ 'profile.titles.phone' | translate }}
+        </h4>
+        <p>{{ contact.phone }}</p>
+      </div>
+    </ng-container>
+  </div>
+  <div class="orga">
+    <div class="info-row no-icon">
+      <h4 class="subtitle">
+        {{ 'marketplace.titles.organisation' | translate }}
+      </h4>
+      <div class="info-wrapper">
+        <a [routerLink]="['/', 'organisations', orga.id]">
+          <div class="value-column link">
+            <div>{{ orga.name }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div
+  class="label font-2"
+  (click)="(clickHandler)"
+  [class]="color + ''"
+  [ngClass]="{
+    clickable: clickable,
+    withIcon: icon,
+    limitedWidth: limitedWidth
+  }"
+>
+  <app-outlined-icon *ngIf="icon">{{ icon }}</app-outlined-icon>
+  <ng-content></ng-content>
+</div>

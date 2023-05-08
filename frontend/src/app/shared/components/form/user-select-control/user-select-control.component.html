@@ -1,0 +1,20 @@
+<div class="select-wrapper">
+  <mat-form-field appearance="outline">
+    <mat-label *ngIf="(loading$ | async) !== true; else loading">{{
+      label || 'controles.labels.userSelect' | translate
+    }}</mat-label>
+    <ng-template #loading
+      ><mat-label
+        >...{{ 'controles.labels.loadingUsers' | translate }}</mat-label
+      ></ng-template
+    >
+    <mat-select [formControl]="formControl" [compareWith]="compareFn">
+      <mat-option *ngFor="let user of users" [value]="user">
+        {{ getFormattedUser(user) }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error [field]="formControl"></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+</div>

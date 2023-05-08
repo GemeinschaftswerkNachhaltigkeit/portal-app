@@ -1,0 +1,84 @@
+<div class="actions-container">
+  <div *ngIf="!showPrevBtn" class="placeholder"></div>
+  <button mat-flat-button matStepperPrevious *ngIf="showPrevBtn" id="prev-step">
+    {{ 'btn.back' | translate }}
+  </button>
+  <!--{{ errorMsg$ | async | json }}-->
+
+  <div
+    class="step-state-message mat-error"
+    *ngIf="
+      (stepState$ | async)?.error === true &&
+      (stepState$ | async)?.formStep === formStepKey
+    "
+  >
+    {{ 'error.unknown' | translate }}
+  </div>
+
+  <div class="next-buttons">
+    <div
+      *ngIf="
+        (stepState$ | async)?.error === false &&
+        (stepState$ | async)?.formStep === formStepKey
+      "
+      class="step-state-message"
+    >
+      <app-outlined-icon>cloud_done</app-outlined-icon>
+      {{ 'labels.saved' | translate }}
+    </div>
+    <div>
+      <button
+        mat-flat-button
+        color="accent"
+        matStepperNext
+        *ngIf="showNextBtn && nextBtnCallback === undefined"
+        id="next-step"
+      >
+        {{ 'btn.next' | translate }}
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        matStepperNext
+        *ngIf="last && !modification"
+        (click)="cancelHandler()"
+        [disabled]="disableNextBtn"
+        id="next-step"
+      >
+        {{ 'btn.saveCurrentState' | translate }}
+      </button>
+    </div>
+    <div>
+      <button
+        mat-flat-button
+        color="accent"
+        matStepperNext
+        *ngIf="showNextBtn && nextBtnCallback !== undefined"
+        (click)="nextBtnCallback()"
+        [disabled]="disableNextBtn"
+        id="next-step"
+      >
+        <div>
+          <span *ngIf="!last">{{ 'btn.next' | translate }}</span>
+          <ng-container *ngIf="last && !modification">
+            <span *ngIf="type === 'organisation'">{{
+              'btn.finishOrgaWizard' | translate
+            }}</span>
+            <span *ngIf="type === 'activity'">{{
+              'btn.finishActivityWizard' | translate
+            }}</span>
+          </ng-container>
+
+          <ng-container *ngIf="last && modification"
+            ><span *ngIf="type === 'organisation'">{{
+              'btn.updateOrga' | translate
+            }}</span
+            ><span *ngIf="type === 'activity'">{{
+              'btn.updateActivity' | translate
+            }}</span></ng-container
+          >
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

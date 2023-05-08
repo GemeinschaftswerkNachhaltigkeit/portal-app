@@ -1,0 +1,92 @@
+<ng-container [formGroup]="form">
+  <!-- name -->
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.danName' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.danName' | translate"
+      formControlName="name"
+    />
+    <app-valid-check [form]="form" controlName="name"></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error [field]="form.get('name')"></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+  <!-- type -->
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.danType' | translate }}</mat-label>
+    <mat-select formControlName="activityType">
+      <mat-option
+        *ngFor="let activityType of activityTypeOpts"
+        [value]="activityType"
+      >
+        {{ 'activityType.' + activityType | translate }}
+      </mat-option>
+    </mat-select>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('activityType')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- WYSIWYG Input -->
+
+  <div
+    class="mat-form-field-appearance-outline wysiwyg-form-field"
+    [class.ng-invalid]="
+      form.get('description')?.invalid &&
+      (form.get('description')?.dirty || form.get('description')?.touched)
+    "
+    [class.mat-form-field-disabled]="form.get('description')?.disabled"
+  >
+    <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
+      <app-tiptap-menu-bar
+        [editor]="editor"
+        [disabled]="form.get('description')?.disabled!"
+        >{{ 'forms.labels.description' | translate }} *</app-tiptap-menu-bar
+      >
+      <tiptap-editor
+        [editor]="editor"
+        formControlName="description"
+      ></tiptap-editor>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentCharsHtml('description')"
+          [total]="1500"
+        ></app-char-count>
+      </div>
+      <div class="mat-form-field-subscript-wrapper">
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('description')"
+          ></app-form-field-error>
+        </mat-error>
+      </div>
+    </div>
+  </div>
+
+  <!-- date -->
+
+  <mat-form-field appearance="outline">
+    <mat-label> {{ 'forms.labels.periodDan' | translate }}</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input
+        matStartDate
+        [placeholder]="'forms.labels.start' | translate"
+        formControlName="start"
+      />
+      <input
+        matEndDate
+        [placeholder]="'forms.labels.end' | translate"
+        formControlName="end"
+      />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</ng-container>

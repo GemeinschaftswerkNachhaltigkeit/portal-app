@@ -1,0 +1,130 @@
+<ng-container *ngIf="activityData$ | async as activity">
+  <mat-stepper
+    [linear]="true"
+    #stepper
+    color="accent"
+    [orientation]="(stepperOrientation | async)!"
+    [disableRipple]="true"
+  >
+    <mat-step
+      [stepControl]="step1Form!"
+      [label]="'labels.wizard.masterData' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-layout>
+        <div class="form-container">
+          <form [formGroup]="step1Form">
+            <app-master-data-form
+              formGroupName="masterData"
+            ></app-master-data-form>
+            <app-images-form
+              [activity]="activity"
+              [orgId]="orgId"
+              (deleteImage)="deleteHandler($event)"
+            ></app-images-form>
+            <app-external-links-form
+              formGroupName="masterData"
+            ></app-external-links-form>
+          </form>
+          <app-actions [showPrevBtn]="false"></app-actions>
+        </div>
+      </app-wizard-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="step2Form!"
+      [label]="'labels.wizard.topics' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-layout>
+        <div class="form-container">
+          <form [formGroup]="step2Form">
+            <app-topics-form formGroupName="topics"></app-topics-form>
+          </form>
+          <app-actions></app-actions>
+        </div>
+      </app-wizard-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="step3Form!"
+      [label]="'labels.wizard.contact' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-layout>
+        <div class="form-container">
+          <form [formGroup]="step3Form">
+            <app-contact-controls
+              [position]="false"
+              formGroupName="contact"
+            ></app-contact-controls>
+          </form>
+          <app-actions
+            [finalStep]="true"
+            [modification]="isModification"
+            [completedButtonText]="'btn.finishDan' | translate"
+            [updateButtonText]="'btn.updateDan' | translate"
+            (completed)="submit()"
+            (canceled)="backToDansHandler()"
+          ></app-actions>
+        </div>
+      </app-wizard-layout>
+    </mat-step>
+
+    <mat-step class="final-step">
+      <app-content-wrapper *ngIf="loading$ | async" size="xl">
+        <app-spinner></app-spinner>
+      </app-content-wrapper>
+      <app-content-wrapper
+        *ngIf="isSubmissionSuccess && (loading$ | async) === false"
+        size="xl"
+      >
+        <div class="final-step-content-wrapper">
+          <app-html-wrapper
+            [html]="(activityContent$ | async)?.completedMessage || ''"
+          ></app-html-wrapper>
+
+          <div class="actions">
+            <a mat-flat-button color="accent" [href]="shareLink()">
+              {{ 'btn.share' | translate }}
+            </a>
+            <a
+              mat-flat-button
+              color="accent"
+              [routerLink]="['/', 'account', 'dan-activities']"
+              [queryParams]="{ update: 'success' }"
+            >
+              <span class="short">{{ 'btn.back' | translate }}</span>
+              <span class="long">{{
+                'btn.backToActivityOverview' | translate
+              }}</span>
+            </a>
+          </div>
+        </div>
+      </app-content-wrapper>
+      <app-content-wrapper
+        *ngIf="!isSubmissionSuccess && (loading$ | async) === false"
+        size="xl"
+      >
+        <div class="final-step-content-wrapper">
+          <p>
+            {{ 'error.unknown' | translate }}
+          </p>
+          <button mat-flat-button color="accent" matStepperPrevious>
+            {{ 'btn.back' | translate }}
+          </button>
+        </div>
+      </app-content-wrapper>
+    </mat-step>
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="edit">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="number">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="done">
+      <mat-icon>check</mat-icon>
+    </ng-template>
+  </mat-stepper>
+</ng-container>

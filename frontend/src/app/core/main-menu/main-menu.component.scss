@@ -1,0 +1,49 @@
+@use 'theme' as *;
+
+.menu {
+  padding: 0;
+  padding-right: $spacing-6;
+  display: flex;
+
+  .user {
+    margin-left: auto;
+    .user-content {
+      display: flex;
+      align-items: center;
+      .icon {
+        display: flex;
+        align-items: center;
+        margin-right: $spacing-2;
+      }
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+    margin-bottom: auto;
+    .user {
+      margin-left: 0;
+    }
+  }
+
+  .dropdown-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host {
+    flex-grow: 1;
+  }
+  .menu {
+    padding: 0 $spacing-16;
+    padding-right: $spacing-6;
+    gap: $spacing-8;
+    .dropdown-wrapper {
+      display: block;
+    }
+    .mobile-dropdown-wrapper {
+      display: none;
+    }
+  }
+}

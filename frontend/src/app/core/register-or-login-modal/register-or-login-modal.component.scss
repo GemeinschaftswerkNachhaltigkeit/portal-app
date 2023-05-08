@@ -1,0 +1,61 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.auth-modal {
+  .header {
+    background-color: $blue-light;
+    margin: 0 -2.4rem -2.4rem -2.4rem;
+    padding: 2.4rem;
+    margin-bottom: 2.4rem;
+    display: grid;
+    gap: $spacing-2;
+    position: relative;
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .title {
+      font-size: 2rem;
+      margin: 0;
+    }
+  }
+  .content {
+    width: 100%;
+    display: grid;
+    gap: $spacing-2;
+    .login-btn {
+      width: 100%;
+    }
+    .register-btn {
+      background-color: $yellow;
+      color: $magenta;
+      width: 100%;
+    }
+    .spacer {
+      height: 4rem;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      .text {
+        padding: $spacing-2;
+        background-color: white;
+        z-index: 2;
+        text-transform: uppercase;
+        position: absolute;
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: $blue-navy;
+        z-index: 0;
+      }
+    }
+  }
+}

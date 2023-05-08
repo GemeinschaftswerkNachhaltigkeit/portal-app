@@ -1,0 +1,15 @@
+@use 'theme' as *;
+@use 'palette' as *;
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: $spacing-14;
+  width: 60vw;
+}
+
+.image {
+  display: flex;
+  gap: $spacing-4;
+}

@@ -1,0 +1,28 @@
+<div class="upload-wrapper" *ngIf="config">
+  <label>{{ 'marketplace.labels.image' | translate }}</label>
+  <div class="dropzone-wrapper">
+    <div class="uploaded-image">
+      <img *ngIf="fileId" [src]="imgService.url(fileId)" alt="upload-image" />
+    </div>
+    <dropzone
+      [config]="config"
+      [message]="'marketplace.labels.imageUpload' | translate"
+      (init)="onDropZoneInit($event)"
+      (success)="onUploadSuccess($event)"
+      (error)="onUploadError()"
+      [class]="'type'"
+    >
+    </dropzone>
+  </div>
+
+  <div class="actions">
+    <span class="help">{{ 'marketplace.labels.imageHelp' | translate }}</span>
+    <button *ngIf="fileId" mat-icon-button (click)="deleteHandler()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+
+<span *ngIf="error" class="upload-error mat-error">
+  {{ 'marketplace.labels.imageError' | translate }}</span
+>

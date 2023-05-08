@@ -1,0 +1,21 @@
+<div class="category-select">
+  <ng-container *ngFor="let option of options">
+    <button
+      type="button"
+      mat-stroked-button
+      color="warn"
+      class="option"
+      [ngClass]="{ selected: selected(option) }"
+      [disabled]="disabled"
+      (click)="setOption(option)"
+    >
+      <span class="text">{{ option.label | translate }}</span>
+      <mat-icon *ngIf="selected(option)">check</mat-icon>
+    </button>
+  </ng-container>
+</div>
+<div class="error" *ngIf="isTouched && !selectedOption">
+  <mat-error>
+    <span>{{ 'validationErrors.required' | translate }}</span>
+  </mat-error>
+</div>

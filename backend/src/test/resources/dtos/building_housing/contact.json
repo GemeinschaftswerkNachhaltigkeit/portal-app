@@ -1,0 +1,8 @@
+{
+  "name": "Max Mustermann",
+  "organisation": "organisation",
+  "email": "test@test.com",
+  "position": "position",
+  "privacyConsent": true,
+  "station": "STATION_3"
+}

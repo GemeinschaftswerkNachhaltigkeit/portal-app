@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  height: 100%;
+}
+
+::ng-deep {
+}
+
+.final-step-content {
+  padding: 0 0;
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .final-step-content {
+    padding: 0 2rem;
+  }
+}

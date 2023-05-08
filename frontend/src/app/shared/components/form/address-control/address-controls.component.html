@@ -1,0 +1,119 @@
+<ng-container [formGroup]="form">
+  <div class="address">
+    <mat-form-field *ngIf="withNameField" appearance="outline">
+      <mat-label>{{ nameFieldLabel | translate }}</mat-label>
+      <input
+        matInput
+        [placeholder]="nameFieldLabel | translate"
+        formControlName="name"
+      />
+      <app-valid-check [form]="form" controlName="name"></app-valid-check>
+      <mat-error>
+        <app-form-field-error [field]="form.get('name')"></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+    <div class="address-row-1">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.street' | translate"
+          formControlName="street"
+        />
+        <app-valid-check [form]="form" controlName="street"></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('street')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.streetNo' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.streetNo' | translate"
+          formControlName="streetNo"
+        />
+
+        <app-valid-check [form]="form" controlName="streetNo"></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('streetNo')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.supplement' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.supplement' | translate"
+          formControlName="supplement"
+        />
+        <app-valid-check
+          [form]="form"
+          controlName="supplement"
+        ></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('supplement')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="address-row-2">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.zipCode' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.zipCode' | translate"
+          formControlName="zipCode"
+        />
+        <app-valid-check [form]="form" controlName="zipCode"></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('zipCode')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.city' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.city' | translate"
+          formControlName="city"
+        />
+
+        <app-valid-check [form]="form" controlName="city"></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('city')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.country' | translate }}</mat-label>
+        <input
+          matInput
+          readonly
+          [placeholder]="'forms.labels.country' | translate"
+          formControlName="country"
+        />
+
+        <app-valid-check [form]="form" controlName="country"></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('country')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</ng-container>

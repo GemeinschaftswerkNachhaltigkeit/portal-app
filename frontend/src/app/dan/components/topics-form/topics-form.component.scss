@@ -1,0 +1,38 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.fields {
+  display: grid;
+  gap: $spacing-8;
+}
+
+.field {
+  position: relative;
+}
+
+.image-upload {
+  position: relative;
+  top: -18px;
+}
+
+.char-count {
+  position: absolute;
+  bottom: -0rem;
+  right: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.radio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+  margin-top: 10rem;
+}
+
+.error-wrapper {
+  margin: $spacing-4 0;
+}

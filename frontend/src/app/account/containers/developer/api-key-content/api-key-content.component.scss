@@ -1,0 +1,84 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.api-key {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.noKey {
+    justify-content: flex-start;
+  }
+
+  .dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 2px;
+    .dot {
+      width: 0.4rem;
+      height: 0.4rem;
+      background-color: $blue-navy;
+      border-radius: 50%;
+    }
+  }
+
+  .key {
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.2rem;
+    cursor: pointer;
+
+    .key-text {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: $spacing-2;
+
+      .key-value {
+        white-space: nowrap;
+      }
+
+      .copied {
+        font-size: 1.2rem;
+        background-color: #f3f3f3;
+        padding: $spacing-1;
+      }
+    }
+  }
+
+  .placeholder {
+    opacity: 0.5;
+    height: 4rem;
+    line-height: 4rem;
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .api-key {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .dots {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 468px;
+      justify-content: space-between;
+      gap: 0;
+      .dot {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    .key {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+
+    .placeholder {
+      font-size: 2rem;
+    }
+  }
+}

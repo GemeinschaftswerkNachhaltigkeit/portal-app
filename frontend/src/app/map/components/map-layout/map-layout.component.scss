@@ -1,0 +1,147 @@
+@use '@angular/material' as mat;
+@use 'palette' as *;
+@use 'theme' as *;
+
+.map-layout {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .toggle {
+    display: block;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: $spacing-8;
+    z-index: $z11;
+    background-color: $magenta;
+    opacity: 0.8;
+    border-radius: 50%;
+  }
+  .filters {
+    background-color: $blue-light;
+    position: static;
+    z-index: $z1;
+  }
+
+  .result-list {
+    flex-grow: 1;
+    overflow: auto;
+    height: fit-content;
+    padding: $spacing-8 0;
+  }
+
+  .map-wrapper,
+  .details-wrapper {
+    background-color: gray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: $z10;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: transform 300ms;
+  }
+
+  .details-wrapper {
+    z-index: $z12;
+    background: white;
+    overflow: auto;
+  }
+
+  .outlet {
+    display: none;
+  }
+
+  .content {
+    flex-grow: 1;
+  }
+
+  &.map-open {
+    .map-wrapper {
+      transform: translateX(0%);
+    }
+  }
+
+  &.details-open {
+    .details-wrapper {
+      transform: translateX(0%);
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .map-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr;
+    height: 100%;
+    position: relative;
+
+    .details-wrapper {
+      display: none;
+    }
+
+    .toggle {
+      display: none;
+    }
+
+    .filters {
+      position: sticky;
+      top: $top-nav-height;
+    }
+
+    .details {
+      position: fixed;
+      z-index: 9000;
+      right: 0;
+      left: min(50%, 800px);
+      top: 0;
+      bottom: 0;
+      padding: 0;
+      max-width: 500px;
+      pointer-events: none;
+
+      &.clickable {
+        pointer-events: all;
+      }
+    }
+
+    .outlet {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .content {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      position: relative;
+      z-index: $z0;
+      .result-list {
+        flex-grow: 1;
+        background-color: transparent;
+        overflow: auto;
+
+        z-index: $z1;
+        max-width: 800px;
+      }
+      .map-wrapper {
+        background-color: gray;
+        position: sticky;
+        top: calc(#{$top-nav-height} + 100px);
+        height: calc(100vh - #{$top-nav-height} - 100px);
+        width: 200%;
+        transform: translateX(-50%);
+        transition: all 300ms;
+        z-index: $z0;
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+/**
+* WYSIWYG (Tiptap Editor)
+**/
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+.wysiwyg-editor {
+  border: 1px solid mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+  border-radius: 0px;
+  border-top: none;
+  display: block;
+  padding: 16px 12px !important;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.wysiwyg-editor.ProseMirror-focused {
+  border-width: 2px;
+  // border: 2px solid mat.get-color-from-palette($wpgwn-app-primary, 500);
+}
+
+.ng-invalid.ng-touched {
+  & > .wysiwyg-editor {
+    border-width: 2px;
+    border-color: mat.get-color-from-palette($wpgwn-app-warn, 500);
+  }
+}
+
+.mat-form-field-disabled {
+  .wysiwyg-editor,
+  .wysiwig-toolbar {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    color: rgba(0, 0, 0, 0.38);
+  }
+}
+
+.wysiwyg-editor {
+  min-height: 200px;
+  ul {
+    list-style-type: none;
+    li ::before {
+      content: '\2022';
+      padding-right: 1.3em;
+      margin-left: -2em;
+    }
+  }
+}
+
+/* Placeholder (at the top) */
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}

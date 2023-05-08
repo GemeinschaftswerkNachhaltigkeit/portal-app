@@ -1,0 +1,217 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+// Must be px fixed as the design is created for a specific width
+$card-width: fit-content;
+$card-height: 300px;
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+.card-wrapper {
+  width: 100%;
+  background: white;
+  transition: transform 200ms;
+  &:hover {
+    cursor: pointer;
+  }
+  .featured {
+    width: 100%;
+    background-color: $orange;
+    color: white;
+    display: flex;
+    grid-template-columns: min-content max-content;
+    align-items: flex-start;
+    gap: $spacing-3;
+    padding: $spacing-6 $spacing-4;
+    font-size: 1.8rem;
+    .new {
+      margin-top: 3px;
+      width: fit-content;
+      height: 1.6rem;
+      padding: 0.2rem 0.6rem;
+      background-color: $yellow;
+      color: $blue-navy;
+      border-radius: 0.8rem;
+      text-transform: uppercase;
+      font-size: 1rem;
+      line-height: 1.2rem;
+      font-weight: 600;
+    }
+  }
+  .card {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 20rem;
+    position: relative;
+    gap: $spacing-3;
+    &.draft {
+      opacity: 0.6;
+    }
+    &.notClickable,
+    &.draft {
+      cursor: default;
+    }
+    overflow: hidden;
+
+    .clickable-area {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: $z2;
+
+      &.expired {
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    .top-right {
+      position: absolute;
+      right: $spacing-4;
+      top: $spacing-4;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10);
+      z-index: $z3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .category {
+        height: 4rem;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .image-column {
+      margin: $spacing-4;
+      width: $spacing-16;
+      height: $spacing-16;
+      position: relative;
+
+      .featured-icon {
+        position: absolute;
+        left: $spacing-2;
+        top: $spacing-2;
+        z-index: $z4;
+        background-color: $orange;
+        color: white;
+        width: $spacing-8;
+        height: $spacing-8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: $z1;
+      padding: $spacing-4;
+
+      .top {
+        position: relative;
+        display: grid;
+        grid-auto-rows: min-content;
+
+        .title {
+          color: $text-color;
+          margin: 0;
+          font-weight: bold;
+          font-size: 1.4rem;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          word-break: break-word;
+          hyphens: auto;
+        }
+
+        .infos {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: $spacing-4;
+
+          .description {
+            .description-text {
+              font-size: 1.2rem;
+              overflow-wrap: break-word;
+              word-wrap: break-word;
+              word-break: break-word;
+              hyphens: auto;
+            }
+          }
+
+          .details {
+            .info-title {
+              color: $text-color;
+              font-weight: bold;
+              font-size: 1.2rem;
+              margin: 0;
+              margin-bottom: $spacing-2;
+            }
+            .details-entries {
+              display: grid;
+              gap: $spacing-4;
+              height: fit-content;
+            }
+          }
+        }
+      }
+
+      .thematicFocuses {
+        column-span: 2;
+        font-size: 1rem;
+        padding-top: $spacing-2;
+        margin-top: $spacing-2;
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-xs) {
+  .card-wrapper {
+    &:hover {
+      transform: translateX(2rem);
+    }
+    .card {
+      grid-template-columns: 22rem 1fr;
+
+      .top-right {
+        gap: $spacing-4;
+        flex-direction: row;
+
+        .category {
+          display: flex;
+          align-items: center;
+        }
+      }
+      .image-column {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+      }
+
+      .content-column {
+        margin-top: 5rem;
+        .top {
+          .infos {
+            grid-template-columns: 2fr minmax(24rem, 1fr);
+            gap: $spacing-6;
+          }
+        }
+      }
+    }
+  }
+}

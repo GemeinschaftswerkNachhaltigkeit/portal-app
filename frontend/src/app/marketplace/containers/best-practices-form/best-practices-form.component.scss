@@ -1,0 +1,41 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.closeX {
+  position: absolute;
+  top: $spacing-8;
+  right: $spacing-8;
+  transform: scale(2);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-8;
+}
+
+.field {
+  position: relative;
+}
+
+.image-upload {
+  position: relative;
+  top: -18px;
+}
+
+.char-count {
+  position: absolute;
+  bottom: -0rem;
+  right: 1rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.radio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+}

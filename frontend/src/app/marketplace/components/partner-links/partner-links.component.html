@@ -1,0 +1,60 @@
+<div #slidercontainer id="partner-links">
+  <div
+    id="partner-links-slider"
+    class="slider-wrapper"
+    *ngIf="filtered?.length"
+  >
+    <div class="title">
+      <app-heading size="sm" color="none" [uppercase]="true">{{
+        'marketplace.titles.slider' | translate
+      }}</app-heading>
+    </div>
+
+    <div *ngIf="isSlider(); else noSlider">
+      <ng-container #outlet [ngTemplateOutlet]="content"> </ng-container>
+      <ng-template #content>
+        <swiper
+          #swiper
+          [slidesPerView]="slides"
+          [slidesPerGroup]="slides"
+          [centeredSlides]="true"
+          [spaceBetween]="12"
+          [loop]="true"
+          [loopFillGroupWithBlank]="false"
+        >
+          <ng-container *ngFor="let link of filtered">
+            <ng-template swiperSlide
+              ><a class="slide-wrapper" target="_blank" [href]="link.url">
+                <div class="image-wrapper">
+                  <img [src]="link.logo" alt="" />
+                </div>
+                <h5>{{ link.title }}</h5>
+              </a></ng-template
+            >
+          </ng-container>
+        </swiper>
+      </ng-template>
+    </div>
+
+    <ng-template #noSlider>
+      <div class="no-slider">
+        <ng-container *ngFor="let link of filtered">
+          <a class="slide-wrapper" target="_blank" [href]="link.url">
+            <div class="image-wrapper">
+              <img [src]="link.logo" alt="" />
+            </div>
+            <h5>{{ link.title }}</h5>
+          </a>
+        </ng-container>
+      </div>
+    </ng-template>
+    <div class="buttons" *ngIf="isSlider()">
+      <button class="button prev" type="button" (click)="slidePrev()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button class="button next" type="button" (click)="slideNext()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

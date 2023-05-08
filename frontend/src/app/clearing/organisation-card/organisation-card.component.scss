@@ -1,0 +1,60 @@
+@use 'theme' as *;
+@use 'palette' as *;
+@use '@angular/material' as mat;
+
+$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+
+:host {
+  height: 100%;
+}
+
+.card {
+  background-color: #fff;
+  padding: $spacing-4;
+  .header {
+    display: flex;
+    gap: 0.8em;
+    justify-content: space-between;
+    align-items: center;
+    height: 4em;
+    .title {
+      color: $text-color;
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+    > * {
+      min-width: 200px;
+    }
+  }
+
+  .body {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    margin-bottom: 1.5em;
+    p {
+      flex: 0 1 100%;
+    }
+    .info {
+      flex: 0 0 300px;
+    }
+  }
+
+  .footer {
+    display: flex;
+    gap: 0.8em;
+    justify-content: flex-end;
+    .details-btn {
+      margin-right: auto;
+    }
+  }
+}
+.card.is-active {
+  transform: translate(2rem);
+}
+
+.feedbackHistoryToggle {
+  margin-left: -1.6rem;
+}

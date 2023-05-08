@@ -1,0 +1,149 @@
+<app-content-wrapper size="xl"
+  ><app-page-with-header-layout
+    [title]="'marketplace.titles.newOffer' | translate"
+  >
+    <ng-container headerContent>
+      <p>{{ 'marketplace.texts.newOffer' | translate }}</p>
+      <p>{{ 'marketplace.texts.requiredFields' | translate }}</p>
+    </ng-container>
+    <button (click)="handleCancelation()" mat-icon-button class="closeX">
+      <mat-icon>clear</mat-icon>
+    </button>
+    <div><app-spinner *ngIf="loading$ | async"></app-spinner></div>
+
+    <ng-container *ngIf="(loading$ | async) !== true">
+      <ng-container *ngIf="orgId && uuid">
+        <form
+          [formGroup]="formGroup"
+          (ngSubmit)="handleSubmit()"
+          #form="ngForm"
+        >
+          <app-form-section-list>
+            <app-form-section
+              [title]="'marketplace.titles.step1Offer' | translate"
+              [description]="'marketplace.texts.step1Offer' | translate"
+            >
+              <app-category-control
+                formControlName="offerCategory"
+                [options]="getCategories()"
+              ></app-category-control>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step2Offer' | translate"
+              [description]="'marketplace.texts.step2Offer' | translate"
+              colStyle="twoCols"
+            >
+              <app-thematic-focus-control
+                controlName="thematicFocus"
+                [maxSelectable]="2"
+                [label]="'marketplace.labels.thematicFocus' | translate"
+              ></app-thematic-focus-control>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step3Offer' | translate"
+              [description]="'marketplace.texts.step3Offer' | translate"
+              colStyle="twoCols"
+            >
+              <app-content-controls
+                formGroupName="content"
+                [urlLabel]="'marketplace.labels.url' | translate"
+                [descriptionPlaceholder]="
+                  'marketplace.placeholders.description' | translate
+                "
+              ></app-content-controls>
+              <div class="image-upload">
+                <app-upload-image
+                  [config]="getImageUploadConfig(orgId, uuid)"
+                  [aspectRatio]="dzService.getAspectRatio('marketplace')"
+                  [labelTranslationKey]="'forms.labels.optionalImage'"
+                  [fileId]="image"
+                  [token]="token"
+                  [errorMsg]="'marketplace.labels.imageError' | translate"
+                  [info]="'marketplace.labels.imageHelp' | translate"
+                  (delete)="handleDelteImage()"
+                ></app-upload-image>
+              </div>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step4Offer' | translate"
+              [description]="'marketplace.texts.step4Offer' | translate"
+              colStyle="twoCols"
+            >
+              <div class="fields">
+                <div class="field">
+                  <mat-radio-group
+                    aria-label="Select an option"
+                    formControlName="location"
+                  >
+                    <div class="radio-options">
+                      <mat-radio-button value="NONE">
+                        {{
+                          'forms.labels.noLocation' | translate
+                        }}</mat-radio-button
+                      >
+                      <mat-radio-button value="ONLINE">
+                        {{
+                          'forms.labels.online' | translate
+                        }}</mat-radio-button
+                      >
+                      <mat-radio-button value="ADDRESS">
+                        {{
+                          'forms.labels.address' | translate
+                        }}</mat-radio-button
+                      >
+                    </div>
+                  </mat-radio-group>
+                </div>
+                <div
+                  class="field"
+                  *ngIf="formGroup.get('location')?.value === 'ADDRESS'"
+                >
+                  <app-address-controls
+                    formGroupName="address"
+                  ></app-address-controls>
+                </div>
+              </div>
+            </app-form-section>
+
+            <app-form-section
+              [title]="'marketplace.titles.step5Offer' | translate"
+              [description]="'marketplace.texts.step5Offer' | translate"
+              colStyle="twoCols"
+            >
+              <app-contact-controls
+                formGroupName="contact"
+              ></app-contact-controls>
+            </app-form-section>
+
+            <app-form-section
+              *ngIf="accessToFeatured()"
+              [title]="'marketplace.titles.step6Offer' | translate"
+              [description]="'marketplace.texts.step6Offer' | translate"
+              colStyle="twoCols"
+            >
+              <app-visibility-controls
+                formGroupName="visibility"
+              ></app-visibility-controls>
+            </app-form-section>
+          </app-form-section-list>
+          <div class="actions">
+            <button type="button" mat-button (click)="handleCancelation()">
+              {{ 'btn.cancel' | translate }}
+            </button>
+            <button type="submit" mat-flat-button color="accent">
+              <span *ngIf="!isModification">{{
+                'marketplace.buttons.submitOffer' | translate
+              }}</span>
+              <span *ngIf="isModification">{{
+                'marketplace.buttons.updateOffer' | translate
+              }}</span>
+            </button>
+          </div>
+        </form>
+      </ng-container>
+    </ng-container>
+  </app-page-with-header-layout>
+</app-content-wrapper>

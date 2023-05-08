@@ -1,0 +1,17 @@
+<header class="header mat-elevation-z8" [class.mobile]="mobile" role="banner">
+  <app-content-wrapper [onlyX]="true">
+    <div class="header-content">
+      <div class="left-content">
+        <app-logo></app-logo>
+        <ng-container *ngIf="!mobile">
+          <app-main-menu></app-main-menu>
+        </ng-container>
+      </div>
+      <div class="actions">
+        <ng-container *ngIf="!mobile">
+          <app-nav-actions></app-nav-actions>
+        </ng-container>
+      </div>
+    </div>
+  </app-content-wrapper>
+</header>
