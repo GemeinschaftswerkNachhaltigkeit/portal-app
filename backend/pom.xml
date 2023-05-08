@@ -498,7 +498,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run build -- --base-href='/app/'</arguments>
                         </configuration>
                     </execution>
                 </executions>
