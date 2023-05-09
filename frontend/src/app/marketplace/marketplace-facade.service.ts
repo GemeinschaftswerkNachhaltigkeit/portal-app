@@ -46,9 +46,9 @@ export class MarketplaceFacadeService {
 
   handlePartnerLinkContent(): void {
     this.translate.onLangChange.subscribe(() => {
-      this.loadPartnerLinks(this.translate.currentLang);
+      this.loadPartnerLinks();
     });
-    this.loadPartnerLinks(this.translate.currentLang);
+    this.loadPartnerLinks();
   }
 
   get marketplaceItems$(): Observable<MarketplaceItemDto[] | null> {
@@ -171,9 +171,9 @@ export class MarketplaceFacadeService {
     });
   }
 
-  loadPartnerLinks(currentLang: string): void {
+  loadPartnerLinks(): void {
     this.partnerLinksContentSevice
-      .getPartnerLinks(currentLang)
+      .getPartnerLinks()
       .pipe(take(1))
       .subscribe((values) => {
         this.partnerLinksState.setPartnerLinks(values);

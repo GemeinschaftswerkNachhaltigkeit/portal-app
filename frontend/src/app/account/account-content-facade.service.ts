@@ -30,7 +30,7 @@ export class AccountContentFacadeService implements OnDestroy {
 
   private loadDanHelpModalContent(): void {
     this.api
-      .getDanHelpModalContent(this.translate.currentLang)
+      .getDanHelpModalContent()
       .pipe(take(1))
       .subscribe({
         next: (content) => {
