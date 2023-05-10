@@ -31,6 +31,9 @@ import {
 } from '@angular/material/core';
 import { DetailsLinkComponent } from './map/components/map/details-link/details-link.component';
 import { PaginatorWrapperComponent } from './map/components/map/paginator-wrapper/paginator-wrapper.component';
+import { EmbeddedMapContainerComponent } from './embedded-map/containers/embedded-map-container/embedded-map-container.component';
+import { EmbeddedMapDetailsCardComponent } from './embedded-map/containers/embedded-map-details-card/embedded-map-details-card.component';
+
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
     dateInput: 'D'
@@ -51,7 +54,9 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MapComponent,
     DetailsCardComponent,
     DetailsLinkComponent,
-    PaginatorWrapperComponent
+    PaginatorWrapperComponent,
+    EmbeddedMapContainerComponent,
+    EmbeddedMapDetailsCardComponent
   ],
   imports: [
     SharedModule,
