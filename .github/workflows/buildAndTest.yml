@@ -1,6 +1,10 @@
 name: Maven Build and Test
 
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Manual workflow dispatch"
   push:
     branches: [ "develop" ]
   pull_request:
