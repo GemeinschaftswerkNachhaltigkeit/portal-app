@@ -117,6 +117,7 @@
     }
   },
   "labels": {
+    "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",
     "tags": "Themenfelder",

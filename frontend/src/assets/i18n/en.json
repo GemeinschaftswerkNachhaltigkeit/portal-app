@@ -116,6 +116,7 @@
     }
   },
   "labels": {
+    "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",
     "tags": "Subject areas",

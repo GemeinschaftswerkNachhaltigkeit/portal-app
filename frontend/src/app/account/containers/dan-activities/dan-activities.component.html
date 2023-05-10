@@ -20,6 +20,7 @@
             <ng-container *ngIf="paging$ | async as paging">
               <div class="buttons">
                 <button
+                  class="create-button"
                   headerAction
                   mat-flat-button
                   color="accent"
@@ -28,7 +29,12 @@
                 >
                   {{ 'account.buttons.addDanActivity' | translate }}
                 </button>
-                <button headerAction mat-button (click)="openHelp()">
+                <button
+                  headerAction
+                  mat-button
+                  (click)="openHelp()"
+                  class="help-button"
+                >
                   <div class="help-button-content">
                     <div class="icon">
                       <app-outlined-icon>help</app-outlined-icon>
