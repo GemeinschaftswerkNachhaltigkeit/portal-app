@@ -137,14 +137,18 @@ export class MapApiService {
       const startDateValue = DateTime.fromISO(searchFilter.startDate)
         .setZone('utc')
         .toISO({ includeOffset: true });
-      params = params.append('startDate', startDateValue);
+      if (startDateValue) {
+        params = params.append('startDate', startDateValue);
+      }
     }
 
     if (searchFilter.endDate) {
       const endDateValue = DateTime.fromISO(searchFilter.endDate)
         .setZone('utc')
         .toISO({ includeOffset: true });
-      params = params.append('endDate', endDateValue);
+      if (endDateValue) {
+        params = params.append('endDate', endDateValue);
+      }
     }
 
     if (searchFilter.initiator) {
