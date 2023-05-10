@@ -1,6 +1,5 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
-import { FieldFilter } from '@directus/sdk';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { DirectusService } from 'src/app/shared/services/directus.service';
