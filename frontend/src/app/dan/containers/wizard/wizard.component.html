@@ -8,10 +8,13 @@
   >
     <mat-step
       [stepControl]="step1Form!"
-      [label]="'labels.wizard.masterData' | translate"
+      [label]="'labels.wizard.aboutDan' | translate"
       [editable]="isEditable"
     >
       <app-wizard-layout>
+        <p class="step-description">
+          {{ 'dan.texts.wizard.about' | translate }}
+        </p>
         <div class="form-container">
           <form [formGroup]="step1Form">
             <app-master-data-form
@@ -37,6 +40,9 @@
       [editable]="isEditable"
     >
       <app-wizard-layout>
+        <p class="step-description">
+          {{ 'dan.texts.wizard.topics' | translate }}
+        </p>
         <div class="form-container">
           <form [formGroup]="step2Form">
             <app-topics-form formGroupName="topics"></app-topics-form>
