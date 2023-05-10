@@ -1,6 +1,5 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import { Directus, FieldFilter } from '@directus/sdk';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import qs from 'query-string';
@@ -91,7 +90,7 @@ export class DirectusService {
     }
   }
 
-  private getLangIso(): FieldFilter<string> {
+  private getLangIso(): string {
     const currentLang =
       this.translate.currentLang || this.translate.defaultLang;
     return currentLang === 'de' ? 'de-DE' : 'en-US';
