@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { DynamicFilters } from '../../map/models/search-filter';
+import { DynamicFilters } from '../../map/map/models/search-filter';
 
 @Injectable({
   providedIn: 'root'

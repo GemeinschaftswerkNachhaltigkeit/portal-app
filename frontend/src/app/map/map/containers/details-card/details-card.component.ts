@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { MapFacadeService } from '../../map-facade.service';
+import { MapFacadeService } from '../../../map-facade.service';
 import SearchResult from '../../models/search-result';
-import { CardService } from '../../services/card.service';
+import { CardService } from '../../../services/card.service';
 import {
   trigger,
   state,
@@ -11,7 +11,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { MarkerService } from '../../services/marker.service';
+import { MarkerService } from '../../../services/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 @Component({

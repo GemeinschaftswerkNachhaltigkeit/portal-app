@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import SearchFilter from 'src/app/map/models/search-filter';
+import SearchFilter from 'src/app/map/map/models/search-filter';
 import Organisation from 'src/app/shared/models/organisation';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import PagedResponse from 'src/app/shared/models/paged-response';

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import SearchResult from '../../models/search-result';
-import { CardService } from '../../services/card.service';
+import SearchResult from '../../../models/search-result';
+import { CardService } from '../../../../services/card.service';
 
 @Component({
   selector: 'app-details-link',

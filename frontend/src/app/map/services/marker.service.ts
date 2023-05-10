@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-import SearchResult from '../models/search-result';
+import SearchResult from '../map/models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import { MapFacadeService } from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import MarkerDto from '../models/markerDto';
+import MarkerDto from '../map/models/markerDto';
 
 const getIcon = (type: string, isActive = false, isHovered = false) => {
   const defaultIcon = L.divIcon({

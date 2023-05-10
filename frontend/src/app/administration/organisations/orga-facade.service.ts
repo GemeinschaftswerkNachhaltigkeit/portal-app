@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription, take } from 'rxjs';
 import { ConfirmationService } from 'src/app/core/services/confirmation.service';
-import { DynamicFilters } from 'src/app/map/models/search-filter';
+import { DynamicFilters } from 'src/app/map/map/models/search-filter';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';

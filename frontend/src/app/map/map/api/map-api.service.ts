@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { environment } from 'src/environments/environment';
-import PagedResponse from '../../shared/models/paged-response';
+import PagedResponse from '../../../shared/models/paged-response';
 import SearchFilter from '../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
