@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
-import { MapContainerComponent } from './map/containers/map-container/map-container.component';
-import { SharedModule } from '../shared/shared.module';
-import { MapRoutingModule } from './map-routing.module';
-import { MapLayoutComponent } from './map/components/map/map-layout/map-layout.component';
-import { SearchFormComponent } from './map/components/search-form/search-form.component';
+import { MapContainerComponent } from './containers/map-container/map-container.component';
+import { SharedModule } from '../../shared/shared.module';
+import { MapRoutingModule } from '../map-routing.module';
+import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
 import { MatIconModule } from '@angular/material/icon';
-import { MapComponent } from './map/components/map/map.component';
+import { MapComponent } from './components/map/map.component';
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
-import { DetailsCardComponent } from './map/containers/details-card/details-card.component';
+import { DetailsCardComponent } from './containers/details-card/details-card.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 
@@ -29,10 +29,10 @@ import {
   MatDateFormats,
   MAT_DATE_LOCALE
 } from '@angular/material/core';
-import { DetailsLinkComponent } from './map/components/map/details-link/details-link.component';
-import { PaginatorWrapperComponent } from './map/components/map/paginator-wrapper/paginator-wrapper.component';
-import { EmbeddedMapContainerComponent } from './embedded-map/containers/embedded-map-container/embedded-map-container.component';
-import { EmbeddedMapDetailsCardComponent } from './embedded-map/containers/embedded-map-details-card/embedded-map-details-card.component';
+import { DetailsLinkComponent } from './components/map/details-link/details-link.component';
+import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
+import { EmbeddedMapContainerComponent } from '../embedded-map/containers/embedded-map-container/embedded-map-container.component';
+import { EmbeddedMapDetailsCardComponent } from '../embedded-map/containers/embedded-map-details-card/embedded-map-details-card.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
