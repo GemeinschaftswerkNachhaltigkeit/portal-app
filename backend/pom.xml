@@ -51,7 +51,7 @@
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- END: Update vulnerable dependencies -->
 
-        <node.version>v18.10.0</node.version>
+        <node.version>v18.11.0</node.version>
         <npm.version>8.19.2</npm.version>
     </properties>
 
@@ -481,7 +481,7 @@
                     </execution>
 
                     <execution>
-                        <id>npm install</id>
+                        <id>npm ci</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -498,7 +498,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run build -- --base-href='/app/'</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -519,21 +519,12 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>${basedir}/src/main/resources/public</outputDirectory>
+                            <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>../frontend/dist</directory>
                                     <includes>
-                                        <include>static/</include>
-                                        <include>assets/</include>
-                                        <include>index.html</include>
-                                        <include>favicon.ico</include>
-                                        <include>*.js</include>
-                                        <include>*.txt</include>
-                                        <include>*.ttf</include>
-                                        <include>*.woff2</include>
-                                        <include>*.png</include>
-                                        <include>*.css</include>
+                                        <include>**/*.*</include>
                                     </includes>
                                 </resource>
                             </resources>

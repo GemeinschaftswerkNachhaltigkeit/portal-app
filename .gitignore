@@ -4,13 +4,4 @@
 
 # Dependency directories
 node_modules/
-backend/src/main/resources/public/assets
-backend/src/main/resources/public/index.html
-backend/src/main/resources/public/favicon.ico
-backend/src/main/resources/public/*.txt
-backend/src/main/resources/public/*.js
-backend/src/main/resources/public/*.ttf
-backend/src/main/resources/public/*.woff2
-backend/src/main/resources/public/*.png
-backend/src/main/resources/public/*.css
 frontend/node
