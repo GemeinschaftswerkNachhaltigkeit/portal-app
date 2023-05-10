@@ -7,7 +7,7 @@ import {
   query
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { OfferWipDto } from 'src/app/marketplace/models/offer-wip-dto';

@@ -33,15 +33,9 @@
 
 <ng-container *ngIf="mobile">
   <div class="hamburger-wrapper">
-    <button
-      class="hamburger hamburger--collapse"
-      [class.is-active]="sidenav.opened"
-      type="button"
-      (click)="sidenav.toggle()"
-    >
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
+    <button class="hamburger" type="button" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">clear</mat-icon>
     </button>
   </div>
 </ng-container>

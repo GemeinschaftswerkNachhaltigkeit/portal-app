@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { SecondaryFilters } from '../secondary-filters/secondary-filters.component';
 

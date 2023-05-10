@@ -23,11 +23,11 @@ export class FeaturesService {
 
   public async getFeatures() {
     try {
-      const response = await this.directusService.directus
-        .items('features')
-        .readByQuery({});
-      if (response?.data && response?.data.length) {
-        this.features.next(response?.data as Feature[]);
+      const features = await this.directusService.getContentItems<Feature>(
+        'features'
+      );
+      if (features && features.length) {
+        this.features.next(features);
       }
     } catch (e) {
       console.error('loadError', e);

@@ -1,11 +1,5 @@
 @use 'theme' as *;
 @use 'palette' as *;
-@use '~hamburgers/_sass/hamburgers/hamburgers' with (
-  $hamburger-layer-color: $blue-navy,
-  $hamburger-layer-width: 30px,
-  $hamburger-layer-height: 2px,
-  $hamburger-layer-spacing: 5px
-);
 
 :host {
   display: flex;
@@ -36,6 +30,15 @@
     align-items: center;
     justify-content: center;
     padding-top: 4px;
+
+    .hamburger {
+      background-color: transparent;
+      border: none;
+      color: $blue-navy;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .main-content {

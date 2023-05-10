@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
@@ -8,7 +8,7 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DanHelpModalComponent } from './dan-help-modal/dan-help-modal.component';
 
 @Component({

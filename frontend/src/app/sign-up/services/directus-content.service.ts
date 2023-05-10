@@ -1,6 +1,5 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { Injectable } from '@angular/core';
-import { FieldFilter } from '@directus/sdk';
 import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject } from 'rxjs';
 import { DirectusService } from 'src/app/shared/services/directus.service';
@@ -35,51 +34,37 @@ export type ContactInviteContent = {
   providedIn: 'root'
 })
 export class DirectusContentService {
-  /* private contentIdsSubject = new ReplaySubject<
-    [{ SignUpFormKey: string; translations: number }]
-  >();
-  private contentIds$ = this.contentIdsSubject.asObservable();
-*/
-  orgContentSubject = new ReplaySubject<SignUpOrgContent>();
+  orgContentSubject = new ReplaySubject<SignUpOrgContent | null>();
   orgContent$ = this.orgContentSubject.asObservable();
 
-  orgImportContentSubject = new ReplaySubject<ImportOrgContent>();
+  orgImportContentSubject = new ReplaySubject<ImportOrgContent | null>();
   orgImportContent$ = this.orgImportContentSubject.asObservable();
 
-  activityContentSubject = new ReplaySubject<SignUpActivityContent>();
+  activityContentSubject = new ReplaySubject<SignUpActivityContent | null>();
   activityContent$ = this.activityContentSubject.asObservable();
 
-  contactInviteSubject = new ReplaySubject<ContactInviteContent>();
+  contactInviteSubject = new ReplaySubject<ContactInviteContent | null>();
   contactInvite$ = this.contactInviteSubject.asObservable();
 
   constructor(
     private translate: TranslateService,
     private directusService: DirectusService
   ) {
-    // this.getContentIds();
     translate.onLangChange.subscribe(() => {
       this.getSignUpOrganisationtTranslations();
       this.getImportDescisionTranslations();
       this.getSignUpActivityTranslations();
-      //this.getContactInviteTranslations({ orgname: '' });
-      //  this.updateCalendarTranslation(event);
     });
   }
 
   public async getSignUpOrganisationtTranslations() {
     try {
-      const response = await this.directusService.directus
-        .items('SignUpOrganisation_translations')
-        .readByQuery({
-          //   fields: ['participation_declaration', 'languages_id'],
-          filter: {
-            languages_code: this.getLangIso() //'en-US'
-          }
-        });
-      this.orgContentSubject.next(response.data![0] as SignUpOrgContent);
-      return response;
+      const content =
+        await this.directusService.getContentItemForCurrentLang<SignUpOrgContent>(
+          'SignUpOrganisation_translations'
+        );
+      this.orgContentSubject.next(content);
     } catch (e) {
-      //   this.orgUpdateStateSubject.next({ type: 'loadError', error: true });
       console.error('loadError', e);
       return;
     }
@@ -87,18 +72,14 @@ export class DirectusContentService {
 
   public async getImportDescisionTranslations(replacements = { orgname: '' }) {
     try {
-      const response = await this.directusService.directus
-        .items('ImportOrganisation_translations')
-        .readByQuery({
-          //   fields: ['participation_declaration', 'languages_id'],
-          filter: {
-            languages_code: this.getLangIso() //'en-US'
-          }
-        });
+      const response =
+        await this.directusService.getContentItemForCurrentLang<ImportOrgContent>(
+          'ImportOrganisation_translations'
+        );
 
       let content: ImportOrgContent;
-      if (response && response.data && response.data[0]) {
-        content = response.data[0] as ImportOrgContent;
+      if (response) {
+        content = response;
 
         content.denyCompleteMessage = content.denyCompleteMessage.replace(
           '{{orgname}}',
@@ -112,8 +93,6 @@ export class DirectusContentService {
 
         this.orgImportContentSubject.next(content);
       }
-
-      return response;
     } catch (e) {
       //   this.orgUpdateStateSubject.next({ type: 'loadError', error: true });
       console.error('loadError', e);
@@ -123,17 +102,14 @@ export class DirectusContentService {
 
   public async getContactInviteTranslations(replacements = { orgname: '' }) {
     try {
-      const response = await this.directusService.directus
-        .items('ContactInvite_translations')
-        .readByQuery({
-          filter: {
-            languages_code: this.getLangIso()
-          }
-        });
+      const response =
+        await this.directusService.getContentItemForCurrentLang<ContactInviteContent>(
+          'ContactInvite_translations'
+        );
 
       let content: ContactInviteContent;
-      if (response && response.data && response.data[0]) {
-        content = response.data[0] as ContactInviteContent;
+      if (response) {
+        content = response;
 
         content.allowed = content.allowed.replace(
           '{{orgname}}',
@@ -150,7 +126,6 @@ export class DirectusContentService {
 
         this.contactInviteSubject.next(content);
       }
-      return response;
     } catch (e) {
       console.error('loadError', e);
       return;
@@ -159,26 +134,16 @@ export class DirectusContentService {
 
   public async getSignUpActivityTranslations() {
     try {
-      const response = await this.directusService.directus
-        .items('SignUpActivity_translations') // TODO
-        .readByQuery({
-          filter: {
-            languages_code: this.getLangIso() //'en-US'
-          }
-        });
-      this.activityContentSubject.next(
-        response.data![0] as SignUpActivityContent
-      );
+      const response =
+        await this.directusService.getContentItemForCurrentLang<SignUpActivityContent>(
+          'SignUpActivity_translations'
+        );
+
+      this.activityContentSubject.next(response);
       return response;
     } catch (e) {
       console.error('loadError', e);
       return;
     }
-  }
-
-  private getLangIso(): FieldFilter<string> {
-    const currentLang =
-      this.translate.currentLang || this.translate.defaultLang;
-    return currentLang === 'de' ? 'de-DE' : 'en-US';
   }
 }
