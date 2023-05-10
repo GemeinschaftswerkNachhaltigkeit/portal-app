@@ -140,7 +140,8 @@
     "activate": "Activate",
     "deactivate": "Deactivate",
     "wizard.masterData": "Master data",
-    "wizard.topics": "Topics",
+    "wizard.aboutDan": "About the activity",
+    "wizard.topics": "Topic & Location",
     "wizard.externalLinks": "Online presence",
     "wizard.contact": "Contact",
     "saved": "Saved",
@@ -175,6 +176,13 @@
     "title": "Are you sure?",
     "description": "Do you want to perform this action? You cannot undo the action afterwards!"
   },
+  "dan": {
+    "texts": {
+      "wizard.about": "Add the most important information about your activity.",
+      "wizard.description": "Explain your activity and describe how to participate.",
+      "wizard.topics": "Enter here more information and details about the location."
+    }
+  },
   "account": {
     "nav": {
       "home": "Start here",
@@ -190,12 +198,12 @@
       "developer": "Developer",
       "offers": "Offers",
       "bestPractices": "Practical examples",
-      "danActivities": "DAN Aktionen"
+      "danActivities": "Action Days"
     },
     "titles": {
       "myData": "Your account",
       "myOrga": "Your organisation",
-      "danActivities": "DAN Aktionen",
+      "danActivities": "Action Days",
       "map": "Map",
       "noOrgaSubs": "You have not followed any organisation",
       "noActivitySubs": "You have not saved any activities",
@@ -239,7 +247,7 @@
     "texts": {
       "map": "On the interactive map you can find organisations and activities using advanced filter functions.",
       "myData": "In your profile you have an overview of various functionalities. You can change your personal data, create or edit your organisation and its activities and find followed organisations and saved activities. You can change your password via the 'Forgotten password' function when you log in.",
-      "danActivities": "Hier kannst du DAN Aktionen für deine Organisation jederzeit anlegen, bearbeiten oder löschen.",
+      "danActivities": "Here you can register, change, and delete your activities for the German Sustainability Action Days.",
       "myDataShort": "Here you can change your name or delete your account.",
       "myOrga": "Here you can customize your organisation profile and add people who can manage your organisation.",
       "noOrgaSubs": "Simply search for organisations via the map and click on 'Follow organisation'.",
