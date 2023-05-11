@@ -6,8 +6,6 @@ import qs from 'query-string';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-export const directusAssetsPath = `${environment.directusBaseUrl}/assets`;
-
 export type ExternalLinks = {
   projectn_winner_page?: string;
 };
@@ -29,11 +27,11 @@ export class DirectusService {
   ): string {
     const params = qs.stringify(options);
 
-    return `${environment.directusBaseUrl}assets/${fileId}?${params}`;
+    return `${environment.directusBaseUrl}/assets/${fileId}?${params}`;
   }
 
   async getContentItems<T>(collection: string, queryString = ''): Promise<T[]> {
-    const url = `${environment.directusBaseUrl}items/${collection}${queryString}`;
+    const url = `${environment.directusBaseUrl}/items/${collection}${queryString}`;
     const res = await lastValueFrom(this.http.get<{ data: T[] }>(url));
     const data = res.data;
     return Array.isArray(data) ? data : [data];
@@ -77,7 +75,7 @@ export class DirectusService {
       participation_declaration: string;
     }>('landingpage_translations', 'languages_id');
     if (res) {
-      return `${environment.directusBaseUrl}assets/${res.participation_declaration}`;
+      return `${environment.directusBaseUrl}/assets/${res.participation_declaration}`;
     } else {
       return;
     }

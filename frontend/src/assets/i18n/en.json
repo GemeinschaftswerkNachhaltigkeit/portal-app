@@ -8,7 +8,7 @@
     "about": "About us",
     "marketplace": "Search & Share",
     "projectN": "Projekt Nachhaltigkeit",
-    "dan": "Aktionstage",
+    "dan": "Action Days",
     "activities": "Besondere Aktionen"
   },
   "btn": {
@@ -116,6 +116,7 @@
     }
   },
   "labels": {
+    "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",
     "tags": "Subject areas",
@@ -512,7 +513,8 @@
       "info": "Info",
       "relatedOrganisation": "Host organisation",
       "startDate": "from",
-      "endDate": "to"
+      "endDate": "to",
+      "dan": "Action Days"
     },
     "buttons": {
       "showMore": "show more",

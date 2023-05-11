@@ -1,6 +1,7 @@
 name: Maven Build and Test
 
-on:
+on: 
+  workflow_dispatch:
   push:
     branches: [ "develop" ]
   pull_request:

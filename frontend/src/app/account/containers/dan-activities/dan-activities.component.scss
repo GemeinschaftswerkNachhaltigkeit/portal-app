@@ -10,21 +10,30 @@
 }
 .actions-wrapper {
   display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
   align-items: center;
   justify-content: space-between;
 
   .buttons {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: $spacing-4;
-    .help-button-content {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      gap: $spacing-2;
-      .icon {
+    .create-button {
+      margin-right: $spacing-4;
+    }
+    .help-button {
+      margin-left: -$spacing-4;
+      .help-button-content {
+        height: 100%;
         display: flex;
         align-items: center;
+        gap: $spacing-2;
+        .icon {
+          display: flex;
+          align-items: center;
+        }
       }
     }
   }

@@ -89,7 +89,7 @@ export class WizardComponent implements OnDestroy {
         description: fb.control('', [wysiwygContentRequired(100, 1500)]),
         start: fb.control('', [Validators.required]),
         end: fb.control('', [Validators.required]),
-        url: fb.control('', [Validators.maxLength(200), urlPattern()])
+        url: fb.control('', [Validators.maxLength(1000), urlPattern()])
       })
     });
     this.step2Form = fb.group({

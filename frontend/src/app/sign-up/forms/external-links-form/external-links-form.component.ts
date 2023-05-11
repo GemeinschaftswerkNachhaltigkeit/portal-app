@@ -42,13 +42,13 @@ export class ExternalLinksFormComponent implements OnChanges, OnDestroy {
 
   constructor(private _formBuilder: FormBuilder) {
     this.linksFormGroup = this._formBuilder.group({
-      url: ['', [Validators.maxLength(200), urlPattern()]]
+      url: ['', [Validators.maxLength(1000), urlPattern()]]
     });
 
     this.socialMediaTypes.forEach((type) => {
       this.linksFormGroup.addControl(
         type as string,
-        new FormControl('', [Validators.maxLength(200), urlPattern()])
+        new FormControl('', [Validators.maxLength(1000), urlPattern()])
       );
     });
 
