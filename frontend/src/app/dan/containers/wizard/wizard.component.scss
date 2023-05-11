@@ -19,6 +19,10 @@
   }
 }
 
+.step-description {
+  margin-bottom: $spacing-10;
+}
+
 @media screen and (min-width: 600px) {
   .final-step-content-wrapper {
     .actions {

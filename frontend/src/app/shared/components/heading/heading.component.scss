@@ -45,7 +45,7 @@ $xl: 3.2rem;
     position: relative;
     z-index: $z1;
     padding: 0 $spacing-2;
-    margin: 0 -$spacing-2;
+    margin: 0 (-$spacing-2);
     transition: all 500ms;
   }
 

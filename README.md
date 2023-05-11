@@ -1,5 +1,6 @@
 # Gemeinschaftswerk Nachhaltigkeit | Portal App
 
+[![Maven Build and Test](https://github.com/GemeinschaftswerkNachhaltigkeit/gw-portal-app/actions/workflows/buildAndTest.yml/badge.svg)](https://github.com/GemeinschaftswerkNachhaltigkeit/gw-portal-app/actions/workflows/buildAndTest.yml)  [![Java CI with Maven](https://github.com/GemeinschaftswerkNachhaltigkeit/gw-portal-app/actions/workflows/buildAndPush.yml/badge.svg)](https://github.com/GemeinschaftswerkNachhaltigkeit/gw-portal-app/actions/workflows/buildAndPush.yml)
 
 ## Getting started / Installation
 
