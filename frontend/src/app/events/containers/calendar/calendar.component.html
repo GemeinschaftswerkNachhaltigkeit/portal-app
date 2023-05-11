@@ -1,0 +1,20 @@
+<app-calendar-layout>
+  <div search-field>Search Field</div>
+  <div filter-bar>
+    <div>
+      <app-filter-modal-button
+        [count]="countFilters()"
+        (clear)="clearAll()"
+        (openModal)="openFilters()"
+      ></app-filter-modal-button>
+    </div>
+  </div>
+
+  <div results>
+    <div>Content Row</div>
+    <div>Content Row</div>
+    <div>Content Row</div>
+    <div>Content Row</div>
+  </div>
+  <div filters>filter</div>
+</app-calendar-layout>
