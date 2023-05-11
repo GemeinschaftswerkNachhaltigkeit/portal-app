@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmbeddedMapContainerComponent } from './containers/embedded-map-container/embedded-map-container.component';
-import { EmbeddedMapDetailsCardComponent } from './containers/embedded-map-details-card/embedded-map-details-card.component';
+import { DetailsCardComponent } from '../map/containers/details-card/details-card.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: ':type/:detail',
-        component: EmbeddedMapDetailsCardComponent,
+        component: DetailsCardComponent,
         data: { animation: 'mapDetails' }
       }
     ]

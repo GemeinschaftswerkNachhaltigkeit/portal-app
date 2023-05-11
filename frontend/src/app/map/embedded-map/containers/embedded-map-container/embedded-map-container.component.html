@@ -58,7 +58,7 @@
         <app-map *ngIf="markers$ | async as markers" [center]="germanyCenter" [data]="markers"
             (mapMoved)="mapMovedHandler($event)"></app-map>
     </div>
-    <!-- <app-details-card detailsDesktop></app-details-card> -->
-    <!-- <app-details-card detailsMobile [mobile]="true"></app-details-card> -->
+    <app-details-card detailsDesktop></app-details-card>
+    <app-details-card detailsMobile [mobile]="true"></app-details-card>
 
 </app-embedded-map-layout>

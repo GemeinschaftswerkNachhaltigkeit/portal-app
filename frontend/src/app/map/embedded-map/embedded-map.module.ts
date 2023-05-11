@@ -32,7 +32,6 @@ import { MatIconModule } from '@angular/material/icon';
 // import { DetailsLinkComponent } from './components/map/details-link/details-link.component';
 // import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
 import { EmbeddedMapContainerComponent } from './containers/embedded-map-container/embedded-map-container.component';
-import { EmbeddedMapDetailsCardComponent } from './containers/embedded-map-details-card/embedded-map-details-card.component';
 import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout/embedded-map-layout.component';
 
 // export const APP_DATE_FORMATS: MatDateFormats = {
@@ -57,7 +56,6 @@ import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout
     // DetailsLinkComponent,
     // PaginatorWrapperComponent,
     EmbeddedMapContainerComponent,
-    EmbeddedMapDetailsCardComponent,
     EmbeddedMapLayoutComponent
   ],
   imports: [

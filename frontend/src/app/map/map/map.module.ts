@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { MapContainerComponent } from './containers/map-container/map-container.component';
-import { SharedModule } from '../../shared/shared.module';
+// import { SharedModule } from '../../shared/shared.module';
 import { SharedMapModule } from '../shared-map.module';
 import { MapRoutingModule } from './map-routing.module';
 import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
@@ -15,7 +14,6 @@ import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/materia
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
-import { DetailsCardComponent } from './containers/details-card/details-card.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 
@@ -29,7 +27,6 @@ import {
   MatDateFormats,
   MAT_DATE_LOCALE
 } from '@angular/material/core';
-import { DetailsLinkComponent } from './components/map/details-link/details-link.component';
 import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
@@ -49,17 +46,13 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MapContainerComponent,
     MapLayoutComponent,
     SearchFormComponent,
-    DetailsCardComponent,
-    DetailsLinkComponent,
     PaginatorWrapperComponent    
   ],
   imports: [
-    SharedModule,
     SharedMapModule,
     MapRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
