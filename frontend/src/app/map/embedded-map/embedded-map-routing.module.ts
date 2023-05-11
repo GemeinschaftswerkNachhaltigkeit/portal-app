@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmbeddedMapContainerComponent } from './embedded-map/containers/embedded-map-container/embedded-map-container.component';
-import { EmbeddedMapDetailsCardComponent } from './embedded-map/containers/embedded-map-details-card/embedded-map-details-card.component';
+import { EmbeddedMapContainerComponent } from './containers/embedded-map-container/embedded-map-container.component';
+import { EmbeddedMapDetailsCardComponent } from './containers/embedded-map-details-card/embedded-map-details-card.component';
 
 const routes: Routes = [
   {
