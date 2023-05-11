@@ -43,7 +43,7 @@
     "@tiptap/extension-underline": "2.0.3",
     "@tiptap/starter-kit": "2.0.3",
     "@types/leaflet.markercluster": "1.5.1",
-    "angular-oauth2-oidc": "15.0.1",
+    "angular-oauth2-oidc": "^13.0.1",
     "leaflet": "1.9.3",
     "leaflet.markercluster": "1.5.3",
     "luxon": "3.3.0",
