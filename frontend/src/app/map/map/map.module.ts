@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { MapContainerComponent } from './containers/map-container/map-container.component';
 import { SharedModule } from '../../shared/shared.module';
-import { MapRoutingModule } from '../map-routing.module';
+import { SharedMapModule } from '../shared-map.module';
+import { MapRoutingModule } from './map-routing.module';
 import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-import { MatIconModule } from '@angular/material/icon';
-import { MapComponent } from './components/map/map.component';
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
@@ -49,20 +49,20 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MapContainerComponent,
     MapLayoutComponent,
     SearchFormComponent,
-    MapComponent,
     DetailsCardComponent,
     DetailsLinkComponent,
     PaginatorWrapperComponent    
   ],
   imports: [
     SharedModule,
+    SharedMapModule,
     MapRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule,
     MatButtonModule,
     MatPaginatorModule,
     MatDialogModule,

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmbeddedMapContainerComponent } from './embedded-map/containers/embedded-map-container/embedded-map-container.component';
-import { DetailsCardComponent } from './map/containers/details-card/details-card.component';
-import { MapContainerComponent } from './map/containers/map-container/map-container.component';
+import { EmbeddedMapContainerComponent } from '../embedded-map/containers/embedded-map-container/embedded-map-container.component';
+import { DetailsCardComponent } from './containers/details-card/details-card.component';
+import { MapContainerComponent } from './containers/map-container/map-container.component';
 
 const routes: Routes = [
   {
@@ -16,10 +16,6 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'embeddedMap',
-    component: EmbeddedMapContainerComponent,
-  }
 ];
 
 @NgModule({

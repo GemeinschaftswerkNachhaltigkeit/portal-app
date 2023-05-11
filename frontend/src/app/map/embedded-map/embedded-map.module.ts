@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { SharedMapModule } from '../shared-map.module';
 import { EmbeddedMapRoutingModule } from './embedded-map-routing.module';
 // import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
 // import { SearchFormComponent } from './components/search-form/search-form.component';
@@ -7,8 +8,8 @@ import { EmbeddedMapRoutingModule } from './embedded-map-routing.module';
 // import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 // import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 // import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-// import { MatIconModule } from '@angular/material/icon';
-// import { MapComponent } from './components/map/map.component';
+import { MatIconModule } from '@angular/material/icon';
+// import { MapComponent } from '../map/components/map/map.component';
 // import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 // import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
 // import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
@@ -60,8 +61,11 @@ import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout
     EmbeddedMapLayoutComponent
   ],
   imports: [
-    SharedModule,
+    // SharedModule,
     EmbeddedMapRoutingModule,
+    SharedMapModule,
+    MatIconModule,
+    CommonModule
     // FormsModule,
     // ReactiveFormsModule,
     // MatFormFieldModule,
