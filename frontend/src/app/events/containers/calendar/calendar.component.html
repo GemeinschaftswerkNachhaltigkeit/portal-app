@@ -1,6 +1,6 @@
 <app-calendar-layout>
   <div search-field>
-    <app-search-controls></app-search-controls>
+    <app-search-controls (search)="handleSearch($event)"></app-search-controls>
   </div>
   <div filter-bar>
     <div>
@@ -13,10 +13,9 @@
   </div>
 
   <div results>
-    <div>Content Row</div>
-    <div>Content Row</div>
-    <div>Content Row</div>
-    <div>Content Row</div>
+    <ng-container *ngIf="events$ | async as events">
+      <pre>{{ events | json }}</pre>
+    </ng-container>
   </div>
   <div filters>filter</div>
 </app-calendar-layout>

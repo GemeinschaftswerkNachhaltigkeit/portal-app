@@ -1,27 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../../data/events.service';
+import { SearchFields } from '../../components/search-input/search-controls.component';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   query = '';
   location = '';
 
-  handleSearchValueChanged({
-    query,
-    location
-  }: {
-    query: string;
-    location: string;
-  }): void {
-    this.query = query;
-    this.location = location;
-  }
+  events$ = this.eventsService.events$;
 
-  handleSearch(query: string): void {
-    // this.marketplaceFacade.search({ query: query });
+  constructor(private eventsService: EventsService) {}
+
+  handleSearch({ query, location }: SearchFields): void {
+    this.eventsService.search({
+      query: query,
+      location: location
+    });
   }
 
   countFilters(): number {
@@ -34,5 +32,9 @@ export class CalendarComponent {
 
   openFilters(): void {
     //
+  }
+
+  ngOnInit(): void {
+    this.eventsService.init();
   }
 }

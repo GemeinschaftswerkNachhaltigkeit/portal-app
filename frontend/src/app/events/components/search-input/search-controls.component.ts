@@ -9,6 +9,11 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
+export type SearchFields = {
+  query: string;
+  location: string;
+};
+
 @Component({
   selector: 'app-search-controls',
   templateUrl: './search-controls.component.html',
@@ -20,11 +25,7 @@ export class SearchControlsComponent implements OnDestroy {
   @Input() buttonText = '';
   @Input() value = '';
 
-  @Output() search = new EventEmitter<string>();
-  @Output() searchValueChanged = new EventEmitter<{
-    query: string | null;
-    location: string | null;
-  }>();
+  @Output() search = new EventEmitter<SearchFields>();
 
   unsubscribe$ = new Subject();
 
@@ -34,17 +35,12 @@ export class SearchControlsComponent implements OnDestroy {
   });
 
   handleClear(): void {
-    this.searchValueChanged.emit();
-    this.search.emit('');
+    this.search.emit({ query: '', location: '' });
   }
 
   handleSubmit(): void {
-    this.search.emit(this.value);
-  }
-
-  handleChange(): void {
     const values = this.formGroup.value;
-    this.searchValueChanged.emit({
+    this.search.emit({
       query: values.query || '',
       location: values.location || ''
     });
