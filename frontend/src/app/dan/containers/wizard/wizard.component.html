@@ -87,7 +87,7 @@
       >
         <div class="final-step-content-wrapper">
           <app-html-wrapper
-            [html]="(activityContent$ | async)?.completedMessage || ''"
+            [html]="danContent?.completed_message || ''"
           ></app-html-wrapper>
 
           <div class="actions">
@@ -102,7 +102,7 @@
             >
               <span class="short">{{ 'btn.back' | translate }}</span>
               <span class="long">{{
-                'btn.backToActivityOverview' | translate
+                'btn.backToDanOverview' | translate
               }}</span>
             </a>
           </div>
