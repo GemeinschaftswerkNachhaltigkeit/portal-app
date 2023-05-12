@@ -38,6 +38,13 @@ const routes: Routes = [
     redirectTo: '/marketplace/search'
   },
   {
+    path: 'marketplace',
+    loadChildren: () =>
+      import('./marketplace/marketplace.module').then(
+        (m) => m.MarketplaceModule
+      )
+  },
+  {
     path: 'events',
     loadChildren: () =>
       import('./events/events.module').then((m) => m.EventsModule)

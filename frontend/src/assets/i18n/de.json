@@ -48,6 +48,8 @@
   },
   "forms": {
     "labels": {
+      "query": "Was",
+      "location": "Wo",
       "upload": "Datei auswählen",
       "userSelect": "Nutzer:in",
       "loadingUsers": "Lade Nutzer:innen",
@@ -506,8 +508,6 @@
   },
   "map": {
     "labels": {
-      "query": "Was",
-      "location": "Wo",
       "sdgs": "Nachhaltigkeitsziele",
       "ACTIVITY": "Aktivitäten",
       "thematicFocus": "Themenfelder",
