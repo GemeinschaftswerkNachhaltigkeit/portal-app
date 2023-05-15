@@ -8,6 +8,7 @@ import java.util.Random;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -31,7 +32,6 @@ public class DefaultImageService {
     public static final String CLASSPATH_IMAGES_MARKETPLACE = CLASSPATH_IMAGES + "/marketplace/{category}/*";
 
     private final ResourceLoader resourceLoader;
-    private final PathMatchingResourcePatternResolver resolver;
     private final Random random;
 
 
@@ -60,7 +60,12 @@ public class DefaultImageService {
     private String getDefaultImage(String locationPattern) {
         final Resource[] resources;
         try {
+            ClassLoader cl = this.getClass().getClassLoader();
+            ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
             resources = resolver.getResources(locationPattern);
+            for (Resource resource: resources) {
+                log.error("Location Pattern: " + resource.toString());
+            }
         } catch (IOException e) {
             log.error("Unexpected error listing resources in location [{}]", locationPattern, e);
             return null;

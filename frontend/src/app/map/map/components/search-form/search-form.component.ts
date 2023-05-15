@@ -6,7 +6,6 @@ import { AdditionalFiltersModalComponent } from 'src/app/shared/components/form/
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { DynamicFilters } from '../../models/search-filter';
-import { ActivityType } from 'src/app/shared/models/activity-type';
 
 @Component({
   selector: 'app-search-form',
@@ -193,9 +192,6 @@ export class SearchFormComponent implements OnInit {
   private setActiveFilters(): void {
     if (this.activeFilters) {
       this.searchForm.patchValue(this.activeFilters);
-      const { viewType } = this.getActiveFilters();
-      // this.showActivity = viewType === ['ACTIVITY'] || !viewType;
-      // this.showOrga = viewType === ['ORGANISATION'] || !viewType;
     }
   }
 
