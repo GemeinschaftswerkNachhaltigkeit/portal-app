@@ -32,7 +32,6 @@ public class DefaultImageService {
     public static final String CLASSPATH_IMAGES_MARKETPLACE = CLASSPATH_IMAGES + "/marketplace/{category}/*";
 
     private final ResourceLoader resourceLoader;
-    private final PathMatchingResourcePatternResolver resolver;
     private final Random random;
 
 
@@ -65,7 +64,7 @@ public class DefaultImageService {
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
             resources = resolver.getResources(locationPattern);
             for (Resource resource: resources) {
-                log.error("Locatin Pattern: " + resource.toString());
+                log.error("Location Pattern: " + resource.toString());
             }
         } catch (IOException e) {
             log.error("Unexpected error listing resources in location [{}]", locationPattern, e);
