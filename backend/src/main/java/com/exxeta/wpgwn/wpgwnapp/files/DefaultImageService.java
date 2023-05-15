@@ -63,8 +63,8 @@ public class DefaultImageService {
         try {
             ClassLoader cl = this.getClass().getClassLoader();
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
-            resources = resolver.getResources(locationPattern) ;
-            for (Resource resource: resources){
+            resources = resolver.getResources(locationPattern);
+            for (Resource resource: resources) {
                 log.error("Locatin Pattern: " + resource.toString());
             }
         } catch (IOException e) {
