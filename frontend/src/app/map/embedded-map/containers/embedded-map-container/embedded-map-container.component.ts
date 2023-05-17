@@ -15,6 +15,11 @@ export class EmbeddedMapContainerComponent {
   markers$ = this.mapFacade.markers$;
   germanyCenter: L.LatLngTuple = [51.1642292, 10.4541194];
 
+  ngOnInit() {
+    this.mapFacade.setInitalFilters();
+    this.mapFacade.search();
+  }
+
   mapMovedHandler(box: string): void {
     this.mapFacade.setBoundingBox(box);
   }

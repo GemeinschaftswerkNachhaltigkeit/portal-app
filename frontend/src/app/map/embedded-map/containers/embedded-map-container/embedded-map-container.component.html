@@ -52,11 +52,15 @@
                 [showFirstLastButtons]="true" (page)="pageChangedHandler($event)" aria-label="Select page">
             </mat-paginator>
         </div>
-    </div> 
+    </div>
 -->
     <div map>
-        <app-map *ngIf="markers$ | async as markers" [center]="germanyCenter" [data]="markers"
-            (mapMoved)="mapMovedHandler($event)"></app-map>
+      <app-map
+        *ngIf="markers$ | async as markers"
+        [center]="germanyCenter"
+        [data]="markers"
+        (mapMoved)="mapMovedHandler($event)"
+      ></app-map>
     </div>
     <app-details-card detailsDesktop></app-details-card>
     <app-details-card detailsMobile [mobile]="true"></app-details-card>
