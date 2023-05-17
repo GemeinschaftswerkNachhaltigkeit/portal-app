@@ -1,8 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.files;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URI;
 import java.util.Random;
 
 import org.springframework.core.io.Resource;
@@ -64,7 +63,7 @@ public class DefaultImageService {
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
             resources = resolver.getResources(locationPattern);
             for (Resource resource: resources) {
-                log.error("Location Pattern: " + resource.toString());
+                log.debug("Location Pattern: " + resource.toString());
             }
         } catch (IOException e) {
             log.error("Unexpected error listing resources in location [{}]", locationPattern, e);
@@ -76,18 +75,18 @@ public class DefaultImageService {
         }
 
         final int rndIdx = random.nextInt(resources.length);
-        final Path path;
+        URI uri;
         try {
-            path = Paths.get(resources[rndIdx].getURI());
+            uri = resources[rndIdx].getURI();
+            log.info("resources[rndIdx].getURI(): " + uri);
         } catch (IOException e) {
             log.error("Unexpected error converting path to uri [{}]", resources[rndIdx], e);
             return null;
         }
 
-        final String uriPath = path.toUri().toString();
         final String searchPattern = locationPattern.substring(CLASSPATH_IMAGES.length(), locationPattern.length() - 1);
-        final int idx = uriPath.lastIndexOf(searchPattern);
-        return uriPath.substring(idx + 1);
+        final int idx = uri.toString().lastIndexOf(searchPattern);
+        return uri.toString().substring(idx + 1);
     }
 
     public Resource loadDefaultImage(String filename) {
