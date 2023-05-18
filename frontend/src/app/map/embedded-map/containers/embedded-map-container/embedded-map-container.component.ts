@@ -16,7 +16,9 @@ export class EmbeddedMapContainerComponent {
   germanyCenter: L.LatLngTuple = [51.1642292, 10.4541194];
 
   ngOnInit() {
+    this.mapFacade.setEmbedded(true);
     this.mapFacade.setInitalFilters();
+    // todo: Refactor MapFacadeService since search() determines cards and markers. But we only markers here.
     this.mapFacade.search();
   }
 

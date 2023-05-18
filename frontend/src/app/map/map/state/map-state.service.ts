@@ -14,6 +14,7 @@ export class MapStateService {
   });
   private markers = new BehaviorSubject<MarkerDto[]>([]);
   private currentResult = new BehaviorSubject<SearchResult | null>(null);
+  private embedded = false; // todo: better approach is save the current route ('embeddedMap' or 'map'). This avoids hardcoded routes in MapFacadeService.
 
   get markers$(): Observable<MarkerDto[]> {
     return this.markers.asObservable();
@@ -40,6 +41,14 @@ export class MapStateService {
     );
   }
 
+  get isEmbedded(): boolean {
+    return this.embedded;
+  }
+
+  set isEmbedded(isEmbedded: boolean) {
+    this.embedded = isEmbedded;
+  }
+
   getResultForIdAndType(type = '', id = -1): SearchResult | undefined {
     return this.searchResp.value.content.find(
       (sr) => sr.id === id && sr.resultType === type
@@ -57,4 +66,5 @@ export class MapStateService {
   setMarkers(makers: MarkerDto[]): void {
     this.markers.next(makers);
   }
+
 }

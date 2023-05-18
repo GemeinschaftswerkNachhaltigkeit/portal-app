@@ -71,6 +71,7 @@ export class MapContainerComponent implements OnInit {
   mapInitialised$ = this.mapFacade.mapInitialised$;
 
   ngOnInit(): void {
+    this.mapFacade.setEmbedded(false);
     this.mapFacade.setInitalFilters();
     this.mapFacade.search();
 

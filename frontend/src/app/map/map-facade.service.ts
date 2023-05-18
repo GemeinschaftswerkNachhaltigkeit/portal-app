@@ -90,7 +90,7 @@ export class MapFacadeService {
       const filters = this.uiState.filterValues;
 
       if (activeCard?.id && activeCard?.type) {
-        this.router.navigate(['/', 'map'], {
+        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
           queryParams: {
             ...filters,
             type: activeCard?.type,
@@ -119,7 +119,7 @@ export class MapFacadeService {
     delete updatedFilters['id'];
     delete updatedFilters['type'];
     this.setActiveCard();
-    this.router.navigate(['/', 'map'], {
+    this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
       queryParams: {
         ...updatedFilters
       },
@@ -175,7 +175,7 @@ export class MapFacadeService {
         ...searchFilter,
         envelope: existingFilters['envelope']
       };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', 'map']);
+      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map']);
     } else {
       filters = existingFilters;
     }
@@ -210,5 +210,9 @@ export class MapFacadeService {
         this.mapState.setMarkers(resp);
       }
     });
+  }
+
+  setEmbedded(isEmbedded: boolean) {
+    this.mapState.isEmbedded = isEmbedded;
   }
 }
