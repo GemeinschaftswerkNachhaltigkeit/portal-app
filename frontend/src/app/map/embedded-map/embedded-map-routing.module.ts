@@ -14,12 +14,8 @@ const routes: Routes = [
         data: { animation: 'mapDetails' }
       }
     ]
-  },
-  {
-    path: 'embeddedMap',
-    component: EmbeddedMapContainerComponent,
   }
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
