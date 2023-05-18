@@ -17,7 +17,7 @@ export class EmbeddedMapContainerComponent {
 
   ngOnInit() {
     this.mapFacade.setInitalFilters();
-    this.mapFacade.searchMarkers();
+    this.mapFacade.search();
   }
 
   mapMovedHandler(box: string): void {

@@ -72,8 +72,7 @@ export class MapContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.mapFacade.setInitalFilters();
-    this.mapFacade.searchCards();
-    this.mapFacade.searchMarkers();
+    this.mapFacade.search();
 
     this.route.queryParams.subscribe((params) => {
       this.mapFacade.setActiveCard({
@@ -85,8 +84,7 @@ export class MapContainerComponent implements OnInit {
 
   searchChangedHandler(searchFilter: DynamicFilters): void {
     this.mapFacade.setActiveCard(undefined);
-    this.mapFacade.searchCards(searchFilter);
-    this.mapFacade.searchMarkers(searchFilter);
+    this.mapFacade.search(searchFilter);
   }
 
   pageChangedHandler(event: PageEvent): void {

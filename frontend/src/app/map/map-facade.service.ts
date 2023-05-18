@@ -136,8 +136,7 @@ export class MapFacadeService {
   changePage(page: number, size: number) {
     this.setActiveCard();
     const filters = this.uiState.filterValues;
-    this.searchCards({ ...filters, page, size });
-    this.searchMarkers({ ...filters, page, size });
+    this.search({ ...filters, page, size });
   }
 
   getById(type: string, id: number): void {
@@ -158,11 +157,11 @@ export class MapFacadeService {
 
   setBoundingBox(box: string): void {
     this.uiState.setEnvelope(box);
-    this.searchCards();
-    this.searchMarkers();
+    this.search();
   }
 
-  private filters(searchFilter?: DynamicFilters): DynamicFilters {
+  search(searchFilter?: DynamicFilters): void {
+    this.loading.start('map-search');
     const existingFilters = this.uiState.filterValues;
     let filters;
     if (searchFilter) {
@@ -190,13 +189,11 @@ export class MapFacadeService {
     } else {
       this.uiState.setMapInitialised();
     }
-    return filters;
+    this.searchCards(filters);
+    this.searchMarkers(filters);
   }
 
-  // Cards and Markers may be searched independently. Comes in with external Map requirement.
-  searchCards(searchFilter?: DynamicFilters): void {
-    this.loading.start('map-search');
-    const filters = this.filters(searchFilter);
+  private searchCards(filters: DynamicFilters): void {
     this.searchRequest = this.mapApi.search(filters).subscribe({
       next: (resp: PagedResponse<SearchResult>) => {
         this.mapState.setSearchResponse(resp);
@@ -207,9 +204,7 @@ export class MapFacadeService {
       }
     });
   }
-
-  searchMarkers(searchFilter?: DynamicFilters): void {
-    const filters = this.filters(searchFilter);
+  private searchMarkers(filters: DynamicFilters): void {
     this.searchRequest = this.mapApi.searchMarkers(filters).subscribe({
       next: (resp: MarkerDto[]) => {
         this.mapState.setMarkers(resp);
