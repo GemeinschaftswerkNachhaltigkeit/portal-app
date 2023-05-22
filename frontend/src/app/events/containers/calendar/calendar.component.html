@@ -1,21 +1,25 @@
-<app-calendar-layout>
-  <div search-field>
-    <app-search-controls (search)="handleSearch($event)"></app-search-controls>
-  </div>
-  <div filter-bar>
-    <div>
-      <app-filter-modal-button
-        [count]="countFilters()"
-        (clear)="clearAll()"
-        (openModal)="openFilters()"
-      ></app-filter-modal-button>
+<ng-container *ngIf="paging$ | async as paging">
+  <app-calendar-layout [total]="paging.totalElements || 0">
+    <div search-field>
+      <app-search-controls
+        (search)="handleSearch($event)"
+      ></app-search-controls>
     </div>
-  </div>
+    <div filter-bar>
+      <div>
+        <app-filter-modal-button
+          [count]="countFilters()"
+          (clear)="clearAll()"
+          (openModal)="openFilters()"
+        ></app-filter-modal-button>
+      </div>
+    </div>
 
-  <div results>
-    <ng-container *ngIf="events$ | async as events">
-      <pre>{{ events | json }}</pre>
-    </ng-container>
-  </div>
-  <div filters>filter</div>
-</app-calendar-layout>
+    <div results>
+      <ng-container *ngIf="events$ | async as events">
+        <pre>{{ events | json }}</pre>
+      </ng-container>
+    </div>
+    <div filters>filter</div>
+  </app-calendar-layout>
+</ng-container>

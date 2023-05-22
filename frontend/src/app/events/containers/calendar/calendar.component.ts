@@ -12,6 +12,7 @@ export class CalendarComponent implements OnInit {
   location = '';
 
   events$ = this.eventsService.events$;
+  paging$ = this.eventsService.eventsPaging$;
 
   constructor(private eventsService: EventsService) {}
 
