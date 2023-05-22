@@ -5,8 +5,11 @@ import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
-import SearchFilter from '../models/search-filter';
+import SearchFilter, { DynamicFilters } from '../models/search-filter';
 import { TranslateService } from '@ngx-translate/core';
+import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
+import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +23,13 @@ export class EventsService {
   constructor(
     private eventsApi: EventsApiService,
     private feedback: FeedbackService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private route: ActivatedRoute,
+    private loader: LoadingService,
+    private persistFilters: PersistFiltersService
+  ) {
+    this.triggerSearchOnQueryParamsChange();
+  }
 
   get events$(): Observable<EventDto[]> {
     return this.eventsState
@@ -41,6 +49,7 @@ export class EventsService {
   }
 
   init(): void {
+    this.loader.start('load-events');
     this.searchFilters
       .pipe(
         switchMap((searchParams) => {
@@ -49,9 +58,11 @@ export class EventsService {
       )
       .subscribe({
         next: (data: PagedResponse<EventDto>) => {
+          this.loader.stop('load-events');
           this.eventsState.next(data);
         },
-        error: (e) => {
+        error: () => {
+          this.loader.stop('load-events');
           this.feedback.showFeedback(
             'error',
             this.translate.instant('errors.unkown')
@@ -60,7 +71,27 @@ export class EventsService {
       });
   }
 
-  search(filters: SearchFilter): void {
-    this.searchFilters.next(filters);
+  search(searchFilter: SearchFilter): void {
+    const existingFilters = this.getFilters();
+    const filters = {
+      ...existingFilters,
+      ...searchFilter
+    };
+    this.persistFilters.setFiltersToUrl(filters);
+  }
+
+  private triggerSearchOnQueryParamsChange(): void {
+    this.route.queryParamMap.subscribe(() => {
+      const filters = this.getFilters();
+      this.searchFilters.next(filters);
+    });
+  }
+
+  private getFilters(): DynamicFilters {
+    return this.persistFilters.getFiltersFromUrl([
+      'thematicFocus',
+      'offerCat',
+      'bestPractiseCat'
+    ]);
   }
 }
