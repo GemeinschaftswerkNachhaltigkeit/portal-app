@@ -20,7 +20,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { ImageType } from 'src/app/shared/models/image-type';
 import { ActivityService } from 'src/app/shared/services/activity.service';
-import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
 import { MasterDataFormComponent } from '../../components/master-data-form/master-data-form.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
@@ -28,6 +27,7 @@ import { ActivityType } from 'src/app/shared/models/activity-type';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
+import { DirectusService } from 'src/app/shared/services/directus.service';
 
 @Component({
   selector: 'app-wizard',
@@ -40,7 +40,7 @@ export class WizardComponent implements OnDestroy {
   private paramsSub: Subscription;
 
   public activityData$ = this.activityService.activityData$;
-  public activityContent$ = this.directusContentService.activityContent$;
+  public danContent: { completed_message: string } | null = null;
 
   public activityStepState$ = this.activityService.activityUpdateStateData$;
 
@@ -72,7 +72,7 @@ export class WizardComponent implements OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private activityService: ActivityService,
-    private directusContentService: DirectusContentService,
+    private directus: DirectusService,
     private loading: LoadingService,
     private translate: TranslateService,
     private geoService: GeoCoordinateLookupService,
@@ -139,10 +139,22 @@ export class WizardComponent implements OnDestroy {
           });
       }
     });
-    this.directusContentService.getSignUpActivityTranslations();
+
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 1000px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+
+    this.getWizardContent();
+  }
+
+  private async getWizardContent() {
+    try {
+      this.danContent = await this.directus.getContentItemForCurrentLang<{
+        completed_message: string;
+      }>('dan_wizard_translations');
+    } catch (error) {
+      this.danContent = null;
+    }
   }
 
   private getPayload(): ActivityWIP {

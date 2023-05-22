@@ -10,6 +10,7 @@ import { authConfig, restrictedUrls } from './app-auth.config';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { environment } from 'src/environments/environment';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
   declarations: [AppComponent, ExampleComponent],
   imports: [
@@ -24,7 +25,10 @@ import { environment } from 'src/environments/environment';
     }),
     NgxMatomoRouterModule
   ],
-  providers: [{ provide: Window, useValue: window }],
+  providers: [
+    { provide: Window, useValue: window },
+    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Import({TestSecurityConfiguration.class})
 @SpringBootTest
-class DefaultImageServiceTest {
+class DefaultImageServiceIT {
 
     @Autowired
     DefaultImageService service;
