@@ -1,4 +1,4 @@
-<app-base-layout>
+<app-base-layout *ngIf="noHeader$ | async as noHeader" [noHeader]="noHeader">
 <router-outlet></router-outlet>
 </app-base-layout>
 

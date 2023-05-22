@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject, takeUntil } from 'rxjs';
+import { of, Subject, takeUntil } from 'rxjs';
 import { AuthService } from './auth/services/auth.service';
+import { filter, map } from 'rxjs/operators'
+import { Router, NavigationStart } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +13,23 @@ import { AuthService } from './auth/services/auth.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject();
+  noHeader$ = of(false);
+
   constructor(
+    private router: Router,
     private titleService: Title,
     private authService: AuthService,
     private translate: TranslateService
   ) {}
-
   ngOnInit(): void {
+
+    // in case of embeddedMap hide header
+    this.noHeader$ = this.router.events.pipe(
+      filter(event => event instanceof NavigationStart),
+      // Get route w/o parameters. Expression returns true if it equals '/embeddedMap'
+      map((event: any) => event.url.split('?')[0] === '/embeddedMap'),
+    );
+
     this.translate.onLangChange
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
