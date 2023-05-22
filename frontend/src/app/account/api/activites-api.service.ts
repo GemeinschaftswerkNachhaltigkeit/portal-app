@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { User } from 'src/app/auth/models/user';
-import { DynamicFilters } from 'src/app/map/map/models/search-filter';
+import { DynamicFilters } from 'src/app/map/models/search-filter';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import Activity from 'src/app/shared/models/actvitiy';
 import PagedResponse from 'src/app/shared/models/paged-response';

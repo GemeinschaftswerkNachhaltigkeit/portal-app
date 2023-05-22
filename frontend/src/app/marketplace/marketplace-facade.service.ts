@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
 import { RegisterOrLoginService } from '../core/services/register-or-login.service.service';
-import { DynamicFilters } from '../map/map/models/search-filter';
+import { DynamicFilters } from '../map/models/search-filter';
 import Paging from '../shared/models/paging';
 import { LoadingService } from '../shared/services/loading.service';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';

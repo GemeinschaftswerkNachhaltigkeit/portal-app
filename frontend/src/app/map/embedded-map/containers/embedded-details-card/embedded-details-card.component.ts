@@ -14,10 +14,11 @@ import {
 import { MarkerService } from '../../../services/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+
 @Component({
-  selector: 'app-details-card',
-  templateUrl: './details-card.component.html',
-  styleUrls: ['./details-card.component.scss'],
+  selector: 'app-embedded-details-card',
+  templateUrl: './embedded-details-card.component.html',
+  styleUrls: ['./embedded-details-card.component.scss'],
   animations: [
     trigger('openClose', [
       state(
@@ -38,7 +39,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
     ])
   ]
 })
-export class DetailsCardComponent implements OnInit {
+export class EmbeddedDetailsCardComponent implements OnInit {
   @Input() mobile = false;
   currentResult?: SearchResult = undefined;
   remainingSdgsVisible = false;
@@ -94,3 +95,4 @@ export class DetailsCardComponent implements OnInit {
       });
   }
 }
+

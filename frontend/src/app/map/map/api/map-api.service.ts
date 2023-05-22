@@ -4,13 +4,13 @@ import { map, Observable, of } from 'rxjs';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { environment } from 'src/environments/environment';
 import PagedResponse from '../../../shared/models/paged-response';
-import SearchFilter from '../models/search-filter';
+import SearchFilter from '../../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
-} from '../models/search-result';
+} from '../../models/search-result';
 import { DateTime } from 'luxon';
 import { MatomoTracker } from '@ngx-matomo/tracker';
-import MarkerDto from '../models/markerDto';
+import MarkerDto from '../../models/markerDto';
 
 @Injectable({
   providedIn: 'root'

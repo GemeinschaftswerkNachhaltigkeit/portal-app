@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DynamicFilters } from 'src/app/map/map/models/search-filter';
+import { DynamicFilters } from 'src/app/map/models/search-filter';
 
 @Injectable({
   providedIn: 'root'

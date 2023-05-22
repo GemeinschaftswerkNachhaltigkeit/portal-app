@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable, take } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
 import { ConfirmationService } from '../core/services/confirmation.service';
-import { DynamicFilters } from '../map/map/models/search-filter';
+import { DynamicFilters } from '../map/models/search-filter';
 import { ActivityWIP } from '../shared/models/activity-wip';
 import Activity from '../shared/models/actvitiy';
 import Paging, {

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MapApiService } from './map/api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
-import { DynamicFilters } from './map/models/search-filter';
+import { DynamicFilters } from './models/search-filter';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';
 import { MapStateService } from './map/state/map-state.service';
 import { UiStateService } from './map/state/ui-state.service';
 import { Subscription, take } from 'rxjs';
 import { LoadingService } from '../shared/services/loading.service';
-import SearchResult from './map/models/search-result';
+import SearchResult from './models/search-result';
 import { ActivatedRoute, Router } from '@angular/router';
-import MarkerDto from './map/models/markerDto';
+import MarkerDto from './models/markerDto';
 
 @Injectable({
   providedIn: 'root'

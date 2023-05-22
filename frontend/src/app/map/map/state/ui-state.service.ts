@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import ActiveCard from '../models/active-card';
-import { DynamicFilters } from '../models/search-filter';
+import ActiveCard from '../../models/active-card';
+import { DynamicFilters } from '../../models/search-filter';
 
 @Injectable({
   providedIn: 'root'

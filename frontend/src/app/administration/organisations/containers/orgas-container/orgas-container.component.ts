@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { DynamicFilters } from 'src/app/map/map/models/search-filter';
+import { DynamicFilters } from 'src/app/map/models/search-filter';
 import Organisation from 'src/app/shared/models/organisation';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';

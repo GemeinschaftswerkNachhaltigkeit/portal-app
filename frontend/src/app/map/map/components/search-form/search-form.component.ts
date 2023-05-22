@@ -5,7 +5,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AdditionalFiltersModalComponent } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
-import { DynamicFilters } from '../../models/search-filter';
+import { DynamicFilters } from '../../../models/search-filter';
 
 @Component({
   selector: 'app-search-form',

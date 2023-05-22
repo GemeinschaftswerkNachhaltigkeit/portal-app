@@ -17,8 +17,8 @@ import {
   Subject,
   takeUntil
 } from 'rxjs';
-import MarkerDto from '../../models/markerDto';
-import SearchResult from '../../models/search-result';
+import MarkerDto from '../../../models/markerDto';
+import SearchResult from '../../../models/search-result';
 import { MarkerService } from '../../../services/marker.service';
 
 @Component({
