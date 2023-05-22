@@ -1,0 +1,8 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}

@@ -11,6 +11,7 @@ import { SubscriptionFacadeService } from '../../subscription-facade.service';
 export class ActivitySubscriptionActionComponent {
   @Input() activity?: Activity;
   @Input() full = false;
+  @Input() onlyIcon = false;
   @Input() short? = false;
   @Input() stroked = false;
   @Input() small = false;

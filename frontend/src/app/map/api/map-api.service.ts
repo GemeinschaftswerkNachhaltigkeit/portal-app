@@ -8,7 +8,6 @@ import SearchFilter from '../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
 } from '../models/search-result';
-import { DateTime } from 'luxon';
 import { MatomoTracker } from '@ngx-matomo/tracker';
 import MarkerDto from '../models/markerDto';
 

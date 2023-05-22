@@ -10,13 +10,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatLegacyInputModule } from '@angular/material/legacy-input';
 import { MatLegacyButtonModule } from '@angular/material/legacy-button';
+import { EventComponent } from './components/event/event.component';
+import { EventListComponent } from './components/event-list/event-list.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
     CalendarLayoutComponent,
     SearchBarComponent,
-    SearchControlsComponent
+    SearchControlsComponent,
+    EventComponent,
+    EventListComponent
   ],
   imports: [
     CommonModule,

@@ -17,6 +17,14 @@
 
     <div results>
       <ng-container *ngIf="events$ | async as events">
+        <app-event-list>
+          <ng-container *ngFor="let event of events; let i = index">
+            <app-event
+              [event]="event"
+              [last]="events.length === i + 1"
+            ></app-event>
+          </ng-container>
+        </app-event-list>
         <pre>{{ events | json }}</pre>
       </ng-container>
     </div>

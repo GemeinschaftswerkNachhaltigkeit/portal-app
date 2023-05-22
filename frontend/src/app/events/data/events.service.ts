@@ -1,13 +1,6 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import EventDto from '../models/event-dto';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  catchError,
-  map,
-  switchMap
-} from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
