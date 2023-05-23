@@ -16,6 +16,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
+import { DetailsCardComponent } from '../map/containers/details-card/details-card.component';
+
 
 import {
   LuxonDateAdapter,
@@ -46,7 +48,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MapContainerComponent,
     MapLayoutComponent,
     SearchFormComponent,
-    PaginatorWrapperComponent    
+    PaginatorWrapperComponent,
+    DetailsCardComponent
   ],
   imports: [
     SharedMapModule,
@@ -63,7 +66,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatCheckboxModule,
     MatDatepickerModule,
     MatLuxonDateModule,
-    NgxMatomoTrackerModule
+    NgxMatomoTrackerModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
