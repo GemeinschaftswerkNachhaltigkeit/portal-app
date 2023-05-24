@@ -100,7 +100,6 @@ export class MapContainerComponent implements OnInit {
   }
 
   openCard(result: SearchResult): void {
-    console.log('result', result);
     this.mapFacade.openCard(result.resultType, result.id);
     this.marker.triggerMarkerActivation(result);
   }

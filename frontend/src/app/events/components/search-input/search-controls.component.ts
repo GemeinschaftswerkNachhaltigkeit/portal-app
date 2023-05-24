@@ -1,31 +1,42 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output
-} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 export type SearchFields = {
-  query: string;
-  location: string;
+  query: string | null;
+  location: string | null;
 };
 
 @Component({
   selector: 'app-search-controls',
   templateUrl: './search-controls.component.html',
-  styleUrls: ['./search-controls.component.scss']
+  styleUrls: ['./search-controls.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: SearchControlsComponent
+    }
+  ]
 })
-export class SearchControlsComponent implements OnDestroy {
+export class SearchControlsComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder = '';
   @Input() withButton = true;
   @Input() buttonText = '';
-  @Input() value = '';
 
-  @Output() search = new EventEmitter<SearchFields>();
+  disabled = false;
+  isTouched = false;
+  onChange: (value: SearchFields) => void = (value) => {};
+  onTouched: () => void = () => {};
+
+  @Output() search = new EventEmitter<void>();
 
   unsubscribe$ = new Subject();
 
@@ -34,20 +45,38 @@ export class SearchControlsComponent implements OnDestroy {
     location: new FormControl<string>('')
   });
 
-  handleClear(): void {
-    this.search.emit({ query: '', location: '' });
+  handleSubmit(): void {
+    this.search.emit();
   }
 
-  handleSubmit(): void {
-    const values = this.formGroup.value;
-    this.search.emit({
-      query: values.query || '',
-      location: values.location || ''
+  markAsTouched(): void {
+    if (!this.isTouched) {
+      this.isTouched = true;
+      this.onTouched();
+    }
+  }
+
+  ngOnInit(): void {
+    this.formGroup.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe({
+      next: () => {
+        this.onChange({
+          query: this.formGroup.value.query || '',
+          location: this.formGroup.value.location || ''
+        });
+      }
     });
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe$.next(null);
-    this.unsubscribe$.complete();
+  writeValue(value: SearchFields): void {
+    this.formGroup.patchValue(value);
+  }
+  registerOnChange(fn: (value: SearchFields) => void): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }

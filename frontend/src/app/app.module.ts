@@ -11,6 +11,9 @@ import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { environment } from 'src/environments/environment';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent, ExampleComponent],
   imports: [
@@ -31,4 +34,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeDe, 'de');
+  }
+}

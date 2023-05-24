@@ -10,14 +10,6 @@
       [placeholder]="'forms.labels.location' | translate"
       formControlName="location"
     />
-    <button
-      type="button"
-      *ngIf="value"
-      class="clear-btn"
-      (click)="handleClear()"
-    >
-      <mat-icon>clear</mat-icon>
-    </button>
   </div>
   <button type="submit" class="button" mat-flat-button color="accent">
     {{ buttonText || 'btn.search' | translate }}

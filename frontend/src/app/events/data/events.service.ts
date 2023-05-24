@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import EventDto from '../models/event-dto';
 import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
-import Paging from 'src/app/shared/models/paging';
+import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import SearchFilter, { DynamicFilters } from '../models/search-filter';
@@ -22,6 +22,7 @@ export class EventsService {
     content: []
   });
   private eventsState = new BehaviorSubject<EventDto[]>([]);
+  initialized = false;
 
   constructor(
     private eventsApi: EventsApiService,
@@ -32,6 +33,30 @@ export class EventsService {
     private persistFilters: PersistFiltersService
   ) {
     this.triggerSearchOnQueryParamsChange();
+
+    this.searchFilters
+      .pipe(
+        switchMap((searchParams) => {
+          this.loader.start('load-events');
+          return this.eventsApi.search(searchParams, this.nextPage);
+        })
+      )
+      .subscribe({
+        next: (data: PagedResponse<EventDto>) => {
+          this.loader.stop('load-events');
+          this.initialized = true;
+          this.updateState(data);
+          this.fitlersChanged = false;
+        },
+        error: () => {
+          this.fitlersChanged = false;
+          this.loader.stop('load-events');
+          this.feedback.showFeedback(
+            'error',
+            this.translate.instant('errors.unkown')
+          );
+        }
+      });
   }
 
   get events$(): Observable<EventDto[]> {
@@ -49,35 +74,8 @@ export class EventsService {
     );
   }
 
-  init(): void {
-    this.searchFilters
-      .pipe(
-        switchMap((searchParams) => {
-          this.loader.start('load-events');
-          return this.eventsApi.search(searchParams, this.nextPage);
-        })
-      )
-      .subscribe({
-        next: (data: PagedResponse<EventDto>) => {
-          this.loader.stop('load-events');
-          this.updateState(data);
-          this.fitlersChanged = false;
-        },
-        error: () => {
-          this.fitlersChanged = false;
-          this.loader.stop('load-events');
-          this.feedback.showFeedback(
-            'error',
-            this.translate.instant('errors.unkown')
-          );
-        }
-      });
-  }
-
   search(searchFilter: SearchFilter): void {
-    this.fitlersChanged = true;
-    this.nextPage = 0;
-    this.eventsState.next([]);
+    this.reset();
     const existingFilters = this.getFilters();
     const filters = {
       ...existingFilters,
@@ -87,22 +85,31 @@ export class EventsService {
   }
 
   loadMore(): void {
-    this.loadNextPage();
-  }
-
-  private loadNextPage(): void {
-    if (!this.fitlersChanged) {
+    if (!this.fitlersChanged && this.eventsState.value.length > 0) {
       const pageInfo = this.pagedEventsState.value;
-      const itemsPerPage = 15; //defaultPaginatorOptions.pageSize
+      const itemsPerPage = defaultPaginatorOptions.pageSize;
       const total = pageInfo.totalElements ?? 0;
       const nextPage = this.nextPage + 1;
       const hasItemsLeft = total - itemsPerPage * nextPage > 0;
-      console.log('has items left', total, nextPage, hasItemsLeft);
       if (hasItemsLeft) {
         this.nextPage = nextPage;
         const filters = this.getFilters();
         this.searchFilters.next(filters);
       }
+    }
+  }
+
+  reset(): void {
+    this.fitlersChanged = true;
+    this.nextPage = 0;
+    this.eventsState.next([]);
+    this.pagedEventsState.next({ content: [] });
+  }
+
+  triggerSearch(): void {
+    if (this.initialized) {
+      this.reset();
+      this.searchFilters.next({});
     }
   }
 
@@ -118,7 +125,7 @@ export class EventsService {
     });
   }
 
-  private getFilters(): DynamicFilters {
+  getFilters(): DynamicFilters {
     return this.persistFilters.getFiltersFromUrl([
       'thematicFocus',
       'offerCat',

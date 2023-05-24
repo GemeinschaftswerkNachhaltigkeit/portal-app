@@ -7,7 +7,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { EventsService } from '../../data/events.service';
-import { SearchFields } from '../../components/search-input/search-controls.component';
+import EventDto from '../../models/event-dto';
+import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -17,10 +20,11 @@ import { SearchFields } from '../../components/search-input/search-controls.comp
 export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('marker') marker: ElementRef;
 
-  query = '';
-  location = '';
   events$ = this.eventsService.events$;
   paging$ = this.eventsService.eventsPaging$;
+  loading$ = this.loader.isLoading$();
+
+  searchControl = new FormControl({ query: '', location: '' });
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -36,17 +40,33 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   );
 
-  constructor(private eventsService: EventsService) {}
+  constructor(
+    private eventsService: EventsService,
+    private loader: LoadingService,
+    public translate: TranslateService
+  ) {}
 
-  handleSearch({ query, location }: SearchFields): void {
+  handleSearch(): void {
+    const vals = this.searchControl.value;
     this.eventsService.search({
-      query: query,
-      location: location
+      query: vals?.query,
+      location: vals?.location
     });
   }
 
   handleLoadMore(): void {
     this.eventsService.loadMore();
+  }
+
+  groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
+    const groups: { [date: string]: EventDto[] } = {};
+    events.forEach((e) => {
+      const start = e.period?.start || 'undefined';
+
+      if (!groups[start]) groups[start] = [];
+      groups[start].push(e);
+    });
+    return Object.entries(groups);
   }
 
   countFilters(): number {
@@ -62,7 +82,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.eventsService.init();
+    this.eventsService.triggerSearch();
+    const filters = this.eventsService.getFilters();
+    this.searchControl.setValue({
+      query: (filters['query'] || '') as string,
+      location: (filters['location'] || '') as string
+    });
   }
 
   ngAfterViewInit(): void {

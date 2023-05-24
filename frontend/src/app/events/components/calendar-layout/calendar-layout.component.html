@@ -19,14 +19,7 @@
         </div>
       </header>
       <section class="result-list">
-        <ng-content select="[results]" *ngIf="!loading"></ng-content>
-        <app-spinner *ngIf="loading"></app-spinner>
-        <app-alert
-          *ngIf="total <= 0 && !loading"
-          [title]="'map.titles.noData' | translate"
-        >
-          {{ 'map.texts.noData.0' | translate }}
-        </app-alert>
+        <ng-content select="[results]"></ng-content>
       </section>
     </main>
   </div>

@@ -2,7 +2,8 @@
   <app-calendar-layout [total]="paging.totalElements || 0">
     <div search-field>
       <app-search-controls
-        (search)="handleSearch($event)"
+        [formControl]="searchControl"
+        (search)="handleSearch()"
       ></app-search-controls>
     </div>
     <div filter-bar>
@@ -17,16 +18,35 @@
 
     <div results>
       <ng-container *ngIf="events$ | async as events">
-        <app-event-list>
-          <ng-container *ngFor="let event of events; let i = index">
-            <app-event
-              [event]="event"
-              [last]="events.length === i + 1"
-            ></app-event>
-          </ng-container>
-        </app-event-list>
-        <div #marker></div>
+        <div class="group" *ngFor="let group of groupEventsByDate(events)">
+          <div class="date">
+            <div class="text">
+              {{
+                group[0] | date : 'dd. MMM' : undefined : translate.currentLang
+              }}
+            </div>
+          </div>
+          <app-event-list>
+            <ng-container *ngFor="let event of group[1]; let i = index">
+              <app-event
+                [event]="event"
+                [last]="group[1].length === i + 1"
+              ></app-event>
+            </ng-container>
+          </app-event-list>
+        </div>
         <app-spinner forId="load-events"></app-spinner>
+        <app-alert
+          *ngIf="paging.totalElements! <= 0 && (loading$ | async) === false"
+          [title]="'map.titles.noData' | translate"
+        >
+          {{ 'map.texts.noData.0' | translate }}
+        </app-alert>
+        <div
+          class="placeholder"
+          [ngClass]="{ noElements: groupEventsByDate(events).length <= 0 }"
+        ></div>
+        <div #marker></div>
       </ng-container>
     </div>
     <div filters>filter</div>

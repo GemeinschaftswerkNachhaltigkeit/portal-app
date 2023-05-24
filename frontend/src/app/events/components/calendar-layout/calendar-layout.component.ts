@@ -7,5 +7,4 @@ import { Component, Input } from '@angular/core';
 })
 export class CalendarLayoutComponent {
   @Input() total!: number;
-  @Input() loading: boolean | null = false;
 }

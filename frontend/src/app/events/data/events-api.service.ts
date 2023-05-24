@@ -52,13 +52,18 @@ export class EventsApiService {
               totalPages: results.totalPages,
               content: []
             };
-            result.content = results.content.map((r) => {
-              const resType = r.resultType;
-              return {
-                ...r.activity,
-                resultType: resType
-              } as EventDto;
-            });
+            result.content = results.content
+              .map((r) => {
+                const resType = r.resultType;
+                return {
+                  ...r.activity,
+                  resultType: resType
+                } as EventDto;
+              })
+              /**
+               * Todo: Remove if implemented by backend
+               */
+              .filter((c) => !c.period?.permanent);
             return result;
           }
         )
@@ -76,12 +81,12 @@ export class EventsApiService {
       'includeExpiredActivities',
       includeExpiredActivities
     );
+    params = params.append('resultType', 'ACTIVITY');
+    params = params.append('resultType', 'DAN');
     params = params.append('includeNoCoords', includeNoCoords);
     params = params.append('page', nextPage);
-    params = params.append(
-      'size',
-      15 //defaultPaginatorOptions.pageSize
-    );
+    params = params.append('size', defaultPaginatorOptions.pageSize);
+    params = params.append('sort', `period.start,asc,ignorecase`);
     params = params.append('query', searchFilter.query || '');
     params = params.append('location', searchFilter.location || '');
 
@@ -91,6 +96,14 @@ export class EventsApiService {
 
     if (searchFilter.startDate) {
       const startDateValue = DateTime.fromISO(searchFilter.startDate)
+        .setZone('utc')
+        .toISO({ includeOffset: true });
+      if (startDateValue) {
+        params = params.append('startDate', startDateValue);
+      }
+    } else {
+      const startDateValue = DateTime.now()
+        .startOf('day')
         .setZone('utc')
         .toISO({ includeOffset: true });
       if (startDateValue) {
