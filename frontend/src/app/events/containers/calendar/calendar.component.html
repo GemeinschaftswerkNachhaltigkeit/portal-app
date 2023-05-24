@@ -25,7 +25,8 @@
             ></app-event>
           </ng-container>
         </app-event-list>
-        <pre>{{ events | json }}</pre>
+        <div #marker></div>
+        <app-spinner forId="load-events"></app-spinner>
       </ng-container>
     </div>
     <div filters>filter</div>

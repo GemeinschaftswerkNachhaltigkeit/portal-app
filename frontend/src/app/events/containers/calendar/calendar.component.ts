@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { EventsService } from '../../data/events.service';
 import { SearchFields } from '../../components/search-input/search-controls.component';
 
@@ -7,12 +14,27 @@ import { SearchFields } from '../../components/search-input/search-controls.comp
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('marker') marker: ElementRef;
+
   query = '';
   location = '';
-
   events$ = this.eventsService.events$;
   paging$ = this.eventsService.eventsPaging$;
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          this.handleLoadMore();
+        }
+      });
+    },
+    {
+      root: document.querySelector('.mat-drawer-content'),
+      rootMargin: '100px'
+    }
+  );
 
   constructor(private eventsService: EventsService) {}
 
@@ -21,6 +43,10 @@ export class CalendarComponent implements OnInit {
       query: query,
       location: location
     });
+  }
+
+  handleLoadMore(): void {
+    this.eventsService.loadMore();
   }
 
   countFilters(): number {
@@ -37,5 +63,13 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventsService.init();
+  }
+
+  ngAfterViewInit(): void {
+    this.observer.observe(this.marker.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.observer.unobserve(this.marker.nativeElement);
   }
 }

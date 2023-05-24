@@ -15,10 +15,13 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
   providedIn: 'root'
 })
 export class EventsService {
+  private nextPage = 0;
+  private fitlersChanged = false;
   private searchFilters = new BehaviorSubject<SearchFilter>({});
-  private eventsState = new BehaviorSubject<PagedResponse<EventDto>>({
+  private pagedEventsState = new BehaviorSubject<PagedResponse<EventDto>>({
     content: []
   });
+  private eventsState = new BehaviorSubject<EventDto[]>([]);
 
   constructor(
     private eventsApi: EventsApiService,
@@ -32,13 +35,11 @@ export class EventsService {
   }
 
   get events$(): Observable<EventDto[]> {
-    return this.eventsState
-      .asObservable()
-      .pipe(map((response) => response.content));
+    return this.eventsState.asObservable();
   }
 
   get eventsPaging$(): Observable<Paging> {
-    return this.eventsState.asObservable().pipe(
+    return this.pagedEventsState.asObservable().pipe(
       map((response) => ({
         number: response.number,
         size: response.size,
@@ -49,19 +50,21 @@ export class EventsService {
   }
 
   init(): void {
-    this.loader.start('load-events');
     this.searchFilters
       .pipe(
         switchMap((searchParams) => {
-          return this.eventsApi.search(searchParams);
+          this.loader.start('load-events');
+          return this.eventsApi.search(searchParams, this.nextPage);
         })
       )
       .subscribe({
         next: (data: PagedResponse<EventDto>) => {
           this.loader.stop('load-events');
-          this.eventsState.next(data);
+          this.updateState(data);
+          this.fitlersChanged = false;
         },
         error: () => {
+          this.fitlersChanged = false;
           this.loader.stop('load-events');
           this.feedback.showFeedback(
             'error',
@@ -72,12 +75,40 @@ export class EventsService {
   }
 
   search(searchFilter: SearchFilter): void {
+    this.fitlersChanged = true;
+    this.nextPage = 0;
+    this.eventsState.next([]);
     const existingFilters = this.getFilters();
     const filters = {
       ...existingFilters,
       ...searchFilter
     };
     this.persistFilters.setFiltersToUrl(filters);
+  }
+
+  loadMore(): void {
+    this.loadNextPage();
+  }
+
+  private loadNextPage(): void {
+    if (!this.fitlersChanged) {
+      const pageInfo = this.pagedEventsState.value;
+      const itemsPerPage = 15; //defaultPaginatorOptions.pageSize
+      const total = pageInfo.totalElements ?? 0;
+      const nextPage = this.nextPage + 1;
+      const hasItemsLeft = total - itemsPerPage * nextPage > 0;
+      console.log('has items left', total, nextPage, hasItemsLeft);
+      if (hasItemsLeft) {
+        this.nextPage = nextPage;
+        const filters = this.getFilters();
+        this.searchFilters.next(filters);
+      }
+    }
+  }
+
+  private updateState(data: PagedResponse<EventDto>): void {
+    this.pagedEventsState.next(data);
+    this.eventsState.next([...this.eventsState.value, ...data.content]);
   }
 
   private triggerSearchOnQueryParamsChange(): void {

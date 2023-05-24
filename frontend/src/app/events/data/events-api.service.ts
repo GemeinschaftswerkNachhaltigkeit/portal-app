@@ -20,7 +20,10 @@ export class EventsApiService {
     private readonly tracker: MatomoTracker
   ) {}
 
-  search(searchFilter: SearchFilter): Observable<PagedResponse<EventDto>> {
+  search(
+    searchFilter: SearchFilter,
+    page: number
+  ): Observable<PagedResponse<EventDto>> {
     this.tracker.trackSiteSearch(
       JSON.stringify(searchFilter, null, 2),
       'EVENTS_SEARCH'
@@ -32,7 +35,7 @@ export class EventsApiService {
           activity: Activity;
         }>
       >(`${environment.apiUrl}/search`, {
-        params: this.searchParams(searchFilter, true, true)
+        params: this.searchParams(searchFilter, page, true, true)
       })
       .pipe(
         map(
@@ -64,6 +67,7 @@ export class EventsApiService {
 
   private searchParams(
     searchFilter: SearchFilter,
+    nextPage = 0,
     includeExpiredActivities = false,
     includeNoCoords = false
   ): HttpParams {
@@ -73,10 +77,10 @@ export class EventsApiService {
       includeExpiredActivities
     );
     params = params.append('includeNoCoords', includeNoCoords);
-    params = params.append('page', searchFilter.page || '');
+    params = params.append('page', nextPage);
     params = params.append(
       'size',
-      searchFilter.size || defaultPaginatorOptions.pageSize
+      15 //defaultPaginatorOptions.pageSize
     );
     params = params.append('query', searchFilter.query || '');
     params = params.append('location', searchFilter.location || '');
