@@ -13,6 +13,11 @@
   gap: $spacing-4;
   position: relative;
 
+  &:hover {
+    background-color: $gray-light;
+    cursor: pointer;
+  }
+
   &.last {
     box-shadow: 0 1px 0 0 $gray-light inset, 0 -1px 0 0 $gray-light inset;
   }

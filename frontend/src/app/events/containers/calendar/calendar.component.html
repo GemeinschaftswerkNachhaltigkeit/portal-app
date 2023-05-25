@@ -31,6 +31,7 @@
               <app-event
                 [event]="event"
                 [last]="group[1].length === i + 1"
+                (clicked)="handleOpen($event)"
               ></app-event>
             </ng-container>
           </app-event-list>

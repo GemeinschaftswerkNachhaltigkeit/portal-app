@@ -1,4 +1,8 @@
-<div class="event" [ngClass]="{ dan: event.resultType === 'DAN', last: last }">
+<div
+  class="event"
+  [ngClass]="{ dan: event.resultType === 'DAN', last: last }"
+  (click)="open(event)"
+>
   <div class="content">
     <h3 class="title">{{ event.name }}</h3>
     <div class="location">
@@ -16,7 +20,7 @@
       [clickable]="true"
       icon="launch"
       [onlyIcon]="true"
-      (clicked)="open()"
+      (clicked)="open(event)"
     >
     </app-action>
     <app-activity-subscription-action

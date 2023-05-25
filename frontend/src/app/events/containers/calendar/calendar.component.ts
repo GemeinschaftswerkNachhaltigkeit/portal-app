@@ -11,6 +11,7 @@ import EventDto from '../../models/event-dto';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -43,6 +44,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private eventsService: EventsService,
     private loader: LoadingService,
+    private router: Router,
     public translate: TranslateService
   ) {}
 
@@ -56,6 +58,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleLoadMore(): void {
     this.eventsService.loadMore();
+  }
+
+  handleOpen({ orgaId, actiId }: { orgaId: number; actiId: number }): void {
+    this.router.navigate(['/', 'organisations', orgaId, actiId]);
   }
 
   groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
