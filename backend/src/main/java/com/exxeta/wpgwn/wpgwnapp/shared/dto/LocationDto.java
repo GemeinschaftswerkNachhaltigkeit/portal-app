@@ -26,7 +26,7 @@ public class LocationDto implements Serializable {
     private Boolean privateLocation;
 
     @URL
-    @Length(max = 200)
+    @Length(max = 1000)
     private String url;
 
     /**
