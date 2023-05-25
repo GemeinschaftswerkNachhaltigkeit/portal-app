@@ -13,6 +13,7 @@ import { MatLegacyButtonModule } from '@angular/material/legacy-button';
 import { EventComponent } from './components/event/event.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar.component';
+import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FilterSidebarComponent } from './components/filter-sidebar/filter-sideb
     MatIconModule,
     ReactiveFormsModule,
     MatLegacyInputModule,
-    MatLegacyButtonModule
+    MatLegacyButtonModule,
+    MatLegacySlideToggleModule
   ]
 })
 export class EventsModule {}

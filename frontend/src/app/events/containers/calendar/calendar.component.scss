@@ -33,6 +33,16 @@
   }
 }
 
+.slide-toggle {
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  border-bottom: 1px solid $gray-light;
+}
+
 @media screen and (min-width: $breakpoint-xs) {
   .group {
     flex-direction: row;

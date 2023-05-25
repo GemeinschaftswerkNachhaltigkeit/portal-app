@@ -52,6 +52,11 @@
     </div>
     <div filters>
       <app-filter-sidebar>
+        <div class="slide-toggle">
+          <div>Nur online Veranstaltungen?</div>
+          <mat-slide-toggle [formControl]="onlyOnlineControl" color="primary">
+          </mat-slide-toggle>
+        </div>
         <app-secondary-filters
           [data]="getFilterData()"
           (filtersChanged)="handleFiltersChanged($event)"

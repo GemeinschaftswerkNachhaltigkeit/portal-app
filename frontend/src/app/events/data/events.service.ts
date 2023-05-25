@@ -120,8 +120,6 @@ export class EventsService {
 
   private triggerSearchOnQueryParamsChange(): void {
     this.route.queryParamMap.subscribe(() => {
-      debugger;
-
       const filters = this.getFilters();
       this.searchFilters.next(filters);
     });

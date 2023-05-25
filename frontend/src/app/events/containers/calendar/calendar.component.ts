@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { AdditionalFiltersData } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -23,13 +24,14 @@ import AdditionalFilters from 'src/app/shared/models/additional-filters';
 })
 export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('marker') marker: ElementRef;
+  unsubscribe$ = new Subject();
 
   events$ = this.eventsService.events$;
   paging$ = this.eventsService.eventsPaging$;
   loading$ = this.loader.isLoading$();
 
   searchControl = new FormControl({ query: '', location: '' });
-
+  onlyOnlineControl = new FormControl(false);
   includedFilters: SecondaryFilters[] = [SecondaryFilters.THEMATIC_FOCUS];
 
   observer = new IntersectionObserver(
@@ -51,7 +53,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     private loader: LoadingService,
     private router: Router,
     public translate: TranslateService
-  ) {}
+  ) {
+    this.handleOnlyOnlineChange();
+  }
 
   handleSearch(): void {
     const vals = this.searchControl.value;
@@ -63,6 +67,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleLoadMore(): void {
     this.eventsService.loadMore();
+  }
+
+  handleOnlyOnlineChange(): void {
+    this.onlyOnlineControl.valueChanges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((value: boolean | null) => {
+        this.eventsService.search({
+          online: !!value
+        });
+      });
   }
 
   handleOpen({ orgaId, actiId }: { orgaId: number; actiId: number }): void {
@@ -81,7 +95,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleFiltersChanged(filters: AdditionalFilters): void {
-    console.log('>>>> FILTER', filters);
     this.eventsService.search(filters);
   }
 
@@ -121,5 +134,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.observer.unobserve(this.marker.nativeElement);
+    this.unsubscribe$.next(null);
+    this.unsubscribe$.complete();
   }
 }

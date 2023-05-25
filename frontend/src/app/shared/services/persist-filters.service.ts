@@ -28,12 +28,16 @@ export class PersistFiltersService {
     const filters: DynamicFilters = {};
     queryParams.keys.forEach((key) => {
       const values = queryParams.getAll(key);
-      let value: string | string[] = values.length > 1 ? values : values[0];
+      let value: string | string[] | boolean =
+        values.length > 1 ? values : values[0];
+      if (value === 'true' || value === 'false') {
+        value = value === 'true';
+      }
       lists.forEach((l) => {
         if (value && typeof value === 'string' && key === l) {
           value = [value as string];
         }
-        if (!value) {
+        if (!value && typeof value === 'string' && key === l) {
           value = [];
         }
       });
