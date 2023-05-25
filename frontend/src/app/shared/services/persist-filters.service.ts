@@ -33,6 +33,9 @@ export class PersistFiltersService {
         if (value && typeof value === 'string' && key === l) {
           value = [value as string];
         }
+        if (!value) {
+          value = [];
+        }
       });
       filters[key] = value || '';
     });

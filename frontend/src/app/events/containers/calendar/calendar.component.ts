@@ -12,6 +12,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AdditionalFiltersData } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
+import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
+import AdditionalFilters from 'src/app/shared/models/additional-filters';
 
 @Component({
   selector: 'app-calendar',
@@ -26,6 +29,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   loading$ = this.loader.isLoading$();
 
   searchControl = new FormControl({ query: '', location: '' });
+
+  includedFilters: SecondaryFilters[] = [SecondaryFilters.THEMATIC_FOCUS];
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -51,8 +56,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   handleSearch(): void {
     const vals = this.searchControl.value;
     this.eventsService.search({
-      query: vals?.query,
-      location: vals?.location
+      query: vals?.query || '',
+      location: vals?.location || ''
     });
   }
 
@@ -73,6 +78,20 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       groups[start].push(e);
     });
     return Object.entries(groups);
+  }
+
+  handleFiltersChanged(filters: AdditionalFilters): void {
+    console.log('>>>> FILTER', filters);
+    this.eventsService.search(filters);
+  }
+
+  getFilterData(): AdditionalFiltersData {
+    const filters: AdditionalFilters = this.eventsService.getFilters();
+
+    return {
+      use: this.includedFilters,
+      selectedThematicFocusValues: filters['thematicFocus']
+    };
   }
 
   countFilters(): number {

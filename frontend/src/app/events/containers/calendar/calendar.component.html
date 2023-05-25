@@ -51,7 +51,12 @@
       </ng-container>
     </div>
     <div filters>
-      <app-filter-sidebar> lorem </app-filter-sidebar>
+      <app-filter-sidebar>
+        <app-secondary-filters
+          [data]="getFilterData()"
+          (filtersChanged)="handleFiltersChanged($event)"
+        ></app-secondary-filters>
+      </app-filter-sidebar>
     </div>
   </app-calendar-layout>
 </ng-container>

@@ -48,7 +48,7 @@ export class EventsService {
           this.updateState(data);
           this.fitlersChanged = false;
         },
-        error: () => {
+        error: (e) => {
           this.fitlersChanged = false;
           this.loader.stop('load-events');
           this.feedback.showFeedback(
@@ -74,7 +74,7 @@ export class EventsService {
     );
   }
 
-  search(searchFilter: SearchFilter): void {
+  search(searchFilter: DynamicFilters): void {
     this.reset();
     const existingFilters = this.getFilters();
     const filters = {
@@ -120,16 +120,14 @@ export class EventsService {
 
   private triggerSearchOnQueryParamsChange(): void {
     this.route.queryParamMap.subscribe(() => {
+      debugger;
+
       const filters = this.getFilters();
       this.searchFilters.next(filters);
     });
   }
 
   getFilters(): DynamicFilters {
-    return this.persistFilters.getFiltersFromUrl([
-      'thematicFocus',
-      'offerCat',
-      'bestPractiseCat'
-    ]);
+    return this.persistFilters.getFiltersFromUrl(['thematicFocus']);
   }
 }
