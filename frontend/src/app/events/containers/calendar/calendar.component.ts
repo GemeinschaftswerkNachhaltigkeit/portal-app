@@ -12,10 +12,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdditionalFiltersData } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
+import {
+  AdditionalFiltersData,
+  AdditionalFiltersModalComponent
+} from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { Subject, takeUntil } from 'rxjs';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
   selector: 'app-calendar',
@@ -52,7 +56,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     private eventsService: EventsService,
     private loader: LoadingService,
     private router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public dialog: MatDialog
   ) {
     this.handleOnlyOnlineChange();
   }
@@ -116,7 +121,16 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openFilters(): void {
-    //
+    const dialogRef = this.dialog.open(AdditionalFiltersModalComponent, {
+      width: '800px',
+      data: this.getFilterData()
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('RESULTS >>>>>>', result);
+        this.eventsService.search(result);
+      }
+    });
   }
 
   ngOnInit(): void {

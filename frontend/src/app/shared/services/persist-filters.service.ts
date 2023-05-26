@@ -34,11 +34,12 @@ export class PersistFiltersService {
         value = value === 'true';
       }
       lists.forEach((l) => {
-        if (value && typeof value === 'string' && key === l) {
-          value = [value as string];
-        }
-        if (!value && typeof value === 'string' && key === l) {
-          value = [];
+        if (key === l) {
+          if (value && typeof value === 'string') {
+            value = [value as string];
+          } else {
+            value = [];
+          }
         }
       });
       filters[key] = value || '';
