@@ -125,6 +125,7 @@
     "projectSustainabilityWinner": "Award winner",
     "projectSustainabilityWinnerLong": "Award winner from project sustainability",
     "expiredActivity": "Past activity",
+    "expiredDanActivity": "Past action",
     "copied": "copied",
     "sdgs": "Sustainable development goals",
     "thematicFocus": "Subject areas",
@@ -180,6 +181,7 @@
   },
   "dan": {
     "texts": {
+      "wizard.period": "Attention! Please only create actions within the action period",
       "wizard.about": "Add the most important information about your activity.",
       "wizard.description": "Explain your activity and describe how to participate.",
       "wizard.topics": "Enter here more information and details about the location."
