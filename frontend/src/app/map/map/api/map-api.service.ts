@@ -7,11 +7,7 @@ import PagedResponse from '../../../shared/models/paged-response';
 import SearchFilter from '../../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
-<<<<<<< HEAD
 } from '../../models/search-result';
-=======
-} from '../../shared/models/search-result';
->>>>>>> add EmbeddedDetailsCardComponent
 import { DateTime } from 'luxon';
 import { MatomoTracker } from '@ngx-matomo/tracker';
 import MarkerDto from '../../models/markerDto';

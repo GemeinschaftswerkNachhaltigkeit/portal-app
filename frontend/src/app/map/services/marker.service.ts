@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import SearchResult from '../models/search-result';
-=======
-import SearchResult from '../shared/models/search-result';
->>>>>>> add EmbeddedDetailsCardComponent
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 import { MapFacadeService } from '../map-facade.service';

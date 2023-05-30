@@ -2,11 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { MapFacadeService } from '../../../map-facade.service';
-<<<<<<< HEAD
 import SearchResult from '../../../models/search-result';
-=======
-import SearchResult from '../../../shared/models/search-result';
->>>>>>> add EmbeddedDetailsCardComponent
 import { CardService } from '../../../services/card.service';
 import {
   trigger,

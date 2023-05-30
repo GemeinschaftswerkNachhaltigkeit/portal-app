@@ -7,11 +7,7 @@ import { MapStateService } from './map/state/map-state.service';
 import { UiStateService } from './map/state/ui-state.service';
 import { Subscription, take } from 'rxjs';
 import { LoadingService } from '../shared/services/loading.service';
-<<<<<<< HEAD
 import SearchResult from './models/search-result';
-=======
-import SearchResult from './shared/models/search-result';
->>>>>>> add EmbeddedDetailsCardComponent
 import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
 
