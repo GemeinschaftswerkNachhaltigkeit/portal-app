@@ -17,8 +17,13 @@ import {
   Subject,
   takeUntil
 } from 'rxjs';
+<<<<<<< HEAD
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
+=======
+import MarkerDto from '../../models/markerDto';
+import SearchResult from '../../../shared/models/search-result';
+>>>>>>> add EmbeddedDetailsCardComponent
 import { MarkerService } from '../../../services/marker.service';
 
 @Component({

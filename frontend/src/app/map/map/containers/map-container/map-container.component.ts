@@ -15,8 +15,13 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { MapFacadeService } from '../../../map-facade.service';
+<<<<<<< HEAD
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
+=======
+import { DynamicFilters } from '../../models/search-filter';
+import SearchResult from '../../../shared/models/search-result';
+>>>>>>> add EmbeddedDetailsCardComponent
 import { MarkerService } from '../../../services/marker.service';
 
 @Component({

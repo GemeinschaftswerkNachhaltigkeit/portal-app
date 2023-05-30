@@ -2,8 +2,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import Paging from 'src/app/shared/models/paging';
 import PagedResponse from '../../../shared/models/paged-response';
+<<<<<<< HEAD
 import MarkerDto from '../../models/markerDto';
 import SearchResult from '../../models/search-result';
+=======
+import MarkerDto from '../models/markerDto';
+import SearchResult from '../../shared/models/search-result';
+>>>>>>> add EmbeddedDetailsCardComponent
 
 @Injectable({
   providedIn: 'root'
