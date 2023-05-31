@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { MapFacadeService } from '../../../map-facade.service';
+import { EmbeddedMapFacade } from '../../../map-facade.service';
 import SearchResult from '../../../models/search-result';
 import { CardService } from '../../../services/card.service';
 import {
@@ -46,7 +46,7 @@ export class EmbeddedDetailsCardComponent implements OnInit {
   unsubscribe$ = new Subject();
 
   constructor(
-    private mapFacade: MapFacadeService,
+    private mapFacade: EmbeddedMapFacade,
     private router: Router,
     private route: ActivatedRoute,
     public card: CardService,

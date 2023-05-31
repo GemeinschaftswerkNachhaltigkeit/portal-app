@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MapFacadeService } from '../../../map-facade.service';
+import { EmbeddedMapFacade } from '../../../map-facade.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class EmbeddedMapContainerComponent implements OnInit{
   center: L.LatLngTuple = [0,0];
 
   constructor(
-    private mapFacade: MapFacadeService,
+    private mapFacade: EmbeddedMapFacade,
     private readonly route: ActivatedRoute,
   ) { }
 

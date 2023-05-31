@@ -14,7 +14,7 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { MapFacadeService } from '../../../map-facade.service';
+import { InternalMapFacade } from '../../../map-facade.service';
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
 import { MarkerService } from '../../../services/marker.service';
@@ -45,7 +45,7 @@ export class MapContainerComponent implements OnInit {
   loading$ = this.loading.isLoading$('map-search');
 
   constructor(
-    private mapFacade: MapFacadeService,
+    private mapFacade: InternalMapFacade,
     private loading: LoadingService,
     private route: ActivatedRoute,
     private marker: MarkerService,

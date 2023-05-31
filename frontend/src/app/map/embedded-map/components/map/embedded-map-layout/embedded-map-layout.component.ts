@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MapFacadeService } from '../../../../map-facade.service';
+import { EmbeddedMapFacade } from '../../../../map-facade.service';
 
 @Component({
   selector: 'app-embedded-map-layout',
@@ -10,7 +10,7 @@ export class EmbeddedMapLayoutComponent {
   showFullMap$ = this.facade.showFullMap$;
 
   constructor(
-    private facade: MapFacadeService,    
+    private facade: EmbeddedMapFacade,    
   ) { }
   
   hasDetail(): boolean {

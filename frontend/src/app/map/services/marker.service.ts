@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { MapFacadeService } from '../map-facade.service';
+import { InternalMapFacade } from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
@@ -100,7 +100,7 @@ export class MarkerService {
   markerLeaved$ = new BehaviorSubject(null);
 
   constructor(
-    private mapFacade: MapFacadeService,
+    private mapFacade: InternalMapFacade,
     private utils: UtilsService
   ) {}
 

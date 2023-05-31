@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MapApiService } from './map/api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
 import { DynamicFilters } from './models/search-filter';
@@ -10,21 +10,22 @@ import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
 import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
+import { SharedMapModule } from './shared-map.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: SharedMapModule
 })
-export class MapFacadeService {
-  constructor(
-    private mapApi: MapApiService,
-    private mapState: MapStateService,
-    private uiState: UiStateService,
-    private persistFilters: PersistFiltersService,
-    private loading: LoadingService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
-
+abstract class SharedMapFacade {
+  // explanation inheritance with dependency injection see here:
+  // https://www.danywalls.com/using-the-inject-function-in-angular-15
+  mapApi = inject(MapApiService);
+  mapState = inject(MapStateService);
+  uiState = inject(UiStateService);
+  persistFilters = inject(PersistFiltersService);
+  loading = inject(LoadingService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  
   listQueryParams = [
     'thematicFocus',
     'sdgs',
@@ -214,5 +215,21 @@ export class MapFacadeService {
 
   setEmbedded(isEmbedded: boolean) {
     this.mapState.isEmbedded = isEmbedded;
+  }
+}
+
+@Injectable({providedIn: SharedMapModule})
+export class InternalMapFacade extends SharedMapFacade {
+
+  constructor() { 
+    super();
+  }
+}
+
+@Injectable({providedIn: SharedMapModule})
+export class EmbeddedMapFacade extends SharedMapFacade {
+
+  constructor() { 
+    super();
   }
 }
