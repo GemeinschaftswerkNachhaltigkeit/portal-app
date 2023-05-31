@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapFacadeService } from '../../../map-facade.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-embedded-map-container',
@@ -7,15 +8,26 @@ import { MapFacadeService } from '../../../map-facade.service';
   styleUrls: ['./embedded-map-container.component.scss']
 })
 export class EmbeddedMapContainerComponent implements OnInit{
+  zoom: number | undefined;
+  center: L.LatLngTuple = [0,0];
 
   constructor(
     private mapFacade: MapFacadeService,
+    private readonly route: ActivatedRoute,
   ) { }
 
   markers$ = this.mapFacade.markers$;
-  germanyCenter: L.LatLngTuple = [51.1642292, 10.4541194];
+
 
   ngOnInit() {
+    // get center from url and trim spaces. If it does not exist use Germanys center point.
+    const centerFromURL = <L.LatLngTuple | undefined>this.route.snapshot.queryParamMap.get('center')?.split(',').map((item: string) => item.trim());
+    const germanyCenter: L.LatLngTuple = [51.1642292,10.4541194];
+    this.center = centerFromURL ? centerFromURL : germanyCenter;
+
+    // get zoom level from url
+    this.zoom = <number | undefined>(this.route.snapshot.queryParamMap.get('zoom') as unknown);
+
     this.mapFacade.setEmbedded(true);
     this.mapFacade.setInitalFilters();
     // todo: Refactor MapFacadeService since search() determines cards and markers. But we only need markers here.

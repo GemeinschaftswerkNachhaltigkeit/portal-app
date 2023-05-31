@@ -2,8 +2,9 @@
     <div map>
       <app-embedded-map
         *ngIf="markers$ | async as markers"
-        [center]="germanyCenter"
+        [center]="center"
         [data]="markers"
+        [zoom]="zoom"
         (mapMoved)="mapMovedHandler($event)"
       ></app-embedded-map>
     </div>

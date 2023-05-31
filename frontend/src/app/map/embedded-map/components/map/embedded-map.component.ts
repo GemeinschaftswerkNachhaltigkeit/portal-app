@@ -30,6 +30,7 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
   @ViewChild('mapRef') mapRef: ElementRef<HTMLDivElement> | null = null;
   @Input() data: MarkerDto[] = [];
   @Input() center?: L.LatLngTuple;
+  @Input() zoom?: number | undefined;
   @Output() mapMoved = new EventEmitter<string>();
   private map: L.Map | null = null;
   unsubscribe$ = new Subject();
@@ -46,8 +47,9 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
     const screenWidth = this.getScreenWidth();
     this.map = L.map('map', {
       center: this.center,
-      zoom: screenWidth && screenWidth < 1200 ? 6 : 8,
-      // minZoom: 4,
+      zoom: this.zoom // in case zoom is provided in URL, use it. Otherwise set it depending on screenwidth.
+        ? this.zoom
+        : screenWidth && screenWidth < 1200 ? 6 : 8,
       maxZoom: 17
     });
     const tiles = L.tileLayer(
@@ -67,11 +69,6 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
     if (this.map) {
       const map = this.map;
       const screenWidth = this.mapRef?.nativeElement?.offsetWidth;
-      // if (screenWidth && screenWidth > 1199) {
-      //   this.map.fitBounds(this.map.getBounds(), {
-      //     paddingTopLeft: [800, 10]
-      //   });
-      // }
 
       this.map.on('moveend', () => {
         this.marker.setExitingActiveMarker(map, this.data);
