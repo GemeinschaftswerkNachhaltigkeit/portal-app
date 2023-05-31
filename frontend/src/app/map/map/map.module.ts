@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MapContainerComponent } from './containers/map-container/map-container.component';
-// import { SharedModule } from '../../shared/shared.module';
 import { SharedMapModule } from '../shared-map.module';
 import { MapRoutingModule } from './map-routing.module';
 import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
@@ -17,6 +16,7 @@ import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { DetailsCardComponent } from '../map/containers/details-card/details-card.component';
+import { MapComponent } from './components/map/map.component';
 
 
 import {
@@ -45,6 +45,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
 
 @NgModule({
   declarations: [
+    MapComponent,
     MapContainerComponent,
     MapLayoutComponent,
     SearchFormComponent,

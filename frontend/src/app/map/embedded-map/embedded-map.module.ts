@@ -5,12 +5,14 @@ import { EmbeddedMapRoutingModule } from './embedded-map-routing.module';
 import { EmbeddedMapContainerComponent } from './containers/embedded-map-container/embedded-map-container.component';
 import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout/embedded-map-layout.component';
 import { EmbeddedDetailsCardComponent } from './containers/embedded-details-card/embedded-details-card.component';
+import { EmbeddedMapComponent } from './components/map/embedded-map.component';
 
 @NgModule({
   declarations: [
     EmbeddedMapContainerComponent,
     EmbeddedMapLayoutComponent,
-    EmbeddedDetailsCardComponent
+    EmbeddedDetailsCardComponent,
+    EmbeddedMapComponent
   ],
   imports: [
     EmbeddedMapRoutingModule,

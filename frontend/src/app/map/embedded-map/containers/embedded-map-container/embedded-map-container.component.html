@@ -1,11 +1,11 @@
 <app-embedded-map-layout>
     <div map>
-      <app-map
+      <app-embedded-map
         *ngIf="markers$ | async as markers"
         [center]="germanyCenter"
         [data]="markers"
         (mapMoved)="mapMovedHandler($event)"
-      ></app-map>
+      ></app-embedded-map>
     </div>
     <app-embedded-details-card detailsDesktop></app-embedded-details-card>
     <app-embedded-details-card detailsMobile [mobile]="true"></app-embedded-details-card>

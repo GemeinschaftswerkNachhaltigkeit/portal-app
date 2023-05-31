@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { MapComponent } from './map/components/map/map.component';
 import { DetailsLinkComponent } from './components/details-link/details-link.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -8,7 +7,6 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    MapComponent,
     DetailsLinkComponent,
   ],
   imports: [
@@ -17,7 +15,6 @@ import { CommonModule } from '@angular/common';
     SharedModule
   ],
   exports: [
-    MapComponent,
     DetailsLinkComponent,
     SharedModule,
     MatIconModule
