@@ -152,14 +152,6 @@
             </div>
           </button>
         </div>
-        <div class="group">
-          <h5 class="subtitle">{{ 'map.labels.thematicFocus' | translate }}</h5>
-          <div class="thematicFocus">
-            <ng-container *ngFor="let topic of currentResult?.thematicFocus">
-              <app-topic>{{ 'thematicFocus.' + topic | translate }}</app-topic>
-            </ng-container>
-          </div>
-        </div>
         <div
           class="group"
           *ngIf="
@@ -175,28 +167,4 @@
       </main>
     </ng-container>
   </div>
-  <footer class="footer">
-    <div class="info-btn">
-      <app-details-link [currentResult]="currentResult">
-        <button mat-flat-button color="accent">
-          {{ 'map.buttons.allInformation' | translate }}
-        </button>
-      </app-details-link>
-    </div>
-
-    <app-organisation-subscription-action
-      *ngIf="card.isOrga(currentResult?.resultType)"
-      [short]="true"
-      [stroked]="true"
-      [organisation]="utils.asOrga(currentResult)"
-    >
-    </app-organisation-subscription-action>
-    <app-activity-subscription-action
-      *ngIf="card.isActivity(currentResult?.resultType)"
-      [short]="true"
-      [stroked]="true"
-      [activity]="utils.asActivity(currentResult)"
-    >
-    </app-activity-subscription-action>
-  </footer>
 </div>
