@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts } from '@angular/router';
-import { slideInAnimation } from '../../../../animations';
+import { slideInAnimation } from '../../../animations';
 import { MapFacadeService } from '../../../../map-facade.service';
 
 @Component({
