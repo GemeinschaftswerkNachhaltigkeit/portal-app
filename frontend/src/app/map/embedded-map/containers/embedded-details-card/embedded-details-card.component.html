@@ -152,18 +152,6 @@
             </div>
           </button>
         </div>
-        <div
-          class="group"
-          *ngIf="
-            card.isActivity(currentResult.resultType) &&
-            currentResult.organisation?.name
-          "
-        >
-          <h5 class="subtitle">
-            {{ 'map.labels.relatedOrganisation' | translate }}
-          </h5>
-          <p>{{ currentResult.organisation?.name }}</p>
-        </div>
       </main>
     </ng-container>
   </div>
