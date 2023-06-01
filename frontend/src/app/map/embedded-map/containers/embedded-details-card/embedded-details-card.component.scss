@@ -100,7 +100,6 @@
     .body {
       padding: $spacing-4;
       padding-top: 0;
-      padding-bottom: 12rem;
       display: grid;
       gap: $spacing-6;
       position: relative;
@@ -192,23 +191,6 @@
       }
     }
   }
-  .footer {
-    position: absolute;
-    bottom: 70px;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    padding: 0 $spacing-4;
-    z-index: $z1;
-    box-shadow: 0 2px 0 0 $gray-light inset;
-    .info-btn {
-      margin-right: $spacing-2;
-    }
-    // box-shadow: 0 -2px 0 0 black;
-  }
 }
 
 .wrapper {
@@ -217,18 +199,12 @@
     .details {
       position: static;
     }
-    .body {
-      padding-bottom: $spacing-4;
-    }
-    .footer {
-      position: static;
-    }
   }
 }
 
-@media screen and (min-width: $breakpoint-md) {
+@media screen {
   :host {
-    width: 100%;
+    width: 40%;
     height: 100%;
     left: auto;
     top: auto;
@@ -239,10 +215,6 @@
     }
     .details {
       top: $spacing-8;
-      bottom: $spacing-8;
-    }
-    .footer {
-      bottom: $spacing-8;
     }
   }
 }

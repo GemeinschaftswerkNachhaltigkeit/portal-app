@@ -30,7 +30,6 @@ export class EmbeddedMapContainerComponent implements OnInit{
 
     this.mapFacade.setEmbedded(true);
     this.mapFacade.setInitalFilters();
-    // todo: Refactor MapFacadeService since search() determines cards and markers. But we only need markers here.
     this.mapFacade.search();
   }
 
