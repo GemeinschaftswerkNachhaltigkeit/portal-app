@@ -126,6 +126,44 @@ export abstract class SharedMapFacade {
       });
   }
 
+  search(searchFilter?: DynamicFilters): void {
+    this.loading.start('map-search');
+    const existingFilters = this.uiState.filterValues;
+    let filters;
+    if (searchFilter) {
+      if (!searchFilter['initiator']) {
+        delete searchFilter['initiator'];
+      }
+      if (!searchFilter['projectSustainabilityWinner']) {
+        delete searchFilter['projectSustainabilityWinner'];
+      }
+      filters = {
+        ...searchFilter,
+        envelope: existingFilters['envelope']
+      };
+      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map']);
+    } else {
+      filters = existingFilters;
+    }
+
+    this.uiState.setFilters(filters);
+    if (this.searchRequest) {
+      this.searchRequest.unsubscribe();
+    }
+    if (!filters['envelope']) {
+      delete filters['envelope'];
+    } else {
+      this.uiState.setMapInitialised();
+    }
+
+    this.initiateSearch(filters);
+  }
+
+  protected initiateSearch(filters: DynamicFilters) {
+    this.searchCards(filters);
+    this.searchMarkers(filters);
+  }
+
   protected searchCards(filters: DynamicFilters): void {
     this.searchRequest = this.mapApi.search(filters).subscribe({
       next: (resp: PagedResponse<SearchResult>) => {
@@ -144,6 +182,11 @@ export abstract class SharedMapFacade {
         this.mapState.setMarkers(resp);
       }
     });
+  }
+
+  setBoundingBox(box: string): void {
+    this.uiState.setEnvelope(box);
+    this.search();
   }
 
   setEmbedded(isEmbedded: boolean) {
@@ -188,46 +231,6 @@ export class InternalMapFacade extends SharedMapFacade {
     this.search({ ...filters, page, size });
   }
 
-
-
-  search(searchFilter?: DynamicFilters): void {
-    this.loading.start('map-search');
-    const existingFilters = this.uiState.filterValues;
-    let filters;
-    if (searchFilter) {
-      if (!searchFilter['initiator']) {
-        delete searchFilter['initiator'];
-      }
-      if (!searchFilter['projectSustainabilityWinner']) {
-        delete searchFilter['projectSustainabilityWinner'];
-      }
-      filters = {
-        ...searchFilter,
-        envelope: existingFilters['envelope']
-      };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', 'map']);
-    } else {
-      filters = existingFilters;
-    }
-
-    this.uiState.setFilters(filters);
-    if (this.searchRequest) {
-      this.searchRequest.unsubscribe();
-    }
-    if (!filters['envelope']) {
-      delete filters['envelope'];
-    } else {
-      this.uiState.setMapInitialised();
-    }
-    this.searchCards(filters);
-    this.searchMarkers(filters);
-  }
-
-  setBoundingBox(box: string): void {
-    this.uiState.setEnvelope(box);
-    this.search();
-  }
-
 }
 
 // MapFacade services for embedded map
@@ -238,40 +241,8 @@ export class EmbeddedMapFacade extends SharedMapFacade {
     super();
   }
 
-  search(searchFilter?: DynamicFilters): void {
-    this.loading.start('map-search');
-    const existingFilters = this.uiState.filterValues;
-    let filters;
-    if (searchFilter) {
-      if (!searchFilter['initiator']) {
-        delete searchFilter['initiator'];
-      }
-      if (!searchFilter['projectSustainabilityWinner']) {
-        delete searchFilter['projectSustainabilityWinner'];
-      }
-      filters = {
-        ...searchFilter,
-        envelope: existingFilters['envelope']
-      };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', 'embeddedMap']);
-    } else {
-      filters = existingFilters;
-    }
-
-    this.uiState.setFilters(filters);
-    if (this.searchRequest) {
-      this.searchRequest.unsubscribe();
-    }
-    if (!filters['envelope']) {
-      delete filters['envelope'];
-    } else {
-      this.uiState.setMapInitialised();
-    }
+  override initiateSearch(filters: DynamicFilters) {
     this.searchMarkers(filters);
   }
 
-  setBoundingBox(box: string): void {
-    this.uiState.setEnvelope(box);
-    this.search();
-  }
 }
