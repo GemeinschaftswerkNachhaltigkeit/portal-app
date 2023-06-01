@@ -13,7 +13,7 @@ import MarkerDto from './models/markerDto';
 import { SharedMapModule } from './shared-map.module';
 
 @Injectable({
-  providedIn: SharedMapModule
+  providedIn: 'root'
 })
 abstract class SharedMapFacade {
   // explanation inheritance with dependency injection see here:
@@ -25,7 +25,7 @@ abstract class SharedMapFacade {
   loading = inject(LoadingService);
   router = inject(Router);
   route = inject(ActivatedRoute);
-  
+
   listQueryParams = [
     'thematicFocus',
     'sdgs',
@@ -218,18 +218,18 @@ abstract class SharedMapFacade {
   }
 }
 
-@Injectable({providedIn: SharedMapModule})
+@Injectable({providedIn: 'root'})
 export class InternalMapFacade extends SharedMapFacade {
 
-  constructor() { 
+  constructor() {
     super();
   }
 }
 
-@Injectable({providedIn: SharedMapModule})
+@Injectable({providedIn: 'root'})
 export class EmbeddedMapFacade extends SharedMapFacade {
 
-  constructor() { 
+  constructor() {
     super();
   }
 }
