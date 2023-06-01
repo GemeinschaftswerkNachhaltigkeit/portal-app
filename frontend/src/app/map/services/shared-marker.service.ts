@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { InternalMapFacade } from '../map-facade.service';
+import {InternalMapFacade, EmbeddedMapFacade, SharedMapFacade} from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
@@ -82,7 +82,7 @@ const getClusterIcon = (
 @Injectable({
   providedIn: 'root'
 })
-export class MarkerService {
+abstract class SharedMarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
   activityMarkers: L.MarkerClusterGroup | null = null;
@@ -99,10 +99,10 @@ export class MarkerService {
   });
   markerLeaved$ = new BehaviorSubject(null);
 
-  constructor(
-    private mapFacade: InternalMapFacade,
-    private utils: UtilsService
-  ) {}
+  // explanation inheritance with dependency injection see here:
+  // https://www.danywalls.com/using-the-inject-function-in-angular-15
+  utils = inject(UtilsService);
+  mapFacade = inject(SharedMapFacade);
 
   makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number): void {
     this.organisationMarkers?.clearLayers();
@@ -168,6 +168,31 @@ export class MarkerService {
     this.setExitingActiveMarker(map, data);
   }
 
+  markerClickHandler(
+    map: L.Map,
+    marker: MarkerDto,
+    markers: MarkerDto[],
+    mapWidth?: number
+  ): void {
+    this.mapFacade.openCard(marker.resultType, marker.id);
+    // this.scrollToCard(marker.resultType, marker.id);
+
+    this.activateMarker(map, marker, markers, mapWidth);
+  }
+
+  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
+    const card = this.mapFacade.getActiveResult();
+    const marker = this.findMarker(markers, card);
+    if (card && marker) {
+      this.handleActiveMarker(
+        map,
+        this.getSingleMarkerData(marker),
+        undefined,
+        false
+      );
+    }
+  }
+
   makerKey(res: MarkerDto): string {
     return `${res.resultType}-${res.id}`;
   }
@@ -199,18 +224,6 @@ export class MarkerService {
 
   triggerMarkerLeaved(): void {
     this.markerLeaved$.next(null);
-  }
-
-  markerClickHandler(
-    map: L.Map,
-    marker: MarkerDto,
-    markers: MarkerDto[],
-    mapWidth?: number
-  ): void {
-    this.mapFacade.openCard(marker.resultType, marker.id);
-    // this.scrollToCard(marker.resultType, marker.id);
-
-    this.activateMarker(map, marker, markers, mapWidth);
   }
 
   activateMarker(
@@ -254,18 +267,6 @@ export class MarkerService {
     return;
   }
 
-  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
-    const card = this.mapFacade.getActiveResult();
-    const marker = this.findMarker(markers, card);
-    if (card && marker) {
-      this.handleActiveMarker(
-        map,
-        this.getSingleMarkerData(marker),
-        undefined,
-        false
-      );
-    }
-  }
   hoverMarker(
     map: L.Map,
     searchResult: SearchResult,
@@ -476,7 +477,7 @@ export class MarkerService {
     this.utils.scrollToAnchor(`card-${type}${id}`, 200);
   }
 
-  private getMarkerData(
+  protected getMarkerData(
     data: MarkerDto[]
   ): { lon?: number; lat?: number; data: MarkerDto }[] {
     return data.map((d) => {
@@ -500,5 +501,24 @@ export class MarkerService {
       data: marker,
       ...coordinates
     };
+  }
+}
+
+// Marker service for internal map
+@Injectable({providedIn: 'root'})
+export class InternalMapMarkerService extends SharedMarkerService {
+  override mapFacade = inject(InternalMapFacade);
+  constructor() {
+    super();
+  }
+}
+
+
+// Marker service for embedded map
+@Injectable({providedIn: 'root'})
+export class EmbeddedMapMarkerService extends SharedMarkerService {
+  override mapFacade = inject(EmbeddedMapFacade);
+  constructor() {
+    super();
   }
 }

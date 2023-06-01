@@ -19,7 +19,7 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { MarkerService } from '../../../services/marker.service';
+import { EmbeddedMapMarkerService } from '../../../services/shared-marker.service';
 
 @Component({
   selector: 'app-embedded-map',
@@ -37,7 +37,7 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
   mapMoves = new BehaviorSubject<string>('');
   mapInitialized = false;
 
-  constructor(private marker: MarkerService) {}
+  constructor(private marker: EmbeddedMapMarkerService) {}
 
   private getScreenWidth(): number | undefined {
     return this.mapRef?.nativeElement?.offsetWidth;

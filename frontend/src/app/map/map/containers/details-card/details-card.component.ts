@@ -11,7 +11,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { MarkerService } from '../../../services/marker.service';
+import { InternalMapMarkerService } from '../../../services/shared-marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 @Component({
@@ -50,7 +50,7 @@ export class DetailsCardComponent implements OnInit {
     private route: ActivatedRoute,
     public card: CardService,
     public utils: UtilsService,
-    private marker: MarkerService,
+    private marker: InternalMapMarkerService,
     private imgService: ImgService
   ) {}
 
