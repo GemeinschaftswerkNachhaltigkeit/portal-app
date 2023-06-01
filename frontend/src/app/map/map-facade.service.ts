@@ -12,10 +12,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
 import { SharedMapModule } from './shared-map.module';
 
-@Injectable({
-  providedIn: 'root'
-})
-abstract class SharedMapFacade {
+// common map facade services
+@Injectable({providedIn: 'root'})
+export abstract class SharedMapFacade {
   // explanation inheritance with dependency injection see here:
   // https://www.danywalls.com/using-the-inject-function-in-angular-15
   mapApi = inject(MapApiService);
@@ -46,65 +45,6 @@ abstract class SharedMapFacade {
 
   searchRequest?: Subscription;
 
-  toggleMap(): void {
-    this.uiState.toggleMap();
-  }
-
-  isActiveCard(type: string, id: number | undefined): boolean {
-    return (
-      this.uiState.activeCardValue?.id === id &&
-      this.uiState.activeCardValue?.type.toUpperCase() === type.toUpperCase()
-    );
-  }
-
-  getActiveResult(): SearchResult | undefined {
-    const card = this.uiState.activeCardValue;
-    return this.mapState.getResultForIdAndType(card?.type, card?.id);
-  }
-
-  hoverActive(): boolean {
-    return !!this.uiState.hoveredCardValue;
-  }
-
-  isHoveredCard(type: string, id: number | undefined): boolean {
-    return (
-      this.uiState.hoveredCardValue?.id === id &&
-      this.uiState.hoveredCardValue?.type === type
-    );
-  }
-
-  hasActiveCard(): boolean {
-    return !!this.uiState.activeCardId;
-  }
-
-  setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
-    this.uiState.setHoveredCard(hoveredCard);
-  }
-
-  clearHoveredCard(): void {
-    this.uiState.setHoveredCard(undefined);
-  }
-
-  setActiveCard(activeCard?: { type: string; id?: number }): void {
-    if (!this.isActiveCard(activeCard?.type || '', activeCard?.id)) {
-      this.mapState.setCurrentResult(null);
-      const filters = this.uiState.filterValues;
-
-      if (activeCard?.id && activeCard?.type) {
-        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
-          queryParams: {
-            ...filters,
-            type: activeCard?.type,
-            id: activeCard?.id
-          },
-          replaceUrl: true,
-          relativeTo: this.route
-        });
-      }
-      this.uiState.setActiveCard(activeCard);
-    }
-  }
-
   openCard(type: string, id?: string | number): void {
     if (id) {
       this.setActiveCard({
@@ -129,15 +69,45 @@ abstract class SharedMapFacade {
     });
   }
 
+  setActiveCard(activeCard?: { type: string; id?: number }): void {
+    if (!this.isActiveCard(activeCard?.type || '', activeCard?.id)) {
+      this.mapState.setCurrentResult(null);
+      const filters = this.uiState.filterValues;
+
+      if (activeCard?.id && activeCard?.type) {
+        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
+          queryParams: {
+            ...filters,
+            type: activeCard?.type,
+            id: activeCard?.id
+          },
+          replaceUrl: true,
+          relativeTo: this.route
+        });
+      }
+      this.uiState.setActiveCard(activeCard);
+    }
+  }
+
+  getActiveResult(): SearchResult | undefined {
+    const card = this.uiState.activeCardValue;
+    return this.mapState.getResultForIdAndType(card?.type, card?.id);
+  }
+
+  hasActiveCard(): boolean {
+    return !!this.uiState.activeCardId;
+  }
+
+  isActiveCard(type: string, id: number | undefined): boolean {
+    return (
+      this.uiState.activeCardValue?.id === id &&
+      this.uiState.activeCardValue?.type.toUpperCase() === type.toUpperCase()
+    );
+  }
+
   setInitalFilters(): void {
     const filters = this.persistFilters.getFiltersFromUrl(this.listQueryParams);
     this.uiState.setFilters(filters);
-  }
-
-  changePage(page: number, size: number) {
-    this.setActiveCard();
-    const filters = this.uiState.filterValues;
-    this.search({ ...filters, page, size });
   }
 
   getById(type: string, id: number): void {
@@ -156,10 +126,69 @@ abstract class SharedMapFacade {
       });
   }
 
-  setBoundingBox(box: string): void {
-    this.uiState.setEnvelope(box);
-    this.search();
+  protected searchCards(filters: DynamicFilters): void {
+    this.searchRequest = this.mapApi.search(filters).subscribe({
+      next: (resp: PagedResponse<SearchResult>) => {
+        this.mapState.setSearchResponse(resp);
+        this.loading.stop('map-search');
+      },
+      error: () => {
+        this.loading.stop('map-search');
+      }
+    });
   }
+
+  protected searchMarkers(filters: DynamicFilters): void {
+    this.searchRequest = this.mapApi.searchMarkers(filters).subscribe({
+      next: (resp: MarkerDto[]) => {
+        this.mapState.setMarkers(resp);
+      }
+    });
+  }
+
+  setEmbedded(isEmbedded: boolean) {
+    this.mapState.isEmbedded = isEmbedded;
+  }
+}
+
+// MapFacade services for internal map
+@Injectable({providedIn: 'root'})
+export class InternalMapFacade extends SharedMapFacade {
+
+  constructor() {
+    super();
+  }
+
+  toggleMap(): void {
+    this.uiState.toggleMap();
+  }
+
+  hoverActive(): boolean {
+    return !!this.uiState.hoveredCardValue;
+  }
+
+  setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
+    this.uiState.setHoveredCard(hoveredCard);
+  }
+
+  isHoveredCard(type: string, id: number | undefined): boolean {
+    return (
+      this.uiState.hoveredCardValue?.id === id &&
+      this.uiState.hoveredCardValue?.type === type
+    );
+  }
+
+  clearHoveredCard(): void {
+    this.uiState.setHoveredCard(undefined);
+  }
+
+  changePage(page: number, size: number) {
+    this.setActiveCard();
+    const filters = this.uiState.filterValues;
+    this.search({ ...filters, page, size });
+  }
+
+
 
   search(searchFilter?: DynamicFilters): void {
     this.loading.start('map-search');
@@ -176,7 +205,7 @@ abstract class SharedMapFacade {
         ...searchFilter,
         envelope: existingFilters['envelope']
       };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map']);
+      this.persistFilters.setFiltersToUrl(searchFilter, ['/', 'map']);
     } else {
       filters = existingFilters;
     }
@@ -194,42 +223,55 @@ abstract class SharedMapFacade {
     this.searchMarkers(filters);
   }
 
-  private searchCards(filters: DynamicFilters): void {
-    this.searchRequest = this.mapApi.search(filters).subscribe({
-      next: (resp: PagedResponse<SearchResult>) => {
-        this.mapState.setSearchResponse(resp);
-        this.loading.stop('map-search');
-      },
-      error: () => {
-        this.loading.stop('map-search');
-      }
-    });
-  }
-  private searchMarkers(filters: DynamicFilters): void {
-    this.searchRequest = this.mapApi.searchMarkers(filters).subscribe({
-      next: (resp: MarkerDto[]) => {
-        this.mapState.setMarkers(resp);
-      }
-    });
+  setBoundingBox(box: string): void {
+    this.uiState.setEnvelope(box);
+    this.search();
   }
 
-  setEmbedded(isEmbedded: boolean) {
-    this.mapState.isEmbedded = isEmbedded;
-  }
 }
 
-@Injectable({providedIn: 'root'})
-export class InternalMapFacade extends SharedMapFacade {
-
-  constructor() {
-    super();
-  }
-}
-
+// MapFacade services for embedded map
 @Injectable({providedIn: 'root'})
 export class EmbeddedMapFacade extends SharedMapFacade {
 
   constructor() {
     super();
+  }
+
+  search(searchFilter?: DynamicFilters): void {
+    this.loading.start('map-search');
+    const existingFilters = this.uiState.filterValues;
+    let filters;
+    if (searchFilter) {
+      if (!searchFilter['initiator']) {
+        delete searchFilter['initiator'];
+      }
+      if (!searchFilter['projectSustainabilityWinner']) {
+        delete searchFilter['projectSustainabilityWinner'];
+      }
+      filters = {
+        ...searchFilter,
+        envelope: existingFilters['envelope']
+      };
+      this.persistFilters.setFiltersToUrl(searchFilter, ['/', 'embeddedMap']);
+    } else {
+      filters = existingFilters;
+    }
+
+    this.uiState.setFilters(filters);
+    if (this.searchRequest) {
+      this.searchRequest.unsubscribe();
+    }
+    if (!filters['envelope']) {
+      delete filters['envelope'];
+    } else {
+      this.uiState.setMapInitialised();
+    }
+    this.searchMarkers(filters);
+  }
+
+  setBoundingBox(box: string): void {
+    this.uiState.setEnvelope(box);
+    this.search();
   }
 }
