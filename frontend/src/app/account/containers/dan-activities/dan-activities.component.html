@@ -7,8 +7,7 @@
         [showNoEntriesWarning]="
           (loading$ | async) !== true &&
           !activities.length &&
-          !activityWips.length &&
-          utils.hasOrga()
+          !activityWips.length
         "
       >
         <ng-container headerContent>
