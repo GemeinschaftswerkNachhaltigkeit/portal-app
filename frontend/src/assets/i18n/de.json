@@ -129,6 +129,7 @@
     "projectSustainabilityWinnerLong": "Preisträger:in vom Projekt Nachhaltigkeit",
     "permanent": "Dauerhaft",
     "expiredActivity": "Vergangene Aktivität",
+    "expiredDanActivity": "Vergangene Aktion",
     "copied": "kopiert",
     "sdgs": "Nachhaltigkeitsziele",
     "thematicFocus": "Themenfelder",
@@ -183,6 +184,7 @@
   },
   "dan": {
     "texts": {
+      "wizard.period": "Achtung! Bitte erstelle nur Aktionen innerhalb des Aktionszeitraums",
       "wizard.about": "Trage hier die wichtigsten Informationen zu deiner Aktion im Rahmen der Deutschen Aktionstage Nachhaltigkeit ein.",
       "wizard.description": "Erkläre hier deine Aktion und beschreibe wie man mitmachen kann.",
       "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein."

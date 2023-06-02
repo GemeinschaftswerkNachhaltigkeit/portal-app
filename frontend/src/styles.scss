@@ -298,6 +298,15 @@ mat-dialog-container.mat-dialog-container {
   opacity: 0.5;
 }
 
+/**
+  Angular material uses align-items: baseline for input elements.
+  Hence the suffix is not positioned centered to the input box.
+  If this is a bug, this override can be deleted after an appropriate bugfix.
+*/
+.mat-form-field-flex {
+  align-items: center !important;
+}
+
 /* 
   Material Icons 
 */

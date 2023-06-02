@@ -8,7 +8,11 @@
 >
   <div class="active-maker"></div>
   <div class="expiredBadge" *ngIf="showAsExpired(entity, type)">
-    <app-expired-badge></app-expired-badge>
+    <app-expired-badge
+      [dan]="
+        card.isActivity(type) && utils.asActivity(entity).activityType === 'DAN'
+      "
+    ></app-expired-badge>
   </div>
   <div
     class="clickable-area"

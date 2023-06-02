@@ -3,7 +3,7 @@
 
   <img [src]="bgImage" alt="header" *ngIf="bgImage" />
   <div class="expiredBadge" *ngIf="isExpired">
-    <app-expired-badge></app-expired-badge>
+    <app-expired-badge [dan]="dan"></app-expired-badge>
   </div>
   <div class="type">
     <app-card-label

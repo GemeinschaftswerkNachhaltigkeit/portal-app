@@ -21,12 +21,17 @@ export class ActivitesApiService {
     filters: DynamicFilters = {},
     paging: PageQuerParams = {}
   ): Observable<PagedResponse<Activity> | null> {
-    const orgaIdOfUser = user?.orgId;
+    let orgaIdOfUser = user?.orgId;
+    const dan = filters['dan'];
     let endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/activities`;
     if (!orgaIdOfUser) {
-      return of(null);
+      if (!dan) {
+        return of(null);
+      } else {
+        orgaIdOfUser = environment.danId;
+      }
     }
-    if (filters['dan']) {
+    if (dan) {
       endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dans`;
     }
     return this.http.get<PagedResponse<Activity>>(endpoint, {
