@@ -32,7 +32,8 @@ export class MapFacadeService {
     'orgaTypes',
     'activityTypes',
     'startDate',
-    'endDate'
+    'endDate',
+    'viewType'
   ];
 
   searchResults$ = this.mapState.searchResults$;
