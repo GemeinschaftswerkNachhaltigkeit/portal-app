@@ -157,7 +157,7 @@ export class ActiFacadeService {
       .subscribe((confirmed) => {
         if (confirmed) {
           this.activitiesApi
-            .deleteActivity(user, id)
+            .deleteActivity(user, id, dan)
             .pipe(take(1))
             .subscribe({
               next: () => this.loadActivities(dan)
