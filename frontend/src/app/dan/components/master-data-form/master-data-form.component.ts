@@ -27,6 +27,10 @@ import { TranslateService } from '@ngx-translate/core';
 export class MasterDataFormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() formGroupName!: string;
   @Input() descriptionPlaceholder = '';
+  @Input() danContent: {
+    completed_message?: string;
+    period_hint?: string;
+  } | null = {};
   form!: FormGroup;
   activityTypeOpts = [ActivityType.DAN];
   editor: Editor;

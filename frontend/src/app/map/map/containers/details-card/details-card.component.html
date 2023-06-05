@@ -9,7 +9,12 @@
     <ng-container *ngIf="currentResult">
       <header class="header">
         <div class="expiredBadge" *ngIf="showAsExpired(currentResult)">
-          <app-expired-badge></app-expired-badge>
+          <app-expired-badge
+            [dan]="
+              card.isActivity(currentResult.resultType) &&
+              utils.asActivity(currentResult).activityType === 'DAN'
+            "
+          ></app-expired-badge>
         </div>
         <div class="expiredOverlay" *ngIf="showAsExpired(currentResult)"></div>
 

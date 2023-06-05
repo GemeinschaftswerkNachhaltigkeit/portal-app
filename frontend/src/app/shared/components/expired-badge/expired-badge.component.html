@@ -1,6 +1,8 @@
 <div class="expired-badge">
   <span #ref><ng-content></ng-content></span>
   <ng-container *ngIf="!ref.hasChildNodes()">
-    {{ 'labels.expiredActivity' | translate }}
+    {{
+      (dan ? 'labels.expiredDanActivity' : 'labels.expiredActivity') | translate
+    }}
   </ng-container>
 </div>

@@ -24,10 +24,7 @@
         </app-dropdown-menu>
       </div>
       <div class="mobile-dropdown-wrapper" *ngIf="item.submenu">
-        <app-accordion-menu-item
-          [title]="'menu.about' | translate"
-          [new]="!!item.new"
-        >
+        <app-accordion-menu-item [title]="item.name" [new]="!!item.new">
           <div *ngFor="let subitem of item.submenu">
             <app-menu-entry
               [internal]="false"
