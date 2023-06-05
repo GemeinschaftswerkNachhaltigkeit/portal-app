@@ -11,7 +11,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { InternalMapMarkerService } from '../../../services/shared-marker.service';
+import { InternalMapMarkerService } from '../../../services/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 @Component({

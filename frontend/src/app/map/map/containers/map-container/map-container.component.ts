@@ -17,7 +17,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { InternalMapFacade } from '../../../map-facade.service';
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
-import { InternalMapMarkerService } from '../../../services/shared-marker.service';
+import { InternalMapMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-map-container',

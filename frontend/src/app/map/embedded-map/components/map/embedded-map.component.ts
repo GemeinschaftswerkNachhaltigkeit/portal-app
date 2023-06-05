@@ -19,7 +19,7 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { EmbeddedMapMarkerService } from '../../../services/shared-marker.service';
+import { EmbeddedMapMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-embedded-map',

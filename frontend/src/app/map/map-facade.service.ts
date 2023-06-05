@@ -242,6 +242,7 @@ export class EmbeddedMapFacade extends SharedMapFacade {
     super();
   }
 
+  // for embeddedMap we only want to search Markers
   override initiateSearch(filters: DynamicFilters) {
     this.searchMarkers(filters);
   }

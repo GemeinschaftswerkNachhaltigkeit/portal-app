@@ -19,7 +19,7 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { InternalMapMarkerService } from '../../../services/shared-marker.service';
+import { InternalMapMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-map',
