@@ -3,14 +3,13 @@ import { MapApiService } from './map/api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
 import { DynamicFilters } from './models/search-filter';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';
-import { MapStateService } from './map/state/map-state.service';
+import { InternalMapStateService, SharedMapStateService } from './map/state/map-state.service';
 import { UiStateService } from './map/state/ui-state.service';
 import { Subscription, take } from 'rxjs';
 import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
 import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
-import { SharedMapModule } from './shared-map.module';
 
 // common map facade services
 @Injectable({providedIn: 'root'})
@@ -18,7 +17,7 @@ export abstract class SharedMapFacade {
   // explanation inheritance with dependency injection see here:
   // https://www.danywalls.com/using-the-inject-function-in-angular-15
   mapApi = inject(MapApiService);
-  mapState = inject(MapStateService);
+  mapState = inject(SharedMapStateService);
   uiState = inject(UiStateService);
   persistFilters = inject(PersistFiltersService);
   loading = inject(LoadingService);
@@ -36,13 +35,9 @@ export abstract class SharedMapFacade {
     'viewType'
   ];
 
-  searchResults$ = this.mapState.searchResults$;
-  searchPaging$ = this.mapState.searchPaging$;
   currentResult$ = this.mapState.currentResult$;
   markers$ = this.mapState.markers$;
   showFullMap$ = this.uiState.showFullMap$;
-  filters$ = this.uiState.filters$;
-  mapInitialised$ = this.uiState.mapInitialised$;
 
   searchRequest?: Subscription;
 
@@ -161,20 +156,7 @@ export abstract class SharedMapFacade {
   }
 
   protected initiateSearch(filters: DynamicFilters) {
-    this.searchCards(filters);
     this.searchMarkers(filters);
-  }
-
-  protected searchCards(filters: DynamicFilters): void {
-    this.searchRequest = this.mapApi.search(filters).subscribe({
-      next: (resp: PagedResponse<SearchResult>) => {
-        this.mapState.setSearchResponse(resp);
-        this.loading.stop('map-search');
-      },
-      error: () => {
-        this.loading.stop('map-search');
-      }
-    });
   }
 
   protected searchMarkers(filters: DynamicFilters): void {
@@ -198,6 +180,12 @@ export abstract class SharedMapFacade {
 // MapFacade services for internal map
 @Injectable({providedIn: 'root'})
 export class InternalMapFacade extends SharedMapFacade {
+  internalMapState = inject(InternalMapStateService);
+
+  searchResults$ = this.internalMapState.searchResults$; // internal map only
+  searchPaging$ = this.internalMapState.searchPaging$; // internal map only
+  filters$ = this.uiState.filters$; // internal map only
+  mapInitialised$ = this.uiState.mapInitialised$; // internal map only
 
   constructor() {
     super();
@@ -232,6 +220,23 @@ export class InternalMapFacade extends SharedMapFacade {
     this.search({ ...filters, page, size });
   }
 
+  protected searchCards(filters: DynamicFilters): void {
+    this.searchRequest = this.mapApi.search(filters).subscribe({
+      next: (resp: PagedResponse<SearchResult>) => {
+        this.internalMapState.setSearchResponse(resp);
+        this.loading.stop('map-search');
+      },
+      error: () => {
+        this.loading.stop('map-search');
+      }
+    });
+  }
+
+  override initiateSearch(filters: DynamicFilters) {
+    this.searchCards(filters);
+    this.searchMarkers(filters);
+  }
+
 }
 
 // MapFacade services for embedded map
@@ -240,11 +245,6 @@ export class EmbeddedMapFacade extends SharedMapFacade {
 
   constructor() {
     super();
-  }
-
-  // for embeddedMap we only want to search Markers
-  override initiateSearch(filters: DynamicFilters) {
-    this.searchMarkers(filters);
   }
 
 }

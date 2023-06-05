@@ -8,13 +8,13 @@ import SearchResult from '../../models/search-result';
 @Injectable({
   providedIn: 'root'
 })
-export class MapStateService {
-  private searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
+export abstract class SharedMapStateService {
+  protected searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
     content: []
   });
   private markers = new BehaviorSubject<MarkerDto[]>([]);
   private currentResult = new BehaviorSubject<SearchResult | null>(null);
-  private embedded = false; // todo: better approach is save the current route ('embeddedMap' or 'map'). This avoids hardcoded routes in MapFacadeService.
+  private embedded = false;
 
   get markers$(): Observable<MarkerDto[]> {
     return this.markers.asObservable();
@@ -23,6 +23,33 @@ export class MapStateService {
   get currentResult$(): Observable<SearchResult | null> {
     return this.currentResult.asObservable();
   }
+
+  get isEmbedded(): boolean {
+    return this.embedded;
+  }
+
+  set isEmbedded(isEmbedded: boolean) {
+    this.embedded = isEmbedded;
+  }
+
+  getResultForIdAndType(type = '', id = -1): SearchResult | undefined {
+    return this.searchResp.value.content.find(
+      (sr) => sr.id === id && sr.resultType === type
+    );
+  }
+
+  setCurrentResult(res: SearchResult | null): void {
+    this.currentResult.next(res);
+  }
+
+  setMarkers(makers: MarkerDto[]): void {
+    this.markers.next(makers);
+  }
+
+}
+
+@Injectable({providedIn: 'root'})
+export class InternalMapStateService extends SharedMapStateService {
 
   get searchResults$(): Observable<SearchResult[]> {
     return this.searchResp
@@ -41,30 +68,8 @@ export class MapStateService {
     );
   }
 
-  get isEmbedded(): boolean {
-    return this.embedded;
-  }
-
-  set isEmbedded(isEmbedded: boolean) {
-    this.embedded = isEmbedded;
-  }
-
-  getResultForIdAndType(type = '', id = -1): SearchResult | undefined {
-    return this.searchResp.value.content.find(
-      (sr) => sr.id === id && sr.resultType === type
-    );
-  }
-
   setSearchResponse(resp: PagedResponse<SearchResult>): void {
     this.searchResp.next(resp);
-  }
-
-  setCurrentResult(res: SearchResult | null): void {
-    this.currentResult.next(res);
-  }
-
-  setMarkers(makers: MarkerDto[]): void {
-    this.markers.next(makers);
   }
 
 }
