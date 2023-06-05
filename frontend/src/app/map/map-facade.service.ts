@@ -3,8 +3,8 @@ import { MapApiService } from './map/api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
 import { DynamicFilters } from './models/search-filter';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';
-import { InternalMapStateService, SharedMapStateService } from './map/state/map-state.service';
-import { UiStateService } from './map/state/ui-state.service';
+import { InternalMapStateService, SharedMapStateService } from './state/map-state.service';
+import {InternalUiStateService, SharedUiStateService} from './state/ui-state.service';
 import { Subscription, take } from 'rxjs';
 import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
@@ -18,7 +18,7 @@ export abstract class SharedMapFacade {
   // https://www.danywalls.com/using-the-inject-function-in-angular-15
   mapApi = inject(MapApiService);
   mapState = inject(SharedMapStateService);
-  uiState = inject(UiStateService);
+  uiState = inject(SharedUiStateService);
   persistFilters = inject(PersistFiltersService);
   loading = inject(LoadingService);
   router = inject(Router);
@@ -181,42 +181,43 @@ export abstract class SharedMapFacade {
 @Injectable({providedIn: 'root'})
 export class InternalMapFacade extends SharedMapFacade {
   internalMapState = inject(InternalMapStateService);
+  internalUiState = inject(InternalUiStateService);
 
   searchResults$ = this.internalMapState.searchResults$; // internal map only
   searchPaging$ = this.internalMapState.searchPaging$; // internal map only
-  filters$ = this.uiState.filters$; // internal map only
-  mapInitialised$ = this.uiState.mapInitialised$; // internal map only
+  filters$ = this.internalUiState.filters$; // internal map only
+  mapInitialised$ = this.internalUiState.mapInitialised$; // internal map only
 
   constructor() {
     super();
   }
 
   toggleMap(): void {
-    this.uiState.toggleMap();
+    this.internalUiState.toggleMap();
   }
 
   hoverActive(): boolean {
-    return !!this.uiState.hoveredCardValue;
+    return !!this.internalUiState.hoveredCardValue;
   }
 
   setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
-    this.uiState.setHoveredCard(hoveredCard);
+    this.internalUiState.setHoveredCard(hoveredCard);
   }
 
   isHoveredCard(type: string, id: number | undefined): boolean {
     return (
-      this.uiState.hoveredCardValue?.id === id &&
-      this.uiState.hoveredCardValue?.type === type
+      this.internalUiState.hoveredCardValue?.id === id &&
+      this.internalUiState.hoveredCardValue?.type === type
     );
   }
 
   clearHoveredCard(): void {
-    this.uiState.setHoveredCard(undefined);
+    this.internalUiState.setHoveredCard(undefined);
   }
 
   changePage(page: number, size: number) {
     this.setActiveCard();
-    const filters = this.uiState.filterValues;
+    const filters = this.internalUiState.filterValues;
     this.search({ ...filters, page, size });
   }
 

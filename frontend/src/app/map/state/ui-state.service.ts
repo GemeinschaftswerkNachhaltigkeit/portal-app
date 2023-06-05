@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import ActiveCard from '../../models/active-card';
-import { DynamicFilters } from '../../models/search-filter';
+import ActiveCard from '../models/active-card';
+import { DynamicFilters } from '../models/search-filter';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class UiStateService {
-  private showFullMap = new BehaviorSubject<boolean>(false);
-  private mapInitialised = new BehaviorSubject<boolean>(false);
-  private filters = new BehaviorSubject<DynamicFilters>({
+@Injectable({ providedIn: 'root' })
+export abstract class SharedUiStateService {
+  protected showFullMap = new BehaviorSubject<boolean>(false);
+  protected mapInitialised = new BehaviorSubject<boolean>(false);
+  protected filters = new BehaviorSubject<DynamicFilters>({
     viewType: 'ALL'
   });
   private activeCard = new BehaviorSubject<ActiveCard | undefined>(undefined);
-  private hoveredCard = new BehaviorSubject<ActiveCard | undefined>(undefined);
 
   get activeCardId(): number | undefined {
     return this.activeCard.value?.id;
@@ -23,24 +20,12 @@ export class UiStateService {
     return this.activeCard.value;
   }
 
-  get hoveredCardValue(): ActiveCard | undefined {
-    return this.hoveredCard.value;
-  }
-
   get filterValues(): DynamicFilters {
     return this.filters.value;
   }
 
-  get filters$(): Observable<DynamicFilters> {
-    return this.filters.asObservable();
-  }
-
   get showFullMap$(): Observable<boolean> {
     return this.showFullMap.asObservable();
-  }
-
-  get mapInitialised$(): Observable<boolean> {
-    return this.mapInitialised.asObservable();
   }
 
   setActiveCard(activeCard?: { type: string; id?: number }): void {
@@ -62,15 +47,6 @@ export class UiStateService {
     }
   }
 
-  setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
-    this.hoveredCard.next(hoveredCard);
-  }
-
-  toggleMap(): void {
-    const current = this.showFullMap.value;
-    this.showFullMap.next(!current);
-  }
-
   setFilters(filters: DynamicFilters): void {
     this.filters.next(filters);
   }
@@ -83,5 +59,31 @@ export class UiStateService {
 
   setMapInitialised(): void {
     this.mapInitialised.next(true);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class InternalUiStateService extends SharedUiStateService {
+  private hoveredCard = new BehaviorSubject<ActiveCard | undefined>(undefined);
+
+  get hoveredCardValue(): ActiveCard | undefined {
+    return this.hoveredCard.value;
+  }
+
+  get filters$(): Observable<DynamicFilters> {
+    return this.filters.asObservable();
+  }
+
+  get mapInitialised$(): Observable<boolean> {
+    return this.mapInitialised.asObservable();
+  }
+
+  setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
+    this.hoveredCard.next(hoveredCard);
+  }
+
+  toggleMap(): void {
+    const current = this.showFullMap.value;
+    this.showFullMap.next(!current);
   }
 }
