@@ -32,8 +32,8 @@ import com.exxeta.wpgwn.wpgwnapp.zip_code_mapping.ZipCodeService;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
 public abstract class SharedMapper {
 
-    private static final Instant PERMANENT_START = Instant.parse("1970-01-01T00:00:00Z");
-    private static final Instant PERMANENT_END = Instant.parse("9999-12-31T00:00:00Z");
+    public static final Instant PERMANENT_START = Instant.parse("1970-01-01T00:00:00Z");
+    public static final Instant PERMANENT_END = Instant.parse("9999-12-31T00:00:00Z");
     @Autowired
     private ZipCodeService zipCodeService;
 
