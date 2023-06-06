@@ -82,7 +82,7 @@ const getClusterIcon = (
 @Injectable({
   providedIn: 'root'
 })
-abstract class SharedMarkerService {
+export class SharedMarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
   activityMarkers: L.MarkerClusterGroup | null = null;
@@ -501,24 +501,5 @@ abstract class SharedMarkerService {
       data: marker,
       ...coordinates
     };
-  }
-}
-
-// Marker service for internal map
-@Injectable({providedIn: 'root'})
-export class InternalMapMarkerService extends SharedMarkerService {
-  override mapFacade = inject(InternalMapFacade);
-  constructor() {
-    super();
-  }
-}
-
-
-// Marker service for embedded map
-@Injectable({providedIn: 'root'})
-export class EmbeddedMapMarkerService extends SharedMarkerService {
-  override mapFacade = inject(EmbeddedMapFacade);
-  constructor() {
-    super();
   }
 }

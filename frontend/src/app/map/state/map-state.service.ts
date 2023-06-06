@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import Paging from 'src/app/shared/models/paging';
 import PagedResponse from '../../shared/models/paged-response';
@@ -9,7 +9,7 @@ import SearchResult from '../models/search-result';
   providedIn: 'root'
 })
 export abstract class SharedMapStateService {
-  protected searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
+  private searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
     content: []
   });
   private markers = new BehaviorSubject<MarkerDto[]>([]);
@@ -49,8 +49,41 @@ export abstract class SharedMapStateService {
 }
 
 @Injectable({providedIn: 'root'})
-export class InternalMapStateService extends SharedMapStateService {
+export class InternalMapStateService {
+  private searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
+    content: []
+  });
+  private sharedMapState = inject(SharedMapStateService);
 
+  get markers$(): Observable<MarkerDto[]> {
+    return this.sharedMapState.markers$;
+  }
+
+  get currentResult$(): Observable<SearchResult | null> {
+    return this.sharedMapState.currentResult$;
+  }
+
+  get isEmbedded(): boolean {
+    return this.sharedMapState.isEmbedded;
+  }
+
+  set isEmbedded(isEmbedded: boolean) {
+    this.sharedMapState.isEmbedded = isEmbedded;
+  }
+
+  getResultForIdAndType(type = '', id = -1): SearchResult | undefined {
+    return this.sharedMapState.getResultForIdAndType(type, id);
+  }
+
+  setCurrentResult(res: SearchResult | null): void {
+    this.sharedMapState.setCurrentResult(res);
+  }
+
+  setMarkers(makers: MarkerDto[]): void {
+    this.sharedMapState.setMarkers(makers);
+  }
+
+  /* #### Methods for internal map only ### */
   get searchResults$(): Observable<SearchResult[]> {
     return this.searchResp
       .asObservable()
@@ -72,4 +105,37 @@ export class InternalMapStateService extends SharedMapStateService {
     this.searchResp.next(resp);
   }
 
+}
+
+@Injectable({providedIn: 'root'})
+export class EmbeddedMapStateService {
+  private sharedMapState = inject(SharedMapStateService);
+
+  get markers$(): Observable<MarkerDto[]> {
+    return this.sharedMapState.markers$;
+  }
+
+  get currentResult$(): Observable<SearchResult | null> {
+    return this.sharedMapState.currentResult$;
+  }
+
+  get isEmbedded(): boolean {
+    return this.sharedMapState.isEmbedded;
+  }
+
+  set isEmbedded(isEmbedded: boolean) {
+    this.sharedMapState.isEmbedded = isEmbedded;
+  }
+
+  getResultForIdAndType(type = '', id = -1): SearchResult | undefined {
+    return this.sharedMapState.getResultForIdAndType(type, id);
+  }
+
+  setCurrentResult(res: SearchResult | null): void {
+    this.sharedMapState.setCurrentResult(res);
+  }
+
+  setMarkers(makers: MarkerDto[]): void {
+    this.sharedMapState.setMarkers(makers);
+  }
 }

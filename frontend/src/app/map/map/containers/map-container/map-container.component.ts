@@ -17,7 +17,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { InternalMapFacade } from '../../../map-facade.service';
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
-import { InternalMapMarkerService } from '../../../services/marker.service';
+import { SharedMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-map-container',
@@ -48,7 +48,7 @@ export class MapContainerComponent implements OnInit {
     private mapFacade: InternalMapFacade,
     private loading: LoadingService,
     private route: ActivatedRoute,
-    private marker: InternalMapMarkerService,
+    private marker: SharedMarkerService,
     public subscription: SubscriptionFacadeService,
     public utils: UtilsService,
     filtersService: SecondaryFitlersService

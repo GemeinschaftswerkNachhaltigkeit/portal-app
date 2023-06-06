@@ -11,7 +11,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { EmbeddedMapMarkerService } from '../../../services/marker.service';
+import { SharedMarkerService } from '../../../services/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
@@ -51,7 +51,7 @@ export class EmbeddedDetailsCardComponent implements OnInit {
     private route: ActivatedRoute,
     public card: CardService,
     public utils: UtilsService,
-    private marker: EmbeddedMapMarkerService,
+    private marker: SharedMarkerService,
     private imgService: ImgService
   ) {}
 

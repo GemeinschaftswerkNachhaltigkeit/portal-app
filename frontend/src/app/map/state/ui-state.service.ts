@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import ActiveCard from '../models/active-card';
 import { DynamicFilters } from '../models/search-filter';
 
 @Injectable({ providedIn: 'root' })
 export abstract class SharedUiStateService {
-  protected showFullMap = new BehaviorSubject<boolean>(false);
-  protected mapInitialised = new BehaviorSubject<boolean>(false);
-  protected filters = new BehaviorSubject<DynamicFilters>({
+  private showFullMap = new BehaviorSubject<boolean>(false);
+  private mapInitialised = new BehaviorSubject<boolean>(false);
+  private filters = new BehaviorSubject<DynamicFilters>({
     viewType: 'ALL'
   });
   private activeCard = new BehaviorSubject<ActiveCard | undefined>(undefined);
@@ -26,6 +26,14 @@ export abstract class SharedUiStateService {
 
   get showFullMap$(): Observable<boolean> {
     return this.showFullMap.asObservable();
+  }
+
+  get mapInitialised$(): Observable<boolean> {
+    return this.mapInitialised.asObservable();
+  }
+
+  get filters$(): Observable<DynamicFilters> {
+    return this.filters.asObservable();
   }
 
   setActiveCard(activeCard?: { type: string; id?: number }): void {
@@ -60,30 +68,108 @@ export abstract class SharedUiStateService {
   setMapInitialised(): void {
     this.mapInitialised.next(true);
   }
+
+  toggleMap(): void {
+    const current = this.showFullMap.value;
+    this.showFullMap.next(!current);
+  }
 }
 
 @Injectable({ providedIn: 'root' })
-export class InternalUiStateService extends SharedUiStateService {
+export class InternalUiStateService {
   private hoveredCard = new BehaviorSubject<ActiveCard | undefined>(undefined);
+  private sharedUiState = inject(SharedUiStateService);
 
-  get hoveredCardValue(): ActiveCard | undefined {
-    return this.hoveredCard.value;
+  /* #### Common methods valid for internal and embedded map #### */
+  get activeCardId(): number | undefined {
+    return this.sharedUiState.activeCardId;
   }
 
-  get filters$(): Observable<DynamicFilters> {
-    return this.filters.asObservable();
+  get activeCardValue(): ActiveCard | undefined {
+    return this.sharedUiState.activeCardValue;
+  }
+
+  get filterValues(): DynamicFilters {
+    return this.sharedUiState.filterValues;
+  }
+
+  get showFullMap$(): Observable<boolean> {
+    return this.sharedUiState.showFullMap$;
   }
 
   get mapInitialised$(): Observable<boolean> {
-    return this.mapInitialised.asObservable();
+    return this.sharedUiState.mapInitialised$;
+  }
+
+  get filters$(): Observable<DynamicFilters> {
+    return this.sharedUiState.filters$;
+  }
+
+  setActiveCard(activeCard?: { type: string; id?: number }): void {
+    return this.sharedUiState.setActiveCard(activeCard);
+  }
+
+  setFilters(filters: DynamicFilters): void {
+    this.sharedUiState.setFilters(filters);
+  }
+
+  setEnvelope(box: string): void {
+    this.sharedUiState.setEnvelope(box);
+  }
+
+  setMapInitialised(): void {
+    this.sharedUiState.setMapInitialised();
+  }
+
+  toggleMap(): void {
+    this.sharedUiState.toggleMap();
+  }
+
+  /* #### Methods valid for internal map ui state  #### */
+  get hoveredCardValue(): ActiveCard | undefined {
+    return this.hoveredCard.value;
   }
 
   setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
     this.hoveredCard.next(hoveredCard);
   }
 
-  toggleMap(): void {
-    const current = this.showFullMap.value;
-    this.showFullMap.next(!current);
+}
+
+@Injectable({ providedIn: 'root' })
+export class EmbeddedUiStateService {
+  private sharedUiState = inject(SharedUiStateService);
+
+  /* #### Common methods valid for internal and embedded map #### */
+  get activeCardId(): number | undefined {
+    return this.sharedUiState.activeCardId;
+  }
+
+  get activeCardValue(): ActiveCard | undefined {
+    return this.sharedUiState.activeCardValue;
+  }
+
+  get filterValues(): DynamicFilters {
+    return this.sharedUiState.filterValues;
+  }
+
+  get showFullMap$(): Observable<boolean> {
+    return this.sharedUiState.showFullMap$;
+  }
+
+  setActiveCard(activeCard?: { type: string; id?: number }): void {
+    return this.sharedUiState.setActiveCard(activeCard);
+  }
+
+  setFilters(filters: DynamicFilters): void {
+    this.sharedUiState.setFilters(filters);
+  }
+
+  setEnvelope(box: string): void {
+    this.sharedUiState.setEnvelope(box);
+  }
+
+  setMapInitialised(): void {
+    this.sharedUiState.setMapInitialised();
   }
 }
