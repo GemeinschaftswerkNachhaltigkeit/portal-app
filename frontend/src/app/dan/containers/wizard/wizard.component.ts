@@ -267,7 +267,7 @@ export class WizardComponent implements OnDestroy {
   }
 
   deleteHandler(image: ImageType): void {
-    this.activityService.deleteImage(this.orgId, this.activityId, image);
+    this.activityService.deleteImage(this.orgId, this.activityId, image, true);
   }
 
   isAllowedToEdit() {
