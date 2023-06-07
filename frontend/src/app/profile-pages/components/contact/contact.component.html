@@ -96,7 +96,10 @@
       </div>
     </div>
   </div>
-  <div class="activity-orga" *ngIf="type === 'ACTIVITY' && activityOrga">
+  <div
+    class="activity-orga"
+    *ngIf="type === 'ACTIVITY' && activityOrga && !dan"
+  >
     <div class="info-row no-icon">
       <h4 class="subtitle">
         {{ 'profile.titles.relatedOrganisation' | translate }}

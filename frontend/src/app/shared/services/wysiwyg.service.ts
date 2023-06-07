@@ -7,6 +7,7 @@ import BulletList from '@tiptap/extension-bullet-list';
 import OrderedList from '@tiptap/extension-ordered-list';
 import ListItem from '@tiptap/extension-list-item';
 import Placeholder from '@tiptap/extension-placeholder';
+import Link from '@tiptap/extension-link';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,9 @@ export class WysiwygService {
         BulletList,
         OrderedList,
         ListItem,
+        Link.configure({
+          openOnClick: false
+        }),
         Placeholder.configure({
           emptyEditorClass: 'is-editor-empty',
           placeholder
