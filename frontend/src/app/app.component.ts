@@ -26,8 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // in case of embeddedMap hide header
     this.noHeader$ = this.router.events.pipe(
       filter((event: Event) => event instanceof NavigationStart),
-      // Get route w/o parameters. Expression returns true if it equals '/embeddedMap'
-      map(event => (<RouterEvent>event).url.split('?')[0] === '/embeddedMap'),
+      // Get route w/o parameters. Expression returns true if it equals '/embeddedmap'
+      map(event => (<RouterEvent>event).url.split('?')[0] === '/embeddedmap'),
     );
 
     this.translate.onLangChange

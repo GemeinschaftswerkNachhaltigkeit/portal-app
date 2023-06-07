@@ -49,7 +49,7 @@ export class SharedMapFacade {
     delete updatedFilters['id'];
     delete updatedFilters['type'];
     this.setActiveCard();
-    this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
+    this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'], {
       queryParams: {
         ...updatedFilters
       },
@@ -64,7 +64,7 @@ export class SharedMapFacade {
       const filters = this.uiState.filterValues;
 
       if (activeCard?.id && activeCard?.type) {
-        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map'], {
+        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'], {
           queryParams: {
             ...filters,
             type: activeCard?.type,
@@ -130,7 +130,7 @@ export class SharedMapFacade {
         ...searchFilter,
         envelope: existingFilters['envelope']
       };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedMap' : 'map']);
+      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map']);
     } else {
       filters = existingFilters;
     }

@@ -33,7 +33,7 @@ const routes: Routes = [
     loadChildren: () => import('./map/map/map.module').then((m) => m.MapModule)
   },
   {
-    path: 'embeddedMap',
+    path: 'embeddedmap',
     loadChildren: () => import('./map/embedded-map/embedded-map.module').then((m) => m.EmbeddedMapModule)
   },
   {
