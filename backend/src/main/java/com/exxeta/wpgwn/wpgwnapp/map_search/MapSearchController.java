@@ -43,6 +43,8 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 
+import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
+import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
 
 @RestController
@@ -73,13 +75,16 @@ public class MapSearchController {
             @RequestParam(value = "includeExpiredActivities", defaultValue = "false") Boolean includeExpiredActivities,
             @RequestParam(value = "includeNoCoords", defaultValue = "true") Boolean includeNoCoords,
             @RequestParam(value = "initiator", required = false) Boolean initiator,
+            @RequestParam(value = "permanent", required = false) Boolean permanent,
+            @RequestParam(value = "online", required = false) Boolean online,
             @RequestParam(value = "projectSustainabilityWinner", required = false) Boolean projectSustainabilityWinner,
             @QuerydslPredicate(root = MapSearchResult.class, bindings = MapSearchResultBindingCustomizer.class)
             Predicate mapSearchFilterPredicate,
             Pageable pageable) {
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
-                        includeExpiredActivities, includeNoCoords, initiator, projectSustainabilityWinner,
+                        includeExpiredActivities, includeNoCoords, initiator, permanent, online,
+                        projectSustainabilityWinner,
                         mapSearchFilterPredicate);
 
         final Page<MapSearchResult> activitiesPage = mapSearchResultRepository.findAll(searchPredicate, pageable);
@@ -98,6 +103,8 @@ public class MapSearchController {
             @RequestParam(value = "includeExpiredActivities", defaultValue = "false") Boolean includeExpiredActivities,
             @RequestParam(value = "includeNoCoords", defaultValue = "true") Boolean includeNoCoords,
             @RequestParam(value = "initiator", required = false) Boolean initiator,
+            @RequestParam(value = "permanent", required = false) Boolean permanent,
+            @RequestParam(value = "online", required = false) Boolean online,
             @RequestParam(value = "projectSustainabilityWinner", required = false)
             Boolean projectSustainabilityWinner,
             @QuerydslPredicate(root = MapSearchResult.class, bindings = MapSearchResultBindingCustomizer.class)
@@ -106,7 +113,8 @@ public class MapSearchController {
 
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
-                        includeExpiredActivities, includeNoCoords, initiator, projectSustainabilityWinner,
+                        includeExpiredActivities, includeNoCoords, initiator, permanent, online,
+                        projectSustainabilityWinner,
                         mapSearchFilterPredicate);
 
         return new JPAQuery<>(entityManager)
@@ -129,6 +137,8 @@ public class MapSearchController {
                                               boolean includeExpiredActivities,
                                               boolean includeDataWithoutCoordinates,
                                               Boolean initiator,
+                                              Boolean permanent,
+                                              Boolean online,
                                               Boolean projectSustainabilityWinner,
                                               Predicate mapSearchFilterPredicate) {
         final BooleanBuilder searchPredicate = new BooleanBuilder(mapSearchFilterPredicate);
@@ -222,6 +232,25 @@ public class MapSearchController {
         }
         if (specialOrganisations.hasValue()) {
             searchPredicate.and(specialOrganisations);
+        }
+
+        if (Objects.nonNull(online)) {
+            if (online) {
+                searchPredicate.and(QMapSearchResult.mapSearchResult.location.online.eq(Boolean.TRUE));
+            } else {
+                searchPredicate.and(QMapSearchResult.mapSearchResult.location.online.isNull()
+                        .or(QMapSearchResult.mapSearchResult.location.online.eq(Boolean.FALSE)));
+            }
+        }
+
+        if (Objects.nonNull(permanent)) {
+            if (permanent) {
+                searchPredicate.and(QMapSearchResult.mapSearchResult.period.start.eq(PERMANENT_START)
+                        .and(QMapSearchResult.mapSearchResult.period.end.eq(PERMANENT_END)));
+            } else {
+                searchPredicate.and(QMapSearchResult.mapSearchResult.period.start.ne(PERMANENT_START)
+                        .or(QMapSearchResult.mapSearchResult.period.end.ne(PERMANENT_END)));
+            }
         }
 
         return searchPredicate;

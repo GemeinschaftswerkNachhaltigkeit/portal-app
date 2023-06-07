@@ -166,6 +166,11 @@ class MapSearchControllerTest {
 
                 act.setPeriod(period);
             }
+
+            if (i == 7) {
+                act.getLocation().setOnline(true);
+            }
+
             act.setOrganisation(org);
 
             act.setCreatedAt(instant.plusSeconds(20 + i));
@@ -237,6 +242,82 @@ class MapSearchControllerTest {
         DocumentContext jsonResponse = JsonPath.parse(responseString);
         assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("10");
         assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("10");
+    }
+
+    @Test
+    void requestPermanentActivities() throws Exception {
+        // When
+        String responseString = mockMvc.perform(get(BASE_API_URL)
+                        .queryParam("resultType", "ACTIVITY")
+                        .queryParam("permanent", "true")
+                        .queryParam("includeExpiredActivities", "true")
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                // Then
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        // Use JsonPath to Check because cant create Page and MapSearchResultWrapperDto through ObjectMapper
+        DocumentContext jsonResponse = JsonPath.parse(responseString);
+        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("1");
+        assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("1");
+    }
+
+    @Test
+    void requestNotPermanentActivities() throws Exception {
+        // When
+        String responseString = mockMvc.perform(get(BASE_API_URL)
+                        .queryParam("resultType", "ACTIVITY")
+                        .queryParam("permanent", "false")
+                        .queryParam("includeExpiredActivities", "true")
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                // Then
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        // Use JsonPath to Check because cant create Page and MapSearchResultWrapperDto through ObjectMapper
+        DocumentContext jsonResponse = JsonPath.parse(responseString);
+        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("9");
+        assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("9");
+    }
+
+    @Test
+    void requestOnlineActivities() throws Exception {
+        // When
+        String responseString = mockMvc.perform(get(BASE_API_URL)
+                        .queryParam("resultType", "ACTIVITY")
+                        .queryParam("online", "true")
+                        .queryParam("includeExpiredActivities", "true")
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                // Then
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        // Use JsonPath to Check because cant create Page and MapSearchResultWrapperDto through ObjectMapper
+        DocumentContext jsonResponse = JsonPath.parse(responseString);
+        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("1");
+        assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("1");
+    }
+
+    @Test
+    void requestNotOnlineActivities() throws Exception {
+        // When
+        String responseString = mockMvc.perform(get(BASE_API_URL)
+                        .queryParam("resultType", "ACTIVITY")
+                        .queryParam("online", "false")
+                        .queryParam("includeExpiredActivities", "true")
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                // Then
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        // Use JsonPath to Check because cant create Page and MapSearchResultWrapperDto through ObjectMapper
+        DocumentContext jsonResponse = JsonPath.parse(responseString);
+        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("9");
+        assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("9");
     }
 
     @Test

@@ -23,6 +23,7 @@ public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomize
         bindings.excluding(root.organisationType);
         bindings.excluding(root.activityType);
         bindings.excluding(root.initiator);
+        bindings.excluding(root.location.online);
         bindings.excluding(root.projectSustainabilityWinner);
 
         bindings.bind(root.sustainableDevelopmentGoals).all(utils.stringLeftPadContainsAnyCondition());
