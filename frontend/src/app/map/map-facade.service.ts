@@ -115,7 +115,7 @@ export class SharedMapFacade {
       });
   }
 
-  search(searchFilter?: DynamicFilters): DynamicFilters {
+  composeFilter(searchFilter?: DynamicFilters): DynamicFilters {
     this.loading.start('map-search');
     const existingFilters = this.uiState.filterValues;
     let filters;
@@ -146,10 +146,7 @@ export class SharedMapFacade {
   }
 
   searchMarkers(filters: DynamicFilters): void {
-    if (this.searchRequest) {
-      this.searchRequest.unsubscribe();
-    }
-    this.searchRequest = this.mapApi.searchMarkers(filters).subscribe({
+    this.mapApi.searchMarkers(filters).pipe(take(1)).subscribe({
       next: (resp: MarkerDto[]) => {
         this.mapState.setMarkers(resp);
       }
@@ -158,7 +155,7 @@ export class SharedMapFacade {
 
   setBoundingBox(box: string): void {
     this.uiState.setEnvelope(box);
-    this.search();
+    this.composeFilter();
   }
 
   setEmbedded(isEmbedded: boolean) {
@@ -184,7 +181,6 @@ export class InternalMapFacade {
   /* #### Common methods valid for internal and embedded map #### */
   sharedMapFacade = inject(SharedMapFacade);
   showFullMap$ = this.internalUiState.showFullMap$;
-  searchRequest?: Subscription;
 
   openCard(type: string, id?: string | number): void {
     this.sharedMapFacade.openCard(type, id);
@@ -219,16 +215,13 @@ export class InternalMapFacade {
   }
 
   search(searchFilter?: DynamicFilters): void {
-    const filters = this.sharedMapFacade.search(searchFilter);
+    const filters = this.sharedMapFacade.composeFilter(searchFilter);
     this.searchCards(filters);
     this.sharedMapFacade.searchMarkers(filters);
   }
 
   private searchCards(filters: DynamicFilters): void {
-    if (this.searchRequest) {
-      this.searchRequest.unsubscribe();
-    }
-    this.searchRequest = this.mapApi.search(filters).subscribe({
+    this.mapApi.search(filters).pipe(take(1)).subscribe({
       next: (resp: PagedResponse<SearchResult>) => {
         this.internalMapState.setSearchResponse(resp);
         this.loading.stop('map-search');
@@ -241,6 +234,7 @@ export class InternalMapFacade {
 
   setBoundingBox(box: string): void {
     this.sharedMapFacade.setBoundingBox(box);
+    this.search();
   }
 
   setEmbedded(isEmbedded: boolean) {
@@ -325,12 +319,13 @@ export class EmbeddedMapFacade {
   }
 
   search(searchFilter?: DynamicFilters): void {
-    const filters = this.sharedMapFacade.search(searchFilter);
+    const filters = this.sharedMapFacade.composeFilter(searchFilter);
     this.sharedMapFacade.searchMarkers(filters);
   }
 
   setBoundingBox(box: string): void {
     this.sharedMapFacade.setBoundingBox(box);
+    this.search();
   }
 
   setEmbedded(isEmbedded: boolean) {
