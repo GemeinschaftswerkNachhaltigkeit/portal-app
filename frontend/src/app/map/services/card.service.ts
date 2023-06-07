@@ -24,4 +24,8 @@ export class CardService {
   isActivity(type = ''): boolean {
     return type === 'ACTIVITY';
   }
+
+  isDan(type = ''): boolean {
+    return type === 'DAN';
+  }
 }

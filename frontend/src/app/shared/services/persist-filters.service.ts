@@ -37,13 +37,15 @@ export class PersistFiltersService {
         if (key === l) {
           if (value && typeof value === 'string') {
             value = [value as string];
-          } else {
+          }
+          if (!value) {
             value = [];
           }
         }
       });
       filters[key] = value || '';
     });
+
     return filters;
   }
 }
