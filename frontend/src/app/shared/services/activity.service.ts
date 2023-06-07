@@ -195,15 +195,16 @@ export class ActivityService {
     }
   }
 
-  async deleteImage(orgId: string, uuid: string, image: ImageType) {
+  async deleteImage(
+    orgId: string,
+    uuid: string,
+    image: ImageType,
+    dan = false
+  ) {
     try {
-      const response = await lastValueFrom(
-        this.http.delete(
-          `${REQUEST_BASE_URL}/${orgId}/activities-wip/${uuid}/${image}`,
-          {}
-        )
-      );
-      this.getActivity(orgId, uuid);
+      const endpoint = `${REQUEST_BASE_URL}/${orgId}/activities-wip/${uuid}/${image}`;
+      const response = await lastValueFrom(this.http.delete(endpoint, {}));
+      this.getActivity(orgId, uuid, dan);
       return response;
     } catch (e) {
       console.error('createError', e);

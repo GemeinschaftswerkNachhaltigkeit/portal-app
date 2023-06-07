@@ -211,7 +211,7 @@ public class DanWorkInProgressController {
 
         final Activity savedDan = activityWorkInProgressPublishService
                 .updateActivityWithActivityWorkInProgress(savedDanWorkInProgress, principal);
-
+        savedDanWorkInProgress.setActivity(savedDan);
         activityWorkInProgressService.delete(savedDanWorkInProgress);
         return activityMapper.activityToDto(savedDan);
     }
