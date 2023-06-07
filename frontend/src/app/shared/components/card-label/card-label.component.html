@@ -1,7 +1,5 @@
 <ng-container *ngIf="(activityTypeLabel || organisationTypeLabel) && type">
-  <ng-container
-    *ngIf="(card.isActivity(type) || card.isDan(type)) && activityTypeLabel"
-  >
+  <ng-container *ngIf="!card.isOrga(type) && activityTypeLabel">
     <app-label [color]="dan ? 'blue' : 'green'" [limitedWidth]="limitedWidth">
       {{ activityTypeLabel }}
     </app-label>
