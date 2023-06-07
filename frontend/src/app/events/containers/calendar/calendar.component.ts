@@ -178,7 +178,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       query: (filters['query'] || '') as string,
       location: (filters['location'] || '') as string
     });
-    console.log('START', filters['startDate']);
+
     this.selected = (filters['startDate'] as string) || '';
   }
 

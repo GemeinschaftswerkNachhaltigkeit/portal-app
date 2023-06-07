@@ -103,9 +103,10 @@ export class MapApiService {
     );
     params = params.append('query', searchFilter.query || '');
     params = params.append('location', searchFilter.location || '');
-    searchFilter.viewType?.forEach((resultType) => {
-      params = params.append('resultType', resultType);
-    });
+    searchFilter.viewType &&
+      searchFilter.viewType?.forEach((resultType) => {
+        params = params.append('resultType', resultType);
+      });
     if (searchFilter.envelope) {
       params = params.append('envelope', searchFilter.envelope || '');
     }
