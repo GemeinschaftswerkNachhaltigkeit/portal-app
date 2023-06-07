@@ -172,6 +172,18 @@ export class MapFacadeService {
       if (!searchFilter['projectSustainabilityWinner']) {
         delete searchFilter['projectSustainabilityWinner'];
       }
+      if (!searchFilter['startDate']) {
+        delete searchFilter['startDate'];
+      }
+      if (!searchFilter['endDate']) {
+        delete searchFilter['endDate'];
+      }
+      if (!searchFilter['location']) {
+        delete searchFilter['location'];
+      }
+      if (!searchFilter['query']) {
+        delete searchFilter['query'];
+      }
       filters = {
         ...searchFilter,
         envelope: existingFilters['envelope']

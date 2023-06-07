@@ -6,7 +6,6 @@ export function wysiwygContentRequired(
   maxLength = 1000
 ): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
-    console.log('>>>>>>>>>>> VALIDATE', maxLength);
     const text = UtilsService.stripHtml(control.value || '');
     const textLen = text.length;
 
