@@ -104,7 +104,7 @@ export class SharedMarkerService {
   utils = inject(UtilsService);
   mapFacade = inject(SharedMapFacade);
 
-  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number): void {
+  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number, move?: boolean): void {
     this.organisationMarkers?.clearLayers();
     this.activityMarkers?.clearLayers();
     this.danMarkers?.clearLayers();
@@ -143,7 +143,7 @@ export class SharedMarkerService {
           icon: icon
         });
         marker.on('click', () =>
-          this.markerClickHandler(map, c.data, data, mapWidth)
+          this.markerClickHandler(map, c.data, data, mapWidth, move)
         );
 
         if (c.data.resultType === 'DAN') {
@@ -172,12 +172,13 @@ export class SharedMarkerService {
     map: L.Map,
     marker: MarkerDto,
     markers: MarkerDto[],
-    mapWidth?: number
+    mapWidth?: number,
+    move?: boolean
   ): void {
     this.mapFacade.openCard(marker.resultType, marker.id);
     // this.scrollToCard(marker.resultType, marker.id);
 
-    this.activateMarker(map, marker, markers, mapWidth);
+    this.activateMarker(map, marker, markers, mapWidth, move);
   }
 
   setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
@@ -231,8 +232,9 @@ export class SharedMarkerService {
     res: SearchResult,
     markers: MarkerDto[],
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
+    console.log('ActivateMarker () MOVE', move)
     const marker = this.findMarker(markers, res);
 
     if (marker) {
@@ -402,7 +404,7 @@ export class SharedMarkerService {
     map: L.Map,
     activeMarker: { lon?: number; lat?: number; data: MarkerDto },
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
     this.setActiveMarkerIcon(activeMarker.data);
     if (move && activeMarker && activeMarker.lat && activeMarker.lon) {

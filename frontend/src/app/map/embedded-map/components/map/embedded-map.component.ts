@@ -102,7 +102,8 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
             this.map,
             searchResult,
             this.data,
-            this.mapRef?.nativeElement?.offsetWidth
+            this.mapRef?.nativeElement?.offsetWidth,
+            false
           );
         }
       });
@@ -134,7 +135,8 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
       this.marker.makeMarkers(
         this.map,
         this.data,
-        this.mapRef?.nativeElement?.offsetWidth
+        this.mapRef?.nativeElement?.offsetWidth,
+        false
       );
     }
   }

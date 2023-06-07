@@ -1,18 +1,19 @@
 @use 'theme' as *;
 @use 'palette' as *;
 :host {
-  width: 100%;
+  width: 40rem;
   height: 100%;
-  left: 0;
-  top: 0;
+  left: $spacing-4;
+  top: $spacing-4;
   z-index: 9000;
   position: absolute;
   color: $blue-navy;
 
   .close-button {
     position: absolute;
-    top: $spacing-4;
-    left: $spacing-4;
+    top: $spacing-2;
+    right: $spacing-2;
+    left: auto;
     z-index: $z10;
     background-color: white;
     border-radius: 50%;
@@ -23,7 +24,6 @@
     left: 0;
     top: 0;
     right: 0;
-    bottom: 70px;
     background-color: white;
     overflow: auto;
 
@@ -198,23 +198,6 @@
   &.mobile {
     .details {
       position: static;
-    }
-  }
-}
-
-@media screen {
-  :host {
-    width: 40%;
-    height: 100%;
-    left: auto;
-    top: auto;
-    .close-button {
-      top: 3.4rem;
-      right: 0.4rem;
-      left: auto;
-    }
-    .details {
-      top: $spacing-8;
     }
   }
 }
