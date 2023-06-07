@@ -6,13 +6,14 @@ import { CalendarLayoutComponent } from './components/calendar-layout/calendar-l
 import { SharedModule } from '../shared/shared.module';
 import { SearchControlsComponent } from './components/search-controls/search-controls.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatLegacyInputModule } from '@angular/material/legacy-input';
 import { MatLegacyButtonModule } from '@angular/material/legacy-button';
 import { EventComponent } from './components/event/event.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar.component';
 import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggl
     ReactiveFormsModule,
     MatLegacyInputModule,
     MatLegacyButtonModule,
-    MatLegacySlideToggleModule
+    MatLegacySlideToggleModule,
+    MatDatepickerModule,
+    FormsModule
   ]
 })
 export class EventsModule {}

@@ -1,7 +1,9 @@
 import {
   AfterViewInit,
+  ApplicationRef,
   Component,
   ElementRef,
+  Inject,
   OnDestroy,
   OnInit,
   ViewChild
@@ -20,7 +22,8 @@ import { SecondaryFilters } from 'src/app/shared/components/form/filters/seconda
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { Subject, takeUntil } from 'rxjs';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-
+import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -34,6 +37,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   paging$ = this.eventsService.eventsPaging$;
   loading$ = this.loader.isLoading$();
 
+  selected: string = new Date().toISOString();
+  dateControl = new FormControl('');
   searchControl = new FormControl({ query: '', location: '' });
   onlyOnlineControl = new FormControl(false);
   includedFilters: SecondaryFilters[] = [
@@ -60,9 +65,23 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     private loader: LoadingService,
     private router: Router,
     public translate: TranslateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _adapter: DateAdapter<LuxonDateAdapter>,
+    @Inject(MAT_DATE_LOCALE) private _locale: string
   ) {
     this.handleOnlyOnlineChange();
+    this.translate.onLangChange.subscribe((event) => {
+      this.changeDatePickerLang(event.lang);
+    });
+  }
+
+  changeDatePickerLang(locale: string) {
+    this._locale = locale;
+    this._adapter.setLocale(this._locale);
+  }
+
+  handleDateChange(): void {
+    this.eventsService.search({ startDate: this.selected });
   }
 
   handleSearch(): void {
@@ -159,6 +178,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       query: (filters['query'] || '') as string,
       location: (filters['location'] || '') as string
     });
+    console.log('START', filters['startDate']);
+    this.selected = (filters['startDate'] as string) || '';
   }
 
   ngAfterViewInit(): void {

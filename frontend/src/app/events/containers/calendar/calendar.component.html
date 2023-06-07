@@ -55,6 +55,12 @@
         (permanentChanged)="handlePermanentFilter($event)"
         [permanent]="isPermanent()"
       >
+        <pre>{{ selected }}</pre>
+        <mat-calendar
+          [(selected)]="selected"
+          (selectedChange)="handleDateChange()"
+        ></mat-calendar>
+
         <app-heading [size]="'md'" color="none">Filter</app-heading>
         <app-secondary-filters
           [data]="getFilterData()"

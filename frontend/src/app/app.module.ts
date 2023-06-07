@@ -10,9 +10,31 @@ import { authConfig, restrictedUrls } from './app-auth.config';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { environment } from 'src/environments/environment';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatDateFormats,
+  MatNativeDateModule
+} from '@angular/material/core';
 import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
+import {
+  LuxonDateAdapter,
+  MAT_LUXON_DATE_ADAPTER_OPTIONS
+} from '@angular/material-luxon-adapter';
+
+export const APP_DATE_FORMATS: MatDateFormats = {
+  parse: {
+    dateInput: 'D'
+  },
+  display: {
+    dateInput: 'dd.LL.yyyy',
+    monthYearLabel: 'LLL yyyy',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'LLL yyyy'
+  }
+};
 
 @NgModule({
   declarations: [AppComponent, ExampleComponent],
@@ -21,6 +43,7 @@ import { registerLocaleData } from '@angular/common';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
+    MatNativeDateModule,
     AuthModule.forRoot(authConfig, restrictedUrls),
     NgxMatomoTrackerModule.forRoot({
       trackerUrl: environment.matomoUrl,
@@ -30,6 +53,12 @@ import { registerLocaleData } from '@angular/common';
   ],
   providers: [
     { provide: Window, useValue: window },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
+    { provide: DateAdapter, useClass: LuxonDateAdapter },
+    {
+      provide: MAT_LUXON_DATE_ADAPTER_OPTIONS,
+      useValue: { firstDayOfWeek: 1 }
+    },
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
   ],
   bootstrap: [AppComponent]
