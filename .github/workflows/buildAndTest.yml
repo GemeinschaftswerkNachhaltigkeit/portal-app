@@ -34,5 +34,5 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: push latest image to GitHub Container Registry
+      - name: push image (latest) to GitHub Container Registry
         run: docker push ${{env.REGISTRY}}/${{ env.GITHUB_NAME }}/${{env.IMAGE_NAME}}:latest
