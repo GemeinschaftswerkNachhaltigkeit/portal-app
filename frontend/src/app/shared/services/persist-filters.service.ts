@@ -14,6 +14,7 @@ export class PersistFiltersService {
     },
     path: string[] = []
   ): void {
+    console.log('URL FILTER', filters);
     this.router.navigate(path, {
       queryParams: {
         ...filters
@@ -37,13 +38,15 @@ export class PersistFiltersService {
         if (key === l) {
           if (value && typeof value === 'string') {
             value = [value as string];
-          } else {
+          }
+          if (!value) {
             value = [];
           }
         }
       });
       filters[key] = value || '';
     });
+
     return filters;
   }
 }

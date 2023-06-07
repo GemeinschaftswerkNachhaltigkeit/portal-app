@@ -52,18 +52,14 @@ export class EventsApiService {
               totalPages: results.totalPages,
               content: []
             };
-            result.content = results.content
-              .map((r) => {
-                const resType = r.resultType;
-                return {
-                  ...r.activity,
-                  resultType: resType
-                } as EventDto;
-              })
-              /**
-               * Todo: Remove if implemented by backend
-               */
-              .filter((c) => !c.period?.permanent);
+            result.content = results.content.map((r) => {
+              const resType = r.resultType;
+              return {
+                ...r.activity,
+                resultType: resType
+              } as EventDto;
+            });
+
             return result;
           }
         )
@@ -89,38 +85,40 @@ export class EventsApiService {
     params = params.append('sort', `period.start,asc,ignorecase`);
     params = params.append('query', searchFilter.query || '');
     // params = params.append('location', searchFilter.location || '');
-    params = params.append(
-      'location',
-      searchFilter.online ? 'Leipzig' : searchFilter.location || ''
-    );
+    if (searchFilter.online) {
+      params = params.append('online', !!searchFilter.online);
+    }
+    params = params.append('permanent', !!searchFilter.permanent);
 
     searchFilter.thematicFocus?.forEach((tf) => {
       params = params.append('thematicFocus', tf);
     });
 
-    if (searchFilter.startDate) {
-      const startDateValue = DateTime.fromISO(searchFilter.startDate)
-        .setZone('utc')
-        .toISO({ includeOffset: true });
-      if (startDateValue) {
-        params = params.append('startDate', startDateValue);
+    if (!searchFilter.permanent) {
+      if (searchFilter.startDate) {
+        const startDateValue = DateTime.fromISO(searchFilter.startDate)
+          .setZone('utc')
+          .toISO({ includeOffset: true });
+        if (startDateValue) {
+          params = params.append('startDate', startDateValue);
+        }
+      } else {
+        // const startDateValue = DateTime.now()
+        //   .startOf('day')
+        //   .setZone('utc')
+        //   .toISO({ includeOffset: true });
+        // if (startDateValue) {
+        //   params = params.append('startDate', startDateValue);
+        // }
       }
-    } else {
-      const startDateValue = DateTime.now()
-        .startOf('day')
-        .setZone('utc')
-        .toISO({ includeOffset: true });
-      if (startDateValue) {
-        params = params.append('startDate', startDateValue);
-      }
-    }
 
-    if (searchFilter.endDate) {
-      const endDateValue = DateTime.fromISO(searchFilter.endDate)
-        .setZone('utc')
-        .toISO({ includeOffset: true });
-      if (endDateValue) {
-        params = params.append('endDate', endDateValue);
+      if (searchFilter.endDate) {
+        const endDateValue = DateTime.fromISO(searchFilter.endDate)
+          .setZone('utc')
+          .toISO({ includeOffset: true });
+        if (endDateValue) {
+          params = params.append('endDate', endDateValue);
+        }
       }
     }
     return params;

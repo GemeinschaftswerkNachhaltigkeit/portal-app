@@ -19,6 +19,7 @@ export type AdditionalFiltersData = {
   selectedEndDate?: string;
   initiator?: boolean;
   projectSustainabilityWinner?: boolean;
+  online?: boolean;
 };
 
 @Component({

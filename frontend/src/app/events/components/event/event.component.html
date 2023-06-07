@@ -11,11 +11,11 @@
         <div>{{ utils.locationString(event.location) }}</div>
       </div>
       <div class="name">{{ event.location?.address?.name || '' }}</div>
-      <pre>{{ event.period?.permanent | json }}</pre>
     </div>
   </div>
 
   <div class="actions">
+    <!--
     <app-action
       [clickable]="true"
       icon="launch"
@@ -23,6 +23,8 @@
       (clicked)="open(event)"
     >
     </app-action>
+  -->
+    <div style="width: 40px"></div>
     <app-activity-subscription-action
       [onlyIcon]="true"
       [activity]="utils.asActivity(event)"

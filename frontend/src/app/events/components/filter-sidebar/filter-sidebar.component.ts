@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./filter-sidebar.component.scss']
 })
 export class FilterSidebarComponent {
+  @Input() permanent = false;
+  @Output() permanentChanged = new EventEmitter<boolean>();
 
+  handleTabChange(permanent: boolean): void {
+    this.permanentChanged.emit(permanent);
+  }
 }

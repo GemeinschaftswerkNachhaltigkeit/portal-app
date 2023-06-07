@@ -75,5 +75,12 @@
         (filterChanged)="dateRangeHandler($event)"
       ></app-activity-period-filter
     ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLINE)"
+      ><app-online-filter
+        [selected]="filters.online"
+        (filterChanged)="onlineHandler($event)"
+      ></app-online-filter
+    ></app-ordered-filter>
   </div>
 </mat-accordion>

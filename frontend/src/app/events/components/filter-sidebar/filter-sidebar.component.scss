@@ -4,6 +4,7 @@
 .filter-header {
   display: flex;
   width: 100%;
+  margin-bottom: $spacing-4;
 
   .tab-button {
     flex-grow: 1;
@@ -12,6 +13,7 @@
     color: $blue-navy;
     padding: $spacing-2;
     border-bottom: 2px solid $gray-light;
+    cursor: pointer;
     &.active {
       border-bottom: 2px solid $magenta;
       font-weight: bold;

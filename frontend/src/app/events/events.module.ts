@@ -4,8 +4,7 @@ import { CalendarComponent } from './containers/calendar/calendar.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { CalendarLayoutComponent } from './components/calendar-layout/calendar-layout.component';
 import { SharedModule } from '../shared/shared.module';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { SearchControlsComponent } from './components/search-input/search-controls.component';
+import { SearchControlsComponent } from './components/search-controls/search-controls.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatLegacyInputModule } from '@angular/material/legacy-input';
@@ -19,7 +18,6 @@ import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggl
   declarations: [
     CalendarComponent,
     CalendarLayoutComponent,
-    SearchBarComponent,
     SearchControlsComponent,
     EventComponent,
     EventListComponent,

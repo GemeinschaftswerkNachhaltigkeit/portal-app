@@ -36,7 +36,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   searchControl = new FormControl({ query: '', location: '' });
   onlyOnlineControl = new FormControl(false);
-  includedFilters: SecondaryFilters[] = [SecondaryFilters.THEMATIC_FOCUS];
+  includedFilters: SecondaryFilters[] = [
+    SecondaryFilters.THEMATIC_FOCUS,
+    SecondaryFilters.ONLINE
+  ];
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -70,6 +73,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  handlePermanentFilter(isPermanent: boolean): void {
+    this.eventsService.search({
+      permanent: isPermanent
+    });
+  }
+
   handleLoadMore(): void {
     this.eventsService.loadMore();
   }
@@ -99,6 +108,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     return Object.entries(groups);
   }
 
+  isPermanent(): boolean {
+    return !!this.eventsService.getFilters()['permanent'];
+  }
+
   handleFiltersChanged(filters: AdditionalFilters): void {
     this.eventsService.search(filters);
   }
@@ -108,7 +121,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
     return {
       use: this.includedFilters,
-      selectedThematicFocusValues: filters['thematicFocus']
+      selectedThematicFocusValues: filters['thematicFocus'],
+      online: filters['online']
     };
   }
 

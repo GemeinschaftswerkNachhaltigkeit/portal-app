@@ -19,7 +19,7 @@
     <div results>
       <ng-container *ngIf="events$ | async as events">
         <div class="group" *ngFor="let group of groupEventsByDate(events)">
-          <div class="date">
+          <div class="date" *ngIf="group[0] !== 'undefined'">
             <div class="text">
               {{
                 group[0] | date : 'dd. MMM' : undefined : translate.currentLang
@@ -51,7 +51,11 @@
       </ng-container>
     </div>
     <div filters>
-      <app-filter-sidebar>
+      <app-filter-sidebar
+        (permanentChanged)="handlePermanentFilter($event)"
+        [permanent]="isPermanent()"
+      >
+        <app-heading [size]="'md'" color="none">Filter</app-heading>
         <div class="slide-toggle">
           <div>Nur online Veranstaltungen?</div>
           <mat-slide-toggle [formControl]="onlyOnlineControl" color="primary">
