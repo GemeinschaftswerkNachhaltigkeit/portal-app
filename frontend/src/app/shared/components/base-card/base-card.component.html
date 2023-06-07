@@ -78,12 +78,10 @@
         <app-card-label
           [limitedWidth]="narrow"
           [type]="type"
-          [dan]="
-            card.isActivity(type) &&
-            utils.asActivity(entity).activityType === 'DAN'
-          "
+          [dan]="card.isDan(type)"
           [activityTypeLabel]="
-            card.isActivity(type) && utils.asActivity(entity).activityType
+            (card.isActivity(type) || card.isDan(type)) &&
+            utils.asActivity(entity).activityType
               ? ('activityType.' + utils.asActivity(entity).activityType
                 | translate)
               : ''
