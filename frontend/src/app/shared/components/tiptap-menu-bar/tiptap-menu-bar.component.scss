@@ -31,6 +31,10 @@
     border: none;
     color: $blue-navy;
 
+    &.active {
+      color: $magenta;
+    }
+
     //  padding: 3px 5px;
     //  margin-right: 15px;
 
