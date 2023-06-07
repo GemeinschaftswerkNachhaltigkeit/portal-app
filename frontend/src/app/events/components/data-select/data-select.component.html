@@ -1,0 +1,6 @@
+<mat-calendar
+  *ngIf="ready"
+  [selected]="selected"
+  (selectedChange)="handleDateChange($event)"
+  [dateClass]="dateClass"
+></mat-calendar>
