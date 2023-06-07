@@ -119,7 +119,7 @@
     }
   },
   "labels": {
-    "onlyOnlineEvents": "Only online events?",
+    "onlyOnline": "Only online?",
     "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",

@@ -37,8 +37,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   searchControl = new FormControl({ query: '', location: '' });
   onlyOnlineControl = new FormControl(false);
   includedFilters: SecondaryFilters[] = [
-    SecondaryFilters.THEMATIC_FOCUS,
-    SecondaryFilters.ONLINE
+    SecondaryFilters.ONLINE,
+    SecondaryFilters.THEMATIC_FOCUS
   ];
 
   observer = new IntersectionObserver(
@@ -127,11 +127,17 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   countFilters(): number {
-    return 0;
+    const filters: AdditionalFilters = this.eventsService.getFilters();
+
+    let count = 0;
+    const tf = filters['thematicFocus'] || [];
+    count = count + (tf ? tf.length + count : 0);
+    count = filters['online'] ? count + 1 : count;
+    return count;
   }
 
   clearAll(): void {
-    //
+    this.eventsService.reset();
   }
 
   openFilters(): void {
@@ -141,7 +147,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('RESULTS >>>>>>', result);
         this.eventsService.search(result);
       }
     });

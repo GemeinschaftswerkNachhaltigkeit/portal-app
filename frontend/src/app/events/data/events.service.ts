@@ -104,6 +104,7 @@ export class EventsService {
     this.nextPage = 0;
     this.eventsState.next([]);
     this.pagedEventsState.next({ content: [] });
+    this.persistFilters.setFiltersToUrl({});
   }
 
   triggerSearch(): void {

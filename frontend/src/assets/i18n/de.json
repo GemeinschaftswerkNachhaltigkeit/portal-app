@@ -120,7 +120,7 @@
     }
   },
   "labels": {
-    "onlyOnlineEvents": "Nur online Veranstaltungen?",
+    "onlyOnline": "Nur online?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",
