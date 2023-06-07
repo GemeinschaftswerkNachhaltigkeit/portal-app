@@ -7,7 +7,7 @@
       "npmPublish": false
     }],
     ["@semantic-release/exec", {
-      "prepareCmd": "cd backend && mvn -s /secrets/settings_m3.xml versions:set -DnewVersion=${nextRelease.version}"
+      "prepareCmd": "cd backend && mvn versions:set -DnewVersion=${nextRelease.version}"
     }],
     ["@semantic-release/git",
       {
