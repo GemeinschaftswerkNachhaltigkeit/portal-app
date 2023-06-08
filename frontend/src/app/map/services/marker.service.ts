@@ -207,7 +207,6 @@ export class SharedMarkerService {
     mapWidth?: number,
     move?: boolean
   ): void {
-    console.log('ActivateMarker () MOVE', move)
     const marker = this.findMarker(markers, res);
 
     if (marker) {
