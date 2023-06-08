@@ -78,6 +78,7 @@
 
     <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLINE)"
       ><app-online-filter
+        *ngIf="useFilter(filterTypes.ONLINE)"
         [selected]="filters.online"
         (filterChanged)="onlineHandler($event)"
       ></app-online-filter
