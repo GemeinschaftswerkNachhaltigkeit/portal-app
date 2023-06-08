@@ -19,6 +19,10 @@ export class DeveloperComponent {
       title: 'Github',
       url: 'https://github.com/GemeinschaftswerkNachhaltigkeit',
       absoluteUrl: true
-    }
+    },
+    {
+      title: 'Einbindung der Karte',
+      url: 'assets/documents/Einbindung_WPGWN_Karte.pdf',
+    },
   ];
 }
