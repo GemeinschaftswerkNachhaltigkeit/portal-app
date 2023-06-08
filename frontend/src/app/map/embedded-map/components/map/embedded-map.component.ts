@@ -49,7 +49,7 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
       center: this.center,
       zoom: this.zoom // in case zoom is provided in URL, use it. Otherwise set it depending on screenwidth.
         ? this.zoom
-        : screenWidth && screenWidth < 1200 ? 6 : 8,
+        : screenWidth && screenWidth < 1200 ? 6 : 7,
       maxZoom: 17
     });
     const tiles = L.tileLayer(
