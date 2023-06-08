@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts } from '@angular/router';
-import { slideInAnimation } from '../../animations';
-import { MapFacadeService } from '../../map-facade.service';
+import { slideInAnimation } from '../../../animations';
+import { InternalMapFacade } from '../../../../map-facade.service';
 
 @Component({
   selector: 'app-map-layout',
@@ -13,7 +13,7 @@ export class MapLayoutComponent {
   showFullMap$ = this.facade.showFullMap$;
 
   constructor(
-    private facade: MapFacadeService,
+    private facade: InternalMapFacade,
     private contexts: ChildrenOutletContexts,
     private route: ActivatedRoute
   ) {}

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { MapFacadeService } from '../map-facade.service';
+import {InternalMapFacade, EmbeddedMapFacade, SharedMapFacade} from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
@@ -68,7 +68,7 @@ const getClusterIcon = (
 @Injectable({
   providedIn: 'root'
 })
-export class MarkerService {
+export class SharedMarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
   danMarkers: L.MarkerClusterGroup | null = null;
@@ -84,12 +84,12 @@ export class MarkerService {
   });
   markerLeaved$ = new BehaviorSubject(null);
 
-  constructor(
-    private mapFacade: MapFacadeService,
-    private utils: UtilsService
-  ) {}
+  // explanation inheritance with dependency injection see here:
+  // https://www.danywalls.com/using-the-inject-function-in-angular-15
+  utils = inject(UtilsService);
+  mapFacade = inject(SharedMapFacade);
 
-  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number): void {
+  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number, move?: boolean): void {
     this.organisationMarkers?.clearLayers();
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
@@ -120,7 +120,7 @@ export class MarkerService {
           icon: icon
         });
         marker.on('click', () =>
-          this.markerClickHandler(map, c.data, data, mapWidth)
+          this.markerClickHandler(map, c.data, data, mapWidth, move)
         );
 
         if (c.data.resultType === 'DAN') {
@@ -139,6 +139,32 @@ export class MarkerService {
     this.danMarkers.addTo(map);
     this.organisationMarkers.addTo(map);
     this.setExitingActiveMarker(map, data);
+  }
+
+  markerClickHandler(
+    map: L.Map,
+    marker: MarkerDto,
+    markers: MarkerDto[],
+    mapWidth?: number,
+    move?: boolean
+  ): void {
+    this.mapFacade.openCard(marker.resultType, marker.id);
+    // this.scrollToCard(marker.resultType, marker.id);
+
+    this.activateMarker(map, marker, markers, mapWidth, move);
+  }
+
+  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
+    const card = this.mapFacade.getActiveResult();
+    const marker = this.findMarker(markers, card);
+    if (card && marker) {
+      this.handleActiveMarker(
+        map,
+        this.getSingleMarkerData(marker),
+        undefined,
+        false
+      );
+    }
   }
 
   makerKey(res: MarkerDto): string {
@@ -174,24 +200,12 @@ export class MarkerService {
     this.markerLeaved$.next(null);
   }
 
-  markerClickHandler(
-    map: L.Map,
-    marker: MarkerDto,
-    markers: MarkerDto[],
-    mapWidth?: number
-  ): void {
-    this.mapFacade.openCard(marker.resultType, marker.id);
-    // this.scrollToCard(marker.resultType, marker.id);
-
-    this.activateMarker(map, marker, markers, mapWidth);
-  }
-
   activateMarker(
     map: L.Map,
     res: SearchResult,
     markers: MarkerDto[],
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
     const marker = this.findMarker(markers, res);
 
@@ -220,18 +234,6 @@ export class MarkerService {
     return;
   }
 
-  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
-    const card = this.mapFacade.getActiveResult();
-    const marker = this.findMarker(markers, card);
-    if (card && marker) {
-      this.handleActiveMarker(
-        map,
-        this.getSingleMarkerData(marker),
-        undefined,
-        false
-      );
-    }
-  }
   hoverMarker(
     map: L.Map,
     searchResult: SearchResult,
@@ -335,7 +337,7 @@ export class MarkerService {
     map: L.Map,
     activeMarker: { lon?: number; lat?: number; data: MarkerDto },
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
     this.setActiveMarkerIcon(activeMarker.data);
     if (move && activeMarker && activeMarker.lat && activeMarker.lon) {
@@ -409,7 +411,7 @@ export class MarkerService {
     this.utils.scrollToAnchor(`card-${type}${id}`, 200);
   }
 
-  private getMarkerData(
+  protected getMarkerData(
     data: MarkerDto[]
   ): { lon?: number; lat?: number; data: MarkerDto }[] {
     return data.map((d) => {

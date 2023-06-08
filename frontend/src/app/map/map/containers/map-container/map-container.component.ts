@@ -14,10 +14,10 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { MapFacadeService } from '../../map-facade.service';
-import { DynamicFilters } from '../../models/search-filter';
-import SearchResult from '../../models/search-result';
-import { MarkerService } from '../../services/marker.service';
+import { InternalMapFacade } from '../../../map-facade.service';
+import { DynamicFilters } from '../../../models/search-filter';
+import SearchResult from '../../../models/search-result';
+import { SharedMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-map-container',
@@ -45,10 +45,10 @@ export class MapContainerComponent implements OnInit {
   loading$ = this.loading.isLoading$('map-search');
 
   constructor(
-    private mapFacade: MapFacadeService,
+    private mapFacade: InternalMapFacade,
     private loading: LoadingService,
     private route: ActivatedRoute,
-    private marker: MarkerService,
+    private marker: SharedMarkerService,
     public subscription: SubscriptionFacadeService,
     public utils: UtilsService,
     filtersService: SecondaryFitlersService
@@ -71,6 +71,7 @@ export class MapContainerComponent implements OnInit {
   mapInitialised$ = this.mapFacade.mapInitialised$;
 
   ngOnInit(): void {
+    this.mapFacade.setEmbedded(false);
     this.mapFacade.setInitalFilters();
     this.mapFacade.search();
 

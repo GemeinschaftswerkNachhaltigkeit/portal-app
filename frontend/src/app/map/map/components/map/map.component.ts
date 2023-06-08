@@ -17,9 +17,9 @@ import {
   Subject,
   takeUntil
 } from 'rxjs';
-import MarkerDto from '../../models/markerDto';
-import SearchResult from '../../models/search-result';
-import { MarkerService } from '../../services/marker.service';
+import MarkerDto from '../../../models/markerDto';
+import SearchResult from '../../../models/search-result';
+import { SharedMarkerService } from '../../../services/marker.service';
 
 @Component({
   selector: 'app-map',
@@ -36,7 +36,7 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
   mapMoves = new BehaviorSubject<string>('');
   mapInitialized = false;
 
-  constructor(private marker: MarkerService) {}
+  constructor(private marker: SharedMarkerService) {}
 
   private getScreenWidth(): number | undefined {
     return this.mapRef?.nativeElement?.offsetWidth;
@@ -105,7 +105,8 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
             this.map,
             searchResult,
             this.data,
-            this.mapRef?.nativeElement?.offsetWidth
+            this.mapRef?.nativeElement?.offsetWidth,
+            true
           );
         }
       });
@@ -137,7 +138,8 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
       this.marker.makeMarkers(
         this.map,
         this.data,
-        this.mapRef?.nativeElement?.offsetWidth
+        this.mapRef?.nativeElement?.offsetWidth,
+        true
       );
     }
   }
