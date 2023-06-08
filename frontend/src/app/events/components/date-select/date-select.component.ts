@@ -58,7 +58,7 @@ export class DateSelectComponent implements AfterViewInit {
 
         return '';
       };
-    }, 2000);
+    }, 0);
   }
 
   changeDatePickerLang(locale: string) {
