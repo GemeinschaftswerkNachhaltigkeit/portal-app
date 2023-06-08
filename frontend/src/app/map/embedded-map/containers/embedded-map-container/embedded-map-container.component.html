@@ -1,0 +1,16 @@
+<app-embedded-map-layout>
+    <div map>
+    <div class="logo">
+        <a href="https://gemeinschaftswerk-nachhaltigkeit.de/" target="_blank"><img src="../../assets/favicons/apple-touch-icon_transp.png"></a>
+    </div>
+      <app-embedded-map
+        *ngIf="markers$ | async as markers"
+        [center]="center"
+        [data]="markers"
+        [zoom]="zoom"
+        (mapMoved)="mapMovedHandler($event)"
+      ></app-embedded-map>
+    </div>
+    <app-embedded-details-card detailsDesktop></app-embedded-details-card>
+    <app-embedded-details-card detailsMobile [mobile]="true"></app-embedded-details-card>
+</app-embedded-map-layout>

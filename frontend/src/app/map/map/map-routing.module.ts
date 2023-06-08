@@ -14,7 +14,7 @@ const routes: Routes = [
         data: { animation: 'mapDetails' }
       }
     ]
-  }
+  },
 ];
 
 @NgModule({
