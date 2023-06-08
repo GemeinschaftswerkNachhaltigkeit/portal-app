@@ -8,9 +8,8 @@ describe('EmbeddedMapLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmbeddedMapLayoutComponent ]
-    })
-    .compileComponents();
+      declarations: [EmbeddedMapLayoutComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EmbeddedMapLayoutComponent);
     component = fixture.componentInstance;

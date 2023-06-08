@@ -14,10 +14,6 @@ import { EmbeddedMapComponent } from './components/map/embedded-map.component';
     EmbeddedDetailsCardComponent,
     EmbeddedMapComponent
   ],
-  imports: [
-    EmbeddedMapRoutingModule,
-    SharedMapModule,
-    CommonModule
-  ]
+  imports: [EmbeddedMapRoutingModule, SharedMapModule, CommonModule]
 })
 export class EmbeddedMapModule {}

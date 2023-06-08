@@ -3,8 +3,16 @@ import { MapApiService } from './api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
 import { DynamicFilters } from './models/search-filter';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';
-import {EmbeddedMapStateService, InternalMapStateService, SharedMapStateService} from './state/map-state.service';
-import {EmbeddedUiStateService, InternalUiStateService, SharedUiStateService} from './state/ui-state.service';
+import {
+  EmbeddedMapStateService,
+  InternalMapStateService,
+  SharedMapStateService
+} from './state/map-state.service';
+import {
+  EmbeddedUiStateService,
+  InternalUiStateService,
+  SharedUiStateService
+} from './state/ui-state.service';
 import { Subscription, take } from 'rxjs';
 import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
@@ -12,7 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
 
 // common map facade services
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SharedMapFacade {
   private mapApi = inject(MapApiService);
   private mapState = inject(SharedMapStateService);
@@ -49,13 +57,16 @@ export class SharedMapFacade {
     delete updatedFilters['id'];
     delete updatedFilters['type'];
     this.setActiveCard();
-    this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'], {
-      queryParams: {
-        ...updatedFilters
-      },
-      replaceUrl: true,
-      relativeTo: this.route
-    });
+    this.router.navigate(
+      ['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'],
+      {
+        queryParams: {
+          ...updatedFilters
+        },
+        replaceUrl: true,
+        relativeTo: this.route
+      }
+    );
   }
 
   setActiveCard(activeCard?: { type: string; id?: number }): void {
@@ -64,15 +75,18 @@ export class SharedMapFacade {
       const filters = this.uiState.filterValues;
 
       if (activeCard?.id && activeCard?.type) {
-        this.router.navigate(['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'], {
-          queryParams: {
-            ...filters,
-            type: activeCard?.type,
-            id: activeCard?.id
-          },
-          replaceUrl: true,
-          relativeTo: this.route
-        });
+        this.router.navigate(
+          ['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map'],
+          {
+            queryParams: {
+              ...filters,
+              type: activeCard?.type,
+              id: activeCard?.id
+            },
+            replaceUrl: true,
+            relativeTo: this.route
+          }
+        );
       }
       this.uiState.setActiveCard(activeCard);
     }
@@ -142,7 +156,10 @@ export class SharedMapFacade {
         ...searchFilter,
         envelope: existingFilters['envelope']
       };
-      this.persistFilters.setFiltersToUrl(searchFilter, ['/', this.mapState.isEmbedded ? 'embeddedmap' : 'map']);
+      this.persistFilters.setFiltersToUrl(searchFilter, [
+        '/',
+        this.mapState.isEmbedded ? 'embeddedmap' : 'map'
+      ]);
     } else {
       filters = existingFilters;
     }
@@ -158,11 +175,14 @@ export class SharedMapFacade {
   }
 
   searchMarkers(filters: DynamicFilters): void {
-    this.mapApi.searchMarkers(filters).pipe(take(1)).subscribe({
-      next: (resp: MarkerDto[]) => {
-        this.mapState.setMarkers(resp);
-      }
-    });
+    this.mapApi
+      .searchMarkers(filters)
+      .pipe(take(1))
+      .subscribe({
+        next: (resp: MarkerDto[]) => {
+          this.mapState.setMarkers(resp);
+        }
+      });
   }
 
   setBoundingBox(box: string): void {
@@ -176,7 +196,7 @@ export class SharedMapFacade {
 }
 
 // MapFacade services for internal map
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class InternalMapFacade {
   private internalMapState = inject(InternalMapStateService);
   private internalUiState = inject(InternalUiStateService);
@@ -233,15 +253,18 @@ export class InternalMapFacade {
   }
 
   private searchCards(filters: DynamicFilters): void {
-    this.mapApi.search(filters).pipe(take(1)).subscribe({
-      next: (resp: PagedResponse<SearchResult>) => {
-        this.internalMapState.setSearchResponse(resp);
-        this.loading.stop('map-search');
-      },
-      error: () => {
-        this.loading.stop('map-search');
-      }
-    });
+    this.mapApi
+      .search(filters)
+      .pipe(take(1))
+      .subscribe({
+        next: (resp: PagedResponse<SearchResult>) => {
+          this.internalMapState.setSearchResponse(resp);
+          this.loading.stop('map-search');
+        },
+        error: () => {
+          this.loading.stop('map-search');
+        }
+      });
   }
 
   setBoundingBox(box: string): void {
@@ -282,13 +305,11 @@ export class InternalMapFacade {
     const filters = this.internalUiState.filterValues;
     this.search({ ...filters, page, size });
   }
-
 }
 
 // MapFacade services for embedded map
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class EmbeddedMapFacade {
-
   /* #### Common methods valid for internal and embedded map #### */
   private sharedMapFacade = inject(SharedMapFacade);
   private embeddedUiState = inject(EmbeddedUiStateService);
@@ -343,5 +364,4 @@ export class EmbeddedMapFacade {
   setEmbedded(isEmbedded: boolean) {
     this.sharedMapFacade.setEmbedded(isEmbedded);
   }
-
 }

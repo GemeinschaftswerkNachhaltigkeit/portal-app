@@ -26,7 +26,9 @@ import { SharedMarkerService } from '../../../services/marker.service';
   templateUrl: './embedded-map.component.html',
   styleUrls: ['./embedded-map.component.scss']
 })
-export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class EmbeddedMapComponent
+  implements AfterViewInit, OnChanges, OnDestroy
+{
   @ViewChild('mapRef') mapRef: ElementRef<HTMLDivElement> | null = null;
   @Input() data: MarkerDto[] = [];
   @Input() center?: L.LatLngTuple;
@@ -49,7 +51,9 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
       center: this.center,
       zoom: this.zoom // in case zoom is provided in URL, use it. Otherwise set it depending on screenwidth.
         ? this.zoom
-        : screenWidth && screenWidth < 1200 ? 6 : 7,
+        : screenWidth && screenWidth < 1200
+        ? 6
+        : 7,
       maxZoom: 17
     });
     const tiles = L.tileLayer(
@@ -146,4 +150,3 @@ export class EmbeddedMapComponent implements AfterViewInit, OnChanges, OnDestroy
     this.unsubscribe$.complete();
   }
 }
-

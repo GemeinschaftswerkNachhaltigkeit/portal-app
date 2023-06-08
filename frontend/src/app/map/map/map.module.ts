@@ -18,7 +18,6 @@ import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { DetailsCardComponent } from '../map/containers/details-card/details-card.component';
 import { MapComponent } from './components/map/map.component';
 
-
 import {
   LuxonDateAdapter,
   MatLuxonDateModule,
@@ -67,7 +66,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatCheckboxModule,
     MatDatepickerModule,
     MatLuxonDateModule,
-    NgxMatomoTrackerModule,
+    NgxMatomoTrackerModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

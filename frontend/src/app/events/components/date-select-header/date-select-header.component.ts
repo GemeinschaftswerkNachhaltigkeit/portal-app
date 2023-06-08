@@ -90,22 +90,22 @@ export class DateSelectHeaderComponent<D> implements OnDestroy {
   }
 
   previousClicked(mode: 'month' | 'year') {
-    this._calendar.activeDate =
+    const newDate =
       mode === 'month'
         ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, -1)
         : this._dateAdapter.addCalendarYears(this._calendar.activeDate, -1);
-    this.eventsService.loadAvailableEvents(
-      this._calendar.activeDate as DateTime
-    );
+    this.eventsService.loadAvailableEvents(newDate as DateTime, () => {
+      this._calendar.activeDate = newDate;
+    });
   }
 
   nextClicked(mode: 'month' | 'year') {
-    this._calendar.activeDate =
+    const newDate =
       mode === 'month'
         ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, 1)
         : this._dateAdapter.addCalendarYears(this._calendar.activeDate, 1);
-    this.eventsService.loadAvailableEvents(
-      this._calendar.activeDate as DateTime
-    );
+    this.eventsService.loadAvailableEvents(newDate as DateTime, () => {
+      this._calendar.activeDate = newDate;
+    });
   }
 }

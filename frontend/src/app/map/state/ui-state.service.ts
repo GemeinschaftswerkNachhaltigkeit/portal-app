@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import ActiveCard from '../models/active-card';
 import { DynamicFilters } from '../models/search-filter';
@@ -133,7 +133,6 @@ export class InternalUiStateService {
   setHoveredCard(hoveredCard?: { type: string; id?: number }): void {
     this.hoveredCard.next(hoveredCard);
   }
-
 }
 
 @Injectable({ providedIn: 'root' })
