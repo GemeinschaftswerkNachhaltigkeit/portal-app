@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { MapApiService } from './map/api/map-api.service';
+import { MapApiService } from './api/map-api.service';
 import PagedResponse from '../shared/models/paged-response';
 import { DynamicFilters } from './models/search-filter';
 import { PersistFiltersService } from '../shared/services/persist-filters.service';
