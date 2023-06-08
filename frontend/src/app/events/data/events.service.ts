@@ -34,7 +34,7 @@ export class EventsService {
   private eventsState = new BehaviorSubject<EventDto[]>([]);
   private availableEventsState = new BehaviorSubject<{
     [key: string]: number;
-  }>({});
+  } | null>(null);
   initialized = false;
 
   constructor(
@@ -76,7 +76,7 @@ export class EventsService {
       });
   }
 
-  get availableEvents$(): Observable<{ [key: string]: number }> {
+  get availableEvents$(): Observable<{ [key: string]: number } | null> {
     return this.availableEventsState.asObservable();
   }
 
@@ -95,12 +95,15 @@ export class EventsService {
     );
   }
 
-  loadAvailableEvents(month: DateTime): void {
+  loadAvailableEvents(month: DateTime, cb?: () => void): void {
     this.eventsApi
       .getDates(month)
       .pipe(take(1))
       .subscribe({
-        next: (dates) => this.availableEventsState.next(dates),
+        next: (dates) => {
+          this.availableEventsState.next(dates);
+          if (cb) cb();
+        },
         error: (e) => {
           console.log(e);
         }

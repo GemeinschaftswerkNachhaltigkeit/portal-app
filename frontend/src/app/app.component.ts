@@ -3,8 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { of, Subject, takeUntil } from 'rxjs';
 import { AuthService } from './auth/services/auth.service';
-import { filter, map } from 'rxjs/operators'
-import { Router, NavigationStart, RouterEvent, Event } from "@angular/router";
+import { filter, map } from 'rxjs/operators';
+import { Router, NavigationStart, RouterEvent, Event } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +22,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private translate: TranslateService
   ) {}
   ngOnInit(): void {
-
     // in case of embeddedMap hide header
     this.noHeader$ = this.router.events.pipe(
       filter((event: Event) => event instanceof NavigationStart),
       // Get route w/o parameters. Expression returns true if it equals '/embeddedmap'
-      map(event => (<RouterEvent>event).url.split('?')[0] === '/embeddedmap'),
+      map((event) => (<RouterEvent>event).url.split('?')[0] === '/embeddedmap')
     );
 
     this.translate.onLangChange

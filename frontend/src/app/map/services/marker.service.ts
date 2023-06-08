@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {inject, Injectable} from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import {InternalMapFacade, EmbeddedMapFacade, SharedMapFacade} from '../map-facade.service';
+import {
+  InternalMapFacade,
+  EmbeddedMapFacade,
+  SharedMapFacade
+} from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
@@ -89,7 +93,12 @@ export class SharedMarkerService {
   utils = inject(UtilsService);
   mapFacade = inject(SharedMapFacade);
 
-  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number, move?: boolean): void {
+  makeMarkers(
+    map: L.Map,
+    data: MarkerDto[],
+    mapWidth?: number,
+    move?: boolean
+  ): void {
     this.organisationMarkers?.clearLayers();
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);

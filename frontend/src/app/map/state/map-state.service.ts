@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import Paging from 'src/app/shared/models/paging';
 import PagedResponse from '../../shared/models/paged-response';
@@ -45,10 +45,9 @@ export abstract class SharedMapStateService {
   setMarkers(makers: MarkerDto[]): void {
     this.markers.next(makers);
   }
-
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class InternalMapStateService {
   private searchResp = new BehaviorSubject<PagedResponse<SearchResult>>({
     content: []
@@ -104,10 +103,9 @@ export class InternalMapStateService {
   setSearchResponse(resp: PagedResponse<SearchResult>): void {
     this.searchResp.next(resp);
   }
-
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class EmbeddedMapStateService {
   private sharedMapState = inject(SharedMapStateService);
 

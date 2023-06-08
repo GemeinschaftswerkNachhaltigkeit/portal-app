@@ -21,13 +21,9 @@ export class EventsApiService {
   ) {}
 
   getDates(date: DateTime): Observable<{ [key: string]: number }> {
-    let params = new HttpParams();
-    params = params.append('date', date.toISO() || '');
+    const month = date.startOf('month').startOf('day').toUTC().toISO();
     return this.http.get<{ [key: string]: number }>(
-      `${environment.apiUrl}/events/dates`,
-      {
-        params: params
-      }
+      `${environment.apiUrl}/activities/month/${month}`
     );
   }
 

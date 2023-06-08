@@ -192,9 +192,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     const start = (filters['startDate'] as string) || '';
-    if (start) {
-      this.selected = DateTime.fromISO(start);
-    }
+    this.selected = start ? DateTime.fromISO(start) : DateTime.now();
+    this.eventsService.loadAvailableEvents(this.selected);
   }
 
   ngAfterViewInit(): void {

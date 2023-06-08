@@ -12,6 +12,7 @@
     "activities": "Besondere Aktionen"
   },
   "btn": {
+    "today": "heute",
     "login": "Login",
     "logout": "Logout",
     "registration": "Jetzt registrieren",

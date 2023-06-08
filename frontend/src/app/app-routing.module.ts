@@ -34,7 +34,10 @@ const routes: Routes = [
   },
   {
     path: 'embeddedmap',
-    loadChildren: () => import('./map/embedded-map/embedded-map.module').then((m) => m.EmbeddedMapModule)
+    loadChildren: () =>
+      import('./map/embedded-map/embedded-map.module').then(
+        (m) => m.EmbeddedMapModule
+      )
   },
   {
     path: 'marketplace',

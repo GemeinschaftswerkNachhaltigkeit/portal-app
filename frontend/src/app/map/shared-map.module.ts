@@ -4,20 +4,9 @@ import { DetailsLinkComponent } from './components/details-link/details-link.com
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
-
 @NgModule({
-  declarations: [
-    DetailsLinkComponent,
-  ],
-  imports: [
-    MatIconModule,
-    CommonModule,
-    SharedModule
-  ],
-  exports: [
-    DetailsLinkComponent,
-    SharedModule,
-    MatIconModule
-  ],
+  declarations: [DetailsLinkComponent],
+  imports: [MatIconModule, CommonModule, SharedModule],
+  exports: [DetailsLinkComponent, SharedModule, MatIconModule]
 })
 export class SharedMapModule {}

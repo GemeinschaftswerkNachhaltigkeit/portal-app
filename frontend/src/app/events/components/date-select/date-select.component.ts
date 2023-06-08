@@ -4,11 +4,12 @@ import {
   EventEmitter,
   Inject,
   Input,
-  Output
+  Output,
+  ViewChild
 } from '@angular/core';
 import {
-  MatCalendarCellClassFunction,
-  MatCalendarView
+  MatCalendar,
+  MatCalendarCellClassFunction
 } from '@angular/material/datepicker';
 import { DateTime } from 'luxon';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
@@ -25,6 +26,7 @@ export class DateSelectComponent implements AfterViewInit {
   @Input() selected: DateTime = DateTime.now();
   @Input() data: { [key: string]: number } = {};
   @Output() dateSelected = new EventEmitter<DateTime>();
+  @ViewChild('cal') cal: MatCalendar<DateTime>;
 
   header = DateSelectHeaderComponent;
   ready = false;
@@ -44,13 +46,10 @@ export class DateSelectComponent implements AfterViewInit {
       this.dateClass = (cellDate, view) => {
         if (view === 'month') {
           if (cellDate) {
-            const date = DateTime.utc(
-              cellDate.year,
-              cellDate.month,
-              cellDate.day
-            ).toISO();
-            console.log('>>> DATE', date);
-            console.log('>>> DATA', this.data);
+            const date = cellDate
+              .startOf('day')
+              .toUTC()
+              .toISO({ suppressMilliseconds: true });
             const inData = date && this.data[date] > 0;
             return inData ? 'date-with-data' : '';
           }
@@ -74,7 +73,8 @@ export class DateSelectComponent implements AfterViewInit {
     }
   }
 
-  handleViewChange(view: MatCalendarView): void {
-    console.log('>>>> VIEW', view);
+  handleToday(): void {
+    this.cal.activeDate = DateTime.now();
+    this.handleDateChange(DateTime.now());
   }
 }

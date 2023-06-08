@@ -22,7 +22,7 @@ export class DeveloperComponent {
     },
     {
       title: 'Einbindung der Karte',
-      url: 'assets/documents/Einbindung_WPGWN_Karte.pdf',
-    },
+      url: 'assets/documents/Einbindung_WPGWN_Karte.pdf'
+    }
   ];
 }
