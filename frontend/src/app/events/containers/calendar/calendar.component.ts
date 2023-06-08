@@ -184,7 +184,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.eventsService.triggerSearch();
     const filters = this.eventsService.getFilters();
     this.searchControl.setValue({
       query: (filters['query'] || '') as string,
@@ -192,8 +191,10 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     const start = (filters['startDate'] as string) || '';
+    console.log('START');
     this.selected = start ? DateTime.fromISO(start) : DateTime.now();
     this.eventsService.loadAvailableEvents(this.selected);
+    this.eventsService.triggerSearch();
   }
 
   ngAfterViewInit(): void {

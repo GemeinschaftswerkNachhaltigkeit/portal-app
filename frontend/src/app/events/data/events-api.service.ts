@@ -104,19 +104,17 @@ export class EventsApiService {
     if (!searchFilter.permanent) {
       if (searchFilter.startDate) {
         const startDateValue = DateTime.fromISO(searchFilter.startDate)
-          .setZone('utc')
-          .toISO({ includeOffset: true });
+          .startOf('day')
+          .toUTC()
+          .toISO();
         if (startDateValue) {
           params = params.append('startDate', startDateValue);
         }
       } else {
-        // const startDateValue = DateTime.now()
-        //   .startOf('day')
-        //   .setZone('utc')
-        //   .toISO({ includeOffset: true });
-        // if (startDateValue) {
-        //   params = params.append('startDate', startDateValue);
-        // }
+        const startDateValue = DateTime.now().startOf('day').toUTC().toISO();
+        if (startDateValue) {
+          params = params.append('startDate', startDateValue);
+        }
       }
 
       if (searchFilter.endDate) {
