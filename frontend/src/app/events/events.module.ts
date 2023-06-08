@@ -14,6 +14,8 @@ import { EventListComponent } from './components/event-list/event-list.component
 import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar.component';
 import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateSelectComponent } from './components/date-select/date-select.component';
+import { DateSelectHeaderComponent } from './components/date-select-header/date-select-header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SearchControlsComponent,
     EventComponent,
     EventListComponent,
-    FilterSidebarComponent
+    FilterSidebarComponent,
+    DateSelectComponent,
+    DateSelectHeaderComponent
   ],
   imports: [
     CommonModule,

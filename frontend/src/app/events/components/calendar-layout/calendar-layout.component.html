@@ -5,6 +5,9 @@
     </aside>
     <main class="search-results">
       <header class="search">
+        <div class="calendar">
+          <ng-content select="[calendar]"> </ng-content>
+        </div>
         <div class="search-bar">
           <div class="search-input-wrapper">
             <ng-content select="[search-field]"> </ng-content>

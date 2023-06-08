@@ -33,7 +33,7 @@ export class SearchControlsComponent implements OnInit, ControlValueAccessor {
 
   disabled = false;
   isTouched = false;
-  onChange: (value: SearchFields) => void = (value) => {};
+  onChange: (value: SearchFields) => void = () => {};
   onTouched: () => void = () => {};
 
   @Output() search = new EventEmitter<void>();

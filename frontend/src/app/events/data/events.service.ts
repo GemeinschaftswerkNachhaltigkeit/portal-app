@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import EventDto from '../models/event-dto';
-import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, take } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingService } from 'src/app/shared/services/loading.service';
+import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class EventsService {
     content: []
   });
   private eventsState = new BehaviorSubject<EventDto[]>([]);
+  private availableEventsState = new BehaviorSubject<{
+    [key: string]: number;
+  }>({});
   initialized = false;
 
   constructor(
@@ -59,6 +63,10 @@ export class EventsService {
       });
   }
 
+  get availableEvents$(): Observable<{ [key: string]: number }> {
+    return this.availableEventsState.asObservable();
+  }
+
   get events$(): Observable<EventDto[]> {
     return this.eventsState.asObservable();
   }
@@ -72,6 +80,18 @@ export class EventsService {
         totalPages: response.totalPages
       }))
     );
+  }
+
+  loadAvailableEvents(month: DateTime): void {
+    this.eventsApi
+      .getDates(month)
+      .pipe(take(1))
+      .subscribe({
+        next: (dates) => this.availableEventsState.next(dates),
+        error: (e) => {
+          console.log(e);
+        }
+      });
   }
 
   search(searchFilter: DynamicFilters): void {

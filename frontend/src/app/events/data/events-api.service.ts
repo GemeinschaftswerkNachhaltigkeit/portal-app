@@ -20,6 +20,17 @@ export class EventsApiService {
     private readonly tracker: MatomoTracker
   ) {}
 
+  getDates(date: DateTime): Observable<{ [key: string]: number }> {
+    let params = new HttpParams();
+    params = params.append('date', date.toISO() || '');
+    return this.http.get<{ [key: string]: number }>(
+      `${environment.apiUrl}/events/dates`,
+      {
+        params: params
+      }
+    );
+  }
+
   search(
     searchFilter: SearchFilter,
     page: number

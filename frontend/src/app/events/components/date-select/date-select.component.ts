@@ -4,26 +4,29 @@ import {
   EventEmitter,
   Inject,
   Input,
-  OnInit,
   Output
 } from '@angular/core';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import {
+  MatCalendarCellClassFunction,
+  MatCalendarView
+} from '@angular/material/datepicker';
 import { DateTime } from 'luxon';
-import EventDto from '../../models/event-dto';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DateSelectHeaderComponent } from '../date-select-header/date-select-header.component';
 
 @Component({
-  selector: 'app-data-select',
-  templateUrl: './data-select.component.html',
-  styleUrls: ['./data-select.component.scss']
+  selector: 'app-date-select',
+  templateUrl: './date-select.component.html',
+  styleUrls: ['./date-select.component.scss']
 })
-export class DataSelectComponent implements AfterViewInit {
+export class DateSelectComponent implements AfterViewInit {
   @Input() selected: DateTime = DateTime.now();
-  @Input() data: EventDto[] = [];
+  @Input() data: { [key: string]: number } = {};
   @Output() dateSelected = new EventEmitter<DateTime>();
 
+  header = DateSelectHeaderComponent;
   ready = false;
 
   constructor(
@@ -39,26 +42,23 @@ export class DataSelectComponent implements AfterViewInit {
     setTimeout(() => {
       this.ready = true;
       this.dateClass = (cellDate, view) => {
-        console.log('>>>>>>>>>>> TEST', this.data);
         if (view === 'month') {
           if (cellDate) {
-            const date = cellDate.day;
-            const inData = this.data.find((d) => {
-              const start = DateTime.fromISO(d.period?.start || '');
-              console.log('>>>>>>>>>>>>> start day', start.day);
-              console.log('>>>>>>>>>>>>> date', date);
-
-              return start.day === date;
-            });
-            console.log('IN DATA', inData);
-            // Highlight the 1st and 20th day of each month.
+            const date = DateTime.utc(
+              cellDate.year,
+              cellDate.month,
+              cellDate.day
+            ).toISO();
+            console.log('>>> DATE', date);
+            console.log('>>> DATA', this.data);
+            const inData = date && this.data[date] > 0;
             return inData ? 'date-with-data' : '';
           }
         }
 
         return '';
       };
-    }, 0);
+    }, 2000);
   }
 
   changeDatePickerLang(locale: string) {
@@ -72,5 +72,9 @@ export class DataSelectComponent implements AfterViewInit {
     if (date) {
       this.dateSelected.emit(date);
     }
+  }
+
+  handleViewChange(view: MatCalendarView): void {
+    console.log('>>>> VIEW', view);
   }
 }
