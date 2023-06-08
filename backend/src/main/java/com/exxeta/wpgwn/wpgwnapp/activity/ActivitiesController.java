@@ -35,6 +35,8 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
+import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_ZONE_ID;
+
 @RestController
 @RequestMapping("/api/v1/activities")
 @RequiredArgsConstructor
@@ -88,18 +90,20 @@ public class ActivitiesController {
     }
 
     private Instant[] initMonthRange(Instant startDate) {
-        LocalDateTime firstDayOfMonth = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault())
-                .with(TemporalAdjusters.firstDayOfMonth())
-                .with(LocalTime.MIN);
+        LocalDateTime startDateTime = LocalDateTime.ofInstant(startDate, DEFAULT_ZONE_ID);
 
-        LocalDateTime lastDayOfMonth = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault())
-                .with(TemporalAdjusters.lastDayOfMonth())
-                .with(LocalTime.MAX);
+        Instant firstDayInstant = startDateTime.with(TemporalAdjusters.firstDayOfMonth())
+                .with(LocalTime.MIN)
+                .atZone(DEFAULT_ZONE_ID)
+                .toInstant();
 
-        Instant firstDayInstant = firstDayOfMonth.toInstant(ZoneOffset.UTC);
-        Instant lastDayInstant = lastDayOfMonth.toInstant(ZoneOffset.UTC);
+        Instant lastDayInstant = startDateTime.with(TemporalAdjusters.lastDayOfMonth())
+                .with(LocalTime.MAX)
+                .atZone(DEFAULT_ZONE_ID)
+                .toInstant();
 
         return new Instant[] {firstDayInstant, lastDayInstant};
     }
+
 }
 
