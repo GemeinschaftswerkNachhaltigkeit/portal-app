@@ -10,6 +10,7 @@ type AdditionalFilters = {
   endDate?: string;
   initiator?: boolean;
   projectSustainabilityWinner?: boolean;
+  online?: boolean;
 };
 
 export default AdditionalFilters;

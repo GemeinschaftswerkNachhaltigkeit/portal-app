@@ -1,0 +1,35 @@
+<app-content-wrapper size="xl">
+  <div class="layout">
+    <aside class="sidebar">
+      <ng-content select="[filters]"></ng-content>
+    </aside>
+    <main class="search-results">
+      <header class="search">
+        <div class="calendar">
+          <ng-content select="[calendar]"> </ng-content>
+        </div>
+        <div class="search-bar">
+          <div class="search-input-wrapper">
+            <ng-content select="[search-field]"> </ng-content>
+          </div>
+          <div class="total-wrapper">
+            <ng-container *ngTemplateOutlet="totalResults"></ng-container>
+          </div>
+        </div>
+        <div class="filter-bar">
+          <ng-content select="[filter-bar]"></ng-content>
+          <ng-container *ngTemplateOutlet="totalResults"></ng-container>
+        </div>
+      </header>
+      <section class="result-list">
+        <ng-content select="[results]"></ng-content>
+      </section>
+    </main>
+  </div>
+</app-content-wrapper>
+
+<ng-template #totalResults
+  ><app-heading size="xs"
+    >{{ total }} {{ 'labels.total' | translate }}</app-heading
+  ></ng-template
+>

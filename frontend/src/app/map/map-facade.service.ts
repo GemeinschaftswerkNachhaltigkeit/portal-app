@@ -37,7 +37,7 @@ export class SharedMapFacade {
   openCard(type: string, id?: string | number): void {
     if (id) {
       this.setActiveCard({
-        type: type === 'DAN' ? 'ACTIVITY' : type,
+        type: type,
         id: +id
       });
     }

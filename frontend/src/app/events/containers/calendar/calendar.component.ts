@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ApplicationRef,
   Component,
   ElementRef,
   Inject,
@@ -24,6 +23,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateTime } from 'luxon';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -34,10 +34,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   unsubscribe$ = new Subject();
 
   events$ = this.eventsService.events$;
+  availableEvents$ = this.eventsService.availableEvents$;
   paging$ = this.eventsService.eventsPaging$;
   loading$ = this.loader.isLoading$();
 
-  selected: string = new Date().toISOString();
+  selected: DateTime = DateTime.now();
   dateControl = new FormControl('');
   searchControl = new FormControl({ query: '', location: '' });
   onlyOnlineControl = new FormControl(false);
@@ -80,8 +81,9 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     this._adapter.setLocale(this._locale);
   }
 
-  handleDateChange(): void {
-    this.eventsService.search({ startDate: this.selected });
+  handleDateChange(date: DateTime): void {
+    this.selected = date;
+    this.eventsService.search({ startDate: date.toISO() || '' });
   }
 
   handleSearch(): void {
@@ -178,7 +180,11 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
       query: (filters['query'] || '') as string,
       location: (filters['location'] || '') as string
     });
-    this.selected = (filters['startDate'] as string) || '';
+
+    const start = (filters['startDate'] as string) || '';
+    if (start) {
+      this.selected = DateTime.fromISO(start);
+    }
   }
 
   ngAfterViewInit(): void {

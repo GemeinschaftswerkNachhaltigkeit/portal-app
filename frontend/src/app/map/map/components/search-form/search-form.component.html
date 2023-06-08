@@ -4,13 +4,13 @@
       <div class="what-and-where">
         <div class="field">
           <mat-form-field appearance="outline" color="primary">
-            <mat-label>{{ 'map.labels.query' | translate }}</mat-label>
+            <mat-label>{{ 'forms.labels.query' | translate }}</mat-label>
             <input matInput formControlName="query" />
           </mat-form-field>
         </div>
         <div class="field">
           <mat-form-field appearance="outline" color="primary">
-            <mat-label>{{ 'map.labels.location' | translate }}</mat-label>
+            <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
             <input matInput formControlName="location" />
           </mat-form-field>
         </div>
@@ -34,23 +34,15 @@
           [ngModelOptions]="{ standalone: true }"
           >{{ 'map.labels.dan' | translate }}</mat-checkbox
         >
+        <mat-checkbox
+          class="orga"
+          color="primary"
+          [(ngModel)]="showOrga"
+          (ngModelChange)="viewTypeHandler()"
+          [ngModelOptions]="{ standalone: true }"
+          >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+        >
       </app-feature>
-      <mat-checkbox
-        class="orga"
-        color="primary"
-        [(ngModel)]="showOrga"
-        (ngModelChange)="viewTypeHandler()"
-        [ngModelOptions]="{ standalone: true }"
-        >{{ 'map.labels.organisation' | translate }}</mat-checkbox
-      >
-      <mat-checkbox
-        class="activity"
-        color="primary"
-        [(ngModel)]="showActivity"
-        (ngModelChange)="viewTypeHandler()"
-        [ngModelOptions]="{ standalone: true }"
-        >{{ 'map.labels.ACTIVITY' | translate }}</mat-checkbox
-      >
     </div>
   </div>
 </div>

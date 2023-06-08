@@ -1,0 +1,9 @@
+<mat-calendar
+  *ngIf="ready"
+  [selected]="selected"
+  (selectedChange)="handleDateChange($event)"
+  (viewChanged)="handleViewChange($event)"
+  [dateClass]="dateClass"
+  [headerComponent]="header"
+  [startAt]="selected"
+></mat-calendar>

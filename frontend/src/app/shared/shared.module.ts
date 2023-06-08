@@ -89,6 +89,8 @@ import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/le
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { WizardSidebarLayoutComponent } from './components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
+import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
 
 @NgModule({
   declarations: [
@@ -164,7 +166,8 @@ import { AddressControlsComponent } from './components/form/address-control/addr
     FormStepActionsComponent,
     FormStepDescriptionComponent,
     UploadImageComponent,
-    WizardSidebarLayoutComponent
+    WizardSidebarLayoutComponent,
+    OnlineFilterComponent
   ],
   imports: [
     CommonModule,
@@ -186,7 +189,8 @@ import { AddressControlsComponent } from './components/form/address-control/addr
     FormsModule,
     MatStepperModule,
     MatTooltipModule,
-    DropzoneModule
+    DropzoneModule,
+    MatLegacySlideToggleModule
   ],
   exports: [
     CommonModule,

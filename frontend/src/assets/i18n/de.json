@@ -49,6 +49,8 @@
   },
   "forms": {
     "labels": {
+      "query": "Was",
+      "location": "Wo",
       "upload": "Datei auswählen",
       "userSelect": "Nutzer:in",
       "loadingUsers": "Lade Nutzer:innen",
@@ -118,6 +120,7 @@
     }
   },
   "labels": {
+    "onlyOnline": "Nur online?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",
@@ -511,8 +514,6 @@
   },
   "map": {
     "labels": {
-      "query": "Was",
-      "location": "Wo",
       "sdgs": "Nachhaltigkeitsziele",
       "ACTIVITY": "Aktivitäten",
       "thematicFocus": "Themenfelder",

@@ -48,6 +48,8 @@
   },
   "forms": {
     "labels": {
+      "query": "What",
+      "location": "Where",
       "upload": "Select file",
       "userSelect": "User",
       "loadingUsers": "Load users",
@@ -117,6 +119,7 @@
     }
   },
   "labels": {
+    "onlyOnline": "Only online?",
     "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",
@@ -509,8 +512,6 @@
   },
   "map": {
     "labels": {
-      "query": "What",
-      "location": "Where",
       "sdgs": "Sustainable development goals",
       "thematicFocus": "Subject areas",
       "ACTIVITY": "Activities",

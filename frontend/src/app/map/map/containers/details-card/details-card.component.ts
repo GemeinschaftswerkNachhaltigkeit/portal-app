@@ -76,7 +76,7 @@ export class DetailsCardComponent implements OnInit {
   }
 
   showAsExpired(entity?: SearchResult): boolean {
-    return this.card.isActivity(entity?.resultType) && entity
+    return entity?.resultType === 'DAN' && entity
       ? this.utils.isExpiredActivity(entity.period)
       : false;
   }

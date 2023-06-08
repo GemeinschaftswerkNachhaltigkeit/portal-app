@@ -21,8 +21,6 @@ export class SearchFormComponent implements OnInit {
     SecondaryFilters.SDGS,
     SecondaryFilters.IMPACT_AREAS,
     SecondaryFilters.ORGA_TYPES,
-    SecondaryFilters.ACTIVITY_TYPES,
-    SecondaryFilters.ACTIVITY_PERIOD,
     SecondaryFilters.SPECIAL_ORGAS
   ];
   searchForm = this.fb.group({
@@ -45,9 +43,6 @@ export class SearchFormComponent implements OnInit {
         selectedImpactAreas: filters.impactAreas,
         selectedSdgValues: filters.sdgs,
         selectedOrgaTypes: filters.orgaTypes,
-        selectedActivityTypes: filters.activityTypes,
-        selectedStartDate: filters.startDate,
-        selectedEndDate: filters.endDate,
         initiator: filters.initiator,
         projectSustainabilityWinner: filters.projectSustainabilityWinner
       }

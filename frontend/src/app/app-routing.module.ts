@@ -48,6 +48,11 @@ const routes: Routes = [
         (m) => m.MarketplaceModule
       )
   },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./events/events.module').then((m) => m.EventsModule)
+  },
 
   {
     path: 'organisations/:orgaId',
