@@ -1,17 +1,14 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityDetailsResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity.model.QActivity;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.persistence.EntityNotFoundException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Map;
+import java.util.Objects;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -25,8 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Objects;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityDetailsResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.QActivity;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
+
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 
 @RestController
 @RequestMapping("/api/v1/activities")
@@ -39,6 +46,8 @@ public class ActivitiesController {
     private final ActivityMapper mapper;
 
     private final GeometryFactory factory;
+
+    private final ActivityService activityService;
 
     @GetMapping
     Page<ActivityResponseDto> findActivitiesPage(@RequestParam(value = "envelope", required = false) Envelope envelope,
@@ -71,5 +80,26 @@ public class ActivitiesController {
                         String.format("Entity [%s] with id [%s] not found", "Activity", id)));
     }
 
+    @GetMapping("/month/{startDate}")
+    Map<Instant, Integer> findActivityById(@PathVariable("startDate") Instant startDate) {
+
+        Instant[] range = initMonthRange(startDate);
+        return activityService.getActivityStatistic(range[0], range[1]);
+    }
+
+    private Instant[] initMonthRange(Instant startDate) {
+        LocalDateTime firstDayOfMonth = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault())
+                .with(TemporalAdjusters.firstDayOfMonth())
+                .with(LocalTime.MIN);
+
+        LocalDateTime lastDayOfMonth = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault())
+                .with(TemporalAdjusters.lastDayOfMonth())
+                .with(LocalTime.MAX);
+
+        Instant firstDayInstant = firstDayOfMonth.toInstant(ZoneOffset.UTC);
+        Instant lastDayInstant = lastDayOfMonth.toInstant(ZoneOffset.UTC);
+
+        return new Instant[] {firstDayInstant, lastDayInstant};
+    }
 }
 
