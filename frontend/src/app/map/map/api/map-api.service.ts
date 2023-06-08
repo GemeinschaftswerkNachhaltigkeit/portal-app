@@ -7,9 +7,9 @@ import PagedResponse from '../../../shared/models/paged-response';
 import SearchFilter from '../../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
-} from '../models/search-result';
+} from '../../models/search-result';
 import { MatomoTracker } from '@ngx-matomo/tracker';
-import MarkerDto from '../models/markerDto';
+import MarkerDto from '../../models/markerDto';
 
 @Injectable({
   providedIn: 'root'
