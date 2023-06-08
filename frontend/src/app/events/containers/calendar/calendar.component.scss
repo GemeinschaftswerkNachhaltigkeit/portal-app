@@ -4,6 +4,35 @@
 .reset {
   margin-top: $spacing-4;
 }
+.sidebar-actions {
+  margin-top: $spacing-10;
+}
+.mobile-actions {
+  margin-top: $spacing-4;
+  margin-bottom: $spacing-4;
+}
+.actions {
+  display: grid;
+  gap: $spacing-2;
+  .action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    &.dan-button {
+      background-color: $dan-blue;
+      color: white;
+    }
+    .action-content {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+    }
+  }
+}
+
+.filters {
+  margin-top: $spacing-10;
+}
 
 .group {
   display: flex;

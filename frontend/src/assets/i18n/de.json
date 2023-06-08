@@ -45,7 +45,9 @@
     "filters": "Filter",
     "delete": "löschen",
     "resetFilters": "Alle Filter zurücksetzen",
-    "add": "Jetzt hinzufügen"
+    "add": "Jetzt hinzufügen",
+    "addNewEvent": "Veranstaltung hinzufügen",
+    "toDan": "Zu den Aktionstagen springen"
   },
   "forms": {
     "labels": {
@@ -189,6 +191,14 @@
       "wizard.about": "Trage hier die wichtigsten Informationen zu deiner Aktion im Rahmen der Deutschen Aktionstage Nachhaltigkeit ein.",
       "wizard.description": "Erkläre hier deine Aktion und beschreibe wie man mitmachen kann.",
       "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein."
+    }
+  },
+  "events": {
+    "titles": {
+      "addLoginModal": "Veranstaltung hinzufügen"
+    },
+    "texts": {
+      "addLoginModal": "Logge dich bitte ein, mm eine neue Veranstaltung hinzuzufügen."
     }
   },
   "account": {

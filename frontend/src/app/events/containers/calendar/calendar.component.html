@@ -1,13 +1,7 @@
 <ng-container *ngIf="paging$ | async as paging">
   <app-calendar-layout [total]="paging.totalElements || 0">
-    <div calendar>
-      <ng-container *ngIf="availableEvents$ | async as events">
-        <app-date-select
-          (dateSelected)="handleDateChange($event)"
-          [selected]="selected"
-          [data]="events"
-        ></app-date-select>
-      </ng-container>
+    <div calendar class="mobile-actions">
+      <ng-container *ngTemplateOutlet="actions"></ng-container>
     </div>
     <div search-field>
       <app-search-controls
@@ -64,25 +58,56 @@
         (permanentChanged)="handlePermanentFilter($event)"
         [permanent]="isPermanent()"
       >
-        <ng-container *ngIf="availableEvents$ | async as events">
-          <app-date-select
-            (dateSelected)="handleDateChange($event)"
-            [selected]="selected"
-            [data]="events"
-          ></app-date-select>
-        </ng-container>
-
-        <app-heading [size]="'md'" color="none">Filter</app-heading>
-        <app-secondary-filters
-          [data]="getFilterData()"
-          (filtersChanged)="handleFiltersChanged($event)"
-        ></app-secondary-filters>
-        <div class="reset">
-          <button mat-stroked-button color="accent" (click)="clearAll()">
-            {{ 'btn.resetFilters' | translate }}
-          </button>
+        <div class="sidebar-actions">
+          <ng-container *ngTemplateOutlet="actions"></ng-container>
+        </div>
+        <div class="filters">
+          <app-heading [size]="'md'" color="none">Filter</app-heading>
+          <app-secondary-filters
+            [data]="getFilterData()"
+            (filtersChanged)="handleFiltersChanged($event)"
+          ></app-secondary-filters>
+          <div class="reset">
+            <button mat-stroked-button color="accent" (click)="clearAll()">
+              {{ 'btn.resetFilters' | translate }}
+            </button>
+          </div>
         </div>
       </app-filter-sidebar>
     </div>
   </app-calendar-layout>
 </ng-container>
+
+<ng-template #actions>
+  <ng-container *ngIf="availableEvents$ | async as events">
+    <app-date-select
+      (dateSelected)="handleDateChange($event)"
+      [selected]="selected"
+      [data]="events"
+    ></app-date-select>
+    <div class="actions">
+      <button
+        class="action"
+        mat-flat-button
+        color="accent"
+        (click)="handleAddNewEvent()"
+      >
+        <div class="action-content">
+          <mat-icon>add</mat-icon>
+          <span>{{ 'btn.addNewEvent' | translate }}</span>
+        </div>
+      </button>
+      <a
+        mat-flat-button
+        class="dan-button action"
+        [href]="getActionDaysUrl()"
+        target="_blank"
+      >
+        <div class="action-content">
+          <app-new-badge></app-new-badge>
+          <span>{{ 'btn.toDan' | translate }}</span>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</ng-template>

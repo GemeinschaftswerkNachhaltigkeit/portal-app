@@ -24,6 +24,7 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
+import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -65,6 +66,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     private eventsService: EventsService,
     private loader: LoadingService,
     private router: Router,
+    private lp: LandingpageService,
     public translate: TranslateService,
     public dialog: MatDialog,
     private _adapter: DateAdapter<LuxonDateAdapter>,
@@ -116,6 +118,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleOpen({ orgaId, actiId }: { orgaId: number; actiId: number }): void {
     this.router.navigate(['/', 'organisations', orgaId, actiId]);
+  }
+
+  handleAddNewEvent(): void {
+    this.eventsService.addNewEvent();
+  }
+
+  getActionDaysUrl(): string {
+    return this.lp.getDanUrl();
   }
 
   groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
