@@ -32,7 +32,8 @@ public class SecurityConfig {
 
         // @formatter:off
         http.csrf().disable()
-                .headers().frameOptions().sameOrigin()
+                //.headers().frameOptions().sameOrigin()
+                .headers().frameOptions().disable()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
