@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import EventDto from '../../models/event-dto';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event',
@@ -15,9 +16,10 @@ export class EventComponent {
   constructor(public utils: UtilsService) {}
 
   open(event: EventDto): void {
-    console.log(event);
-    if (event.organisation?.id && event.id) {
-      this.clicked.emit({ orgaId: event.organisation?.id, actiId: event.id });
+    const orgaId = event.organisation?.id;
+
+    if (orgaId !== undefined && orgaId !== null && event.id) {
+      this.clicked.emit({ orgaId: orgaId, actiId: event.id });
     }
   }
 }

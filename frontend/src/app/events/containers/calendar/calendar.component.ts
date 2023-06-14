@@ -25,6 +25,7 @@ import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -117,7 +118,12 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleOpen({ orgaId, actiId }: { orgaId: number; actiId: number }): void {
-    this.router.navigate(['/', 'organisations', orgaId, actiId]);
+    if (orgaId !== undefined && orgaId !== null && actiId) {
+      window.open(
+        environment.contextPath + `organisations/${orgaId}/${actiId}`,
+        '_blank'
+      );
+    }
   }
 
   handleAddNewEvent(): void {
