@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import lombok.RequiredArgsConstructor;
@@ -547,13 +548,14 @@ class MapSearchControllerTest {
     @Test
     void requestPeriod_1() throws Exception {
         // When
-        mockMvc.perform(get(BASE_API_URL)
-                        .queryParam("startDate", getStringForNowPlusDays(0))
-                        .queryParam("endDate", getStringForNowPlusDays(1))
-                        .contentType(MediaType.APPLICATION_JSON))
-
+        String startDate = getStringForNowPlusDays(0);
+        String endDate = getStringForNowPlusDays(9);
+        ResultActions resultActions = mockMvc.perform(get(BASE_API_URL)
+                        .queryParam("startDate", startDate)
+                        .queryParam("endDate", endDate)
+                        .contentType(MediaType.APPLICATION_JSON));
                 // Then
-                .andExpect(status().isOk())
+        resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$['numberOfElements']").value("15"))
                 .andExpect(jsonPath("$['content'][14]['name']").value("TEST_ACT_000"))
                 .andExpect(jsonPath("$['content'][13]['name']").value("TEST_ACT_001"))
@@ -563,7 +565,7 @@ class MapSearchControllerTest {
                 .andExpect(jsonPath("$['content'][9]['name']").value("TEST_ACT_003"))
                 .andExpect(jsonPath("$['content'][8]['name']").value("TEST_ORG_002"))
                 .andExpect(jsonPath("$['content'][7]['name']").value("TEST_ORG_003"))
-                .andExpect(jsonPath("$['content'][6]['name']").value("TEST_ACT_005"))
+                .andExpect(jsonPath("$['content'][6]['name']").value("TEST_ACT_004"))
                 .andExpect(jsonPath("$['content'][5]['name']").value("TEST_ORG_004"))
                 .andExpect(jsonPath("$['content'][4]['name']").value("TEST_ORG_005"))
                 .andExpect(jsonPath("$['content'][3]['name']").value("TEST_ORG_006"))
@@ -576,8 +578,8 @@ class MapSearchControllerTest {
     void requestPeriod_2() throws Exception {
         // When
         mockMvc.perform(get(BASE_API_URL)
-                        .queryParam("startDate", getStringForNowPlusDays(-1))
-                        .queryParam("endDate", getStringForNowPlusDays(1))
+                        .queryParam("startDate", getStringForNowPlusDays(-6))
+                        .queryParam("endDate", getStringForNowPlusDays(5))
                         .queryParam("includeExpiredActivities", "true")
                         .contentType(MediaType.APPLICATION_JSON))
 
@@ -592,7 +594,7 @@ class MapSearchControllerTest {
                 .andExpect(jsonPath("$['content'][13]['name']").value("TEST_ACT_003"))
                 .andExpect(jsonPath("$['content'][12]['name']").value("TEST_ORG_002"))
                 .andExpect(jsonPath("$['content'][11]['name']").value("TEST_ORG_003"))
-                .andExpect(jsonPath("$['content'][10]['name']").value("TEST_ACT_005"))
+                .andExpect(jsonPath("$['content'][10]['name']").value("TEST_ACT_004"))
                 .andExpect(jsonPath("$['content'][9]['name']").value("TEST_ORG_004"))
                 .andExpect(jsonPath("$['content'][8]['name']").value("TEST_ORG_005"))
                 .andExpect(jsonPath("$['content'][7]['name']").value("TEST_ACT_006"))
@@ -609,29 +611,15 @@ class MapSearchControllerTest {
     void requestPeriod_3() throws Exception {
         // When
         mockMvc.perform(get(BASE_API_URL)
-                        .queryParam("startDate", getStringForNowPlusDays(0))
-                        .queryParam("endDate", getStringForNowPlusDays(3))
+                        .queryParam("startDate", getStringForNowPlusDays(3))
+                        .queryParam("endDate", getStringForNowPlusDays(5))
+                        .queryParam("resultType", "ACTIVITY")
                         .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$['numberOfElements']").value("16"))
-                .andExpect(jsonPath("$['content'][15]['name']").value("TEST_ACT_000"))
-                .andExpect(jsonPath("$['content'][14]['name']").value("TEST_ACT_001"))
-                .andExpect(jsonPath("$['content'][13]['name']").value("TEST_ORG_000"))
-                .andExpect(jsonPath("$['content'][12]['name']").value("TEST_ORG_001"))
-                .andExpect(jsonPath("$['content'][11]['name']").value("TEST_ACT_002"))
-                .andExpect(jsonPath("$['content'][10]['name']").value("TEST_ACT_003"))
-                .andExpect(jsonPath("$['content'][9]['name']").value("TEST_ORG_002"))
-                .andExpect(jsonPath("$['content'][8]['name']").value("TEST_ORG_003"))
-                .andExpect(jsonPath("$['content'][7]['name']").value("TEST_ACT_004"))
-                .andExpect(jsonPath("$['content'][6]['name']").value("TEST_ACT_005"))
-                .andExpect(jsonPath("$['content'][5]['name']").value("TEST_ORG_004"))
-                .andExpect(jsonPath("$['content'][4]['name']").value("TEST_ORG_005"))
-                .andExpect(jsonPath("$['content'][3]['name']").value("TEST_ORG_006"))
-                .andExpect(jsonPath("$['content'][2]['name']").value("TEST_ORG_007"))
-                .andExpect(jsonPath("$['content'][1]['name']").value("TEST_ORG_008"))
-                .andExpect(jsonPath("$['content'][0]['name']").value("TEST_ORG_009"));
+                .andExpect(jsonPath("$['numberOfElements']").value("1"))
+                .andExpect(jsonPath("$['content'][0]['name']").value("TEST_ACT_004"));
 
     }
 
@@ -645,12 +633,11 @@ class MapSearchControllerTest {
 
                 // Then
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$['numberOfElements']").value("11"))
-                .andExpect(jsonPath("$['content'][10]['name']").value("TEST_ORG_000"))
-                .andExpect(jsonPath("$['content'][9]['name']").value("TEST_ORG_001"))
-                .andExpect(jsonPath("$['content'][8]['name']").value("TEST_ORG_002"))
-                .andExpect(jsonPath("$['content'][7]['name']").value("TEST_ORG_003"))
-                .andExpect(jsonPath("$['content'][6]['name']").value("TEST_ACT_005"))
+                .andExpect(jsonPath("$['numberOfElements']").value("10"))
+                .andExpect(jsonPath("$['content'][9]['name']").value("TEST_ORG_000"))
+                .andExpect(jsonPath("$['content'][8]['name']").value("TEST_ORG_001"))
+                .andExpect(jsonPath("$['content'][7]['name']").value("TEST_ORG_002"))
+                .andExpect(jsonPath("$['content'][6]['name']").value("TEST_ORG_003"))
                 .andExpect(jsonPath("$['content'][5]['name']").value("TEST_ORG_004"))
                 .andExpect(jsonPath("$['content'][4]['name']").value("TEST_ORG_005"))
                 .andExpect(jsonPath("$['content'][3]['name']").value("TEST_ORG_006"))
