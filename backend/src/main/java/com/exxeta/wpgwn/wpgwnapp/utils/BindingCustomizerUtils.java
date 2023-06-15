@@ -1,8 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.utils;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -14,8 +11,6 @@ import com.querydsl.core.types.dsl.EnumPath;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.SetPath;
 import com.querydsl.core.types.dsl.StringPath;
-
-import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_ZONE_ID;
 
 public class BindingCustomizerUtils {
 
@@ -100,14 +95,6 @@ public class BindingCustomizerUtils {
                 .reduce(BooleanExpression::or)
                 // Map identity or otherwise cast exception
                 .map(Function.identity());
-    }
-
-    public static Instant instantAtDefaultZone(Instant instant) {
-        if (instant == null) {
-            return null;
-        }
-        LocalDateTime startDateTime = LocalDateTime.ofInstant(instant, DEFAULT_ZONE_ID);
-        return startDateTime.atZone(ZoneId.of("UTC")).toInstant();
     }
 
 }
