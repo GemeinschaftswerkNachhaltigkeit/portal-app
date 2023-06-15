@@ -6,6 +6,8 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
 import com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils;
 
+import static com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils.instantAtDefaultZone;
+
 public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomizer<QMapSearchResult> {
 
     private BindingCustomizerUtils utils = new BindingCustomizerUtils();
@@ -35,11 +37,12 @@ public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomize
         // Prüfung, ob das Intervall (Start - Ende) mit den Daten in der DB überlappt.
         bindings.bind(root.period.start)
                 .as("endDate")
-                .first((path, value) -> path.loe(value).or(path.isNull()));
+                .first((path, value) -> path.loe(instantAtDefaultZone(value)).or(path.isNull()));
 //                .first(DateTimeExpression::loe);
         bindings.bind(root.period.end)
                 .as("startDate")
-                .first((path, value) -> path.goe(value).or(path.isNull()));
+                .first((path, value) -> path.goe(instantAtDefaultZone(value)).or(path.isNull()));
 //                .first(DateTimeExpression::goe);
     }
+
 }
