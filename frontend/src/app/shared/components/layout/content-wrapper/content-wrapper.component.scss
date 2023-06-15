@@ -6,13 +6,13 @@
 .content-wrapper {
   width: 100%;
   height: 100%;
-  padding: $spacing-4 $spacing-8;
+  padding: $spacing-4 $spacing-4;
   position: relative;
   &.mobileNoMargin {
     padding: $spacing-4 0;
   }
   &.narrow {
-    padding: $spacing-2 $spacing-8;
+    padding: $spacing-4 $spacing-4;
   }
   &.onlyX {
     padding-top: 0;

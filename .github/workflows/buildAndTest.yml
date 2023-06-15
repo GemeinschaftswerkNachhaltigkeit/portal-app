@@ -1,4 +1,4 @@
-name: Maven Build and Test
+name: mvn build and test, docker build (latest) and push
 
 on: 
   workflow_dispatch:
@@ -6,6 +6,12 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
+
+env:
+  MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/backend"
+  REGISTRY: ghcr.io
+  GITHUB_NAME:  gemeinschaftswerknachhaltigkeit
+  IMAGE_NAME: gw-portal-app
 
 jobs:
   test:
@@ -20,3 +26,13 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean verify --file ${{ github.workspace }}/backend/pom.xml
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ${{env.REGISTRY}}/${{ env.GITHUB_NAME }}/${{env.IMAGE_NAME}}
+      - name: login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: push image (latest) to GitHub Container Registry
+        run: docker push ${{env.REGISTRY}}/${{ env.GITHUB_NAME }}/${{env.IMAGE_NAME}}:latest

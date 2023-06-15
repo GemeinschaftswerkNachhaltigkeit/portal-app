@@ -1,0 +1,48 @@
+<div class="form-wrapper map-filters">
+  <div class="left">
+    <form novalidate [formGroup]="searchForm" *ngIf="searchForm">
+      <div class="what-and-where">
+        <div class="field">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>{{ 'forms.labels.query' | translate }}</mat-label>
+            <input matInput formControlName="query" />
+          </mat-form-field>
+        </div>
+        <div class="field">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
+            <input matInput formControlName="location" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <app-filter-modal-button
+      [count]="filterCount()"
+      (clear)="clearAll()"
+      (openModal)="openFilters()"
+    ></app-filter-modal-button>
+  </div>
+
+  <div class="right">
+    <app-feature feature="dan-range">
+      <div class="view-type">
+        <mat-checkbox
+          class="dan"
+          color="primary"
+          [(ngModel)]="showDan"
+          (ngModelChange)="viewTypeHandler()"
+          [ngModelOptions]="{ standalone: true }"
+          >{{ 'map.labels.dan' | translate }}</mat-checkbox
+        >
+        <mat-checkbox
+          class="orga"
+          color="primary"
+          [(ngModel)]="showOrga"
+          (ngModelChange)="viewTypeHandler()"
+          [ngModelOptions]="{ standalone: true }"
+          >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+        >
+      </div>
+    </app-feature>
+  </div>
+</div>

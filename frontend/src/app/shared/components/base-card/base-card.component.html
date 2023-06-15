@@ -8,7 +8,11 @@
 >
   <div class="active-maker"></div>
   <div class="expiredBadge" *ngIf="showAsExpired(entity, type)">
-    <app-expired-badge></app-expired-badge>
+    <app-expired-badge
+      [dan]="
+        card.isActivity(type) && utils.asActivity(entity).activityType === 'DAN'
+      "
+    ></app-expired-badge>
   </div>
   <div
     class="clickable-area"
@@ -74,12 +78,10 @@
         <app-card-label
           [limitedWidth]="narrow"
           [type]="type"
-          [dan]="
-            card.isActivity(type) &&
-            utils.asActivity(entity).activityType === 'DAN'
-          "
+          [dan]="card.isDan(type)"
           [activityTypeLabel]="
-            card.isActivity(type) && utils.asActivity(entity).activityType
+            (card.isActivity(type) || card.isDan(type)) &&
+            utils.asActivity(entity).activityType
               ? ('activityType.' + utils.asActivity(entity).activityType
                 | translate)
               : ''
@@ -104,7 +106,7 @@
         <div
           class="orga-name"
           [ngClass]="{ dan: utils.asActivity(entity).activityType === 'DAN' }"
-          *ngIf="type === 'ACTIVITY'"
+          *ngIf="type === 'ACTIVITY' || type === 'DAN'"
         >
           {{ utils.asActivity(entity).organisation?.name }}
         </div>

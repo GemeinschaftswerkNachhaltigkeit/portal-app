@@ -1,0 +1,34 @@
+<div
+  class="event"
+  [ngClass]="{ dan: event.resultType === 'DAN', last: last }"
+  (click)="open(event)"
+>
+  <div class="content">
+    <h3 class="title">{{ event.name }}</h3>
+    <div class="location">
+      <div class="city">
+        <app-outlined-icon>pin_drop</app-outlined-icon>
+        <div>{{ utils.locationString(event.location) }}</div>
+      </div>
+      <div class="name">{{ event.location?.address?.name || '' }}</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <!--
+    <app-action
+      [clickable]="true"
+      icon="launch"
+      [onlyIcon]="true"
+      (clicked)="open(event)"
+    >
+    </app-action>
+  -->
+    <div style="width: 40px"></div>
+    <app-activity-subscription-action
+      [onlyIcon]="true"
+      [activity]="utils.asActivity(event)"
+    >
+    </app-activity-subscription-action>
+  </div>
+</div>

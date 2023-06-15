@@ -40,7 +40,10 @@ export class WizardComponent implements OnDestroy {
   private paramsSub: Subscription;
 
   public activityData$ = this.activityService.activityData$;
-  public danContent: { completed_message: string } | null = null;
+  public danContent: {
+    completed_message?: string;
+    period_hint?: string;
+  } | null = null;
 
   public activityStepState$ = this.activityService.activityUpdateStateData$;
 
@@ -145,12 +148,18 @@ export class WizardComponent implements OnDestroy {
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
     this.getWizardContent();
+    this.translate.onLangChange
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe(() => {
+        this.getWizardContent();
+      });
   }
 
   private async getWizardContent() {
     try {
       this.danContent = await this.directus.getContentItemForCurrentLang<{
         completed_message: string;
+        period_hint: string;
       }>('dan_wizard_translations');
     } catch (error) {
       this.danContent = null;
@@ -258,7 +267,7 @@ export class WizardComponent implements OnDestroy {
   }
 
   deleteHandler(image: ImageType): void {
-    this.activityService.deleteImage(this.orgId, this.activityId, image);
+    this.activityService.deleteImage(this.orgId, this.activityId, image, true);
   }
 
   isAllowedToEdit() {

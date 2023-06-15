@@ -1,0 +1,9 @@
+<div class="slide-toggle">
+  <div>{{ 'labels.onlyOnline' | translate }}</div>
+  <mat-slide-toggle
+    color="primary"
+    [checked]="selected"
+    (change)="onlineHandler($event)"
+  >
+  </mat-slide-toggle>
+</div>

@@ -146,8 +146,12 @@ export class ActiFacadeService {
 
   deleteActivity(id?: number, dan = false): void {
     const ref = this.confirm.open({
-      title: this.translate.instant('account.titles.deleteActivity'),
-      description: this.translate.instant('account.texts.deleteActivity'),
+      title: this.translate.instant(
+        dan ? 'account.titles.deleteAction' : 'account.titles.deleteActivity'
+      ),
+      description: this.translate.instant(
+        dan ? 'account.texts.deleteAction' : 'account.texts.deleteActivity'
+      ),
       button: this.translate.instant('account.buttons.delete')
     });
     const user = this.auth.getUser();
@@ -157,7 +161,7 @@ export class ActiFacadeService {
       .subscribe((confirmed) => {
         if (confirmed) {
           this.activitiesApi
-            .deleteActivity(user, id)
+            .deleteActivity(user, id, dan)
             .pipe(take(1))
             .subscribe({
               next: () => this.loadActivities(dan)

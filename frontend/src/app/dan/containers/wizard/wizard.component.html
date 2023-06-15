@@ -18,6 +18,7 @@
         <div class="form-container">
           <form [formGroup]="step1Form">
             <app-master-data-form
+              [danContent]="danContent"
               formGroupName="masterData"
             ></app-master-data-form>
             <app-images-form

@@ -72,7 +72,7 @@ export class BaseCardComponent implements AfterViewChecked {
   }
 
   showAsExpired(entity?: Organisation | Activity, type = ''): boolean {
-    return this.card.isActivity(type) && entity
+    return this.card.isActivity(type) || (this.card.isDan(type) && entity)
       ? this.utils.isExpiredActivity(this.utils.asActivity(entity).period)
       : false;
   }

@@ -1,0 +1,17 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+.slide-toggle {
+  padding: 0 $spacing-6;
+  height: $spacing-12;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .slide-toggle {
+    padding: 0;
+    font-weight: bold;
+  }
+}

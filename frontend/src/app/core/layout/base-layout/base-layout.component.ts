@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject, takeUntil } from 'rxjs';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 
@@ -19,22 +19,10 @@ export class BaseLayoutComponent implements OnDestroy {
     breakpointObserver: BreakpointObserver
   ) {
     breakpointObserver
-      .observe([
-        Breakpoints.XSmall,
-        Breakpoints.Small,
-        Breakpoints.Medium,
-        Breakpoints.Large
-      ])
+      .observe('(min-width: 1480px)')
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
-        for (const query of Object.keys(result.breakpoints)) {
-          if (result.breakpoints[query]) {
-            this.mobile =
-              query == Breakpoints.Medium ||
-              query == Breakpoints.Small ||
-              query == Breakpoints.XSmall;
-          }
-        }
+        this.mobile = !result.matches;
       });
   }
 

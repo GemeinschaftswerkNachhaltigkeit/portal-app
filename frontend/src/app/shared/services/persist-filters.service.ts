@@ -14,6 +14,7 @@ export class PersistFiltersService {
     },
     path: string[] = []
   ): void {
+    console.log('URL FILTER', filters);
     this.router.navigate(path, {
       queryParams: {
         ...filters
@@ -28,14 +29,24 @@ export class PersistFiltersService {
     const filters: DynamicFilters = {};
     queryParams.keys.forEach((key) => {
       const values = queryParams.getAll(key);
-      let value: string | string[] = values.length > 1 ? values : values[0];
+      let value: string | string[] | boolean =
+        values.length > 1 ? values : values[0];
+      if (value === 'true' || value === 'false') {
+        value = value === 'true';
+      }
       lists.forEach((l) => {
-        if (value && typeof value === 'string' && key === l) {
-          value = [value as string];
+        if (key === l) {
+          if (value && typeof value === 'string') {
+            value = [value as string];
+          }
+          if (!value) {
+            value = [];
+          }
         }
       });
       filters[key] = value || '';
     });
+
     return filters;
   }
 }

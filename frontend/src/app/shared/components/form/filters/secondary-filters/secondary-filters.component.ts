@@ -10,6 +10,7 @@ import {
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { AdditionalFiltersData } from '../additional-filters-modal/additional-filters-modal.component';
 import { SpecialOrgaFilters } from '../special-orgas-filter/special-orgas-filter.component';
+import { MatLegacySlideToggleChange } from '@angular/material/legacy-slide-toggle';
 
 export enum SecondaryFilters {
   THEMATIC_FOCUS = 'THEMATIC_FOCUS',
@@ -20,7 +21,8 @@ export enum SecondaryFilters {
   OFFER_CATS = 'OFFER_CATS',
   BEST_PRACTICE_CATS = 'BEST_PRACTICE_CATS',
   ACTIVITY_PERIOD = 'ACTIVITY_PERIOD',
-  SPECIAL_ORGAS = 'SPECIAL_ORGAS'
+  SPECIAL_ORGAS = 'SPECIAL_ORGAS',
+  ONLINE = 'ONLINE'
 }
 
 @Component({
@@ -99,7 +101,13 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
     this.updateFilters();
   }
 
+  onlineHandler(checked: boolean): void {
+    this.filters.online = checked;
+    this.updateFilters();
+  }
+
   private updateFilters(): void {
+    console.log('Fitlers', this.filters);
     const f = { ...this.filters };
     if (!this.useFilter(SecondaryFilters.THEMATIC_FOCUS)) {
       delete f.thematicFocus;
@@ -130,6 +138,9 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
       delete f.initiator;
       delete f.projectSustainabilityWinner;
     }
+    if (!this.useFilter(SecondaryFilters.ONLINE)) {
+      delete f.online;
+    }
     this.filtersChanged.emit(f);
   }
 
@@ -146,7 +157,8 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
       endDate: this.data.selectedEndDate || '',
       initiator: this.data.initiator || false,
       projectSustainabilityWinner:
-        this.data.projectSustainabilityWinner || false
+        this.data.projectSustainabilityWinner || false,
+      online: this.data.online || false
     };
   }
 

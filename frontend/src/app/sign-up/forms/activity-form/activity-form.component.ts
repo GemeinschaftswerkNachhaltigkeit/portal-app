@@ -55,13 +55,21 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
   ) {
     this.editor = wysiwygService.getTipTapConfig();
     this.activityFormGroup = this._formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      activityType: ['', Validators.required],
-      description: ['', [wysiwygContentRequired(100, 1500)]],
+      name: _formBuilder.control('', [
+        Validators.required,
+        Validators.maxLength(100)
+      ]),
+      activityType: _formBuilder.control(
+        { disabled: true, value: ActivityType.EVENT },
+        [Validators.required]
+      ),
+      description: _formBuilder.control('', [
+        wysiwygContentRequired(100, 1500)
+      ]),
 
-      start: ['', [Validators.required]],
-      end: ['', [Validators.required]],
-      permanent: [false, []]
+      start: _formBuilder.control('', [Validators.required]),
+      end: _formBuilder.control('', [Validators.required]),
+      permanent: _formBuilder.control(false, [])
     });
     this.updateDateSelect();
     this.activityFormGroup.valueChanges
@@ -82,7 +90,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
     if (this.activity) {
       this.activityFormGroup.patchValue({
         name: this.activity.name,
-        activityType: this.activity.activityType,
+        activityType: ActivityType.EVENT,
         description: this.wysiwygService.htmlDecode(this.activity.description),
         start: this.activity.period?.start,
         end: this.activity.period?.end,
@@ -94,6 +102,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
         this.activityFormGroup.disable();
       } else {
         this.activityFormGroup.enable();
+        this.activityFormGroup.get('activityType')?.disable();
       }
     }
     this.handleIsPermanent(this.activity?.period?.permanent || false);

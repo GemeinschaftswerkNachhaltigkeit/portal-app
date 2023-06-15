@@ -32,12 +32,10 @@ public class FileStorageService {
         final UUID uuid = UUID.randomUUID();
         final String filename = uuid + "." + ext;
         final Path destination = Path.of(directory.toString(), filename);
-
-        log.error("path: " + path);
-        log.error("filename: " + filename);
-
+        log.debug("path: " + path);
+        log.debug("filename: " + filename);
         Files.copy(file.getInputStream(), destination);
-        log.error("saved file with name [{}], filename [{}]", file.getOriginalFilename(), filename);
+        log.debug("saved file with name [{}], filename [{}]", file.getOriginalFilename(), filename);
         return filename;
     }
 

@@ -8,7 +8,6 @@ import SearchFilter from '../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
 } from '../models/search-result';
-import { DateTime } from 'luxon';
 import { MatomoTracker } from '@ngx-matomo/tracker';
 import MarkerDto from '../models/markerDto';
 
@@ -50,11 +49,6 @@ export class MapApiService {
                   ...r.organisation,
                   resultType: resType
                 } as SearchResult;
-              } else if (resType === 'ACTIVITY') {
-                return {
-                  ...r.activity,
-                  resultType: resType
-                } as SearchResult;
               } else if (resType === 'DAN') {
                 return {
                   ...r.activity,
@@ -80,7 +74,7 @@ export class MapApiService {
   }
 
   byId(type: string, id: number): Observable<SearchResult> {
-    const enpoint = type === 'ACTIVITY' ? 'activities' : 'organisations';
+    const enpoint = type === 'DAN' ? 'activities' : 'organisations';
     return this.http
       .get<SearchResult>(`${environment.apiUrl}/${enpoint}/${id}`, {})
       .pipe(
@@ -109,9 +103,10 @@ export class MapApiService {
     );
     params = params.append('query', searchFilter.query || '');
     params = params.append('location', searchFilter.location || '');
-    searchFilter.viewType?.forEach((resultType) => {
-      params = params.append('resultType', resultType);
-    });
+    searchFilter.viewType &&
+      searchFilter.viewType?.forEach((resultType) => {
+        params = params.append('resultType', resultType);
+      });
     if (searchFilter.envelope) {
       params = params.append('envelope', searchFilter.envelope || '');
     }
@@ -128,28 +123,6 @@ export class MapApiService {
     searchFilter.orgaTypes?.forEach((orgaType) => {
       params = params.append('organisationType', orgaType);
     });
-
-    searchFilter.activityTypes?.forEach((activityType) => {
-      params = params.append('activityTypes', activityType);
-    });
-
-    if (searchFilter.startDate) {
-      const startDateValue = DateTime.fromISO(searchFilter.startDate)
-        .setZone('utc')
-        .toISO({ includeOffset: true });
-      if (startDateValue) {
-        params = params.append('startDate', startDateValue);
-      }
-    }
-
-    if (searchFilter.endDate) {
-      const endDateValue = DateTime.fromISO(searchFilter.endDate)
-        .setZone('utc')
-        .toISO({ includeOffset: true });
-      if (endDateValue) {
-        params = params.append('endDate', endDateValue);
-      }
-    }
 
     if (searchFilter.initiator) {
       params = params.append('initiator', true);

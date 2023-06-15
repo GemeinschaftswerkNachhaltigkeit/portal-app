@@ -1,0 +1,113 @@
+<ng-container *ngIf="paging$ | async as paging">
+  <app-calendar-layout [total]="paging.totalElements || 0">
+    <div calendar class="mobile-actions">
+      <ng-container *ngTemplateOutlet="actions"></ng-container>
+    </div>
+    <div search-field>
+      <app-search-controls
+        [formControl]="searchControl"
+        (search)="handleSearch()"
+      ></app-search-controls>
+    </div>
+    <div filter-bar>
+      <div>
+        <app-filter-modal-button
+          [count]="countFilters()"
+          (clear)="clearAll()"
+          (openModal)="openFilters()"
+        ></app-filter-modal-button>
+      </div>
+    </div>
+
+    <div results>
+      <ng-container *ngIf="events$ | async as events">
+        <div class="group" *ngFor="let group of groupEventsByDate(events)">
+          <div class="date" *ngIf="group[0] !== 'undefined'">
+            <div class="text">
+              {{
+                group[0] | date : 'dd. MMM' : undefined : translate.currentLang
+              }}
+            </div>
+          </div>
+          <app-event-list>
+            <ng-container *ngFor="let event of group[1]; let i = index">
+              <app-event
+                [event]="event"
+                [last]="group[1].length === i + 1"
+                (clicked)="handleOpen($event)"
+              ></app-event>
+            </ng-container>
+          </app-event-list>
+        </div>
+        <app-spinner forId="load-events"></app-spinner>
+        <app-alert
+          *ngIf="paging.totalElements! <= 0 && (loading$ | async) === false"
+          [title]="'map.titles.noData' | translate"
+        >
+          {{ 'map.texts.noData.0' | translate }}
+        </app-alert>
+        <div
+          class="placeholder"
+          [ngClass]="{ noElements: groupEventsByDate(events).length <= 0 }"
+        ></div>
+        <div #marker></div>
+      </ng-container>
+    </div>
+    <div filters>
+      <app-filter-sidebar
+        (permanentChanged)="handlePermanentFilter($event)"
+        [permanent]="isPermanent()"
+      >
+        <div class="sidebar-actions">
+          <ng-container *ngTemplateOutlet="actions"></ng-container>
+        </div>
+        <div class="filters">
+          <app-heading [size]="'md'" color="none">Filter</app-heading>
+          <app-secondary-filters
+            [data]="getFilterData()"
+            (filtersChanged)="handleFiltersChanged($event)"
+          ></app-secondary-filters>
+          <div class="reset">
+            <button mat-stroked-button color="accent" (click)="clearAll()">
+              {{ 'btn.resetFilters' | translate }}
+            </button>
+          </div>
+        </div>
+      </app-filter-sidebar>
+    </div>
+  </app-calendar-layout>
+</ng-container>
+
+<ng-template #actions>
+  <ng-container *ngIf="availableEvents$ | async as events">
+    <app-date-select
+      (dateSelected)="handleDateChange($event)"
+      [selected]="selected"
+      [data]="events"
+    ></app-date-select>
+    <div class="actions">
+      <button
+        class="action"
+        mat-flat-button
+        color="accent"
+        (click)="handleAddNewEvent()"
+      >
+        <div class="action-content">
+          <mat-icon>add</mat-icon>
+          <span>{{ 'btn.addNewEvent' | translate }}</span>
+        </div>
+      </button>
+      <a
+        mat-flat-button
+        class="dan-button action"
+        [href]="getActionDaysUrl()"
+        target="_blank"
+      >
+        <div class="action-content">
+          <app-new-badge></app-new-badge>
+          <span>{{ 'btn.toDan' | translate }}</span>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</ng-template>
