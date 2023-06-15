@@ -36,6 +36,12 @@ export class ContactComponent {
   }
 
   toggleShowContact(): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const _mtm = (window._mtm = window._mtm || []);
+    console.log('MTM', _mtm);
+    _mtm.push({ event: 'mtm.PageView' });
+    console.log('PUSH');
     this.showContact = true;
   }
 }
