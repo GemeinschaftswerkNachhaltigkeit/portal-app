@@ -20,7 +20,6 @@
           <p>{{ profileUtils.contactString(contact) }}</p>
         </div>
         <button
-          id="click-mich"
           *ngIf="!showContact"
           class="show-contact-btn"
           mat-flat-button
@@ -29,6 +28,7 @@
         >
           {{ 'profile.buttons.contactNow' | translate }}
         </button>
+        <button id="click-mich" (click)="test()">TEST</button>
         <ng-container *ngIf="showContact"
           ><div class="info-row">
             <h4 class="subtitle">

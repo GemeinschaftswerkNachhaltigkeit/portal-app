@@ -6,6 +6,8 @@ import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ProfileUtilsService } from '../../services/profile-utils.service';
+import { MatomoTracker } from '@ngx-matomo/tracker';
+import { MatomoTagManagerService } from 'src/app/matomo-tm.service';
 
 @Component({
   selector: 'app-contact',
@@ -28,7 +30,9 @@ export class ContactComponent {
   constructor(
     public utils: UtilsService,
     public profileUtils: ProfileUtilsService,
-    private imgService: ImgService
+    private imgService: ImgService,
+    private tracker: MatomoTracker,
+    private tags: MatomoTagManagerService
   ) {}
 
   get contactImage(): string | null {
@@ -36,12 +40,24 @@ export class ContactComponent {
   }
 
   toggleShowContact(): void {
+    this.tracker.trackEvent(
+      'ogranisation_profile',
+      'button_click',
+      'contact_now',
+      1
+    );
+    this.showContact = true;
+  }
+
+  test(): void {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const _mtm = (window._mtm = window._mtm || []);
-    console.log('MTM', _mtm);
-    _mtm.push({ event: 'mtm.PageView' });
     console.log('PUSH');
+    this.tracker.trackEvent('CAT2', 'ACT', 'EVENT TEST', 100);
     this.showContact = true;
+    this.tags.sendTag({
+      event: 'MEIN_TEST_EVENT',
+      test: 'TEST !!!!'
+    });
   }
 }

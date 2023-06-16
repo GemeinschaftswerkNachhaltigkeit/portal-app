@@ -1,43 +1,32 @@
-import { Injectable, Inject } from '@angular/core';
-import { MatomoTagManagerConfig } from './matomo-tag-manager.config';
+import { Injectable } from '@angular/core';
+
+export interface MatomoTag {
+  event: string;
+  [key: string]: any;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class MatomoInjectorService {
-  scriptLoaded = false;
-
-  constructor() {
-    this.initMtm();
+export class MatomoTagManagerService {
+  /**
+   * Send a new tag to MTM Container
+   * @param tag The tag
+   */
+  sendTag(tag: MatomoTag): void {
+    const dataLayer = this.getDataLayer();
+    dataLayer.push(tag);
   }
 
   /**
-   * Initialization of Matomo Tag Manager (MTM)
-   * 1. Creation of the html tag to inject Matomo script
-   * 2. Pushing init tag required
+   * Return the datalayer (by default in _mtm variable)
    */
-  initMtm(): void {
-    if (this.scriptLoaded) {
-      return;
-    }
-
+  private getDataLayer(): any {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const mtm = (window['_mtm'] = window['_mtm'] || []);
-    mtm.push({ 'mtm.startTime': new Date().getTime(), event: 'mtm.Start' });
-
-    const { host, containerId } = {
-      host: 'http://localhost',
-      containerId: 'OpLDkCNf'
-    };
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.defer = true;
-    script.src = `${host}/js/container_${containerId}.js`;
-    const s = document.getElementsByTagName('script')[0];
-    s.parentNode?.insertBefore(script, s);
-
-    this.scriptLoaded = true;
+    //@ts-ignore
+    window['_mtm'] = window['_mtm'] || [];
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    return window['_mtm'];
   }
 }

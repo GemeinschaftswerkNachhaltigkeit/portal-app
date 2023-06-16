@@ -11,7 +11,7 @@ export let environment = {
   assetsUrl: '/assets',
   matomoUrl: 'http://localhost',
   matomoSiteId: 1,
-  matomoTagManagerUrl: 'http://localhost/js/container_OpLDkCNf.js',
+  matomoTagManagerContainerId: 'OpLDkCNf',
   danId: 0,
   keycloak: {
     issuer: 'https://wpgwn-auth.exxeta.info/realms/wpgwn',
@@ -29,7 +29,7 @@ export function overrideEnvironment(e: {
   assetsUrl: string;
   matomoUrl: string;
   matomoSiteId: number;
-  matomoTagManagerUrl: string;
+  matomoTagManagerContainerId: string;
   keycloak: { issuer: string; clientId: string; debug: boolean };
   danId: number;
 }): void {
