@@ -5,9 +5,10 @@
   [full]="full"
   *ngIf="!subscriptionFacade.activityIsSubcribed(activity?.id)"
   icon="bookmark_add"
+  [onlyIcon]="onlyIcon"
   (clicked)="bookmarkHandler()"
 >
-  <span [ngClass]="{ small: small }">
+  <span [ngClass]="{ small: small }" *ngIf="!onlyIcon">
     <span *ngIf="!short">{{ 'btn.bookmark' | translate }}</span>
     <span *ngIf="short">{{ 'btn.bookmarkShort' | translate }}</span>
   </span>
@@ -19,9 +20,10 @@
   [full]="full"
   *ngIf="subscriptionFacade.activityIsSubcribed(activity?.id)"
   icon="bookmark_added"
+  [onlyIcon]="onlyIcon"
   (clicked)="unbookmarkHandler()"
 >
-  <span [ngClass]="{ small: small }">
+  <span [ngClass]="{ small: small }" *ngIf="!onlyIcon">
     <span *ngIf="!short">{{ 'btn.unbookmark' | translate }}</span>
     <span *ngIf="short">{{ 'btn.unbookmarkShort' | translate }}</span>
   </span>

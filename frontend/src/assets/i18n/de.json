@@ -12,6 +12,7 @@
     "activities": "Besondere Aktionen"
   },
   "btn": {
+    "today": "heute",
     "login": "Login",
     "logout": "Logout",
     "registration": "Jetzt registrieren",
@@ -20,8 +21,8 @@
     "cancel": "Abbrechen",
     "goToLandingpage": "Zur Startseite",
     "goToApp": "Zurück zur Anwendung",
-    "bookmark": "Aktivität merken",
-    "unbookmark": "Aktivität nicht mehr merken",
+    "bookmark": "Veranstaltung merken",
+    "unbookmark": "Veranstaltung nicht mehr merken",
     "follow": "Organisation folgen",
     "unfollow": "Organisation nicht mehr folgen",
     "share": "Teilen",
@@ -29,26 +30,30 @@
     "bookmarkShort": "Merken",
     "unfollowShort": "Nicht folgen",
     "unbookmarkShort": "Nicht merken",
-    "backToActivityOverview": "Zurück zur Aktivitätsübersicht",
+    "backToActivityOverview": "Zurück zur Veranstaltungsübersicht",
     "backToDanOverview": "Zurück zur Aktionsübersicht",
     "loading": "Lade ...",
     "finishDan": "Aktion veröffentlichen",
     "updateDan": "Aktion speichern",
     "finishOrgaWizard": "Organisation anmelden",
-    "finishActivityWizard": "Aktivität veröffentlichen",
+    "finishActivityWizard": "Veranstaltung veröffentlichen",
     "saveCurrentState": "Zwischenstand speichern",
     "updateOrga": "Organisation speichern",
-    "updateActivity": "Aktivität speichern",
+    "updateActivity": "Veranstaltung speichern",
     "search": "Suchen",
     "close": "Schließen",
     "apply": "Anwenden",
     "filters": "Filter",
     "delete": "löschen",
     "resetFilters": "Alle Filter zurücksetzen",
-    "add": "Jetzt hinzufügen"
+    "add": "Jetzt hinzufügen",
+    "addNewEvent": "Veranstaltung hinzufügen",
+    "toDan": "Zu den Aktionstagen springen"
   },
   "forms": {
     "labels": {
+      "query": "Was",
+      "location": "Wo",
       "upload": "Datei auswählen",
       "userSelect": "Nutzer:in",
       "loadingUsers": "Lade Nutzer:innen",
@@ -72,18 +77,18 @@
       "organisationLogo": "Logo der Organisation",
       "organisationImage": "Titelbild der Organisation",
       "privacyConsent": "Ich stimme der <a href=\"{{participationdeclaration}}\" target=\"_blank\" rel=\"noopener\">Mitmach-Erklärung</a> zu.",
-      "activityTitle": "Titel der Aktivität",
-      "activityDescription": "Beschreibung der Aktivität",
-      "activityType": "Art der Aktivität",
-      "activityLogo": "Logo der Aktivität",
-      "activityImage": "Titelbild der Aktivität",
+      "activityTitle": "Titel der Veranstaltung",
+      "activityDescription": "Beschreibung der Veranstaltung",
+      "activityType": "Art der Veranstaltung",
+      "activityLogo": "Logo der Veranstaltung",
+      "activityImage": "Titelbild der Veranstaltung",
       "danName": "Titel der Aktion",
       "danType": "Typ der Aktion",
       "danLogo": "Logo der Aktion",
       "danImage": "Titelbild der Aktion",
       "periodDan": "Zeitraum der Aktion",
-      "period": "Zeitraum der Aktivität",
-      "permanet": "Dauerhafte Aktivität",
+      "period": "Zeitraum der Veranstaltung",
+      "permanet": "Dauerhafte Veranstaltung",
       "start": "Start",
       "end": "Ende",
       "sustainableDevelopmentGoals": "Verfolgte Nachhaltigkeitsziele",
@@ -98,7 +103,7 @@
       "city": "Stadt",
       "country": "Land",
       "state": "Bundesland",
-      "onlineLocation": "Diese Aktivität findet online statt.",
+      "onlineLocation": "Diese Veranstaltung findet online statt.",
       "externalLinkDan": "Externer Link zur Aktion",
       "url": "Website",
       "FACEBOOK": "Facebook",
@@ -118,6 +123,7 @@
     }
   },
   "labels": {
+    "onlyOnline": "Nur online?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",
@@ -126,15 +132,15 @@
     "projectSustainabilityWinner": "Preisträger:in",
     "projectSustainabilityWinnerLong": "Preisträger:in vom Projekt Nachhaltigkeit",
     "permanent": "Dauerhaft",
-    "expiredActivity": "Vergangene Aktivität",
+    "expiredActivity": "Vergangene Veranstaltung",
     "expiredDanActivity": "Vergangene Aktion",
     "copied": "kopiert",
     "sdgs": "Nachhaltigkeitsziele",
     "thematicFocus": "Themenfelder",
     "impactAreas": "Wirkungsraum",
     "orgaTypes": "Organisationstyp",
-    "activityType": "Aktivitätstyp",
-    "dateRange": "Aktivitätszeitraum",
+    "activityType": "Veranstaltungstyp",
+    "dateRange": "Veranstaltungszeitraum",
     "specialOrgas": "Ausgezeichnete Organisationen",
     "startDate": "Startdatum",
     "endDate": "Enddatum",
@@ -188,15 +194,23 @@
       "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein."
     }
   },
+  "events": {
+    "titles": {
+      "addLoginModal": "Veranstaltung hinzufügen"
+    },
+    "texts": {
+      "addLoginModal": "Logge dich bitte ein, mm eine neue Veranstaltung hinzuzufügen."
+    }
+  },
   "account": {
     "nav": {
       "home": "Startseite",
       "changePassword": "Passwort ändern",
       "myData": "Deine Daten",
       "myOrga": "Deine Organisation",
-      "activities": "Aktivitäten",
+      "activities": "Veranstaltungen",
       "organisationSubscriptions": "Gefolgte Organisationen",
-      "activitySubscriptions": "Aktivitäten-Merkliste",
+      "activitySubscriptions": "Veranstaltungs-Merkliste",
       "clearing": "Clearing",
       "organisations": "Organisationen",
       "user-management": "Benutzerverwaltung",
@@ -211,20 +225,20 @@
       "danActivities": "Aktionstage",
       "map": "Karte",
       "noOrgaSubs": "Du folgst keinen Organisationen",
-      "noActivitySubs": "Du hast keine gemerkten Aktivitäten",
+      "noActivitySubs": "Du hast keine gemerkten Veranstaltungen",
       "orgaSubs": "Gefolgte Organisationen",
-      "activitySubs": "Aktivitäten-Merkliste",
-      "noActivities": "Du hast keine Aktivitäten",
+      "activitySubs": "Veranstaltungs-Merkliste",
+      "noActivities": "Du hast keine Veranstaltungen",
       "noDanActivities": "Du hast keine Atkionen",
-      "activities": "Deine Aktivitäten",
+      "activities": "Deine Veranstaltungen",
       "leave": "Aus Organisation austreten",
       "deleteOrga": "Organisation löschen",
-      "deleteActivity": "Aktivität löschen",
+      "deleteActivity": "Veranstaltung löschen",
       "deleteAction": "Aktion löschen",
       "noOrganisation": "Du gehörst noch keiner Organisation an.",
-      "activityWips": "Unveröffentlichte Aktivitäten",
+      "activityWips": "Unveröffentlichte Veranstaltungen",
       "danActivitiesWips": "Unveröffentlichte Aktionen",
-      "finishedActivities": "Veröffentlichte Aktivitäten",
+      "finishedActivities": "Veröffentlichte Veranstaltungen",
       "danActivitiesFinished": "Veröffentlichte Aktionen",
       "orgaUserForm": "Personen, die deine Organisationen verwalten können:",
       "orgaUserList": "Personen, die verwalten dürfen:",
@@ -251,27 +265,27 @@
       }
     },
     "texts": {
-      "map": "Auf der interaktiven Karte kannst du Organisationen und Aktivitäten mit Hilfe von erweiterten Filterfunktionen finden.",
-      "myData": "In deinem Profil hast du einen Überblick über verschiedene Funktionalitäten. Du kannst deine persönlichen Daten ändern, deine Organisation und ihre Aktivitäten anlegen oder bearbeiten und findest gefolgte Organisationen und gemerkte Aktivitäten wieder. Dein Passwort kannst du über die 'Passwort vergessen' Funktion beim Login ändern.",
+      "map": "Auf der interaktiven Karte kannst du Organisationen und Veranstaltungen mit Hilfe von erweiterten Filterfunktionen finden.",
+      "myData": "In deinem Profil hast du einen Überblick über verschiedene Funktionalitäten. Du kannst deine persönlichen Daten ändern, deine Organisation und ihre Veranstaltungen anlegen oder bearbeiten und findest gefolgte Organisationen und gemerkte Veranstaltungen wieder. Dein Passwort kannst du über die 'Passwort vergessen' Funktion beim Login ändern.",
       "danActivities": "Hier kannst du Aktionen für die Deutschen Aktionstage Nachhaltigkeit jederzeit anlegen, bearbeiten oder löschen.",
       "myDataShort": "Hier kannst du deinen Namen ändern oder deinen Account löschen.",
       "myOrga": "Hier kannst du dein Organisationsprofil anpassen und Personen hinzufügen, die deine Organisation verwalten können.",
       "noOrgaSubs": "Suche einfach Organisationen über die Karte und klicke auf 'Organisation folgen'.",
-      "noActivitySubs": "Suche einfach Aktivitäten über die Karte und klicke auf 'Aktivität merken'.",
+      "noActivitySubs": "Suche einfach Veranstaltungen über die Karte und klicke auf 'Veranstaltung merken'.",
       "orgaSubs": "Entdecke Organisationen auf der Plattform und folge ihnen, um den Überblick über deine Favoriten zu behalten. Klicke 'Organisation folgen' auf der Karte, um neue Organisationen hinzuzufügen.",
-      "activitySubs": "Entdecke Aktivitäten auf der Plattform und merke sie dir, um den Überblick über deine Favoriten zu behalten. Klicke 'Aktivität merken' auf der Karte, um neue Aktivitäten hinzuzufügen.",
-      "noActivities": "Du kannst eine Aktivität einfach über den Button 'Aktivität anlegen' erstellen.",
+      "activitySubs": "Entdecke Veranstaltungen auf der Plattform und merke sie dir, um den Überblick über deine Favoriten zu behalten. Klicke 'Veranstaltung merken' auf der Karte, um neue Veranstaltungen hinzuzufügen.",
+      "noActivities": "Du kannst eine Veranstaltung einfach über den Button 'Veranstaltung anlegen' erstellen.",
       "noDanActivities": "Du kannst eine Aktion einfach über den Button 'Aktion anlegen' erstellen.",
-      "activities": "Erstelle hier Aktivitäten deiner Organisation, wie z.B. Veranstaltungen und Netzwerke, die auf der Karte dargestellt werden.",
+      "activities": "Erstelle hier Veranstaltungen deiner Organisation, wie z.B. Veranstaltungen und Netzwerke, die auf der Karte dargestellt werden.",
       "leave": "Möchtest du wirklich aus deiner Organisation austreten? Nachdem du ausgetreten bist, musst du erneut hinzugefügt werden um deine Organisation wieder verwalten zu können.",
       "deleteOrga": "Soll deine Organisation wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten deiner Organisation verloren.",
-      "deleteActivity": "Soll die Aktivität wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten dieser Aktivität verloren.",
+      "deleteActivity": "Soll die Veranstaltung wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten dieser Veranstaltung verloren.",
       "deleteAction": "Soll die Aktion wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten dieser Aktion verloren.",
       "orgaInClearing": "Deine Organisation wird von uns überprüft",
       "orgaInProgress": "Bitte vervollständige deine Organisationsdaten",
-      "noOrganisation": "Du kannst erst Aktivitäten anlegen, sobald du einer Organisation angehörst.",
-      "activityWips": "Die Bearbeitung dieser Aktivitäten ist noch nicht abgeschlossen.",
-      "finishedActivities": "Diese Aktivitäten werden bereits auf der Karte dargestellt.",
+      "noOrganisation": "Du kannst erst Veranstaltungen anlegen, sobald du einer Organisation angehörst.",
+      "activityWips": "Die Bearbeitung dieser Veranstaltungen ist noch nicht abgeschlossen.",
+      "finishedActivities": "Diese Veranstaltungen werden bereits auf der Karte dargestellt.",
       "addUserHint": "Wenn für die angegebene E-Mail-Adresse noch kein:e User:in auf der Platform existiert, wird ein:e neue:r User:in mit einem Einmalpasswort angelegt und benachrichtigt.",
       "confirmDelteUser": "Soll die Person {{email}} wirklich als {{role}} aus deiner Organisation entfernt werden? Nachdem die Person entfernt wurde, muss sie erneut hinzugefügt werden um deine Organisation wieder verwalten zu können.",
       "welcome": "Hier findest du eine Übersicht über alle wichtigen Bereiche der Plattform. Du kannst hier neue Einträge erstellen und deine Daten jederzeit bearbeiten oder löschen.",
@@ -294,7 +308,7 @@
     "buttons": {
       "saveUserData": "Speichern",
       "deleteAccount": "Account löschen",
-      "addActivity": "Aktivität anlegen",
+      "addActivity": "Veranstaltung anlegen",
       "delete": "Löschen",
       "leave": "Austreten",
       "addOrganisation": "Organisation anlegen",
@@ -323,7 +337,7 @@
     },
     "notifications": {
       "orgaUpdateSuccess": "Deine Organisation wurde erfolgreich gespeichert",
-      "activityUpdateSuccess": "Deine Aktivität wurde erfolgreich gespeichert",
+      "activityUpdateSuccess": "Deine Veranstaltung wurde erfolgreich gespeichert",
       "mydataUpdateSuccess": "Deine Daten wurden erfolgreich gespeichert",
       "lastAdmin": "Du bist der letzte Administrator deiner Organisation und kannst diese deswegen nicht verlassen.",
       "userAdded": "Der Benutzer wurde erfolgreich zu Ihrer Organisation hinzugefügt und benachrichtigt.",
@@ -482,7 +496,7 @@
     },
     "texts": {
       "continue": "Du hast erfolgreich deine E-Mail-Adresse bestätigt. Klicke auf WEITER, um fortzufahren.",
-      "orga": "Du bist in einer Organisation aktiv und möchtest mehr Menschen von deinen Aktivitäten begeistern? Dann kannst du sie hier direkt anlegen."
+      "orga": "Du bist in einer Organisation aktiv und möchtest mehr Menschen von deinen Veranstaltungen begeistern? Dann kannst du sie hier direkt anlegen."
     },
     "buttons": {
       "continue": "Weiter",
@@ -490,9 +504,9 @@
     },
     "advantages": {
       "follow": "Organisation folgen",
-      "bookmark": "Dir Aktivitäten merken",
+      "bookmark": "Dir Veranstaltungen merken",
       "createOrga": "Deine Organisation anlegen",
-      "createActivity": "Aktivitäten deiner Organisation erstellen"
+      "createActivity": "Veranstaltungen deiner Organisation erstellen"
     }
   },
   "sign-up": {
@@ -511,10 +525,8 @@
   },
   "map": {
     "labels": {
-      "query": "Was",
-      "location": "Wo",
       "sdgs": "Nachhaltigkeitsziele",
-      "ACTIVITY": "Aktivitäten",
+      "ACTIVITY": "Veranstaltungen",
       "thematicFocus": "Themenfelder",
       "organisation": "Organisation",
       "info": "Info",
@@ -541,24 +553,24 @@
       "address": "Adresse",
       "impactArea": "Wirkungsraum",
       "online": "online",
-      "activityLocation": "Aktivitätsort",
+      "activityLocation": "Veranstaltungsort",
       "noCoordinates": "Standort nicht gefunden!",
       "bestPractices": "Praxisbeispiele",
       "offers": "Angebote",
-      "activities": "Aktivitäten"
+      "activities": "Veranstaltungen"
     },
     "nav": {
       "sdgs": "Nachhaltigkeitsziele",
       "aboutUs": "Über uns",
-      "aboutActivity": "Über die Aktivität",
-      "activities": "Aktivitäten"
+      "aboutActivity": "Über die Veranstaltung",
+      "activities": "Veranstaltungen"
     },
     "titles": {
       "sdgs": "Nachhaltigkeitsziele",
       "sdgsTagline": "Dafür setzen wir uns ein",
       "aboutUs": "Über uns",
-      "aboutActivity": "Über die Aktivität",
-      "activities": "Aktivitäten",
+      "aboutActivity": "Über die Veranstaltung",
+      "activities": "Veranstaltungen",
       "activitiesTagline": "Was wir so machen",
       "contact": "Kontakt",
       "contactPerson": "Ansprechpartner:in",
@@ -572,14 +584,14 @@
     },
     "buttons": {
       "contactNow": "Jetzt kontaktieren",
-      "openActivity": "Zur Aktivität",
+      "openActivity": "Zur Veranstaltung",
       "openOffer": "Zum Angebot",
       "openBestPractice": "Zum Beispiel"
     },
     "texts": {
       "shareOrga.subject": "Hi, kennst du diese Organisation schon?",
       "shareOrga.body": "{{orga}} ist eine wirklich interessante Organisation! %0ADer folgende Link führt dich direkt zu ihrem Profil. %0A%0A{{link}}",
-      "shareActivity.subject": "Hi, kennst du diese Aktivität schon?",
+      "shareActivity.subject": "Hi, kennst du diese Veranstaltung schon?",
       "shareActivity.body": "{{activity}} ist eine wirklich interessante Aktion! %0ADer folgende Link führt dich direkt zu ihrem Profil. %0A%0A{{link}}"
     }
   },
@@ -603,8 +615,8 @@
     "invalidWysiwygContentLength": "Beschreibung muss zwischen 100 und 1500 Zeichen lang sein.",
     "coordinatesNotFoundTitle": "Ort nicht gefunden!",
     "coordinatesNotFound": "Für die von dir angegebene Adresse konnten wir leider keinen Ort finden. Bitte prüfe noch einmal deine Eingabe. Ohne einen gültigen Standort sind wir nicht in der Lage den Eintrag auf der Karte anzuzeigen.",
-    "activitiesCoordinatesTitle": "Aktivitäten ohne Ort vorhanden!",
-    "activitiesCoordinates": "Du hast Aktivitäen, für die wir keinen Standort finden können. Ohne einen gültigen Standort sind wir nicht in der Lage die Einträge auf der Karte anzuzeigen.",
+    "activitiesCoordinatesTitle": "Veranstaltungen ohne Ort vorhanden!",
+    "activitiesCoordinates": "Du hast Veranstaltungen, für die wir keinen Standort finden können. Ohne einen gültigen Standort sind wir nicht in der Lage die Einträge auf der Karte anzuzeigen.",
     "loadingOptionsError": "Die Optionen konnten nicht geladen werden."
   },
   "SDGS": {
@@ -693,7 +705,7 @@
     "notFoundTitle": "Seite nicht gefunden",
     "notFound": "Du kannst aber weiterhin alle Aktionen auf unserer Plattform über die Startseite erreichen.",
     "unknown": "Es ist ein unerwarteter Fehler aufgetreten.",
-    "userAlreadyAssigendToOrg": "<h1>Du hast schon eine Organsation</h1><p>Du hast erfolgreich deine E-Mail-Adresse bestätigt. Entdecke jetzt viele nachhaltige Organisationen, Aktivitäten und vieles mehr.</p><p>Du bist in einer Organisation aktiv und möchtest mehr Menschen von deinen Aktivitäten begeistern? Dann kannst du sie hier direkt anlegen.</p>",
+    "userAlreadyAssigendToOrg": "<h1>Du hast schon eine Organsation</h1><p>Du hast erfolgreich deine E-Mail-Adresse bestätigt. Entdecke jetzt viele nachhaltige Organisationen, Veranstaltungen und vieles mehr.</p><p>Du bist in einer Organisation aktiv und möchtest mehr Menschen von deinen Veranstaltungen begeistern? Dann kannst du sie hier direkt anlegen.</p>",
     "organisationWipNotFound": "<h1>Organsation nicht gefunden</h1><p>Wir konnten die gewünschte Organisation nicht finden.<br/>Bitte wende dich an unseren Support: <a href='gemeinschaftswerk@nachhaltigkeitsrat.de'>gemeinschaftswerk@nachhaltigkeitsrat.de</a></p>"
   }
 }

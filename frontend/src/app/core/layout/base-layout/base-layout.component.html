@@ -31,7 +31,7 @@
   </mat-sidenav>
 </mat-sidenav-container>
 
-<ng-container *ngIf="mobile">
+<ng-container *ngIf="mobile && !noHeader">
   <div class="hamburger-wrapper">
     <button class="hamburger" type="button" (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>

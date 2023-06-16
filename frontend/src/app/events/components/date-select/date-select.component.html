@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <mat-calendar
+    #cal
+    *ngIf="ready"
+    [selected]="selected"
+    (selectedChange)="handleDateChange($event)"
+    [dateClass]="dateClass"
+    [headerComponent]="header"
+    [startAt]="selected"
+  ></mat-calendar>
+  <button mat-button class="today" (click)="handleToday()">
+    <span>{{ 'btn.today' | translate }}</span>
+  </button>
+</div>

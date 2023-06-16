@@ -1,5 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -40,4 +41,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
     Page<ClusteredActivity> findAllInEnvelopeClusters(List<Number> envelope, double epsDistance, Pageable pageable);
 
     List<Activity> findAllByOrganisation(Organisation organisation);
+
+
+    List<Activity> findByPeriodStartBetween(Instant start, Instant end);
 }

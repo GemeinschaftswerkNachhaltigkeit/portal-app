@@ -1,0 +1,17 @@
+<form [formGroup]="formGroup" class="search-form" (submit)="handleSubmit()">
+  <div class="input-wrapper">
+    <input
+      class="search-field"
+      [placeholder]="'forms.labels.query' | translate"
+      formControlName="query"
+    />
+    <input
+      class="search-field"
+      [placeholder]="'forms.labels.location' | translate"
+      formControlName="location"
+    />
+  </div>
+  <button type="submit" class="button" mat-flat-button color="accent">
+    {{ buttonText || 'btn.search' | translate }}
+  </button>
+</form>

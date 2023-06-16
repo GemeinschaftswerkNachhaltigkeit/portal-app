@@ -1,0 +1,20 @@
+<header class="filter-header">
+  <button
+    class="tab-button"
+    [ngClass]="{ active: !permanent }"
+    (click)="handleTabChange(false)"
+  >
+    Bevorstehend
+  </button>
+  <button
+    class="tab-button"
+    [ngClass]="{ active: permanent }"
+    (click)="handleTabChange(true)"
+  >
+    Dauerhaft
+  </button>
+</header>
+
+<div>
+  <ng-content></ng-content>
+</div>

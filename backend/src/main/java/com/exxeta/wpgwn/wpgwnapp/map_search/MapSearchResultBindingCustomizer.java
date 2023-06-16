@@ -23,6 +23,7 @@ public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomize
         bindings.excluding(root.organisationType);
         bindings.excluding(root.activityType);
         bindings.excluding(root.initiator);
+        bindings.excluding(root.location.online);
         bindings.excluding(root.projectSustainabilityWinner);
 
         bindings.bind(root.sustainableDevelopmentGoals).all(utils.stringLeftPadContainsAnyCondition());
@@ -32,13 +33,14 @@ public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomize
 //        bindings.bind(root.organisation.sustainableDevelopmentGoals).all(utils.containsAnyCondition());
 
         // Prüfung, ob das Intervall (Start - Ende) mit den Daten in der DB überlappt.
-        bindings.bind(root.period.start)
+        bindings.bind(root.period.end)
                 .as("endDate")
                 .first((path, value) -> path.loe(value).or(path.isNull()));
 //                .first(DateTimeExpression::loe);
-        bindings.bind(root.period.end)
+        bindings.bind(root.period.start)
                 .as("startDate")
                 .first((path, value) -> path.goe(value).or(path.isNull()));
 //                .first(DateTimeExpression::goe);
     }
+
 }

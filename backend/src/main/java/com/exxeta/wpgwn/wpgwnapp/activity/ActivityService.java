@@ -1,14 +1,13 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressService;
-import com.exxeta.wpgwn.wpgwnapp.files.FileStorageService;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-
-import com.querydsl.core.types.Predicate;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +15,15 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressService;
+import com.exxeta.wpgwn.wpgwnapp.files.FileStorageService;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+
+import com.querydsl.core.types.Predicate;
 
 @Service
 @RequiredArgsConstructor
@@ -76,5 +79,17 @@ public class ActivityService {
         return activityRepository.findById(actId);
     }
 
+    public List<Activity> findActivitiesBetween(Instant start, Instant end) {
+        return activityRepository.findByPeriodStartBetween(start, end);
+    }
 
+    public Map<Instant, Integer> getActivityStatistic(Instant start, Instant end) {
+        List<Activity> activities = findActivitiesBetween(start, end);
+        Map<Instant, Integer> result = new HashMap<>();
+        for (Activity activity : activities) {
+            Instant from = activity.getPeriod().getStart();
+            result.put(from, result.getOrDefault(from, 0) + 1);
+        }
+        return result;
+    }
 }

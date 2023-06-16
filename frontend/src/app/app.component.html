@@ -1,5 +1,3 @@
-<app-base-layout>
-<router-outlet></router-outlet>
+<app-base-layout [noHeader]="!!(noHeader$ | async)">
+  <router-outlet></router-outlet>
 </app-base-layout>
-
-

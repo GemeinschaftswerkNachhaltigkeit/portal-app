@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import { MapFacadeService } from '../map-facade.service';
+import {
+  InternalMapFacade,
+  EmbeddedMapFacade,
+  SharedMapFacade
+} from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
@@ -29,17 +33,6 @@ const getIcon = (type: string, isActive = false, isHovered = false) => {
     </div>`
   });
 
-  const activityIcon = L.divIcon({
-    className: 'custom-pin',
-    iconAnchor: [0, 24],
-    popupAnchor: [0, -36],
-    html: `<div class="map-marker activity ${
-      isActive ? 'highlighted active ' : ''
-    } ${isHovered ? 'highlighted' : ''}" >
-      <div class="inner"></div>
-    </div>`
-  });
-
   const danIcon = L.divIcon({
     className: 'custom-pin',
     iconAnchor: [0, 24],
@@ -53,9 +46,6 @@ const getIcon = (type: string, isActive = false, isHovered = false) => {
 
   if (type === 'ORGANISATION') {
     return orgaIcon;
-  }
-  if (type === 'ACTIVITY') {
-    return activityIcon;
   }
   if (type === 'DAN') {
     return danIcon;
@@ -82,10 +72,9 @@ const getClusterIcon = (
 @Injectable({
   providedIn: 'root'
 })
-export class MarkerService {
+export class SharedMarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
-  activityMarkers: L.MarkerClusterGroup | null = null;
   danMarkers: L.MarkerClusterGroup | null = null;
   markers: {
     [key: string]: {
@@ -99,24 +88,21 @@ export class MarkerService {
   });
   markerLeaved$ = new BehaviorSubject(null);
 
-  constructor(
-    private mapFacade: MapFacadeService,
-    private utils: UtilsService
-  ) {}
+  // explanation inheritance with dependency injection see here:
+  // https://www.danywalls.com/using-the-inject-function-in-angular-15
+  utils = inject(UtilsService);
+  mapFacade = inject(SharedMapFacade);
 
-  makeMarkers(map: L.Map, data: MarkerDto[], mapWidth?: number): void {
+  makeMarkers(
+    map: L.Map,
+    data: MarkerDto[],
+    mapWidth?: number,
+    move?: boolean
+  ): void {
     this.organisationMarkers?.clearLayers();
-    this.activityMarkers?.clearLayers();
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
 
-    this.activityMarkers = L.markerClusterGroup({
-      iconCreateFunction: function (cluster) {
-        return getClusterIcon(cluster.getChildCount(), 'ACTIVITY', '');
-      },
-      showCoverageOnHover: false,
-      spiderfyOnMaxZoom: false
-    });
     this.danMarkers = L.markerClusterGroup({
       iconCreateFunction: function (cluster) {
         return getClusterIcon(cluster.getChildCount(), 'DAN', '');
@@ -143,14 +129,11 @@ export class MarkerService {
           icon: icon
         });
         marker.on('click', () =>
-          this.markerClickHandler(map, c.data, data, mapWidth)
+          this.markerClickHandler(map, c.data, data, mapWidth, move)
         );
 
         if (c.data.resultType === 'DAN') {
           this.danMarkers.addLayer(marker);
-        }
-        if (c.data.resultType === 'ACTIVITY') {
-          this.activityMarkers.addLayer(marker);
         }
         if (c.data.resultType === 'ORGANISATION') {
           this.organisationMarkers.addLayer(marker);
@@ -162,10 +145,35 @@ export class MarkerService {
       }
     }
 
-    this.activityMarkers.addTo(map);
     this.danMarkers.addTo(map);
     this.organisationMarkers.addTo(map);
     this.setExitingActiveMarker(map, data);
+  }
+
+  markerClickHandler(
+    map: L.Map,
+    marker: MarkerDto,
+    markers: MarkerDto[],
+    mapWidth?: number,
+    move?: boolean
+  ): void {
+    this.mapFacade.openCard(marker.resultType, marker.id);
+    // this.scrollToCard(marker.resultType, marker.id);
+
+    this.activateMarker(map, marker, markers, mapWidth, move);
+  }
+
+  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
+    const card = this.mapFacade.getActiveResult();
+    const marker = this.findMarker(markers, card);
+    if (card && marker) {
+      this.handleActiveMarker(
+        map,
+        this.getSingleMarkerData(marker),
+        undefined,
+        false
+      );
+    }
   }
 
   makerKey(res: MarkerDto): string {
@@ -201,24 +209,12 @@ export class MarkerService {
     this.markerLeaved$.next(null);
   }
 
-  markerClickHandler(
-    map: L.Map,
-    marker: MarkerDto,
-    markers: MarkerDto[],
-    mapWidth?: number
-  ): void {
-    this.mapFacade.openCard(marker.resultType, marker.id);
-    // this.scrollToCard(marker.resultType, marker.id);
-
-    this.activateMarker(map, marker, markers, mapWidth);
-  }
-
   activateMarker(
     map: L.Map,
     res: SearchResult,
     markers: MarkerDto[],
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
     const marker = this.findMarker(markers, res);
 
@@ -238,13 +234,6 @@ export class MarkerService {
         if (card.resultType === 'ORGANISATION') {
           return m.resultType === 'ORGANISATION' && m.id === card.id;
         }
-        if (card.resultType === 'ACTIVITY' && card.activityType !== 'DAN') {
-          return m.resultType === 'ACTIVITY' && m.id === card.id;
-        }
-        // If backend sets Resulttype to dan correctly, this one can be removed
-        if (card.resultType === 'ACTIVITY' && card.activityType === 'DAN') {
-          return m.resultType === 'DAN' && m.id === card.id;
-        }
         if (card.resultType === 'DAN') {
           return m.resultType === 'DAN' && m.id === card.id;
         }
@@ -254,18 +243,6 @@ export class MarkerService {
     return;
   }
 
-  setExitingActiveMarker(map: L.Map, markers: MarkerDto[]): void {
-    const card = this.mapFacade.getActiveResult();
-    const marker = this.findMarker(markers, card);
-    if (card && marker) {
-      this.handleActiveMarker(
-        map,
-        this.getSingleMarkerData(marker),
-        undefined,
-        false
-      );
-    }
-  }
   hoverMarker(
     map: L.Map,
     searchResult: SearchResult,
@@ -286,9 +263,6 @@ export class MarkerService {
         const orgaCluster: any = this.organisationMarkers?.getVisibleParent(
           marker.marker
         );
-        const actiCluster: any = this.activityMarkers?.getVisibleParent(
-          marker.marker
-        );
         const danCluster: any = this.danMarkers?.getVisibleParent(
           marker.marker
         );
@@ -303,14 +277,6 @@ export class MarkerService {
               'ORGANISATION',
               ''
             )
-          );
-        } else if (
-          actiCluster &&
-          actiCluster.getChildCount &&
-          res.resultType === 'ACTIVITY'
-        ) {
-          actiCluster.setIcon(
-            getClusterIcon((actiCluster as any).getChildCount(), 'ACTIVITY', '')
           );
         } else if (
           danCluster &&
@@ -335,7 +301,6 @@ export class MarkerService {
     if (marker) {
       const orgaCluster: any =
         this.organisationMarkers?.getVisibleParent(marker);
-      const actiCluster: any = this.activityMarkers?.getVisibleParent(marker);
       const danCluster: any = this.danMarkers?.getVisibleParent(marker);
       if (
         orgaCluster &&
@@ -346,18 +311,6 @@ export class MarkerService {
           getClusterIcon(
             (orgaCluster as any).getChildCount(),
             'ORGANISATION',
-            res.resultType
-          )
-        );
-      } else if (
-        actiCluster &&
-        actiCluster.getChildCount &&
-        res.resultType === 'ACTIVITY'
-      ) {
-        actiCluster.setIcon(
-          getClusterIcon(
-            (actiCluster as any).getChildCount(),
-            'ACTIVITY',
             res.resultType
           )
         );
@@ -381,14 +334,6 @@ export class MarkerService {
     }
   }
 
-  // setHoveredMarkerIcon(res: SearchResult): void {
-  //   this.clearMarkerIcons();
-  //   const m = this.findMarker(res);
-  //   const marker = this.getMarker(res)?.marker;
-  //   const activeIcon = getIcon(res.resultType, true, true);
-  //   marker?.setIcon(activeIcon);
-  // }
-
   handlerHoveredMarker(map: L.Map, hoverdMarkerData: MarkerDto): void {
     if (hoverdMarkerData) {
       this.setActiveMarkerIcon(hoverdMarkerData, false, true);
@@ -401,7 +346,7 @@ export class MarkerService {
     map: L.Map,
     activeMarker: { lon?: number; lat?: number; data: MarkerDto },
     mapWidth?: number,
-    move = true
+    move?: boolean
   ): void {
     this.setActiveMarkerIcon(activeMarker.data);
     if (move && activeMarker && activeMarker.lat && activeMarker.lon) {
@@ -468,7 +413,6 @@ export class MarkerService {
       setTimeout(() => {
         this.searchOnMove = true;
       }, 1000);
-      // this.scrollToCard(activeMarker.data.resultType, activeMarker.data.id);
     }
   }
 
@@ -476,7 +420,7 @@ export class MarkerService {
     this.utils.scrollToAnchor(`card-${type}${id}`, 200);
   }
 
-  private getMarkerData(
+  protected getMarkerData(
     data: MarkerDto[]
   ): { lon?: number; lat?: number; data: MarkerDto }[] {
     return data.map((d) => {

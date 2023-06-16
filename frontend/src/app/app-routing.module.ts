@@ -30,7 +30,14 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    loadChildren: () => import('./map/map.module').then((m) => m.MapModule)
+    loadChildren: () => import('./map/map/map.module').then((m) => m.MapModule)
+  },
+  {
+    path: 'embeddedmap',
+    loadChildren: () =>
+      import('./map/embedded-map/embedded-map.module').then(
+        (m) => m.EmbeddedMapModule
+      )
   },
   {
     path: 'marketplace',
@@ -43,6 +50,11 @@ const routes: Routes = [
       import('./marketplace/marketplace.module').then(
         (m) => m.MarketplaceModule
       )
+  },
+  {
+    path: 'events',
+    loadChildren: () =>
+      import('./events/events.module').then((m) => m.EventsModule)
   },
 
   {

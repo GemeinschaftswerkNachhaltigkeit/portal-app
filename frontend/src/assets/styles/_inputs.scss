@@ -42,3 +42,7 @@ input.mat-input-element {
     }
   }
 }
+
+.mat-calendar-body-cell.date-with-data {
+  background-color: transparentize($color: $green, $amount: 0.5);
+}
