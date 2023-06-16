@@ -46,7 +46,6 @@ import com.querydsl.jpa.impl.JPAQuery;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
-import static com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils.instantAtDefaultZone;
 
 @RestController
 @RequestMapping("/api/v1/search")
@@ -247,14 +246,12 @@ public class MapSearchController {
         if (Objects.nonNull(permanent)) {
             if (permanent) {
                 searchPredicate.and(
-                        QMapSearchResult.mapSearchResult.period.start.eq(instantAtDefaultZone(PERMANENT_START))
-                                .and(QMapSearchResult.mapSearchResult.period.end.eq(
-                                        instantAtDefaultZone(PERMANENT_END))));
+                        QMapSearchResult.mapSearchResult.period.start.eq(PERMANENT_START)
+                                .and(QMapSearchResult.mapSearchResult.period.end.eq(PERMANENT_END)));
             } else {
                 searchPredicate.and(
-                        QMapSearchResult.mapSearchResult.period.start.ne(instantAtDefaultZone(PERMANENT_START))
-                                .or(QMapSearchResult.mapSearchResult.period.end.ne(
-                                        instantAtDefaultZone(PERMANENT_END))));
+                        QMapSearchResult.mapSearchResult.period.start.ne(PERMANENT_START)
+                                .or(QMapSearchResult.mapSearchResult.period.end.ne(PERMANENT_END)));
             }
         }
 
