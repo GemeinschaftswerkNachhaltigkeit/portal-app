@@ -107,6 +107,10 @@ export class MapApiService {
       searchFilter.viewType?.forEach((resultType) => {
         params = params.append('resultType', resultType);
       });
+    if (!searchFilter.viewType || !searchFilter.viewType?.length) {
+      params = params.append('resultType', 'DAN');
+      params = params.append('resultType', 'ORGANISATION');
+    }
     if (searchFilter.envelope) {
       params = params.append('envelope', searchFilter.envelope || '');
     }

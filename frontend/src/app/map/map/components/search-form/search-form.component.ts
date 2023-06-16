@@ -28,7 +28,6 @@ export class SearchFormComponent implements OnInit {
     location: ['']
   });
   showOrga = true;
-  showActivity = true;
   showDan = true;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
@@ -123,12 +122,10 @@ export class SearchFormComponent implements OnInit {
     if (this.showOrga) {
       viewType.push('ORGANISATION');
     }
-    if (this.showActivity) {
-      viewType.push('ACTIVITY');
-    }
     if (this.showDan) {
       viewType.push('DAN');
     }
+
     this.emitFilters(undefined, viewType);
   }
 
