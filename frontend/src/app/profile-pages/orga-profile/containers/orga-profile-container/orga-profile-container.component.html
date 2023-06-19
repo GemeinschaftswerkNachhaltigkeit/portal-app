@@ -127,12 +127,14 @@
                         [openTitle]="'profile.buttons.openOffer'"
                         [openLink]="['/marketplace/search', offer.id]"
                       >
+                        <!--
                         <app-offer-subscription-action
                           [short]="true"
                           [stroked]="true"
                           [offer]="offer"
                           [full]="true"
                         ></app-offer-subscription-action>
+                      -->
                       </app-list-item>
                     </ng-container>
                   </app-tab>
@@ -197,14 +199,17 @@
                         [openTitle]="'profile.buttons.openBestPractice'"
                         [openLink]="['/marketplace/search', bestPractice.id]"
                       >
-                        <app-best-practice-subscription-action
+                        <!-- 
+                      <app-best-practice-subscription-action
                           [short]="true"
                           [stroked]="true"
                           [bp]="bestPractice"
                           [full]="true"
                         ></app-best-practice-subscription-action>
-                      </app-list-item> </ng-container
-                  ></app-tab>
+                      -->
+                      </app-list-item>
+                    </ng-container></app-tab
+                  >
                 </app-tabs>
               </app-section>
             </section>
