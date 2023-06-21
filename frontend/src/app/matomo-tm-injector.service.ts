@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 /**
  * Currently unused
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MatomoInjectorService {
   scriptLoaded = false;
 
@@ -13,6 +15,7 @@ export class MatomoInjectorService {
   }
 
   initMtm(): void {
+    console.log('INJECT TAG MANAGER');
     if (this.scriptLoaded) {
       return;
     }

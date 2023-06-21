@@ -40,24 +40,6 @@ export class ContactComponent {
   }
 
   toggleShowContact(): void {
-    this.tracker.trackEvent(
-      'ogranisation_profile',
-      'button_click',
-      'contact_now',
-      1
-    );
     this.showContact = true;
-  }
-
-  test(): void {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    console.log('PUSH');
-    this.tracker.trackEvent('CAT2', 'ACT', 'EVENT TEST', 100);
-    this.showContact = true;
-    this.tags.sendTag({
-      event: 'MEIN_TEST_EVENT',
-      test: 'TEST !!!!'
-    });
   }
 }
