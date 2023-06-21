@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { of, Subject, takeUntil } from 'rxjs';
 import { AuthService } from './auth/services/auth.service';
 import { filter, map } from 'rxjs/operators';
 import { Router, NavigationStart, RouterEvent, Event } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { MatomoInjectorService } from './matomo-tm-injector.service';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private titleService: Title,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private tags: MatomoInjectorService
   ) {}
+
   ngOnInit(): void {
     // in case of embeddedMap hide header
     this.noHeader$ = this.router.events.pipe(
