@@ -23,14 +23,14 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 @ToString(callSuper = true)
 public class ImportDanXmlProcess extends AuditableEntityBase {
 
-    @Column(name = "import_filename")
+    @Column(name = "import_filename", nullable = false)
     private String importFilename;
 
-    @Column(name = "import_status")
+    @Column(name = "import_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private ImportStatus importStatus;
 
-    @Column(name = "import_id")
+    @Column(name = "import_id", nullable = false)
     private String importId;
 
     @Column(name = "report", columnDefinition = "text")

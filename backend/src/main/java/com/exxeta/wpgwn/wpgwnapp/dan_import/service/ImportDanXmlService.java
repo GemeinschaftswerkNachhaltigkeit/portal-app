@@ -41,6 +41,7 @@ import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationService;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
@@ -249,6 +250,7 @@ public class ImportDanXmlService {
         dan.setActivityType(ActivityType.DAN);
         dan.setSustainableDevelopmentGoals(sdgs);
         dan.setSource(DAN_XML);
+        dan.setStatus(ItemStatus.ACTIVE);
         dan.setOrganisation(organisationService.getDefaultDanOrganisation());
         activityRepository.save(dan);
         importDanXmlQueue.setActivityId(dan.getId());

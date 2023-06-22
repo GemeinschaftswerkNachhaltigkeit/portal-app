@@ -1,21 +1,26 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.mapper;
 
-import java.util.Map;
-
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-import org.springframework.stereotype.Component;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 import com.exxeta.wpgwn.wpgwnapp.nominatim.NominatimService;
 import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Address;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -36,7 +41,7 @@ public class CampaignAddressMapper {
             return location;
         }
         location.setCoordinate(getPointFromStrings(campaign.getLatitude(), campaign.getLongitude()));
-        NominatimDto nominatimDto = nominatimService.searchAddress(campaign.getVenue());
+        NominatimDto nominatimDto = nominatimService.searchAddress(prepareAndCleaningAddress(campaign.getVenue()));
         if (nonNull(nominatimDto)) {
             if (isNull(location.getCoordinate())) {
                 location.setCoordinate(getPoint(nominatimDto.getLatitude(), nominatimDto.getLongitude()));
@@ -45,8 +50,26 @@ public class CampaignAddressMapper {
             return location;
         }
 
-        throw new DanXmlImportCancelledException(Map.of("campaign.address", "campaign.address.invalid"));
+        throw new DanXmlImportCancelledException(Map.of("campaign.address", campaign.getVenue() + " is invalid"));
     }
+
+    private String prepareAndCleaningAddress(String venue) {
+        venue = venue.trim()
+                .replaceAll("\n\r", ",")
+                .replaceAll("\n", ",")
+                .replaceAll("\r", ",");
+        if (!venue.contains(",")) {
+            return venue;
+        }
+        List<String> venueSubStrings = Lists.newLinkedList(Splitter.on(",").omitEmptyStrings()
+                .trimResults().split(venue));
+        if (venueSubStrings.size() >= 2) {
+            Collections.reverse(venueSubStrings);
+            return venueSubStrings.get(1) + ", " + venueSubStrings.get(0);
+        }
+        return venue;
+    }
+
 
     private Address mapperAddress(NominatimDto nominatimDto) {
         Address address = new Address();

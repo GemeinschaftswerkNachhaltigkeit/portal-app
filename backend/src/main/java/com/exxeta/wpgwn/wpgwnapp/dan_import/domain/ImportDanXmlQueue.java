@@ -1,18 +1,13 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import java.time.Instant;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
+import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Table(
@@ -26,7 +21,7 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 @Setter
 @ToString(callSuper = true)
 public class ImportDanXmlQueue extends AuditableEntityBase {
-    @Column(name = "dan_id")
+    @Column(name = "dan_id", nullable = false)
     private String danId;
     @Column(name = "latitude")
     private String latitude;
@@ -38,11 +33,11 @@ public class ImportDanXmlQueue extends AuditableEntityBase {
     private String aimed;
     @Column(name = "venue")
     private String venue;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "intro_text")
     private String introText;
-    @Column(name = "detail_text")
+    @Column(name = "detail_text", columnDefinition = "text", nullable = false)
     private String detailText;
     @Column(name = "organizer")
     private String organizer;
@@ -58,10 +53,10 @@ public class ImportDanXmlQueue extends AuditableEntityBase {
     @Column(name = "link")
     private String link;
 
-    @Column(name = "date_start")
+    @Column(name = "date_start", nullable = false)
     private Instant dateStart;
 
-    @Column(name = "date_end")
+    @Column(name = "date_end", nullable = false)
     private Instant dateEnd;
 
     @Column(name = "import_status")
