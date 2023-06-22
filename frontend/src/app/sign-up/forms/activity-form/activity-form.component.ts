@@ -124,7 +124,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
     ) {
       this.saveData.emit({
         name: formVals.name,
-        activityType: formVals.activityType as ActivityType,
+        activityType: ActivityType.EVENT,
         description: formVals.description,
         period: {
           start: formVals.start,

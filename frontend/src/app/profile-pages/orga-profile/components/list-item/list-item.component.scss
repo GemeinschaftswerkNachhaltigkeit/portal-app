@@ -81,11 +81,15 @@
     }
   }
   .actions {
-    width: fit-content;
-    display: grid;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     justify-items: end;
-    grid-template-columns: 1fr 1fr;
     gap: $spacing-2;
+
+    .open-link {
+      flex-grow: 1;
+    }
   }
 }
 

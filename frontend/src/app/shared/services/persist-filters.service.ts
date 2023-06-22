@@ -14,7 +14,6 @@ export class PersistFiltersService {
     },
     path: string[] = []
   ): void {
-    console.log('URL FILTER', filters);
     this.router.navigate(path, {
       queryParams: {
         ...filters

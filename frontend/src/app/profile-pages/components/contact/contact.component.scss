@@ -74,6 +74,14 @@
 
     .show-contact-btn {
       background-color: $yellow;
+      height: 36px;
+      padding: 0 16px;
+      border: none;
+      font-family: 'AzeretMono';
+      color: $blue-navy;
+      width: 100%;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
     .contact-information {

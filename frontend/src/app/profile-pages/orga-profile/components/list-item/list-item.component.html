@@ -59,7 +59,12 @@
     </div>
     <div class="actions">
       <ng-content></ng-content>
-      <a [routerLink]="openLink" mat-flat-button color="accent">
+      <a
+        [routerLink]="openLink"
+        mat-flat-button
+        color="accent"
+        class="open-link"
+      >
         {{ openTitle | translate }}
       </a>
     </div>

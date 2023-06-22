@@ -20,10 +20,9 @@
           <p>{{ profileUtils.contactString(contact) }}</p>
         </div>
         <button
+          id="contact-now"
           *ngIf="!showContact"
           class="show-contact-btn"
-          mat-flat-button
-          [attr.data-track]="type"
           (click)="toggleShowContact()"
         >
           {{ 'profile.buttons.contactNow' | translate }}
