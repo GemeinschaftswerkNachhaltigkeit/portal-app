@@ -16,6 +16,7 @@ public interface CmsClient {
     @RequestMapping(method = RequestMethod.GET, value = "${building-housing-contact.station}")
     StationCmsDto getStation();
 
+
     @RequestMapping(method = RequestMethod.GET, value = "${wpgwn.feature-setting-url}", produces = "application/json")
     FeatureDataDto getFeatures();
 }

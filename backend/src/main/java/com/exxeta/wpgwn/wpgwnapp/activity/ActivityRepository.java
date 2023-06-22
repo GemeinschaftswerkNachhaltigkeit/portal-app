@@ -3,6 +3,8 @@ package com.exxeta.wpgwn.wpgwnapp.activity;
 import java.time.Instant;
 import java.util.List;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,8 +19,6 @@ import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 public interface ActivityRepository extends JpaRepository<Activity, Long>,
         RevisionRepository<Activity, Long, Long>,
         QuerydslPredicateExecutor<Activity> {
-
-
 
 
     Page<Activity> findAllByOrganisationIdIs(Long organisationId, Pageable pageable);
@@ -44,4 +44,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
 
 
     List<Activity> findByPeriodStartBetween(Instant start, Instant end);
+
+    Activity findActivityByExternalIdAndSource(String externalId, Source source);
 }

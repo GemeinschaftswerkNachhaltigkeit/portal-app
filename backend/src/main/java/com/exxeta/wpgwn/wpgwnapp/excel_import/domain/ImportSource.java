@@ -5,5 +5,7 @@ public enum ImportSource {
     RNE,
     BERTELSMANN,
     KVM,
+
+    DAN_XML,
     GLOBAL_GOALS_DIRECTORY
 }
