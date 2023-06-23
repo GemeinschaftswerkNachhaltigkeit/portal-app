@@ -36,10 +36,10 @@
     "finishDan": "Publish action",
     "updateDan": "Save action",
     "finishOrgaWizard": "Register organisation",
-    "finishActivityWizard": "Aktivität veröffentlichen",
+    "finishActivityWizard": "Publish event",
     "saveCurrentState": "Save current state",
     "updateOrga": "Update organisation",
-    "updateActivity": "Aktivität speichern",
+    "updateActivity": "Save event",
     "search": "Search",
     "close": "Close",
     "apply": "Apply",
@@ -47,7 +47,7 @@
     "resetFilters": "Reset all filters",
     "add": "Add now",
     "addNewEvent": "Add event",
-    "toDan": "Go to action days"
+    "toDan": "Add action"
   },
   "forms": {
     "labels": {
@@ -143,6 +143,7 @@
     "specialOrgas": "Special Organisations",
     "endDate": "End date",
     "permanent": "Permanent",
+    "upcoming": "Upcoming",
     "bestPracitces": "Practical examples",
     "offers": "Offers",
     "filters": "Filters",
@@ -155,7 +156,8 @@
     "wizard.contact": "Contact",
     "saved": "Saved",
     "online": "Online",
-    "private": "Private"
+    "private": "Private",
+    "new": "New"
   },
   "paging": {
     "first": "First page",
@@ -198,7 +200,7 @@
       "addLoginModal": "Add event"
     },
     "texts": {
-      "addLoginModal": ""
+      "addLoginModal": "Please log in to add an event."
     }
   },
   "account": {
@@ -209,7 +211,7 @@
       "myOrga": "Your organisation",
       "activities": "Events",
       "organisationSubscriptions": "Followed organisations",
-      "activitySubscriptions": "Saved activities",
+      "activitySubscriptions": "Saved events",
       "clearing": "Clearing",
       "organisations": "Organisations",
       "user-management": "User management",
@@ -224,20 +226,20 @@
       "danActivities": "Action Days",
       "map": "Map",
       "noOrgaSubs": "You have not followed any organisation",
-      "noActivitySubs": "You have not saved any activities",
+      "noActivitySubs": "You have not saved any events",
       "orgaSubs": "Followed organisations",
-      "activitySubs": "Saved activities",
-      "noActivities": "You have no activities",
+      "activitySubs": "Saved events",
+      "noActivities": "You have no events",
       "noDanActivities": "You have no actions",
-      "activities": "Your activities",
+      "activities": "Your events",
       "leave": "Leave organisation",
       "deleteOrga": "Delete organisation",
       "deleteActivity": "Delete event",
       "deleteAction": "Delete action",
       "noOrganisation": "You are not part of any organisation.",
-      "activityWips": "Unpublished event",
+      "activityWips": "Unpublished events",
       "danActivitiesWips": "Unpublished actions",
-      "finishedActivities": "Published event",
+      "finishedActivities": "Published events",
       "danActivitiesFinished": "Published actions",
       "orgaUserForm": "People who can manage your organization:",
       "orgaUserList": "People who are allowed to manage your organisation:",
@@ -264,27 +266,27 @@
       }
     },
     "texts": {
-      "map": "On the interactive map you can find organisations and activities using advanced filter functions.",
-      "myData": "In your profile you have an overview of various functionalities. You can change your personal data, create or edit your organisation and its activities and find followed organisations and saved activities. You can change your password via the 'Forgotten password' function when you log in.",
+      "map": "On the interactive map you can find organisations and events using advanced filter functions.",
+      "myData": "In your profile you have an overview of various functionalities. You can change your personal data, create or edit your organisation and its events and find followed organisations and saved events. You can change your password via the 'Forgotten password' function when you log in.",
       "danActivities": "Here you can register, change, and delete your actions for the German Sustainability Action Days.",
       "myDataShort": "Here you can change your name or delete your account.",
       "myOrga": "Here you can customize your organisation profile and add people who can manage your organisation.",
       "noOrgaSubs": "Simply search for organisations via the map and click on 'Follow organisation'.",
-      "noActivitySubs": "Simply search for activities via the map and click on 'Save event'.",
+      "noActivitySubs": "Simply search for events via the map and click on 'Save event'.",
       "orgaSubs": "Discover organisations on the platform and follow them to keep track of your favourites. Click 'Follow organisation' on the map to add new organisations.",
-      "activitySubs": "Discover and save activities on the platform to keep track of your favourites. Click 'Save event' on the map to add new activities.",
+      "activitySubs": "Discover and save events on the platform to keep track of your favourites. Click 'Save event' on the map to add new events.",
       "noActivities": "You can create an event by clicking the 'Create event' button.",
       "noDanActivities": "You can create an action by clicking the 'Create action' button.",
-      "activities": "Here you can create activities of your organisation, such as events and networks, which will be displayed on the map.",
+      "activities": "Here you can create events for your organisation. These will be displayed in the event calendar.",
       "leave": "Do you really want to leave your organisation? After you have left, you need to be added again to be able to manage your organisation again.",
       "deleteOrga": "Do you really want your organisation to be irrevocably deleted? With the deletion, all stored data of your organisation will be lost.",
       "deleteActivity": "Should the event really be irrevocably deleted? With the deletion, all stored data of this event will be lost.",
       "deleteAction": "Should the action really be irrevocably deleted? With the deletion, all stored data of this action will be lost.",
       "orgaInClearing": "Your organisation is getting checked by us",
       "orgaInProgress": "Please complete your organisation details",
-      "noOrganisation": "You can only create activities once you belong to an organisation.",
-      "activityWips": "The editing of these activities has not yet been completed.",
-      "finishedActivities": "These activities are already shown on the map.",
+      "noOrganisation": "You can only create events once you belong to an organisation.",
+      "activityWips": "The editing of these events has not yet been completed.",
+      "finishedActivities": "These events are already shown on the map.",
       "addUserHint": "If no user with the specified email address exists on the platform, a new one will be created and notified.",
       "confirmDelteUser": "Do your really want the person {{email}} to be removed as {{role}} from your organisation?",
       "welcome": "Here your will find an overview of all important areas of the platform.You can create new entries here and edit or delete your data at any time.",
@@ -494,7 +496,7 @@
     },
     "texts": {
       "continue": "You have successfully confirmed your e-mail address. Click on 'Continue' to proceed.",
-      "orga": "You are active in an organisation and want to inspire more people with your activities? Then you can create your organisation here."
+      "orga": "You are active in an organisation and want to inspire more people with your events? Then you can create your organisation here."
     },
     "buttons": {
       "continue": "Next",
@@ -502,9 +504,9 @@
     },
     "advantages": {
       "follow": "Follow organisations",
-      "bookmark": "Save activities",
+      "bookmark": "Save events",
       "createOrga": "Create your organisation",
-      "createActivity": "Create activities of your organisation"
+      "createActivity": "Create events of your organisation"
     }
   },
   "sign-up": {
@@ -701,7 +703,7 @@
     "notFoundTitle": "Page not found",
     "notFound": "You can still access all actions on our platform via the landing page.",
     "unknown": "An error has occurred",
-    "userAlreadyAssigendToOrg": "<h1>You already have an organisation</h1><p>You have successfully confirmed your email address. Discover many sustainable organisations, activities and much more.</p><p>You are active in an organisation and want to inspire more people with your activities? Then you can create them directly here.</p>",
+    "userAlreadyAssigendToOrg": "<h1>You already have an organisation</h1><p>You have successfully confirmed your email address. Discover many sustainable organisations, events and much more.</p><p>You are active in an organisation and want to inspire more people with your events? Then you can create them directly here.</p>",
     "organisationWipNotFound": "<h1>Organisation not found</h1><p>We could not find the organisation you are looking for.<br/>Please contact our support: <a href='gemeinschaftswerk@nachhaltigkeitsrat.de'>gemeinschaftswerk@nachhaltigkeitsrat.de</a></p>"
   }
 }

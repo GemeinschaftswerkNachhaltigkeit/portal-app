@@ -4,14 +4,14 @@
     [ngClass]="{ active: !permanent }"
     (click)="handleTabChange(false)"
   >
-    Bevorstehend
+    {{ 'labels.upcoming' | translate }}
   </button>
   <button
     class="tab-button"
     [ngClass]="{ active: permanent }"
     (click)="handleTabChange(true)"
   >
-    Dauerhaft
+    {{ 'labels.permanent' | translate }}
   </button>
 </header>
 

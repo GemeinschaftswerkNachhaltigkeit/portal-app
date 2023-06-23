@@ -6,6 +6,7 @@ export let environment = {
   landingPageUrl: 'load-from-backend',
   assetsUrl: '/app/assets',
   matomoUrl: 'https://matomo.nachhaltigkeitsrat.de',
+  matomoTagManagerContainerId: 'jFGzL2wu',
   matomoSiteId: 10,
   danId: 0,
   keycloak: {
@@ -25,6 +26,7 @@ export function overrideEnvironment(e: {
   matomoUrl: string;
   matomoSiteId: number;
   danId: number;
+  matomoTagManagerContainerId: string;
   keycloak: { issuer: string; clientId: string; debug: boolean };
 }): void {
   environment = e;

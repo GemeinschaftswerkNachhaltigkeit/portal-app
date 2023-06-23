@@ -48,7 +48,7 @@
     "resetFilters": "Alle Filter zurücksetzen",
     "add": "Jetzt hinzufügen",
     "addNewEvent": "Veranstaltung hinzufügen",
-    "toDan": "Zu den Aktionstagen springen"
+    "toDan": "Aktion hinzufügen"
   },
   "forms": {
     "labels": {
@@ -132,6 +132,7 @@
     "projectSustainabilityWinner": "Preisträger:in",
     "projectSustainabilityWinnerLong": "Preisträger:in vom Projekt Nachhaltigkeit",
     "permanent": "Dauerhaft",
+    "upcoming": "Bevorstehend",
     "expiredActivity": "Vergangene Veranstaltung",
     "expiredDanActivity": "Vergangene Aktion",
     "copied": "kopiert",
@@ -148,7 +149,6 @@
     "offers": "Angebote",
     "activate": "Aktivieren",
     "deactivate": "Deaktivieren",
-    "new": "Neu",
     "wizard.masterData": "Stammdaten",
     "wizard.aboutDan": "Über die Aktion",
     "wizard.topics": "Thema & Ort",
@@ -156,7 +156,8 @@
     "wizard.contact": "Kontakt",
     "saved": "Gespeichert",
     "online": "Online",
-    "private": "Privat"
+    "private": "Privat",
+    "new": "Neu"
   },
   "paging": {
     "first": "Erste Seite",
@@ -199,7 +200,7 @@
       "addLoginModal": "Veranstaltung hinzufügen"
     },
     "texts": {
-      "addLoginModal": "Logge dich bitte ein, mm eine neue Veranstaltung hinzuzufügen."
+      "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen."
     }
   },
   "account": {
@@ -276,7 +277,7 @@
       "activitySubs": "Entdecke Veranstaltungen auf der Plattform und merke sie dir, um den Überblick über deine Favoriten zu behalten. Klicke 'Veranstaltung merken' auf der Karte, um neue Veranstaltungen hinzuzufügen.",
       "noActivities": "Du kannst eine Veranstaltung einfach über den Button 'Veranstaltung anlegen' erstellen.",
       "noDanActivities": "Du kannst eine Aktion einfach über den Button 'Aktion anlegen' erstellen.",
-      "activities": "Erstelle hier Veranstaltungen deiner Organisation, wie z.B. Veranstaltungen und Netzwerke, die auf der Karte dargestellt werden.",
+      "activities": "Hier kannst du Veranstaltungen deiner Organisation anlegen. Diese werden im Veransaltungskalender dargestellt.",
       "leave": "Möchtest du wirklich aus deiner Organisation austreten? Nachdem du ausgetreten bist, musst du erneut hinzugefügt werden um deine Organisation wieder verwalten zu können.",
       "deleteOrga": "Soll deine Organisation wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten deiner Organisation verloren.",
       "deleteActivity": "Soll die Veranstaltung wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten dieser Veranstaltung verloren.",

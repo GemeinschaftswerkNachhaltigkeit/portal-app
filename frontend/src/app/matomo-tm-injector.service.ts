@@ -15,7 +15,6 @@ export class MatomoInjectorService {
   }
 
   initMtm(): void {
-    console.log('INJECT TAG MANAGER');
     if (this.scriptLoaded) {
       return;
     }
@@ -39,6 +38,5 @@ export class MatomoInjectorService {
     s.parentNode?.insertBefore(script, s);
 
     this.scriptLoaded = true;
-    console.log('TAG MANAGER added');
   }
 }

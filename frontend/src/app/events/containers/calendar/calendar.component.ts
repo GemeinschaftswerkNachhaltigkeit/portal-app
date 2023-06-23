@@ -131,7 +131,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getActionDaysUrl(): string {
-    return this.lp.getDanUrl();
+    return this.lp.getDanUrl() + '#mitmachen';
   }
 
   groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
