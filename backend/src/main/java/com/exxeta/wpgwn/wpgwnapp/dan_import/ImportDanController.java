@@ -5,7 +5,10 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +25,13 @@ import com.exxeta.wpgwn.wpgwnapp.dan_import.dto.ImportDanXmlProcessDto;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.service.ImportDanXmlService;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaigns;
 
+import javax.annotation.security.RolesAllowed;
+
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.TODO;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
-@RequestMapping("/api/public/dan-import")
+@RequestMapping("/api/v1/dan-import")
 @RequiredArgsConstructor
 public class ImportDanController {
 
@@ -41,6 +46,7 @@ public class ImportDanController {
      *
      * @return list
      */
+    @RolesAllowed(PermissionPool.RNE_ADMIN)
     @GetMapping("")
     public List<ImportDanXmlProcessDto> findAllImport() {
         return importDanXmlService.findAllDanImport();
@@ -52,6 +58,7 @@ public class ImportDanController {
      * @param importId
      * @return ImportDanXmlProcessDto
      */
+    @RolesAllowed(PermissionPool.RNE_ADMIN)
     @GetMapping("/{importId}")
     public ImportDanXmlProcessDto findByImportId(@PathVariable("importId") String importId) {
         return importDanXmlService.findByImportId(importId);
@@ -63,6 +70,8 @@ public class ImportDanController {
      * @param campaigns
      * @return importDanXmlProcessDto
      */
+    @Transactional
+    @RolesAllowed(PermissionPool.RNE_ADMIN)
     @PostMapping(value = "/xml", produces = {APPLICATION_XML_VALUE})
     public ImportDanXmlProcessDto importDanAsRequestBody(@RequestBody Campaigns campaigns) {
         String filename = Instant.now(clock) + "XML_REQUEST_PER_REST_API";
@@ -76,6 +85,8 @@ public class ImportDanController {
      * @param xmlFile
      * @return importDanXmlProcessDto
      */
+    @Transactional
+    @RolesAllowed(PermissionPool.RNE_ADMIN)
     @PostMapping("/file")
     public ImportDanXmlProcessDto importDan(@RequestParam("xmlFile") MultipartFile xmlFile) {
         Campaigns campaigns = importDanXmlService.loadXmlFromFile(xmlFile);
