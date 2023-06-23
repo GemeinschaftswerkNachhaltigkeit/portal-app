@@ -13,6 +13,7 @@ import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportIgnoredExcepti
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlReadException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.mapper.CampaignAddressMapper;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.mapper.CampaignSdgMapper;
+import com.exxeta.wpgwn.wpgwnapp.dan_import.mapper.ImportDanXmlProcessMapper;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.validator.CampaignDuplicateValidator;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.validator.CampaignExpiredValidator;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.validator.CampaignTechValidator;
@@ -37,11 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityNotFoundException;
 import java.time.Clock;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.FINISH;
@@ -49,9 +46,7 @@ import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.PENDING;
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportType.INSERT;
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportType.UPDATE;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.Source.DAN_XML;
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static org.springframework.util.StringUtils.hasText;
 
 @Service
 @Slf4j
@@ -72,6 +67,8 @@ public class ImportDanXmlService {
 
     private final CampaignAddressMapper campaignAddressMapper;
 
+    private final ImportDanXmlProcessMapper importDanXmlProcessMapper;
+
     private final ImportDanXmlQueueRepository importDanXmlQueueRepository;
 
     private final OrganisationService organisationService;
@@ -85,8 +82,7 @@ public class ImportDanXmlService {
     public Campaigns loadXmlFromFile(MultipartFile xmlFile) {
         ObjectMapper xmlMapper = mappingJackson2XmlHttpMessageConverter.getObjectMapper();
         try {
-            Campaigns campaigns = xmlMapper.readValue(xmlFile.getInputStream(), Campaigns.class);
-            return campaigns;
+            return xmlMapper.readValue(xmlFile.getInputStream(), Campaigns.class);
         } catch (Exception ex) {
             throw new DanXmlReadException("Error parsing content of xml file " + xmlFile.getOriginalFilename(), ex);
         }
@@ -94,7 +90,7 @@ public class ImportDanXmlService {
 
     public List<ImportDanXmlProcessDto> findAllDanImport() {
         return importDanXmlProcessRepository.findAllByOrderByCreatedAtDesc()
-                .stream().map(this::mapperImportDanXmlProcess)
+                .stream().map(importDanXmlProcessMapper::mapperImportDanXmlProcess)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
@@ -102,7 +98,8 @@ public class ImportDanXmlService {
 
         ImportDanXmlProcess importDanXmlProcessByImportId =
                 importDanXmlProcessRepository.findImportDanXmlProcessByImportId(importId);
-        ImportDanXmlProcessDto importDanXmlProcessDto = mapperImportDanXmlProcess(importDanXmlProcessByImportId);
+        ImportDanXmlProcessDto importDanXmlProcessDto =
+                importDanXmlProcessMapper.mapperImportDanXmlProcess(importDanXmlProcessByImportId);
         if (nonNull(importDanXmlProcessDto)) {
             return importDanXmlProcessDto;
         }
@@ -110,22 +107,6 @@ public class ImportDanXmlService {
                 String.format("Entity [%s] with id [%s] not found", "ImportDanXmlProcess", importId));
     }
 
-    @SneakyThrows
-    private ImportDanXmlProcessDto mapperImportDanXmlProcess(ImportDanXmlProcess importDanXmlProcess) {
-
-        if (isNull(importDanXmlProcess)) {
-            return null;
-        }
-        ImportDanXmlProcessDto importDanXmlProcessDto = new ImportDanXmlProcessDto();
-        importDanXmlProcessDto.setImportFilename(importDanXmlProcess.getImportFilename());
-        importDanXmlProcessDto.setImportId(importDanXmlProcess.getImportId());
-        importDanXmlProcessDto.setImportStatus(importDanXmlProcess.getImportStatus());
-        if (hasText(importDanXmlProcess.getReport())) {
-            importDanXmlProcessDto.setReport(
-                    objectMapper.readValue(importDanXmlProcess.getReport(), ImportDanXmlResult.class));
-        }
-        return importDanXmlProcessDto;
-    }
 
     @EventListener
     @Async
