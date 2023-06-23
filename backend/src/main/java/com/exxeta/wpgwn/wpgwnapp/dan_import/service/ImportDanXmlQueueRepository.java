@@ -1,10 +1,10 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlQueue;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ImportDanXmlQueueRepository extends JpaRepository<ImportDanXmlQueue, Long> {
 
-    ImportDanXmlQueue findImportDanXmlQueueByDanId(String danId);
+    ImportDanXmlQueue findFirstByDanIdOrderByCreatedAtDesc(String danId);
 }

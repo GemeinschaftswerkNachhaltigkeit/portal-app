@@ -11,18 +11,15 @@ create table if not exists import_dan_xml_process
     import_status       varchar(255)  not null,
     report              text,
     constraint import_dan_xml_process_pkey primary key (id)
-)
-
-drop index if exists import_id_idx;
+);
 
 create index if not exists import_id_idx
     on import_dan_xml_process using btree
     (import_id  asc nulls last);
 
-
 create table if not exists import_dan_xml_queue
 (
-    id bigserial not null default,
+    id bigserial not null,
     created_at timestamp not null,
     created_by  varchar(255) ,
     last_modified_by  varchar(255) ,
@@ -51,19 +48,14 @@ create table if not exists import_dan_xml_queue
     unique_key  varchar(255) ,
     venue  varchar(255) ,
     constraint import_dan_xml_queue_pkey primary key (id)
-    )
+    );
 
 -- Index: dan_id_queue_idx
-
-drop index if exists dan_id_queue_idx;
-
 create index if not exists dan_id_queue_idx
     on import_dan_xml_queue using btree
     (dan_id asc nulls last);
 
 -- index: import_id_queue_idx
-
-drop index if exists import_id_queue_idx;
 
 create index if not exists import_id_queue_idx
     on import_dan_xml_queue using btree

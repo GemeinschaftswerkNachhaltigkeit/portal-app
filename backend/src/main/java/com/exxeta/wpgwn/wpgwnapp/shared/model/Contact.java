@@ -5,10 +5,10 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.util.StringUtils;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import org.springframework.util.StringUtils;
 
 @Embeddable
 @Getter

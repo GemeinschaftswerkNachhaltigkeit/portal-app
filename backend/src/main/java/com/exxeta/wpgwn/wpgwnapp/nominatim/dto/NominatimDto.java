@@ -37,6 +37,7 @@ public final class NominatimDto {
         return nonNull(address)
                 ? hasText(address.getCity()) ? address.getCity()
                 : hasText(address.getTown()) ? address.getTown()
+                : hasText(address.getVillage()) ? address.getVillage()
                 : hasText(address.getMunicipality()) ? address.getMunicipality()
                 : hasText(address.getState()) ? address.getState()
                 : ""
@@ -55,6 +56,8 @@ public final class NominatimDto {
         private String postCode;
         @JsonProperty("house_number")
         private String houseNumber;
+        @JsonProperty("village")
+        private String village;
         @JsonProperty("state")
         private String state;
         @JsonProperty("town")

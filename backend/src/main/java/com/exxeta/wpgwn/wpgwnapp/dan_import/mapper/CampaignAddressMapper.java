@@ -41,8 +41,18 @@ public class CampaignAddressMapper {
             return location;
         }
         location.setCoordinate(getPointFromStrings(campaign.getLatitude(), campaign.getLongitude()));
-        NominatimDto nominatimDto = nominatimService.searchAddress(prepareAndCleaningAddress(campaign.getVenue()));
-        if (nonNull(nominatimDto)) {
+        log.debug("Venue: {}", campaign.getVenue());
+
+        NominatimDto nominatimDto = nominatimService.searchAddress(campaign.getVenue());
+
+        if (isNull(nominatimDto)) {
+            String prepareAndCleaningAddress = prepareAndCleaningAddress(campaign.getVenue());
+            log.debug("prepareAndCleaningAddress: {}", prepareAndCleaningAddress);
+            nominatimDto = nominatimService.searchAddress(prepareAndCleaningAddress);
+        }
+
+        if (nonNull(nominatimDto) && hasText(nominatimDto.getAddress().getRoad())) {
+            log.debug("nominatimDto: {}", nominatimDto);
             if (isNull(location.getCoordinate())) {
                 location.setCoordinate(getPoint(nominatimDto.getLatitude(), nominatimDto.getLongitude()));
             }
@@ -50,7 +60,8 @@ public class CampaignAddressMapper {
             return location;
         }
 
-        throw new DanXmlImportCancelledException(Map.of("campaign.address", campaign.getVenue() + " is invalid"));
+        throw new DanXmlImportCancelledException(
+                Map.of("campaign.address", campaign.getVenue() + " is invalid"));
     }
 
     private String prepareAndCleaningAddress(String venue) {

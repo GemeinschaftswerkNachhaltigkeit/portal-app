@@ -1,24 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.service;
 
-import javax.persistence.EntityNotFoundException;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.context.event.EventListener;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-
 import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlProcess;
@@ -38,16 +19,30 @@ import com.exxeta.wpgwn.wpgwnapp.dan_import.validator.CampaignTechValidator;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaigns;
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationService;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.context.event.EventListener;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.EntityNotFoundException;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.FINISH;
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.PENDING;
@@ -178,6 +173,7 @@ public class ImportDanXmlService {
             } catch (DanXmlImportCancelledException ex) {
                 importDanXmlResult.addCancelled(campaign.getId(), ex.getErrorMessages().toString());
             } catch (Exception ex) {
+                log.error("unknown error: {}", ex);
                 importDanXmlResult.addCancelled(campaign.getId(),
                         Map.of("campaign", "campaign.import.error").toString());
             }
@@ -222,15 +218,18 @@ public class ImportDanXmlService {
 
     private void createOrUpdateDan(ImportDanXmlQueue importDanXmlQueue, Set<Long> sdgs, Location location,
                                    boolean isUpdate, ImportDanXmlResult importDanXmlResult) {
-        Activity dan = new Activity();
         String externalId = importDanXmlQueue.getDanId();
-        if (isUpdate) {
-            Activity target = activityRepository.findActivityByExternalIdAndSource(externalId, DAN_XML);
-            if (nonNull(target)) {
-                dan = target;
-            }
+        Activity dan = activityRepository.findActivityByExternalIdAndSource(externalId, DAN_XML);
+        if (dan == null) {
+            dan = new Activity();
+            dan.setExternalId(importDanXmlQueue.getDanId());
+            dan.setActivityType(ActivityType.DAN);
+            dan.setThematicFocus(Collections.singleton(ThematicFocus.OTHER));
+            dan.setImpactArea(ImpactArea.WORLD);
+            dan.setSource(DAN_XML);
+            dan.setStatus(ItemStatus.ACTIVE);
+            dan.setOrganisation(organisationService.getDefaultDanOrganisation());
         }
-        dan.setExternalId(externalId);
         dan.setName(importDanXmlQueue.getName());
         dan.setDescription(importDanXmlQueue.getDetailText());
         Contact contact = new Contact();
@@ -241,17 +240,8 @@ public class ImportDanXmlService {
         dan.setContact(contact);
         dan.setLocation(location);
         dan.setImage(importDanXmlQueue.getImage());
-        Period period = new Period();
-        period.setStart(importDanXmlQueue.getDateStart());
-        period.setEnd(importDanXmlQueue.getDateEnd());
-        dan.setPeriod(period);
-        dan.setThematicFocus(Set.of(ThematicFocus.OTHER));
-        dan.setImpactArea(ImpactArea.WORLD);
-        dan.setActivityType(ActivityType.DAN);
+        dan.setPeriod(new Period(importDanXmlQueue.getDateStart(), importDanXmlQueue.getDateEnd()));
         dan.setSustainableDevelopmentGoals(sdgs);
-        dan.setSource(DAN_XML);
-        dan.setStatus(ItemStatus.ACTIVE);
-        dan.setOrganisation(organisationService.getDefaultDanOrganisation());
         activityRepository.save(dan);
         importDanXmlQueue.setActivityId(dan.getId());
         importDanXmlQueue.setImportStatus(FINISH);

@@ -118,6 +118,9 @@ keycloak:
     read-timeout: 10
     connection-timeout: 10
 
+nominatim:
+  url: https://nominatim.openstreetmap.org/search.php
+
 ui-config:
   api-url: '/app/api/v1'
   context-path: '/'
