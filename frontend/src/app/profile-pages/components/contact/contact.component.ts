@@ -6,6 +6,8 @@ import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ProfileUtilsService } from '../../services/profile-utils.service';
+import { MatomoTracker } from '@ngx-matomo/tracker';
+import { MatomoTagManagerService } from 'src/app/matomo-tm.service';
 
 @Component({
   selector: 'app-contact',
@@ -28,7 +30,9 @@ export class ContactComponent {
   constructor(
     public utils: UtilsService,
     public profileUtils: ProfileUtilsService,
-    private imgService: ImgService
+    private imgService: ImgService,
+    private tracker: MatomoTracker,
+    private tags: MatomoTagManagerService
   ) {}
 
   get contactImage(): string | null {

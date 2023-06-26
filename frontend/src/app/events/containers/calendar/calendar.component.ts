@@ -131,7 +131,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getActionDaysUrl(): string {
-    return this.lp.getDanUrl();
+    return this.lp.getDanUrl() + '#mitmachen';
   }
 
   groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
@@ -197,7 +197,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     const start = (filters['startDate'] as string) || '';
-    console.log('START');
     this.selected = start ? DateTime.fromISO(start) : DateTime.now();
     this.eventsService.loadAvailableEvents(this.selected);
     this.eventsService.triggerSearch();

@@ -107,7 +107,6 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
   }
 
   private updateFilters(): void {
-    console.log('Fitlers', this.filters);
     const f = { ...this.filters };
     if (!this.useFilter(SecondaryFilters.THEMATIC_FOCUS)) {
       delete f.thematicFocus;

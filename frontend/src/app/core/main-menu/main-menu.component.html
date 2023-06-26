@@ -6,6 +6,7 @@
         [url]="'/' + item.target"
         (routeClicked)="closeNavHandler()"
         [underline]="mobile"
+        [new]="!!item.new"
       >
         {{ item.name }}
       </app-menu-entry>

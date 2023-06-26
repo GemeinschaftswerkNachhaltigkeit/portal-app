@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 
 @Configuration
 public class GeneralConfiguration {
@@ -26,5 +27,10 @@ public class GeneralConfiguration {
     @Bean
     Random random() throws NoSuchAlgorithmException {
         return SecureRandom.getInstanceStrong();
+    }
+
+    @Bean
+    public MappingJackson2XmlHttpMessageConverter jaxbConverter() {
+        return new MappingJackson2XmlHttpMessageConverter();
     }
 }

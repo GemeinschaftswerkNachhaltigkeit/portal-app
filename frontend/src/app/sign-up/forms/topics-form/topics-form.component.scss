@@ -59,9 +59,20 @@ form {
   }
 }
 
+.online-checkbox-long {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   .address-row-1,
   .address-row-2 {
     flex-direction: row;
+  }
+
+  .online-checkbox-long {
+    display: block;
+  }
+  .online-checkbox-short {
+    display: none;
   }
 }

@@ -28,6 +28,13 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/wpgwn-app
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 25MB
+      location: ${java.io.tmpdir}
+      resolve-lazily: true
 
 springdoc:
   swagger-ui:
@@ -72,11 +79,17 @@ keycloak:
     connection-pool-size: 10
     read-timeout: 10
     connection-timeout: 10
+nominatim:
+  url: https://nominatim.openstreetmap.org/search.php
 
 feign:
   client:
     config:
       cms-client:
+        connectTimeout: 60000
+        readTimeout: 60000
+        loggerLevel: basic
+      nominatim-client:
         connectTimeout: 60000
         readTimeout: 60000
         loggerLevel: basic

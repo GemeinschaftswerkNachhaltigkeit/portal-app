@@ -22,9 +22,9 @@ public class PasswordGenerator {
                 .map(i -> random.nextInt(legalCharacter.length()))
                 .map(legalCharacter::charAt)
                 .collect(Collector.of(
-                    StringBuilder::new,
-                    StringBuilder::append,
-                    StringBuilder::append,
-                    StringBuilder::toString));
+                        StringBuilder::new,
+                        StringBuilder::append,
+                        StringBuilder::append,
+                        StringBuilder::toString));
     }
 }

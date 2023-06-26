@@ -41,8 +41,11 @@
     formControlName="online"
     *ngIf="isLocationRequired === false"
   >
-    <span>
+    <span class="online-checkbox-long">
       {{ 'forms.labels.onlineLocation' | translate }}
+    </span>
+    <span class="online-checkbox-short">
+      {{ 'forms.labels.online' | translate }}
     </span>
   </mat-checkbox>
 
