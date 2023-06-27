@@ -4,6 +4,9 @@ public enum Source {
 
     LANDING_PAGE,
     WEB_APP,
+
+    DAN_XML,
+
     IMPORT;
 
 }

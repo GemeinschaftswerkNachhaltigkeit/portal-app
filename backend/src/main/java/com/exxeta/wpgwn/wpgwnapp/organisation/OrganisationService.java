@@ -52,6 +52,10 @@ public class OrganisationService {
         return getOrganisation(orgId);
     }
 
+    public Organisation getDefaultDanOrganisation() {
+        return getOrganisation(wpgwnProperties.getDanId());
+    }
+
     public long getDanOrganisationId(OAuth2AuthenticatedPrincipal principal) {
         Long userOrgId = PrincipalMapper.getUserOrgId(principal);
         return isNull(userOrgId) ? wpgwnProperties.getDanId() : userOrgId;
