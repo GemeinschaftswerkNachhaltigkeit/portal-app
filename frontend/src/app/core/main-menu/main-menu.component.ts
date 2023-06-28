@@ -2,7 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/auth/models/user';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
-import { NavContentService } from '../services/nav-content.service';
+import {
+  NavContentService,
+  NavItemContent
+} from '../services/nav-content.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -32,6 +35,14 @@ export class MainMenuComponent implements OnInit {
 
   closeNavHandler(): void {
     this.closeNav.emit();
+  }
+
+  getUrl(item: NavItemContent): string {
+    if (item.lp) {
+      return this.lpService.getBaseUrl() + '/' + (item.target || item.slug);
+    } else {
+      return '/' + item.target;
+    }
   }
 
   ngOnInit(): void {

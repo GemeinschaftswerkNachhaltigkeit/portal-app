@@ -11,8 +11,10 @@ export type NavigationContent = {
 export type NavItemContent = {
   name: string;
   target?: string;
+  slug?: string;
   new?: boolean;
   key?: string;
+  lp?: boolean;
   submenu?: NavItemContent[];
 };
 

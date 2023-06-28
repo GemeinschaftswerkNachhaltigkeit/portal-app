@@ -3,10 +3,11 @@
     <ng-container *ngFor="let item of navContent">
       <app-menu-entry
         *ngIf="!item.submenu"
-        [url]="'/' + item.target"
+        [url]="getUrl(item)"
         (routeClicked)="closeNavHandler()"
         [underline]="mobile"
         [new]="!!item.new"
+        [internal]="!item.lp"
       >
         {{ item.name }}
       </app-menu-entry>
@@ -15,7 +16,7 @@
           <div *ngFor="let subitem of item.submenu">
             <app-menu-entry
               [internal]="false"
-              [url]="lpService.getBaseUrl() + '/' + subitem.target"
+              [url]="getUrl(subitem)"
               [underline]="true"
               [blue]="true"
             >
@@ -29,7 +30,7 @@
           <div *ngFor="let subitem of item.submenu">
             <app-menu-entry
               [internal]="false"
-              [url]="lpService.getBaseUrl() + '/' + subitem.target"
+              [url]="getUrl(subitem)"
               [underline]="true"
               [blue]="true"
             >
