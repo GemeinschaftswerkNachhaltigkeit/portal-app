@@ -151,6 +151,7 @@
 
         &.noImage {
           left: 0;
+          grid-template-columns: 1fr;
         }
 
         .image {
