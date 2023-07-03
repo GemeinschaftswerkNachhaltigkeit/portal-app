@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.api.controller;
 
 import javax.annotation.security.RolesAllowed;
+import java.util.List;
 
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
 import com.exxeta.wpgwn.wpgwnapp.api.dto.ApiActivityResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.api.mapper.ApiActivityMapper;
 import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -49,10 +51,39 @@ public class ApiActivitiesController {
             @ApiResponse(responseCode = "401", description = "Authorization header is missing or api key is invalid")
     })
     @GetMapping
-    Page<ApiActivityResponseDto> findActivitiesForOrganisation(@ParameterObject Pageable pageable) {
-        return activityRepository.findAll(pageable)
+    Page<ApiActivityResponseDto> findActivities(@ParameterObject Pageable pageable) {
+        return findActivitiesByType(List.of(ActivityType.EVENT, ActivityType.DAN), pageable);
+    }
+
+    @Operation(summary = "Get a page of event.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found events",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiActivityResponseDto.class))}),
+            @ApiResponse(responseCode = "401", description = "Authorization header is missing or api key is invalid")
+    })
+    @GetMapping("/events")
+    Page<ApiActivityResponseDto> findEvents(@ParameterObject Pageable pageable) {
+        return findActivitiesByType(List.of(ActivityType.EVENT), pageable);
+    }
+
+    @Operation(summary = "Get a page of dan.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found dans",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ApiActivityResponseDto.class))}),
+            @ApiResponse(responseCode = "401", description = "Authorization header is missing or api key is invalid")
+    })
+    @GetMapping("/dans")
+    Page<ApiActivityResponseDto> findDans(@ParameterObject Pageable pageable) {
+        return findActivitiesByType(List.of(ActivityType.DAN), pageable);
+    }
+
+    private Page<ApiActivityResponseDto> findActivitiesByType(List<ActivityType> defaultTypes, Pageable pageable) {
+        return activityRepository.findAllInActivityTypes(defaultTypes, pageable)
                 .map(activityMapper::activityToDto);
     }
+
 
 }
 
