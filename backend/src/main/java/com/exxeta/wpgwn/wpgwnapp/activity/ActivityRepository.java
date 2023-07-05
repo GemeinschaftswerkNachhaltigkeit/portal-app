@@ -1,8 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import java.time.Instant;
-import java.util.List;
-
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity.projection.ClusteredActivity;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
 
 import org.springframework.data.domain.Page;
@@ -11,10 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
+import org.springframework.data.repository.query.Param;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity.projection.ClusteredActivity;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import java.time.Instant;
+import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Activity, Long>,
         RevisionRepository<Activity, Long, Long>,
@@ -28,6 +29,19 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
             + "WHERE coordinate && ST_MakeEnvelope(:envelope)", nativeQuery = true)
     Page<Activity> findAllInEnvelope(List<Number> envelope, Pageable pageable);
 
+
+    @Query(value = "SELECT * "
+            + "FROM activity "
+            + "WHERE activity_type IN (:activityTypes)", nativeQuery = true)
+    Page<Activity> findAllInActivityTypes(@Param("activityTypes") List<ActivityType> activityTypes,
+                                          Pageable pageable);
+
+    @Query(value = "SELECT * "
+            + "FROM activity "
+            + "WHERE activity_type IN (:activityTypes) AND organisation_id =:organisationId", nativeQuery = true)
+    Page<Activity> findAllInActivityTypesAndByOrganisationId(@Param("activityTypes") List<ActivityType> activityTypes,
+                                                             @Param("organisationId") Long organisationId,
+                                                             Pageable pageable);
 
     @Query(value = "SELECT st_astext(ST_Centroid(ST_Collect(geom))) as coordinate,"
             + "        count(clstr_id) as number_points,"
@@ -45,5 +59,7 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
 
     List<Activity> findByPeriodStartBetween(Instant start, Instant end);
 
+
     Activity findActivityByExternalIdAndSource(String externalId, Source source);
+
 }

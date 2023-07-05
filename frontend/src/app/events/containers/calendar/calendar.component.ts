@@ -174,6 +174,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   clearAll(): void {
+    this.searchControl.setValue({ query: '', location: '' });
     this.eventsService.reset();
   }
 
