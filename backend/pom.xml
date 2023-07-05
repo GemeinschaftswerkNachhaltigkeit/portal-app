@@ -51,7 +51,7 @@
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- END: Update vulnerable dependencies -->
 
-        <node.version>v18.16.1</node.version>
+        <node.version>v18.11.0</node.version>
         <npm.version>8.19.2</npm.version>
     </properties>
 
