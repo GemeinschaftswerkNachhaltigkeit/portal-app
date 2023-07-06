@@ -11,7 +11,7 @@
 
     <groupId>com.exxeta.wpgwn</groupId>
     <artifactId>wpgwn-app</artifactId>
-    <version>1.22.8</version>
+    <version>1.25.0</version>
     <name>wpgwn-app</name>
     <description>Wpgwn App</description>
 
@@ -51,7 +51,7 @@
         <snakeyaml.version>1.33</snakeyaml.version>
         <!-- END: Update vulnerable dependencies -->
 
-        <node.version>v18.11.0</node.version>
+        <node.version>v18.12.1</node.version>
         <npm.version>8.19.2</npm.version>
     </properties>
 
@@ -296,6 +296,17 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <argLine>-Xmx4096m -XX:MaxPermSize=2048m</argLine>
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -469,7 +480,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>1.13.4</version>
 
                 <executions>
                     <execution>
