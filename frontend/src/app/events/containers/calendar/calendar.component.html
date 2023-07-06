@@ -97,10 +97,10 @@
           <span>{{ 'btn.addNewEvent' | translate }}</span>
         </div>
       </button>
-      <a
+      <button
         mat-flat-button
         class="dan-button action"
-        [href]="getActionDaysUrl()"
+        (click)="handleNewActionDay()"
         target="_blank"
       >
         <div class="action-content">
@@ -108,7 +108,7 @@
           <span>{{ 'btn.toDan' | translate }}</span>
           <app-new-badge></app-new-badge>
         </div>
-      </a>
+      </button>
     </div>
   </ng-container>
 </ng-template>

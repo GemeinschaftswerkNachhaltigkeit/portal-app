@@ -20,6 +20,8 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { DateTime } from 'luxon';
 import { RegisterOrLoginService } from 'src/app/core/services/register-or-login.service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +48,9 @@ export class EventsService {
     private persistFilters: PersistFiltersService,
     private registerOrLogin: RegisterOrLoginService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private feature: FeatureService,
+    private lp: LandingpageService
   ) {
     this.triggerSearchOnQueryParamsChange();
     this.triggerNewEventRedirect();
@@ -175,6 +179,14 @@ export class EventsService {
         subtitle: this.translate.instant('events.texts.addLoginModal'),
         next: `${this.router.url}?add=true`
       });
+    }
+  }
+
+  addNewAction(): void {
+    if (this.auth.isLoggedIn() && this.feature.showSync('dan-account')) {
+      this.router.navigate(['/', 'account', 'dan-activities']);
+    } else {
+      window.open(this.lp.getDanUrl() + '#mitmachen', '_blank');
     }
   }
 
