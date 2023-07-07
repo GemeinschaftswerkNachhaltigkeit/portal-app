@@ -7,11 +7,7 @@ import { CoreModule } from './core/core.module';
 import { ExampleComponent } from './example/example.component';
 import { AuthModule } from './auth/auth.module';
 import { authConfig, restrictedUrls } from './app-auth.config';
-import {
-  MatomoConsentMode,
-  NgxMatomoTrackerModule,
-  createDefaultMatomoScriptElement
-} from '@ngx-matomo/tracker';
+import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { environment } from 'src/environments/environment';
 import {

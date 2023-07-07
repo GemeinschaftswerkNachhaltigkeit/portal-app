@@ -88,6 +88,26 @@ export class EventsService {
     return this.eventsState.asObservable();
   }
 
+  get groupedEvents$(): Observable<{ group: string; list: EventDto[] }[]> {
+    return this.eventsState.asObservable().pipe(
+      map((events) => {
+        const groups: { [date: string]: EventDto[] } = {};
+        events.forEach((e) => {
+          const start = e.period?.start || 'undefined';
+
+          if (!groups[start]) groups[start] = [];
+          groups[start].push(e);
+        });
+        return Object.entries(groups).map((e) => {
+          return {
+            group: e[0],
+            list: e[1]
+          };
+        });
+      })
+    );
+  }
+
   get eventsPaging$(): Observable<Paging> {
     return this.pagedEventsState.asObservable().pipe(
       map((response) => ({
