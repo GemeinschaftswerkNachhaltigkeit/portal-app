@@ -8,7 +8,6 @@ import {
   ViewChild
 } from '@angular/core';
 import { EventsService } from '../../data/events.service';
-import EventDto from '../../models/event-dto';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
@@ -36,6 +35,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   unsubscribe$ = new Subject();
 
   events$ = this.eventsService.events$;
+  groups$ = this.eventsService.groupedEvents$;
   availableEvents$ = this.eventsService.availableEvents$;
   paging$ = this.eventsService.eventsPaging$;
   loading$ = this.loader.isLoading$();
@@ -132,17 +132,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleNewActionDay(): void {
     this.eventsService.addNewAction();
-  }
-
-  groupEventsByDate(events: EventDto[]): [string, EventDto[]][] {
-    const groups: { [date: string]: EventDto[] } = {};
-    events.forEach((e) => {
-      const start = e.period?.start || 'undefined';
-
-      if (!groups[start]) groups[start] = [];
-      groups[start].push(e);
-    });
-    return Object.entries(groups);
   }
 
   isPermanent(): boolean {
