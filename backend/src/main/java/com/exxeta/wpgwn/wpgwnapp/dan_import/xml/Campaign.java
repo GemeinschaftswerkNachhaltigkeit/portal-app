@@ -8,6 +8,7 @@ import lombok.*;
 import java.time.Instant;
 
 import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_TIME_ZONE;
+import static com.exxeta.wpgwn.wpgwnapp.dan_import.utils.HtmlTagRemover.removeHtmlTags;
 import static java.util.Objects.nonNull;
 import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
 import static org.springframework.util.StringUtils.hasText;
@@ -73,7 +74,7 @@ public class Campaign {
                 + "category:" + category
                 + "venue:" + venue
                 + "name:" + name
-                + "detailtext:" + detailText
+                + "detailtext:" + removeHtmlTags(detailText)
                 + "organizer:" + organizer
                 + "organizer_email:" + organizerEmail
                 + "organizer_website:" + organizerWebsite
