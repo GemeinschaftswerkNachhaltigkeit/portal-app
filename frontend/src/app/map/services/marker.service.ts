@@ -3,11 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
-import {
-  InternalMapFacade,
-  EmbeddedMapFacade,
-  SharedMapFacade
-} from '../map-facade.service';
+import { SharedMapFacade } from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';

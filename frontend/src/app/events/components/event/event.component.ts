@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import EventDto from '../../models/event-dto';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-event',
