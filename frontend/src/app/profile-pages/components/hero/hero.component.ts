@@ -23,8 +23,4 @@ export class HeroComponent {
   @Input() isExpired = false;
 
   constructor(public utils: UtilsService, private imgService: ImgService) {}
-
-  get bgImage(): string | null {
-    return this.imgService.url(this.bgImageName);
-  }
 }
