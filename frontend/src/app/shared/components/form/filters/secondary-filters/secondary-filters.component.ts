@@ -10,7 +10,6 @@ import {
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { AdditionalFiltersData } from '../additional-filters-modal/additional-filters-modal.component';
 import { SpecialOrgaFilters } from '../special-orgas-filter/special-orgas-filter.component';
-import { MatLegacySlideToggleChange } from '@angular/material/legacy-slide-toggle';
 
 export enum SecondaryFilters {
   THEMATIC_FOCUS = 'THEMATIC_FOCUS',
