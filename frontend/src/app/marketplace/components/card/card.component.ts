@@ -7,6 +7,7 @@ import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { MarketplaceTypes } from '../../models/marketplace-type';
+import Organisation from 'src/app/shared/models/organisation';
 
 @Component({
   selector: 'app-card',
@@ -20,6 +21,7 @@ export class CardComponent {
   @Input() location?: LocationData;
   @Input() thematicFocus: ThematicFocus[] = [];
   @Input() type?: MarketplaceTypes;
+  @Input() orga?: Organisation;
   @Input() category = '';
   @Input() showActions? = true;
   @Input() clickable? = true;

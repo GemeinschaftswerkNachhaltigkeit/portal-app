@@ -53,6 +53,7 @@
               [location]="featuredItem.location"
               [thematicFocus]="featuredItem.thematicFocus"
               [showActions]="false"
+              [orga]="featuredItem.organisation"
               (cardClicked)="open(featuredItem.id)"
             ></app-card>
           </ng-container>
@@ -72,6 +73,7 @@
               [location]="item.location"
               [thematicFocus]="item.thematicFocus"
               [showActions]="false"
+              [orga]="item.organisation"
               (cardClicked)="open(item.id)"
             ></app-card>
           </ng-container>
