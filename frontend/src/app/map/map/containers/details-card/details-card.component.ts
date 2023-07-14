@@ -54,8 +54,8 @@ export class DetailsCardComponent implements OnInit {
     private imgService: ImgService
   ) {}
 
-  get bgImage(): string | null {
-    return this.imgService.url(this.currentResult?.image);
+  get bgImage(): string | undefined {
+    return this.currentResult?.image;
   }
 
   getActivityType(currentResult: SearchResult): string {

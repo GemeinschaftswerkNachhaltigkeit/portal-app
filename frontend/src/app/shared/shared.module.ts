@@ -91,6 +91,7 @@ import { WizardSidebarLayoutComponent } from './components/wizard/wizard-sidebar
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
 import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
+import { ImageComponent } from './components/image/image.component';
 
 @NgModule({
   declarations: [
@@ -167,7 +168,8 @@ import { OnlineFilterComponent } from './components/form/filters/online-filter/o
     FormStepDescriptionComponent,
     UploadImageComponent,
     WizardSidebarLayoutComponent,
-    OnlineFilterComponent
+    OnlineFilterComponent,
+    ImageComponent
   ],
   imports: [
     CommonModule,
@@ -254,7 +256,8 @@ import { OnlineFilterComponent } from './components/form/filters/online-filter/o
     FormStepDescriptionComponent,
     UploadImageComponent,
     WizardSidebarLayoutComponent,
-    AddressControlsComponent
+    AddressControlsComponent,
+    ImageComponent
   ]
 })
 export class SharedModule {}

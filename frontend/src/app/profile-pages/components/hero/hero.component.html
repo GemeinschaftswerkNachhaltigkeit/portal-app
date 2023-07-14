@@ -1,7 +1,9 @@
 <header class="header">
   <div class="expiredOverlay" *ngIf="isExpired"></div>
 
-  <img [src]="bgImage" alt="header" *ngIf="bgImage" />
+  <div class="img">
+    <app-image [src]="bgImageName" alt="header" *ngIf="bgImageName" />
+  </div>
   <div class="expiredBadge" *ngIf="isExpired">
     <app-expired-badge [dan]="dan"></app-expired-badge>
   </div>

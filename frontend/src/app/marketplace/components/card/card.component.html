@@ -68,6 +68,9 @@
       <div class="thematicFocuses" *ngIf="thematicFocus?.length">
         {{ getFormattedThematicFocus() }}
       </div>
+      <div *ngIf="orga" class="orga">
+        <a [routerLink]="['/', 'organisations', orga.id]">{{ orga.name }}</a>
+      </div>
     </div>
   </div>
 </div>
