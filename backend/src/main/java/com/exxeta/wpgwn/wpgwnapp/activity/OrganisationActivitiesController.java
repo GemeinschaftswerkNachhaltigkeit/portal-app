@@ -14,6 +14,7 @@ import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationValidator;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 
 import com.querydsl.core.types.Predicate;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,14 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityNotFoundException;
@@ -68,6 +62,7 @@ public class OrganisationActivitiesController {
     @GetMapping
     Page<ActivityResponseDto> findActivitiesForOrganisation(@PathVariable("orgId") Long orgId, Pageable pageable) {
         Predicate predicate = QActivity.activity.organisation.id.eq(orgId)
+                .and(QActivity.activity.status.eq(ItemStatus.ACTIVE))
                 .and(QActivity.activity.activityType.ne(ActivityType.DAN).or(QActivity.activity.activityType.isNull()));
         return activityService.findByPredicate(predicate, pageable)
                 .map(activityMapper::activityToDto);

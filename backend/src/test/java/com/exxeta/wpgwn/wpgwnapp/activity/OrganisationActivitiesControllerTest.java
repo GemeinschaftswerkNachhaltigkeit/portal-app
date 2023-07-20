@@ -73,6 +73,7 @@ class OrganisationActivitiesControllerTest {
 
         Activity activity = MockDataUtils.getActivity();
         activity.setOrganisation(organisation);
+        activity.setStatus(ItemStatus.ACTIVE);
         activityRepository.save(activity);
 
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
