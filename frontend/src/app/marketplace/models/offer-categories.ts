@@ -47,6 +47,11 @@ export enum OfferCategories {
   VOLUNTEERING = 'VOLUNTEERING',
 
   /**
+   * Netzwerk
+   */
+  NETWORK ='NETWORK',
+
+  /**
    * Sonstiges
    */
   OTHER = 'OTHER'
