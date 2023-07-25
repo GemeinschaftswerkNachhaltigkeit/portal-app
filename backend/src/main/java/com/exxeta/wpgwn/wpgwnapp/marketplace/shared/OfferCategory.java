@@ -63,6 +63,11 @@ public enum OfferCategory implements SearchableEnum {
     OTHER("Sonstiges"),
 
     /**
+     * Netzwerk
+     */
+    NETWORK("Netzwerk"),
+
+    /**
      * Projekt Nachhaltigkeit
      */
     PROJECT_SUSTAINABILITY("Projekt Nachhaltigkeit");
