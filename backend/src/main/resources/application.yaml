@@ -73,6 +73,8 @@ wpgwn:
     marketplace:
       max-offers: 10
       max-best-practises: 10
+    dan:
+      max-dans: 50
 keycloak:
   admin:
     admin-realm: master

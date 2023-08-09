@@ -126,7 +126,8 @@ class OrganisationWorkInProgressPublishServiceTest {
                 new WpgwnProperties.Duplicate(0.7),
                 new WpgwnProperties.ContactInvite(Duration.of(42, ChronoUnit.DAYS)),
                 new WpgwnProperties.OrganisationMembership(Duration.of(42, ChronoUnit.DAYS), 12),
-                new WpgwnProperties.MarketplaceProperties(10, 10)
+                new WpgwnProperties.MarketplaceProperties(10, 10),
+                new WpgwnProperties.DanProperties(50)
         );
 
         MailProperties mailProperties = new MailProperties();

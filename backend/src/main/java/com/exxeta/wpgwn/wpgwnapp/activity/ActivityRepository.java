@@ -4,6 +4,7 @@ import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
 import com.exxeta.wpgwn.wpgwnapp.activity.projection.ClusteredActivity;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
@@ -61,5 +63,14 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
 
 
     Activity findActivityByExternalIdAndSource(String externalId, Source source);
+
+
+    @Transactional(readOnly = true)
+    long countActivitiesByActivityTypeAndStatusAndCreatedBy(ActivityType activityType, ItemStatus status,
+                                                            String createdBy);
+
+    @Transactional(readOnly = true)
+    long countActivitiesByActivityTypeAndStatusAndOrganisation(ActivityType activityType, ItemStatus status,
+                                                               Organisation organisation);
 
 }

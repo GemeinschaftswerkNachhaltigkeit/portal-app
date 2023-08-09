@@ -105,6 +105,11 @@ public class WpgwnProperties {
     @NotNull
     private final WpgwnProperties.MarketplaceProperties marketplace;
 
+    @Valid
+    @NestedConfigurationProperty
+    @NotNull
+    private final WpgwnProperties.DanProperties dan;
+
     @Value
     @Validated
     public static class ReminderEmail {
@@ -200,5 +205,14 @@ public class WpgwnProperties {
 
     }
 
+    @Value
+    @Validated
+    public static class DanProperties {
+
+        @NotNull
+        @PositiveOrZero
+        private final Integer maxDans;
+
+    }
 
 }
