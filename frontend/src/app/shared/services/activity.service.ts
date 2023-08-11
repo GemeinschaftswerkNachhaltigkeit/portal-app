@@ -141,13 +141,15 @@ export class ActivityService {
       this.activityUpdateStateSubject.next(null);
       return response;
     } catch (e) {
-      console.error('createActivityError', e);
       const error = e as HttpErrorResponse;
       if (error.status === 409) {
         this.feedback.showFeedback(
           this.translate.instant('error.itemLimit'),
           'error'
         );
+        if (dan) {
+          this.router.navigate(['/account/dan-activities']);
+        }
       } else {
         this.feedback.showFeedback(
           this.translate.instant('error.unknown'),

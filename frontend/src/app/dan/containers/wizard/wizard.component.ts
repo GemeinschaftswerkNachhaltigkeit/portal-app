@@ -330,6 +330,7 @@ export class WizardComponent implements OnDestroy {
                         this.isSubmissionSuccess = false;
                       }
                     })
+
                     .finally(() => this.loading.stop(loadingId));
                 });
             });
