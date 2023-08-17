@@ -20,14 +20,14 @@
               mat-flat-button
               color="accent"
               (click)="handleNew()"
-              [disabled]="(paging.totalElements || 0) >= 10"
+              [disabled]="(paging.totalElements || 0) >= 30"
             >
               {{ 'account.buttons.addBestPractice' | translate }}
             </button>
 
             <app-char-count
               [count]="paging.totalElements || 0"
-              [total]="10"
+              [total]="30"
             ></app-char-count>
           </ng-container>
         </div>
