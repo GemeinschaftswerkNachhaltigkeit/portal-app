@@ -36,7 +36,7 @@
     </div>
   </div>
   <aside class="aside" [ngClass]="{ disabled: isExpired() }">
-    <div class="image-wrapper">
+    <div class="image-wrapper" *ngIf="image">
       <div class="image" *ngIf="!sdgs">
         <img [src]="imgService.url(image)" [alt]="title" />
       </div>
