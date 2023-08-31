@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ItemStatusChangeDto;
 import com.exxeta.wpgwn.wpgwnapp.activity.event.ActivityDeleteEvent;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
@@ -59,6 +60,8 @@ public class OrganisationActivitiesController {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    private final DanRangeService danRangeService;
+
     @GetMapping
     Page<ActivityResponseDto> findActivitiesForOrganisation(@PathVariable("orgId") Long orgId,
                                                             @RequestParam(value = "includeDan", defaultValue = "false")
@@ -66,10 +69,17 @@ public class OrganisationActivitiesController {
                                                             Pageable pageable) {
         BooleanExpression predicateExpression = QActivity.activity.organisation.id.eq(orgId)
                 .and(QActivity.activity.status.eq(ItemStatus.ACTIVE));
-        if (includeDan) {
+        DanSetting danSetting = danRangeService.getDanSetting();
+        if (!includeDan || !danSetting.active()) {
             predicateExpression = predicateExpression
-                    .and(QActivity.activity.activityType.ne(ActivityType.DAN)
-                            .or(QActivity.activity.activityType.isNull()));
+                    .and(QActivity.activity.activityType.eq(ActivityType.EVENT));
+        } else {
+            BooleanExpression danPredicate =
+                    QActivity.activity.activityType.eq(ActivityType.DAN)
+                            .and(QActivity.activity.period.start.goe(danSetting.startMin()))
+                            .and(QActivity.activity.period.end.loe(danSetting.endMax()));
+            predicateExpression = predicateExpression
+                    .and(QActivity.activity.activityType.eq(ActivityType.EVENT).or(danPredicate));
         }
 
         return activityService.findByPredicate(predicateExpression, pageable)

@@ -1,13 +1,28 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import java.nio.charset.StandardCharsets;
+import com.exxeta.wpgwn.wpgwnapp.CmsClientConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressRepository;
+import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
+import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
+import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
+import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
+
+import lombok.RequiredArgsConstructor;
 
 import org.hamcrest.text.MatchesPattern;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
@@ -15,27 +30,14 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
-import lombok.RequiredArgsConstructor;
-
-import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressRepository;
-import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
-import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
+import java.nio.charset.StandardCharsets;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@Import({TestSecurityConfiguration.class})
+@Import({CmsClientConfiguration.class, TestSecurityConfiguration.class})
 @SpringBootTest
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
@@ -45,6 +47,13 @@ class OrganisationActivitiesControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private CmsClient cmsClient;
+
+    @Autowired
+    @Qualifier("cmsClientForTest")
+    private CmsClient cmsClientTest;
 
     @Autowired
     ResourceLoader resourceLoader;
@@ -74,8 +83,10 @@ class OrganisationActivitiesControllerTest {
         Activity activity = MockDataUtils.getActivity();
         activity.setOrganisation(organisation);
         activity.setStatus(ItemStatus.ACTIVE);
+        activity.setActivityType(ActivityType.EVENT);
         activityRepository.save(activity);
-
+        when(cmsClient.getFeatures())
+                .thenReturn(cmsClientTest.getFeatures());
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
                         "classpath:testsamples/organisation/activities/expected-organisation-activities-response.json")
                 .getInputStream(), StandardCharsets.UTF_8);
