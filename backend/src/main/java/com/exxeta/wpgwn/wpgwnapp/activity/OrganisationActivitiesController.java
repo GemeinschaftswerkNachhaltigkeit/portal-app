@@ -16,7 +16,7 @@ import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 
-import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import io.swagger.v3.oas.annotations.Parameter;
 
 import lombok.RequiredArgsConstructor;
@@ -60,11 +60,19 @@ public class OrganisationActivitiesController {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @GetMapping
-    Page<ActivityResponseDto> findActivitiesForOrganisation(@PathVariable("orgId") Long orgId, Pageable pageable) {
-        Predicate predicate = QActivity.activity.organisation.id.eq(orgId)
-                .and(QActivity.activity.status.eq(ItemStatus.ACTIVE))
-                .and(QActivity.activity.activityType.ne(ActivityType.DAN).or(QActivity.activity.activityType.isNull()));
-        return activityService.findByPredicate(predicate, pageable)
+    Page<ActivityResponseDto> findActivitiesForOrganisation(@PathVariable("orgId") Long orgId,
+                                                            @RequestParam(value = "includeDan", defaultValue = "false")
+                                                            Boolean includeDan,
+                                                            Pageable pageable) {
+        BooleanExpression predicateExpression = QActivity.activity.organisation.id.eq(orgId)
+                .and(QActivity.activity.status.eq(ItemStatus.ACTIVE));
+        if (includeDan) {
+            predicateExpression = predicateExpression
+                    .and(QActivity.activity.activityType.ne(ActivityType.DAN)
+                            .or(QActivity.activity.activityType.isNull()));
+        }
+
+        return activityService.findByPredicate(predicateExpression, pageable)
                 .map(activityMapper::activityToDto);
     }
 
