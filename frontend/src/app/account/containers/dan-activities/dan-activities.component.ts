@@ -39,7 +39,7 @@ export class DanActivitiesComponent implements OnInit {
   ) {}
 
   pageChangedHandler(event: PageEvent): void {
-    this.actiFacade.changePage(event.pageIndex, event.pageSize);
+    this.actiFacade.changePage(event.pageIndex, event.pageSize, true);
   }
   wipsPageChangedHandler(event: PageEvent): void {
     this.actiFacade.changeWipsPage(event.pageIndex, event.pageSize);

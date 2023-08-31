@@ -210,8 +210,12 @@ export class ActiFacadeService {
       });
   }
 
-  changePage(page: number, size: number): void {
-    this.loadActivitiesOfUser({ page: page, size: size });
+  changePage(page: number, size: number, dan = false): void {
+    const filters: DynamicFilters = { page: page, size: size };
+    if (dan) {
+      filters['dan'] = true;
+    }
+    this.loadActivitiesOfUser(filters);
   }
 
   changeWipsPage(page: number, size: number): void {
