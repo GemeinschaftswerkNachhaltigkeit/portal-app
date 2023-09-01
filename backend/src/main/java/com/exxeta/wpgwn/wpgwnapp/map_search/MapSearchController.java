@@ -228,6 +228,7 @@ public class MapSearchController {
                     orExpression =
                             orExpression == null ? activityTypePredicate : orExpression.or(activityTypePredicate);
                 }
+                orExpression.or(QMapSearchResult.mapSearchResult.activityType.isNull());
                 typePredicate.or(orExpression);
             }
         }
