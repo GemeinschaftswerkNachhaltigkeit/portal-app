@@ -418,6 +418,7 @@ class MapSearchControllerTest {
         String responseString = mockMvc.perform(get(BASE_API_URL)
                         .queryParam("activityTypes", ActivityType.EVENT.name())
                         .queryParam("activityTypes", ActivityType.OTHER.name())
+                        .queryParam("resultType", "ACTIVITY")
                         .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
@@ -440,6 +441,7 @@ class MapSearchControllerTest {
         MockHttpServletRequestBuilder getRequestBuilder = get(BASE_API_URL)
                 .queryParam("activityTypes", ActivityType.NETWORK.name(), ActivityType.OTHER.name())
                 .queryParam("organisationType", OrganisationType.EDUCATION.name(), OrganisationType.CULTURAL.name())
+                .queryParam("resultType", "ACTIVITY","ORGANISATION")
                 .contentType(MediaType.APPLICATION_JSON);
         MockHttpServletRequest getRequest =
                 getRequestBuilder.buildRequest(mockMvc.getDispatcherServlet().getServletContext());
@@ -456,14 +458,19 @@ class MapSearchControllerTest {
         log.info("requestActTypeAndOrgType: check result");
         // Use JsonPath to Check because cant create Page and MapSearchResultWrapperDto through ObjectMapper
         DocumentContext jsonResponse = JsonPath.parse(responseString);
-        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("7");
-        assertThat(jsonResponse.read("$['content'][6]['name']").toString()).isEqualTo("TEST_ORG_000");
-        assertThat(jsonResponse.read("$['content'][5]['name']").toString()).isEqualTo("TEST_ORG_001");
-        assertThat(jsonResponse.read("$['content'][4]['name']").toString()).isEqualTo("TEST_ORG_002");
-        assertThat(jsonResponse.read("$['content'][3]['name']").toString()).isEqualTo("TEST_ORG_003");
-        assertThat(jsonResponse.read("$['content'][2]['name']").toString()).isEqualTo("TEST_ACT_004");
-        assertThat(jsonResponse.read("$['content'][1]['name']").toString()).isEqualTo("TEST_ACT_005");
-        assertThat(jsonResponse.read("$['content'][0]['name']").toString()).isEqualTo("TEST_ORG_004");
+        assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("12");
+        assertThat(jsonResponse.read("$['content'][11]['name']").toString()).isEqualTo("TEST_ORG_000");
+        assertThat(jsonResponse.read("$['content'][10]['name']").toString()).isEqualTo("TEST_ORG_001");
+        assertThat(jsonResponse.read("$['content'][9]['name']").toString()).isEqualTo("TEST_ORG_002");
+        assertThat(jsonResponse.read("$['content'][8]['name']").toString()).isEqualTo("TEST_ORG_003");
+        assertThat(jsonResponse.read("$['content'][7]['name']").toString()).isEqualTo("TEST_ACT_004");
+        assertThat(jsonResponse.read("$['content'][6]['name']").toString()).isEqualTo("TEST_ACT_005");
+        assertThat(jsonResponse.read("$['content'][5]['name']").toString()).isEqualTo("TEST_ORG_004");
+        assertThat(jsonResponse.read("$['content'][4]['name']").toString()).isEqualTo("TEST_ORG_005");
+        assertThat(jsonResponse.read("$['content'][3]['name']").toString()).isEqualTo("TEST_ORG_006");
+        assertThat(jsonResponse.read("$['content'][2]['name']").toString()).isEqualTo("TEST_ORG_007");
+        assertThat(jsonResponse.read("$['content'][1]['name']").toString()).isEqualTo("TEST_ORG_008");
+        assertThat(jsonResponse.read("$['content'][0]['name']").toString()).isEqualTo("TEST_ORG_009");
     }
 
     @Test

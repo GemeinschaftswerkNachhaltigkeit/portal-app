@@ -216,7 +216,7 @@ public class MapSearchController {
 
             if (!CollectionUtils.isEmpty(activityTypes)) {
                 gotTypePredicate = true;
-                BooleanExpression orExpression = null;
+                BooleanExpression orExpression = QMapSearchResult.mapSearchResult.activityType.isNull();
                 for (ActivityType activityType : activityTypes) {
                     BooleanExpression activityTypePredicate =
                             QMapSearchResult.mapSearchResult.activityType.eq(activityType);
@@ -225,10 +225,8 @@ public class MapSearchController {
                                 .and(QMapSearchResult.mapSearchResult.period.start.goe(danSetting.startMin()))
                                 .and(QMapSearchResult.mapSearchResult.period.end.loe(danSetting.endMax()));
                     }
-                    orExpression =
-                            orExpression == null ? activityTypePredicate : orExpression.or(activityTypePredicate);
+                    orExpression = orExpression.or(activityTypePredicate);
                 }
-                orExpression.or(QMapSearchResult.mapSearchResult.activityType.isNull());
                 typePredicate.or(orExpression);
             }
         }
