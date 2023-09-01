@@ -13,7 +13,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent implements OnInit {
-  @Input() type: 'ACTIVITY' | 'BEST_PRACTICE' | 'OFFER' = 'ACTIVITY';
+  @Input() type: 'ACTIVITY' | 'BEST_PRACTICE' | 'OFFER' | 'DAN' = 'ACTIVITY';
   @Input() title = '';
   @Input() description = '';
   @Input() sdgs?: number[];
@@ -56,6 +56,9 @@ export class ListItemComponent implements OnInit {
     }
     if (this.type === 'ACTIVITY') {
       return this.catType.ACTIVITY;
+    }
+    if (this.type === 'DAN') {
+      return this.catType.DAN;
     }
     return this.catType.ACTIVITY;
   }
