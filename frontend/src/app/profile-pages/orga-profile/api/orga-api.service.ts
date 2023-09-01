@@ -39,7 +39,10 @@ export class OrgaApiService {
       .get<PagedResponse<Activity>>(
         `${environment.apiUrl}/organisations/${id}/activities`,
         {
-          params: paging
+          params: {
+            ...paging,
+            includeDan: true
+          }
         }
       )
       .pipe(
