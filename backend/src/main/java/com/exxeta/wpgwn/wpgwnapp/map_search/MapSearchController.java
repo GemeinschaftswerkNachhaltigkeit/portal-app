@@ -210,8 +210,9 @@ public class MapSearchController {
 
             DanSetting danSetting = danRangeService.getDanSetting();
 
-            if (activityTypes.contains(DAN) && !danSetting.active()) {
+            if (!danSetting.active()) {
                 activityTypes.remove(DAN);
+                searchPredicate.and(QMapSearchResult.mapSearchResult.resultType.ne(MapSearchResultType.DAN));
             }
 
             if (!CollectionUtils.isEmpty(activityTypes)) {
