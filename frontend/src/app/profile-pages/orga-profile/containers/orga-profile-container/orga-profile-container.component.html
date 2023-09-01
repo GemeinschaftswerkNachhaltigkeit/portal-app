@@ -145,6 +145,9 @@
                   >
                     <ng-container *ngFor="let activity of activities">
                       <app-list-item
+                        [type]="
+                          activity?.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
+                        "
                         [title]="activity.name || ''"
                         [description]="activity.description || ''"
                         [impactArea]="activity.impactArea"

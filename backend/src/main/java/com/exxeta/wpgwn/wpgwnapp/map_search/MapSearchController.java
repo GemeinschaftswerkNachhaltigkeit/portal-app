@@ -1,13 +1,26 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
+import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+
+import com.google.common.collect.Lists;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
+
+import lombok.RequiredArgsConstructor;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -22,26 +35,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
-
-import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
-import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
-
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
@@ -142,28 +143,55 @@ public class MapSearchController {
                                               Boolean projectSustainabilityWinner,
                                               Predicate mapSearchFilterPredicate) {
         final BooleanBuilder searchPredicate = new BooleanBuilder(mapSearchFilterPredicate);
-        if (Objects.nonNull(envelope)) {
 
+        buildCoordinatePredicate(searchPredicate, envelope, includeDataWithoutCoordinates);
+
+        buildLocationPredicate(searchPredicate, location);
+
+        buildTypePredicate(searchPredicate, organisationTypes, activityTypes);
+
+        buildQueryPredicate(searchPredicate, query);
+
+        buildExpiredActivitiesPredicate(searchPredicate, includeExpiredActivities);
+
+        buildSpecialOrganisationsPredicate(searchPredicate, initiator, projectSustainabilityWinner);
+
+        buildOnlinePredicate(searchPredicate, online);
+
+        buildPermanentPredicate(searchPredicate, permanent);
+
+        return searchPredicate;
+    }
+
+    private void buildCoordinatePredicate(BooleanBuilder searchPredicate, Envelope envelope,
+                                          boolean includeDataWithoutCoordinates) {
+        if (Objects.nonNull(envelope)) {
             BooleanExpression coordinateExpression = QMapSearchResult.mapSearchResult.location.coordinate
                     .within(factory.toGeometry(envelope));
             if (includeDataWithoutCoordinates) {
-                final BooleanExpression hasNoCoordinates =
-                        QMapSearchResult.mapSearchResult.location.coordinate.isNull();
-                coordinateExpression = coordinateExpression.or(hasNoCoordinates);
+                coordinateExpression =
+                        coordinateExpression.or(QMapSearchResult.mapSearchResult.location.coordinate.isNull());
             }
             searchPredicate.and(coordinateExpression);
         }
+    }
 
+    private void buildLocationPredicate(BooleanBuilder searchPredicate, String location) {
         if (StringUtils.hasText(location)) {
             // @formatter:off
             searchPredicate.and(
                     QMapSearchResult.mapSearchResult.location.address.street.containsIgnoreCase(location)
-                        .or(QMapSearchResult.mapSearchResult.location.address.city.containsIgnoreCase(location)
-                        .or(QMapSearchResult.mapSearchResult.location.address.zipCode.containsIgnoreCase(location)
-                        .or(QMapSearchResult.mapSearchResult.location.address.state.containsIgnoreCase(location))))
-                        .or(QMapSearchResult.mapSearchResult.location.address.country.containsIgnoreCase(location)));
+                            .or(QMapSearchResult.mapSearchResult.location.address.city.containsIgnoreCase(location)
+                                    .or(QMapSearchResult.mapSearchResult.location.address.zipCode.containsIgnoreCase(location)
+                                            .or(QMapSearchResult.mapSearchResult.location.address.state.containsIgnoreCase(location))))
+                            .or(QMapSearchResult.mapSearchResult.location.address.country.containsIgnoreCase(location)));
             // @formatter:on
         }
+    }
+
+    private void buildTypePredicate(BooleanBuilder searchPredicate, List<OrganisationType> organisationTypes,
+                                    List<ActivityType> activityTypes) {
+
 
         final BooleanBuilder typePredicate = new BooleanBuilder();
         boolean gotTypePredicate = false;
@@ -174,17 +202,22 @@ public class MapSearchController {
             );
         }
 
+        if (CollectionUtils.isEmpty(activityTypes)) {
+            activityTypes = Lists.newArrayList(DAN);
+        }
+
         if (!CollectionUtils.isEmpty(activityTypes)) {
 
             DanSetting danSetting = danRangeService.getDanSetting();
 
-            if (activityTypes.contains(DAN) && !danSetting.active()) {
+            if (!danSetting.active()) {
                 activityTypes.remove(DAN);
+                searchPredicate.and(QMapSearchResult.mapSearchResult.resultType.ne(MapSearchResultType.DAN));
             }
 
             if (!CollectionUtils.isEmpty(activityTypes)) {
                 gotTypePredicate = true;
-                BooleanExpression orExpression = null;
+                BooleanExpression orExpression = QMapSearchResult.mapSearchResult.activityType.isNull();
                 for (ActivityType activityType : activityTypes) {
                     BooleanExpression activityTypePredicate =
                             QMapSearchResult.mapSearchResult.activityType.eq(activityType);
@@ -193,8 +226,7 @@ public class MapSearchController {
                                 .and(QMapSearchResult.mapSearchResult.period.start.goe(danSetting.startMin()))
                                 .and(QMapSearchResult.mapSearchResult.period.end.loe(danSetting.endMax()));
                     }
-                    orExpression =
-                            orExpression == null ? activityTypePredicate : orExpression.or(activityTypePredicate);
+                    orExpression = orExpression.or(activityTypePredicate);
                 }
                 typePredicate.or(orExpression);
             }
@@ -203,7 +235,9 @@ public class MapSearchController {
         if (gotTypePredicate) {
             searchPredicate.and(typePredicate);
         }
+    }
 
+    private void buildQueryPredicate(BooleanBuilder searchPredicate, String query) {
         if (StringUtils.hasText(query)) {
             final String queryWithOr = String.join(" OR ", query.split(" "));
             BooleanExpression searchFieldsForQuery = inNameOrDescription(queryWithOr);
@@ -215,14 +249,19 @@ public class MapSearchController {
 
             searchPredicate.and(searchFieldsForQuery);
         }
+    }
 
+    private void buildExpiredActivitiesPredicate(BooleanBuilder searchPredicate, boolean includeExpiredActivities) {
         if (!includeExpiredActivities) {
             final Instant now = Instant.now(clock);
             searchPredicate.and(QMapSearchResult.mapSearchResult.period.isNull()
                     .or(QMapSearchResult.mapSearchResult.period.end.after(now)));
         }
+    }
 
-        final BooleanBuilder specialOrganisations = new BooleanBuilder();
+    private void buildSpecialOrganisationsPredicate(BooleanBuilder searchPredicate, Boolean initiator,
+                                                    Boolean projectSustainabilityWinner) {
+        BooleanBuilder specialOrganisations = new BooleanBuilder();
         if (Objects.nonNull(initiator)) {
             specialOrganisations.or(QMapSearchResult.mapSearchResult.initiator.eq(initiator));
         }
@@ -233,7 +272,9 @@ public class MapSearchController {
         if (specialOrganisations.hasValue()) {
             searchPredicate.and(specialOrganisations);
         }
+    }
 
+    private void buildOnlinePredicate(BooleanBuilder searchPredicate, Boolean online) {
         if (Objects.nonNull(online)) {
             if (online) {
                 searchPredicate.and(QMapSearchResult.mapSearchResult.location.online.eq(Boolean.TRUE));
@@ -242,7 +283,9 @@ public class MapSearchController {
                         .or(QMapSearchResult.mapSearchResult.location.online.eq(Boolean.FALSE)));
             }
         }
+    }
 
+    private void buildPermanentPredicate(BooleanBuilder searchPredicate, Boolean permanent) {
         if (Objects.nonNull(permanent)) {
             if (permanent) {
                 searchPredicate.and(
@@ -254,9 +297,8 @@ public class MapSearchController {
                                 .or(QMapSearchResult.mapSearchResult.period.end.ne(PERMANENT_END)));
             }
         }
-
-        return searchPredicate;
     }
+
 
     private BooleanExpression inNameOrDescription(String query) {
         // @formatter:off
