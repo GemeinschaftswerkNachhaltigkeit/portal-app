@@ -60,7 +60,7 @@ public class ApiOrganisationActivitiesController {
             @Parameter(description = "Id of the organisation") @PathVariable("orgId")
             Long orgId,
             @ParameterObject Pageable pageable) {
-        List<ActivityType> defaultTypes = List.of(ActivityType.EVENT, ActivityType.DAN);
+        List<String> defaultTypes = List.of(ActivityType.EVENT.name(), ActivityType.DAN.name());
         return activityRepository.findAllInActivityTypesAndByOrganisationId(defaultTypes, orgId, pageable)
                 .map(activityMapper::activityToDto);
     }

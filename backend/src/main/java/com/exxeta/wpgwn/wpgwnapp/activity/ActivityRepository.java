@@ -34,14 +34,14 @@ public interface ActivityRepository extends JpaRepository<Activity, Long>,
 
     @Query(value = "SELECT * "
             + "FROM activity "
-            + "WHERE activity_type IN (:activityTypes)", nativeQuery = true)
-    Page<Activity> findAllInActivityTypes(@Param("activityTypes") List<ActivityType> activityTypes,
+            + "WHERE  activity_type IN (:activityTypes)", nativeQuery = true)
+    Page<Activity> findAllInActivityTypes(@Param("activityTypes") List<String> activityTypes,
                                           Pageable pageable);
 
     @Query(value = "SELECT * "
             + "FROM activity "
             + "WHERE activity_type IN (:activityTypes) AND organisation_id =:organisationId", nativeQuery = true)
-    Page<Activity> findAllInActivityTypesAndByOrganisationId(@Param("activityTypes") List<ActivityType> activityTypes,
+    Page<Activity> findAllInActivityTypesAndByOrganisationId(@Param("activityTypes") List<String> activityTypes,
                                                              @Param("organisationId") Long organisationId,
                                                              Pageable pageable);
 
