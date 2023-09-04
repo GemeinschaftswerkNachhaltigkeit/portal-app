@@ -64,9 +64,7 @@ public class ApiActivitiesController {
     })
     @GetMapping("/events")
     Page<ApiActivityResponseDto> findEvents(@ParameterObject Pageable pageable) {
-        Page<ApiActivityResponseDto> activitiesByType = findActivitiesByType(List.of(ActivityType.EVENT.name()), pageable);
-        System.out.println(activitiesByType);
-        return activitiesByType;
+        return findActivitiesByType(List.of(ActivityType.EVENT.name()), pageable);
     }
 
     @Operation(summary = "Get a page of dan.")
