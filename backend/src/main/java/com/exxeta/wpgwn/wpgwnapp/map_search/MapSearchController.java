@@ -47,6 +47,7 @@ import java.util.stream.Collectors;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
+import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.EVENT;
 
 @RestController
 @RequestMapping("/api/v1/search")
@@ -199,11 +200,14 @@ public class MapSearchController {
             gotTypePredicate = true;
             typePredicate.or(
                     QMapSearchResult.mapSearchResult.organisationType.in(organisationTypes)
+                            .and(QMapSearchResult.mapSearchResult.activityType.isNull())
             );
+        } else {
+            typePredicate.or(QMapSearchResult.mapSearchResult.activityType.isNull());
         }
 
         if (CollectionUtils.isEmpty(activityTypes)) {
-            activityTypes = Lists.newArrayList(DAN);
+            activityTypes = Lists.newArrayList(DAN, EVENT);
         }
 
         if (!CollectionUtils.isEmpty(activityTypes)) {
@@ -217,7 +221,7 @@ public class MapSearchController {
 
             if (!CollectionUtils.isEmpty(activityTypes)) {
                 gotTypePredicate = true;
-                BooleanExpression orExpression = QMapSearchResult.mapSearchResult.activityType.isNull();
+                BooleanExpression orExpression = null;
                 for (ActivityType activityType : activityTypes) {
                     BooleanExpression activityTypePredicate =
                             QMapSearchResult.mapSearchResult.activityType.eq(activityType);
@@ -226,7 +230,8 @@ public class MapSearchController {
                                 .and(QMapSearchResult.mapSearchResult.period.start.goe(danSetting.startMin()))
                                 .and(QMapSearchResult.mapSearchResult.period.end.loe(danSetting.endMax()));
                     }
-                    orExpression = orExpression.or(activityTypePredicate);
+                    orExpression =
+                            orExpression == null ? activityTypePredicate : orExpression.or(activityTypePredicate);
                 }
                 typePredicate.or(orExpression);
             }

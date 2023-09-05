@@ -1,9 +1,11 @@
 package com.exxeta.wpgwn.wpgwnapp;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 
 import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +21,9 @@ import static com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService.DAN_RANGE_KEY;
 
 @TestConfiguration
 public class CmsClientConfiguration {
+
+    @Autowired
+    private Clock clock;
 
     @Bean
     @Qualifier("cmsClientForTest")
@@ -49,12 +54,12 @@ public class CmsClientConfiguration {
             public FeatureDataDto getFeatures() {
                 FeatureDto danAccount = FeatureDto.builder().feature(DAN_ACCOUNT_KEY)
                         .active(true)
-                        .start(LocalDateTime.now().minusYears(1))
-                        .end(LocalDateTime.now().plusYears(1)).build();
+                        .start(LocalDateTime.now(clock).minusYears(1))
+                        .end(LocalDateTime.now(clock).plusYears(1)).build();
                 FeatureDto danRange = FeatureDto.builder().feature(DAN_RANGE_KEY)
                         .active(true)
-                        .start(LocalDateTime.now().minusYears(1))
-                        .end(LocalDateTime.now().plusYears(1)).build();
+                        .start(LocalDateTime.now(clock).minusYears(1))
+                        .end(LocalDateTime.now(clock).plusYears(1)).build();
                 FeatureDataDto featureDataDto = new FeatureDataDto();
                 featureDataDto.setData(Lists.newArrayList(danAccount, danRange));
 

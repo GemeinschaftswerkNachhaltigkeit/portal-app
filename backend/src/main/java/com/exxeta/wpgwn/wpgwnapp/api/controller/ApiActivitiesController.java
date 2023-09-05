@@ -52,7 +52,7 @@ public class ApiActivitiesController {
     })
     @GetMapping
     Page<ApiActivityResponseDto> findActivities(@ParameterObject Pageable pageable) {
-        return findActivitiesByType(List.of(ActivityType.EVENT, ActivityType.DAN), pageable);
+        return findActivitiesByType(List.of(ActivityType.EVENT.name(), ActivityType.DAN.name()), pageable);
     }
 
     @Operation(summary = "Get a page of event.")
@@ -64,7 +64,7 @@ public class ApiActivitiesController {
     })
     @GetMapping("/events")
     Page<ApiActivityResponseDto> findEvents(@ParameterObject Pageable pageable) {
-        return findActivitiesByType(List.of(ActivityType.EVENT), pageable);
+        return findActivitiesByType(List.of(ActivityType.EVENT.name()), pageable);
     }
 
     @Operation(summary = "Get a page of dan.")
@@ -76,10 +76,10 @@ public class ApiActivitiesController {
     })
     @GetMapping("/dans")
     Page<ApiActivityResponseDto> findDans(@ParameterObject Pageable pageable) {
-        return findActivitiesByType(List.of(ActivityType.DAN), pageable);
+        return findActivitiesByType(List.of(ActivityType.DAN.name()), pageable);
     }
 
-    private Page<ApiActivityResponseDto> findActivitiesByType(List<ActivityType> defaultTypes, Pageable pageable) {
+    private Page<ApiActivityResponseDto> findActivitiesByType(List<String> defaultTypes, Pageable pageable) {
         return activityRepository.findAllInActivityTypes(defaultTypes, pageable)
                 .map(activityMapper::activityToDto);
     }
