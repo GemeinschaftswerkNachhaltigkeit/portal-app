@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 
 import lombok.Data;
@@ -48,6 +49,10 @@ public class ActivityWorkInProgressRequestDto implements Serializable {
 
     @Valid
     private final LocationDto location;
+
+    @URL
+    @Length(max = 1000)
+    private String registerUrl;
 
     private final Set<@NotNull @Valid SocialMediaContactDto> socialMediaContacts;
 

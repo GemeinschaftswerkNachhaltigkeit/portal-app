@@ -29,6 +29,7 @@ public class ActivityResponseDto implements Serializable {
     private final Set<ThematicFocusDto> thematicFocus;
     private final ActivityTypeDto activityType;
     private final String externalId;
+    private final String registerUrl;
     private final LocalDate approvedUntil;
     private final PeriodDto period;
     private final String logo;

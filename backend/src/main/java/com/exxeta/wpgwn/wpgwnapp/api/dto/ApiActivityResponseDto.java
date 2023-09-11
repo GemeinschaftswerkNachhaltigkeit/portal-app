@@ -60,6 +60,9 @@ public class ApiActivityResponseDto implements Serializable {
     @Schema(description = "External id of the activity, when it was imported from an external data source.", example = "eid1")
     private final String externalId;
 
+    @Schema(description = "register url of the activity")
+    private final String registerUrl;
+
     @Schema(description = "The period when this activity is active.")
     private final PeriodDto period;
 
