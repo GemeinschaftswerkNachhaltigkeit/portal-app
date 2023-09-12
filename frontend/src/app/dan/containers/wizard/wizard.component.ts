@@ -92,7 +92,8 @@ export class WizardComponent implements OnDestroy {
         description: fb.control('', [wysiwygContentRequired(100, 1500)]),
         start: fb.control('', [Validators.required]),
         end: fb.control('', [Validators.required]),
-        url: fb.control('', [Validators.maxLength(1000), urlPattern()])
+        url: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()])
       })
     });
     this.step2Form = fb.group({
@@ -188,7 +189,8 @@ export class WizardComponent implements OnDestroy {
         online: step2Values.topics.location === 'ONLINE',
         privateLocation: step2Values.topics.location === 'PRIVATE'
       },
-      contact: step3Values.contact
+      contact: step3Values.contact,
+      registerUrl: step1Values.masterData.registerUrl
     };
   }
 
@@ -200,7 +202,8 @@ export class WizardComponent implements OnDestroy {
         description: data.description,
         start: data.period?.start,
         end: data.period?.end,
-        url: data.location?.url
+        url: data.location?.url,
+        registerUrl: data.registerUrl
       }
     });
     this.step2Form.patchValue({

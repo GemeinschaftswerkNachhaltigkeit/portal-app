@@ -30,6 +30,7 @@ type Activity = {
     image: string;
   };
   isSubscribed?: boolean;
+  registerUrl?: string;
 };
 
 export default Activity;
