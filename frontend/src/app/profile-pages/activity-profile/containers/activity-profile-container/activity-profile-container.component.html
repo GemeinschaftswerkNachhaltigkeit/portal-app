@@ -77,6 +77,20 @@
           <app-html-wrapper
             [html]="activity.description || ''"
           ></app-html-wrapper>
+          <a
+            *ngIf="activity.registerUrl"
+            [href]="activity.registerUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            mat-flat-button
+            color="accent"
+            class="register-button"
+          >
+            <div class="register-button-content">
+              <div>{{ 'btn.registerUrlButton' | translate }}</div>
+              <mat-icon>launch</mat-icon>
+            </div>
+          </a>
         </app-section>
       </section>
       <section

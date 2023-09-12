@@ -31,3 +31,11 @@
   word-break: break-word;
   hyphens: auto;
 }
+.register-button {
+  margin-top: $spacing-4;
+}
+.register-button-content {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+}
