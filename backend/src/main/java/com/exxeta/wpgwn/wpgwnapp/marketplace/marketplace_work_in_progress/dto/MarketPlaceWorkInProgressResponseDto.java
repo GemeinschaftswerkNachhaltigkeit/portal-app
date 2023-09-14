@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto;
 
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -28,6 +29,7 @@ public class MarketPlaceWorkInProgressResponseDto {
     private Set<ThematicFocusDto> thematicFocus;
     private String image;
     private ContactDto contact;
+    private LocalDate endUntil;
     private UUID randomUniqueId;
     private Boolean featured;
     private String featuredText;
