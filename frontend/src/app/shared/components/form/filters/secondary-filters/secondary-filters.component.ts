@@ -21,7 +21,8 @@ export enum SecondaryFilters {
   BEST_PRACTICE_CATS = 'BEST_PRACTICE_CATS',
   ACTIVITY_PERIOD = 'ACTIVITY_PERIOD',
   SPECIAL_ORGAS = 'SPECIAL_ORGAS',
-  ONLINE = 'ONLINE'
+  ONLINE = 'ONLINE',
+  ONLY_DAN = 'ONLY_DAN'
 }
 
 @Component({
@@ -105,6 +106,11 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
     this.updateFilters();
   }
 
+  onlyDanHandler(checked: boolean): void {
+    this.filters.onlyDan = checked;
+    this.updateFilters();
+  }
+
   private updateFilters(): void {
     const f = { ...this.filters };
     if (!this.useFilter(SecondaryFilters.THEMATIC_FOCUS)) {
@@ -139,6 +145,10 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
     if (!this.useFilter(SecondaryFilters.ONLINE)) {
       delete f.online;
     }
+    if (!this.useFilter(SecondaryFilters.ONLY_DAN)) {
+      delete f.onlyDan;
+    }
+    console.log('Filters', f);
     this.filtersChanged.emit(f);
   }
 
@@ -156,7 +166,8 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
       initiator: this.data.initiator || false,
       projectSustainabilityWinner:
         this.data.projectSustainabilityWinner || false,
-      online: this.data.online || false
+      online: this.data.online || false,
+      onlyDan: this.data.onlyDan || false
     };
   }
 

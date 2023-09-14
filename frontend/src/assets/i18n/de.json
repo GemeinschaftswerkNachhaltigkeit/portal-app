@@ -126,6 +126,7 @@
   },
   "labels": {
     "onlyOnline": "Nur online?",
+    "onlyDan": "Nur Aktionstage?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",

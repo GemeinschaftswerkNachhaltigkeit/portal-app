@@ -125,6 +125,7 @@
   },
   "labels": {
     "onlyOnline": "Only online?",
+    "onlyDan": "Only action days?",
     "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",

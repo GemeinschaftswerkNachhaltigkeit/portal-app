@@ -46,6 +46,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   onlyOnlineControl = new FormControl(false);
   includedFilters: SecondaryFilters[] = [
     SecondaryFilters.ONLINE,
+    SecondaryFilters.ONLY_DAN,
     SecondaryFilters.THEMATIC_FOCUS
   ];
 
@@ -148,7 +149,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     return {
       use: this.includedFilters,
       selectedThematicFocusValues: filters['thematicFocus'],
-      online: filters['online']
+      online: filters['online'],
+      onlyDan: filters['onlyDan']
     };
   }
 
