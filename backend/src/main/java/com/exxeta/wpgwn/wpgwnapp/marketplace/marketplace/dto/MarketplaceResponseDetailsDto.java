@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.dto;
 
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public abstract class MarketplaceResponseDetailsDto {
     private String image;
     private ContactDto contact;
     private OrganisationDataDto organisation;
+    private LocalDate endUntil;
     private ItemStatus status;
     private Boolean featured;
     private String featuredText;

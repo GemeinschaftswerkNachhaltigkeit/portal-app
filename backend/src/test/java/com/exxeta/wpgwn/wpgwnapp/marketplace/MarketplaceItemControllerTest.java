@@ -3,6 +3,7 @@ package com.exxeta.wpgwn.wpgwnapp.marketplace;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.auditing.AuditingHandler;
 import org.springframework.data.auditing.DateTimeProvider;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
@@ -106,6 +108,7 @@ class MarketplaceItemControllerTest {
     void getOfferById() throws Exception {
 
         MarketplaceItem testMarketplaceItem = createTestOffer(organisation);
+        testMarketplaceItem.setEndUntil(LocalDate.now(clock));
         testMarketplaceItem = marketplaceRepository.save(testMarketplaceItem);
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
                         "classpath:testsamples/offer/expected-get-offer-by-id.json")

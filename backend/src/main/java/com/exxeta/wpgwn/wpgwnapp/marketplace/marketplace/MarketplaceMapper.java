@@ -107,6 +107,7 @@ public abstract class MarketplaceMapper {
     @Mapping(target = "image", ignore = true)
     @Mapping(target = "randomUniqueId", ignore = true)
     @Mapping(target = "randomIdGenerationTime", ignore = true)
+    @Mapping(target = "endUntil", ignore = true)
     @Mapping(target = "marketplaceType", constant = "BEST_PRACTISE")
     @Mapping(target = "locationWorkInProgress", source = "location")
     @Mapping(target = "contactWorkInProgress", source = "contact")
