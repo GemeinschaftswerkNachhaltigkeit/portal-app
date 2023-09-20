@@ -61,8 +61,10 @@ public class MarketplaceController {
             @RequestParam(value = "query", required = false) String query,
             @RequestParam(value = "bestPractiseCat", required = false) Set<BestPractiseCategory> bestPractiseCategories,
             @RequestParam(value = "offerCat", required = false) Set<OfferCategory> offerCategories,
-            @QuerydslPredicate(root = MarketplaceItem.class, bindings = MarketplaceBindingCustomizer.class) Predicate offerPredicate,
-            @PageableDefault(size = MARKETPLACE_PAGE_SIZE, sort = "modifiedAt", direction = Sort.Direction.DESC) Pageable pageable) {
+            @QuerydslPredicate(root = MarketplaceItem.class, bindings = MarketplaceBindingCustomizer.class)
+            Predicate offerPredicate,
+            @PageableDefault(size = MARKETPLACE_PAGE_SIZE, sort = "modifiedAt", direction = Sort.Direction.DESC)
+            Pageable pageable) {
 
         BooleanBuilder searchPredicate = new BooleanBuilder(offerPredicate)
                 .and(QMarketplaceItem.marketplaceItem.status.eq(ItemStatus.ACTIVE));

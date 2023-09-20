@@ -36,6 +36,22 @@ class ExcelImportServiceTest {
 
     private ResourceLoader resourceLoader;
 
+    public static Stream<Arguments> createReadExcelParams() {
+        ImportResultDto expectedResult1 = new ImportResultDto();
+        expectedResult1.setImportedOrganisations(2);
+        expectedResult1.setImportProcess(new ImportProcessDto(0L, ImportType.EXCEL, ImportSource.RNE, ""));
+
+        ImportResultDto expectedResult2 = new ImportResultDto();
+        expectedResult2.setImportedOrganisations(13);
+        expectedResult2.setImportProcess(new ImportProcessDto(0L, ImportType.EXCEL, ImportSource.RNE, ""));
+        return Stream.of(
+                Arguments.of(TEST_EXCEL_FILE_PATH_1, expectedResult1,
+                        new OrganisationWorkInProgress[] {ExcelImportTestHelper.getOrga1(),
+                                ExcelImportTestHelper.getOrga2()}),
+                Arguments.of(TEST_EXCEL_FILE_PATH_2, expectedResult2, new OrganisationWorkInProgress[0])
+        );
+    }
+
     @BeforeEach
     void setUp() {
         resourceLoader = new DefaultResourceLoader();
@@ -69,21 +85,5 @@ class ExcelImportServiceTest {
         for (int i = 0; i < expectedOrgs.length; i++) {
             ExcelImportTestHelper.compareOrganisationValues(expectedOrgs[i], result.get(i));
         }
-    }
-
-    public static Stream<Arguments> createReadExcelParams() {
-        ImportResultDto expectedResult1 = new ImportResultDto();
-        expectedResult1.setImportedOrganisations(2);
-        expectedResult1.setImportProcess(new ImportProcessDto(0L, ImportType.EXCEL, ImportSource.RNE, ""));
-
-        ImportResultDto expectedResult2 = new ImportResultDto();
-        expectedResult2.setImportedOrganisations(13);
-        expectedResult2.setImportProcess(new ImportProcessDto(0L, ImportType.EXCEL, ImportSource.RNE, ""));
-        return Stream.of(
-                Arguments.of(TEST_EXCEL_FILE_PATH_1, expectedResult1,
-                        new OrganisationWorkInProgress[] {ExcelImportTestHelper.getOrga1(),
-                                ExcelImportTestHelper.getOrga2()}),
-                Arguments.of(TEST_EXCEL_FILE_PATH_2, expectedResult2, new OrganisationWorkInProgress[0])
-        );
     }
 }

@@ -1,7 +1,11 @@
 {
   "name": "test@exxeta.com",
   "emailAddress": "test@exxeta.com",
-  "sustainabilityGoals": [1, 17, 5],
+  "sustainabilityGoals": [
+    1,
+    17,
+    5
+  ],
   "contribution": "exxeta test contribution",
   "privacyConsent": true
 }

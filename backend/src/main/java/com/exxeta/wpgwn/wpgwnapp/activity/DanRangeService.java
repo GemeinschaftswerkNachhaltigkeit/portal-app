@@ -5,8 +5,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
-
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
 import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
+import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
 import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDto;
 
 @Service
@@ -23,11 +22,9 @@ import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDto;
 @SuppressWarnings("MagicNumber")
 public class DanRangeService {
 
-    private final CmsClient cmsClient;
-
     public static final String DAN_ACCOUNT_KEY = "dan-account";
-
     public static final String DAN_RANGE_KEY = "dan-range";
+    private final CmsClient cmsClient;
     private final Clock clock;
 
     public void isDanAvailable() {

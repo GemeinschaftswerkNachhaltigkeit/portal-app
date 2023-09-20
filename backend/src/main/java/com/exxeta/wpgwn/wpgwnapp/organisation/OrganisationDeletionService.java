@@ -1,7 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation;
 
 import javax.validation.constraints.NotNull;
-
 import java.io.IOException;
 import java.util.Objects;
 

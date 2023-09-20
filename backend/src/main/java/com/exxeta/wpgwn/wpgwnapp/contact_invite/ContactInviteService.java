@@ -239,10 +239,10 @@ public class ContactInviteService {
     }
 
     /**
-     *  Kontakteinladung für Aktivitäten. Aktuell deaktiviert, sodass jede beliebige Kontaktperson ohne Zustimmung
-     *  eingetragen werden kann.
+     * Kontakteinladung für Aktivitäten. Aktuell deaktiviert, sodass jede beliebige Kontaktperson ohne Zustimmung
+     * eingetragen werden kann.
      * <p>
-     *  Wurde vom {@link com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressPublishService} aufgerufen.
+     * Wurde vom {@link com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressPublishService} aufgerufen.
      */
     public void handleContactInvite(Activity activity, UserRepresentation user) {
         /**

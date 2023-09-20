@@ -43,20 +43,23 @@ public class MarketplaceWorkInProgressService {
     }
 
     public Page<BestPractiseWorkInProgress> findBestPractiseItems(Long orgId, Pageable pageable) {
-        Predicate predicate = QMarketplaceWorkInProgress.marketplaceWorkInProgress.marketplaceType.eq(MarketplaceType.BEST_PRACTISE)
-                .and(QMarketplaceWorkInProgress.marketplaceWorkInProgress.organisation.id.eq(orgId));
+        Predicate predicate =
+                QMarketplaceWorkInProgress.marketplaceWorkInProgress.marketplaceType.eq(MarketplaceType.BEST_PRACTISE)
+                        .and(QMarketplaceWorkInProgress.marketplaceWorkInProgress.organisation.id.eq(orgId));
         return marketPlaceWorkInProgressRepository.findAll(predicate, pageable)
                 .map(item -> (BestPractiseWorkInProgress) item);
     }
 
     public Page<OfferWorkInProgress> findOfferWorkInProgressItems(Long orgId, Pageable pageable) {
-        Predicate predicate = QMarketplaceWorkInProgress.marketplaceWorkInProgress.marketplaceType.eq(MarketplaceType.OFFER)
-                .and(QMarketplaceWorkInProgress.marketplaceWorkInProgress.organisation.id.eq(orgId));
+        Predicate predicate =
+                QMarketplaceWorkInProgress.marketplaceWorkInProgress.marketplaceType.eq(MarketplaceType.OFFER)
+                        .and(QMarketplaceWorkInProgress.marketplaceWorkInProgress.organisation.id.eq(orgId));
         return marketPlaceWorkInProgressRepository.findAll(predicate, pageable)
                 .map(item -> (OfferWorkInProgress) item);
     }
 
-    public MarketplaceWorkInProgress saveOfferImage(MarketplaceWorkInProgress marketplaceWorkInProgress, MultipartFile file)
+    public MarketplaceWorkInProgress saveOfferImage(MarketplaceWorkInProgress marketplaceWorkInProgress,
+                                                    MultipartFile file)
             throws IOException {
         final String filename = fileStorageService.saveFile(file);
         final String image = marketplaceWorkInProgress.getImage();
@@ -79,7 +82,8 @@ public class MarketplaceWorkInProgressService {
      * @return
      * @throws IOException
      */
-    public MarketplaceWorkInProgress deleteOfferImage(MarketplaceWorkInProgress marketplaceWorkInProgress) throws IOException {
+    public MarketplaceWorkInProgress deleteOfferImage(MarketplaceWorkInProgress marketplaceWorkInProgress)
+            throws IOException {
         final String image = marketplaceWorkInProgress.getImage();
 
         if (!Objects.equals(Optional.of(marketplaceWorkInProgress)

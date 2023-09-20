@@ -26,36 +26,25 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
 @SuppressWarnings("MagicNumber")
 public class ActivityWorkInProgressRequestDto implements Serializable {
 
-    @Length(max = 200)
-    private String name;
-
-    @Length(max = 3000)
-    private String description;
-
-    private Set<@NotNull ThematicFocus> thematicFocus;
-
     @Valid
     private final Set<@NotNull @Positive Long> sustainableDevelopmentGoals;
-
     @Valid
     private final Set<@NotNull @Positive Long> subGoals;
-
     @Valid
     private final ContactDto contact;
-
     private final ImpactArea impactArea;
-
     private final ActivityTypeDto activityType;
-
     @Valid
     private final LocationDto location;
-
+    private final Set<@NotNull @Valid SocialMediaContactDto> socialMediaContacts;
+    @Length(max = 200)
+    private String name;
+    @Length(max = 3000)
+    private String description;
+    private Set<@NotNull ThematicFocus> thematicFocus;
     @URL
     @Length(max = 1000)
     private String registerUrl;
-
-    private final Set<@NotNull @Valid SocialMediaContactDto> socialMediaContacts;
-
     private PeriodDto period;
 
     private String category;

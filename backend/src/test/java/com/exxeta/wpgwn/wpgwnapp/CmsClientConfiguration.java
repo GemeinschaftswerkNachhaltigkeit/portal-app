@@ -3,8 +3,6 @@ package com.exxeta.wpgwn.wpgwnapp;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
-import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -12,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.exxeta.wpgwn.wpgwnapp.building_housing.dto.StationCmsDto;
 import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
+import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
 import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDto;
 
 import com.google.common.collect.Lists;

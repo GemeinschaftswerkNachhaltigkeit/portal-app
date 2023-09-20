@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
 
 public interface MapSearchResultRepository extends JpaRepository<MapSearchResult, String>,
-     QuerydslPredicateExecutor<MapSearchResult> {
+        QuerydslPredicateExecutor<MapSearchResult> {
 
     @Transactional
     @Modifying

@@ -27,7 +27,6 @@ public class BindingCustomizerUtils {
     }
 
     /**
-     *
      * Custom bindung to allow "and" and "or" conditions for collection elements
      * <pre>
      *           or:
@@ -37,7 +36,7 @@ public class BindingCustomizerUtils {
      *           and:
      *           thematicFocus == 1 AND thematicFocus == 2
      *           ?thematicFocus=1&thematicFocus=2
-     *</pre>
+     * </pre>
      */
     public <T extends Enum<T>> MultiValueBinding<SetPath<T, EnumPath<T>>, Set<T>> multiValueAndOrConditionsForEnum() {
         return (path, value) -> value.stream()
@@ -59,8 +58,8 @@ public class BindingCustomizerUtils {
      *     ?status=1&status=2
      * </pre>
      *
-     * @return
      * @param <T>
+     * @return
      */
     public <T extends Enum<T>> MultiValueBinding<EnumPath<T>, T> multiValueOrCondition() {
         return (path, value) -> value.stream()

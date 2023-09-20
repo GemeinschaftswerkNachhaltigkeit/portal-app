@@ -31,21 +31,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EmailOptOutTest {
 
     private static final String BASE_API_URL = "/api/v1/email/opt-out";
-
-    @Autowired
-    private Clock clock;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private EmailOptOutRepository emailOptOutRepository;
-
-    @Autowired
-    private EmailOptOutService emailOptOutService;
-
     private final String EMAIL_1 = "test.1@exxeta.com";
     private final String EMAIL_2 = "test.2@exxeta.com";
+    @Autowired
+    private Clock clock;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private EmailOptOutRepository emailOptOutRepository;
+    @Autowired
+    private EmailOptOutService emailOptOutService;
 
     @AfterEach
     public void tearDown() {
@@ -62,9 +57,9 @@ class EmailOptOutTest {
 
         // When
         mockMvc.perform(post(BASE_API_URL + "/{uuid}", optOutEntry.getRandomUniqueId())
-                .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
-                        EMAIL_1, EmailOptOutOption.COMPANY_WIP_CONSENT.name()))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
+                                EMAIL_1, EmailOptOutOption.COMPANY_WIP_CONSENT.name()))
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk());
@@ -86,9 +81,9 @@ class EmailOptOutTest {
 
         // When
         mockMvc.perform(post(BASE_API_URL + "/{uuid}", optOutEntry.getRandomUniqueId())
-                .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
-                        EMAIL_1, EmailOptOutOption.COMPANY_INVITE.name()))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
+                                EMAIL_1, EmailOptOutOption.COMPANY_INVITE.name()))
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk());
@@ -114,10 +109,10 @@ class EmailOptOutTest {
 
         // When
         mockMvc.perform(post(BASE_API_URL)
-                .with(token)
-                .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
-                        "should be ignored", EmailOptOutOption.COMPANY_WIP_CONSENT.name()))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .with(token)
+                        .content(String.format("{\"email\": \"%s\", \"emailOptOutOptions\": [\"%s\"]}",
+                                "should be ignored", EmailOptOutOption.COMPANY_WIP_CONSENT.name()))
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk());

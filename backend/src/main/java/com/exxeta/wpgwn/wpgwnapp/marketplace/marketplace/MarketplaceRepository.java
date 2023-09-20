@@ -22,7 +22,8 @@ public interface MarketplaceRepository extends JpaRepository<MarketplaceItem, Lo
     Page<MarketplaceItem> findAllByOrganisationIdIs(Long organisationId, Pageable pageable);
 
     @Transactional(readOnly = true)
-    long countMarketplaceItemsByOrganisationAndMarketplaceTypeAndStatus(Organisation organisation, MarketplaceType type, ItemStatus status);
+    long countMarketplaceItemsByOrganisationAndMarketplaceTypeAndStatus(Organisation organisation, MarketplaceType type,
+                                                                        ItemStatus status);
 
     @Transactional(readOnly = true)
     Stream<MarketplaceItem> findAllByOrganisation(Organisation organisation);

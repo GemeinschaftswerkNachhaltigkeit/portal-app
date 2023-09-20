@@ -116,7 +116,7 @@ public abstract class MarketplaceMapper {
     @Mapping(target = "featuredText", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     public abstract void updateBestPractise(BestPractiseWorkInProgressRequestDto offerRequest,
-                            @MappingTarget BestPractiseWorkInProgress bestPractiseWorkInProgress);
+                                            @MappingTarget BestPractiseWorkInProgress bestPractiseWorkInProgress);
 
     @Mapping(target = "location", source = "locationWorkInProgress")
     @Mapping(target = "contact", source = "contactWorkInProgress")

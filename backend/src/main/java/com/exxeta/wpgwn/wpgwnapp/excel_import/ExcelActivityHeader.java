@@ -51,7 +51,8 @@ public enum ExcelActivityHeader implements ExcelHeader {
         @Override
         public void setValueOfActivityWorkInProgress(ActivityWorkInProgress activityWorkInProgress, Cell cell) {
             try {
-                Set<ThematicFocus> thematicFocusSet = ExcelHeader.getThematicFocusSetFromValue(cell.getStringCellValue());
+                Set<ThematicFocus> thematicFocusSet =
+                        ExcelHeader.getThematicFocusSetFromValue(cell.getStringCellValue());
                 activityWorkInProgress.setThematicFocus(thematicFocusSet);
             } catch (Exception e) {
                 log.error("Error parsing [THEMATIC_FOCUS] value [{}]", cell.getStringCellValue());
@@ -274,12 +275,10 @@ public enum ExcelActivityHeader implements ExcelHeader {
         }
     };
 
+    private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory();
+    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
     private final String[] columnName;
     private final int columnIndex;
-
-    private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory();
-
-    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
 
     ExcelActivityHeader(int columnIndex, String... columnName) {
         this.columnName = columnName;
@@ -292,10 +291,14 @@ public enum ExcelActivityHeader implements ExcelHeader {
             return ActivityType.valueOf(value);
         } catch (IllegalArgumentException iae) {
             switch (value) {
-                case "NETZWERK": return ActivityType.NETWORK;
-                case "VERANSTALTUNG": return ActivityType.EVENT;
-                case "SONSTIGES": return ActivityType.OTHER;
-                default: throw iae;
+                case "NETZWERK":
+                    return ActivityType.NETWORK;
+                case "VERANSTALTUNG":
+                    return ActivityType.EVENT;
+                case "SONSTIGES":
+                    return ActivityType.OTHER;
+                default:
+                    throw iae;
             }
         }
     }

@@ -1,5 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.mapper;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 import com.exxeta.wpgwn.wpgwnapp.nominatim.NominatimService;
@@ -9,18 +21,6 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.locationtech.jts.geom.Coordinate;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.Point;
-import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;

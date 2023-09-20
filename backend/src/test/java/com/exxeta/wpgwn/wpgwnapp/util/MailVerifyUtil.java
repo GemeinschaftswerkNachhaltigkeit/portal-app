@@ -7,11 +7,9 @@ import javax.mail.Multipart;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +67,8 @@ public class MailVerifyUtil {
      * @throws IOException        wenn die Datei nicht gefunden werden kann
      * @throws MessagingException wenn beim Auslesen des Body-Teil Fehler auftreten
      */
-    public static void verifyAttachment(String expectedFilePath, String contentType, BodyPart bodyPart) throws IOException, MessagingException {
+    public static void verifyAttachment(String expectedFilePath, String contentType, BodyPart bodyPart)
+            throws IOException, MessagingException {
         final byte[] expectedPdfBinary = FileUtils.readBytes(expectedFilePath);
 
         final String[] pathElements = expectedFilePath.split("/");
@@ -86,10 +85,11 @@ public class MailVerifyUtil {
      * @throws MessagingException
      * @throws IOException
      */
-    public static void verifySimpleMail(MimeMessage message, MailVerifyProperties properties) throws MessagingException, IOException {
+    public static void verifySimpleMail(MimeMessage message, MailVerifyProperties properties)
+            throws MessagingException, IOException {
         final String messageContent = (String) message.getContent();
 
-        log.info("Message Content: \n\n" +messageContent);
+        log.info("Message Content: \n\n" + messageContent);
 
         assertThat(message.getContentType(), is(properties.contentType.contentType));
 
@@ -109,7 +109,8 @@ public class MailVerifyUtil {
      * @throws MessagingException
      * @throws IOException
      */
-    public static void verifyMultipartMail(MimeMessage message, MailVerifyProperties properties) throws MessagingException, IOException {
+    public static void verifyMultipartMail(MimeMessage message, MailVerifyProperties properties)
+            throws MessagingException, IOException {
         final MimeMultipart messageContent = (MimeMultipart) message.getContent();
         assertThat(messageContent.getCount(), is(properties.attachments.size() + 1));
 
@@ -133,12 +134,14 @@ public class MailVerifyUtil {
         assertThat(message.getSubject(), Matchers.is(equalTo(expectedSubject)));
     }
 
-    public static void verifyRecipient(MimeMessage message, String expectedRecipient, Message.RecipientType recipientType)
+    public static void verifyRecipient(MimeMessage message, String expectedRecipient,
+                                       Message.RecipientType recipientType)
             throws MessagingException {
         verifyRecipients(message, Collections.singletonList(expectedRecipient), recipientType);
     }
 
-    public static void verifyRecipients(MimeMessage message, List<String> expectedRecipients, Message.RecipientType recipientType)
+    public static void verifyRecipients(MimeMessage message, List<String> expectedRecipients,
+                                        Message.RecipientType recipientType)
             throws MessagingException {
         final List<String> receivedRecipients = Arrays.stream(message.getRecipients(recipientType))
                 .map(InternetAddress.class::cast)
@@ -149,8 +152,10 @@ public class MailVerifyUtil {
         assertThat(receivedRecipients, containsInAnyOrder(expectedRecipients.toArray()));
     }
 
-    public static void verifyContent(MimeMessage message, String expectedContentPath) throws MessagingException, IOException {
-        final BodyPart mailTextContent = ((Multipart) ((Multipart) message.getContent()).getBodyPart(0).getContent()).getBodyPart(0);
+    public static void verifyContent(MimeMessage message, String expectedContentPath)
+            throws MessagingException, IOException {
+        final BodyPart mailTextContent =
+                ((Multipart) ((Multipart) message.getContent()).getBodyPart(0).getContent()).getBodyPart(0);
         final String actualContent = (String) mailTextContent.getContent();
 
         assertThat(actualContent, is(htmlEqualToFile(expectedContentPath)));
@@ -187,7 +192,8 @@ public class MailVerifyUtil {
         List<MailVerifyAttachment> attachments;
         Map<String, String> args;
 
-        public MailVerifyProperties(String contentFilePath, ContentType contentType, String from, List<String> recipients, String subject) {
+        public MailVerifyProperties(String contentFilePath, ContentType contentType, String from,
+                                    List<String> recipients, String subject) {
             this.contentFilePath = contentFilePath;
             this.contentType = contentType;
             this.from = from;
@@ -197,7 +203,8 @@ public class MailVerifyUtil {
             this.args = Collections.emptyMap();
         }
 
-        public MailVerifyProperties(String contentFilePath, ContentType contentType, String from, List<String> recipients, String subject, List<MailVerifyAttachment> attachments) {
+        public MailVerifyProperties(String contentFilePath, ContentType contentType, String from,
+                                    List<String> recipients, String subject, List<MailVerifyAttachment> attachments) {
             this.contentFilePath = contentFilePath;
             this.contentType = contentType;
             this.from = from;
@@ -268,7 +275,8 @@ public class MailVerifyUtil {
     public static class MailVerifyFileAttachment extends MailVerifyAttachment {
         String contentFilePath;
 
-        public MailVerifyFileAttachment(String contentFilePath, String contentType, String dataHandlerContentType, String fileName) {
+        public MailVerifyFileAttachment(String contentFilePath, String contentType, String dataHandlerContentType,
+                                        String fileName) {
             super(contentType, dataHandlerContentType, fileName);
             this.contentFilePath = contentFilePath;
         }
@@ -304,7 +312,8 @@ public class MailVerifyUtil {
     public static class MailVerifyInlineAttachment extends MailVerifyAttachment {
         byte[] content;
 
-        public MailVerifyInlineAttachment(byte[] content, String contentType, String dataHandlerContentType, String fileName) {
+        public MailVerifyInlineAttachment(byte[] content, String contentType, String dataHandlerContentType,
+                                          String fileName) {
             super(contentType, dataHandlerContentType, fileName);
             this.content = content;
         }

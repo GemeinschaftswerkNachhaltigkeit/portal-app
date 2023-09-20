@@ -68,43 +68,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequiredArgsConstructor
 class OrganisationWorkInProgressControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
     private static final String BASE_API_URL = "/api/v1/register-organisation";
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private DuplicateListRepository duplicateListRepository;
-
     @Autowired
     private ContactInviteRepository contactInviteRepository;
-
     @Autowired
     private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
     @Autowired
     private ActivityWorkInProgressRepository activityWorkInProgressRepository;
-
     @Autowired
     private OrganisationRepository organisationRepository;
-
     @Autowired
     private EmailOptOutRepository emailOptOutRepository;
-
     @MockBean
     private KeycloakService keycloakService;
-
     @MockBean
     private JavaMailSenderImpl javaMailSenderImpl;
-
     @Autowired
     private Clock clock;
 
@@ -644,5 +626,13 @@ class OrganisationWorkInProgressControllerTest {
         when(userResource.toRepresentation()).thenReturn(userRepresentation);
         when(keycloakService.getUserResource(any())).thenReturn(userResource);
         return userRepresentation;
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 }

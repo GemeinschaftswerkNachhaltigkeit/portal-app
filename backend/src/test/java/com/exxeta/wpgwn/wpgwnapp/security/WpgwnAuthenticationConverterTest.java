@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WpgwnAuthenticationConverterTest {
 
-    private WpgwnAuthenticationConverter converter = new WpgwnAuthenticationConverter();
+    private final WpgwnAuthenticationConverter converter = new WpgwnAuthenticationConverter();
 
     @Test
     void wpgwnTokenConverter() {

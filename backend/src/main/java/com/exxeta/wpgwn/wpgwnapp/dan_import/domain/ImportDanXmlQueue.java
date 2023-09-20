@@ -1,13 +1,18 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.domain;
 
-import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import java.time.Instant;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.time.Instant;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 
 @Entity
 @Table(

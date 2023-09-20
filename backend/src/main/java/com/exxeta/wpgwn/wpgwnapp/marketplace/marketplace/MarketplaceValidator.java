@@ -35,7 +35,8 @@ public class MarketplaceValidator {
                                 EntityManager entityManager) {
         this.marketplaceRepository = marketplaceRepository;
         this.wpgwnProperties = wpgwnProperties;
-        this.offerEntityInformation = new JpaRepositoryFactory(entityManager).getEntityInformation(MarketplaceItem.class);
+        this.offerEntityInformation =
+                new JpaRepositoryFactory(entityManager).getEntityInformation(MarketplaceItem.class);
         this.smartValidator = smartValidator;
     }
 
@@ -69,7 +70,8 @@ public class MarketplaceValidator {
 
         final MarketplaceType type = marketplaceItem.getMarketplaceType();
         long numItemsForOrganisation =
-                marketplaceRepository.countMarketplaceItemsByOrganisationAndMarketplaceTypeAndStatus(marketplaceItem.getOrganisation(), type, ItemStatus.ACTIVE);
+                marketplaceRepository.countMarketplaceItemsByOrganisationAndMarketplaceTypeAndStatus(
+                        marketplaceItem.getOrganisation(), type, ItemStatus.ACTIVE);
         if (offerEntityInformation.isNew(marketplaceItem)) {
             numItemsForOrganisation++;
         }

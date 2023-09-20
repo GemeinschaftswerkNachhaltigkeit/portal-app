@@ -71,7 +71,7 @@ class ContactWorkInProgressFormControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(contactFormJson))
 
-        // Then
+                // Then
                 .andExpect(status().isOk());
 
         // And

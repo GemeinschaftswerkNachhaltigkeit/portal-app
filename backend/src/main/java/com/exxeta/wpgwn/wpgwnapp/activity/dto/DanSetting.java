@@ -1,10 +1,10 @@
 package com.exxeta.wpgwn.wpgwnapp.activity.dto;
 
-import lombok.Value;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import lombok.Value;
 
 import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_ZONE_ID;
 import static java.util.Objects.nonNull;
@@ -49,6 +49,7 @@ public class DanSetting {
     }
 
     private Instant toInstant(LocalDateTime localDateTime) {
-        return nonNull(localDateTime) ? localDateTime.toLocalDate().atTime(LocalTime.MAX).atZone(DEFAULT_ZONE_ID).toInstant() : null;
+        return nonNull(localDateTime)
+                ? localDateTime.toLocalDate().atTime(LocalTime.MAX).atZone(DEFAULT_ZONE_ID).toInstant() : null;
     }
 }

@@ -106,7 +106,6 @@ public class MockDataUtils {
         socialMediaContact.setContact("TwitterTestAcc");
 
 
-
         Contact contact = new Contact();
         result.setContact(contact);
         contact.setEmail("kontakt@test.com");

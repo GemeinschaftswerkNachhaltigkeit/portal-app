@@ -3,9 +3,10 @@ package com.exxeta.wpgwn.wpgwnapp.shared.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.springframework.util.StringUtils;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.StringUtils;
 
 @Embeddable
 @Getter

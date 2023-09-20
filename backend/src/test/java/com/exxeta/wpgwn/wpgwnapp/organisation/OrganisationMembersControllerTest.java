@@ -74,19 +74,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrganisationMembersControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-09-08T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
     private static final String BASE_API_URL = "/api/v1/organisations";
-
     @Autowired
     Clock clock;
-
+    @Autowired
+    EmailOptOutRepository emailOptOutRepository;
     @Autowired
     private MockMvc mockMvc;
 
@@ -117,10 +109,6 @@ class OrganisationMembersControllerTest {
 
     @Autowired
     private EmailService emailService;
-
-    @Autowired
-    EmailOptOutRepository emailOptOutRepository;
-
     private GreenMail greenMail;
 
     @BeforeEach
@@ -240,7 +228,6 @@ class OrganisationMembersControllerTest {
                 Collections.emptyList(),
                 Map.of("###ORG_ID###", organisation.getId().toString())));
     }
-
 
     /**
      * Erstellen einer Organisations-Mitgliedschaft
@@ -418,5 +405,13 @@ class OrganisationMembersControllerTest {
 
         List<OrganisationMembership> organisationMemberships = organisationMembershipRepository.findAll();
         assertThat(organisationMemberships).isEmpty();
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-09-08T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 }

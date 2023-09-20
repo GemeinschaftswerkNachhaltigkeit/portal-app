@@ -24,7 +24,8 @@ public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, ApiKeyService apiKeyService) throws Exception {
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, ApiKeyService apiKeyService)
+            throws Exception {
 
         String principalRequestHeader = "x-api-key";
         ApiKeyAuthFilter filter = new ApiKeyAuthFilter(principalRequestHeader);

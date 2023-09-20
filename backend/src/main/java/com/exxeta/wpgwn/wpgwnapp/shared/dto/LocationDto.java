@@ -1,18 +1,18 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.dto;
 
-import com.exxeta.wpgwn.wpgwnapp.api.dto.ApiPointSchema;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-
-import lombok.Data;
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.Optional;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 import org.locationtech.jts.geom.Point;
 
-import javax.validation.Valid;
-import java.io.Serializable;
-import java.util.Optional;
+import lombok.Data;
+
+import com.exxeta.wpgwn.wpgwnapp.api.dto.ApiPointSchema;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @SuppressWarnings("MagicNumber")

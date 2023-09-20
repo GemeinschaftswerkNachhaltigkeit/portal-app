@@ -1,13 +1,13 @@
 package com.exxeta.wpgwn.wpgwnapp.nominatim;
 
-import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
+import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
 
 @FeignClient(name = "nominatim-client", url = "${nominatim.url}")
 public interface NominatimClient {

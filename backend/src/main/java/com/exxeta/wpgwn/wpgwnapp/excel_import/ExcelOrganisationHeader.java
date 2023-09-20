@@ -300,12 +300,10 @@ public enum ExcelOrganisationHeader implements ExcelHeader {
 
     /* ORGANISATION - END */
 
+    private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory();
+    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
     private final String[] columnName;
     private final int columnIndex;
-
-    private static final GeometryFactory GEOMETRY_FACTORY = new GeometryFactory();
-
-    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
 
     ExcelOrganisationHeader(int columnIndex, String... columnName) {
         this.columnName = columnName;
@@ -329,23 +327,40 @@ public enum ExcelOrganisationHeader implements ExcelHeader {
             return OrganisationType.valueOf(value);
         } catch (IllegalArgumentException iae) {
             switch (value) {
-                case "BILDUNGSEINRICHTUNG": return OrganisationType.EDUCATION;
-                case "BUND": return OrganisationType.FEDERAL;
-                case "BUNDESLAND": return OrganisationType.STATE;
-                case "FINANZSEKTOR": return OrganisationType.FINANCE;
-                case "GEWERKSCHAFT": return OrganisationType.UNION;
-                case "RELIGIONSGEMEINSCHAFT": return OrganisationType.RELIGION;
-                case "KOMMUNE": return OrganisationType.MUNICIPALITY;
-                case "KULTUREINRICHTUNG": return OrganisationType.CULTURAL;
-                case "PARTEI": return OrganisationType.PARTY;
-                case "SPORTVEREIN": return OrganisationType.SPORTS_CLUB;
-                case "STIFTUNG": return OrganisationType.FOUNDATION;
-                case "VERBAND/ NICHTREGIERUNGSORGANISATION": return OrganisationType.NON_GOVERNMENT_ORGANISATION;
-                case "VEREIN/ INITIATIVE": return OrganisationType.ASSOCIATION;
-                case "WIRTSCHAFT": return OrganisationType.BUSINESS;
-                case "WISSENSCHAFT": return OrganisationType.SCIENCE;
-                case "SONSTIGES": return OrganisationType.OTHER;
-                default: throw iae;
+                case "BILDUNGSEINRICHTUNG":
+                    return OrganisationType.EDUCATION;
+                case "BUND":
+                    return OrganisationType.FEDERAL;
+                case "BUNDESLAND":
+                    return OrganisationType.STATE;
+                case "FINANZSEKTOR":
+                    return OrganisationType.FINANCE;
+                case "GEWERKSCHAFT":
+                    return OrganisationType.UNION;
+                case "RELIGIONSGEMEINSCHAFT":
+                    return OrganisationType.RELIGION;
+                case "KOMMUNE":
+                    return OrganisationType.MUNICIPALITY;
+                case "KULTUREINRICHTUNG":
+                    return OrganisationType.CULTURAL;
+                case "PARTEI":
+                    return OrganisationType.PARTY;
+                case "SPORTVEREIN":
+                    return OrganisationType.SPORTS_CLUB;
+                case "STIFTUNG":
+                    return OrganisationType.FOUNDATION;
+                case "VERBAND/ NICHTREGIERUNGSORGANISATION":
+                    return OrganisationType.NON_GOVERNMENT_ORGANISATION;
+                case "VEREIN/ INITIATIVE":
+                    return OrganisationType.ASSOCIATION;
+                case "WIRTSCHAFT":
+                    return OrganisationType.BUSINESS;
+                case "WISSENSCHAFT":
+                    return OrganisationType.SCIENCE;
+                case "SONSTIGES":
+                    return OrganisationType.OTHER;
+                default:
+                    throw iae;
             }
         }
     }

@@ -15,10 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class FileStorageServiceTest {
 
-    private FileStorageService fileStorageService;
-
     private final byte[] payload = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    private String testFileName = "test.png";
+    private FileStorageService fileStorageService;
+    private final String testFileName = "test.png";
 
     @BeforeEach
     void setUp() {

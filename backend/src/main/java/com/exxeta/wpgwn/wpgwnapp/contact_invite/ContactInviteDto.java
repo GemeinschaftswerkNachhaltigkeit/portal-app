@@ -18,15 +18,11 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.ContactDto;
 public class ContactInviteDto {
 
     private final UUID randomUniqueId;
-
-    private OrganisationWorkInProgressDto organisationWorkInProgress;
-
-    private OrganisationResponseDto organisation;
-
     @NotNull
     @Valid
     private final ContactDto contact;
-
+    private OrganisationWorkInProgressDto organisationWorkInProgress;
+    private OrganisationResponseDto organisation;
     @NotNull
     private ContactInviteStatus status;
 

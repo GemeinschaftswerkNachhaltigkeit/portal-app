@@ -13,7 +13,6 @@ public class ActivityWorkInProgressImportValidator {
 
     /**
      * Prüft, ob die Aktivität für den Import valide ist.
-     *
      */
     public boolean isValidActivity(ActivityWorkInProgress activityWorkInProgress) {
         return Objects.nonNull(activityWorkInProgress)

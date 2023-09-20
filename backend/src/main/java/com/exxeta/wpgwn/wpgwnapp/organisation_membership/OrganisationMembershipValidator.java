@@ -1,17 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_membership;
 
+import com.exxeta.wpgwn.wpgwnapp.exception.ValidationException;
+import com.exxeta.wpgwn.wpgwnapp.keycloak_client.domain.KeycloakConstants;
+import com.exxeta.wpgwn.wpgwnapp.keycloak_client.service.KeycloakService;
+
+import lombok.RequiredArgsConstructor;
+
 import org.keycloak.representations.idm.GroupRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-
-import lombok.RequiredArgsConstructor;
-
-import com.exxeta.wpgwn.wpgwnapp.exception.ValidationException;
-import com.exxeta.wpgwn.wpgwnapp.keycloak_client.domain.KeycloakConstants;
-import com.exxeta.wpgwn.wpgwnapp.keycloak_client.service.KeycloakService;
 
 @Component
 @RequiredArgsConstructor

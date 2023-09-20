@@ -43,32 +43,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrganisationMarketplaceItemControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
+    private static final String BASE_API_URL = "/api/v1/organisations/{orgId}/marketplace/offer";
+    @Autowired
+    Clock clock;
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private OrganisationRepository organisationRepository;
-
     @Autowired
     private MarketplaceRepository marketplaceRepository;
-
     @Autowired
     private ResourceLoader resourceLoader;
     @Autowired
     private AuditingHandler handler;
-    @Autowired
-    Clock clock;
-
-    private static final String BASE_API_URL = "/api/v1/organisations/{orgId}/marketplace/offer";
-
     private Organisation organisation;
 
     @BeforeEach
@@ -141,6 +128,14 @@ class OrganisationMarketplaceItemControllerTest {
         mockMvc.perform(put(BASE_API_URL + "/" + testMarketplaceItem.getId(), organisation.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResponse, false));
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 
 }

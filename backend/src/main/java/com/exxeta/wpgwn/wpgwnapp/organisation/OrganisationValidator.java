@@ -1,21 +1,21 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation;
 
+import java.util.Objects;
+import java.util.Optional;
+
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.security.JwtTokenNames;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.EntityBase;
 import com.exxeta.wpgwn.wpgwnapp.user.UserValidator;
 import com.exxeta.wpgwn.wpgwnapp.utils.PrincipalMapper;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
-import org.springframework.stereotype.Component;
-
-import java.util.Objects;
-import java.util.Optional;
 
 import static java.util.Objects.isNull;
 

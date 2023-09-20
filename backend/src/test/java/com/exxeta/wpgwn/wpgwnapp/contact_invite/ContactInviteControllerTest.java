@@ -48,36 +48,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequiredArgsConstructor
 class ContactInviteControllerTest {
 
-    @Autowired
-    private WpgwnProperties wpgwnProperties;
-
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
     private static final String BASE_API_URL = "/api/v1/contact-invite";
     @Autowired
+    private WpgwnProperties wpgwnProperties;
+    @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ContactInviteRepository contactInviteRepository;
-
     @Autowired
     private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
     @Autowired
     private OrganisationRepository organisationRepository;
-
     @Autowired
     private OrganisationMapper organisationMapper;
-
     @Autowired
     private Clock clock;
-
     @MockBean
     private JavaMailSenderImpl javaMailSenderImpl;
 
@@ -143,18 +128,23 @@ class ContactInviteControllerTest {
 
         // When
         mockMvc.perform(put(BASE_API_URL + "/" + contactInvite.getRandomUniqueId() + "?status=ALLOW")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk());
 
-        ContactInvite resultContactInvite = contactInviteRepository.findByRandomUniqueId(contactInvite.getRandomUniqueId()).get();
+        ContactInvite resultContactInvite =
+                contactInviteRepository.findByRandomUniqueId(contactInvite.getRandomUniqueId()).get();
         assertThat(resultContactInvite.getStatus()).isEqualTo(ContactInviteStatus.ALLOW);
 
-        OrganisationWorkInProgress resultOrganisationWorkInProgress = organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(contactInvite.getContact().getFirstName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(contactInvite.getContact().getLastName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(contactInvite.getContact().getEmail());
+        OrganisationWorkInProgress resultOrganisationWorkInProgress =
+                organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(
+                contactInvite.getContact().getFirstName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(
+                contactInvite.getContact().getLastName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(
+                contactInvite.getContact().getEmail());
     }
 
     @Test
@@ -173,18 +163,23 @@ class ContactInviteControllerTest {
 
         // When
         mockMvc.perform(put(BASE_API_URL + "/" + contactInvite.getRandomUniqueId() + "?status=DENY")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 // Then
                 .andExpect(status().isOk());
 
-        ContactInvite resultContactInvite = contactInviteRepository.findByRandomUniqueId(contactInvite.getRandomUniqueId()).get();
+        ContactInvite resultContactInvite =
+                contactInviteRepository.findByRandomUniqueId(contactInvite.getRandomUniqueId()).get();
         assertThat(resultContactInvite.getStatus()).isEqualTo(ContactInviteStatus.DENY);
 
-        OrganisationWorkInProgress resultOrganisationWorkInProgress = organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getFirstName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getLastName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getEmail());
+        OrganisationWorkInProgress resultOrganisationWorkInProgress =
+                organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getFirstName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getLastName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getEmail());
 
         // @ToDo: Template testen wenn fertig
         Mockito.verify(javaMailSenderImpl, Mockito.times(1)).send(Mockito.<MimeMessage>any());
@@ -206,20 +201,25 @@ class ContactInviteControllerTest {
         contactInviteRepository.save(contactInvite);
 
         // When
-        assertThatThrownBy(() ->{
-          try {
-            mockMvc.perform(put(BASE_API_URL + "/" + contactInvite.getRandomUniqueId() + "?status=DENY")
-                    .contentType(MediaType.APPLICATION_JSON));
-          } catch (NestedServletException e) {
-              throw e.getCause();
-          }
+        assertThatThrownBy(() -> {
+            try {
+                mockMvc.perform(put(BASE_API_URL + "/" + contactInvite.getRandomUniqueId() + "?status=DENY")
+                        .contentType(MediaType.APPLICATION_JSON));
+            } catch (NestedServletException e) {
+                throw e.getCause();
+            }
         }).isInstanceOf(EntityExpiredException.class)
-                .hasMessage(String.format("[ContactInvite] with uuid [%s] expired!", contactInvite.getRandomUniqueId()));
+                .hasMessage(
+                        String.format("[ContactInvite] with uuid [%s] expired!", contactInvite.getRandomUniqueId()));
 
-        OrganisationWorkInProgress resultOrganisationWorkInProgress = organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getFirstName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getLastName());
-        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(organisationWorkInProgress.getContactWorkInProgress().getEmail());
+        OrganisationWorkInProgress resultOrganisationWorkInProgress =
+                organisationWorkInProgressRepository.findById(organisationWorkInProgress.getId()).get();
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getFirstName()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getFirstName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getLastName()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getLastName());
+        assertThat(resultOrganisationWorkInProgress.getContactWorkInProgress().getEmail()).isEqualTo(
+                organisationWorkInProgress.getContactWorkInProgress().getEmail());
     }
 
     private ContactInvite getContactInvite() {
@@ -240,5 +240,13 @@ class ContactInviteControllerTest {
         result.setStatus(ContactInviteStatus.OPEN);
 
         return result;
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 }
