@@ -34,21 +34,30 @@ public class CampaignAddressMapper {
     private final NominatimService nominatimService;
 
     public Location mapperLocation(Campaign campaign) {
+
+
         Location location = new Location();
         location.setUrl(hasText(campaign.getLink()) ? campaign.getLink() : campaign.getOrganizerWebsite());
         location.setOnline(campaign.online());
         if (location.getOnline()) {
             return location;
         }
-        location.setCoordinate(getPointFromStrings(campaign.getLatitude(), campaign.getLongitude()));
-        log.debug("Venue: {}", campaign.getVenue());
 
-        NominatimDto nominatimDto = nominatimService.searchAddress(campaign.getVenue());
+        if (!hasText(campaign.getVenue()) && (!hasText(campaign.getLatitude()) || !hasText(campaign.getLongitude()))) {
+            throw new DanXmlImportCancelledException(
+                    Map.of("campaign.address", campaign.getVenue() + " is invalid"));
+        }
+
+        location.setCoordinate(getPointFromStrings(campaign.getLatitude(), campaign.getLongitude()));
+
+        NominatimDto nominatimDto =
+                nominatimService.searchAddress(campaign.getVenue(), campaign.getLatitude(), campaign.getLongitude());
 
         if (isNull(nominatimDto)) {
             String prepareAndCleaningAddress = prepareAndCleaningAddress(campaign.getVenue());
             log.debug("prepareAndCleaningAddress: {}", prepareAndCleaningAddress);
-            nominatimDto = nominatimService.searchAddress(prepareAndCleaningAddress);
+            nominatimDto = nominatimService.searchAddress(prepareAndCleaningAddress, campaign.getLatitude(),
+                    campaign.getLongitude());
         }
 
         if (nonNull(nominatimDto) && hasText(nominatimDto.getAddress().getRoad())) {
