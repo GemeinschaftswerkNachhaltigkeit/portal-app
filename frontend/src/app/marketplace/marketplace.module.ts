@@ -31,6 +31,8 @@ import { AddBannerComponent } from './components/add-banner/add-banner.component
 import { AuthModule } from '../auth/auth.module';
 import { VisibilityControlsComponent } from './components/visibility-controls/visibility-controls.component';
 import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/
     AuthModule,
     MarketplcaeRoutingModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatLuxonDateModule,
     MatInputModule,
     MatTooltipModule,
     MatButtonModule,

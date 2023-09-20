@@ -16,4 +16,5 @@ export type OfferDto = {
   status?: Status;
   featured?: boolean;
   featuredText?: string;
+  endUntil?: string;
 };
