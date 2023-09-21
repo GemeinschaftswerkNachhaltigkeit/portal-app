@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatomoTracker } from '@ngx-matomo/tracker';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { environment } from 'src/environments/environment';
@@ -30,6 +30,15 @@ export class MarketplaceApiService {
         params: this.searchParams(searchFilter)
       }
     );
+    // .pipe(
+    //   map((items) => {
+    //     items.content = items.content.map((item) => {
+    //       item.endUntil = '2023-09-19T00:00:00+02:00';
+    //       return item;
+    //     });
+    //     return items;
+    //   })
+    // );
   }
 
   getFeatured(): Observable<PagedResponse<MarketplaceItemDto>> {

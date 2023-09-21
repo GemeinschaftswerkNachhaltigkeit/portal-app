@@ -54,6 +54,7 @@
               [thematicFocus]="featuredItem.thematicFocus"
               [showActions]="false"
               [orga]="featuredItem.organisation"
+              [expired]="expired(featuredItem)"
               (cardClicked)="open(featuredItem.id)"
             ></app-card>
           </ng-container>
@@ -74,6 +75,7 @@
               [thematicFocus]="item.thematicFocus"
               [showActions]="false"
               [orga]="item.organisation"
+              [expired]="expired(item)"
               (cardClicked)="open(item.id)"
             ></app-card>
           </ng-container>

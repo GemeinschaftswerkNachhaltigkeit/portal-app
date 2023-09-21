@@ -28,6 +28,7 @@ export class CardComponent {
   @Input() draft? = false;
   @Input() featured? = false;
   @Input() featuredText? = '';
+  @Input() expired = false;
 
   @Output() cardClicked = new EventEmitter();
   @Output() edit = new EventEmitter();

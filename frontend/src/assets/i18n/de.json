@@ -125,6 +125,7 @@
     }
   },
   "labels": {
+    "expiredOffer": "Abgelaufenes Angebot",
     "onlyOnline": "Nur online?",
     "onlyDan": "Nur Aktionstage?",
     "total": "Treffer",

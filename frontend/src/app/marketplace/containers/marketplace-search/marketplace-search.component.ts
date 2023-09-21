@@ -18,6 +18,7 @@ import { BestPracticesCategories } from '../../models/best-practices-categories'
 import { MarketplaceItemDto } from '../../models/marketplace-item-dto';
 import { MarketplaceTypes } from '../../models/marketplace-type';
 import { OfferCategories } from '../../models/offer-categories';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-marketplace-search',
@@ -44,7 +45,7 @@ export class MarketplaceSearchComponent implements OnInit {
     private translate: TranslateService,
     private loader: LoadingService,
     public dialog: MatDialog,
-
+    private utils: UtilsService,
     filtersService: SecondaryFitlersService
   ) {
     filtersService.setOpenFilters('marketplace-fitlers', [
@@ -61,6 +62,15 @@ export class MarketplaceSearchComponent implements OnInit {
 
   getQuery(): string {
     return this.marketplaceFacade.getFilters()['query'] as string;
+  }
+
+  expired(item: MarketplaceItemDto): boolean {
+    if (!item.endUntil) {
+      return false;
+    }
+    const currentDate = Date.now();
+    const expireDate = new Date(item.endUntil).getTime();
+    return currentDate > expireDate;
   }
 
   getCategories(): (OfferCategories | BestPracticesCategories)[] {

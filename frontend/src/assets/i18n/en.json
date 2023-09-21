@@ -124,6 +124,7 @@
     }
   },
   "labels": {
+    "expiredOffer": "Expired offer",
     "onlyOnline": "Only online?",
     "onlyDan": "Only action days?",
     "total": "Results",
