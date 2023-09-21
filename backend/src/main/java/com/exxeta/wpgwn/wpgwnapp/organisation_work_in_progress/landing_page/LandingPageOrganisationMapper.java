@@ -1,12 +1,13 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.landing_page;
 
-import com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.OrganisationWorkInProgress;
+import java.time.Instant;
+import java.util.UUID;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-import java.time.Instant;
-import java.util.UUID;
+import com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.OrganisationWorkInProgress;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {Instant.class, UUID.class})
 public abstract class LandingPageOrganisationMapper {
@@ -26,6 +27,7 @@ public abstract class LandingPageOrganisationMapper {
     @Mapping(target = "sustainabilityGoals", source = "sustainableDevelopmentGoals")
     @Mapping(target = "emailAddress", source = "contactWorkInProgress.email")
     @Mapping(target = "privacyConsent", source = "privacyConsent")
-    abstract LandingPageOrganisationDto organisationWorkInProgressToLandingPageDto(OrganisationWorkInProgress organisationWorkInProgress);
+    abstract LandingPageOrganisationDto organisationWorkInProgressToLandingPageDto(
+            OrganisationWorkInProgress organisationWorkInProgress);
 
 }

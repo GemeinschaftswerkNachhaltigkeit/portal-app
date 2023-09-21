@@ -9,9 +9,11 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import com.exxeta.wpgwn.wpgwnapp.configuration.properties.AccessLogProperties;
-import ch.qos.logback.access.tomcat.LogbackValve;
 import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.AccessLogProperties;
+
+import ch.qos.logback.access.tomcat.LogbackValve;
 
 /**
  * Konfiguriert Logback für das Tomcat Access-Log.

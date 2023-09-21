@@ -8,7 +8,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils;
 
 public class MapSearchResultBindingCustomizer implements QuerydslBinderCustomizer<QMapSearchResult> {
 
-    private BindingCustomizerUtils utils = new BindingCustomizerUtils();
+    private final BindingCustomizerUtils utils = new BindingCustomizerUtils();
 
     @Override
     public void customize(QuerydslBindings bindings, QMapSearchResult root) {

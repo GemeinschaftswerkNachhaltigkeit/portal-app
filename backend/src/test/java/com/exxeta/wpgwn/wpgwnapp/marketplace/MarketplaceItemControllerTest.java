@@ -5,6 +5,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 
@@ -43,35 +44,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MarketplaceItemControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private OrganisationRepository organisationRepository;
-
-    @Autowired
-    private MarketplaceRepository marketplaceRepository;
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @Autowired
-    private AuditingHandler handler;
+    private static final String BASE_API_URL = "/api/v1/marketplace";
     @Autowired
     Clock clock;
-
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private OrganisationRepository organisationRepository;
+    @Autowired
+    private MarketplaceRepository marketplaceRepository;
+    @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
+    private AuditingHandler handler;
     private DateTimeProvider dateTimeProvider;
-
-    private static final String BASE_API_URL = "/api/v1/marketplace";
-
     private Organisation organisation;
 
     @BeforeEach
@@ -109,13 +95,26 @@ class MarketplaceItemControllerTest {
 
         MarketplaceItem testMarketplaceItem = createTestOffer(organisation);
         testMarketplaceItem.setEndUntil(LocalDate.now(clock));
+        testMarketplaceItem.setEndUntil(OffsetDateTime.now(clock));
         testMarketplaceItem = marketplaceRepository.save(testMarketplaceItem);
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
                         "classpath:testsamples/offer/expected-get-offer-by-id.json")
                 .getInputStream(), StandardCharsets.UTF_8);
+        String responseString = mockMvc.perform(get(BASE_API_URL)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println(responseString);
 
         mockMvc.perform(get(BASE_API_URL + "/" + testMarketplaceItem.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResponse, false));
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 }

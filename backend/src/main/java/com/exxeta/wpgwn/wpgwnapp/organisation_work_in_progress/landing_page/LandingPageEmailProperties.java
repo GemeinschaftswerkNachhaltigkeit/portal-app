@@ -1,17 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.landing_page;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @ConfigurationProperties("landing-page.email")
 @Getter

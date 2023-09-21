@@ -64,20 +64,13 @@ public class OrganisationWorkInProgressDto implements Serializable {
     private final OrganisationStatus status;
 
     private final String externalId;
-
-    private Source source;
-
-    private ImportProcessDto importProcess;
-
     private final String image;
-
     private final String logo;
-
     private final LocalDate approvedUntil;
     private final UUID randomUniqueId;
-
     private final String feedbackRequest;
     private final OffsetDateTime feedbackRequestSent;
-
     private final String rejectionReason;
+    private Source source;
+    private ImportProcessDto importProcess;
 }

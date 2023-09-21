@@ -1,24 +1,15 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
 
-import com.exxeta.wpgwn.wpgwnapp.CmsClientConfiguration;
-import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
-import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
-import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
-import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDto;
-import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.*;
-import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
-
-import com.google.common.collect.Lists;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,15 +28,28 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.IntStream;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import com.exxeta.wpgwn.wpgwnapp.CmsClientConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
+import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDataDto;
+import com.exxeta.wpgwn.wpgwnapp.cms.dto.FeatureDto;
+import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
+
+import com.google.common.collect.Lists;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 
 import static com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService.DAN_ACCOUNT_KEY;
 import static com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService.DAN_RANGE_KEY;
@@ -63,37 +67,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MapSearchControllerTest {
 
     private static final String BASE_API_URL = "/api/v1/search";
-
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
     @Autowired
     private Clock clock;
-
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private OrganisationRepository organisationRepository;
-
     @Autowired
     private ActivityRepository activityRepository;
-
     @Autowired
     private MapSearchResultRepository mapSearchResultRepository;
-
     @MockBean
     private CmsClient cmsClient;
-
     @Autowired
     @Qualifier("cmsClientForTest")
     private CmsClient cmsClientTest;
-
 
     @BeforeEach
     public void setUp() {
@@ -373,7 +361,6 @@ class MapSearchControllerTest {
         assertThat(jsonResponse.read("$['numberOfElements']").toString()).isEqualTo("1");
         assertThat(jsonResponse.read("$['totalElements']").toString()).isEqualTo("1");
     }
-
 
     @Test
     void requestNotPermanentActivities() throws Exception {
@@ -868,7 +855,6 @@ class MapSearchControllerTest {
                 .plus(days, ChronoUnit.DAYS);
     }
 
-
     private void activeDanSetting() {
         when(cmsClient.getFeatures())
                 .thenReturn(getActiveFeatures());
@@ -878,7 +864,6 @@ class MapSearchControllerTest {
         when(cmsClient.getFeatures())
                 .thenReturn(getInactiveFeatures());
     }
-
 
     public FeatureDataDto getActiveFeatures() {
         FeatureDto danAccount = FeatureDto.builder().feature(DAN_ACCOUNT_KEY)
@@ -908,6 +893,14 @@ class MapSearchControllerTest {
         featureDataDto.setData(Lists.newArrayList(danAccount, danRange));
 
         return featureDataDto;
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 
 }

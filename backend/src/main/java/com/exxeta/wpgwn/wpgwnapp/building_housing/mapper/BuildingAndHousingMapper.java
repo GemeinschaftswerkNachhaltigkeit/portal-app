@@ -23,5 +23,6 @@ public abstract class BuildingAndHousingMapper {
     public abstract BuildingAndHousingContact mapperBuildingAndHousing(
             BuildingAndHousingContactFormDto buildingAndHousingContactFormDto);
 
-    public abstract BuildingAndHousingContactFormDto buildingAndHousingContactToDto(BuildingAndHousingContact savedBuildingAndHousingContact);
+    public abstract BuildingAndHousingContactFormDto buildingAndHousingContactToDto(
+            BuildingAndHousingContact savedBuildingAndHousingContact);
 }

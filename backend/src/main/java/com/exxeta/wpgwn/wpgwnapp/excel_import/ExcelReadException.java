@@ -7,7 +7,7 @@ import lombok.experimental.StandardException;
 
 /**
  * Exception, die mitteilt, dass das Lesen einer Exceltabelle fehlgeschlagen ist.
- *
+ * <p>
  * Copyright: Copyright (c) 14.08.2021<br/>
  * Organisation: EXXETA AG
  *

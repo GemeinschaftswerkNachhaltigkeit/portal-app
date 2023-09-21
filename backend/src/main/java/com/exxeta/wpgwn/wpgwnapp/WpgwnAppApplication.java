@@ -16,13 +16,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableFeignClients
 public class WpgwnAppApplication {
 
+    public static final String DEFAULT_TIME_ZONE = "Europe/Berlin";
+    public static final ZoneId DEFAULT_ZONE_ID = ZoneId.of(DEFAULT_TIME_ZONE);
+
     public static void main(String[] args) {
         SpringApplication.run(WpgwnAppApplication.class, args);
     }
-
-    public static final String DEFAULT_TIME_ZONE = "Europe/Berlin";
-
-    public static final ZoneId DEFAULT_ZONE_ID = ZoneId.of(DEFAULT_TIME_ZONE);
 
     @PostConstruct
     public void setDefaultParam() {

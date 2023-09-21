@@ -132,7 +132,8 @@ public class ExcelImportService {
             log.debug("Skip importing invalid activity [{}].", activityWorkInProgress);
         }
 
-        if (organisationWorkInProgressImportValidator.isValidOrganisation(organisationWorkInProgress, extractedOrganisationWorkInProgress)) {
+        if (organisationWorkInProgressImportValidator.isValidOrganisation(organisationWorkInProgress,
+                extractedOrganisationWorkInProgress)) {
             return Optional.of(organisationWorkInProgress);
         } else {
             log.debug("Skip importing invalid organisation [{}].", organisationWorkInProgress);

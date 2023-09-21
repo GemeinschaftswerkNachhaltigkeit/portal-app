@@ -80,7 +80,9 @@ public class DuplicateCheckService {
                     OrganisationWorkInProgress wip = listItem.getOrganisationWorkInProgress();
                     if (Objects.nonNull(wip)) {
                         final DuplicateList wipDuplicateListItem = getDuplicateList(wip);
-                        wipDuplicateListItem.getDuplicateListItems().removeIf(item -> Objects.equals(item.getOrganisationWorkInProgress(), organisationWorkInProgress));
+                        wipDuplicateListItem.getDuplicateListItems().removeIf(
+                                item -> Objects.equals(item.getOrganisationWorkInProgress(),
+                                        organisationWorkInProgress));
                     }
                 });
         duplicateListItems.clear();

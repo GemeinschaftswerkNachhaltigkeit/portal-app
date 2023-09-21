@@ -4,5 +4,5 @@ public enum DuplicateForField {
     NAME,
     ADDRESS,
     EMAIL,
-    URL;
+    URL
 }

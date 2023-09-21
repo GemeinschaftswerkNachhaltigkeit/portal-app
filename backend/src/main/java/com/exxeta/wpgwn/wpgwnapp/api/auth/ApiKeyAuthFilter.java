@@ -1,7 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.api.auth;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.Objects;
 import java.util.UUID;
 

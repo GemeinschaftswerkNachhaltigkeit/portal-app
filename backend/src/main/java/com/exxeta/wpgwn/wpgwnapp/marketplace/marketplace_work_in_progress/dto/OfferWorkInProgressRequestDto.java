@@ -2,7 +2,7 @@ package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,7 +43,7 @@ public class OfferWorkInProgressRequestDto {
     @Valid
     private ContactDto contact;
 
-    private LocalDate endUntil;
+    private OffsetDateTime endUntil;
 
     @NotNull
     private Boolean featured = false;

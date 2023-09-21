@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.user_account;
 
-import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+import javax.annotation.security.RolesAllowed;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
@@ -12,8 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.exxeta.wpgwn.wpgwnapp.keycloak_client.configuration.KeycloakProperties;
 import com.exxeta.wpgwn.wpgwnapp.keycloak_client.service.KeycloakService;
-
-import javax.annotation.security.RolesAllowed;
+import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
 
 @RestController
 @RequestMapping("/api/v1/users")

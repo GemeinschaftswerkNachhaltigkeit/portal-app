@@ -69,6 +69,10 @@ public class KeycloakService {
 
     private final KeycloakMapper keycloakMapper;
 
+    private static String getKeycloakGroupName(OrganisationWorkInProgress organisationWorkInProgress) {
+        return organisationWorkInProgress.getName() + "_" + organisationWorkInProgress.getRandomUniqueId();
+    }
+
     public List<GroupRepresentation> getGroups(String searchString) {
         return getGroupResource()
                 .groups(searchString, SEARCH_PAGE_INDEX, MAX_SEARCH_RESULTS);
@@ -101,7 +105,6 @@ public class KeycloakService {
             }
         }
     }
-
 
     public List<String> getRoles() {
         RolesResource roles = keycloak.realm(keycloakProperties.getRealm()).roles();
@@ -179,10 +182,6 @@ public class KeycloakService {
                 .map(RoleResource::toRepresentation)
                 .map(List::of)
                 .orElse(List.of());
-    }
-
-    private static String getKeycloakGroupName(OrganisationWorkInProgress organisationWorkInProgress) {
-        return organisationWorkInProgress.getName() + "_" + organisationWorkInProgress.getRandomUniqueId();
     }
 
     /**

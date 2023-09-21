@@ -61,56 +61,39 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class OrganisationWorkInProgressServiceTest {
 
-    @Mock
-    OrganisationWorkInProgressRepository repository;
-
-    @Mock
-    FeedbackHistoryEntryRepository feedbackHistoryRepository;
-
-    @Mock
-    ActivityWorkInProgressService activityWorkInProgressService;
-
-    @Mock
-    private FileStorageService fileStorageService;
-
-    @Mock
-    private EmailService emailService;
-
-    @Mock
-    private TemplateEngine templateEngine;
-
-    @Mock
-    private EmailOptOutService emailOptOutService;
-
-    @Mock
-    private ProfileService profileService;
-
-    OrganisationWorkInProgressService service;
-
-    @Mock
-    DuplicateCheckService duplicateCheckService;
-
-    @Mock
-    KeycloakService keycloakService;
-
-    @Mock
-    ContactInviteService contactInviteService;
-
-    @Mock
-    OrganisationWorkInProgressPublishService organisationWorkInProgressPublishService;
-
-    @Mock
-    private MailToLinkGenerator mailToLinkGenerator;
-
-    private EmailProperties emailProps;
-
-    private Clock clock = Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
-
-    private GreenMail greenMail;
-
     final String toAddress = "test@exxeta.com";
     final String contactAddress = "contactAddress@exxeta.com";
+    @Mock
+    OrganisationWorkInProgressRepository repository;
+    @Mock
+    FeedbackHistoryEntryRepository feedbackHistoryRepository;
+    @Mock
+    ActivityWorkInProgressService activityWorkInProgressService;
+    OrganisationWorkInProgressService service;
+    @Mock
+    DuplicateCheckService duplicateCheckService;
+    @Mock
+    KeycloakService keycloakService;
+    @Mock
+    ContactInviteService contactInviteService;
+    @Mock
+    OrganisationWorkInProgressPublishService organisationWorkInProgressPublishService;
     GroupResource mockGroupResource;
+    @Mock
+    private FileStorageService fileStorageService;
+    @Mock
+    private EmailService emailService;
+    @Mock
+    private TemplateEngine templateEngine;
+    @Mock
+    private EmailOptOutService emailOptOutService;
+    @Mock
+    private ProfileService profileService;
+    @Mock
+    private MailToLinkGenerator mailToLinkGenerator;
+    private EmailProperties emailProps;
+    private final Clock clock = Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
+    private GreenMail greenMail;
 
     @BeforeEach
     void setUp() {

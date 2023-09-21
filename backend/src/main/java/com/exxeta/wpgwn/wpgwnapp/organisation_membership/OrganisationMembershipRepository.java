@@ -16,6 +16,7 @@ public interface OrganisationMembershipRepository
         QuerydslPredicateExecutor<OrganisationMembership> {
 
     Optional<OrganisationMembership> findByRandomUniqueId(UUID uuid);
+
     Stream<OrganisationMembership> findAllByOrganisation(Organisation organisation);
 
     Optional<OrganisationMembership> findByOrganisationAndEmail(Organisation organisation, String email);

@@ -61,7 +61,7 @@ public final class HtmlMatcher extends TypeSafeMatcher<String> {
     public static HtmlMatcher htmlEqualToFile(String expectedFilePath, Map<String, String> args) throws IOException {
         String expectedContent = FileUtils.readStringData(expectedFilePath);
         if (!args.isEmpty()) {
-            for (Map.Entry<String, String> e: args.entrySet()) {
+            for (Map.Entry<String, String> e : args.entrySet()) {
                 expectedContent = expectedContent.replace(e.getKey(), e.getValue());
             }
         }
@@ -70,7 +70,8 @@ public final class HtmlMatcher extends TypeSafeMatcher<String> {
 
     @Override
     protected boolean matchesSafely(String actual) {
-        assertThat("Actual html must not be empty! Expected was: " + expected, !StringUtils.hasText(actual), is(equalTo(false)));
+        assertThat("Actual html must not be empty! Expected was: " + expected, !StringUtils.hasText(actual),
+                is(equalTo(false)));
 
         // Diff generieren, Whitespaces/Zeilenumbrüche und Kommentare werden ignoriert
         final Diff diff = DiffBuilder.compare(expected).withTest(actual).normalizeWhitespace().ignoreComments().build();

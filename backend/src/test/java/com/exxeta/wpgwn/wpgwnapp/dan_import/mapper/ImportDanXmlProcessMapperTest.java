@@ -1,16 +1,16 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.mapper;
 
-import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlProcess;
-import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus;
-import com.exxeta.wpgwn.wpgwnapp.dan_import.dto.ImportDanXmlProcessDto;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlProcess;
+import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus;
+import com.exxeta.wpgwn.wpgwnapp.dan_import.dto.ImportDanXmlProcessDto;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

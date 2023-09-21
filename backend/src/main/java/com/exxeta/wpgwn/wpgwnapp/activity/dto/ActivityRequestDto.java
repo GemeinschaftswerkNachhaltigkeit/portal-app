@@ -30,51 +30,38 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.ThematicFocusDto;
 @SuppressWarnings("MagicNumber")
 public class ActivityRequestDto implements Serializable {
 
-    @NotBlank
-    @Length(max = 200)
-    private String name;
-
-    @NotBlank
-    @Length(max = 3000)
-    private String description;
-
     @Valid
     private final Set<@NotNull @Positive Long> sustainableDevelopmentGoals = new LinkedHashSet<>();
-
     @NotNull
     @Valid
     private final ContactDto contact;
-
     @NotNull
     @Valid
     private final LocationDto location;
-
     @NotNull
     private final ImpactAreaDto impactArea;
-
     @Valid
     private final PeriodDto period;
-
     @NotNull
     @NotEmpty
     private final Set<ThematicFocusDto> thematicFocus = new LinkedHashSet<>();
-
     @NotNull
     private final Set<SocialMediaContactDto> socialMediaContacts = new LinkedHashSet<>();
-
     @NotNull
     private final ActivityTypeDto activityType;
-
-    private final  String externalId;
-
-    @URL
-    @Length(max = 1000)
-    private String registerUrl;
-
+    private final String externalId;
     private final LocalDate approvedUntil;
-
     @NotNull
     @AssertTrue
     private final Boolean privacyConsent;
+    @NotBlank
+    @Length(max = 200)
+    private String name;
+    @NotBlank
+    @Length(max = 3000)
+    private String description;
+    @URL
+    @Length(max = 1000)
+    private String registerUrl;
 
 }

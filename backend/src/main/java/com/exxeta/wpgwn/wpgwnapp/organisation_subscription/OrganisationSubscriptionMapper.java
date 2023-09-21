@@ -15,5 +15,6 @@ import com.exxeta.wpgwn.wpgwnapp.utils.converter.DateMapper;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public abstract class OrganisationSubscriptionMapper {
 
-    abstract OrganisationSubscriptionResponseDto organisationSubscriptionToDto(OrganisationSubscription organisationSubscription);
+    abstract OrganisationSubscriptionResponseDto organisationSubscriptionToDto(
+            OrganisationSubscription organisationSubscription);
 }

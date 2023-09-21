@@ -1,22 +1,22 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
 import com.exxeta.wpgwn.wpgwnapp.utils.PrincipalMapper;
 
 import com.querydsl.core.BooleanBuilder;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 import static java.util.Objects.isNull;
 

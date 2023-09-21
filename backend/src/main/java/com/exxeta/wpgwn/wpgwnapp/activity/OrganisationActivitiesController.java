@@ -1,5 +1,30 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
+import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityNotFoundException;
+import java.util.Objects;
+import java.util.UUID;
+
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ItemStatusChangeDto;
@@ -19,23 +44,6 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import io.swagger.v3.oas.annotations.Parameter;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Controller für Aktivitäten einer Organisation.

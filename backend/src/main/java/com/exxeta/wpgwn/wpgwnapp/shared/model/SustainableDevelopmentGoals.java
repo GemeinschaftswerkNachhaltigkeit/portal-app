@@ -27,8 +27,8 @@ public enum SustainableDevelopmentGoals implements SearchableEnum {
     SDG_16("16", "Frieden, Gerechtigkeit und starke Institutionen"),
     SDG_17("17", "Partnerschaften zur Erreichung der Ziele");
 
-    private String number;
     private final String nameDe;
+    private final String number;
 
     SustainableDevelopmentGoals(String number, String nameDe) {
         this.number = number;

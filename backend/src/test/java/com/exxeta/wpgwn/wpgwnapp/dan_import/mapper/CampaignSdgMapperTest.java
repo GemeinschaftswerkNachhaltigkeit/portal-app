@@ -1,16 +1,18 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.mapper;
 
-import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
-import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
-
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
+import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CampaignSdgMapperTest {
 

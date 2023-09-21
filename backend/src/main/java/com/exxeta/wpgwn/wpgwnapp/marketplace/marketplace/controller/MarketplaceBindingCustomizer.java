@@ -10,7 +10,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils;
 
 public class MarketplaceBindingCustomizer implements QuerydslBinderCustomizer<QMarketplaceItem> {
 
-    private BindingCustomizerUtils utils = new BindingCustomizerUtils();
+    private final BindingCustomizerUtils utils = new BindingCustomizerUtils();
 
 
     @Override
@@ -24,7 +24,7 @@ public class MarketplaceBindingCustomizer implements QuerydslBinderCustomizer<QM
 //        bindings.bind(root.as(QBestPractise.class).bestPractiseCategory)
 //                .as("bestPractiseCat").first(SimpleExpression::eq);
 
-                bindings.excluding(root.organisation);
+        bindings.excluding(root.organisation);
         bindings.excluding(root.organisation.activities);
 
         bindings.bind(root.thematicFocus).all(utils.multiValueAndOrConditionsForEnum());

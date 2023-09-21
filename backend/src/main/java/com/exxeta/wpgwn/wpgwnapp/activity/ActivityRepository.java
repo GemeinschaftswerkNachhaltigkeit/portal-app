@@ -1,11 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity.projection.ClusteredActivity;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
+import java.time.Instant;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +12,12 @@ import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.List;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity.projection.ClusteredActivity;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
 
 public interface ActivityRepository extends JpaRepository<Activity, Long>,
         RevisionRepository<Activity, Long, Long>,

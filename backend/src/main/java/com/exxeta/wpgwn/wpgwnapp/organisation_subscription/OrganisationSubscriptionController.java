@@ -46,7 +46,7 @@ public class OrganisationSubscriptionController {
     public Page<OrganisationSubscriptionResponseDto> getPagedOrganisationSubscriptionForCurrentUser(
             @Parameter(hidden = true) @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal,
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-            return organisationSubscriptionRepository
+        return organisationSubscriptionRepository
                 .findAllBySubscribedUserId(principal.getName(), pageable)
                 .map(organisationSubscriptionMapper::organisationSubscriptionToDto);
     }
@@ -58,12 +58,16 @@ public class OrganisationSubscriptionController {
             @Parameter(hidden = true) @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
         Organisation organisation = organisationService.findById(requestDto.getOrganisationId())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Entity [%s] with id [%s] not found", "Organisation", requestDto.getOrganisationId())));
+                        String.format("Entity [%s] with id [%s] not found", "Organisation",
+                                requestDto.getOrganisationId())));
 
-        if (organisationSubscriptionRepository.findBySubscribedUserIdAndOrganisation(principal.getName(), organisation).isPresent()) {
+        if (organisationSubscriptionRepository.findBySubscribedUserIdAndOrganisation(principal.getName(), organisation)
+                .isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format("Can't create [%s] for [User] with id [%s] and [%s] with id [%s]: [User] is already subscribed this [%s]!",
-                            "OrganisationSubscription", principal.getName(), "Organisation", requestDto.getOrganisationId(), "Organisation"));
+                    String.format(
+                            "Can't create [%s] for [User] with id [%s] and [%s] with id [%s]: [User] is already subscribed this [%s]!",
+                            "OrganisationSubscription", principal.getName(), "Organisation",
+                            requestDto.getOrganisationId(), "Organisation"));
         }
 
         return organisationSubscriptionMapper.organisationSubscriptionToDto(organisationSubscriptionService
@@ -77,12 +81,16 @@ public class OrganisationSubscriptionController {
             @Parameter(hidden = true) @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
         Organisation organisation = organisationService.findById(requestDto.getOrganisationId())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Entity [%s] with id [%s] not found", "Organisation", requestDto.getOrganisationId())));
+                        String.format("Entity [%s] with id [%s] not found", "Organisation",
+                                requestDto.getOrganisationId())));
 
-        OrganisationSubscription organisationSubscription = organisationSubscriptionRepository.findBySubscribedUserIdAndOrganisation(principal.getName(), organisation)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Can't find [%s] for [User] with id [%s] and [%s] with id [%s]!",
-                                "OrganisationSubscription", principal.getName(), "Organisation", requestDto.getOrganisationId())));
+        OrganisationSubscription organisationSubscription =
+                organisationSubscriptionRepository.findBySubscribedUserIdAndOrganisation(principal.getName(),
+                                organisation)
+                        .orElseThrow(() -> new EntityNotFoundException(
+                                String.format("Can't find [%s] for [User] with id [%s] and [%s] with id [%s]!",
+                                        "OrganisationSubscription", principal.getName(), "Organisation",
+                                        requestDto.getOrganisationId())));
 
         organisationSubscriptionRepository.delete(organisationSubscription);
     }
@@ -92,10 +100,11 @@ public class OrganisationSubscriptionController {
     public void deleteOrganisationSubscriptionForCurrentUser(
             @PathVariable("orgSubId") Long organisationSubscriptionId,
             @Parameter(hidden = true) @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
-        OrganisationSubscription organisationSubscription = organisationSubscriptionRepository.findById(organisationSubscriptionId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Entity [%s] with id [%s] not found", "OrganisationSubscription",
-                                organisationSubscriptionId)));
+        OrganisationSubscription organisationSubscription =
+                organisationSubscriptionRepository.findById(organisationSubscriptionId)
+                        .orElseThrow(() -> new EntityNotFoundException(
+                                String.format("Entity [%s] with id [%s] not found", "OrganisationSubscription",
+                                        organisationSubscriptionId)));
 
         if (!organisationSubscription.getSubscribedUserId().equals(principal.getName())) {
             throw new AccessDeniedException(String.format("User [%s] has no permission for entity [%s] with id [%s].",

@@ -30,17 +30,20 @@ public class ContactValidator {
         return validate(sharedMapper.mapContactWipToContact(contactWorkInProgress), objectName, fieldPrefix);
     }
 
-    public BindingResult validate(ContactWorkInProgress contactWorkInProgress, String objectName, String fieldPrefix, BindingResult errors) {
+    public BindingResult validate(ContactWorkInProgress contactWorkInProgress, String objectName, String fieldPrefix,
+                                  BindingResult errors) {
         return validate(sharedMapper.mapContactWipToContact(contactWorkInProgress), objectName, fieldPrefix, errors);
     }
 
     public BindingResult validate(Contact contact) {
         return validate(contact, "contact", "");
     }
+
     public BindingResult validate(Contact contact, String objectName, String fieldPrefix) {
         BindingResult errors = new BeanPropertyBindingResult(contact, "contact");
         return validate(contact, objectName, fieldPrefix, errors);
     }
+
     public BindingResult validate(Contact contact, String objectName, String fieldPrefix, BindingResult errors) {
         if (Objects.isNull(contact)) {
             errors.addError(new FieldError(objectName, fieldPrefix + "contact", "Can't be empty!"));

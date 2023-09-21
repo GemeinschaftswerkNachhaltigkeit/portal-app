@@ -1,7 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_subscription;
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,6 @@ import com.exxeta.wpgwn.wpgwnapp.activity_subscription.model.ActivitySubscriptio
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
-import com.exxeta.wpgwn.wpgwnapp.security.WithMockWpgwnUser;
 import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
 import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
 
@@ -80,7 +78,7 @@ class ActivitySubscriptionControllerTest {
 
         // When
         mockMvc.perform(delete(BASE_API_URL + "/" + activitySubscriptions.get(0).getId())
-                .with(token))
+                        .with(token))
                 // Then
                 .andExpect(status().isOk());
 
@@ -112,7 +110,7 @@ class ActivitySubscriptionControllerTest {
 
         // When
         mockMvc.perform(delete(BASE_API_URL + "/" + activitySubscriptions.get(0).getId())
-                .with(token))
+                        .with(token))
                 // Then
                 .andExpect(status().isOk());
 
@@ -142,10 +140,10 @@ class ActivitySubscriptionControllerTest {
 
         // When
         mockMvc.perform(post(BASE_API_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"activityId\": " + activity.getId() + "}")
-                .accept(MediaType.APPLICATION_JSON)
-                .with(token))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"activityId\": " + activity.getId() + "}")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(token))
                 // Then
                 .andExpect(status().isOk());
 

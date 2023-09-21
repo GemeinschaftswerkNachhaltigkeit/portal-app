@@ -37,13 +37,16 @@ public class LandingPageOrganisationWorkInProgressController {
     private final EmailService emailService;
 
     @PostMapping
-    LandingPageOrganisationDto registerOrganisation(@RequestBody @Valid LandingPageOrganisationDto landingPageOrganisationDto) {
+    LandingPageOrganisationDto registerOrganisation(
+            @RequestBody @Valid LandingPageOrganisationDto landingPageOrganisationDto) {
 
 
-        final OrganisationWorkInProgress organisationWorkInProgress = landingPageOrganisationMapper.landingPageToOrganisationWorkInProgress(
-                landingPageOrganisationDto);
+        final OrganisationWorkInProgress organisationWorkInProgress =
+                landingPageOrganisationMapper.landingPageToOrganisationWorkInProgress(
+                        landingPageOrganisationDto);
         organisationWorkInProgress.setSource(Source.LANDING_PAGE);
-        final OrganisationWorkInProgress savedOrganisationWorkInProgress = workInProgressRepository.save(organisationWorkInProgress);
+        final OrganisationWorkInProgress savedOrganisationWorkInProgress =
+                workInProgressRepository.save(organisationWorkInProgress);
 
         final Email email = Email.builder()
                 .htmlText(true)
@@ -58,7 +61,8 @@ public class LandingPageOrganisationWorkInProgressController {
 
         organisationWorkInProgressService.sendReminderEmail(savedOrganisationWorkInProgress.getId());
 
-        return landingPageOrganisationMapper.organisationWorkInProgressToLandingPageDto(savedOrganisationWorkInProgress);
+        return landingPageOrganisationMapper.organisationWorkInProgressToLandingPageDto(
+                savedOrganisationWorkInProgress);
     }
 
 }

@@ -1,14 +1,14 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.validator;
 
+import java.time.Instant;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportIgnoredException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 
 import com.google.common.collect.Maps;
-
-import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-import java.util.Map;
 
 import static java.util.Objects.nonNull;
 

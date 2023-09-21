@@ -30,9 +30,9 @@ import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.MarketplaceMapper;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.dto.OfferResponseDetailsDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.model.Offer;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.MarketplaceWorkInProgressService;
+import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.MarketplaceWorkInProgressValidator;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.OfferWorkInProgressMapper;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.OfferWorkInProgressPublishService;
-import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.MarketplaceWorkInProgressValidator;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto.OfferWorkInProgressRequestDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto.OfferWorkInProgressResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.model.MarketplaceWorkInProgress;
@@ -154,7 +154,7 @@ public class OfferWorkInProgressController {
     public OfferResponseDetailsDto publishOfferWorkInProgress(@PathVariable("randomUniqueId") UUID randomUniqueId,
                                                               @PathVariable("orgId") Long orgId,
                                                               @AuthenticationPrincipal
-                                                         OAuth2AuthenticatedPrincipal principal) {
+                                                              OAuth2AuthenticatedPrincipal principal) {
 
         final Organisation organisation = organisationService.getOrganisation(orgId);
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
@@ -179,7 +179,8 @@ public class OfferWorkInProgressController {
         final Organisation organisation = organisationService.getOrganisation(orgId);
 //        organisationValidator.hasPermissionForOrganisation(principal, organisation);
 
-        final OfferWorkInProgress offerWip = marketplaceWorkInProgressService.getOfferWorkInProgressByRandomUniqueId(randomUniqueId);
+        final OfferWorkInProgress offerWip =
+                marketplaceWorkInProgressService.getOfferWorkInProgressByRandomUniqueId(randomUniqueId);
         final MarketplaceWorkInProgress savedOfferWip = marketplaceWorkInProgressService.saveOfferImage(offerWip, file);
         return new FileUploadDto(savedOfferWip.getImage());
     }
@@ -195,7 +196,8 @@ public class OfferWorkInProgressController {
         final Organisation organisation = organisationService.getOrganisation(orgId);
 //        organisationValidator.hasPermissionForOrganisation(principal, organisation);
 
-        final OfferWorkInProgress offerWip = marketplaceWorkInProgressService.getOfferWorkInProgressByRandomUniqueId(randomUniqueId);
+        final OfferWorkInProgress offerWip =
+                marketplaceWorkInProgressService.getOfferWorkInProgressByRandomUniqueId(randomUniqueId);
         marketplaceWorkInProgressService.deleteOfferImage(offerWip);
     }
 

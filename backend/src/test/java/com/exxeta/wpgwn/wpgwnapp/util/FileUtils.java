@@ -22,13 +22,9 @@ public class FileUtils {
      * Einlesen der Datei mit dem übergebenen Pfad und Rückgabe der Inhalte als String.
      * Die Datei muss {@link StandardCharsets UTF8} codiert sein.
      *
-     * @param filePath
-     *         Pfad zu der Datei
-     *
+     * @param filePath Pfad zu der Datei
      * @return Den Inhalt der Datei als String
-     *
-     * @throws IOException
-     *         Falls Fehler beim Lesen der Datei auftreten, z.B. wenn die Datei nicht gefunden werden kann.
+     * @throws IOException Falls Fehler beim Lesen der Datei auftreten, z.B. wenn die Datei nicht gefunden werden kann.
      */
     public String readJsonData(String filePath) throws IOException {
         return new String(readBytes(filePath), StandardCharsets.UTF_8);
@@ -37,13 +33,9 @@ public class FileUtils {
     /**
      * Einlesen der Datei mit dem übergebenen Pfad und Rückgabe der Inhalte als byte array.
      *
-     * @param filePath
-     *         Pfad zu der Datei
-     *
+     * @param filePath Pfad zu der Datei
      * @return Den Inhalt der Datei als byte array
-     *
-     * @throws IOException
-     *         Falls Fehler beim Lesen der Datei auftreten, z.B. wenn die Datei nicht gefunden werden kann.
+     * @throws IOException Falls Fehler beim Lesen der Datei auftreten, z.B. wenn die Datei nicht gefunden werden kann.
      */
     public byte[] readBytes(String filePath) throws IOException {
         return DEFAULT_RESOURCE_LOADER.getResource(filePath).getInputStream().readAllBytes();
@@ -52,13 +44,9 @@ public class FileUtils {
     /**
      * Lädt den Inhalt der Datei des übergebenen Pfads als String.
      *
-     * @param filePath
-     *         Datepfad
-     *
+     * @param filePath Datepfad
      * @return Inhalt der Datei als String
-     *
-     * @throws IOException
-     *         wenn ein Fehler beim Lesen der Datei aufgetreten ist
+     * @throws IOException wenn ein Fehler beim Lesen der Datei aufgetreten ist
      */
     public String readStringData(String filePath) throws IOException {
         return new String(readBytes(filePath), StandardCharsets.UTF_8);
@@ -71,13 +59,9 @@ public class FileUtils {
      * wird zu<br>
      * {@code lorem ipsum dolor sit.}
      *
-     * @param filePath
-     *         Dateipfad
-     *
+     * @param filePath Dateipfad
      * @return String ohne Zeilenumbrüche
-     *
-     * @throws IOException
-     *         wenn ein Fehler beim Lesen der Datei aufgetreten ist
+     * @throws IOException wenn ein Fehler beim Lesen der Datei aufgetreten ist
      */
     public String readStringDataAndRemoveLineBreaks(String filePath) throws IOException {
         final String fileContent = readStringData(filePath);
@@ -92,9 +76,7 @@ public class FileUtils {
      * wird zu<br>
      * {@code lorem ipsum dolor sit.}
      *
-     * @param text
-     *         String
-     *
+     * @param text String
      * @return String ohne Zeilenumbrüche
      */
     public String removeLineBreaks(String text) {

@@ -48,7 +48,7 @@ public abstract class OrganisationMapper {
     @Mapping(target = "initiator", ignore = true)
     @Mapping(target = "projectSustainabilityWinner", ignore = true)
     public abstract void mapWorkInProgressToOrganisationWithoutActivities(OrganisationWorkInProgress workInProgress,
-                                                         @MappingTarget Organisation organisation);
+                                                                          @MappingTarget Organisation organisation);
 
     @Mapping(target = "organisation", source = "organisation")
     @Mapping(target = "id", ignore = true)

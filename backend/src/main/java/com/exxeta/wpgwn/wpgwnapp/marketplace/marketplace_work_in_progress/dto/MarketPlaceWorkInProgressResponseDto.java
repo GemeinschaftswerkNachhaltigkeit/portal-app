@@ -29,7 +29,7 @@ public class MarketPlaceWorkInProgressResponseDto {
     private Set<ThematicFocusDto> thematicFocus;
     private String image;
     private ContactDto contact;
-    private LocalDate endUntil;
+    private OffsetDateTime endUntil;
     private UUID randomUniqueId;
     private Boolean featured;
     private String featuredText;

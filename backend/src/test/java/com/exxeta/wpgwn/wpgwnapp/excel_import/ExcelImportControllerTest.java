@@ -92,7 +92,8 @@ class ExcelImportControllerTest {
         OrganisationWorkInProgress organisationWorkInProgress1 = organisationWorkInProgressList.get(1);
         Set<ActivityWorkInProgress> referencesActivities0 = organisationWorkInProgress0.getActivitiesWorkInProgress();
         Set<ActivityWorkInProgress> referencesActivities1 = organisationWorkInProgress1.getActivitiesWorkInProgress();
-        assertThat(Set.of(referencesActivities0.size(), referencesActivities1.size()).containsAll(Set.of(0, 1))).isTrue();
+        assertThat(
+                Set.of(referencesActivities0.size(), referencesActivities1.size()).containsAll(Set.of(0, 1))).isTrue();
         ActivityWorkInProgress activityWorkInProgress =
                 Stream.concat(referencesActivities0.stream(), referencesActivities1.stream()).findFirst().get();
         assertThat(activityWorkInProgress.getId()).isNotNull();

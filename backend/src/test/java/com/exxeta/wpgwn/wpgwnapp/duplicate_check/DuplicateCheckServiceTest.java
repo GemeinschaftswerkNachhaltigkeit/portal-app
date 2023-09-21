@@ -57,31 +57,23 @@ import static org.mockito.Mockito.when;
 class DuplicateCheckServiceTest {
 
     @Autowired
-    private OrganisationRepository organisationRepository;
-
-    @Autowired
-    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
-    @Autowired
-    private DuplicateListRepository duplicateListRepository;
-
-    @Autowired
     DuplicateCheckService duplicateCheckService;
-
     @Autowired
     OrganisationWorkInProgressPublishService organisationWorkInProgressPublishService;
-
-    @Autowired
-    private Clock clock;
-
-    @Autowired
-    private GeometryFactory factory;
-
     @MockBean
     KeycloakService keycloakService;
-
     @MockBean
     EmailService emailService;
+    @Autowired
+    private OrganisationRepository organisationRepository;
+    @Autowired
+    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
+    @Autowired
+    private DuplicateListRepository duplicateListRepository;
+    @Autowired
+    private Clock clock;
+    @Autowired
+    private GeometryFactory factory;
 
     @AfterEach
     void tearDown() {

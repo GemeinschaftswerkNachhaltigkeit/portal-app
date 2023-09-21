@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -92,7 +92,7 @@ public class MarketplaceItem extends AuditableEntityBase {
      * End Datum für OFFER(Angebot), für BEST_PRACTISE ist nicht relevant
      */
     @Column(name = "end_until")
-    private LocalDate endUntil;
+    private OffsetDateTime endUntil;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)

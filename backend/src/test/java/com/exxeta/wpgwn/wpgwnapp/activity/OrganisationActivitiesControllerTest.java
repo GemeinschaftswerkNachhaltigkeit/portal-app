@@ -1,19 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import com.exxeta.wpgwn.wpgwnapp.CmsClientConfiguration;
-import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
-import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
-import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressRepository;
-import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
-import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
-import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
-
-import lombok.RequiredArgsConstructor;
+import java.nio.charset.StandardCharsets;
 
 import org.hamcrest.text.MatchesPattern;
 import org.junit.jupiter.api.AfterEach;
@@ -30,12 +17,29 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StreamUtils;
 
-import java.nio.charset.StandardCharsets;
+import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.CmsClientConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
+import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
+import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgressRepository;
+import com.exxeta.wpgwn.wpgwnapp.cms.CmsClient;
+import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationRepository;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
+import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
+import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Import({CmsClientConfiguration.class, TestSecurityConfiguration.class})
 @SpringBootTest
@@ -44,20 +48,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class OrganisationActivitiesControllerTest {
 
     private static final String BASE_API_URL = "/api/v1/organisations/{orgId}/activities";
-
+    @Autowired
+    ResourceLoader resourceLoader;
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private CmsClient cmsClient;
-
     @Autowired
     @Qualifier("cmsClientForTest")
     private CmsClient cmsClientTest;
-
-    @Autowired
-    ResourceLoader resourceLoader;
-
     @Autowired
     private OrganisationRepository organisationRepository;
 
