@@ -3,7 +3,6 @@ package com.exxeta.wpgwn.wpgwnapp.marketplace;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -94,7 +93,6 @@ class MarketplaceItemControllerTest {
     void getOfferById() throws Exception {
 
         MarketplaceItem testMarketplaceItem = createTestOffer(organisation);
-        testMarketplaceItem.setEndUntil(LocalDate.now(clock));
         testMarketplaceItem.setEndUntil(OffsetDateTime.now(clock));
         testMarketplaceItem = marketplaceRepository.save(testMarketplaceItem);
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
