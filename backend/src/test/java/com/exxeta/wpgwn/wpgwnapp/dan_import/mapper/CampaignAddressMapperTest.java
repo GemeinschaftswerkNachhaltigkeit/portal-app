@@ -69,7 +69,8 @@ public class CampaignAddressMapperTest {
         addressDto.setState("State");
         addressDto.setCity("City");
         nominatimDto.setAddress(addressDto);
-        when(nominatimService.searchAddress("123 Main St, City, Country")).thenReturn(nominatimDto);
+        when(nominatimService.searchAddress("123 Main St, City, Country", "42.123456", "-78.654321")).thenReturn(
+                nominatimDto);
 
         // Create the object under test
         CampaignAddressMapper mapper = new CampaignAddressMapper(nominatimService);
@@ -90,7 +91,7 @@ public class CampaignAddressMapperTest {
         assertEquals("City", location.getAddress().getCity());
 
         // Verify that NominatimService methods were called
-        verify(nominatimService, times(1)).searchAddress("123 Main St, City, Country");
+        verify(nominatimService, times(1)).searchAddress("123 Main St, City, Country", "42.123456", "-78.654321");
     }
 
     @Test
@@ -101,7 +102,7 @@ public class CampaignAddressMapperTest {
 
         // Create a mock NominatimService
         NominatimService nominatimService = mock(NominatimService.class);
-        when(nominatimService.searchAddress("Invalid Venue")).thenReturn(null);
+        when(nominatimService.searchAddress("Invalid Venue", null, null)).thenReturn(null);
 
         // Create the object under test
         CampaignAddressMapper mapper = new CampaignAddressMapper(nominatimService);
@@ -116,7 +117,7 @@ public class CampaignAddressMapperTest {
         assertEquals("Invalid Venue is invalid", errorMessages.get("campaign.address"));
 
         // Verify that NominatimService methods were called
-        verify(nominatimService, times(2)).searchAddress("Invalid Venue");
+        verify(nominatimService, times(2)).searchAddress("Invalid Venue", null, null);
     }
 }
 
