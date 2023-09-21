@@ -1,0 +1,9 @@
+<div class="slide-toggle">
+  <div>{{ 'labels.onlyDan' | translate }}</div>
+  <mat-slide-toggle
+    color="primary"
+    [checked]="selected"
+    (change)="onlyDanHandler($event)"
+  >
+  </mat-slide-toggle>
+</div>

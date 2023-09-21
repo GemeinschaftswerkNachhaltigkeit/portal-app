@@ -20,6 +20,7 @@ export type AdditionalFiltersData = {
   initiator?: boolean;
   projectSustainabilityWinner?: boolean;
   online?: boolean;
+  onlyDan?: boolean;
 };
 
 @Component({

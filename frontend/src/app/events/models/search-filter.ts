@@ -12,6 +12,7 @@ type SearchFilter = PageQuerParams & {
   endDate?: string;
   online?: boolean;
   permanent?: boolean;
+  onlyDan?: boolean;
 };
 
 export default SearchFilter;

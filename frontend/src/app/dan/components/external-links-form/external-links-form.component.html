@@ -1,5 +1,23 @@
 <ng-container [formGroup]="form">
-  <!-- name -->
+  <!-- register url -->
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.registerUrl' | translate"
+      formControlName="registerUrl"
+    />
+    <div matSuffix><mat-icon>language</mat-icon></div>
+    <app-valid-check [form]="form" controlName="registerUrl"></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('registerUrl')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- external url -->
 
   <mat-form-field appearance="outline">
     <mat-label>{{ 'forms.labels.externalLinkDan' | translate }}</mat-label>

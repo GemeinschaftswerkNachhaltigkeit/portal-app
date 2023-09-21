@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.validation.annotation.Validated;
 
 import lombok.Data;
@@ -65,6 +66,10 @@ public class ActivityRequestDto implements Serializable {
     private final ActivityTypeDto activityType;
 
     private final  String externalId;
+
+    @URL
+    @Length(max = 1000)
+    private String registerUrl;
 
     private final LocalDate approvedUntil;
 

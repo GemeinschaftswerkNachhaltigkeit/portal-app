@@ -47,7 +47,8 @@
     "resetFilters": "Reset all filters",
     "add": "Add now",
     "addNewEvent": "Add event",
-    "toDan": "Add action"
+    "toDan": "Add action",
+    "registerUrlButton": "Register for the event"
   },
   "forms": {
     "labels": {
@@ -118,11 +119,13 @@
       "title": "Title",
       "online": "Online",
       "address": "Addresse",
-      "noLocation": "Independent of location"
+      "noLocation": "Independent of location",
+      "registerUrl": "Registration link (extern)"
     }
   },
   "labels": {
     "onlyOnline": "Only online?",
+    "onlyDan": "Only action days?",
     "total": "Results",
     "publishedAt": "published at",
     "createdAt": "created at",

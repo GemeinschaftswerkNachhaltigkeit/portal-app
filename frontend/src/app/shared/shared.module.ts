@@ -92,6 +92,7 @@ import { AddressControlsComponent } from './components/form/address-control/addr
 import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
 import { ImageComponent } from './components/image/image.component';
+import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 
 @NgModule({
   declarations: [
@@ -169,6 +170,7 @@ import { ImageComponent } from './components/image/image.component';
     UploadImageComponent,
     WizardSidebarLayoutComponent,
     OnlineFilterComponent,
+    OnlyDanFilterComponent,
     ImageComponent
   ],
   imports: [

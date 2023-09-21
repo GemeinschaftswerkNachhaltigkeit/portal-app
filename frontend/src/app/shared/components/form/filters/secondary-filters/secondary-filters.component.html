@@ -83,5 +83,13 @@
         (filterChanged)="onlineHandler($event)"
       ></app-online-filter
     ></app-ordered-filter>
+
+    <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLY_DAN)"
+      ><app-only-dan-filter
+        *ngIf="useFilter(filterTypes.ONLY_DAN)"
+        [selected]="filters.onlyDan"
+        (filterChanged)="onlyDanHandler($event)"
+      ></app-only-dan-filter
+    ></app-ordered-filter>
   </div>
 </mat-accordion>

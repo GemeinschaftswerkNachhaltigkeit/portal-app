@@ -49,7 +49,7 @@ export enum OfferCategories {
   /**
    * Netzwerk
    */
-  NETWORK ='NETWORK',
+  NETWORK = 'NETWORK',
 
   /**
    * Sonstiges

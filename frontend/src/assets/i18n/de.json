@@ -48,7 +48,8 @@
     "resetFilters": "Alle Filter zurücksetzen",
     "add": "Jetzt hinzufügen",
     "addNewEvent": "Veranstaltung hinzufügen",
-    "toDan": "Aktion hinzufügen"
+    "toDan": "Aktion hinzufügen",
+    "registerUrlButton": "Zur Veranstalung anmelden"
   },
   "forms": {
     "labels": {
@@ -119,11 +120,13 @@
       "title": "Titel",
       "online": "Online",
       "address": "Adresse",
-      "noLocation": "Ortsunabhängig"
+      "noLocation": "Ortsunabhängig",
+      "registerUrl": "Link zur Anmeldung (extern)"
     }
   },
   "labels": {
     "onlyOnline": "Nur online?",
+    "onlyDan": "Nur Aktionstage?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
     "createdAt": "erstellt am",

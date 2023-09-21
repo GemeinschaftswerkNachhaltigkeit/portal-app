@@ -133,4 +133,24 @@
       (delete)="deleteHandler(imageTypes.TITLE)"
     ></app-upload-image>
   </div>
+
+  <!-- register url -->
+
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.registerUrl' | translate"
+      formControlName="registerUrl"
+    />
+    <app-valid-check
+      [form]="activityFormGroup"
+      controlName="registerUrl"
+    ></app-valid-check>
+    <mat-error>
+      <app-form-field-error
+        [field]="activityFormGroup.get('registerUrl')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
 </form>

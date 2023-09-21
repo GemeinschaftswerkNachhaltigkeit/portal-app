@@ -84,7 +84,9 @@ export class EventsApiService {
       'includeExpiredActivities',
       includeExpiredActivities
     );
-    params = params.append('resultType', 'ACTIVITY');
+    if (!searchFilter.onlyDan) {
+      params = params.append('resultType', 'ACTIVITY');
+    }
     params = params.append('resultType', 'DAN');
     params = params.append('includeNoCoords', includeNoCoords);
     params = params.append('page', nextPage);

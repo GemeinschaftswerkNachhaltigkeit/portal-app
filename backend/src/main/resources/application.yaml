@@ -82,7 +82,7 @@ keycloak:
     read-timeout: 10
     connection-timeout: 10
 nominatim:
-  url: https://nominatim.openstreetmap.org/search.php
+  url: https://nominatim.openstreetmap.org
 
 feign:
   client:

@@ -20,6 +20,7 @@ import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
 import { ImageType } from '../../../shared/models/image-type';
+import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 
 @Component({
   selector: 'app-activity-form',
@@ -69,7 +70,11 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
 
       start: _formBuilder.control('', [Validators.required]),
       end: _formBuilder.control('', [Validators.required]),
-      permanent: _formBuilder.control(false, [])
+      permanent: _formBuilder.control(false, []),
+      registerUrl: _formBuilder.control('', [
+        Validators.maxLength(1000),
+        urlPattern()
+      ])
     });
     this.updateDateSelect();
     this.activityFormGroup.valueChanges
@@ -94,7 +99,8 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
         description: this.wysiwygService.htmlDecode(this.activity.description),
         start: this.activity.period?.start,
         end: this.activity.period?.end,
-        permanent: this.activity.period?.permanent
+        permanent: this.activity.period?.permanent,
+        registerUrl: this.activity.registerUrl
       });
       this.activityFormGroup.markAllAsTouched();
 
@@ -115,6 +121,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
     start: string;
     end: string;
     permanent: boolean;
+    registerUrl: string;
   }) {
     if (
       this.activity?.randomUniqueId &&
@@ -130,7 +137,8 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
           start: formVals.start,
           end: formVals.end,
           permanent: formVals?.permanent
-        }
+        },
+        registerUrl: formVals.registerUrl
       });
     }
   }

@@ -28,6 +28,7 @@ public class ActivityWorkInProgressResponseDto implements Serializable {
     private final ImportProcessDto importProcess;
     private ActivityTypeDto activityType;
     private Set<SocialMediaContactDto> socialMediaContacts;
+    private String registerUrl;
     private PeriodDto period;
     private String logo;
     private String image;

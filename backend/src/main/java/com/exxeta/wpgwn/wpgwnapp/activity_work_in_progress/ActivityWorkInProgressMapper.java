@@ -33,6 +33,7 @@ public abstract class ActivityWorkInProgressMapper {
     @Mapping(target = "randomUniqueId", ignore = true)
     @Mapping(target = "randomIdGenerationTime", ignore = true)
     @Mapping(target = "externalId", ignore = true)
+    @Mapping(target = "registerUrl", ignore = true)
     @Mapping(target = "logo", ignore = true)
     @Mapping(target = "image", ignore = true)
     @Mapping(target = "importProcess", ignore = true)

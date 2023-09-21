@@ -11,6 +11,7 @@ type AdditionalFilters = {
   initiator?: boolean;
   projectSustainabilityWinner?: boolean;
   online?: boolean;
+  onlyDan?: boolean;
 };
 
 export default AdditionalFilters;
