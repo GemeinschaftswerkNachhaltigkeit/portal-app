@@ -58,6 +58,7 @@
                       [location]="offerWip.location"
                       [thematicFocus]="offerWip.thematicFocus"
                       [draft]="true"
+                      [expired]="expired(offerWip)"
                       (edit)="handleEditOfferWip(offerWip)"
                       (delete)="handleDeleteOfferWip(offerWip)"
                     ></app-card>
@@ -105,6 +106,7 @@
                       [location]="offer.location"
                       [thematicFocus]="offer.thematicFocus"
                       [draft]="offer.status === status.INACTIVE"
+                      [expired]="expired(offer)"
                       (edit)="handleEditOffer(offer)"
                       (delete)="handleDeleteOffer(offer)"
                       (cardClicked)="open(offer)"

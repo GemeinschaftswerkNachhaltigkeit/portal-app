@@ -19,6 +19,7 @@ import { MarketplaceItemDto } from '../../models/marketplace-item-dto';
 import { MarketplaceTypes } from '../../models/marketplace-type';
 import { OfferCategories } from '../../models/offer-categories';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { expired } from '../../marketplace-utils';
 
 @Component({
   selector: 'app-marketplace-search',
@@ -65,12 +66,7 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   expired(item: MarketplaceItemDto): boolean {
-    if (!item.endUntil) {
-      return false;
-    }
-    const currentDate = Date.now();
-    const expireDate = new Date(item.endUntil).getTime();
-    return currentDate > expireDate;
+    return expired(item);
   }
 
   getCategories(): (OfferCategories | BestPracticesCategories)[] {

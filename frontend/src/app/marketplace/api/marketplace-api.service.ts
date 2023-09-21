@@ -30,15 +30,6 @@ export class MarketplaceApiService {
         params: this.searchParams(searchFilter)
       }
     );
-    // .pipe(
-    //   map((items) => {
-    //     items.content = items.content.map((item) => {
-    //       item.endUntil = '2023-09-19T00:00:00+02:00';
-    //       return item;
-    //     });
-    //     return items;
-    //   })
-    // );
   }
 
   getFeatured(): Observable<PagedResponse<MarketplaceItemDto>> {

@@ -14,29 +14,36 @@
         [type]="getType(item)"
         [bgImageName]="item.image"
         [catgegory]="'marketplace.labels.' + getCat(item) | translate"
+        [expired]="expired(item)"
       ></app-hero>
     </div>
     <ng-container content class="">
       <section class="title">
         <app-heading color="blue">{{ item.name }}</app-heading>
-        <div class="createdAt">
-          <div>{{ 'labels.publishedAt' | translate }}</div>
-          <div>{{ item.createdAt | date: 'dd.MM.yyyy' }}</div>
+        <div>
+          <div class="createdAt">
+            <div>{{ 'labels.publishedAt' | translate }}</div>
+            <div>{{ item.createdAt | date : 'dd.MM.yyyy' }}</div>
+          </div>
+          <div class="createdAt" *ngIf="item.endUntil">
+            <div>{{ 'labels.availableUntil' | translate }}</div>
+            <div>{{ item.endUntil | date : 'dd.MM.yyyy' }}</div>
+          </div>
         </div>
       </section>
       <section class="sec">
         <app-heading size="xs" color="none">{{
           'marketplace.titles.description' | translate
-          }}</app-heading>
+        }}</app-heading>
         <app-html-wrapper [html]="item.description"></app-html-wrapper>
       </section>
       <section class="sec" *ngIf="item.location?.url">
         <app-heading size="xs" color="none">{{
           'marketplace.titles.externalLink' | translate
-          }}</app-heading>
+        }}</app-heading>
         <a [href]="item.location.url" target="_blank">{{
           item.location.url
-          }}</a>
+        }}</a>
       </section>
     </ng-container>
     <ng-container sidebar>

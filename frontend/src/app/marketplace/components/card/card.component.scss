@@ -20,6 +20,7 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
   }
 
   .expired {
+    pointer-events: none;
     z-index: $z3;
     position: absolute;
     inset: 0;

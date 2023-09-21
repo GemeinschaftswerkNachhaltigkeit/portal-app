@@ -5,6 +5,7 @@ import { MarketplaceFacadeService } from '../../marketplace-facade.service';
 import { BestPracticesCategories } from '../../models/best-practices-categories';
 import { MarketplaceItemDto } from '../../models/marketplace-item-dto';
 import { OfferCategories } from '../../models/offer-categories';
+import { expired } from '../../marketplace-utils';
 
 @Component({
   selector: 'app-marketplace-item-details',
@@ -19,6 +20,10 @@ export class MarketplaceItemDetailsComponent implements OnInit {
     private marketplaceFacade: MarketplaceFacadeService,
     public utils: UtilsService
   ) {}
+
+  expired(item: MarketplaceItemDto): boolean {
+    return expired(item);
+  }
 
   getCat(
     item: MarketplaceItemDto

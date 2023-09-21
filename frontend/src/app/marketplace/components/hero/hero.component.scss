@@ -7,6 +7,21 @@
   position: relative;
   z-index: $z1;
 
+  .expiredBadge {
+    z-index: $z5;
+    position: absolute;
+    left: $spacing-1;
+    bottom: -2.2rem;
+  }
+
+  .expired {
+    pointer-events: none;
+    z-index: $z3;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
   img {
     object-fit: cover;
     width: 100%;
@@ -17,7 +32,7 @@
     position: absolute;
     left: $spacing-8;
     bottom: 0;
-    z-index: 3;
+    z-index: $z4;
     transform: translateY(50%);
   }
 }

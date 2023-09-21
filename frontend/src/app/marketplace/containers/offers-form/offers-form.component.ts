@@ -186,7 +186,6 @@ export class OffersFormComponent implements OnInit, OnDestroy {
     const values = this.formGroup.value;
     const isOnline = values.location === 'ONLINE';
     const isAddress = values.location === 'ADDRESS';
-    console.log('>>> Payload', (values.content.endUntil as DateTime).toISO());
     const payload: OfferWipDto = {
       offerCategory: values.offerCategory,
       name: values.content.name || '',
@@ -267,7 +266,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
         name: wipDto.name,
         description: wipDto.description,
         url: wipDto.location?.url,
-        endUnti: wipDto.endUntil
+        endUntil: wipDto.endUntil ? DateTime.fromISO(wipDto.endUntil) : null
       },
       contact: wipDto.contact,
       visibility: {

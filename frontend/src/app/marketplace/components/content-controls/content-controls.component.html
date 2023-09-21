@@ -81,14 +81,9 @@
       <!-- date -->
 
       <mat-form-field appearance="outline">
-        <mat-label> {{ 'forms.labels.periodDan' | translate }}</mat-label>
+        <mat-label> {{ 'forms.labels.expireDate' | translate }}</mat-label>
 
-        <input
-          matInput
-          [matDatepicker]="picker"
-          [placeholder]="'forms.labels.end' | translate"
-          formControlName="endUntil"
-        />
+        <input matInput [matDatepicker]="picker" formControlName="endUntil" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

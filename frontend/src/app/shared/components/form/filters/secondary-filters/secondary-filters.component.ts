@@ -148,7 +148,6 @@ export class SecondaryFiltersComponent implements OnInit, OnChanges {
     if (!this.useFilter(SecondaryFilters.ONLY_DAN)) {
       delete f.onlyDan;
     }
-    console.log('Filters', f);
     this.filtersChanged.emit(f);
   }
 
