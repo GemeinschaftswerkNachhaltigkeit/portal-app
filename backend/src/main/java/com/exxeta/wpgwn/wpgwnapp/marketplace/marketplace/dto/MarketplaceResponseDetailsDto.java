@@ -1,7 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.dto;
 
 
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 

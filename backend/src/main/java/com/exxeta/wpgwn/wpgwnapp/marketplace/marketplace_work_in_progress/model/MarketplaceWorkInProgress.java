@@ -32,17 +32,6 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.ContactWorkInProgress;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.LocationWorkInProgress;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-
 @Entity
 @Getter
 @Setter
