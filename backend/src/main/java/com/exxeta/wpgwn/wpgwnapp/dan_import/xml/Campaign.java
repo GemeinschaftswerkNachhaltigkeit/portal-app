@@ -1,11 +1,15 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.xml;
 
+import java.time.Instant;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
-import lombok.*;
-
-import java.time.Instant;
 
 import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_TIME_ZONE;
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.utils.HtmlTagRemover.removeHtmlTags;

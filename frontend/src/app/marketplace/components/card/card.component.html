@@ -1,8 +1,14 @@
 <div class="card-wrapper mat-elevation-z8">
+  <div class="expiredBadge" *ngIf="expired">
+    <app-expired-badge>{{
+      'labels.expiredOffer' | translate
+    }}</app-expired-badge>
+  </div>
   <div class="featured" *ngIf="featuredText">
     <div class="new">{{ 'labels.new' | translate }}</div>
     {{ featuredText }}
   </div>
+  <div class="expired" *ngIf="expired"></div>
   <div
     class="card"
     [ngClass]="{

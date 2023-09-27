@@ -10,7 +10,6 @@
       <mat-icon>clear</mat-icon>
     </button>
     <div><app-spinner *ngIf="loading$ | async"></app-spinner></div>
-
     <ng-container *ngIf="(loading$ | async) !== true">
       <ng-container *ngIf="orgId && uuid">
         <form

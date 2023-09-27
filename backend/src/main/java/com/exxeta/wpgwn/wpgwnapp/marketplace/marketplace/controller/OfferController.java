@@ -48,7 +48,7 @@ import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
 /**
  * Endpunkt zum Abrufen, Anlegen, Aktualisieren und Löschen von Marktplatzangeboten.
  * Für ein vorhandenes Angebot wird ein Work-in-progress Objekt erstellt,
- *  dass bearbeitet werden kann. Anschließend können die Änderungen veröffentlicht werden.
+ * dass bearbeitet werden kann. Anschließend können die Änderungen veröffentlicht werden.
  */
 @RestController
 @RequestMapping("/api/v1/organisations/{orgId}/marketplace/offer")
@@ -81,7 +81,7 @@ public class OfferController {
     @GetMapping
     public Page<OfferResponseDto> getMarketplaceItemsByOrganisationId(
             @PathVariable("orgId") Long orgId, Pageable pageable,
-    @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
+            @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
         final boolean hasPermissionToViewAll = organisationValidator.hasPermissionForOrganisation(principal, orgId);
         return marketplaceService.findOffersByOrganisationId(orgId, !hasPermissionToViewAll, pageable)
                 .map(marketplaceMapper::mapOfferToDetailsDto);

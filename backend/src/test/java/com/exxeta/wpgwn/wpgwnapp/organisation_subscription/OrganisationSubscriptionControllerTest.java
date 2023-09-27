@@ -98,8 +98,8 @@ class OrganisationSubscriptionControllerTest {
 
         // When
         mockMvc.perform(delete(BASE_API_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"organisationId\": " + organisation.getId() + "}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"organisationId\": " + organisation.getId() + "}"))
                 // Then
                 .andExpect(status().isOk());
 
@@ -124,9 +124,9 @@ class OrganisationSubscriptionControllerTest {
 
         // When
         mockMvc.perform(post(BASE_API_URL)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"organisationId\": " + organisation.getId() + "}")
-                .accept(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"organisationId\": " + organisation.getId() + "}")
+                        .accept(MediaType.APPLICATION_JSON))
                 // Then
                 .andExpect(status().isOk());
 

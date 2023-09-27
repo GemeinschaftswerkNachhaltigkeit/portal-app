@@ -30,8 +30,8 @@ import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.MarketplaceMapper;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.dto.BestPractiseResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.model.BestPractise;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.MarketplaceWorkInProgressService;
-import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.OfferWorkInProgressPublishService;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.MarketplaceWorkInProgressValidator;
+import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.OfferWorkInProgressPublishService;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto.BestPractiseWorkInProgressRequestDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto.BestPractiseWorkInProgressResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.model.BestPractiseWorkInProgress;
@@ -120,10 +120,11 @@ public class BestPracticeWorkInProgressController {
                                                 @PathVariable("randomUniqueId") UUID randomUniqueId,
                                                 @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal)
             throws IOException {
-        final BestPractiseWorkInProgress offerWip = marketplaceWorkInProgressService.findByRandomUniqueId(randomUniqueId)
-                .filter(marketplaceItem -> marketplaceItem instanceof BestPractiseWorkInProgress)
-                .map(marketPlaceWorkInProgress -> (BestPractiseWorkInProgress) marketPlaceWorkInProgress)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
+        final BestPractiseWorkInProgress offerWip =
+                marketplaceWorkInProgressService.findByRandomUniqueId(randomUniqueId)
+                        .filter(marketplaceItem -> marketplaceItem instanceof BestPractiseWorkInProgress)
+                        .map(marketPlaceWorkInProgress -> (BestPractiseWorkInProgress) marketPlaceWorkInProgress)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
         final Organisation organisation = organisationService.findById(orgId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT));
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
@@ -166,7 +167,8 @@ public class BestPracticeWorkInProgressController {
 //        final Organisation organisation = organisationService.getOrganisation(orgId);
 //        organisationValidator.hasPermissionForOrganisation(principal, organisation);
 
-        final BestPractiseWorkInProgress offerWip = marketplaceWorkInProgressService.getBestPractiseWorkInProgressByRandomUniqueId(randomUniqueId);
+        final BestPractiseWorkInProgress offerWip =
+                marketplaceWorkInProgressService.getBestPractiseWorkInProgressByRandomUniqueId(randomUniqueId);
         final MarketplaceWorkInProgress savedOfferWip = marketplaceWorkInProgressService.saveOfferImage(offerWip, file);
         return new FileUploadDto(savedOfferWip.getImage());
     }
@@ -182,7 +184,8 @@ public class BestPracticeWorkInProgressController {
 //        final Organisation organisation = organisationService.getOrganisation(orgId);
 //        organisationValidator.hasPermissionForOrganisation(principal, organisation);
 
-        final MarketplaceWorkInProgress offer = marketplaceWorkInProgressService.getBestPractiseWorkInProgressByRandomUniqueId(randomUniqueId);
+        final MarketplaceWorkInProgress offer =
+                marketplaceWorkInProgressService.getBestPractiseWorkInProgressByRandomUniqueId(randomUniqueId);
         marketplaceWorkInProgressService.deleteOfferImage(offer);
     }
 

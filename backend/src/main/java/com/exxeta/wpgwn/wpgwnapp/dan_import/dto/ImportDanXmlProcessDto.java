@@ -1,12 +1,12 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.dto;
 
-import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlResult;
-import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportDanXmlResult;
+import com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus;
 
 @Getter
 @Setter

@@ -59,61 +59,42 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class OrganisationWorkInProgressPublishServiceTest {
 
-    @MockBean
-    OrganisationService organisationService;
-
-    @MockBean
-    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
-    @MockBean
-    private ActivityWorkInProgressService activityWorkInProgressService;
-
-    @MockBean
-    private KeycloakService keycloakService;
-
-    @MockBean
-    private DuplicateCheckService duplicateCheckService;
-
-    @MockBean
-    OrganisationMembershipService organisationMembershipService;
-
-    @MockBean
-    private ContactInviteService contactInviteService;
-
-    @MockBean
-    private EmailService emailService;
-
-    @MockBean
-    private EmailOptOutService emailOptOutService;
-
-    @MockBean
-    private ApplicationEventPublisher applicationEventPublisher;
-
-    @MockBean
-    private FileStorageService fileStorageService;
-
-    @Autowired
-    private ImageMapper imageMapper;
-
-    @Autowired
-    private TemplateEngine templateEngine;
-
-    @Autowired
-    private MailToLinkGenerator mailToLinkGenerator;
-
-    @Autowired
-    private MessageSource messageSource;
-
-    OrganisationWorkInProgressPublishService service;
-
-    private EmailProperties emailProps;
-
-    private GreenMail greenMail;
-
-    private OrganisationMapper organisationMapper;
-
     final String toAddress = "test@exxeta.com";
     final String contactAddress = "contactAddress@exxeta.com";
+    @MockBean
+    OrganisationService organisationService;
+    @MockBean
+    OrganisationMembershipService organisationMembershipService;
+    OrganisationWorkInProgressPublishService service;
+    @MockBean
+    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
+    @MockBean
+    private ActivityWorkInProgressService activityWorkInProgressService;
+    @MockBean
+    private KeycloakService keycloakService;
+    @MockBean
+    private DuplicateCheckService duplicateCheckService;
+    @MockBean
+    private ContactInviteService contactInviteService;
+    @MockBean
+    private EmailService emailService;
+    @MockBean
+    private EmailOptOutService emailOptOutService;
+    @MockBean
+    private ApplicationEventPublisher applicationEventPublisher;
+    @MockBean
+    private FileStorageService fileStorageService;
+    @Autowired
+    private ImageMapper imageMapper;
+    @Autowired
+    private TemplateEngine templateEngine;
+    @Autowired
+    private MailToLinkGenerator mailToLinkGenerator;
+    @Autowired
+    private MessageSource messageSource;
+    private EmailProperties emailProps;
+    private GreenMail greenMail;
+    private OrganisationMapper organisationMapper;
 
     @BeforeEach
     void setUp() {

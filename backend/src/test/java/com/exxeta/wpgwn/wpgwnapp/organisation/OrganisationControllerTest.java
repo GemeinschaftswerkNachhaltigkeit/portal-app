@@ -1,5 +1,26 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.keycloak.admin.client.resource.GroupResource;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.exxeta.wpgwn.wpgwnapp.TestSecurityConfiguration;
 import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
@@ -28,27 +49,6 @@ import com.exxeta.wpgwn.wpgwnapp.user.UserValidator;
 import com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils;
 import com.exxeta.wpgwn.wpgwnapp.util.MockSecurityUtils;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.keycloak.admin.client.resource.GroupResource;
-import org.keycloak.admin.client.resource.UserResource;
-import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
@@ -64,48 +64,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrganisationControllerTest {
 
-    @Autowired
-    Clock clock;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private OrganisationRepository organisationRepository;
-
-    @Autowired
-    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
-    @Autowired
-    private OrganisationMembershipRepository organisationMembershipRepository;
-
-    @Autowired
-    private OrganisationSubscriptionRepository organisationSubscriptionRepository;
-
-    @Autowired
-    private ActivityRepository activityRepository;
-
-    @Autowired
-    private ActivitySubscriptionRepository activitySubscriptionRepository;
-
-    @Autowired
-    private ContactInviteRepository contactInviteRepository;
-
-    @Autowired
-    private DuplicateListRepository duplicateListRepository;
-
-    @Autowired
-    private DuplicateCheckService duplicateCheckService;
-
-    @MockBean
-    private KeycloakService keycloakService;
-
-    @MockBean
-    private UserValidator userValidator;
-
-    @Autowired
-    private WpgwnProperties properties;
-
     private static final String BASE_API_URL = "/api/v1/organisations";
     private static final String adminMail = "user_admin@exxeta.com";
     private static final String adminId = "KEYCLOAK_ADMIN_ID";
@@ -115,10 +73,37 @@ class OrganisationControllerTest {
     private static final String subId = "KEYCLOAK_SUB_ID";
     private static final String groupId = "KEYCLOAK_GROUP";
     private static final String groupIdAdmin = "KEYCLOAK_GROUP_ADMIN";
-
-    private Organisation organisation;
+    @Autowired
+    Clock clock;
     GroupResource group;
     GroupResource groupAdmin;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private OrganisationRepository organisationRepository;
+    @Autowired
+    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
+    @Autowired
+    private OrganisationMembershipRepository organisationMembershipRepository;
+    @Autowired
+    private OrganisationSubscriptionRepository organisationSubscriptionRepository;
+    @Autowired
+    private ActivityRepository activityRepository;
+    @Autowired
+    private ActivitySubscriptionRepository activitySubscriptionRepository;
+    @Autowired
+    private ContactInviteRepository contactInviteRepository;
+    @Autowired
+    private DuplicateListRepository duplicateListRepository;
+    @Autowired
+    private DuplicateCheckService duplicateCheckService;
+    @MockBean
+    private KeycloakService keycloakService;
+    @MockBean
+    private UserValidator userValidator;
+    @Autowired
+    private WpgwnProperties properties;
+    private Organisation organisation;
 
     @BeforeEach
     void buildUp() {

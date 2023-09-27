@@ -37,7 +37,8 @@ public class FileController {
 
     private final Clock clock;
 
-    private final Pattern filenamePattern = Pattern.compile("^/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.\\w{1,4}$");
+    private final Pattern filenamePattern =
+            Pattern.compile("^/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.\\w{1,4}$");
 
 
     @GetMapping("{*path}")

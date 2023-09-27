@@ -14,6 +14,7 @@ export class HeroComponent {
   @Input() bgImageName!: string;
   @Input() type!: 'offer' | 'bestPractice';
   @Input() catgegory?: OfferCategories | BestPracticesCategories;
+  @Input() expired = false;
 
   constructor(public utils: UtilsService, private imgService: ImgService) {}
 

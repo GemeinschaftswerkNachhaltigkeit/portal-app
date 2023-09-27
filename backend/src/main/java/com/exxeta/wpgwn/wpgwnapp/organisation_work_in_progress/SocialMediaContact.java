@@ -9,15 +9,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Objects;
 
-import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
+import org.springframework.util.StringUtils;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.SocialMediaType;
-import org.springframework.util.StringUtils;
 
 /**
  * Entity, die Social Media Einträge für Organisation in Progress speichert.
@@ -38,6 +38,11 @@ public class SocialMediaContact extends AuditableEntityBase {
     @JoinColumn(name = "organisation_work_in_progress_id")
     private OrganisationWorkInProgress organisationWorkInProgress;
 
+    public SocialMediaContact(SocialMediaType type, String contact) {
+        this.type = type;
+        this.contact = contact;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -48,11 +53,6 @@ public class SocialMediaContact extends AuditableEntityBase {
         }
         SocialMediaContact that = (SocialMediaContact) o;
         return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    public SocialMediaContact(SocialMediaType type, String contact) {
-        this.type = type;
-        this.contact = contact;
     }
 
     @Override

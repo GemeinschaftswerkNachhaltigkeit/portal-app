@@ -1,11 +1,11 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.utils;
 
-import lombok.experimental.UtilityClass;
-
 import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Safelist;
+
+import lombok.experimental.UtilityClass;
 
 import static org.springframework.util.StringUtils.hasText;
 

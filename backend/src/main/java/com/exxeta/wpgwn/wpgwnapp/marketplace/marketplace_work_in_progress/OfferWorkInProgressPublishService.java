@@ -43,7 +43,7 @@ public class OfferWorkInProgressPublishService {
 
     @Transactional
     public BestPractise updateBestPractiseWithWorkInProgress(BestPractiseWorkInProgress workInProgress,
-                                         OAuth2AuthenticatedPrincipal principal) {
+                                                             OAuth2AuthenticatedPrincipal principal) {
         final Organisation organisation = Objects.requireNonNull(workInProgress.getOrganisation());
         final BestPractise bestPractise = Optional.ofNullable(workInProgress.getMarketplaceItem())
                 .filter(item -> item instanceof BestPractise)
@@ -65,7 +65,7 @@ public class OfferWorkInProgressPublishService {
 
     @Transactional
     public Offer updateOfferWithOfferWorkInProgress(OfferWorkInProgress workInProgress,
-                                                              OAuth2AuthenticatedPrincipal principal) {
+                                                    OAuth2AuthenticatedPrincipal principal) {
         final Organisation organisation = Objects.requireNonNull(workInProgress.getOrganisation());
         final Offer offer = Optional.ofNullable(workInProgress.getMarketplaceItem())
                 .filter(item -> item instanceof Offer)

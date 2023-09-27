@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_membership.dto;
 
-import com.exxeta.wpgwn.wpgwnapp.organisation_membership.model.OrganisationMembershipUserType;
-
 import lombok.Data;
+
+import com.exxeta.wpgwn.wpgwnapp.organisation_membership.model.OrganisationMembershipUserType;
 
 @Data
 public class OrganisationMembershipRequestDto {

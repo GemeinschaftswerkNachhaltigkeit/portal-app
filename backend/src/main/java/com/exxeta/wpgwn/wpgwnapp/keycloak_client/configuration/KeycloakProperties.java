@@ -3,7 +3,6 @@ package com.exxeta.wpgwn.wpgwnapp.keycloak_client.configuration;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 

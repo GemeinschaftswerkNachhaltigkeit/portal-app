@@ -12,13 +12,13 @@ import javax.validation.constraints.NotNull;
 import java.time.Instant;
 import java.util.UUID;
 
+import org.springframework.lang.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
-
-import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name = "organisation_membership")

@@ -62,7 +62,7 @@ public class DefaultImageService {
             ClassLoader cl = this.getClass().getClassLoader();
             ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
             resources = resolver.getResources(locationPattern);
-            for (Resource resource: resources) {
+            for (Resource resource : resources) {
                 log.debug("Location Pattern: " + resource.toString());
             }
         } catch (IOException e) {

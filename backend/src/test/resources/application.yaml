@@ -99,8 +99,8 @@ wpgwn:
       oneTimePasswordLength: 12
       expireFromCreationInDays: 42
     marketplace:
-        max-offers: 10
-        max-best-practises: 10
+      max-offers: 10
+      max-best-practises: 10
     dan:
       max-dans: 50
 file:

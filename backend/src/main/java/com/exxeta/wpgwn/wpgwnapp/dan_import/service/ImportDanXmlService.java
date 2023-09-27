@@ -93,6 +93,8 @@ public class ImportDanXmlService {
             "activities/act5.jpg",
             "activities/act6.jpg"};
 
+    private final String defaultEmail = "gemeinschaftswerk@nachhaltigkeitsrat.de";
+
     public Campaigns loadXmlFromFile(MultipartFile xmlFile) {
         ObjectMapper xmlMapper = mappingJackson2XmlHttpMessageConverter.getObjectMapper();
         try {
@@ -156,6 +158,7 @@ public class ImportDanXmlService {
         Instant now = Instant.now(clock);
         for (Campaign campaign : campaigns.getCampaigns()) {
             try {
+                fixEmailIfEmpty(campaign);
                 campaignExpiredValidator.validate(campaign, now);
                 campaignTechValidator.validate(campaign);
                 boolean update = campaignDuplicateValidator.validate(campaign);
@@ -177,6 +180,12 @@ public class ImportDanXmlService {
         if (!importDanXmlResult.getImported().isEmpty()
                 || !importDanXmlResult.getUpdated().isEmpty()) {
             applicationEventPublisher.publishEvent(new ActivityUpdateEvent(new Activity()));
+        }
+    }
+
+    private void fixEmailIfEmpty(Campaign campaign) {
+        if (!hasText(campaign.getOrganizerEmail())) {
+            campaign.setOrganizerEmail(defaultEmail);
         }
     }
 

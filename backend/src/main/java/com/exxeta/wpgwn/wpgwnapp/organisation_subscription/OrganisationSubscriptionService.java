@@ -17,7 +17,8 @@ public class OrganisationSubscriptionService {
     private final OrganisationSubscriptionRepository organisationSubscriptionRepository;
     private final OrganisationService organisationService;
 
-    public OrganisationSubscription createOrganisationSubscriptionForOrganisationAndUser(Organisation organisation, String userName) {
+    public OrganisationSubscription createOrganisationSubscriptionForOrganisationAndUser(Organisation organisation,
+                                                                                         String userName) {
         OrganisationSubscription organisationSubscription = new OrganisationSubscription();
         organisationSubscription.setOrganisation(organisation);
         organisationSubscription.setSubscribedUserId(userName);

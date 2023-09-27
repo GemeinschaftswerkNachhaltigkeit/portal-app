@@ -1,5 +1,15 @@
 package com.exxeta.wpgwn.wpgwnapp.email_opt_out;
 
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
+import com.exxeta.wpgwn.wpgwnapp.email_opt_out.dto.EmailOptOutEntryDto;
+import com.exxeta.wpgwn.wpgwnapp.email_opt_out.model.EmailOptOutEntry;
+
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriTemplate;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.constraints.NotNull;
 import java.time.Clock;
@@ -8,16 +18,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriTemplate;
-
-import lombok.RequiredArgsConstructor;
-
-import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
-import com.exxeta.wpgwn.wpgwnapp.email_opt_out.dto.EmailOptOutEntryDto;
-import com.exxeta.wpgwn.wpgwnapp.email_opt_out.model.EmailOptOutEntry;
 
 @Service
 @RequiredArgsConstructor
@@ -55,7 +55,8 @@ public class EmailOptOutService {
 
     public EmailOptOutEntry setEmailOptOutOptionsForUUID(@NonNull UUID uuid,
                                                          @NonNull EmailOptOutEntryDto optOutEntryDto) {
-        final EmailOptOutEntry entry = getEmailOptOutOptionsForUUIDAndEmail(uuid, optOutEntryDto.getEmail().toLowerCase());
+        final EmailOptOutEntry entry =
+                getEmailOptOutOptionsForUUIDAndEmail(uuid, optOutEntryDto.getEmail().toLowerCase());
         final Set<EmailOptOutOption> emailOptOutOptions = entry.getEmailOptOutOptions();
         emailOptOutOptions.clear();
         emailOptOutOptions.addAll(getOptOutableOptions(optOutEntryDto));

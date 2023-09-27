@@ -114,6 +114,15 @@ public class WpgwnProperties {
     @Validated
     public static class ReminderEmail {
 
+        @NotNull
+        @PositiveOrZero
+        private final Integer maxReminders;
+        private final Duration durationBetweenReminders;
+        @NotBlank
+        private final String cron;
+        @NotNull
+        private final Integer batchSize;
+
         public ReminderEmail(Integer maxReminders,
                              @DurationUnit(ChronoUnit.DAYS) Duration durationBetweenReminders,
                              String cron,
@@ -123,18 +132,6 @@ public class WpgwnProperties {
             this.cron = cron;
             this.batchSize = batchSize;
         }
-
-        @NotNull
-        @PositiveOrZero
-        private final Integer maxReminders;
-
-        private final Duration durationBetweenReminders;
-
-        @NotBlank
-        private final String cron;
-
-        @NotNull
-        private final Integer batchSize;
 
     }
 
@@ -163,12 +160,12 @@ public class WpgwnProperties {
     @Validated
     public static class ContactInvite {
 
+        @NotNull
+        private final Duration expireFromCreationInDays;
+
         public ContactInvite(@DurationUnit(ChronoUnit.DAYS) Duration expireFromCreationInDays) {
             this.expireFromCreationInDays = expireFromCreationInDays;
         }
-
-        @NotNull
-        private final Duration expireFromCreationInDays;
 
 
     }
@@ -177,17 +174,16 @@ public class WpgwnProperties {
     @Validated
     public static class OrganisationMembership {
 
+        @NotNull
+        private final Duration expireFromCreationInDays;
+        @NotNull
+        private final Integer oneTimePasswordLength;
+
         public OrganisationMembership(@DurationUnit(ChronoUnit.DAYS) Duration expireFromCreationInDays,
                                       Integer oneTimePasswordLength) {
             this.expireFromCreationInDays = expireFromCreationInDays;
             this.oneTimePasswordLength = oneTimePasswordLength;
         }
-
-        @NotNull
-        private final Duration expireFromCreationInDays;
-
-        @NotNull
-        private final Integer oneTimePasswordLength;
 
     }
 

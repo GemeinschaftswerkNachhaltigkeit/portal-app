@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -83,6 +84,11 @@ public abstract class MarketplaceWorkInProgress extends AuditableEntityBase {
     @Column(name = "random_unique_id", unique = true, nullable = false)
     private UUID randomUniqueId;
 
+    /**
+     * End Datum für OFFER(Angebot), für BEST_PRACTISE ist nicht relevant
+     */
+    @Column(name = "end_until")
+    private OffsetDateTime endUntil;
     /**
      * Generierungszeit für die {@link #randomUniqueId} um das Ablaufdatum zu ermitteln.
      */

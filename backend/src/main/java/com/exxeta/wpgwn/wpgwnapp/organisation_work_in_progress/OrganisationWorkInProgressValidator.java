@@ -54,6 +54,11 @@ public class OrganisationWorkInProgressValidator {
 
     private final SmartValidator smartValidator;
 
+    private static boolean hasStatus(@NonNull OrganisationStatus status,
+                                     @NonNull List<OrganisationStatus> validStatusList) {
+        return validStatusList.contains(status);
+    }
+
     /**
      * Validierung, ob ein Nutzer die Organisation bearbeiten darf.
      *
@@ -180,11 +185,6 @@ public class OrganisationWorkInProgressValidator {
             errors.addError(new FieldError(name, "status", "ist nicht " + validStatusList));
         }
         return errors;
-    }
-
-    private static boolean hasStatus(@NonNull OrganisationStatus status,
-                                     @NonNull List<OrganisationStatus> validStatusList) {
-        return validStatusList.contains(status);
     }
 
     public void hasPermissionForOrganisationWorkInProgressCreation(OAuth2AuthenticatedPrincipal principal) {

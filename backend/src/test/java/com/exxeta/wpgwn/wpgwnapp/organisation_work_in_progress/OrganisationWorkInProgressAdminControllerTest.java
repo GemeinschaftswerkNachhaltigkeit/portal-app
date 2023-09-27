@@ -71,56 +71,34 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequiredArgsConstructor
 class OrganisationWorkInProgressAdminControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
     private static final String BASE_API_URL = "/api/v1/manage-organisations";
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @MockBean
-    private KeycloakService keycloakService;
-
-    @Autowired
-    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
-
-    @Autowired
-    private DuplicateCheckService duplicateCheckService;
-
-    @Autowired
-    private OrganisationRepository organisationRepository;
-
-    @Autowired
-    private FeedbackHistoryEntryRepository feedbackHistoryEntryRepository;
-
-    @Autowired
-    private MailProperties mailProperties;
-
-    @Autowired
-    Clock clock;
-
-    private DateTimeProvider dateTimeProvider;
-
-    @Autowired
-    private AuditingHandler handler;
-
-    @Autowired
-    private EmailOptOutRepository emailOptOutRepository;
-
-    private GreenMail greenMail;
-
-    private final GeometryFactory geometryFactory = new GeometryFactory();
-
     final String toAddress = "test@exxeta.com";
     final String contactAddress = "contactAddress@exxeta.com";
+    private final GeometryFactory geometryFactory = new GeometryFactory();
+    @Autowired
+    Clock clock;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ResourceLoader resourceLoader;
+    @MockBean
+    private KeycloakService keycloakService;
+    @Autowired
+    private OrganisationWorkInProgressRepository organisationWorkInProgressRepository;
+    @Autowired
+    private DuplicateCheckService duplicateCheckService;
+    @Autowired
+    private OrganisationRepository organisationRepository;
+    @Autowired
+    private FeedbackHistoryEntryRepository feedbackHistoryEntryRepository;
+    @Autowired
+    private MailProperties mailProperties;
+    private DateTimeProvider dateTimeProvider;
+    @Autowired
+    private AuditingHandler handler;
+    @Autowired
+    private EmailOptOutRepository emailOptOutRepository;
+    private GreenMail greenMail;
 
     @BeforeEach
     void setUp() {
@@ -368,5 +346,13 @@ class OrganisationWorkInProgressAdminControllerTest {
         org.setLocationWorkInProgress(locationWorkInProgress);
 
         return org;
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-08-01T16:22:27.605Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 }

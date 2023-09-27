@@ -38,7 +38,7 @@ public class ExcelImportTestHelper {
 
         LocationWorkInProgress locationWorkInProgress = new LocationWorkInProgress();
         result.setLocationWorkInProgress(locationWorkInProgress);
-        locationWorkInProgress.setCoordinate(GEOMETRY_FACTORY.createPoint(new Coordinate(13.405837,52.515607)));
+        locationWorkInProgress.setCoordinate(GEOMETRY_FACTORY.createPoint(new Coordinate(13.405837, 52.515607)));
         locationWorkInProgress.setUrl("http://test.de");
         locationWorkInProgress.setOnline(null);
 
@@ -110,9 +110,9 @@ public class ExcelImportTestHelper {
 
         Period period = new Period();
         result.setPeriod(period);
-        period.setStart(ZonedDateTime.of(LocalDateTime.of(2022, Month.AUGUST, 18, 0,0),
+        period.setStart(ZonedDateTime.of(LocalDateTime.of(2022, Month.AUGUST, 18, 0, 0),
                 ZoneId.systemDefault()).toInstant());
-        period.setEnd(ZonedDateTime.of(LocalDateTime.of(2022, Month.AUGUST, 19, 0,0),
+        period.setEnd(ZonedDateTime.of(LocalDateTime.of(2022, Month.AUGUST, 19, 0, 0),
                 ZoneId.systemDefault()).toInstant());
 
         ContactWorkInProgress contactWorkInProgress = new ContactWorkInProgress();
@@ -137,7 +137,7 @@ public class ExcelImportTestHelper {
         result.setThematicFocus(Set.of());
 
         LocationWorkInProgress locationWorkInProgress = new LocationWorkInProgress();
-        locationWorkInProgress.setCoordinate(GEOMETRY_FACTORY.createPoint(new Coordinate(13.412837,52.523607)));
+        locationWorkInProgress.setCoordinate(GEOMETRY_FACTORY.createPoint(new Coordinate(13.412837, 52.523607)));
         result.setLocationWorkInProgress(locationWorkInProgress);
 
         final Address address = new Address();
@@ -165,7 +165,8 @@ public class ExcelImportTestHelper {
         return result;
     }
 
-    public static void compareOrganisationValues(OrganisationWorkInProgress expected, OrganisationWorkInProgress actual) {
+    public static void compareOrganisationValues(OrganisationWorkInProgress expected,
+                                                 OrganisationWorkInProgress actual) {
         assertThat(actual.getName()).isEqualTo(expected.getName());
         assertThat(actual.getDescription()).isEqualTo(expected.getDescription());
         assertThat(actual.getImpactArea()).isEqualTo(expected.getImpactArea());
@@ -185,7 +186,8 @@ public class ExcelImportTestHelper {
 
         assertThat(actual.getExternalId()).isEqualTo(expected.getExternalId());
         assertThat(actual.getSource()).isEqualTo(expected.getSource());
-        assertThat(actual.getActivitiesWorkInProgress().size()).isEqualTo(expected.getActivitiesWorkInProgress().size());
+        assertThat(actual.getActivitiesWorkInProgress().size()).isEqualTo(
+                expected.getActivitiesWorkInProgress().size());
 
         if (actual.getActivitiesWorkInProgress().size() == 1) {
             final ActivityWorkInProgress actualActivity = actual.getActivitiesWorkInProgress().iterator().next();
@@ -245,7 +247,8 @@ public class ExcelImportTestHelper {
         assertThat(actual.getCountry()).isEqualTo(expected.getCountry());
     }
 
-    public static void compareOrganizationSocialMediaContactSets(Set<SocialMediaContact> expected, Set<SocialMediaContact> actual) {
+    public static void compareOrganizationSocialMediaContactSets(Set<SocialMediaContact> expected,
+                                                                 Set<SocialMediaContact> actual) {
         assertThat(actual.size()).isEqualTo(expected.size());
 
         actual.forEach(smcAct -> {
@@ -253,13 +256,16 @@ public class ExcelImportTestHelper {
         });
     }
 
-    public static boolean compareOrganizationSocialMediaContacts(SocialMediaContact expected, SocialMediaContact actual) {
+    public static boolean compareOrganizationSocialMediaContacts(SocialMediaContact expected,
+                                                                 SocialMediaContact actual) {
 
         return expected.getContact().equals(actual.getContact())
                 && expected.getType().equals(actual.getType());
     }
 
-    public static void compareActivitySocialMediaContactSets(Set<com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact> expected, Set<com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact> actual) {
+    public static void compareActivitySocialMediaContactSets(
+            Set<com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact> expected,
+            Set<com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact> actual) {
         assertThat(actual.size()).isEqualTo(expected.size());
 
         actual.forEach(smcAct -> {
@@ -267,7 +273,9 @@ public class ExcelImportTestHelper {
         });
     }
 
-    public static boolean compareActivitySocialMediaContacts(com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact expected, com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact actual) {
+    public static boolean compareActivitySocialMediaContacts(
+            com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact expected,
+            com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.SocialMediaContact actual) {
 
         return expected.getContact().equals(actual.getContact())
                 && expected.getType().equals(actual.getType());

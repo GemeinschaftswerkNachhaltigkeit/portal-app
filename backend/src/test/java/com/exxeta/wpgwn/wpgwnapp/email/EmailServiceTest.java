@@ -1,12 +1,12 @@
 package com.exxeta.wpgwn.wpgwnapp.email;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +21,7 @@ import com.exxeta.wpgwn.wpgwnapp.util.MailVerifyUtil;
 import com.exxeta.wpgwn.wpgwnapp.util.MailVerifyUtil.ContentType;
 import com.exxeta.wpgwn.wpgwnapp.util.MailVerifyUtil.MailVerifyAttachment;
 import com.exxeta.wpgwn.wpgwnapp.util.MailVerifyUtil.MailVerifyInByteArrayFileAttachment;
+
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
 
@@ -112,7 +113,9 @@ class EmailServiceTest {
 
         // Then
         final MimeMessage receivedMessage = greenMail.getReceivedMessages()[0];
-        MailVerifyAttachment att1 = new MailVerifyInByteArrayFileAttachment(attachment.getPayload(), "application/octet-stream", attachment.getFilename());
+        MailVerifyAttachment att1 =
+                new MailVerifyInByteArrayFileAttachment(attachment.getPayload(), "application/octet-stream",
+                        attachment.getFilename());
         List<MailVerifyAttachment> attachments = List.of(att1);
         MailVerifyUtil.verifyMultipartMail(receivedMessage, new MailVerifyUtil.MailVerifyProperties(
                 "classpath:testsamples/email/test-mail.html",

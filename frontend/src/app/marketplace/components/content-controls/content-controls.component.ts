@@ -1,5 +1,6 @@
 import {
   Component,
+  Inject,
   Input,
   NgZone,
   OnChanges,
@@ -7,6 +8,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Editor } from '@tiptap/core';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
@@ -27,9 +31,20 @@ export class ContentControlsComponent implements OnInit, OnChanges {
   constructor(
     private rootFormGroup: FormGroupDirective,
     private wysiwygService: WysiwygService,
+    private adapter: DateAdapter<LuxonDateAdapter>,
+    private translate: TranslateService,
+    @Inject(MAT_DATE_LOCALE) private locale: string,
     private zone: NgZone
   ) {
     this.editor = wysiwygService.getTipTapConfig(this.descriptionPlaceholder);
+    this.translate.onLangChange.subscribe((event) => {
+      this.changeDatePickerLang(event.lang);
+    });
+  }
+
+  changeDatePickerLang(locale: string) {
+    this.locale = locale;
+    this.adapter.setLocale(this.locale);
   }
 
   currentCharsHtml(field: string): number {

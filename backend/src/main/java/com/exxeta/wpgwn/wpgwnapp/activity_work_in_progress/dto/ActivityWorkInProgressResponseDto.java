@@ -17,21 +17,19 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.ThematicFocusDto;
 @Data
 public class ActivityWorkInProgressResponseDto implements Serializable {
     private final Long id;
-
-    private String name;
-    private String description;
     private final Set<Long> sustainableDevelopmentGoals;
-    private ImpactAreaDto impactArea;
     private final ContactDto contact;
     private final LocationDto location;
     private final Set<ThematicFocusDto> thematicFocus;
     private final ImportProcessDto importProcess;
+    private final String randomUniqueId;
+    private String name;
+    private String description;
+    private ImpactAreaDto impactArea;
     private ActivityTypeDto activityType;
     private Set<SocialMediaContactDto> socialMediaContacts;
     private String registerUrl;
     private PeriodDto period;
     private String logo;
     private String image;
-
-    private final String randomUniqueId;
 }

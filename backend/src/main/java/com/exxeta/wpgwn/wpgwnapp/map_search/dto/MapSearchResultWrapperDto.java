@@ -1,10 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search.dto;
 
-import com.exxeta.wpgwn.wpgwnapp.map_search.MapSearchResultType;
-
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.MapSearchResultType;
 import com.exxeta.wpgwn.wpgwnapp.organisation.dto.OrganisationResponseDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.LocationDto;
 

@@ -59,15 +59,21 @@ public interface ExcelHeader {
             return ImpactArea.valueOf(value);
         } catch (IllegalArgumentException iae) {
             switch (value) {
-                case "LOKAL": return ImpactArea.LOCAL;
+                case "LOKAL":
+                    return ImpactArea.LOCAL;
                 case "KONTINENT":
-                case "EUROPAWEIT": return ImpactArea.CONTINENT;
-                case "LANDESWEIT": return ImpactArea.STATE;
-                case "BUNDESWEIT": return ImpactArea.COUNTRY;
+                case "EUROPAWEIT":
+                    return ImpactArea.CONTINENT;
+                case "LANDESWEIT":
+                    return ImpactArea.STATE;
+                case "BUNDESWEIT":
+                    return ImpactArea.COUNTRY;
                 case "WELT":
                 case "WELTWEIT":
-                case "GLOBAL": return ImpactArea.WORLD;
-                default: throw iae;
+                case "GLOBAL":
+                    return ImpactArea.WORLD;
+                default:
+                    throw iae;
             }
         }
     }
@@ -75,17 +81,6 @@ public interface ExcelHeader {
     static String getCleanedString(Cell cell) {
         return cell.getStringCellValue().replaceAll("\\u00A0", "").trim();
     }
-
-    /**
-     * Validiert, dass die übergebene {@link Cell} genau den Wert des Headers erhält.
-     *
-     * @param cell   Zelle, die überprüft werden soll.
-     * @param rowNum
-     * @throws IllegalArgumentException falls die Zelle nicht den korrekten Inhalt hat.
-     */
-    void validateCellEqualsHeader(Cell cell, int rowNum);
-
-    <T extends IWorkInProgress> void setValueOfWorkInProgressObject(T workInProgressObject, Cell cell);
 
     static boolean isValidUrl(String value) {
         if (value == null || value.isEmpty()) {
@@ -99,4 +94,15 @@ public interface ExcelHeader {
             return false;
         }
     }
+
+    /**
+     * Validiert, dass die übergebene {@link Cell} genau den Wert des Headers erhält.
+     *
+     * @param cell   Zelle, die überprüft werden soll.
+     * @param rowNum
+     * @throws IllegalArgumentException falls die Zelle nicht den korrekten Inhalt hat.
+     */
+    void validateCellEqualsHeader(Cell cell, int rowNum);
+
+    <T extends IWorkInProgress> void setValueOfWorkInProgressObject(T workInProgressObject, Cell cell);
 }

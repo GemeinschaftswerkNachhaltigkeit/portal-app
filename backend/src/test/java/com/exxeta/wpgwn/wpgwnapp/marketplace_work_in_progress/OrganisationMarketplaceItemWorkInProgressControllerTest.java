@@ -54,39 +54,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class OrganisationMarketplaceItemWorkInProgressControllerTest {
 
-    @TestConfiguration
-    public static class TestConf {
-        @Bean
-        Clock clock() {
-            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
-        }
-    }
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private OrganisationRepository organisationRepository;
-
-    @Autowired
-    private MarketPlaceWorkInProgressRepository marketPlaceWorkInProgressRepository;
-
-    @Autowired
-    private MarketplaceRepository marketplaceRepository;
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    @Autowired
-    private MarketplaceMapper mapper;
-
-    @Autowired
-    private AuditingHandler handler;
+    private static final String BASE_API_URL = "/api/v1/organisations/{orgId}/marketplace-wip/offer";
     @Autowired
     Clock clock;
-
-    private static final String BASE_API_URL = "/api/v1/organisations/{orgId}/marketplace-wip/offer";
-
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private OrganisationRepository organisationRepository;
+    @Autowired
+    private MarketPlaceWorkInProgressRepository marketPlaceWorkInProgressRepository;
+    @Autowired
+    private MarketplaceRepository marketplaceRepository;
+    @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
+    private MarketplaceMapper mapper;
+    @Autowired
+    private AuditingHandler handler;
     private Organisation organisation;
 
     @BeforeEach
@@ -259,7 +243,8 @@ class OrganisationMarketplaceItemWorkInProgressControllerTest {
                 .andExpect(jsonPath("filename",
                         Matchers.matchesRegex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\.png$")));
         testOfferWip =
-                (OfferWorkInProgress) marketPlaceWorkInProgressRepository.findByRandomUniqueId(testOfferWip.getRandomUniqueId()).orElseThrow();
+                (OfferWorkInProgress) marketPlaceWorkInProgressRepository.findByRandomUniqueId(
+                        testOfferWip.getRandomUniqueId()).orElseThrow();
         assertThat(testOfferWip.getImage()).isNotNull();
 
         // Test Image Delete
@@ -268,7 +253,8 @@ class OrganisationMarketplaceItemWorkInProgressControllerTest {
                 .andExpect(status().isNoContent());
 
         testOfferWip =
-                (OfferWorkInProgress) marketPlaceWorkInProgressRepository.findByRandomUniqueId(testOfferWip.getRandomUniqueId()).orElseThrow();
+                (OfferWorkInProgress) marketPlaceWorkInProgressRepository.findByRandomUniqueId(
+                        testOfferWip.getRandomUniqueId()).orElseThrow();
         assertThat(testOfferWip.getImage()).isNull();
     }
 
@@ -286,9 +272,18 @@ class OrganisationMarketplaceItemWorkInProgressControllerTest {
         OfferWorkInProgress testOfferWip = mapper.mapOfferToWorkInProgress(testOffer);
         testOfferWip = marketPlaceWorkInProgressRepository.save(testOfferWip);
 
-        mockMvc.perform(post(BASE_API_URL + "/{offerWipId}/releases", organisation.getId(), testOfferWip.getRandomUniqueId()))
+        mockMvc.perform(
+                        post(BASE_API_URL + "/{offerWipId}/releases", organisation.getId(), testOfferWip.getRandomUniqueId()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(expectedResponse, false));
+    }
+
+    @TestConfiguration
+    public static class TestConf {
+        @Bean
+        Clock clock() {
+            return Clock.fixed(Instant.parse("2022-09-08T00:00:00.000Z"), ZoneId.of("Europe/Berlin"));
+        }
     }
 
 }

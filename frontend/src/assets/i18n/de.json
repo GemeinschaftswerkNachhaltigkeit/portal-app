@@ -53,6 +53,7 @@
   },
   "forms": {
     "labels": {
+      "expireDate": "Ablaufdatum",
       "query": "Was",
       "location": "Wo",
       "upload": "Datei auswählen",
@@ -125,10 +126,12 @@
     }
   },
   "labels": {
+    "expiredOffer": "Abgelaufen",
     "onlyOnline": "Nur online?",
     "onlyDan": "Nur Aktionstage?",
     "total": "Treffer",
     "publishedAt": "veröffentlicht am",
+    "availableUntil": "verfügbar bis",
     "createdAt": "erstellt am",
     "tags": "Themenfelder",
     "initiator": "Initiator",

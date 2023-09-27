@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { expired } from 'src/app/marketplace/marketplace-utils';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { OfferWipDto } from 'src/app/marketplace/models/offer-wip-dto';
@@ -29,6 +30,10 @@ export class OffersComponent implements OnInit {
     private offersFacade: OffersFacadeService,
     private loader: LoadingService
   ) {}
+
+  expired(item: OfferDto): boolean {
+    return expired(item);
+  }
 
   open(offer: OfferDto): void {
     if (offer.id && offer.status === Status.ACTIVE) {

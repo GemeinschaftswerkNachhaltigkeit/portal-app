@@ -7,6 +7,6 @@ public enum Source {
 
     DAN_XML,
 
-    IMPORT;
+    IMPORT
 
 }

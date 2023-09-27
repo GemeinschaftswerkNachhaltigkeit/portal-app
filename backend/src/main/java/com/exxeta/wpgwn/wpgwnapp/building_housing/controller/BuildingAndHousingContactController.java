@@ -1,18 +1,18 @@
 package com.exxeta.wpgwn.wpgwnapp.building_housing.controller;
 
 
-import com.exxeta.wpgwn.wpgwnapp.building_housing.dto.BuildingAndHousingContactFormDto;
-import com.exxeta.wpgwn.wpgwnapp.building_housing.mapper.model.BuildingAndHousingContact;
-import com.exxeta.wpgwn.wpgwnapp.building_housing.service.BuildingAndHousingContactService;
-
-import lombok.RequiredArgsConstructor;
+import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.building_housing.dto.BuildingAndHousingContactFormDto;
+import com.exxeta.wpgwn.wpgwnapp.building_housing.mapper.model.BuildingAndHousingContact;
+import com.exxeta.wpgwn.wpgwnapp.building_housing.service.BuildingAndHousingContactService;
 
 @RestController
 @RequestMapping("/api/public/v1/building-housing-contact-form")

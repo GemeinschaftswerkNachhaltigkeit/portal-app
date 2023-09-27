@@ -4,7 +4,7 @@
   </button>
 </div>
 <div class="wrapper" [ngClass]="{ mobile: mobile }">
-  <div class="details mat-elevation-z8">
+  <div class="details" [ngClass]="{ 'mat-elevation-z8': !mobile }">
     <app-spinner forId="detail-popup-data"></app-spinner>
     <ng-container *ngIf="currentResult">
       <header class="header">

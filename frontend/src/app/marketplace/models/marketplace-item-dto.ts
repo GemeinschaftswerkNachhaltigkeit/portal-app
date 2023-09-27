@@ -19,6 +19,7 @@ export type MarketplaceItemDto = {
   createdAt?: string;
   featured?: boolean;
   featuredText?: string;
+  endUntil?: string;
   organisation: {
     id: number;
     name: string;

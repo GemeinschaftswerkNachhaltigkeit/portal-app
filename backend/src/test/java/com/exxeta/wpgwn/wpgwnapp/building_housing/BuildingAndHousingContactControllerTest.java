@@ -45,6 +45,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BuildingAndHousingContactControllerTest {
 
     @Autowired
+    ResourceLoader resourceLoader;
+    @Autowired
     private BuildingAndHousingMapper mapper;
     @Autowired
     private EmailProperties emailProperties;
@@ -61,10 +63,6 @@ public class BuildingAndHousingContactControllerTest {
     @Autowired
     @Qualifier("cmsClientForTest")
     private CmsClient cmsClient;
-
-    @Autowired
-    ResourceLoader resourceLoader;
-
     @Autowired
     private MailProperties mailProperties;
 

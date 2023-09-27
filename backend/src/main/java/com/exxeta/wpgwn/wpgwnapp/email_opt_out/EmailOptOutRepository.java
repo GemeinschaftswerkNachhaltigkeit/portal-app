@@ -12,6 +12,8 @@ public interface EmailOptOutRepository extends JpaRepository<EmailOptOutEntry, L
         QuerydslPredicateExecutor<EmailOptOutEntry> {
 
     Optional<EmailOptOutEntry> findByEmail(String email);
+
     Optional<EmailOptOutEntry> findByRandomUniqueIdAndEmail(UUID uuid, String email);
+
     boolean existsByEmailAndEmailOptOutOptionsContaining(String email, EmailOptOutOption emailOptOutOption);
 }

@@ -71,7 +71,8 @@ public class BestPractiseController {
      */
     @GetMapping
     public Page<BestPractiseResponseDto> getBestPractiseItems(@PathVariable("orgId") Long orgId, Pageable pageable,
-                                                              @AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
+                                                              @AuthenticationPrincipal
+                                                              OAuth2AuthenticatedPrincipal principal) {
         final boolean hasPermissionToViewAll = organisationValidator.hasPermissionForOrganisation(principal, orgId);
         return marketplaceService.findBestPractiseByOrganisationId(orgId, !hasPermissionToViewAll, pageable)
                 .map(marketplaceMapper::mapBestPractiseToResponseDto);

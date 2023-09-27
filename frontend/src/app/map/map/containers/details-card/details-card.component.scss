@@ -4,6 +4,7 @@
   width: 100%;
   left: 0;
   top: 0;
+  bottom: 0;
   z-index: 9000;
   position: absolute;
   color: $blue-navy;
@@ -212,7 +213,6 @@
 
 .wrapper {
   height: 100%;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
   &.mobile {
     .details {
       position: static;

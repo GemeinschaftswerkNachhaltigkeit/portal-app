@@ -20,6 +20,6 @@ public enum ActivityTypeDto {
     /**
      * Dan
      */
-    DAN;
+    DAN
 
 }

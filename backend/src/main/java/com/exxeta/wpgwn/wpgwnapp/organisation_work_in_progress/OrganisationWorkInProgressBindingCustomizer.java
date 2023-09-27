@@ -8,7 +8,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils;
 public class OrganisationWorkInProgressBindingCustomizer implements
         QuerydslBinderCustomizer<QOrganisationWorkInProgress> {
 
-    private BindingCustomizerUtils utils = new BindingCustomizerUtils();
+    private final BindingCustomizerUtils utils = new BindingCustomizerUtils();
 
     @Override
     public void customize(QuerydslBindings bindings, QOrganisationWorkInProgress root) {

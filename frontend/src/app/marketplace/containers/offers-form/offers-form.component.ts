@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { OfferCategories } from '../../models/offer-categories';
 import { OfferWipDto } from '../../models/offer-wip-dto';
 import { OffersFacadeService } from '../../offers-facade.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-offers-form',
@@ -62,7 +63,8 @@ export class OffersFormComponent implements OnInit, OnDestroy {
           Validators.required,
           wysiwygContentRequired(100, 1500)
         ]),
-        url: fb.control<string>('', [Validators.maxLength(1000), urlPattern()])
+        url: fb.control<string>('', [Validators.maxLength(1000), urlPattern()]),
+        endUntil: fb.control<Date | null>(null)
       }),
       location: fb.control<string>(''),
       address: fb.group({
@@ -196,8 +198,12 @@ export class OffersFormComponent implements OnInit, OnDestroy {
       },
       thematicFocus: values.thematicFocus,
       featured: values.visibility.featured,
-      featuredText: values.visibility.featuredText
+      featuredText: values.visibility.featuredText,
+      endUntil: values.content.endUntil
+        ? (values.content.endUntil as DateTime).toISO() || ''
+        : ''
     };
+
     return payload;
   }
 
@@ -259,7 +265,8 @@ export class OffersFormComponent implements OnInit, OnDestroy {
       content: {
         name: wipDto.name,
         description: wipDto.description,
-        url: wipDto.location?.url
+        url: wipDto.location?.url,
+        endUntil: wipDto.endUntil ? DateTime.fromISO(wipDto.endUntil) : null
       },
       contact: wipDto.contact,
       visibility: {

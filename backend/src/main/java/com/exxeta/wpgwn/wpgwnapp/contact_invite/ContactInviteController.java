@@ -37,17 +37,19 @@ public class ContactInviteController {
     @PutMapping("/{uuid}")
     @Transactional
     ContactInviteDto updateStatusForContactInvitation(@PathVariable("uuid") UUID uuid,
-                                       @RequestParam("status") ContactInviteStatus status)
+                                                      @RequestParam("status") ContactInviteStatus status)
             throws EntityExpiredException {
         if (ContactInviteStatus.OPEN.equals(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format("Invalid target status for [%s] with uuid [%s]: [%s] not allowed!", "ContactInvite", uuid, status.name()));
+                    String.format("Invalid target status for [%s] with uuid [%s]: [%s] not allowed!", "ContactInvite",
+                            uuid, status.name()));
         }
 
         ContactInvite contactInvite = contactInviteService.getContactInvite(uuid);
         if (!ContactInviteStatus.OPEN.equals(contactInvite.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format("Invalid status for [%s] with uuid [%s]: Only changeable from OPEN, but was [%s]!", "ContactInvite", uuid, status.name()));
+                    String.format("Invalid status for [%s] with uuid [%s]: Only changeable from OPEN, but was [%s]!",
+                            "ContactInvite", uuid, status.name()));
         }
 
         contactInvite = contactInviteService.changeContactInviteStatusTo(uuid, status);

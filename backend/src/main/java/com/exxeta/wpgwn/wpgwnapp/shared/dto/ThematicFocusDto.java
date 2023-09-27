@@ -123,6 +123,6 @@ public enum ThematicFocusDto {
     /**
      * Digitalisierung
      */
-    DIGITALIZATION;
+    DIGITALIZATION
 
 }

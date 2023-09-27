@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.dto;
 
 
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 import lombok.Data;
@@ -26,6 +27,7 @@ public abstract class MarketplaceResponseDto {
     private MarketplaceType marketplaceType;
     private ItemStatus status;
     private Boolean featured;
+    private OffsetDateTime endUntil;
     private String featuredText;
 
 }

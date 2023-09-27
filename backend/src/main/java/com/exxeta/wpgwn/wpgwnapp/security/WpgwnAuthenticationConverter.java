@@ -28,8 +28,11 @@ public class WpgwnAuthenticationConverter {
     public Converter<Jwt, BearerTokenAuthentication> wpgwnTokenConverter() {
         return source -> {
             Collection<GrantedAuthority> authorities = extractAuthorities(source);
-            OAuth2AuthenticatedPrincipal oauthPrincipal = new DefaultOAuth2AuthenticatedPrincipal(source.getClaims(), authorities);
-            OAuth2AccessToken credentials = new OAuth2AccessToken(TokenType.BEARER, source.getTokenValue(), source.getIssuedAt(), source.getExpiresAt());
+            OAuth2AuthenticatedPrincipal oauthPrincipal =
+                    new DefaultOAuth2AuthenticatedPrincipal(source.getClaims(), authorities);
+            OAuth2AccessToken credentials =
+                    new OAuth2AccessToken(TokenType.BEARER, source.getTokenValue(), source.getIssuedAt(),
+                            source.getExpiresAt());
 
             return new BearerTokenAuthentication(oauthPrincipal, credentials, authorities);
         };
@@ -66,7 +69,7 @@ public class WpgwnAuthenticationConverter {
 
         if (Objects.isNull(data)) {
             return Collections.emptyList();
-        } else  {
+        } else {
             return (Collection<String>) data.get("roles");
         }
     }

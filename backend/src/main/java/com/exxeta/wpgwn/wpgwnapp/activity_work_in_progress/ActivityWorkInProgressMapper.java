@@ -84,8 +84,8 @@ public abstract class ActivityWorkInProgressMapper {
     @AfterMapping
     public void updateActivityWorkInProgressFromDtoAfterMapping(
             @MappingTarget ActivityWorkInProgress activityWorkInProgress) {
-            activityWorkInProgress.getSocialMediaContacts()
-                    .forEach(socialMediaContact -> socialMediaContact.setActivityWorkInProgress(activityWorkInProgress));
+        activityWorkInProgress.getSocialMediaContacts()
+                .forEach(socialMediaContact -> socialMediaContact.setActivityWorkInProgress(activityWorkInProgress));
     }
 
     @Mapping(target = "id", ignore = true)

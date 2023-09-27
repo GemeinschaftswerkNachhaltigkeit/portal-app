@@ -1,16 +1,16 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto;
 
 
-import java.time.OffsetDateTime;
-import java.util.Set;
-import java.util.UUID;
-
-import lombok.Data;
-
 import com.exxeta.wpgwn.wpgwnapp.marketplace.shared.MarketplaceType;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ContactDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.LocationDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ThematicFocusDto;
+
+import lombok.Data;
+
+import java.time.OffsetDateTime;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 public class MarketPlaceWorkInProgressResponseDto {
@@ -28,6 +28,7 @@ public class MarketPlaceWorkInProgressResponseDto {
     private Set<ThematicFocusDto> thematicFocus;
     private String image;
     private ContactDto contact;
+    private OffsetDateTime endUntil;
     private UUID randomUniqueId;
     private Boolean featured;
     private String featuredText;

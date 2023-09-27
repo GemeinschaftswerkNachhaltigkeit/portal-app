@@ -52,6 +52,8 @@
   },
   "forms": {
     "labels": {
+      "expireDate": "Expire date",
+
       "query": "What",
       "location": "Where",
       "upload": "Select file",
@@ -124,10 +126,12 @@
     }
   },
   "labels": {
+    "expiredOffer": "Expired",
     "onlyOnline": "Only online?",
     "onlyDan": "Only action days?",
     "total": "Results",
     "publishedAt": "published at",
+    "availableUntil": "available until",
     "createdAt": "created at",
     "tags": "Subject areas",
     "initiator": "initiator",

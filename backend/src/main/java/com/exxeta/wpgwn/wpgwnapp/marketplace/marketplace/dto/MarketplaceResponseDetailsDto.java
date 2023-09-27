@@ -28,6 +28,7 @@ public abstract class MarketplaceResponseDetailsDto {
     private String image;
     private ContactDto contact;
     private OrganisationDataDto organisation;
+    private OffsetDateTime endUntil;
     private ItemStatus status;
     private Boolean featured;
     private String featuredText;

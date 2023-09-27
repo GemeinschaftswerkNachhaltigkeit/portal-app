@@ -9,7 +9,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.BindingCustomizerUtils;
 
 public class ActivityBindingCustomizer implements QuerydslBinderCustomizer<QActivity> {
 
-    private BindingCustomizerUtils utils = new BindingCustomizerUtils();
+    private final BindingCustomizerUtils utils = new BindingCustomizerUtils();
 
     @Override
     public void customize(QuerydslBindings bindings, QActivity root) {
@@ -29,7 +29,7 @@ public class ActivityBindingCustomizer implements QuerydslBinderCustomizer<QActi
         // Prüfung, ob das Intervall (Start - Ende) mit den Daten in der DB überlappt.
         bindings.bind(root.period.start)
                 .as("endDate")
-                        .first((path, value) -> path.loe(value).or(path.isNull()));
+                .first((path, value) -> path.loe(value).or(path.isNull()));
 //                .first(DateTimeExpression::loe);
         bindings.bind(root.period.end)
                 .as("startDate")

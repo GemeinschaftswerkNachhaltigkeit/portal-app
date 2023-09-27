@@ -1,16 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.activity.model;
 
-import com.exxeta.wpgwn.wpgwnapp.excel_import.domain.ImportProcess;
-import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.*;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import org.hibernate.validator.constraints.URL;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,24 @@ import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.hibernate.validator.constraints.URL;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import com.exxeta.wpgwn.wpgwnapp.excel_import.domain.ImportProcess;
+import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Source;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
 
 @Entity
 @Table(name = "activity")

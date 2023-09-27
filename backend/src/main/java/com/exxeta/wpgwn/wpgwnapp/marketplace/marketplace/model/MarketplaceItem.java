@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -28,9 +29,9 @@ import lombok.Setter;
 
 import com.exxeta.wpgwn.wpgwnapp.marketplace.shared.MarketplaceType;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
 
@@ -86,6 +87,12 @@ public class MarketplaceItem extends AuditableEntityBase {
     @NotNull
     @Embedded
     private Contact contact;
+
+    /**
+     * End Datum für OFFER(Angebot), für BEST_PRACTISE ist nicht relevant
+     */
+    @Column(name = "end_until")
+    private OffsetDateTime endUntil;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)

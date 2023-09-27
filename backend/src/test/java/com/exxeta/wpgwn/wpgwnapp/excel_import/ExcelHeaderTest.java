@@ -10,12 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ExcelHeaderTest {
 
-    @MethodSource("createTestCases")
-    @ParameterizedTest
-    void isValidUrl(String url, Boolean expectedResult) {
-        assertThat(ExcelHeader.isValidUrl(url)).isEqualTo(expectedResult);
-    }
-
     public static Stream<Arguments> createTestCases() {
         return Stream.of(
                 Arguments.of("www.test.de", false),
@@ -25,6 +19,12 @@ class ExcelHeaderTest {
                 Arguments.of("facebookHandle", false),
                 Arguments.of("http://facebookHandle", true)
         );
+    }
+
+    @MethodSource("createTestCases")
+    @ParameterizedTest
+    void isValidUrl(String url, Boolean expectedResult) {
+        assertThat(ExcelHeader.isValidUrl(url)).isEqualTo(expectedResult);
     }
 
 }

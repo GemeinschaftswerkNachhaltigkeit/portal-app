@@ -4,5 +4,5 @@ public enum ContactInviteStatus {
     OPEN,
     EXPIRED,
     ALLOW,
-    DENY;
+    DENY
 }

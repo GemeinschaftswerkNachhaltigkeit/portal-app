@@ -39,7 +39,8 @@ public class OrganisationWorkInProgressImportValidator {
         return Objects.nonNull(organisationWorkInProgress)
                 && hasName(organisationWorkInProgress)
                 && hasContactEmailAddress(organisationWorkInProgress)
-                && !existsInExtractedOrganisationWorkInProgress(organisationWorkInProgress, extractedOrganisationWorkInProgress)
+                && !existsInExtractedOrganisationWorkInProgress(organisationWorkInProgress,
+                extractedOrganisationWorkInProgress)
                 && !existsOrganisationWorkInProgressWithSameContactEmail(
                 getEmailToLowerCase(organisationWorkInProgress))
                 && !existsOrganisationWithSameContactEmail(

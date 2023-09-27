@@ -4,6 +4,6 @@ public enum MapSearchResultType {
 
     ACTIVITY,
     ORGANISATION,
-    DAN;
+    DAN
 
 }
