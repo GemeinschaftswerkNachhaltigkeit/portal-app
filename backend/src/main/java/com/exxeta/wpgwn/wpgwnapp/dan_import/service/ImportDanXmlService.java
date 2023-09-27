@@ -1,27 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.service;
 
-import javax.persistence.EntityNotFoundException;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.event.EventListener;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-
 import com.exxeta.wpgwn.wpgwnapp.activity.ActivityRepository;
 import com.exxeta.wpgwn.wpgwnapp.activity.event.ActivityUpdateEvent;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
@@ -43,16 +21,27 @@ import com.exxeta.wpgwn.wpgwnapp.dan_import.validator.CampaignTechValidator;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaigns;
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationService;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Contact;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Location;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.EntityNotFoundException;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.FINISH;
 import static com.exxeta.wpgwn.wpgwnapp.dan_import.domain.ImportStatus.PENDING;
@@ -103,6 +92,8 @@ public class ImportDanXmlService {
             "activities/act4.jpg",
             "activities/act5.jpg",
             "activities/act6.jpg"};
+
+    private final String defaultEmail = "gemeinschaftswerk@nachhaltigkeitsrat.de";
 
     public Campaigns loadXmlFromFile(MultipartFile xmlFile) {
         ObjectMapper xmlMapper = mappingJackson2XmlHttpMessageConverter.getObjectMapper();
@@ -167,6 +158,7 @@ public class ImportDanXmlService {
         Instant now = Instant.now(clock);
         for (Campaign campaign : campaigns.getCampaigns()) {
             try {
+                fixEmailIfEmpty(campaign);
                 campaignExpiredValidator.validate(campaign, now);
                 campaignTechValidator.validate(campaign);
                 boolean update = campaignDuplicateValidator.validate(campaign);
@@ -188,6 +180,12 @@ public class ImportDanXmlService {
         if (!importDanXmlResult.getImported().isEmpty()
                 || !importDanXmlResult.getUpdated().isEmpty()) {
             applicationEventPublisher.publishEvent(new ActivityUpdateEvent(new Activity()));
+        }
+    }
+
+    private void fixEmailIfEmpty(Campaign campaign) {
+        if (!hasText(campaign.getOrganizerEmail())) {
+            campaign.setOrganizerEmail(defaultEmail);
         }
     }
 
