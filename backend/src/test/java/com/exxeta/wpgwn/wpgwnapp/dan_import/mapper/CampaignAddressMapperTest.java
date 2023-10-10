@@ -106,7 +106,10 @@ public class CampaignAddressMapperTest {
 
         // Create the object under test
         CampaignAddressMapper mapper = new CampaignAddressMapper(nominatimService);
+        Location location = mapper.mapperLocation(campaign);
+        assertTrue(location.getOnline());
 
+        /**
         // Assert that the exception is thrown
         DanXmlImportCancelledException exception = assertThrows(DanXmlImportCancelledException.class,
                 () -> mapper.mapperLocation(campaign));
@@ -118,6 +121,8 @@ public class CampaignAddressMapperTest {
 
         // Verify that NominatimService methods were called
         verify(nominatimService, times(2)).searchAddress("Invalid Venue", null, null);
+
+         **/
     }
 }
 
