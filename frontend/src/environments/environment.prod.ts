@@ -1,6 +1,7 @@
 export let environment = {
   production: true,
   apiUrl: '/app/api/v1',
+  apiV2Url: '/app/api/v2',
   contextPath: '/app/',
   directusBaseUrl: 'load-from-backend',
   landingPageUrl: 'load-from-backend',
@@ -19,6 +20,7 @@ export let environment = {
 export function overrideEnvironment(e: {
   production: boolean;
   apiUrl: string;
+  apiV2Url: string;
   contextPath: string;
   directusBaseUrl: string;
   landingPageUrl: string;

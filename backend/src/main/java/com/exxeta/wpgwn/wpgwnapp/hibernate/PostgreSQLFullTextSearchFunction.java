@@ -40,7 +40,7 @@ public class PostgreSQLFullTextSearchFunction implements SQLFunction {
             String field = (String) args.get(2);
 
             return getValue("string", ftsConfig, value)
-                    + ") @@ websearch_to_tsquery(" + ftsConfig + "," + field + ")";
+                    + ") @@ to_tsquery(" + ftsConfig + "," + field + ")";
         } else if (args.size() == 4) {
             String ftsConfig = (String) args.get(0);
             Object value = args.get(1);
@@ -48,7 +48,7 @@ public class PostgreSQLFullTextSearchFunction implements SQLFunction {
             String fieldType = (String) args.get(3);
 
             String fieldValue = getValue(fieldType, ftsConfig, value);
-            return fieldValue + " @@ websearch_to_tsquery(" + ftsConfig + "," + field + ")";
+            return fieldValue + " @@ to_tsquery(" + ftsConfig + "," + field + ")";
         }
         throw new IllegalArgumentException("Function is undefined for args: " + args);
     }

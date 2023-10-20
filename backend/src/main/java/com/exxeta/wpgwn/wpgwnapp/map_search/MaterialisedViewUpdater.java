@@ -16,24 +16,30 @@ public class MaterialisedViewUpdater {
 
     private final MapSearchResultRepository mapSearchResultRepository;
 
+    private final MapSearchV2ResultRepository mapSearchV2ResultRepository;
+
     @EventListener
     public void handleOrganisationUpdateEvent(OrganisationUpdateEvent organisationUpdateEvent) {
         mapSearchResultRepository.refreshView();
+        mapSearchV2ResultRepository.refreshView();
     }
 
     @EventListener
     public void handleOrganisationDeleteEvent(OrganisationDeleteEvent organisationDeleteEvent) {
         mapSearchResultRepository.refreshView();
+        mapSearchV2ResultRepository.refreshView();
     }
 
     @EventListener
     public void handleActivityUpdateEvent(ActivityUpdateEvent activityUpdateEvent) {
         mapSearchResultRepository.refreshView();
+        mapSearchV2ResultRepository.refreshView();
     }
 
     @EventListener
     public void handleActivityDeleteEvent(ActivityDeleteEvent activityDeleteEvent) {
         mapSearchResultRepository.refreshView();
+        mapSearchV2ResultRepository.refreshView();
     }
 
 }
