@@ -193,6 +193,8 @@ public class MapSearchV2Controller {
 
         buildQueryPredicate(searchPredicate, query);
 
+        buildQueryLikePredicate(searchPredicate, query);
+
         buildExpiredActivitiesPredicate(searchPredicate, includeExpiredActivities);
 
         buildSpecialOrganisationsPredicate(searchPredicate, initiator, projectSustainabilityWinner);
@@ -203,6 +205,7 @@ public class MapSearchV2Controller {
 
         return searchPredicate;
     }
+
 
     private void buildCoordinatePredicate(BooleanBuilder searchPredicate, Envelope envelope,
                                           boolean includeDataWithoutCoordinates) {
@@ -286,6 +289,16 @@ public class MapSearchV2Controller {
         if (hasText(query)) {
             BooleanExpression searchFieldsForQuery = inNameOrDescription(query);
             searchPredicate.and(searchFieldsForQuery);
+        }
+    }
+
+    private void buildQueryLikePredicate(BooleanBuilder searchPredicate, String query) {
+        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
+                .omitEmptyStrings();
+        if (split.splitToList(query).size() == 1) {
+            searchPredicate = searchPredicate
+                    .or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query));
         }
     }
 
