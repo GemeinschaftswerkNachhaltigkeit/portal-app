@@ -92,7 +92,7 @@ export class EventsApiService {
     params = params.append('page', nextPage);
     params = params.append('size', defaultPaginatorOptions.pageSize);
     params = params.append('sort', `period.start,asc,ignorecase`);
-    params = params.append('query', searchFilter.query || '');
+    params = params.append('query', (searchFilter.query || '').trim());
     params = params.append('location', searchFilter.location || '');
     if (searchFilter.online) {
       params = params.append('online', !!searchFilter.online);

@@ -101,7 +101,7 @@ export class MapApiService {
       'size',
       searchFilter.size || defaultPaginatorOptions.pageSize
     );
-    params = params.append('query', searchFilter.query || '');
+    params = params.append('query', (searchFilter.query || '').trim());
     params = params.append('location', searchFilter.location || '');
     searchFilter.viewType &&
       searchFilter.viewType?.forEach((resultType) => {

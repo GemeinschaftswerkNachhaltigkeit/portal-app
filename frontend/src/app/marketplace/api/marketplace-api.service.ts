@@ -61,7 +61,7 @@ export class MarketplaceApiService {
       'size',
       searchFilter.size || defaultPaginatorOptions.pageSize
     );
-    params = params.append('query', searchFilter.query || '');
+    params = params.append('query', (searchFilter.query || '').trim());
     params = params.append('sort', `createdAt,desc,ignorecase`);
 
     if (searchFilter.thematicFocus) {

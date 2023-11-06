@@ -38,7 +38,7 @@ export class OrganisationApiService {
         ? searchFilter.sort + ',ignorecase'
         : `createdAt,desc,ignorecase`
     );
-    params = params.append('query', searchFilter.query || '');
+    params = params.append('query', (searchFilter.query || '').trim());
 
     return params;
   }
