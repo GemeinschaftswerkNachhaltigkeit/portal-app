@@ -125,6 +125,7 @@ nominatim:
 
 ui-config:
   api-url: '/app/api/v1'
+  api-v2-url: '/app/api/v2'
   context-path: '/'
   directus-base-url: 'http://localhost:8055' #'/cms' auf testsystem
   landing-page-url: '/cms/'
