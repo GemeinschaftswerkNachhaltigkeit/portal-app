@@ -24,6 +24,9 @@ public class UiConfigProperties {
     @NotBlank
     private String apiUrl;
 
+    @NotBlank
+    private String apiV2Url;
+
     private String contextPath = "";
 
     @NotBlank

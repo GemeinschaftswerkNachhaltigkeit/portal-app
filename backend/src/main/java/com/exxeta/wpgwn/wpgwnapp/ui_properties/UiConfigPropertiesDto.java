@@ -11,6 +11,8 @@ public class UiConfigPropertiesDto {
 
     private String apiUrl;
 
+    private String apiV2Url;
+
     private String contextPath;
 
     private String directusBaseUrl;

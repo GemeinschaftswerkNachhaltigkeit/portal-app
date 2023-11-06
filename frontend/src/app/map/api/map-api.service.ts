@@ -28,7 +28,7 @@ export class MapApiService {
       );
       return this.http
         .get<PagedResponse<SearchResultResponseContent>>(
-          `${environment.apiUrl}/search`,
+          `${environment.apiV2Url}/search`,
           {
             params: this.searchParams(searchFilter, true, true)
           }
@@ -68,7 +68,7 @@ export class MapApiService {
   }
 
   searchMarkers(searchFilter: SearchFilter): Observable<MarkerDto[]> {
-    return this.http.get<MarkerDto[]>(`${environment.apiUrl}/search/markers`, {
+    return this.http.get<MarkerDto[]>(`${environment.apiV2Url}/search/markers`, {
       params: this.searchParams(searchFilter)
     });
   }
