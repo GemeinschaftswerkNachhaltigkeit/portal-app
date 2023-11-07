@@ -1,13 +1,29 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
+import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
+
+import lombok.RequiredArgsConstructor;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -22,27 +38,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
-
-import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
-import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
-
-import com.google.common.collect.Lists;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
@@ -244,7 +247,7 @@ public class MapSearchController {
 
     private void buildQueryPredicate(BooleanBuilder searchPredicate, String query) {
         if (StringUtils.hasText(query)) {
-            final String queryWithOr = String.join(" OR ", query.split(" "));
+            final String queryWithOr = splitQuery(query);
             BooleanExpression searchFieldsForQuery = inNameOrDescription(queryWithOr);
             searchFieldsForQuery = searchFieldsForQuery.or(inContactPersonNameOrPosition(queryWithOr));
             searchFieldsForQuery = orInOrganisationType(queryWithOr, searchFieldsForQuery);
@@ -254,6 +257,13 @@ public class MapSearchController {
 
             searchPredicate.and(searchFieldsForQuery);
         }
+    }
+
+    private String splitQuery(String query) {
+        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
+                .omitEmptyStrings();
+        return Joiner.on(" | ").skipNulls()
+                .join(split.split(query));
     }
 
     private void buildExpiredActivitiesPredicate(BooleanBuilder searchPredicate, boolean includeExpiredActivities) {
