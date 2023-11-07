@@ -21,9 +21,8 @@ export class UtilsService {
     }
     const nowTs = new Date().getTime();
     const { end } = period;
-    const endTs = new Date(end).getTime();
-
-    return nowTs - endTs > 0;
+    const endTs = DateTime.fromISO(end).plus({ days: 1 }).toMillis();
+    return endTs - nowTs < 0;
   }
 
   noLocation(location?: LocationData): boolean {

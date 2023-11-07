@@ -68,9 +68,12 @@ export class MapApiService {
   }
 
   searchMarkers(searchFilter: SearchFilter): Observable<MarkerDto[]> {
-    return this.http.get<MarkerDto[]>(`${environment.apiV2Url}/search/markers`, {
-      params: this.searchParams(searchFilter)
-    });
+    return this.http.get<MarkerDto[]>(
+      `${environment.apiV2Url}/search/markers`,
+      {
+        params: this.searchParams(searchFilter)
+      }
+    );
   }
 
   byId(type: string, id: number): Observable<SearchResult> {

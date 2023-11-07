@@ -92,10 +92,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   handleSearch(): void {
     const vals = this.searchControl.value;
-    this.eventsService.search({
-      query: vals?.query || '',
-      location: vals?.location || ''
-    });
+    const query = vals?.query || '';
+    const location = vals?.location || '';
+    if (this.eventsService.searchValuesChanged(query, location)) {
+      this.eventsService.search({
+        query,
+        location
+      });
+    }
   }
 
   handlePermanentFilter(isPermanent: boolean): void {
