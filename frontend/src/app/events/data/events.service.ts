@@ -134,6 +134,14 @@ export class EventsService {
       });
   }
 
+  searchValuesChanged(query: string, location: string) {
+    const existingFilters = this.getFilters();
+    return (
+      query !== existingFilters['query'] ||
+      location !== existingFilters['location']
+    );
+  }
+
   search(searchFilter: DynamicFilters): void {
     this.reset();
     const existingFilters = this.getFilters();
