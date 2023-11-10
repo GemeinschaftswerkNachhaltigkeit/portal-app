@@ -20,6 +20,7 @@ import {
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
+import { MapZoomService } from 'src/app/map/services/map-zoom.service';
 
 @Component({
   selector: 'app-map',
@@ -36,7 +37,10 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
   mapMoves = new BehaviorSubject<string>('');
   mapInitialized = false;
 
-  constructor(private marker: SharedMarkerService) {}
+  constructor(
+    private marker: SharedMarkerService,
+    private zoomService: MapZoomService
+  ) {}
 
   private getScreenWidth(): number | undefined {
     return this.mapRef?.nativeElement?.offsetWidth;
@@ -46,7 +50,8 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
     const screenWidth = this.getScreenWidth();
     this.map = L.map('map', {
       center: this.center,
-      zoom: screenWidth && screenWidth < 1200 ? 6 : 8,
+      zoom:
+        screenWidth && screenWidth < 1200 ? this.zoomService.defaultZoom : 8,
       // minZoom: 4,
       maxZoom: 17
     });
@@ -58,6 +63,11 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
       }
     );
     this.map.zoomControl.setPosition('bottomright');
+    this.zoomService.mapZoomResetted
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.zoomOutHandler();
+      });
 
     tiles.addTo(this.map);
   }
@@ -129,7 +139,10 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   zoomOutHandler(): void {
     if (this.map && this.center) {
-      this.map?.setView(this.center, 4);
+      const screenWidth = this.getScreenWidth();
+      const zoom =
+        screenWidth && screenWidth < 1200 ? this.zoomService.defaultZoom : 6;
+      this.map?.setView(this.center, zoom);
     }
   }
 

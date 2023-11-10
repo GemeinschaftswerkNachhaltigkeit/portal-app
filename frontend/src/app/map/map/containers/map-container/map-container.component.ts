@@ -18,6 +18,7 @@ import { InternalMapFacade } from '../../../map-facade.service';
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
+import { MapZoomService } from 'src/app/map/services/map-zoom.service';
 
 @Component({
   selector: 'app-map-container',
@@ -51,6 +52,7 @@ export class MapContainerComponent implements OnInit {
     private marker: SharedMarkerService,
     public subscription: SubscriptionFacadeService,
     public utils: UtilsService,
+    private zoomService: MapZoomService,
     filtersService: SecondaryFitlersService
   ) {
     filtersService.setOpenFilters('map-filters', []);
@@ -115,5 +117,8 @@ export class MapContainerComponent implements OnInit {
   clearHovered(): void {
     this.mapFacade.clearHoveredCard();
     this.marker.triggerMarkerLeaved();
+  }
+  resetZoomHandler(): void {
+    this.zoomService.resetMapZoom();
   }
 }

@@ -19,7 +19,17 @@
           "
         >
           <app-alert [title]="'map.titles.noData' | translate">
-            {{ 'map.texts.noData.0' | translate }}
+            <div>
+              {{ 'map.texts.noData.0' | translate }}
+            </div>
+            <button
+              class="resetBtn"
+              mat-flat-button
+              color="accent"
+              (click)="resetZoomHandler()"
+            >
+              reset zoomm
+            </button>
           </app-alert>
         </div>
       </ng-container>
