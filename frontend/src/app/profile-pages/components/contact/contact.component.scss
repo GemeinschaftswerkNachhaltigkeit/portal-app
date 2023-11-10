@@ -16,6 +16,14 @@
     gap: $spacing-1;
     font-size: 1.2rem;
 
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      gap: $spacing-1;
+      text-align: center;
+    }
+
     .info-wrapper {
       display: grid;
       grid-template-columns: $spacing-8 1fr;
