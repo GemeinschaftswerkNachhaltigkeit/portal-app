@@ -7,13 +7,13 @@ import { ContentWrapperComponent } from './components/layout/content-wrapper/con
 import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { LabelComponent } from './components/label/label.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ContentRowComponent } from './components/content-row/content-row.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu-bar.component';
@@ -35,7 +35,7 @@ import { ActivitySubscriptionActionComponent } from './components/subscription/c
 import { HeadingComponent } from './components/heading/heading.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { ExpiredBadgeComponent } from './components/expired-badge/expired-badge.component';
@@ -45,7 +45,7 @@ import { MessageInputDialogComponent } from './components/message-input-dialog/m
 import { ListWithHeadingLayoutComponent } from './components/layout/list-with-heading-layout/list-with-heading-layout.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { ThematicFocusControlComponent } from './components/form/thematic-focus-select/thematic-focus-control.component';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatSelectModule } from '@angular/material/select';
 import { CategoryControlComponent } from './components/form/category-control/category-control.component';
 import { UserSelectControlComponent } from './components/form/user-select-control/user-select-control.component';
 import { TextBlockComponent } from './components/text-block/text-block.component';
@@ -54,7 +54,7 @@ import { SearchInputComponent } from './components/form/search-input/search-inpu
 import { AdditionalFiltersModalComponent } from './components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { FilterCountBadgeComponent } from './components/form/filters/filter-count-badge/filter-count-badge.component';
 import { CheckboxFilterComponent } from './components/form/filters/checkbox-filter/checkbox-filter.component';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ThematicFocusFilterComponent } from './components/form/filters/thematic-focus-filter/thematic-focus-filter.component';
@@ -85,11 +85,11 @@ import { FormStepActionsComponent } from './components/wizard/form-step-actions/
 import { FormStepDescriptionComponent } from './components/wizard/form-step-description/form-step-description.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { UploadImageComponent } from './components/form/upload-image/upload-image.component';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { WizardSidebarLayoutComponent } from './components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
-import { MatLegacySlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
 import { ImageComponent } from './components/image/image.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
@@ -194,7 +194,7 @@ import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filte
     MatStepperModule,
     MatTooltipModule,
     DropzoneModule,
-    MatLegacySlideToggleModule
+    MatSlideToggleModule
   ],
   exports: [
     CommonModule,

@@ -9,8 +9,10 @@
       [disabled]="disabled"
       (click)="setOption(option)"
     >
-      <span class="text">{{ option.label | translate }}</span>
-      <mat-icon *ngIf="selected(option)">check</mat-icon>
+      <div class="button-wrapper">
+        <span class="text">{{ option.label | translate }}</span>
+        <app-outlined-icon *ngIf="selected(option)">check</app-outlined-icon>
+      </div>
     </button>
   </ng-container>
 </div>

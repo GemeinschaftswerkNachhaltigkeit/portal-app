@@ -1,7 +1,7 @@
 @use 'theme' as *;
 @use 'palette' as *;
 
-.ng-valid .mat-select-arrow-wrapper::after {
+.ng-valid .mat-mdc-select-arrow-wrapper::after {
   font-family: 'Material Icons';
   content: '\e876';
   color: $green;
@@ -15,7 +15,7 @@
   color: $green;
   // background-color: rgb(37, 9, 9);
 }
-input.mat-input-element {
+input.mat-mdc-input-element {
   text-overflow: ellipsis;
   white-space: pre-wrap;
   overflow: hidden;
@@ -43,6 +43,8 @@ input.mat-input-element {
   }
 }
 
-.mat-calendar-body-cell.date-with-data {
+button.date-with-data {
   background-color: transparentize($color: $green, $amount: 0.5);
+  border-radius: 9999px;
+  border: 2px solid white;
 }

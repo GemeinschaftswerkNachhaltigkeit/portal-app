@@ -8,7 +8,7 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DanHelpModalComponent } from './dan-help-modal/dan-help-modal.component';
 
 @Component({

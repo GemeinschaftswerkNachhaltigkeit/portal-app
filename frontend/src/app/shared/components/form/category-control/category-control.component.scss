@@ -10,7 +10,16 @@
     border: 2px solid $bordeauxe;
     white-space: normal;
     text-align: left;
-    display: inline-block;
+
+    .button-wrapper {
+      display: flex;
+      align-items: center;
+      gap: $spacing-1;
+
+      .text {
+        margin-top: 2px;
+      }
+    }
 
     &.selected,
     &:hover {

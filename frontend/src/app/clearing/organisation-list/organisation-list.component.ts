@@ -1,6 +1,6 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { Component, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { MatSidenav } from '@angular/material/sidenav';
 import {

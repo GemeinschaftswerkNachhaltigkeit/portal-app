@@ -39,7 +39,6 @@
           *ngIf="searchPaging$ | async as paging"
         >
           <mat-paginator
-            class="mat-elevation-z8"
             color="accent"
             [length]="paging?.totalElements"
             [pageIndex]="paging?.number"

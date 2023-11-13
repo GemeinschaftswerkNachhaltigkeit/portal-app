@@ -57,8 +57,9 @@
   font-weight: 900;
 }
 
-$wpgwn-app-typography: mat.define-legacy-typography-config(
+$wpgwn-app-typography: mat.define-typography-config(
   $font-family: 'AzeretMono',
+
   $body-1:
     mat.define-typography-level(
       $font-family: Verdana,
@@ -69,23 +70,28 @@ $wpgwn-app-typography: mat.define-legacy-typography-config(
     mat.define-typography-level(
       $font-family: Verdana,
       $font-size: 1.4rem,
-      $line-height: 24px,
-      $font-weight: 600
+      $line-height: 24px
     ),
   $button:
     mat.define-typography-level(
       $font-size: 1.4rem,
       $line-height: 1.4rem
     ),
-  $headline:
+  $headline-1:
     mat.define-typography-level(
       $font-size: 3.2rem,
       $line-height: 150%,
       $font-weight: 900
     ),
-  $title:
+  $headline-2:
     mat.define-typography-level(
       $font-size: 2.4rem,
+      $line-height: 150%,
+      $font-weight: 900
+    ),
+  $subtitle-1:
+    mat.define-typography-level(
+      $font-size: 1.6rem,
       $line-height: 150%,
       $font-weight: 900
     )
@@ -98,8 +104,7 @@ $wpgwn-app-typography: mat.define-legacy-typography-config(
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy($wpgwn-app-typography);`
-@include mat.all-legacy-component-typographies($wpgwn-app-typography);
-@include mat.legacy-core();
+@include mat.core();
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -109,15 +114,16 @@ $wpgwn-app-theme: mat.define-light-theme(
       primary: $wpgwn-app-primary,
       accent: $wpgwn-app-accent,
       warn: $wpgwn-app-warn
-    )
+    ),
+    typographies: $wpgwn-app-typography
   )
 );
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-legacy-component-themes($wpgwn-app-theme);
-
+@include mat.all-component-themes($wpgwn-app-theme);
+@include mat.typography-hierarchy($wpgwn-app-typography);
 /* You can add global styles to this file, and also import other style files */
 
 * {
@@ -156,25 +162,102 @@ h6 {
 /**
   Material Overrides
 **/
-[class^='mat-'] {
+[class^='mat-mdc-'] {
   border-radius: 0 !important;
 }
-.mat-form-field,
-.mat-select,
-.mat-textarea {
+.mdc-notched-outline__leading,
+.mdc-notched-outline__trailing,
+.mdc-notched-outline__notch,
+.mat-mdc-unelevated-button,
+.mat-button,
+.mdc-button--outlined,
+.mat-icon-button,
+.mat-flat-button {
+  border-radius: 0 !important;
+}
+.mat-mdc-form-field:not(.mat-form-field-invalid):not(.mat-form-field-disabled) {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-radius: 0 !important;
+    border-color: mat.get-color-from-palette(
+      $wpgwn-app-primary,
+      500
+    ) !important;
+  }
+}
+.mat-accordion .mat-expansion-panel:last-of-type,
+.mat-accordion .mat-expansion-panel:first-of-type {
+  border-radius: 0 !important;
+}
+
+.mat-mdc-button.mat-unthemed {
+  --mdc-text-button-label-text-color: #{$blue-navy};
+}
+.mat-button-base,
+button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent),
+.mat-paginator,
+.mat-mdc-select-value,
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label,
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input,
+.mat-option-text,
+.mat-select-value-text,
+.mat-menu-item,
+.mat-menu-item[disabled],
+.mat-mdc-paginator,
+.mat-menu-item .mat-icon-no-color,
+.mat-menu-item[disabled] .mat-icon-no-color,
+.mat-mdc-radio-button .mdc-form-field,
+.label {
+  color: $blue-navy;
+
+  &.mat-accent {
+    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+  }
+}
+
+.mat-icon-button,
+.mdc-button--outlined {
+  background-color: white;
+}
+
+.mat-mdc-paginator {
+  background-color: white;
+  padding-block: 1rem;
+}
+
+.mat-paginator .mat-icon-button {
+  background: transparent;
+}
+div.mat-paginator-page-size {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .mat-paginator-page-size-select {
+    margin: 0;
+  }
+}
+
+.mat-option {
+  background-color: white;
+}
+
+.mat-mdc-form-field,
+.mat-mdc-select,
+.mat-mdc-textarea {
   font-family: 'Verdana', sans-serif;
 }
-.mat-slide-toggle-thumb {
+.mat-mdc-slide-toggle-thumb {
   background-color: #c0c0c0;
 }
 .mat-drawer-container {
   color: $blue-navy;
 }
-.mat-flat-button {
+.mdc-button--unelevated {
   color: $blue-navy;
 }
-.mat-flat-button,
-.mat-stroke-button {
+.mdc-button--unelevated,
+.mdc-button--outlined {
   text-transform: uppercase;
 }
 .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -204,6 +287,7 @@ h6 {
 mat-form-field {
   width: 100%;
   max-width: 98vw;
+  background-color: white;
   .mat-form-field-infix {
     width: auto !important;
   }
@@ -241,8 +325,12 @@ mat-dialog-container.mat-dialog-container {
   padding-top: 0;
 }
 .map-filters {
-  .mat-form-field-wrapper {
+  .mat-mdc-form-field {
     padding: 0;
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none;
+    }
   }
   .view-type {
     .orga {
@@ -283,15 +371,6 @@ mat-dialog-container.mat-dialog-container {
       }
     }
   }
-}
-
-.mat-option-text,
-.mat-select-value-text,
-.mat-menu-item,
-.mat-menu-item[disabled],
-.mat-menu-item .mat-icon-no-color,
-.mat-menu-item[disabled] .mat-icon-no-color {
-  color: $blue-navy;
 }
 
 .mat-menu-item[disabled] {

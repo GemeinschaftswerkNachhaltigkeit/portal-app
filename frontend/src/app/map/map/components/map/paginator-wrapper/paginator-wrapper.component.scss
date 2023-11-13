@@ -3,10 +3,16 @@
 
 .wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: white;
   .total {
+    padding: $spacing-2;
     position: absolute;
-    left: $spacing-4;
-    top: -$spacing-6;
+    top: -0.8rem;
+    left: 0;
+    font-size: 1.2rem;
   }
   .noBreak {
     white-space: nowrap;
@@ -17,6 +23,8 @@
   .wrapper {
     .total {
       top: $spacing-4;
+      left: 1rem;
+      font-size: inherit;
     }
   }
 }

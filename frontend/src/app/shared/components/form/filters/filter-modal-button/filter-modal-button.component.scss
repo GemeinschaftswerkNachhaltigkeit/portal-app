@@ -11,8 +11,12 @@
   height: 100%;
   width: 100%;
   margin-left: -16px;
-  .filter-btn-text {
-    margin-left: $spacing-2;
+  .label {
+    display: flex;
+    align-items: center;
+    .filter-btn-text {
+      margin-left: $spacing-2;
+    }
   }
 }
 

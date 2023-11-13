@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { SecondaryFilters } from '../secondary-filters/secondary-filters.component';
-import { MatLegacySlideToggleChange } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-online-filter',
@@ -26,7 +26,7 @@ export class OnlineFilterComponent {
     return this.selected ? 1 : 0;
   }
 
-  onlineHandler(event: MatLegacySlideToggleChange) {
+  onlineHandler(event: MatSlideToggleChange) {
     this.filterChanged.emit(event.checked);
   }
 }

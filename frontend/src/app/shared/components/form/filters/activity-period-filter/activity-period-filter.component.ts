@@ -7,7 +7,7 @@ import {
   Output
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { DateTime } from 'luxon';
 import { Subject, takeUntil } from 'rxjs';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';

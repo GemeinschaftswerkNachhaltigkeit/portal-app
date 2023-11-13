@@ -3,24 +3,24 @@ import { CommonModule } from '@angular/common';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
 import { AccountRoutingModule } from './account-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { AccountLayoutComponent } from './components/account-layout/account-layout.component';
 import { OrganisationSubscriptionsComponent } from './containers/organisation-subscriptions/organisation-subscriptions.component';
 import { ActivitySubscriptionsComponent } from './containers/activity-subscriptions/activity-subscriptions.component';
 import { MyDataComponent } from './containers/my-data/my-data.component';
 import { MyDataFormComponent } from './components/my-data-form/my-data-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatInputModule } from '@angular/material/input';
 import { ActivitiesComponent } from './containers/activities/activities.component';
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MyOrganisationComponent } from './containers/my-organisation/my-organisation.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthModule } from '../auth/auth.module';
 import { NotificationComponent } from './containers/notifications/notifications.component';
 import { NotifiacationSuccessComponent } from './components/notifiacation-success/notifiacation-success.component';
 import { OrgaUserFormComponent } from './containers/my-organisation/orga-user-form/orga-user-form.component';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatSelectModule } from '@angular/material/select';
 import { OrgaUserListComponent } from './components/orga-user-list/orga-user-list.component';
 import { OrgaUserListEntryComponent } from './components/orga-user-list-entry/orga-user-list-entry.component';
 import { OrgaUserListStatusComponent } from './components/orga-user-list-status/orga-user-list-status.component';
@@ -34,10 +34,10 @@ import { ApiKeyDocLinksComponent } from './containers/developer/api-key-doc-link
 import { OffersComponent } from './containers/offers/offers.component';
 import { MarketplaceModule } from '../marketplace/marketplace.module';
 import { BestPracticesComponent } from './containers/best-practices/best-practices.component';
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
 import { DanHelpModalComponent } from './containers/dan-activities/dan-help-modal/dan-help-modal.component';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [

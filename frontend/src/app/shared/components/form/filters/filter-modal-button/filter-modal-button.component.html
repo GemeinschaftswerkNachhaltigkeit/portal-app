@@ -1,7 +1,9 @@
 <div class="filter-btn-wrapper">
   <button mat-button (click)="openFilters()">
-    <mat-icon>tune</mat-icon>
-    <span class="filter-btn-text">{{ 'btn.filters' | translate }}</span>
+    <div class="label">
+      <app-outlined-icon>tune</app-outlined-icon>
+      <span class="filter-btn-text">{{ 'btn.filters' | translate }}</span>
+    </div>
   </button>
   <app-filter-count-badge
     [active]="true"
