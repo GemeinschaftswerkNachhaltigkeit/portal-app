@@ -72,6 +72,12 @@
   }
 }
 
+@media screen and (min-width: 1280px) and (max-width: 1479px) {
+  .map-layout {
+    margin-top: 7rem;
+  }
+}
+
 @media screen and (min-width: $breakpoint-md) {
   .map-layout {
     display: grid;

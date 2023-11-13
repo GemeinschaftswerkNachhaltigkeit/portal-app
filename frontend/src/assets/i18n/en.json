@@ -48,7 +48,8 @@
     "add": "Add now",
     "addNewEvent": "Add event",
     "toDan": "Add action",
-    "registerUrlButton": "Register for the event"
+    "registerUrlButton": "Register for the event",
+    "resetZoom": "Reset map"
   },
   "forms": {
     "labels": {
