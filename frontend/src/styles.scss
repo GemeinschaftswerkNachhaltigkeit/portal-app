@@ -209,6 +209,10 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent),
   }
 }
 
+.mdc-button {
+  text-decoration: none;
+}
+
 .mat-icon-button,
 .mdc-button--outlined {
   background-color: white;
