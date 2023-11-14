@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserRole } from '../models/user-role';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthGuardWithRoleCheck implements CanActivate {
+export class AuthGuardWithRoleCheck  {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

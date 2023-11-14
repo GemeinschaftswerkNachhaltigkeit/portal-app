@@ -1,17 +1,12 @@
 /*  eslint-disable  @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardWithOrga implements CanActivate {
+export class AuthGuardWithOrga  {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
