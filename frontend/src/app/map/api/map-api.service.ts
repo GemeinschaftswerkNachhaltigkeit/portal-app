@@ -8,7 +8,7 @@ import SearchFilter from '../models/search-filter';
 import SearchResult, {
   SearchResultResponseContent
 } from '../models/search-result';
-import { MatomoTracker } from '@ngx-matomo/tracker';
+import { MatomoTracker } from 'ngx-matomo-client';
 import MarkerDto from '../models/markerDto';
 
 @Injectable({

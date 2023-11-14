@@ -14,7 +14,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { DetailsCardComponent } from '../map/containers/details-card/details-card.component';
 import { MapComponent } from './components/map/map.component';
 
@@ -65,8 +64,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatExpansionModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatLuxonDateModule,
-    NgxMatomoTrackerModule
+    MatLuxonDateModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

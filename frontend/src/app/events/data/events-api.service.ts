@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatomoTracker } from '@ngx-matomo/tracker';
+import { MatomoTracker } from 'ngx-matomo-client';
 import { DateTime } from 'luxon';
 import { Observable, map } from 'rxjs';
 

@@ -7,8 +7,8 @@ import { CoreModule } from './core/core.module';
 import { ExampleComponent } from './example/example.component';
 import { AuthModule } from './auth/auth.module';
 import { authConfig, restrictedUrls } from './app-auth.config';
-import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
-import { NgxMatomoRouterModule } from '@ngx-matomo/router';
+import { NgxMatomoTrackerModule } from 'ngx-matomo-client';
+import { NgxMatomoRouterModule } from 'ngx-matomo-client';
 import { environment } from 'src/environments/environment';
 import {
   DateAdapter,

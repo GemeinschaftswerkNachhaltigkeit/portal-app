@@ -6,7 +6,7 @@ import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ProfileUtilsService } from '../../services/profile-utils.service';
-import { MatomoTracker } from '@ngx-matomo/tracker';
+import { MatomoTracker } from 'ngx-matomo-client';
 import { MatomoTagManagerService } from 'src/app/matomo-tm.service';
 
 @Component({
