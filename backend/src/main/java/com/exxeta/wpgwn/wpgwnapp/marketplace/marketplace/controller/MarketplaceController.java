@@ -1,12 +1,15 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.controller;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -35,6 +38,9 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberTemplate;
+import com.querydsl.jpa.impl.JPAQuery;
 
 /**
  * Controller zum Abrufen von Marktplatzangeboten aller Typen (Angebote und Praxisberichte)
@@ -52,6 +58,9 @@ public class MarketplaceController {
     private final MarketplaceService marketplaceService;
 
     private final FullTextSearchHelper fullTextSearchHelper;
+
+    @PersistenceContext
+    private final EntityManager entityManager;
 
     /**
      * Suchen von Angebote und Praxisbeispielen.
@@ -97,8 +106,22 @@ public class MarketplaceController {
             searchPredicate.and(categoryPredicate);
         }
 
-        return marketplaceService.findMarketplaceItems(searchPredicate, pageable)
-                .map(marketplaceMapper::mapMarketplaceItemToResponseDto);
+        JPAQuery<MarketplaceItem> jpaQuery = new JPAQuery<MarketplaceItem>(entityManager)
+                .from(QMarketplaceItem.marketplaceItem)
+                .where(searchPredicate);
+
+        jpaQuery.orderBy(expiredExpression().asc())
+                .orderBy(QMarketplaceItem.marketplaceItem.modifiedAt.desc())
+                .orderBy(QMarketplaceItem.marketplaceItem.createdAt.desc());
+
+        jpaQuery.offset(pageable.getOffset())
+                .limit(pageable.getPageSize());
+
+        final Page<MarketplaceItem> marketplaceItemsPage =
+                PageableExecutionUtils.getPage(jpaQuery.fetch(), pageable, jpaQuery::fetchCount);
+
+        return marketplaceItemsPage.map(marketplaceMapper::mapMarketplaceItemToResponseDto);
+
     }
 
     @GetMapping("{marketplaceItemId}")
@@ -109,6 +132,13 @@ public class MarketplaceController {
                         String.format("Entity [%s] with id [%s] not found", "Offer", marketplaceItemId)));
         return marketplaceMapper.mapMarketplaceItemToDetailsDto(marketplaceItem);
     }
+
+    private NumberTemplate<Integer> expiredExpression() {
+        return Expressions.numberTemplate(Integer.class,
+                "CASE WHEN {0} IS NOT NULL AND {0} <= current_date  THEN 1 ELSE 0 END",
+                QMarketplaceItem.marketplaceItem.endUntil);
+    }
+
 
     private BooleanExpression inNameOrDescription(String query) {
         BooleanExpression nameOrDescriptionQuery =
