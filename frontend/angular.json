@@ -79,11 +79,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wpgwn-app:build:production"
+              "buildTarget": "wpgwn-app:build:production"
             },
             "development": {
-              "browserTarget": "wpgwn-app:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "buildTarget": "wpgwn-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wpgwn-app:build"
+            "buildTarget": "wpgwn-app:build"
           }
         },
         "test": {
