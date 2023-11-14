@@ -1,7 +1,7 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
   MessageInputDialogComponent,

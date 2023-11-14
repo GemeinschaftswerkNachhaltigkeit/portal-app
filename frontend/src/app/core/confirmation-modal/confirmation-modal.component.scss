@@ -6,7 +6,7 @@
     display: grid;
     gap: $spacing-2;
     margin-bottom: $spacing-8;
-    padding-top: $spacing-6;
+    padding: $spacing-6;
   }
   .actions {
     display: flex;
@@ -14,5 +14,6 @@
     align-items: center;
     gap: $spacing-2;
     width: 100%;
+    padding: $spacing-6;
   }
 }

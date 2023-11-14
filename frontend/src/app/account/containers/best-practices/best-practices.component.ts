@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { BestPracticesFacadeService } from 'src/app/marketplace/best-practices-facade.service';
 import { BestPracticesDto } from 'src/app/marketplace/models/best-practices-dto';
 import { BestPracticesWipDto } from 'src/app/marketplace/models/best-practices-wip-dto';

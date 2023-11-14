@@ -18,11 +18,11 @@ export class CardService {
   }
 
   isOrga(type = ''): boolean {
-    return type === 'ORGANISATION';
+    return type === 'ORGANISATION' || type === 'organisation';
   }
 
   isActivity(type = ''): boolean {
-    return type === 'ACTIVITY';
+    return type === 'ACTIVITY' || type === 'activity';
   }
 
   isDan(type = ''): boolean {

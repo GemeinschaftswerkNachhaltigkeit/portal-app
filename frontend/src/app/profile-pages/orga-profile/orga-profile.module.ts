@@ -4,7 +4,7 @@ import { OrgaProfileRoutingModule } from './orga-profile-routing.module';
 import { ProfilePagesModule } from '../profile-pages.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ListItemComponent } from './components/list-item/list-item.component';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { TabsComponent } from './components/tabs/tabs.component';

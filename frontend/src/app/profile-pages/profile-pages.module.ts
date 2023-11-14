@@ -5,7 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HeroComponent } from './components/hero/hero.component';
 import { SectionComponent } from './components/section/section.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 
