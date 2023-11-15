@@ -7,10 +7,7 @@ import Activity from '../../shared/models/actvitiy';
 import Organisation from '../../shared/models/organisation';
 import { ActivityStateService } from './state/activity-state.service';
 import { OrgaStateService } from './state/orga-state.service';
-import {
-  PageQuerParams,
-  defaultPaginatorOptions
-} from 'src/app/shared/models/paging';
+import { PageQuerParams } from 'src/app/shared/models/paging';
 import { OffersStateService } from './state/offers-state.service';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { BestPracticesDto } from 'src/app/marketplace/models/best-practices-dto';
@@ -86,12 +83,7 @@ export class OrgaFacadeService {
       });
   }
 
-  getOffersForOrga(
-    orgaId: number,
-    paging: PageQuerParams = {
-      size: defaultPaginatorOptions.pageSize
-    }
-  ): void {
+  getOffersForOrga(orgaId: number): void {
     this.loading.start('offersLoading');
     this.orgaApi
       .offers(orgaId, { size: 2000 })
@@ -106,12 +98,7 @@ export class OrgaFacadeService {
         }
       });
   }
-  getBestPracticesForOrga(
-    orgaId: number,
-    paging: PageQuerParams = {
-      size: defaultPaginatorOptions.pageSize
-    }
-  ): void {
+  getBestPracticesForOrga(orgaId: number): void {
     this.loading.start('bestPracticesLoading');
     this.orgaApi
       .bestPractices(orgaId, { size: 2000 })

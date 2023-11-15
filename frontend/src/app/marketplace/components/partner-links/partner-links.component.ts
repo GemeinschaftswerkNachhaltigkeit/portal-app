@@ -53,7 +53,7 @@ export class PartnerLinksComponent
       .observe([Breakpoints.XSmall, Breakpoints.Small])
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
-        for (const query of Object.keys(result.breakpoints)) {
+        Object.keys(result.breakpoints).forEach(() => {
           if (result.breakpoints[Breakpoints.XSmall]) {
             this.xs = true;
             this.sm = false;
@@ -71,7 +71,7 @@ export class PartnerLinksComponent
             this.sm = false;
             this.md = false;
           }
-        }
+        });
       });
   }
 

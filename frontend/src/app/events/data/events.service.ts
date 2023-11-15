@@ -90,13 +90,17 @@ export class EventsService {
 
   get groupedEvents$(): Observable<{ group: string; list: EventDto[] }[]> {
     return this.eventsState.asObservable().pipe(
-      map((events) => {
+      map((events: EventDto[]) => {
         const groups: { [date: string]: EventDto[] } = {};
         events.forEach((e) => {
-          const start = e.period?.start || 'undefined';
+          const start = e.period?.start;
+          let day: string = 'undefined';
+          if (start) {
+            day = DateTime.fromISO(start).toISODate() || '';
+          }
 
-          if (!groups[start]) groups[start] = [];
-          groups[start].push(e);
+          if (!groups[day]) groups[day] = [];
+          groups[day].push(e);
         });
         return Object.entries(groups).map((e) => {
           return {
