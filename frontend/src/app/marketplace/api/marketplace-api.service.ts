@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatomoTracker } from 'ngx-matomo-client';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { environment } from 'src/environments/environment';

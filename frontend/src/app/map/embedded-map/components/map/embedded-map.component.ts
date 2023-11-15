@@ -72,7 +72,7 @@ export class EmbeddedMapComponent
     this.initMap();
     if (this.map) {
       const map = this.map;
-      const screenWidth = this.mapRef?.nativeElement?.offsetWidth;
+      // const screenWidth = this.mapRef?.nativeElement?.offsetWidth;
 
       this.map.on('moveend', () => {
         this.marker.setExitingActiveMarker(map, this.data);
