@@ -128,6 +128,11 @@ body {
   height: 100%;
   color: $blue-navy;
   font-family: 'Verdana', sans-serif;
+  --mat-tree-node-text-color: #{$blue-navy};
+  --mat-sidenav-content-text-color: #{$blue-navy};
+  --mdc-outlined-text-field-label-text-color: #{$blue-navy};
+  --mdc-outlined-text-field-input-text-color: #{$blue-navy};
+  --mdc-theme-text-primary-on-background: #{$blue-navy};
 }
 body {
   margin: 0;
@@ -173,10 +178,7 @@ h6 {
   .mdc-notched-outline__trailing,
   .mdc-notched-outline__notch {
     border-radius: 0 !important;
-    border-color: mat.get-color-from-palette(
-      $wpgwn-app-primary,
-      500
-    ) !important;
+    border-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
   }
 }
 .mat-accordion .mat-expansion-panel:last-of-type,
@@ -222,7 +224,14 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent),
   background-color: white;
   padding-block: 1rem;
 }
-
+.mat-mdc-paginator > * {
+  color: $blue-navy !important;
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: white !important;
+  }
+}
 .mat-paginator .mat-icon-button {
   background: transparent;
 }
@@ -230,6 +239,7 @@ div.mat-paginator-page-size {
   display: flex;
   align-items: center;
   gap: 1rem;
+
   .mat-paginator-page-size-select {
     margin: 0;
   }

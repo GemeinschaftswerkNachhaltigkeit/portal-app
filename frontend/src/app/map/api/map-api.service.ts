@@ -114,7 +114,7 @@ export class MapApiService {
       params = params.append('resultType', 'DAN');
       params = params.append('resultType', 'ORGANISATION');
     }
-    if (searchFilter.envelope) {
+    if (searchFilter.envelope && searchFilter.envelope !== 'mobile') {
       params = params.append('envelope', searchFilter.envelope || '');
     }
     searchFilter.sdgs?.forEach((sdg) => {
