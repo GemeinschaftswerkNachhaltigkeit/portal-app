@@ -548,7 +548,7 @@
                             <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../frontend/dist</directory>
+                                    <directory>../frontend/dist/browser</directory>
                                     <includes>
                                         <include>**/*.*</include>
                                     </includes>
