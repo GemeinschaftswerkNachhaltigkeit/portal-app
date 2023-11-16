@@ -106,11 +106,9 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
         .subscribe((box: string) => {
           const screenWidth = this.getScreenWidth();
 
-          console.log('>> screenWidth', screenWidth);
           if (screenWidth && screenWidth < 1200) {
             box = 'mobile';
           }
-          console.log('>> BOX', box);
 
           this.mapMoved.emit(box);
         });
