@@ -43,7 +43,7 @@
     "@tiptap/starter-kit": "2.1.12",
     "@types/leaflet.markercluster": "1.5.4",
     "angular-oauth2-oidc": "^13.0.1",
-    "leaflet": "1.9.4",
+    "leaflet": "1.9.3",
     "leaflet.markercluster": "1.5.3",
     "luxon": "3.4.4",
     "ngx-dropzone-wrapper": "15.0.0",
