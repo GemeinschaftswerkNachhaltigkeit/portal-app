@@ -100,8 +100,6 @@ export class SharedMarkerService {
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
 
-    console.log('>>>>>', window.L === L);
-
     this.danMarkers = new window.L.MarkerClusterGroup({
       iconCreateFunction: function (cluster) {
         return getClusterIcon(cluster.getChildCount(), 'DAN', '');
