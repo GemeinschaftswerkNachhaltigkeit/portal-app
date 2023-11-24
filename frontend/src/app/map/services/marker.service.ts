@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
+
 import { SharedMapFacade } from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -99,14 +100,14 @@ export class SharedMarkerService {
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
 
-    this.danMarkers = L.markerClusterGroup({
+    this.danMarkers = new L.MarkerClusterGroup({
       iconCreateFunction: function (cluster) {
         return getClusterIcon(cluster.getChildCount(), 'DAN', '');
       },
       showCoverageOnHover: false,
       spiderfyOnMaxZoom: false
     });
-    this.organisationMarkers = L.markerClusterGroup({
+    this.organisationMarkers = new L.MarkerClusterGroup({
       iconCreateFunction: function (cluster: L.MarkerCluster) {
         return getClusterIcon(cluster.getChildCount(), 'ORGANISATION', '');
       },
