@@ -100,14 +100,16 @@ export class SharedMarkerService {
     this.danMarkers?.clearLayers();
     const markerData = this.getMarkerData(data);
 
-    this.danMarkers = new L.MarkerClusterGroup({
+    console.log('>>>>>', window.L === L);
+
+    this.danMarkers = new window.L.MarkerClusterGroup({
       iconCreateFunction: function (cluster) {
         return getClusterIcon(cluster.getChildCount(), 'DAN', '');
       },
       showCoverageOnHover: false,
       spiderfyOnMaxZoom: false
     });
-    this.organisationMarkers = new L.MarkerClusterGroup({
+    this.organisationMarkers = new window.L.MarkerClusterGroup({
       iconCreateFunction: function (cluster: L.MarkerCluster) {
         return getClusterIcon(cluster.getChildCount(), 'ORGANISATION', '');
       },
