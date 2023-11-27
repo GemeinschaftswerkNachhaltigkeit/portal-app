@@ -46,7 +46,7 @@
     "leaflet": "1.9.4",
     "leaflet.markercluster": "1.5.3",
     "luxon": "3.4.4",
-    "ngx-dropzone-wrapper": "15.0.0",
+    "ngx-dropzone-wrapper": "16.0.0",
     "ngx-matomo-client": "^6.0.0",
     "ngx-tiptap": "9.1.0",
     "query-string": "8.1.0",
