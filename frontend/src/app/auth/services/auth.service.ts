@@ -166,9 +166,10 @@ export class AuthService {
                 // if the token is expired and we cannot log, we logout to delete the token from the local storage
                 // to prevent it from being sent to the backend. An expired token will always return 401 even if the
                 // endpoint is unsecured.
-                if (!this.oauthService.hasValidAccessToken()) {
-                  this.oauthService.logOut();
-                }
+                // if (!this.oauthService.hasValidAccessToken()) {
+                //   debugger;
+                //   this.oauthService.logOut();
+                // }
 
                 // Instead, we'll now do this:
                 // console.warn(
