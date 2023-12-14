@@ -60,6 +60,7 @@ wpgwn:
       max-reminders: 2
       duration-between-reminders: 7d
       batch-size: 250
+    privacy-content-email-template: "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html"
     import-privacy-consent-email:
       cron: 0 0 0 * * *
     #      cron: 0/10 * * * * *

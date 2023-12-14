@@ -6,6 +6,8 @@ public enum ImportSource {
     BERTELSMANN,
     KVM,
 
+    DNP,
+
     DAN_XML,
     GLOBAL_GOALS_DIRECTORY
 }

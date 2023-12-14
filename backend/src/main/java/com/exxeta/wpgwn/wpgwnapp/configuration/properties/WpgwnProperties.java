@@ -60,6 +60,12 @@ public class WpgwnProperties {
     private final String privacyContentUrl;
 
     /**
+     * Email template für Privacy Content.
+     */
+    @NotBlank
+    private final String privacyContentEmailTemplate;
+
+    /**
      * OptOut Url mit Protokoll, Domain und Variablenspots um die URL für E-Mails einsetzen zu können.
      * Die Platzhalter <strong>uuid</strong> und <strong>email</strong> werden nach Position ersetzt.
      * Bsp.: <pre>http://localhost/opt-out/{uuid}?email={email}</pre>

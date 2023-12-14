@@ -29,7 +29,7 @@ public class PrivacyConsentEmailContentGenerator
                 keycloakService,
                 emailOptOutService,
                 "organisation-work-in-progress-privacy-consent-email.subject",
-                "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html");
+                wpgwnProperties.getPrivacyContentEmailTemplate());
     }
 
     @NonNull
