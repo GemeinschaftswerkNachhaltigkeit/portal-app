@@ -97,7 +97,10 @@ class OrganisationWorkInProgressServiceTest {
 
     @BeforeEach
     void setUp() {
-        WpgwnProperties wpgwnProps = new WpgwnProperties(0L, null, null, "null", "null", "null", "test", "test",
+        WpgwnProperties wpgwnProps = new WpgwnProperties(0L, null, null, "null", "null",
+                "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html",
+                "null", "test",
+                "test",
                 new WpgwnProperties.ReminderEmail(2,
                         Duration.of(2, ChronoUnit.SECONDS),
                         "* 6 * * * * *",

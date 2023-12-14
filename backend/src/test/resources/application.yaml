@@ -81,6 +81,7 @@ wpgwn:
     url: http://test.io/
     email-asset-base-path: http://localhost/test
     privacy-content-url: http://localhost/mme
+    privacy-content-email-template: "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html"
     opt-out-url: http://localhost/opt-out/{uuid}?email={email}
     reminder-email:
       duration-between-reminders: 7d
