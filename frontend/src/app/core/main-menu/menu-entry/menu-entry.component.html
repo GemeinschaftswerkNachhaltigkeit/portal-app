@@ -5,7 +5,7 @@
   <app-new-badge *ngIf="new"></app-new-badge>
   <a
     *ngIf="button; else link"
-    class="menu-entry"
+    class="menu-entry font-2"
     [ngClass]="{ blue: blue, isActive: active }"
   >
     <ng-container *ngTemplateOutlet="content"></ng-container>
@@ -13,7 +13,7 @@
 </div>
 
 <ng-template #external>
-  <a [href]="url" class="menu-entry" [ngClass]="{ blue: blue }">
+  <a [href]="url" class="menu-entry font-2" [ngClass]="{ blue: blue }">
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </a>
 </ng-template>
@@ -24,7 +24,7 @@
     (click)="clickHandler()"
     [routerLink]="[url]"
     [routerLinkActive]="'active'"
-    class="menu-entry"
+    class="menu-entry font-2"
     [ngClass]="{ blue: blue }"
   >
     <ng-container *ngTemplateOutlet="content"></ng-container>
