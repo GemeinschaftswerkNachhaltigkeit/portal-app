@@ -15,7 +15,11 @@ const routes: Routes = [
     redirectTo: 'map',
     pathMatch: 'full'
   },
-
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('./search/search.routes').then((r) => r.SEARCH_ROUTES)
+  },
   {
     path: 'account',
     loadChildren: () =>

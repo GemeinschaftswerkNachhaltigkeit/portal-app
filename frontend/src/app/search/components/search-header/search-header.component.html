@@ -1,0 +1,31 @@
+<header>
+  <app-content-wrapper size="xl">
+    <div class="content">
+      <div class="title-lines">
+        <h1 class="title">Erkunde Nachhaltigkeit:</h1>
+        <h2 class="keywords">Suche, Gestalte, Vernetze</h2>
+      </div>
+      <div class="search-bar">
+        <form
+          [formGroup]="formGroup"
+          class="search-input"
+          (submit)="handleSearch($event)"
+        >
+          <input
+            formControlName="search"
+            matInput
+            type="text"
+            placeholder="Themen, Orte, Aktivitäten ..."
+          />
+          <mat-icon>search</mat-icon>
+        </form>
+        <button type="submit" mat-flat-button color="accent">Suchen</button>
+      </div>
+      <p class="text">
+        Werde aktiv auf der Plattform Gemeinschaftswerk Nachhaltigkeit. Hier
+        vernetzen sich Organisationen und machen ihr Engagement für
+        Nachhaltigkeit sichtbar. Hier erfährst du mehr über das Projekt.
+      </p>
+    </div>
+  </app-content-wrapper>
+</header>
