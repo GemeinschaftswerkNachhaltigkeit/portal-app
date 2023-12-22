@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  p {
+    font-weight: bold;
+    margin: 0 $spacing-10 0 0;
+    flex-shrink: 0;
+    width: fit-content;
+  }
+
+  .actions {
+    box-shadow: 0 -2px 0 0 $gray-light inset;
+    display: flex;
+    overflow: auto;
+    flex-grow: 1;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

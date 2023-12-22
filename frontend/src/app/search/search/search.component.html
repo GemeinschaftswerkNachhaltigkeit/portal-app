@@ -1,4 +1,18 @@
-<app-search-header (search)="handleSearch($event)"> </app-search-header>
-<pre>
-  {{ searchValue() }}
-</pre>
+<app-search-header
+  [searchValue]="searchValue()"
+  (search)="handleSearch($event)"
+>
+</app-search-header>
+<app-content-wrapper>
+  <app-results-heading [searchTerm]="searchValue()"></app-results-heading>
+  <app-type-filter
+    [activeType]="activeType()"
+    (change)="setType($event)"
+  ></app-type-filter>
+  <pre>{{ searchValue() }}</pre>
+  <h1>{{ results().length }}</h1>
+  <pre>
+  {{ results() | json }}
+</pre
+  >
+</app-content-wrapper>

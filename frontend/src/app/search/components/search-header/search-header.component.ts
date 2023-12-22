@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -22,15 +29,19 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './search-header.component.html',
   styleUrl: './search-header.component.scss'
 })
-export class SearchHeaderComponent {
+export class SearchHeaderComponent implements OnChanges {
+  @Input() searchValue = '';
   @Output() search = new EventEmitter<string>();
 
   formGroup = new FormGroup({
-    search: new FormControl<string>('')
+    search: new FormControl<string>(this.searchValue)
   });
 
   handleSearch(event: SubmitEvent) {
-    console.log('>>> search', this.formGroup.get('search')?.value);
     this.search.emit(this.formGroup.get('search')?.value || '');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.formGroup.get('search')?.setValue(this.searchValue);
   }
 }

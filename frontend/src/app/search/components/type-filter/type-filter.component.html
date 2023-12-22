@@ -1,0 +1,10 @@
+<section>
+  <p>Top 3 Suchergebnisse aus:</p>
+  <div class="actions">
+    @for (type of types; track type) {
+    <app-type-tab [attr.active]="activeType === type" (click)="setType(type)">{{
+      type
+    }}</app-type-tab>
+    }
+  </div>
+</section>
