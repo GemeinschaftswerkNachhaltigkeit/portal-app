@@ -8,6 +8,8 @@ public enum ImportSource {
 
     DNP,
 
+    NRW,
+
     DAN_XML,
     GLOBAL_GOALS_DIRECTORY
 }
