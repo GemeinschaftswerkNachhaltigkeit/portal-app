@@ -3,16 +3,22 @@
   (search)="handleSearch($event)"
 >
 </app-search-header>
-<app-content-wrapper>
-  <app-results-heading [searchTerm]="searchValue()"></app-results-heading>
-  <app-type-filter
-    [activeType]="activeType()"
-    (change)="setType($event)"
-  ></app-type-filter>
-  <pre>{{ searchValue() }}</pre>
-  <h1>{{ results().length }}</h1>
-  <pre>
-  {{ results() | json }}
-</pre
-  >
-</app-content-wrapper>
+<div class="main-results">
+  <app-content-wrapper size="xl">
+    <app-results-heading [searchTerm]="searchValue()"></app-results-heading>
+    <app-type-filter
+      [activeType]="activeType()"
+      (change)="setType($event)"
+    ></app-type-filter>
+    <div class="main-results-cards">
+      @for (result of results(); track $index) { @if (result.resultType ===
+      'ORGANISATION') {
+      <app-orga-card [orga]="result"></app-orga-card>
+      } @else if (result.resultType === 'ACTIVITY') {
+      <app-event-card [event]="result"></app-event-card>
+      } @else if (result.resultType === 'MARKETPLACE') {
+      <app-marketplace-card [marketplaceItem]="result"></app-marketplace-card>
+      } }
+    </div>
+  </app-content-wrapper>
+</div>

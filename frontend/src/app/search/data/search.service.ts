@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicFilters } from 'src/app/map/models/search-filter';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { EMPTY, switchMap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { EMPTY, map, switchMap } from 'rxjs';
 import { SearchApiService } from './search-api.service';
+import { CardService } from 'src/app/shared/services/card.service';
 
 export type Type = 'orga' | 'event' | 'marketplace';
 
@@ -21,6 +21,7 @@ export class SearchService {
 
   results$ = toObservable(this.filters).pipe(
     switchMap((filters) => {
+      console.log('>>>', filters);
       switch (filters['type']) {
         case 'orga':
           return this.api.searchOrgas(filters);
@@ -29,13 +30,16 @@ export class SearchService {
         case 'marketplace':
           return this.api.searchMarketplace(filters);
         default:
-          return EMPTY;
+          return this.api.searchOrgas(filters);
       }
     })
   );
 
   pagedResults = toSignal(this.results$, { initialValue: null });
-  results = computed(() => this.pagedResults()?.content || []);
+  results = computed(() => {
+    console.log(this.pagedResults()?.content);
+    return this.pagedResults()?.content || [];
+  });
   searchValue = computed(() => (this.filters()['query'] as string) || '');
   activeType = computed(() => (this.filters()['type'] as Type) || '');
 
@@ -52,7 +56,7 @@ export class SearchService {
     const filters = this.getFilters();
     this.persistFilters.setFiltersToUrl({
       ...filters,
-      type: type
+      type: type || 'orga'
     });
   }
 
@@ -63,7 +67,10 @@ export class SearchService {
   private triggerSearchOnQueryParamsChange(): void {
     this.route.queryParamMap.subscribe(() => {
       const filters = this.getFilters();
-      this.filters.set(filters);
+      this.filters.set({
+        ...filters,
+        type: filters['type'] || 'orga'
+      });
     });
   }
 }

@@ -1,0 +1,23 @@
+<div class="card mat-elevation-z8">
+  <article>
+    <div class="logo" *ngIf="orga.logo">
+      <img [src]="logoUrl()" alt="logo" />
+    </div>
+    <h3 class="title">{{ orga.name }}</h3>
+    <div class="description" [innerHTML]="orga.description"></div>
+  </article>
+  <footer>
+    <div class="badge">
+      {{ 'organisationType.' + orga.organisationType | translate }}
+    </div>
+    <app-content-row
+      [small]="true"
+      [content]="utils.locationString(orga.location)"
+    ></app-content-row>
+    <app-content-row
+      [small]="true"
+      icon="location_searching"
+      [content]="'impactArea.' + orga.impactArea | translate"
+    ></app-content-row>
+  </footer>
+</div>

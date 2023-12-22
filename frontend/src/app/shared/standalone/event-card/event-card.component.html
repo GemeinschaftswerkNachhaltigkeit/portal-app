@@ -1,0 +1,27 @@
+<div class="card mat-elevation-z8">
+  <article>
+    <div class="logo" *ngIf="event.logo">
+      <img [src]="logoUrl()" alt="logo" />
+    </div>
+    @if (event.organisation?.id) {
+    <a
+      class="orga-link"
+      [routerLink]="['/organisations', event.organisation?.id]"
+      >{{ event.organisation?.name }}</a
+    >
+    }
+    <h3 class="title">{{ event.name }}</h3>
+    <div class="description" [innerHTML]="event.description"></div>
+  </article>
+  <footer>
+    <app-content-row
+      [small]="true"
+      icon="calendar_today"
+      [content]="utils.dateRangeString(utils.asActivity(event).period)"
+    ></app-content-row>
+    <app-content-row
+      [small]="true"
+      [content]="utils.locationString(event.location)"
+    ></app-content-row>
+  </footer>
+</div>
