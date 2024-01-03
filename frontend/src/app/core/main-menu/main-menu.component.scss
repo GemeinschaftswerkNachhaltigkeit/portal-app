@@ -1,15 +1,20 @@
 @use 'theme' as *;
+@use 'palette' as *;
 
 .menu {
   padding: 0;
   padding-right: $spacing-6;
   display: flex;
 
-  .user {
+  .right-menu {
     margin-left: auto;
-    .user-content {
+    width: 100%;
+
+    .user-content,
+    .search-content {
       display: flex;
       align-items: center;
+      width: 100%;
       .icon {
         display: flex;
         align-items: center;
@@ -31,7 +36,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: $breakpoint-mobile-menu) {
   :host {
     flex-grow: 1;
   }
@@ -39,6 +44,24 @@
     padding: 0 $spacing-16;
     padding-right: $spacing-6;
     gap: $spacing-8;
+    .right-menu {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+      width: auto;
+      .search-entry {
+        order: -1;
+
+        .search-content {
+          .icon {
+            margin-left: $spacing-2;
+          }
+          .text {
+            display: none;
+          }
+        }
+      }
+    }
     .dropdown-wrapper {
       display: block;
     }

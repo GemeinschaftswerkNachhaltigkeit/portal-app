@@ -41,7 +41,8 @@
       </div>
     </ng-container>
   </ng-container>
-  <div class="user">
+
+  <div class="right-menu">
     <app-menu-entry
       *ngIf="isLoggedIn()"
       [url]="'/account'"
@@ -53,5 +54,19 @@
         <div>{{ getUser()?.firstName + ' ' + getUser()?.lastName }}</div>
       </div>
     </app-menu-entry>
+    <div class="search-entry">
+      <app-menu-entry
+        [url]="'/search'"
+        (routeClicked)="closeNavHandler()"
+        [underline]="mobile"
+      >
+        <div class="search-content">
+          <span class="icon"
+            ><app-outlined-icon>search</app-outlined-icon></span
+          >
+          <div class="text">{{ 'btn.search' | translate }}</div>
+        </div>
+      </app-menu-entry>
+    </div>
   </div>
 </nav>
