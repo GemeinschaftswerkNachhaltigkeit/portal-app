@@ -165,7 +165,20 @@
     "saved": "Saved",
     "online": "Online",
     "private": "Private",
-    "new": "New"
+    "new": "New",
+    "for": "for"
+  },
+  "search": {
+    "noResults": "No results found",
+    "resultsHeading": "Search results",
+    "remainingResultsHeading": "More Suchergebnisse",
+    "topResultsHeading": "Top 3 search resutls in",
+    "orga": "Organisations",
+    "event": "Events",
+    "marketplace": "Marketplace",
+    "orgaLink": "View all results on the map",
+    "eventsLink": "View all results in the event calendar",
+    "marketplaceLink": "View all resutls on the marketplace"
   },
   "paging": {
     "first": "First page",

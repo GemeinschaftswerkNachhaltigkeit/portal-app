@@ -1,0 +1,9 @@
+<div>
+  @if (resultType === 'orga') {
+  <a [routerLink]="['/map']">{{ 'search.orgaLink' | translate }}</a>
+  } @else if (resultType === 'event') {
+  <a [routerLink]="['/map']">{{ 'search.eventsLink' | translate }}</a>
+  } @else if (resultType === 'marketplace') {
+  <a [routerLink]="['/map']">{{ 'search.marketplaceLink' | translate }}</a>
+  }
+</div>

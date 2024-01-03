@@ -164,7 +164,20 @@
     "saved": "Gespeichert",
     "online": "Online",
     "private": "Privat",
-    "new": "Neu"
+    "new": "Neu",
+    "for": "für"
+  },
+  "search": {
+    "noResults": "Keine Ergebnisse gefunden",
+    "resultsHeading": "Suchergebnisse",
+    "remainingResultsHeading": "Weitere Suchergebnisse",
+    "topResultsHeading": "Top 3 Suchergebnisse aus",
+    "orga": "Organisationen",
+    "event": "Veranstlungen",
+    "marketplace": "Marktplatz",
+    "orgaLink": "Alle Ergebnisse auf der Karte ansehen",
+    "eventsLink": "Alle Ergebnisse im Veranstultungskalender ansehen",
+    "marketplaceLink": "Alle Ergebnisse auf dem Marktplatz ansehen"
   },
   "paging": {
     "first": "Erste Seite",

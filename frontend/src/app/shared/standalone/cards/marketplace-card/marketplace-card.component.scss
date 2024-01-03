@@ -4,6 +4,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  background: white;
   header {
     padding-inline: $spacing-8;
     padding-block-start: $spacing-4;
@@ -56,6 +58,7 @@
 
     .title {
       margin-bottom: $spacing-4;
+      font-weight: 700;
     }
   }
 }

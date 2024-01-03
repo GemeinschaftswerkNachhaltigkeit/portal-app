@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Organisation from '../models/organisation';
 import Activity from '../models/actvitiy';
 import { MarketplaceItemDto } from 'src/app/marketplace/models/marketplace-item-dto';
-import { CardData } from '../standalone/orga-card/orga-card.component';
+import { CardData } from '../standalone/cards/orga-card/orga-card.component';
 
 @Injectable({
   providedIn: 'root'

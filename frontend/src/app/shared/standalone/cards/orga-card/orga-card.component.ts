@@ -1,10 +1,11 @@
 import { Component, HostBinding, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardService } from 'src/app/map/services/card.service';
-import { ImgService } from '../../services/img.service';
-import Organisation from '../../models/organisation';
-import { SharedModule } from '../../shared.module';
-import { UtilsService } from '../../services/utils.service';
+import { ImgService } from '../../../services/img.service';
+import Organisation from '../../../models/organisation';
+import { SharedModule } from '../../../shared.module';
+import { UtilsService } from '../../../services/utils.service';
+import { RouterModule } from '@angular/router';
 
 export type CardData = {
   title: string;
@@ -15,7 +16,7 @@ export type CardData = {
 @Component({
   selector: 'app-orga-card',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, RouterModule],
   templateUrl: './orga-card.component.html',
   styleUrl: './orga-card.component.scss'
 })

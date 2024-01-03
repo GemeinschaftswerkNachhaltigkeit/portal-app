@@ -1,9 +1,9 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImgService } from '../../services/img.service';
-import { SharedModule } from '../../shared.module';
-import { UtilsService } from '../../services/utils.service';
-import Activity from '../../models/actvitiy';
+import { ImgService } from '../../../services/img.service';
+import { SharedModule } from '../../../shared.module';
+import { UtilsService } from '../../../services/utils.service';
+import Activity from '../../../models/actvitiy';
 import { RouterModule } from '@angular/router';
 
 export type CardData = {

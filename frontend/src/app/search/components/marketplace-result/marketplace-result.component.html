@@ -1,0 +1,14 @@
+<a [routerLink]="['/marketplace/search/', item.id]">
+  <div class="logo">
+    @if (item.image) {
+    <img [src]="imageUrl()" alt="organisation logo" />
+    }
+  </div>
+  <div class="content">
+    <div class="badge" [ngClass]="item.marketplaceType">
+      {{ getMarketplaceCategory(item) }}
+    </div>
+    <h5>{{ item.name }}</h5>
+    <p>{{ utils.excerpt(item.description) }}</p>
+  </div>
+</a>

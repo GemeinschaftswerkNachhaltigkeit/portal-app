@@ -3,15 +3,20 @@
   (search)="handleSearch($event)"
 >
 </app-search-header>
-<div class="main-results">
-  <app-content-wrapper size="xl">
+<div class="tabs">
+  <app-content-wrapper size="xl" [fitHeight]="true">
     <app-results-heading [searchTerm]="searchValue()"></app-results-heading>
     <app-type-filter
       [activeType]="activeType()"
       (change)="setType($event)"
     ></app-type-filter>
+  </app-content-wrapper>
+</div>
+@if (results().length) {
+<div class="main-results">
+  <app-content-wrapper size="xl" [onlyX]="true">
     <div class="main-results-cards">
-      @for (result of results(); track $index) { @if (result.resultType ===
+      @for (result of mainResults(); track $index) { @if (result.resultType ===
       'ORGANISATION') {
       <app-orga-card [orga]="result"></app-orga-card>
       } @else if (result.resultType === 'ACTIVITY') {
@@ -22,3 +27,27 @@
     </div>
   </app-content-wrapper>
 </div>
+<div class="remaining-results">
+  <app-content-wrapper size="xl">
+    <app-all-results-link [resultType]="activeType()"></app-all-results-link>
+    @if (remainingResults().length) {
+    <app-remaining-results-heading
+      [searchTerm]="searchValue()"
+    ></app-remaining-results-heading>
+    <div class="remaining-results-list">
+      @for (result of remainingResults(); track $index) { @if (result.resultType
+      === 'ORGANISATION') {
+      <app-orga-result [orga]="result"></app-orga-result>
+      } @else if (result.resultType === 'ACTIVITY') {
+      <app-event-result [event]="result"></app-event-result>
+      } @else if (result.resultType === 'MARKETPLACE') {
+      <app-marketplace-result [item]="result"></app-marketplace-result> } }
+    </div>
+    }
+  </app-content-wrapper>
+</div>
+} @else {
+<app-content-wrapper size="xl">
+  <app-no-results></app-no-results>
+</app-content-wrapper>
+}

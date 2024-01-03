@@ -9,6 +9,7 @@ export class ContentWrapperComponent implements OnInit {
   @Input() narrow = false;
   @Input() onlyX = false;
   @Input() mobileNoMargin = false;
+  @Input() fitHeight = false;
   @Input() size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
   wrapperClasses = 'full';
 

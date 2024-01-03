@@ -1,4 +1,4 @@
-<div class="card mat-elevation-z8">
+<a class="card mat-elevation-z8" [routerLink]="['/organisations/', orga.id]">
   <article>
     <div class="logo" *ngIf="orga.logo">
       <img [src]="logoUrl()" alt="logo" />
@@ -20,4 +20,4 @@
       [content]="'impactArea.' + orga.impactArea | translate"
     ></app-content-row>
   </footer>
-</div>
+</a>

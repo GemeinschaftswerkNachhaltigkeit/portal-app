@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicFilters } from 'src/app/map/models/search-filter';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { EMPTY, map, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { SearchApiService } from './search-api.service';
-import { CardService } from 'src/app/shared/services/card.service';
 
 export type Type = 'orga' | 'event' | 'marketplace';
 
@@ -40,6 +39,8 @@ export class SearchService {
     console.log(this.pagedResults()?.content);
     return this.pagedResults()?.content || [];
   });
+  mainResults = computed(() => this.results().slice(0, 3));
+  remainingResults = computed(() => this.results().slice(3));
   searchValue = computed(() => (this.filters()['query'] as string) || '');
   activeType = computed(() => (this.filters()['type'] as Type) || '');
 

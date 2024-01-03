@@ -1,6 +1,11 @@
 <div
   [class]="wrapperClasses"
-  [ngClass]="{ narrow: narrow, onlyX: onlyX, mobileNoMargin: mobileNoMargin }"
+  [ngClass]="{
+    narrow: narrow,
+    onlyX: onlyX,
+    mobileNoMargin: mobileNoMargin,
+    fitHeight: fitHeight
+  }"
 >
   <ng-content></ng-content>
 </div>

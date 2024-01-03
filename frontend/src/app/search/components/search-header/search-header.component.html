@@ -1,9 +1,9 @@
-<header>
+<header class="search-header">
   <app-content-wrapper size="xl">
     <div class="content">
       <div class="title-lines">
-        <h1 class="title">Erkunde Nachhaltigkeit:</h1>
-        <h2 class="keywords">Suche, Gestalte, Vernetze</h2>
+        <h1 class="title">{{ content().title_line_1 }}</h1>
+        <h2 class="keywords">{{ content().title_line_2 }}</h2>
       </div>
       <div class="search-bar">
         <form
@@ -19,13 +19,37 @@
           />
           <mat-icon>search</mat-icon>
         </form>
-        <button type="submit" mat-flat-button color="accent">Suchen</button>
+        <button type="submit" mat-flat-button color="accent">
+          {{ 'btn.search' | translate }}
+        </button>
       </div>
-      <p class="text">
-        Werde aktiv auf der Plattform Gemeinschaftswerk Nachhaltigkeit. Hier
-        vernetzen sich Organisationen und machen ihr Engagement für
-        Nachhaltigkeit sichtbar. Hier erfährst du mehr über das Projekt.
-      </p>
+      @if (content().content) {
+      <div class="text" [innerHTML]="content().content"></div>
+      }
     </div>
   </app-content-wrapper>
+  <div class="image">
+    <img [src]="content().image" alt="" />
+    <svg
+      class="desktop-mask"
+      viewBox="0 0 116 274"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 274L-1.4606e-05 0L116 -4.15783e-06L20.0088 137.285L116 274L0 274Z"
+      />
+    </svg>
+
+    <svg
+      class="mobile-mask"
+      viewBox="0 0 375 91"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M189.5 51.4999L7.80438e-06 1.72827L0 91L375 91L375 0.884766L189.5 51.4999Z"
+      />
+    </svg>
+  </div>
 </header>

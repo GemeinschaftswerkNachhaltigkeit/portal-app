@@ -1,4 +1,7 @@
-<div class="card mat-elevation-z8">
+<a
+  class="card mat-elevation-z8"
+  [routerLink]="['/organisations/', event.organisation?.id, event.id]"
+>
   <article>
     <div class="logo" *ngIf="event.logo">
       <img [src]="logoUrl()" alt="logo" />
@@ -24,4 +27,4 @@
       [content]="utils.locationString(event.location)"
     ></app-content-row>
   </footer>
-</div>
+</a>

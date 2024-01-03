@@ -5,6 +5,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  background: white;
   article {
     flex-grow: 1;
     padding: $spacing-4 $spacing-8 $spacing-17 $spacing-8;
@@ -24,6 +26,7 @@
 
     .title {
       margin-bottom: $spacing-4;
+      font-weight: 700;
     }
   }
 

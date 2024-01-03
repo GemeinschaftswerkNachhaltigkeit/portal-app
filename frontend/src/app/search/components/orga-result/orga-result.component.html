@@ -1,0 +1,25 @@
+<a [routerLink]="['/organisations/', orga.id]">
+  <div class="logo">
+    @if (orga.logo) {
+    <img [src]="logoUrl()" alt="organisation logo" />
+    }
+  </div>
+  <div class="content">
+    <div class="badge">
+      {{ 'organisationType.' + orga.organisationType | translate }}
+    </div>
+    <h5>{{ orga.name }}</h5>
+    <p>{{ utils.excerpt(orga.description) }}</p>
+    <footer>
+      <app-content-row
+        [small]="true"
+        [content]="utils.locationString(orga.location)"
+      ></app-content-row>
+      <app-content-row
+        [small]="true"
+        icon="location_searching"
+        [content]="'impactArea.' + orga.impactArea | translate"
+      ></app-content-row>
+    </footer>
+  </div>
+</a>

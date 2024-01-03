@@ -1,4 +1,5 @@
 <h3>
-  Suchergebnisse @if (searchTerm) {für
+  {{ 'search.resultsHeading' | translate }} @if (searchTerm)
+  {{{ 'labels.for' | translate }}
   <span class="search-term">"{{ searchTerm }}"</span>}
 </h3>
