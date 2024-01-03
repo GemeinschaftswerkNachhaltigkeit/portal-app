@@ -1,9 +1,2 @@
 @use 'theme' as *;
 @use 'palette' as *;
-.wrapper {
-  padding-bottom: $spacing-4;
-
-  .today span {
-    font-size: 1rem;
-  }
-}

@@ -2,6 +2,7 @@
 @use 'palette' as *;
 .tabs {
   background-color: $gray-light;
+  padding-top: $spacing-10;
 }
 .main-results {
   background-color: $gray-light;
@@ -17,6 +18,7 @@
 .remaining-results {
   display: grid;
   gap: $spacing-6;
+  padding-bottom: $spacing-10;
 
   .remaining-results-list {
     display: grid;

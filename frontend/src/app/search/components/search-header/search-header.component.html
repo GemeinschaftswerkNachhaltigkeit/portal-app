@@ -5,12 +5,13 @@
         <h1 class="title">{{ content().title_line_1 }}</h1>
         <h2 class="keywords">{{ content().title_line_2 }}</h2>
       </div>
-      <div class="search-bar">
-        <form
-          [formGroup]="formGroup"
-          class="search-input"
-          (submit)="handleSearch($event)"
-        >
+
+      <form
+        class="search-bar"
+        [formGroup]="formGroup"
+        (submit)="handleSearch($event)"
+      >
+        <div class="search-input">
           <input
             formControlName="search"
             matInput
@@ -18,11 +19,12 @@
             placeholder="Themen, Orte, Aktivitäten ..."
           />
           <mat-icon>search</mat-icon>
-        </form>
+        </div>
+
         <button type="submit" mat-flat-button color="accent">
           {{ 'btn.search' | translate }}
         </button>
-      </div>
+      </form>
       @if (content().content) {
       <div class="text" [innerHTML]="content().content"></div>
       }

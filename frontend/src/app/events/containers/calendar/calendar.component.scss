@@ -1,6 +1,12 @@
 @use 'theme' as *;
 @use 'palette' as *;
-
+.today {
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  margin-bottom: $spacing-10;
+}
 .reset {
   margin-top: $spacing-4;
 }

@@ -40,7 +40,7 @@
             </ng-container>
           </app-event-list>
         </div>
-        <app-spinner forId="load-events"></app-spinner>
+        <app-spinner forId="load-events" [noHeight]="true"></app-spinner>
         <app-alert
           *ngIf="paging.totalElements! <= 0 && (loading$ | async) === false"
           [title]="'map.titles.noData' | translate"
@@ -86,6 +86,9 @@
       [selected]="selected"
       [data]="events"
     ></app-date-select>
+    <button class="today" (click)="handleToday()">
+      {{ 'btn.today' | translate }}
+    </button>
     <div class="actions">
       <button
         class="action"
