@@ -12,4 +12,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class AllResultsLinkComponent {
   @Input() resultType: string;
+  @Input() searchTerm: string;
 }

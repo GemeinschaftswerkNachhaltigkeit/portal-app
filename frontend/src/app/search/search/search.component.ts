@@ -14,6 +14,8 @@ import { OrgaResultComponent } from '../components/orga-result/orga-result.compo
 import { EventResultComponent } from '../components/event-result/event-result.component';
 import { MarketplaceResultComponent } from '../components/marketplace-result/marketplace-result.component';
 import { NoResultsComponent } from '../components/no-results/no-results.component';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search',
@@ -39,11 +41,13 @@ import { NoResultsComponent } from '../components/no-results/no-results.componen
 })
 export class SearchComponent {
   searchService = inject(SearchService);
+  loading = inject(LoadingService);
   searchValue = this.searchService.searchValue;
   activeType = this.searchService.activeType;
   results = this.searchService.results;
   mainResults = this.searchService.mainResults;
   remainingResults = this.searchService.remainingResults;
+  isLoading = toSignal(this.loading.isLoading$('search-loader', 200));
 
   setType(type: Type): void {
     this.searchService.setResultType(type);

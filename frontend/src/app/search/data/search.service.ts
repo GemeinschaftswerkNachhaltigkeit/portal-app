@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { DynamicFilters } from 'src/app/map/models/search-filter';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { SearchApiService } from './search-api.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 export type Type = 'orga' | 'event' | 'marketplace';
 
@@ -15,12 +16,15 @@ export class SearchService {
   api = inject(SearchApiService);
   route = inject(ActivatedRoute);
   persistFilters = inject(PersistFiltersService);
+  loading = inject(LoadingService);
 
   filters = signal<DynamicFilters>({});
+  error = signal<boolean>(false);
+  loading1 = signal<boolean>(false);
 
   results$ = toObservable(this.filters).pipe(
     switchMap((filters) => {
-      console.log('>>>', filters);
+      this.loading.start('search-loader');
       switch (filters['type']) {
         case 'orga':
           return this.api.searchOrgas(filters);
@@ -31,12 +35,14 @@ export class SearchService {
         default:
           return this.api.searchOrgas(filters);
       }
+    }),
+    tap(() => {
+      this.loading.stop('search-loader');
     })
   );
 
   pagedResults = toSignal(this.results$, { initialValue: null });
   results = computed(() => {
-    console.log(this.pagedResults()?.content);
     return this.pagedResults()?.content || [];
   });
   mainResults = computed(() => this.results().slice(0, 3));

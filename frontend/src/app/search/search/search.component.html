@@ -12,7 +12,10 @@
     ></app-type-filter>
   </app-content-wrapper>
 </div>
-@if (results().length) {
+@if (isLoading()) {
+<app-spinner [noHeight]="true"></app-spinner>
+
+} @else { @if (results().length) {
 <div class="main-results">
   <app-content-wrapper size="xl" [onlyX]="true">
     <div class="main-results-cards">
@@ -29,7 +32,10 @@
 </div>
 <div class="remaining-results">
   <app-content-wrapper size="xl">
-    <app-all-results-link [resultType]="activeType()"></app-all-results-link>
+    <app-all-results-link
+      [resultType]="activeType()"
+      [searchTerm]="searchValue()"
+    ></app-all-results-link>
     @if (remainingResults().length) {
     <app-remaining-results-heading
       [searchTerm]="searchValue()"
@@ -50,4 +56,4 @@
 <app-content-wrapper size="xl" [fitHeight]="true">
   <app-no-results></app-no-results>
 </app-content-wrapper>
-}
+} }

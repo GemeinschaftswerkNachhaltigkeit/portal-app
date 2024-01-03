@@ -16,6 +16,10 @@
   padding: $spacing-20;
   height: 100%;
 
+  &.noHeight {
+    height: auto;
+  }
+
   &.noPadding {
     padding: 0;
   }

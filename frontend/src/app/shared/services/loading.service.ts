@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, delay } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
@@ -22,8 +22,9 @@ export class LoadingService {
     return this.loading(this.loaders.value, id);
   }
 
-  isLoading$(id?: string): Observable<boolean> {
+  isLoading$(id?: string, delayTime = 0): Observable<boolean> {
     return this.loaders.asObservable().pipe(
+      delay(delayTime),
       map((loaders: string[]) => {
         return this.loading(loaders, id);
       })

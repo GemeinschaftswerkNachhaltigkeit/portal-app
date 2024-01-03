@@ -12,6 +12,7 @@ export class SpinnerComponent implements OnInit {
   @Input() title? = '';
   @Input() small? = false;
   @Input() noPadding? = false;
+  @Input() noHeight? = false;
   @Input() miniSpinnerInTopRightCorner? = false;
   loading$?: Observable<boolean>;
 
