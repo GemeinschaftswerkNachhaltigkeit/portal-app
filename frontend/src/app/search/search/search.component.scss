@@ -6,9 +6,8 @@
 .main-results {
   background-color: $gray-light;
   .main-results-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    place-content: center;
+    display: flex;
+    flex-direction: column;
 
     gap: $spacing-8;
     padding-block-start: $spacing-8;
@@ -22,5 +21,19 @@
   .remaining-results-list {
     display: grid;
     gap: $spacing-6;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .main-results {
+    .main-results-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      place-content: center;
+
+      gap: $spacing-8;
+      padding-block-start: $spacing-8;
+      padding-block-end: $spacing-16;
+    }
   }
 }

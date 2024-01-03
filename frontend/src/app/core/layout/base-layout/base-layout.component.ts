@@ -19,7 +19,7 @@ export class BaseLayoutComponent implements OnDestroy {
     breakpointObserver: BreakpointObserver
   ) {
     breakpointObserver
-      .observe('(min-width: 1480px)')
+      .observe('(min-width: 1600px)')
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
         this.mobile = !result.matches;

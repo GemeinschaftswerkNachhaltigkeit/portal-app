@@ -15,14 +15,17 @@
     gap: $spacing-4;
 
     .header-text {
+      min-width: 0;
       .badge {
         color: white;
         height: $spacing-7;
+        line-height: $spacing-7;
+        text-align: center;
         padding-inline: $spacing-2;
         margin-block-end: $spacing-2;
-
-        display: flex;
-        align-items: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         &.OFFER {
           background-color: $bordeauxe;
@@ -44,6 +47,7 @@
       width: $spacing-22;
       height: $spacing-22;
       border: 2px solid $gray-light;
+      flex-shrink: 0;
 
       img {
         width: 100%;
