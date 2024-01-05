@@ -4,6 +4,8 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityNotFoundException;
 import java.util.Objects;
 
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
+
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -54,6 +56,7 @@ public class OrganisationController {
     private final OrganisationValidator organisationValidator;
     private final GeometryFactory factory;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private final WpgwnProperties wpgwnProperties;
 
     /**
      * Legt einen neuen Arbeitsstand für eine bereits vorhandene Organisation an,
@@ -93,6 +96,8 @@ public class OrganisationController {
                     .or(QOrganisation.organisation.description.containsIgnoreCase(query));
             searchPredicate.and(searchFieldsForQuery);
         }
+        // exclusive Default Org for Action Day
+        searchPredicate.and(QOrganisation.organisation.id.ne(wpgwnProperties.getDanId()));
 
         final Page<Organisation> organisationPage = organisationService.findAll(searchPredicate, pageable);
         return organisationPage.map(organisationMapper::organisationToDto);
