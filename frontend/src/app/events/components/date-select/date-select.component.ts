@@ -44,7 +44,9 @@ export class DateSelectComponent implements AfterViewInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selected']) {
-      this.cal.activeDate = changes['selected'].currentValue as DateTime;
+      if (this.cal) {
+        this.cal.activeDate = changes['selected'].currentValue as DateTime;
+      }
     }
   }
   ngAfterViewInit(): void {
