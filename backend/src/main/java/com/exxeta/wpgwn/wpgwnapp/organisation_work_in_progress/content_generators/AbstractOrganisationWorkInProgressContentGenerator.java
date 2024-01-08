@@ -4,6 +4,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.Locale;
 import java.util.Optional;
 
+import com.exxeta.wpgwn.wpgwnapp.email.TemplateGenerator;
+
 import org.keycloak.admin.client.resource.GroupResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.context.MessageSource;
@@ -25,7 +27,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.MailToLinkGenerator;
  */
 @RequiredArgsConstructor
 public abstract class AbstractOrganisationWorkInProgressContentGenerator implements
-        ContentGenerator<OrganisationWorkInProgress> {
+        ContentGenerator<OrganisationWorkInProgress>, TemplateGenerator<OrganisationWorkInProgress> {
 
     private final WpgwnProperties wpgwnProperties;
 
@@ -55,7 +57,7 @@ public abstract class AbstractOrganisationWorkInProgressContentGenerator impleme
         context.setVariable("privacyContentUrl", wpgwnProperties.getPrivacyContentUrl());
         context.setVariable("invitationMailToLink", mailToLinkGenerator.buildMailToLink());
         context.setVariable("unsubscribeLink", emailOptOutService.getOptOutLink(getTo(entity)));
-        return templateEngine.process(templateName, context);
+        return templateEngine.process(getTemplate(entity), context);
     }
 
     @Override
@@ -76,4 +78,8 @@ public abstract class AbstractOrganisationWorkInProgressContentGenerator impleme
                 .orElse(entity.getContactWorkInProgress().getEmail());
     }
 
+    @Override
+    public String getTemplate(OrganisationWorkInProgress entity) {
+        return templateName;
+    }
 }
