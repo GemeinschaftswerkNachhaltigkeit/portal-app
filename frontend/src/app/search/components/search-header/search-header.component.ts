@@ -58,7 +58,6 @@ export class SearchHeaderComponent implements OnChanges, OnInit, OnDestroy {
   });
 
   handleSearch(event: SubmitEvent) {
-    console.log('HANDLE');
     this.search.emit(this.formGroup.get('search')?.value || '');
   }
 

@@ -64,7 +64,6 @@ export class SearchApiService {
               resultType: 'MARKETPLACE'
             } as SearchResult;
           });
-          console.log('>>>>>>>>>><', newResults);
           return newResults;
         })
       );
