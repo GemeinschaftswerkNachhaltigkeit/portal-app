@@ -178,7 +178,8 @@
     "marketplace": "Marketplace",
     "orgaLink": "View all results on the map",
     "eventsLink": "View all results in the event calendar",
-    "marketplaceLink": "View all resutls on the marketplace"
+    "marketplaceLink": "View all resutls on the marketplace",
+    "placeholder": "Topics, Places, Activities ..."
   },
   "paging": {
     "first": "First page",

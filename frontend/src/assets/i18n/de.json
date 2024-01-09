@@ -177,7 +177,8 @@
     "marketplace": "Marktplatz",
     "orgaLink": "Alle Ergebnisse auf der Karte ansehen",
     "eventsLink": "Alle Ergebnisse im Veranstultungskalender ansehen",
-    "marketplaceLink": "Alle Ergebnisse auf dem Marktplatz ansehen"
+    "marketplaceLink": "Alle Ergebnisse auf dem Marktplatz ansehen",
+    "placeholder": "Themen, Orte, Aktivitäten ..."
   },
   "paging": {
     "first": "Erste Seite",
