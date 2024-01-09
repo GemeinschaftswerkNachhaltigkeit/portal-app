@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import Organisation from '../models/organisation';
-import Activity from '../models/actvitiy';
-import { MarketplaceItemDto } from 'src/app/marketplace/models/marketplace-item-dto';
-import { CardData } from '../standalone/cards/orga-card/orga-card.component';
 import SearchResult, {
   SearchResultResponseContent
 } from 'src/app/map/models/search-result';

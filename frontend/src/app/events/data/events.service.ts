@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import EventDto from '../models/event-dto';
 import {
   BehaviorSubject,

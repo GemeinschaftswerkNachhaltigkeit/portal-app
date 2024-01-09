@@ -8,6 +8,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './type-tab.component.html',
   styleUrl: './type-tab.component.scss'
 })
-export class TypeTabComponent {
-
-}
+export class TypeTabComponent {}

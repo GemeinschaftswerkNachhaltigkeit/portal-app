@@ -6,7 +6,6 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
   inject,
   signal
 } from '@angular/core';
@@ -57,7 +56,7 @@ export class SearchHeaderComponent implements OnChanges, OnInit, OnDestroy {
     search: new FormControl<string>(this.searchValue)
   });
 
-  handleSearch(event: SubmitEvent) {
+  handleSearch() {
     this.search.emit(this.formGroup.get('search')?.value || '');
   }
 
@@ -85,7 +84,7 @@ export class SearchHeaderComponent implements OnChanges, OnInit, OnDestroy {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.formGroup.get('search')?.setValue(this.searchValue);
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchHeaderComponent } from '../components/search-header/search-header.component';
 import { SearchService, Type } from '../data/search.service';

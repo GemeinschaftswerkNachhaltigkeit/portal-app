@@ -8,7 +8,7 @@
     <app-results-heading [searchTerm]="searchValue()"></app-results-heading>
     <app-type-filter
       [activeType]="activeType()"
-      (change)="setType($event)"
+      (typeChange)="setType($event)"
     ></app-type-filter>
   </app-content-wrapper>
 </div>

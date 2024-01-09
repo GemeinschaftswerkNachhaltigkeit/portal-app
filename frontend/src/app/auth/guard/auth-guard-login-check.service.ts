@@ -6,7 +6,7 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuardWithLoginCheck  {
+export class AuthGuardWithLoginCheck {
   constructor(private authService: AuthService) {}
 
   canActivate(

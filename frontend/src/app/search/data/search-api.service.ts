@@ -6,8 +6,6 @@ import SearchResult, {
   SearchResultResponseContent
 } from 'src/app/map/models/search-result';
 import { MarketplaceItemDto } from 'src/app/marketplace/models/marketplace-item-dto';
-import Activity from 'src/app/shared/models/actvitiy';
-import Organisation from 'src/app/shared/models/organisation';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import { SearchUtilsService } from 'src/app/shared/services/search-utils.service';
 import { environment } from 'src/environments/environment';
@@ -16,8 +14,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SearchApiService {
-  private readonly searchEndpoint = `${environment.apiV2Url}/search`;
-  private readonly marketplaceEndpoint = `${environment.apiV2Url}/marketplace`;
+  private readonly searchEndpoint = `${environment.apiUrl}/search`;
+  private readonly marketplaceEndpoint = `${environment.apiUrl}/marketplace`;
 
   searchUtils = inject(SearchUtilsService);
   http = inject(HttpClient);

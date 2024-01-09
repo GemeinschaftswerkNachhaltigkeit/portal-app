@@ -13,11 +13,11 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TypeFilterComponent {
   @Input() activeType: Type;
-  @Output() change = new EventEmitter<Type>();
+  @Output() typeChange = new EventEmitter<Type>();
 
   types: Type[] = ['orga', 'event', 'marketplace'];
 
   setType(type: Type): void {
-    this.change.emit(type);
+    this.typeChange.emit(type);
   }
 }

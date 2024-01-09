@@ -3,7 +3,6 @@ import { CommonModule, NgClass } from '@angular/common';
 import { ImgService } from '../../../services/img.service';
 import { SharedModule } from '../../../shared.module';
 import { UtilsService } from '../../../services/utils.service';
-import Activity from '../../../models/actvitiy';
 import { RouterModule } from '@angular/router';
 import { MarketplaceItem } from '../../../models/marketplaceItem';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';

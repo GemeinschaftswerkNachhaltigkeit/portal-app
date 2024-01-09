@@ -1,6 +1,5 @@
-import { Component, HostBinding, Input, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardService } from 'src/app/map/services/card.service';
 import { ImgService } from '../../../services/img.service';
 import Organisation from '../../../models/organisation';
 import { SharedModule } from '../../../shared.module';

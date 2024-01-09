@@ -11,7 +11,7 @@ import { EventsService } from '../../data/events.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   AdditionalFiltersData,
   AdditionalFiltersModalComponent
