@@ -4,7 +4,7 @@
       <img [src]="logoUrl()" alt="logo" />
     </div>
     <h3 class="title">{{ orga.name }}</h3>
-    <div class="description" [innerHTML]="orga.description"></div>
+    <div class="description">{{ utils.excerpt(orga.description) }}</div>
   </article>
   <footer>
     <div class="badge">

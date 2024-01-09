@@ -14,7 +14,7 @@
     >
     }
     <h3 class="title">{{ event.name }}</h3>
-    <div class="description" [innerHTML]="event.description"></div>
+    <div class="description">{{ utils.excerpt(event.description) }}</div>
   </article>
   <footer>
     <app-content-row

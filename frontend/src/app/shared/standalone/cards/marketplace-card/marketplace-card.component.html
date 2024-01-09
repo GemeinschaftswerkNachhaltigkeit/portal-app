@@ -21,6 +21,8 @@
   </header>
   <article>
     <h3 class="title">{{ marketplaceItem.name }}</h3>
-    <div class="description" [innerHTML]="marketplaceItem.description"></div>
+    <div class="description">
+      {{ utils.excerpt(marketplaceItem.description) }}
+    </div>
   </article>
 </a>
