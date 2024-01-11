@@ -44,4 +44,11 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
     height: 16px;
     background-color: $blue-light;
   }
+
+  .cardFooter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 0 0 50%;
+  }
 }

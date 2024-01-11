@@ -1,7 +1,7 @@
-<a class="card mat-elevation-z8" [routerLink]="['/organisations/', orga.id]">
+<a class="card" [routerLink]="['/organisations/', orga.id]">
   <article>
-    <div class="logo" *ngIf="orga.logo">
-      <img [src]="logoUrl()" alt="logo" />
+    <div class="logo">
+      <img [src]="logoUrl()" alt="logo" *ngIf="orga.logo" />
     </div>
     <h3 class="title">{{ orga.name }}</h3>
     <div class="description">{{ utils.excerpt(orga.description) }}</div>
@@ -10,14 +10,22 @@
     <div class="badge">
       {{ 'organisationType.' + orga.organisationType | translate }}
     </div>
-    <app-content-row
-      [small]="true"
-      [content]="utils.locationString(orga.location)"
-    ></app-content-row>
-    <app-content-row
-      [small]="true"
-      icon="location_searching"
-      [content]="'impactArea.' + orga.impactArea | translate"
-    ></app-content-row>
+
+    <div class="content-row font-2" *ngIf="utils.locationString(orga.location)">
+      <div class="content">
+        <app-outlined-icon>pin_drop</app-outlined-icon>
+        <p class="text">
+          <mark>{{ utils.locationString(orga.location) }}</mark>
+        </p>
+      </div>
+    </div>
+    <div class="content-row font-2" *ngIf="orga.impactArea">
+      <div class="content">
+        <app-outlined-icon>location_searching</app-outlined-icon>
+        <p class="text">
+          <mark>{{ 'impactArea.' + orga.impactArea | translate }}</mark>
+        </p>
+      </div>
+    </div>
   </footer>
 </a>

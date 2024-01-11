@@ -381,6 +381,14 @@ mat-dialog-container.mat-dialog-container {
   }
 }
 
+.search-header {
+  .text {
+    p {
+      margin: 0;
+    }
+  }
+}
+
 .mat-menu-item[disabled] {
   opacity: 0.5;
 }

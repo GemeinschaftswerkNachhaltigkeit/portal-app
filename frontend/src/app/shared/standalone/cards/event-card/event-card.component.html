@@ -1,10 +1,10 @@
 <a
-  class="card mat-elevation-z8"
+  class="card"
   [routerLink]="['/organisations/', event.organisation?.id, event.id]"
 >
   <article>
-    <div class="logo" *ngIf="event.logo">
-      <img [src]="logoUrl()" alt="logo" />
+    <div class="logo">
+      <img [src]="logoUrl()" alt="logo" *ngIf="event.logo" />
     </div>
     @if (event.organisation?.id) {
     <a
@@ -17,14 +17,29 @@
     <div class="description">{{ utils.excerpt(event.description) }}</div>
   </article>
   <footer>
-    <app-content-row
-      [small]="true"
-      icon="event"
-      [content]="utils.dateRangeString(utils.asActivity(event).period)"
-    ></app-content-row>
-    <app-content-row
-      [small]="true"
-      [content]="utils.locationString(event.location)"
-    ></app-content-row>
+    <div
+      class="content-row font-2"
+      *ngIf="utils.dateRangeString(utils.asActivity(event).period)"
+    >
+      <div class="content">
+        <app-outlined-icon>event</app-outlined-icon>
+        <p class="text">
+          <mark>{{
+            utils.dateRangeString(utils.asActivity(event).period)
+          }}</mark>
+        </p>
+      </div>
+    </div>
+    <div
+      class="content-row font-2"
+      *ngIf="utils.locationString(event.location)"
+    >
+      <div class="content">
+        <app-outlined-icon>pin_drop</app-outlined-icon>
+        <p class="text">
+          <mark>{{ utils.locationString(event.location) }}</mark>
+        </p>
+      </div>
+    </div>
   </footer>
 </a>

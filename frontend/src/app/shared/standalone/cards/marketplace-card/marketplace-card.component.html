@@ -1,7 +1,4 @@
-<a
-  class="card mat-elevation-z8"
-  [routerLink]="['/marketplace/search/', marketplaceItem.id]"
->
+<a class="card" [routerLink]="['/marketplace/search/', marketplaceItem.id]">
   <header>
     <div class="image" *ngIf="marketplaceItem.image">
       <img [src]="imageUrl()" alt="banner" />

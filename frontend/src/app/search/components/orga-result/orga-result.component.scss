@@ -27,6 +27,12 @@ a {
       margin: 0 0 $spacing-1 0;
     }
 
+    p {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+
     .badge {
       background: $orange;
       color: white;

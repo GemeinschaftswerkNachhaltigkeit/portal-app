@@ -3,6 +3,7 @@
 
 a {
   display: flex;
+  flex-direction: column;
   gap: $spacing-4;
   text-decoration: none;
   font-family: 'AzeretMono';
@@ -27,6 +28,12 @@ a {
       margin: 0 0 $spacing-1 0;
     }
 
+    p {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+
     .badge {
       color: white;
       height: $spacing-7;
@@ -44,5 +51,10 @@ a {
         color: $blue-navy;
       }
     }
+  }
+}
+@media screen and (min-width: 800px) {
+  a {
+    flex-direction: row;
   }
 }
