@@ -259,6 +259,7 @@ div.mat-paginator-page-size {
 }
 .mat-drawer-container {
   color: $blue-navy;
+  background-color: white !important;
 }
 .mdc-button--unelevated {
   color: $blue-navy;
@@ -376,6 +377,14 @@ mat-dialog-container.mat-dialog-container {
       p {
         margin: 0;
       }
+    }
+  }
+}
+
+.search-header {
+  .text {
+    p {
+      margin: 0;
     }
   }
 }

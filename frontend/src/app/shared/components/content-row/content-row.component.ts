@@ -10,4 +10,5 @@ export class ContentRowComponent {
   @Input() content? = '';
   @Input() noDecorator = false;
   @Input() small = false;
+  @Input() cardFooter = false;
 }

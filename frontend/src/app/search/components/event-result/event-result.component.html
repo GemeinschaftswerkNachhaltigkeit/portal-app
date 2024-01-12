@@ -1,0 +1,29 @@
+<a [routerLink]="['/organisations/', event.organisation?.id, event.id]">
+  <div class="logo">
+    @if (event.logo) {
+    <img [src]="logoUrl()" alt="organisation logo" />
+    }
+  </div>
+  <div class="content">
+    <div class="badge">
+      {{ 'activityType.' + event.activityType | translate }}
+    </div>
+    <h5>{{ event.name }}</h5>
+    <footer>
+      <app-content-row
+        [small]="true"
+        icon="calendar_today"
+        [content]="utils.dateRangeString(utils.asActivity(event).period)"
+      ></app-content-row>
+      <app-content-row
+        [small]="true"
+        [content]="utils.locationString(event.location)"
+      ></app-content-row>
+      <app-content-row
+        [small]="true"
+        icon="location_searching"
+        [content]="'impactArea.' + event.impactArea | translate"
+      ></app-content-row>
+    </footer>
+  </div>
+</a>

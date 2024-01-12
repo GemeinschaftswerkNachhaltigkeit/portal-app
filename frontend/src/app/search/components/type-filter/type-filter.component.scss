@@ -1,0 +1,61 @@
+@use 'theme' as *;
+@use 'palette' as *;
+section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: -16px;
+      bottom: 0;
+      height: 40px;
+      width: 100px;
+      z-index: 10;
+      background: linear-gradient(to right, $gray-light, transparent);
+      pointer-events: none;
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      right: -16px;
+      bottom: 0;
+      height: 40px;
+      width: 100px;
+      z-index: 10;
+      background: linear-gradient(to left, $gray-light, transparent);
+      pointer-events: none;
+    }
+  }
+
+  p {
+    font-weight: bold;
+    margin: 0 $spacing-10 0 0;
+    flex-shrink: 0;
+    width: fit-content;
+  }
+
+  .actions {
+    box-shadow: 0 -2px 0 0 $gray-light2 inset;
+    display: flex;
+    overflow: auto;
+    flex-grow: 1;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 550px) {
+  section .overlay {
+    display: none;
+  }
+}

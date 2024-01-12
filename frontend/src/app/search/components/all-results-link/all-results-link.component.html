@@ -1,0 +1,17 @@
+<div>
+  @if (resultType === 'orga') {
+  <a [routerLink]="['/map']" [queryParams]="{ query: searchTerm }">{{
+    'search.orgaLink' | translate
+  }}</a>
+  } @else if (resultType === 'event') {
+  <a [routerLink]="['/events']" [queryParams]="{ query: searchTerm }">{{
+    'search.eventsLink' | translate
+  }}</a>
+  } @else if (resultType === 'marketplace') {
+  <a
+    [routerLink]="['/marketplace/search']"
+    [queryParams]="{ query: searchTerm }"
+    >{{ 'search.marketplaceLink' | translate }}</a
+  >
+  }
+</div>

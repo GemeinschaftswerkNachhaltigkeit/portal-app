@@ -1,0 +1,11 @@
+<section>
+  <div class="overlay"></div>
+  <p>{{ 'search.topResultsHeading' | translate }}:</p>
+  <div class="actions">
+    @for (type of types; track type) {
+    <app-type-tab [attr.active]="activeType === type" (click)="setType(type)">
+      {{ 'search.' + type | translate }}
+    </app-type-tab>
+    }
+  </div>
+</section>

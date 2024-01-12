@@ -1,0 +1,8 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+p {
+  text-align: center;
+  font-size: 2rem;
+  padding: $spacing-10 $spacing-2;
+}

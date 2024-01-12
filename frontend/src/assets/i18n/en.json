@@ -110,7 +110,7 @@
       "externalLinkDan": "External link to the action",
       "url": "Website",
       "FACEBOOK": "Facebook",
-      "TWITTER": "Twitter",
+      "TWITTER": "Other Social Media Channel",
       "LINKEDIN": "LinkedIn",
       "TIKTOK": "TikTok",
       "INSTAGRAM": "Instagram",
@@ -165,7 +165,21 @@
     "saved": "Saved",
     "online": "Online",
     "private": "Private",
-    "new": "New"
+    "new": "New",
+    "for": "for"
+  },
+  "search": {
+    "noResults": "No results found",
+    "resultsHeading": "Search results",
+    "remainingResultsHeading": "More Suchergebnisse",
+    "topResultsHeading": "Top 3 search resutls in",
+    "orga": "Organisations",
+    "event": "Events",
+    "marketplace": "Marketplace",
+    "orgaLink": "View all results on the map",
+    "eventsLink": "View all results in the event calendar",
+    "marketplaceLink": "View all resutls on the marketplace",
+    "placeholder": "Topics, Places, Activities ..."
   },
   "paging": {
     "first": "First page",

@@ -1,0 +1,80 @@
+@use 'theme' as *;
+@use 'palette' as *;
+.card {
+  height: 460px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background: white;
+  box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.2);
+  header {
+    padding-inline: $spacing-8;
+    padding-block-start: $spacing-4;
+    padding-block-end: $spacing-2;
+    background: $blue-light;
+    display: flex;
+    gap: $spacing-4;
+
+    .header-text {
+      min-width: 0;
+      .badge {
+        color: white;
+        height: $spacing-7;
+        line-height: $spacing-7;
+        text-align: center;
+        padding-inline: $spacing-2;
+        margin-block-end: $spacing-2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &.OFFER {
+          background-color: $bordeauxe;
+        }
+
+        &.BEST_PRACTISE {
+          background-color: $yellow;
+          color: $blue-navy;
+        }
+      }
+
+      .orga-link {
+        display: block;
+        margin-bottom: $spacing-8;
+      }
+    }
+
+    .image {
+      width: $spacing-22;
+      height: $spacing-22;
+      border: 2px solid $gray-light;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  article {
+    padding: $spacing-12 $spacing-6 $spacing-17 $spacing-6;
+    .description {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+    }
+    .title {
+      margin-bottom: $spacing-4;
+      font-weight: 700;
+    }
+  }
+}
+@media screen and (min-width: 800px) {
+  .card {
+    article {
+      padding: $spacing-4 $spacing-8 $spacing-17 $spacing-8;
+    }
+  }
+}

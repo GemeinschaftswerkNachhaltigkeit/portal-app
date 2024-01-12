@@ -4,7 +4,9 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnChanges,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {
@@ -22,7 +24,7 @@ import { DateSelectHeaderComponent } from '../date-select-header/date-select-hea
   templateUrl: './date-select.component.html',
   styleUrls: ['./date-select.component.scss']
 })
-export class DateSelectComponent implements AfterViewInit {
+export class DateSelectComponent implements AfterViewInit, OnChanges {
   @Input() selected: DateTime = DateTime.now();
   @Input() data: { [key: string]: number } = {};
   @Output() dateSelected = new EventEmitter<DateTime>();
@@ -40,6 +42,13 @@ export class DateSelectComponent implements AfterViewInit {
       this.changeDatePickerLang(event.lang);
     });
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selected']) {
+      if (this.cal) {
+        this.cal.activeDate = changes['selected'].currentValue as DateTime;
+      }
+    }
+  }
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.ready = true;
@@ -51,13 +60,14 @@ export class DateSelectComponent implements AfterViewInit {
               .toUTC()
               .toISO({ suppressMilliseconds: true });
             const inData = date && this.data[date] > 0;
+
             return inData ? 'date-with-data' : '';
           }
         }
 
         return '';
       };
-    }, 0);
+    }, 200);
   }
 
   changeDatePickerLang(locale: string) {
@@ -71,10 +81,5 @@ export class DateSelectComponent implements AfterViewInit {
     if (date) {
       this.dateSelected.emit(date);
     }
-  }
-
-  handleToday(): void {
-    this.cal.activeDate = DateTime.now();
-    this.handleDateChange(DateTime.now());
   }
 }

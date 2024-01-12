@@ -5,6 +5,7 @@ import {
   Observable,
   filter,
   map,
+  skip,
   switchMap,
   take
 } from 'rxjs';
@@ -52,11 +53,12 @@ export class EventsService {
     private feature: FeatureService,
     private lp: LandingpageService
   ) {
-    this.triggerSearchOnQueryParamsChange();
+    // this.triggerSearchOnQueryParamsChange();
     this.triggerNewEventRedirect();
 
     this.searchFilters
       .pipe(
+        skip(1),
         switchMap((searchParams) => {
           this.loader.start('load-events');
           return this.eventsApi.search(searchParams, this.nextPage);
@@ -124,6 +126,7 @@ export class EventsService {
   }
 
   loadAvailableEvents(month: DateTime, cb?: () => void): void {
+    console.log('LOAD EVENTS', month);
     this.eventsApi
       .getDates(month)
       .pipe(take(1))
@@ -164,6 +167,8 @@ export class EventsService {
       const nextPage = this.nextPage + 1;
       const hasItemsLeft = total - itemsPerPage * nextPage > 0;
       if (hasItemsLeft) {
+        console.log('LOAD MORE');
+
         this.nextPage = nextPage;
         const filters = this.getFilters();
         this.searchFilters.next(filters);
@@ -171,11 +176,15 @@ export class EventsService {
     }
   }
 
-  reset(): void {
+  resetState() {
     this.fitlersChanged = true;
     this.nextPage = 0;
     this.eventsState.next([]);
     this.pagedEventsState.next({ content: [] });
+  }
+
+  reset(): void {
+    this.resetState();
     this.persistFilters.setFiltersToUrl({});
   }
 
@@ -189,6 +198,12 @@ export class EventsService {
   private updateState(data: PagedResponse<EventDto>): void {
     this.pagedEventsState.next(data);
     this.eventsState.next([...this.eventsState.value, ...data.content]);
+  }
+
+  setFilters() {
+    const filters = this.getFilters();
+    console.log('SET FILTERS', filters);
+    this.searchFilters.next(filters);
   }
 
   private triggerSearchOnQueryParamsChange(): void {

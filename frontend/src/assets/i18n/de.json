@@ -110,7 +110,7 @@
       "externalLinkDan": "Externer Link zur Aktion",
       "url": "Website",
       "FACEBOOK": "Facebook",
-      "TWITTER": "Twitter",
+      "TWITTER": "Sonstiger Social Media Kanal",
       "LINKEDIN": "LinkedIn",
       "TIKTOK": "TikTok",
       "INSTAGRAM": "Instagram",
@@ -164,7 +164,21 @@
     "saved": "Gespeichert",
     "online": "Online",
     "private": "Privat",
-    "new": "Neu"
+    "new": "Neu",
+    "for": "für"
+  },
+  "search": {
+    "noResults": "Keine Ergebnisse gefunden",
+    "resultsHeading": "Suchergebnisse",
+    "remainingResultsHeading": "Weitere Suchergebnisse",
+    "topResultsHeading": "Top 3 Suchergebnisse aus",
+    "orga": "Organisationen",
+    "event": "Veranstaltungen",
+    "marketplace": "Marktplatz",
+    "orgaLink": "Alle Ergebnisse auf der Karte ansehen",
+    "eventsLink": "Alle Ergebnisse im Veranstultungskalender ansehen",
+    "marketplaceLink": "Alle Ergebnisse auf dem Marktplatz ansehen",
+    "placeholder": "Themen, Orte, Aktivitäten ..."
   },
   "paging": {
     "first": "Erste Seite",

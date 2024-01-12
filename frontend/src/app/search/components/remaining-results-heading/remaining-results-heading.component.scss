@@ -1,0 +1,13 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+h4 {
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  margin-block: $spacing-6;
+  font-family: 'AzeretMono';
+  .search-term {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,30 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+:host {
+  &[active='true'] {
+    button {
+      font-weight: bold;
+      box-shadow: 0 -2px 0 0 $magenta inset;
+      &:hover {
+        box-shadow: 0 -2px 0 0 $magenta inset;
+      }
+    }
+  }
+
+  button {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    border: none;
+    color: $blue-navy;
+    background-color: transparent;
+    font-family: $font2;
+    padding: $spacing-3 $spacing-6;
+    box-shadow: 0 -2px 0 0 $gray-light2;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 -2px 0 0 transparentize($color: $magenta, $amount: 0.8) inset;
+    }
+  }
+}

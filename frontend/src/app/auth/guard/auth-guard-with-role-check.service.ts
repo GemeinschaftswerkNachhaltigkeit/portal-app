@@ -6,7 +6,7 @@ import { UserRole } from '../models/user-role';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthGuardWithRoleCheck  {
+export class AuthGuardWithRoleCheck {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {

@@ -11,7 +11,7 @@ import { EventsService } from '../../data/events.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   AdditionalFiltersData,
   AdditionalFiltersModalComponent
@@ -23,7 +23,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
-import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-calendar',
@@ -67,8 +66,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private eventsService: EventsService,
     private loader: LoadingService,
-    private router: Router,
-    private lp: LandingpageService,
+    private route: ActivatedRoute,
     public translate: TranslateService,
     public dialog: MatDialog,
     private _adapter: DateAdapter<LuxonDateAdapter>,
@@ -88,6 +86,14 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   handleDateChange(date: DateTime): void {
     this.selected = date;
     this.eventsService.search({ startDate: date.toISO() || '' });
+  }
+  handleToday(): void {
+    const today = DateTime.now().startOf('day');
+    this.eventsService.loadAvailableEvents(today, () => {
+      console.log('CB');
+      this.selected = today;
+      this.eventsService.search({ startDate: this.selected.toISO() || '' });
+    });
   }
 
   handleSearch(): void {
@@ -170,7 +176,8 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   clearAll(): void {
     this.searchControl.setValue({ query: '', location: '' });
-    this.eventsService.reset();
+    this.selected = DateTime.now();
+    this.eventsService.triggerSearch();
   }
 
   openFilters(): void {
@@ -185,17 +192,22 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  private triggerSearchOnQueryParamsChange(): void {
+    this.route.queryParamMap.subscribe(() => {
+      this.eventsService.setFilters();
+    });
+  }
+
   ngOnInit(): void {
     const filters = this.eventsService.getFilters();
     this.searchControl.setValue({
       query: (filters['query'] || '') as string,
       location: (filters['location'] || '') as string
     });
-
     const start = (filters['startDate'] as string) || '';
     this.selected = start ? DateTime.fromISO(start) : DateTime.now();
     this.eventsService.loadAvailableEvents(this.selected);
-    this.eventsService.triggerSearch();
+    this.triggerSearchOnQueryParamsChange();
   }
 
   ngAfterViewInit(): void {
@@ -203,6 +215,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.eventsService.resetState();
     this.observer.unobserve(this.marker.nativeElement);
     this.unsubscribe$.next(null);
     this.unsubscribe$.complete();

@@ -8,6 +8,9 @@
   height: 100%;
   padding: $spacing-4 $spacing-4;
   position: relative;
+  &.fitHeight {
+    height: auto;
+  }
   &.mobileNoMargin {
     padding: $spacing-4 0;
   }

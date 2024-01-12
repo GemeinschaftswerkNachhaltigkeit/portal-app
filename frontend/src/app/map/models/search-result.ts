@@ -1,5 +1,6 @@
 import Organisation from 'src/app/shared/models/organisation';
 import Activity from 'src/app/shared/models/actvitiy';
+import { MarketplaceItem } from 'src/app/shared/models/marketplaceItem';
 export type SearchResultResponseContent = {
   resultType: string;
   activity: Activity;
@@ -7,7 +8,8 @@ export type SearchResultResponseContent = {
 };
 
 type SearchResult = Organisation &
-  Activity & {
+  Activity &
+  MarketplaceItem & {
     resultType: string;
   };
 

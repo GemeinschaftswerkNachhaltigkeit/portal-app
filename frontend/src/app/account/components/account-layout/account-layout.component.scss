@@ -47,16 +47,3 @@ $rightColumn: 37.6rem;
     }
   }
 }
-
-@media screen and (min-width: $breakpoint-md) {
-  .profile {
-    .body {
-      .nav {
-        .nav-wrapper {
-          width: calc(6rem + 100%);
-          left: -6rem;
-        }
-      }
-    }
-  }
-}

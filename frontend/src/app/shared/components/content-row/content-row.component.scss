@@ -31,7 +31,7 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
     z-index: $z1;
     display: flex;
     align-items: center;
-    gap: $spacing-4;
+    gap: $spacing-2;
   }
 
   .decorator {
@@ -43,5 +43,12 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
     bottom: -6px;
     height: 16px;
     background-color: $blue-light;
+  }
+
+  .cardFooter {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 0 0 50%;
   }
 }
