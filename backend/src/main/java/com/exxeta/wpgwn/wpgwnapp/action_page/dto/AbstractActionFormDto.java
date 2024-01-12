@@ -16,7 +16,8 @@ import java.util.Map;
 
 @Getter
 @Setter
-public abstract class AbstractActionFormDto {
+@SuppressWarnings("MagicNumber")
+public abstract class AbstractActionFormDto implements ActionPageForm{
 
     @NotBlank
     @Length(max = 200)
@@ -36,9 +37,6 @@ public abstract class AbstractActionFormDto {
     @AssertTrue
     @NotNull
     private Boolean privacyConsent;
-
-    @NotNull
-    private FormKey formKey;
 
     private Map<String, LanguageValue> attributes;
 
