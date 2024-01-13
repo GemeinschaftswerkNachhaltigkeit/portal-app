@@ -52,6 +52,9 @@ wpgwn:
     max-age: 30d
     cache-public: true
   feature-setting-url: '/items/features'
+  action-page:
+     email-send:
+        cron: 0 0 0 * * *
   organisation:
     dan-id: 0
     random-id-life-time: 5d

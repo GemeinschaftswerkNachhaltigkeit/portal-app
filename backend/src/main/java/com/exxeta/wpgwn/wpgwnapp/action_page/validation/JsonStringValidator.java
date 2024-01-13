@@ -1,13 +1,11 @@
 package com.exxeta.wpgwn.wpgwnapp.action_page.validation;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.boot.json.JsonParser;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonStringValidator implements ConstraintValidator<JsonString, String> {
 

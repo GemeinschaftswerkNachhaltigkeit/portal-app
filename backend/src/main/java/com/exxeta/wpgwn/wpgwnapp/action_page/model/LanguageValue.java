@@ -1,4 +1,4 @@
-package com.exxeta.wpgwn.wpgwnapp.action_page.shared;
+package com.exxeta.wpgwn.wpgwnapp.action_page.model;
 
 import lombok.Getter;
 import lombok.Setter;

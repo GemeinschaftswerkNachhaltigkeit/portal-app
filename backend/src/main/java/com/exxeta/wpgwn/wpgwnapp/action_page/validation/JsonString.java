@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JsonString {
-    String message() default "The String is not in JSON format";
+    String message() default "invalid.json.string";
 
     Class<?>[] groups() default {};
 

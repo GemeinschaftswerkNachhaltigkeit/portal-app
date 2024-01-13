@@ -179,7 +179,7 @@ class DuplicateCheckServiceTest {
 
         Organisation organisation = organisationRepository.save(getOrganisation());
 
-        // save organisation work in progress 2
+        // create organisation work in progress 2
         OrganisationWorkInProgress organisationWip2 = organisationWorkInProgressRepository
                 .save(getOrganisationWorkInProgress());
 
@@ -258,7 +258,7 @@ class DuplicateCheckServiceTest {
         // Check for duplicates (non found but entity is saved and later updated
         DuplicateList duplicateList1 = duplicateCheckService.checkForDuplicate(organisationWip1);
 
-        // save organisation work in progress 2
+        // create organisation work in progress 2
         OrganisationWorkInProgress organisationWip2 = organisationWorkInProgressRepository
                 .save(getOrganisationWorkInProgress());
         // Check for duplicates (non found but entity is saved and later updated
