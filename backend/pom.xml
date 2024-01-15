@@ -47,6 +47,7 @@
         <org.apache.poi.version>5.2.4</org.apache.poi.version>
         <postgresql.version>42.5.4</postgresql.version>
         <jsoup.version>1.16.1</jsoup.version>
+        <hypersistence-utils-hibernate.version>3.7.0</hypersistence-utils-hibernate.version>
         <commons-text.version>1.11.0</commons-text.version>
         <!-- BEGIN: Update vulnerable dependencies -->
         <snakeyaml.version>2.2</snakeyaml.version>
@@ -170,6 +171,11 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-spatial</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-55</artifactId>
+            <version>${hypersistence-utils-hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.n52.jackson</groupId>

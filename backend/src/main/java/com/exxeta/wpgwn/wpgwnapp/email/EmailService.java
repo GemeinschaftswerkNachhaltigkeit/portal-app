@@ -6,6 +6,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.action_page.email.ActionPageEmailGenerator;
+
+import com.exxeta.wpgwn.wpgwnapp.action_page.model.ActionPageEmailType;
+
+import com.exxeta.wpgwn.wpgwnapp.shared.model.UserLanguage;
+
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -93,5 +99,19 @@ public class EmailService {
                     entity.getClass().getName(),
                     contentGenerator.getTo(entity));
         }
+    }
+
+    public <T> void sendActionPageMail(ActionPageEmailGenerator<T> actionPageEmailGenerator,
+                                       T entity, ActionPageEmailType emailType,
+                                       UserLanguage userLanguage) {
+        final Email email = Email.builder()
+                .htmlText(true)
+                .from(emailProperties.getDefaultFrom())
+                .tos(actionPageEmailGenerator.getTo(entity, emailType))
+                .subject(actionPageEmailGenerator.getSubject(entity, emailType, userLanguage))
+                .content(actionPageEmailGenerator.generateMailBody(entity, emailType, userLanguage))
+                .build();
+
+        sendMail(email);
     }
 }

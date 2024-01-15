@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
+
 import org.hibernate.annotations.Type;
 
 import lombok.Getter;
@@ -17,6 +19,8 @@ import lombok.ToString;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 
+import org.hibernate.annotations.TypeDef;
+
 @Entity
 @Table(name = "action_page",
         indexes = {@Index(name = "action_page_unique_hash_index", columnList = "unique_hash")}
@@ -24,6 +28,7 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.AuditableEntityBase;
 @Getter
 @Setter
 @ToString
+@TypeDef(name = "jsonb", typeClass = JsonType.class)
 public class ActionPage extends AuditableEntityBase {
 
     @NotBlank
@@ -41,8 +46,8 @@ public class ActionPage extends AuditableEntityBase {
     private FormKey formKey;
 
     @NotNull
-    @Column(name = "status", nullable = false)
+    @Column(name = "post_construct_job", nullable = false)
     @Enumerated(EnumType.STRING)
-    private ActionPageStatus status;
+    private PostConstructJob postConstructJob;
 
 }

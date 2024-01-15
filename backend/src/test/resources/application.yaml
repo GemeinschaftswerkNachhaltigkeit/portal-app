@@ -69,9 +69,12 @@ contact-form:
       - ingo.initiative@exxeta.com
       - test-empfang@exxeta.com
 
+action-page:
+  default-recipients: content@exxeta.com
+
 building-housing-contact:
   recipients:
-    - gemeinschaftswerk@nachhaltigkeitsrat.de
+    - content@exxeta.com
   station: '/items/building_and_living_translations?filter=%7B%22languages_code%22:%22de-DE%22%7D&fields=turnaround_steps'
 
 wpgwn:

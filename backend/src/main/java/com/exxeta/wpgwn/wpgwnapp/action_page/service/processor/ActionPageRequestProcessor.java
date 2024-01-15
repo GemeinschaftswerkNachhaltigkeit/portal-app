@@ -1,4 +1,4 @@
-package com.exxeta.wpgwn.wpgwnapp.action_page.processor;
+package com.exxeta.wpgwn.wpgwnapp.action_page.service.processor;
 
 import com.exxeta.wpgwn.wpgwnapp.action_page.dto.form.ActionPageForm;
 import com.exxeta.wpgwn.wpgwnapp.action_page.dto.request.ActionFromRequestDto;
@@ -13,5 +13,9 @@ public interface ActionPageRequestProcessor {
     FormKey getFormKey();
 
     <T extends ActionPageForm> T getActionPageForm(ActionFromRequestDto actionFromRequestDto);
+
+    void postConstruct(ActionFromRequestDto actionFromRequestDto);
+
+    boolean isExist(ActionFromRequestDto actionFromRequestDto);
 
 }

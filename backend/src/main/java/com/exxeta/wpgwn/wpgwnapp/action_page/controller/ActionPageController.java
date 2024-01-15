@@ -11,29 +11,31 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 import com.exxeta.wpgwn.wpgwnapp.action_page.dto.request.ActionFromRequestDto;
-import com.exxeta.wpgwn.wpgwnapp.action_page.processor.ActionPageRequestProcessor;
-import com.exxeta.wpgwn.wpgwnapp.utils.ApplicationContextUtils;
+import com.exxeta.wpgwn.wpgwnapp.action_page.service.ActionPageService;
+import com.exxeta.wpgwn.wpgwnapp.action_page.service.processor.ActionPageRequestProcessor;
 
 @RestController
 @RequestMapping("/api/public/v1/action-page")
 @RequiredArgsConstructor
 public class ActionPageController {
 
-
-    private final ApplicationContextUtils applicationContextUtils;
+    private final ActionPageService actionPageService;
 
     @PostMapping("/form")
     public void createActionPage(
             @Valid @RequestBody ActionFromRequestDto requestDto) {
-        processActionPageRequest(requestDto);
-    }
 
-
-    private void processActionPageRequest(ActionFromRequestDto requestDto) {
         ActionPageRequestProcessor actionPageRequestProcessor
-                = applicationContextUtils.getBean(requestDto.getFormKey().getProcess());
+                = actionPageService.getActionPageRequestProcessor(requestDto);
+
         actionPageRequestProcessor.validate(requestDto);
-        actionPageRequestProcessor.create(requestDto);
+
+        if (!actionPageRequestProcessor.isExist(requestDto)) {
+
+            actionPageRequestProcessor.create(requestDto);
+
+            actionPageRequestProcessor.postConstruct(requestDto);
+        }
     }
 
 }

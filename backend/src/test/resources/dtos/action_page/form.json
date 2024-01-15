@@ -1,0 +1,5 @@
+{
+  "payload": "{\"name\":\"PatrickHebner\",\"email\":\"patrick.hebner@test.com\",\"organisation\":\"MeineOrga\",\"position\":\"MeinePosition\",\"privacyConsent\":true,\"attributes\":{\"station\":{\"key\":\"station1\",\"en\":\"station1_en\",\"de\":\"station1_de\"}}}",
+  "userLanguage": "en",
+  "formKey": "biodiversity"
+}
