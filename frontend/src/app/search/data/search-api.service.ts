@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SearchApiService {
-  private readonly searchEndpoint = `${environment.apiUrl}/search`;
+  private readonly searchEndpoint = `${environment.apiV2Url}/search`;
   private readonly marketplaceEndpoint = `${environment.apiUrl}/marketplace`;
 
   searchUtils = inject(SearchUtilsService);
