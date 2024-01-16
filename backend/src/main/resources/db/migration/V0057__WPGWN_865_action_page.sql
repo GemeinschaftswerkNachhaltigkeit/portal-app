@@ -1,4 +1,4 @@
-create table action_page
+create table if not exists action_page
 (
     id                 bigserial    not null,
     created_at         timestamp    not null,

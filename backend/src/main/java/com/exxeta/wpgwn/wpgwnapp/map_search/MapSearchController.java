@@ -247,7 +247,7 @@ public class MapSearchController {
 
     private void buildQueryPredicate(BooleanBuilder searchPredicate, String query) {
         if (StringUtils.hasText(query)) {
-            final String queryWithOr = splitQuery(query);
+            final String queryWithOr = fullTextSearchHelper.splitQuery(query);
             BooleanExpression searchFieldsForQuery = inNameOrDescription(queryWithOr);
             searchFieldsForQuery = searchFieldsForQuery.or(inContactPersonNameOrPosition(queryWithOr));
             searchFieldsForQuery = orInOrganisationType(queryWithOr, searchFieldsForQuery);

@@ -79,7 +79,7 @@ public class MarketplaceController {
                 .and(QMarketplaceItem.marketplaceItem.status.eq(ItemStatus.ACTIVE));
 
         if (StringUtils.hasText(query)) {
-            final String queryWithOr = String.join(" OR ", query.split(" "));
+            final String queryWithOr = fullTextSearchHelper.splitQuery(query);
             BooleanExpression searchFieldsForQuery = inNameOrDescription(queryWithOr);
             searchFieldsForQuery = orInOfferCategory(queryWithOr, searchFieldsForQuery);
             searchFieldsForQuery = orInBestPractiseCategory(queryWithOr, searchFieldsForQuery);

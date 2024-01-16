@@ -5,6 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+
 import org.springframework.stereotype.Component;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.model.SearchableEnum;
@@ -20,6 +24,13 @@ import com.querydsl.core.types.dsl.StringPath;
 
 @Component
 public class FullTextSearchHelper {
+
+    public String splitQuery(String query) {
+        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
+                .omitEmptyStrings();
+        return Joiner.on(" | ").skipNulls()
+                .join(split.split(query));
+    }
 
     public BooleanTemplate fullTextSearchInTsVector(StringPath mapSearchResult, String query) {
         return Expressions.booleanTemplate(

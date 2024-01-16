@@ -1,29 +1,12 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
-import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchV2Result;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchV2Result;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
-
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.core.types.dsl.NumberTemplate;
-import com.querydsl.jpa.impl.JPAQuery;
-
-import lombok.RequiredArgsConstructor;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -38,13 +21,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
+import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchV2Result;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchV2Result;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
+
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.NumberTemplate;
+import com.querydsl.jpa.impl.JPAQuery;
 
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
@@ -167,7 +166,7 @@ public class MapSearchV2Controller {
     }
 
     private NumberTemplate<Double> tsRankExpression(String query) {
-        final String queryWithOr = splitQuery(query);
+        final String queryWithOr = fullTextSearchHelper.splitQuery(query);
         return Expressions.numberTemplate(Double.class, "ts_rank({0}, to_tsquery('german', {1}))",
                 QMapSearchV2Result.mapSearchV2Result.nameAndDescriptionTsvec, queryWithOr);
     }
@@ -348,7 +347,7 @@ public class MapSearchV2Controller {
     }
 
     private BooleanExpression inNameOrDescription(String query) {
-        final String queryWithOr = splitQuery(query);
+        final String queryWithOr = fullTextSearchHelper.splitQuery(query);
         return fullTextSearchInNameOrDescription(queryWithOr);
     }
 
@@ -356,13 +355,6 @@ public class MapSearchV2Controller {
         return fullTextSearchHelper.fullTextSearchInTsVector(
                 QMapSearchV2Result.mapSearchV2Result.nameAndDescriptionTsvec,
                 queryWithOr);
-    }
-
-    private String splitQuery(String query) {
-        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
-                .omitEmptyStrings();
-        return Joiner.on(" | ").skipNulls()
-                .join(split.split(query));
     }
 
 }
