@@ -18,12 +18,14 @@ import {
 } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
+import { FeaturesService } from 'src/app/shared/components/feature/features.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -70,12 +72,33 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     public translate: TranslateService,
     public dialog: MatDialog,
     private _adapter: DateAdapter<LuxonDateAdapter>,
+    private feature: FeatureService,
     @Inject(MAT_DATE_LOCALE) private _locale: string
   ) {
     this.handleOnlyOnlineChange();
     this.translate.onLangChange.subscribe((event) => {
       this.changeDatePickerLang(event.lang);
     });
+    feature
+      .show$('dan-range')
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((danFeature) => {
+        this.hideDan(danFeature);
+      });
+  }
+
+  private hideDan(danFeature: boolean) {
+    const foundFilter = this.includedFilters.find(
+      (filter) => SecondaryFilters.ONLY_DAN === filter
+    );
+    if (danFeature && !foundFilter) {
+      this.includedFilters.push(SecondaryFilters.ONLY_DAN);
+    }
+    if (!danFeature && foundFilter) {
+      this.includedFilters = this.includedFilters.filter(
+        (filter) => filter !== SecondaryFilters.ONLY_DAN
+      );
+    }
   }
 
   changeDatePickerLang(locale: string) {
