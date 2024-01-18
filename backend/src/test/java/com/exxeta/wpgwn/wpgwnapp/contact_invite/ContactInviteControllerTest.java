@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_invite;
 
 import jakarta.mail.internet.MimeMessage;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -205,7 +206,7 @@ class ContactInviteControllerTest {
             try {
                 mockMvc.perform(put(BASE_API_URL + "/" + contactInvite.getRandomUniqueId() + "?status=DENY")
                         .contentType(MediaType.APPLICATION_JSON));
-            } catch (NestedServletException e) {
+            } catch (Exception e) {
                 throw e.getCause();
             }
         }).isInstanceOf(EntityExpiredException.class)

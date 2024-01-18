@@ -1,19 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.configuration.properties;
 
-import jakarta.validation.constraints.NotBlank;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.validation.annotation.Validated;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import jakarta.validation.constraints.NotBlank;
+
 
 @ConfigurationProperties("management.endpoints.security")
 @Getter
 @Validated
-@ConstructorBinding
 @RequiredArgsConstructor
 public class ActuatorSecurityProperties {
 

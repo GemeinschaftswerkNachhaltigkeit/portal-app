@@ -16,6 +16,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -105,6 +106,7 @@ public class Activity extends AuditableEntityBase {
     private String image;
 
     @Column(name = "source")
+    @Enumerated(EnumType.STRING)
     private Source source;
 
     @Column(name = "external_id")

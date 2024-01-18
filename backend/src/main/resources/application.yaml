@@ -10,13 +10,11 @@ spring:
     hibernate:
       # In Produktion auf validate oder none
       ddl-auto: validate
-    database-platform: com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextDialect
     database: postgresql
     properties:
-      org:
-        hibernate:
-          envers:
-            audit_table_suffix: _AUDIT_LOG
+      hibernate.type.preferred_instant_jdbc_type: TIMESTAMP
+      hibernate.type.preferred_duration_jdbc_type: BIGINT
+      org.hibernate.envers.audit_table_suffix: _AUDIT_LOG
   messages:
     basename: i18n/message
   flyway:

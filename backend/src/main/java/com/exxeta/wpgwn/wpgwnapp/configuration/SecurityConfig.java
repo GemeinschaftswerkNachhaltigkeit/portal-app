@@ -3,7 +3,7 @@ package com.exxeta.wpgwn.wpgwnapp.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
@@ -21,7 +21,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
-@EnableMethodSecurity
+@EnableGlobalMethodSecurity(jsr250Enabled = true)
 @RequiredArgsConstructor
 @Order(2)
 public class SecurityConfig {
@@ -37,14 +37,14 @@ public class SecurityConfig {
 
         // @formatter:off
         http.csrf(AbstractHttpConfigurer::disable)
-                .headers(headers->headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(filter, BearerTokenAuthenticationFilter.class)
                 .authorizeHttpRequests(amrmr -> amrmr
                         .requestMatchers(antMatcher("/api/public/**")).permitAll()
-                        .requestMatchers(antMatcher("/api/**")).authenticated()
+                        .requestMatchers(antMatcher("/api/**")).permitAll()
                         .anyRequest().permitAll()
-                ).oauth2ResourceServer(oauth2->oauth2.jwt(jwt->jwt
+                ).oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt
                         .jwtAuthenticationConverter(new WpgwnAuthenticationConverter().wpgwnTokenConverter())));
         // @formatter:on
 

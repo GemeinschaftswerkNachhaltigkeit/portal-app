@@ -25,11 +25,7 @@
     }
   ],
   "pageable": {
-    "sort": {
-      "unsorted": false,
-      "empty": false,
-      "sorted": true
-    },
+    "sort": [{"direction":"DESC","property":"modifiedAt","ignoreCase":false,"nullHandling":"NATIVE","ascending":false,"descending":true}],
     "offset": 0,
     "pageSize": 20,
     "pageNumber": 0,
@@ -41,11 +37,7 @@
   "last": true,
   "size": 20,
   "number": 0,
-  "sort": {
-    "unsorted": false,
-    "empty": false,
-    "sorted": true
-  },
+  "sort": [{"direction":"DESC","property":"modifiedAt","ignoreCase":false,"nullHandling":"NATIVE","ascending":false,"descending":true}],
   "first": true,
   "numberOfElements": 1,
   "empty": false

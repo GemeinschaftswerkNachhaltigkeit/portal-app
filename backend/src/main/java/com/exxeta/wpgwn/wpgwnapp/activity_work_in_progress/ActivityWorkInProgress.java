@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -115,6 +116,7 @@ public class ActivityWorkInProgress extends AuditableEntityBase implements IWork
     private String image;
 
     @Column(name = "source")
+    @Enumerated(EnumType.STRING)
     private Source source;
 
     @Column(name = "external_id")

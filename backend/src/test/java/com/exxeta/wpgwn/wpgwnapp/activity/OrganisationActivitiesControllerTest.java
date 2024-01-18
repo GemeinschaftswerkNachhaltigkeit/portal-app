@@ -89,7 +89,8 @@ class OrganisationActivitiesControllerTest {
         String expectedResponse = StreamUtils.copyToString(resourceLoader.getResource(
                         "classpath:testsamples/organisation/activities/expected-organisation-activities-response.json")
                 .getInputStream(), StandardCharsets.UTF_8);
-
+        String resposne = mockMvc.perform(get(BASE_API_URL, organisation.getId())
+                .accept(MediaType.APPLICATION_JSON)).andReturn().getResponse().getContentAsString();
         // When
         mockMvc.perform(get(BASE_API_URL, organisation.getId())
                         .accept(MediaType.APPLICATION_JSON))
