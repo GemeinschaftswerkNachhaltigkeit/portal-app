@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.zip_code_mapping;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

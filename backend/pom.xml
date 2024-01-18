@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.17</version>
+        <version>3.2.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -16,9 +16,9 @@
     <description>Wpgwn App</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <spring-boot.version>2.7.18</spring-boot.version>
-        <spring-cloud.version>2021.0.8</spring-cloud.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
         <jib-maven-plugin.version>3.4.0</jib-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
         <checkstyle.config.location>./checkstyle.xml</checkstyle.config.location>
@@ -35,11 +35,11 @@
         <thymeleaf-extras-nl2br.version>1.0.2</thymeleaf-extras-nl2br.version>
         <spring-surefire-profile/>
         <spring-failsafe-profile/>
-        <springdoc-openapi-ui.version>1.6.15</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>2.3.0</springdoc-openapi-ui.version>
         <jackson-datatype-jts.version>1.2.10</jackson-datatype-jts.version>
-        <excel-streaming-reader.version>4.2.0</excel-streaming-reader.version>
-        <h2.version>2.1.214</h2.version>
-        <keycloak.version>20.0.5</keycloak.version>
+        <excel-streaming-reader.version>4.2.1</excel-streaming-reader.version>
+        <h2.version>2.2.224</h2.version>
+        <keycloak.version>23.0.4</keycloak.version>
         <resteasy.versions>3.15.6.Final</resteasy.versions>
         <guava.version>32.1.3-jre</guava.version>
         <json-smart.version>2.4.10</json-smart.version>
@@ -169,12 +169,12 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-spatial</artifactId>
         </dependency>
         <dependency>
             <groupId>io.hypersistence</groupId>
-            <artifactId>hypersistence-utils-hibernate-55</artifactId>
+            <artifactId>hypersistence-utils-hibernate-63</artifactId>
             <version>${hypersistence-utils-hibernate.version}</version>
         </dependency>
         <dependency>
@@ -224,12 +224,12 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc-openapi-ui.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
             <version>${springdoc-openapi-ui.version}</version>
         </dependency>
         <dependency>

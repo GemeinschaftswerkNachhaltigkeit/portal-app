@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_invite;
 
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;

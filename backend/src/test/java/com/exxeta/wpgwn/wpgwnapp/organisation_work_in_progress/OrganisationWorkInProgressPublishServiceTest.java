@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashSet;

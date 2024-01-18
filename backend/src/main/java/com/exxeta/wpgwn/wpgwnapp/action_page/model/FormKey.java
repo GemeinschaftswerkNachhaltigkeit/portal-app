@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.action_page.model;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.time.ZoneId;
 import java.util.TimeZone;
 

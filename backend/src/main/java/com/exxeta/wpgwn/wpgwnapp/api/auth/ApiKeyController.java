@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.api.auth;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

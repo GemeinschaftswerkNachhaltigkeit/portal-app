@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import java.util.Objects;
 
 import org.locationtech.jts.geom.Point;

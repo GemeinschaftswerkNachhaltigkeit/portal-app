@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;

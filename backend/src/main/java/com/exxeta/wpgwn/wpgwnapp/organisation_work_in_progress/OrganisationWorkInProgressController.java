@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;

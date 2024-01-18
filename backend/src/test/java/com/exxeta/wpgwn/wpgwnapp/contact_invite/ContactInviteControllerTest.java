@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_invite;
 
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;

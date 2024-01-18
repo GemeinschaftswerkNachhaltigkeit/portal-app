@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.dto;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.Serializable;
 import java.util.Optional;
 

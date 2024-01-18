@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_membership;
 
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.Objects;
 import java.util.UUID;
 

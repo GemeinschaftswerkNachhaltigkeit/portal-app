@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.api.controller;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.List;
 
 import org.springdoc.api.annotations.ParameterObject;

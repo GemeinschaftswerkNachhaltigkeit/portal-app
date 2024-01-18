@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
