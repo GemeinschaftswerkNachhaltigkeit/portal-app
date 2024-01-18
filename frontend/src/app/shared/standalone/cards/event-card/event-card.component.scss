@@ -2,7 +2,7 @@
 @use 'palette' as *;
 
 .card {
-  height: 460px;
+  min-height: 460px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -10,7 +10,7 @@
   box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.2);
   article {
     flex-grow: 1;
-    padding: $spacing-4 $spacing-6 $spacing-17 $spacing-6;
+    padding: $spacing-4 $spacing-6 $spacing-10 $spacing-6;
     height: 100%;
 
     .description {
@@ -99,8 +99,10 @@
 }
 @media screen and (min-width: 800px) {
   .card {
+    height: 460px;
+    min-height: auto;
     article {
-      padding: $spacing-4 $spacing-8 $spacing-17 $spacing-8;
+      padding: $spacing-4 $spacing-8 $spacing-10 $spacing-8;
     }
   }
 }
