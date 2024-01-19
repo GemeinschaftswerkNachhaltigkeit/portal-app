@@ -54,6 +54,9 @@
 </div>
 } @else {
 <app-content-wrapper size="xl" [fitHeight]="true">
-  <app-no-results></app-no-results>
+  <app-no-results
+    [resultType]="activeType()"
+    [searchTerm]="searchValue()"
+  ></app-no-results>
 </app-content-wrapper>
 } }

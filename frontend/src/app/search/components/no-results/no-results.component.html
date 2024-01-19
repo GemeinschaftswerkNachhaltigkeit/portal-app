@@ -1,1 +1,11 @@
-<p>{{ 'search.noResults' | translate }}</p>
+@if(resultType === 'orga') {
+<p>{{ 'search.noResultsOrga' | translate }}</p>
+} @if (resultType === 'event') {
+<p>{{ 'search.noResultsEvent' | translate }}</p>
+} @if(resultType === 'marketplace') {
+<p>{{ 'search.noResultsMarketplace' | translate }}</p>
+}
+<app-all-results-link
+  [resultType]="resultType"
+  [searchTerm]="searchTerm"
+></app-all-results-link>
