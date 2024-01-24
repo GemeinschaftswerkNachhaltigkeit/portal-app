@@ -4,7 +4,7 @@
       <img [src]="logoUrl()" alt="logo" *ngIf="orga.logo" />
     </div>
     <h3 class="title">{{ orga.name }}</h3>
-    <div class="description">{{ utils.excerpt(orga.description, 340) }}</div>
+    <div class="description">{{ utils.excerpt(orga.description) }}</div>
   </article>
   <footer>
     <div class="badge">
