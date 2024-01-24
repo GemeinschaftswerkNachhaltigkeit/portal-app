@@ -285,15 +285,15 @@ public class MapSearchV2Controller {
     private void buildQueryPredicate(BooleanBuilder searchPredicate, String query) {
         if (hasText(query)) {
             BooleanExpression searchFieldsForQuery = inNameOrDescription(query);
-            Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
-                    .omitEmptyStrings();
-            if (split.splitToList(query).size() == 1) {
-                searchFieldsForQuery = searchFieldsForQuery
-                        .or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
-                        .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query));
-            }
+            searchFieldsForQuery = fullTextSearchHelper.orInOrganisationType(query, searchFieldsForQuery,
+                    QMapSearchV2Result.mapSearchV2Result.organisationType);
+            searchFieldsForQuery = fullTextSearchHelper.orInThematicFocus(query, searchFieldsForQuery,
+                    QMapSearchV2Result.mapSearchV2Result.thematicFocus);
+            searchFieldsForQuery = fullTextSearchHelper.orInActivityType(query, searchFieldsForQuery,
+                    QMapSearchV2Result.mapSearchV2Result.activityType);
+            searchFieldsForQuery = fullTextSearchHelper.orInSdgs(query, searchFieldsForQuery,
+                    QMapSearchV2Result.mapSearchV2Result.sustainableDevelopmentGoals);
             searchPredicate.and(searchFieldsForQuery);
-
         }
     }
 
@@ -348,7 +348,15 @@ public class MapSearchV2Controller {
 
     private BooleanExpression inNameOrDescription(String query) {
         final String queryWithOr = fullTextSearchHelper.splitQuery(query);
-        return fullTextSearchInNameOrDescription(queryWithOr);
+        BooleanExpression searchFieldsForQuery = fullTextSearchInNameOrDescription(queryWithOr);
+        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
+                .omitEmptyStrings();
+        if (split.splitToList(query).size() == 1) {
+            searchFieldsForQuery = searchFieldsForQuery
+                    .or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query));
+        }
+        return searchFieldsForQuery;
     }
 
     private BooleanExpression fullTextSearchInNameOrDescription(String queryWithOr) {

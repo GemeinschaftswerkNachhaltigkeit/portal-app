@@ -1,29 +1,12 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
-import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
-import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
-
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
-
-import lombok.RequiredArgsConstructor;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -38,14 +21,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
+import com.exxeta.wpgwn.wpgwnapp.hibernate.FullTextSearchHelper;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchMarkerResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.dto.MapSearchResultWrapperDto;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapMarkerView;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.MapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.map_search.model.QMapSearchResult;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.OrganisationType;
+
+import com.google.common.collect.Lists;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
@@ -250,20 +244,17 @@ public class MapSearchController {
             final String queryWithOr = fullTextSearchHelper.splitQuery(query);
             BooleanExpression searchFieldsForQuery = inNameOrDescription(queryWithOr);
             searchFieldsForQuery = searchFieldsForQuery.or(inContactPersonNameOrPosition(queryWithOr));
-            searchFieldsForQuery = orInOrganisationType(queryWithOr, searchFieldsForQuery);
-            searchFieldsForQuery = orInThematicFocus(queryWithOr, searchFieldsForQuery);
-            searchFieldsForQuery = orInActivityType(queryWithOr, searchFieldsForQuery);
-            searchFieldsForQuery = orInSdgs(queryWithOr, searchFieldsForQuery);
+            searchFieldsForQuery = fullTextSearchHelper.orInOrganisationType(queryWithOr, searchFieldsForQuery,
+                    QMapSearchResult.mapSearchResult.organisationType);
+            searchFieldsForQuery = fullTextSearchHelper.orInThematicFocus(queryWithOr, searchFieldsForQuery,
+                    QMapSearchResult.mapSearchResult.thematicFocus);
+            searchFieldsForQuery = fullTextSearchHelper.orInActivityType(queryWithOr, searchFieldsForQuery,
+                    QMapSearchResult.mapSearchResult.activityType);
+            searchFieldsForQuery = fullTextSearchHelper.orInSdgs(queryWithOr, searchFieldsForQuery,
+                    QMapSearchResult.mapSearchResult.sustainableDevelopmentGoals);
 
             searchPredicate.and(searchFieldsForQuery);
         }
-    }
-
-    private String splitQuery(String query) {
-        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
-                .omitEmptyStrings();
-        return Joiner.on(" | ").skipNulls()
-                .join(split.split(query));
     }
 
     private void buildExpiredActivitiesPredicate(BooleanBuilder searchPredicate, boolean includeExpiredActivities) {
@@ -349,51 +340,6 @@ public class MapSearchController {
         }
         // @formatter:on
         return personNameOrPositionQuery;
-    }
-
-    private BooleanExpression orInThematicFocus(String query, BooleanExpression searchFieldsForQuery) {
-
-        final Set<ThematicFocus> fullTextThematicFocus =
-                fullTextSearchHelper.getMatchingValues(ThematicFocus.class, query);
-        if (!fullTextThematicFocus.isEmpty()) {
-            for (ThematicFocus tm : fullTextThematicFocus) {
-                searchFieldsForQuery = searchFieldsForQuery.or(
-                        QMapSearchResult.mapSearchResult.thematicFocus.containsIgnoreCase(tm.name()));
-            }
-        }
-        return searchFieldsForQuery;
-    }
-
-    private BooleanExpression orInSdgs(String query, BooleanExpression searchFieldsForQuery) {
-        final Set<SustainableDevelopmentGoals> fullTextSdgs =
-                fullTextSearchHelper.getMatchingValues(SustainableDevelopmentGoals.class, query);
-        if (!fullTextSdgs.isEmpty()) {
-            for (SustainableDevelopmentGoals sdg : fullTextSdgs) {
-                searchFieldsForQuery = searchFieldsForQuery.or(
-                        QMapSearchResult.mapSearchResult.sustainableDevelopmentGoals.containsIgnoreCase(sdg.name()));
-            }
-        }
-        return searchFieldsForQuery;
-    }
-
-    private BooleanExpression orInOrganisationType(String query, BooleanExpression searchFieldsForQuery) {
-        final Set<OrganisationType> fullTextOrganisationTypes =
-                fullTextSearchHelper.getMatchingValues(OrganisationType.class, query);
-        if (!fullTextOrganisationTypes.isEmpty()) {
-            searchFieldsForQuery = searchFieldsForQuery.or(
-                    QMapSearchResult.mapSearchResult.organisationType.in(fullTextOrganisationTypes));
-        }
-        return searchFieldsForQuery;
-    }
-
-    private BooleanExpression orInActivityType(String query, BooleanExpression searchFieldsForQuery) {
-        final Set<ActivityType> fullTextActivityTypes =
-                fullTextSearchHelper.getMatchingValues(ActivityType.class, query);
-        if (!fullTextActivityTypes.isEmpty()) {
-            searchFieldsForQuery = searchFieldsForQuery.or(
-                    QMapSearchResult.mapSearchResult.activityType.in(fullTextActivityTypes));
-        }
-        return searchFieldsForQuery;
     }
 
 }
