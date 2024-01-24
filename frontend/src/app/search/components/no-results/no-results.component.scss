@@ -4,5 +4,8 @@
 p {
   text-align: center;
   font-size: 2rem;
+  line-height: 3rem;
   padding: $spacing-10 $spacing-2;
+  max-width: 80ch;
+  margin-inline: auto;
 }

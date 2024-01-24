@@ -169,7 +169,9 @@
     "for": "for"
   },
   "search": {
-    "noResults": "No results found",
+    "noResultsOrga": "Sorry, no matches could be found for your search. Try a different term or location or look directly on the map.",
+    "noResultsEvent": "Sorry, no matches could be found for your search. Try a different term or location or look directly at the event calendar.",
+    "noResultsMarketplace": "Sorry, no matches could be found for your search. Try a different term or location or look directly on the marketplace",
     "resultsHeading": "Search results",
     "remainingResultsHeading": "More Suchergebnisse",
     "topResultsHeading": "Top 3 search resutls in",

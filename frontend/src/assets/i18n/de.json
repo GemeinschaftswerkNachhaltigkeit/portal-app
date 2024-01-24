@@ -168,7 +168,9 @@
     "for": "für"
   },
   "search": {
-    "noResults": "Keine Ergebnisse gefunden",
+    "noResultsOrga": "Leider konnten keine Treffer für deine Suche gefunden werden. Versuche es mit einem anderen Begriff oder Ort oder schaue dich direkt auf der Karte um.",
+    "noResultsEvent": "Leider konnten keine Treffer für deine Suche gefunden werden. Versuche es mit einem anderen Begriff oder Ort oder schaue dich direkt auf dem Veranstaltungskalender um.",
+    "noResultsMarketplace": "Leider konnten keine Treffer für deine Suche gefunden werden. Versuche es mit einem anderen Begriff oder Ort oder schaue dich direkt auf dem Marktplatz um.",
     "resultsHeading": "Suchergebnisse",
     "remainingResultsHeading": "Weitere Suchergebnisse",
     "topResultsHeading": "Top 3 Suchergebnisse aus",
