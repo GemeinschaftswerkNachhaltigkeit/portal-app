@@ -148,6 +148,8 @@ export class AuthService {
                 'consent_required'
               ];
 
+              console.log('Auth error', result);
+
               if (
                 result &&
                 result.reason &&
@@ -167,6 +169,7 @@ export class AuthService {
                 // to prevent it from being sent to the backend. An expired token will always return 401 even if the
                 // endpoint is unsecured.
                 if (!this.oauthService.hasValidAccessToken()) {
+                  console.log('Invalid token');
                   this.oauthService.logOut(true);
                 }
 
@@ -175,6 +178,9 @@ export class AuthService {
                 //   'User interaction is needed to log in, we will wait for the user to manually log in.'
                 // );
                 return Promise.resolve();
+              } else {
+                console.log('Unhandled error');
+                this.oauthService.logOut(true);
               }
 
               // We can't handle the truth, just pass on the problem to the
