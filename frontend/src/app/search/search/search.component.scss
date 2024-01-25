@@ -4,6 +4,14 @@
   background-color: $gray-light;
   padding-top: $spacing-10;
 }
+.spinner-wrapper {
+  background-color: $gray-light;
+  padding-block-start: $spacing-8;
+  padding-block-end: $spacing-16;
+  .spinner {
+    height: 460px;
+  }
+}
 .main-results {
   background-color: $gray-light;
   .main-results-cards {
