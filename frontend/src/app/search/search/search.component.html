@@ -13,7 +13,9 @@
   </app-content-wrapper>
 </div>
 @if (isLoading()) {
-<app-spinner [noHeight]="true"></app-spinner>
+<div class="spinner-wrapper">
+  <div class="spinner"><app-spinner [noHeight]="true"></app-spinner></div>
+</div>
 
 } @else { @if (results().length) {
 <div class="main-results">

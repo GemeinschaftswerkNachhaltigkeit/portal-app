@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="DE">
 <head th:replace="email/shared/head :: head">
-    <title>Organisation privacy consent email</title>
+    <title>Erinnerung: Registrierung im Gemeinschaftswerk Nachhaltigkeit</title>
     header
 </head>
 <body style="width:100%;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;margin:0">
@@ -72,36 +72,27 @@
                                                         <tr>
                                                             <td align="left"
                                                                 style="margin:0;padding-top:30px;padding-bottom:30px">
-                                                                Hallo,<br/><br/>
-                                                                du hast deine Organisation erfolgreich registriert und der Mitmach-Erklärung zugestimmt.<br/><br/>
-                                                                Um auf der Webplattform des Gemeinschaftswerk Nachhaltigkeit sichtbar zu werden, möchten
-                                                                wir dich bitten, die Daten deiner Organisation zu überprüfen und zu vervollständigen.
+                                                                Liebe Initiativen, liebe Engagierte,<br/><br/>
+                                                                vor einigen Tagen haben wir euch von der aufregenden Neuigkeit berichtet: Eure Initiative zieht auf die Karte des <a href="https://gemeinschaftswerk-nachhaltigkeit.de/" target="_blank", title="Gemeinschaftswerk Nachhaltigkeit">Gemeinschaftswerk Nachhaltigkeit</a>um! <br/><br/>
+
+                                                                Deswegen möchten wir alle Initiativen, die ihre Registrierung bereits abgeschlossen haben, herzlich willkommen heißen - schön, dass ihr Teil des Gemeinschaftswerk Nachhaltigkeit seid!<br/><br/>
+
+                                                                Da wir jedoch alle wissen, wie schnell wichtige Dinge im Alltag untergehen können, laden wir alle anderen Initiativen herzlich dazu ein, einen Blick auf ihr bereits <a href="" class="es-button" target="_blank"
+                                                                    th:href="${urlPrefix} + 'sign-up/organisation/'+${organisationWorkInProgress.getRandomUniqueId()}+'?forceRegistration'">vorbereitetes Profil</a> zu werfen und fehlende Informationen zu ergänzen. Danach reicht ein einfacher Klick auf "Organisation anmelden",
+                                                                um eure Sichtbarkeit zu erhöhen und euch bundesweit mit anderen Nachhaltigkeitsakteur:innen zu vernetzen.
                                                             </td>
                                                         </tr>
                                                         <!-- END: Text Body -->
-
-                                                        <!-- BEGIN: Call-to-Action Button -->
-                                                        <tr>
-                                                            <td align="center"
-                                                                style="padding:0;margin:0;padding-bottom: 20px;"><span
-                                                                    class="es-button-border"
-                                                                    style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a
-                                                                    href="" class="es-button" target="_blank"
-                                                                    style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
-                                                                    th:href="${urlPrefix} + 'sign-up/organisation/'+${organisationWorkInProgress.getRandomUniqueId()}+'?forceRegistration'">
-                                                                Organisationsdaten vervollständigen
-                                                            </a></span>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- END: Call-to-Action Button -->
 
                                                         <!-- BEGIN: Text Body Part II -->
                                                         <tr>
                                                             <td align="left"
                                                                 style="margin:0;padding-top:30px;padding-bottom:30px">
-                                                                Vor der Freischaltung durchläuft deine Organisation zunächst einen Datenqualitätsprozess.
-                                                                In wenigen Tagen erhältst du dazu eine gesonderte E-Mail.<br/><br/>
-                                                                Für weitere aktuelle Informationen folge dem Gemeinschaftswerk Nachhaltigkeit auf Social Media.<br/>
+                                                                Wir freuen uns, wenn ihr dabei seid - lasst uns gemeinsam die Nachhaltigkeitstransformation voranbringen!<br/><br/>
+
+                                                                Bei Rückfragen könnt ihr euch jederzeit unter <a href="mailto:gemeinschaftswerk@nachhaltigkeitsrat.de">gemeinschaftswerk@nachhaltigkeitsrat.de</a> an uns wenden.<br/><br/>
+
+                                                                Herzliche Grüße vom Team des Gemeinschaftswerk Nachhaltigkeit
                                                             </td>
                                                         </tr>
                                                         <!-- END: Text Body Part II -->
@@ -127,36 +118,23 @@
                                                         <tr>
                                                             <td align="left"
                                                                 style="margin:0;padding-top:30px;padding-bottom:30px">
-                                                                Hello,<br/><br/>
-                                                                you have successfully registered your organisation and signed the participation pledge.<br/><br/>
-                                                                For your organisation to be viewable on the Joint Action for Sustainable Development online platform,
-                                                                we invite you to check the imported data from your organisation and update it where necessary.
+                                                                Dear initiatives, <br/><br/>
+                                                                A few days ago, we told you about the exciting news: Your initiative is moving to the platform Joint Action for Sustainable Development! We would therefore like to extend a warm welcome to all initiatives that have already completed their registration - it's great that you are now part of our community!<br/><br/>
+                                                                However, as we all know how quickly important things can get lost in everyday life, we would like to invite all other initiatives to take a look at their already <a href="" class="es-button" target="_blank" th:href="${urlPrefix} + 'sign-up/organisation/'+${organisationWorkInProgress.getRandomUniqueId()}+'?forceRegistration'">prefilled profile</a> and add any missing
+                                                                information. After that, a simple click on "Register organization" is enough to increase your visibility and network with other sustainability actors in Germany.
                                                             </td>
                                                         </tr>
                                                         <!-- EN END: Text Body -->
-
-                                                        <!-- EN BEGIN: Call-to-Action Button -->
-                                                        <tr>
-                                                            <td align="center"
-                                                                style="padding:0;margin:0;padding-bottom: 20px;"><span
-                                                                    class="es-button-border"
-                                                                    style="border-style:solid;border-color:#2CB543;background:#dd1367;border-width:0px;display:inline-block;border-radius:0px;width:auto"><a
-                                                                    href="" class="es-button" target="_blank"
-                                                                    style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#dd1367;border-width:10px 30px 10px 30px;display:inline-block;background:#dd1367;border-radius:0px;font-family:'courier new', courier, 'lucida sans typewriter', 'lucida typewriter', monospace;font-weight:bold;font-style:normal;line-height:24px;width:auto;text-align:center"
-                                                                    th:href="${urlPrefix} + 'sign-up/organisation/'+${organisationWorkInProgress.getRandomUniqueId()}+'?forceRegistration'">
-                                                                Complete organisation profile
-                                                            </a></span>
-                                                            </td>
-                                                        </tr>
-                                                        <!-- EN END: Call-to-Action Button -->
 
                                                         <!-- EN BEGIN: Text Body Part II -->
                                                         <tr>
                                                             <td align="left"
                                                                 style="margin:0;padding-top:30px;padding-bottom:30px">
-                                                                Before activation, your organisation will first go through a data quality process.
-                                                                You will receive a separate email about this in the next few days.<br/><br/>
-                                                                For further up-to-date information, please follow the Joint Action for Sustainable Development on social media.<br/>
+                                                                We'd love you to join us - let's advance the sustainability transformation together!<br/><br/>
+
+                                                                If you have any questions, you can contact us at <a href="mailto:gemeinschaftswerk@nachhaltigkeitsrat.de">gemeinschaftswerk@nachhaltigkeitsrat.de</a> at any time.<br/><br/>
+
+                                                                Best wishes from the Joint Action for Sustainable Development <br/><br/>
                                                             </td>
                                                         </tr>
                                                         <!-- EN END: Text Body Part II -->

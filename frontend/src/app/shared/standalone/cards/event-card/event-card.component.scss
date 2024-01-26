@@ -22,6 +22,9 @@
     .orga-link {
       display: block;
       margin-bottom: $spacing-8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .logo {
@@ -33,12 +36,20 @@
         width: 100%;
         height: 100%;
         border: 2px solid $gray-light;
+        object-fit: contain;
       }
     }
 
     .title {
       margin-bottom: $spacing-4;
       font-weight: 700;
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: $spacing-10;
     }
   }
 
@@ -56,7 +67,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      flex: 0 0 50%;
+      flex: 0 0 calc(50% - #{$spacing-4});
 
       p {
         margin: 0;
