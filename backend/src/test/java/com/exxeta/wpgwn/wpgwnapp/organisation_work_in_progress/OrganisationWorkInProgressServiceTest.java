@@ -185,7 +185,7 @@ class OrganisationWorkInProgressServiceTest {
 
         List<String> allRecipients = List.of(contactAddress);
         String expectedSubject =
-                "Deine Registrierung für das Gemeinschaftswerk Nachhaltigkeit: Wie es jetzt weiter geht";
+                "Erinnerung: Registrierung im Gemeinschaftswerk Nachhaltigkeit";
         MailVerifyUtil.verifyRecipients(receivedMessage, allRecipients, Message.RecipientType.TO);
         MailVerifyUtil.verifySubject(receivedMessage, emailProps.getPrefixForSubject() + expectedSubject);
     }
