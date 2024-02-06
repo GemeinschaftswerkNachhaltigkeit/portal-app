@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { DynamicFilters } from 'src/app/map/models/search-filter';
 
@@ -20,7 +20,8 @@ export class FiltersComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.filterForm = fb.group({
-      query: fb.control('')
+      query: fb.control(''),
+      coordinates: false
     });
   }
 

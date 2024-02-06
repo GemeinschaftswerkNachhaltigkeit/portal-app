@@ -53,6 +53,7 @@
   },
   "forms": {
     "labels": {
+      "onlyNoCoordinates": "Only organisation without location",
       "expireDate": "Expire date",
 
       "query": "What",
