@@ -54,6 +54,7 @@
   },
   "forms": {
     "labels": {
+      "onlyNoCoordinates": "Nur Organisationen ohne Standort",
       "expireDate": "Ablaufdatum",
       "query": "Was",
       "location": "Wo",

@@ -39,6 +39,7 @@ export class OrganisationApiService {
         : `createdAt,desc,ignorecase`
     );
     params = params.append('query', (searchFilter.query || '').trim());
+    params = params.append('nocoordinates', !!searchFilter.coordinates);
 
     return params;
   }

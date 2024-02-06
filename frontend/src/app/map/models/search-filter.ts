@@ -18,6 +18,7 @@ type SearchFilter = PageQuerParams & {
   viewType?: string[];
   envelope?: string;
   initiator?: boolean;
+  coordinates?: boolean;
   projectSustainabilityWinner?: boolean;
 };
 

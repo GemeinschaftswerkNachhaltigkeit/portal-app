@@ -181,6 +181,9 @@ h6 {
     border-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
   }
 }
+.no-sub .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
 .mat-accordion .mat-expansion-panel:last-of-type,
 .mat-accordion .mat-expansion-panel:first-of-type {
   border-radius: 0 !important;

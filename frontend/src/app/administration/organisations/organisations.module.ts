@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],
@@ -26,7 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatFormFieldModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ]
 })
 export class OrganisationsModule {}

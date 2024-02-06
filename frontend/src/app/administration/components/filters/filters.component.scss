@@ -26,18 +26,23 @@
   .filters {
     flex-direction: row;
     gap: $spacing-8;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: $spacing-4;
 
     .filter-form {
       width: auto;
     }
 
-    .sort-btn-content {
+    .additional-filters {
       display: flex;
       align-items: center;
+      margin-top: $spacing-2;
       gap: $spacing-2;
-      margin-top: $spacing-3;
+      .sort-btn-content {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+      }
     }
   }
 }
