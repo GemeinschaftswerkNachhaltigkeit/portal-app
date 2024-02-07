@@ -36,7 +36,7 @@ public class FullTextSearchHelper {
 
     public BooleanTemplate fullTextSearchInTsVector(StringPath mapSearchResult, String query) {
         return Expressions.booleanTemplate(
-                "FUNCTION('ftsMatch', 'german', {0}, {1}, 'tsvector') = true",
+                "FUNCTION('ftsMatch', 'german', {0}, {1}) = true",
                 mapSearchResult, ConstantImpl.create(query));
     }
 

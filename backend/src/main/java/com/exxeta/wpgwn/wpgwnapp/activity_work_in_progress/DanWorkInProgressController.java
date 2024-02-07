@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress;
 
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.dto;
 
-import javax.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
 import java.io.Serializable;
 
 import org.hibernate.validator.constraints.Length;

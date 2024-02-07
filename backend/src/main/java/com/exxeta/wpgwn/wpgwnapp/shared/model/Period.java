@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;

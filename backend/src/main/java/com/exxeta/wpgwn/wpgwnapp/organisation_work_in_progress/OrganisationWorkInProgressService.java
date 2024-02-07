@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;

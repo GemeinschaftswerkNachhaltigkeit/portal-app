@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_form;
 
-import javax.mail.Message;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 

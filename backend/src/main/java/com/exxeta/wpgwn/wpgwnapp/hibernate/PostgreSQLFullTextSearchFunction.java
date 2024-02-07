@@ -4,24 +4,23 @@ import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.QueryException;
-import org.hibernate.dialect.function.SQLFunction;
 import org.hibernate.engine.spi.Mapping;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.type.Type;
 
-public class PostgreSQLFullTextSearchFunction implements SQLFunction {
+public class PostgreSQLFullTextSearchFunction {
 
-    @Override
+
     public boolean hasArguments() {
         return true;
     }
 
-    @Override
+
     public boolean hasParenthesesIfNoArguments() {
         return false;
     }
 
-    @Override
+
     public Type getReturnType(Type type, Mapping mapping) throws QueryException {
         return null;
     }
@@ -29,7 +28,6 @@ public class PostgreSQLFullTextSearchFunction implements SQLFunction {
     /**
      * FUNCTION( 'ftsMatch', :titre,'pg_catalog.french', film.titre)
      */
-    @Override
     @SuppressWarnings("MagicNumber")
     public String render(Type type, List args, SessionFactoryImplementor sessionFactoryImplementor)
             throws QueryException {

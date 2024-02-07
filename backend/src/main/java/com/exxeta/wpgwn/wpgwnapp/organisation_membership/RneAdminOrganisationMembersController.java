@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_membership;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.stream.Stream;
 
 import org.springframework.data.domain.Page;
