@@ -2,6 +2,7 @@ package com.exxeta.wpgwn.wpgwnapp.organisation;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
+
 import java.util.Objects;
 
 import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
@@ -97,8 +98,9 @@ public class OrganisationController {
                     .or(QOrganisation.organisation.description.containsIgnoreCase(query));
             searchPredicate.and(searchFieldsForQuery);
         }
-        if (nocoordinates) {
-            BooleanExpression invalidCoordinates = QOrganisation.organisation.location.online.isFalse().and(QOrganisation.organisation.location.coordinate.isNull());
+        if (Boolean.TRUE.equals(nocoordinates)) {
+            BooleanExpression invalidCoordinates = QOrganisation.organisation.location.online.isFalse()
+                    .and(QOrganisation.organisation.location.coordinate.isNull());
             searchPredicate.and(invalidCoordinates);
         }
         // exclusive Default Org for Action Day
