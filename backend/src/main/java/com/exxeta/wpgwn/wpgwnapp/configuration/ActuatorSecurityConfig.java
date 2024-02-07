@@ -5,6 +5,7 @@ import org.springframework.boot.actuate.health.HealthEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -43,16 +44,15 @@ public class ActuatorSecurityConfig {
 
     @Bean
     public SecurityFilterChain actuatorFilterChain(HttpSecurity http) throws Exception {
-        http.requestMatcher(EndpointRequest.toAnyEndpoint())
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().csrf().disable()
-                .authorizeRequests()
-                .requestMatchers(EndpointRequest.to(HealthEndpoint.class))
-                .permitAll()
-                .and().authorizeRequests().anyRequest().hasAnyRole(ROLE_ACTUATOR)
-                .and().httpBasic();
-
-        return http.build();
+        return http
+                .securityMatcher(EndpointRequest.toAnyEndpoint())
+                .sessionManagement(ssm -> ssm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(amrmr -> amrmr
+                        .requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
+                        .anyRequest().hasAnyRole(ROLE_ACTUATOR))
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
 }

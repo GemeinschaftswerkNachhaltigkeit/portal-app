@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.keycloak_client.exception;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

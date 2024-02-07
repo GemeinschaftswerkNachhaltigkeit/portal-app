@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Duration;
@@ -27,7 +27,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
@@ -185,7 +186,7 @@ class OrganisationWorkInProgressServiceTest {
 
         List<String> allRecipients = List.of(contactAddress);
         String expectedSubject =
-                "Deine Registrierung für das Gemeinschaftswerk Nachhaltigkeit: Wie es jetzt weiter geht";
+                "Erinnerung: Registrierung im Gemeinschaftswerk Nachhaltigkeit";
         MailVerifyUtil.verifyRecipients(receivedMessage, allRecipients, Message.RecipientType.TO);
         MailVerifyUtil.verifySubject(receivedMessage, emailProps.getPrefixForSubject() + expectedSubject);
     }

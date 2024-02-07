@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_form;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.Set;
 
 import org.springframework.util.StringUtils;

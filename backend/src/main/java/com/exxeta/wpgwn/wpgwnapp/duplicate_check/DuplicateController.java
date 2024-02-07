@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.duplicate_check;
 
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

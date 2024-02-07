@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Objects;
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.Objects;
 
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;

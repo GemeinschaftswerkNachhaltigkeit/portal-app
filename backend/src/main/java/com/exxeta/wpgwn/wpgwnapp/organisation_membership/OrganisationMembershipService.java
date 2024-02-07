@@ -1,8 +1,8 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_membership;
 
 
-import javax.persistence.EntityNotFoundException;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;

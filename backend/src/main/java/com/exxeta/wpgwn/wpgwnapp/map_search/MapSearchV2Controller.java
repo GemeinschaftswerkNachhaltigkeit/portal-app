@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;

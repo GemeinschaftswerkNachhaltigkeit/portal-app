@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.action_page.service;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 

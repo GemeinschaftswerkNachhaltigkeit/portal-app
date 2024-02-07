@@ -1,7 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.util.List;
@@ -40,6 +39,8 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;

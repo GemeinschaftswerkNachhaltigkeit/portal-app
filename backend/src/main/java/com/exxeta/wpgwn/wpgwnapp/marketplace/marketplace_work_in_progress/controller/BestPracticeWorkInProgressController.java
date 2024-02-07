@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.controller;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.io.IOException;
 import java.util.UUID;
 

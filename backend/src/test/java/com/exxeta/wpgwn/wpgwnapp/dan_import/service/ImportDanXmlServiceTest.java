@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.dan_import.service;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
 

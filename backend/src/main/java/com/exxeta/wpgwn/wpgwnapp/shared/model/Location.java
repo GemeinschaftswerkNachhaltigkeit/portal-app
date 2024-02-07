@@ -1,9 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.shared.model;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.validation.Valid;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
+import jakarta.validation.Valid;
 import java.util.Objects;
 
 import org.hibernate.validator.constraints.URL;

@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.HashMap;

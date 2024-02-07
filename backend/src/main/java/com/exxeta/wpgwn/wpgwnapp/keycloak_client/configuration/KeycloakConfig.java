@@ -3,6 +3,8 @@ package com.exxeta.wpgwn.wpgwnapp.keycloak_client.configuration;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import jakarta.ws.rs.client.ClientBuilder;
+
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.keycloak.OAuth2Constants;
@@ -32,7 +34,7 @@ public class KeycloakConfig {
 
     @Bean
     public ResteasyClient resteasyClientWithProxy(KeycloakProperties keycloakProperties) {
-        ResteasyClientBuilder builder = new ResteasyClientBuilder()
+        ResteasyClientBuilder builder = ((ResteasyClientBuilder) ClientBuilder.newBuilder())
                 .connectionPoolSize(keycloakProperties.getConnectionPoolSize())
                 .connectTimeout(keycloakProperties.getConnectionTimeout().getSeconds(), TimeUnit.SECONDS)
                 .readTimeout(keycloakProperties.getReadTimeout().getSeconds(), TimeUnit.SECONDS);

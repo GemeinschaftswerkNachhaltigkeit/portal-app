@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress;
 
-import javax.annotation.security.RolesAllowed;
-import javax.validation.Valid;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;

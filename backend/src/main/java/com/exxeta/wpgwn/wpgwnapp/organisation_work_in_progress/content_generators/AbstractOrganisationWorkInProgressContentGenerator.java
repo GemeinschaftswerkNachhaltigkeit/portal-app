@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.content_generators;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import java.util.Locale;
 import java.util.Optional;
 

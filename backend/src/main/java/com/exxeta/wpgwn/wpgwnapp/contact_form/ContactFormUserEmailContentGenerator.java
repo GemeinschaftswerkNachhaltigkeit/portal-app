@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.contact_form;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;

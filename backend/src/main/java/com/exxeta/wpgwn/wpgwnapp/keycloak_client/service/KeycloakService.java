@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.keycloak_client.service;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;

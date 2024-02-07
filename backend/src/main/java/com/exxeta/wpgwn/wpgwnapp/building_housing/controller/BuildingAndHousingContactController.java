@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.building_housing.controller;
 
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

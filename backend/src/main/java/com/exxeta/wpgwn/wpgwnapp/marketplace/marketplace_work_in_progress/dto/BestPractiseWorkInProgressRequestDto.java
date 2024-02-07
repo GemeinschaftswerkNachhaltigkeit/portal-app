@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace_work_in_progress.dto;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.Set;
 

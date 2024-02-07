@@ -50,11 +50,7 @@
     }
   ],
   "pageable": {
-    "sort": {
-      "empty": true,
-      "unsorted": true,
-      "sorted": false
-    },
+    "sort": [],
     "offset": 0,
     "pageNumber": 0,
     "pageSize": 20,
@@ -66,11 +62,7 @@
   "totalElements": 2,
   "number": 0,
   "size": 20,
-  "sort": {
-    "empty": true,
-    "unsorted": true,
-    "sorted": false
-  },
+  "sort": [],
   "first": true,
   "numberOfElements": 2,
   "empty": false

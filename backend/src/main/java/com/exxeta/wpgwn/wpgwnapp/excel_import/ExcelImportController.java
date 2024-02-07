@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.excel_import;
 
-import javax.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

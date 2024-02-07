@@ -1,6 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.configuration.properties;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.List;

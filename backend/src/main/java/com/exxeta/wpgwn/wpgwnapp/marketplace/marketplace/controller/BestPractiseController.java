@@ -1,7 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.controller;
 
-import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;
