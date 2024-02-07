@@ -81,7 +81,7 @@ public class OrganisationController {
     public Page<OrganisationResponseDto> getPagedOrganisation(
             @RequestParam(value = "envelope", required = false) Envelope envelope,
             @RequestParam(value = "query", required = false) String query,
-            //@RequestParam(value = "nocoordinates", required = false) Boolean nocoordinates,
+            @RequestParam(value = "nocoordinates", required = false) Boolean nocoordinates,
             @QuerydslPredicate(root = Organisation.class, bindings = OrganisationBindingCustomizer.class)
             Predicate filterPredicate,
             Pageable pageable) {
@@ -97,10 +97,10 @@ public class OrganisationController {
                     .or(QOrganisation.organisation.description.containsIgnoreCase(query));
             searchPredicate.and(searchFieldsForQuery);
         }
-//        if (nocoordinates) {
-//            BooleanExpression invalidCoordinates = QOrganisation.organisation.location.online.isFalse().and(QOrganisation.organisation.location.coordinate.isNull());
-//            searchPredicate.and(invalidCoordinates);
-//        }
+        if (nocoordinates) {
+            BooleanExpression invalidCoordinates = QOrganisation.organisation.location.online.isFalse().and(QOrganisation.organisation.location.coordinate.isNull());
+            searchPredicate.and(invalidCoordinates);
+        }
         // exclusive Default Org for Action Day
         searchPredicate.and(QOrganisation.organisation.id.ne(wpgwnProperties.getDanId()));
 
