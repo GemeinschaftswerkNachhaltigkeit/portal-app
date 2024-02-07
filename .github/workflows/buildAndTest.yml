@@ -1,16 +1,16 @@
 name: mvn build and test, docker build (latest) and push
 
-on: 
+on:
   workflow_dispatch:
   push:
-    branches: [ "develop" ]
+    branches: ["develop"]
   pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
 
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/backend"
   REGISTRY: ghcr.io
-  GITHUB_NAME:  gemeinschaftswerknachhaltigkeit
+  GITHUB_NAME: gemeinschaftswerknachhaltigkeit
   IMAGE_NAME: gw-portal-app
 
 jobs:
@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
       - name: Build with Maven
         run: mvn clean verify --file ${{ github.workspace }}/backend/pom.xml
