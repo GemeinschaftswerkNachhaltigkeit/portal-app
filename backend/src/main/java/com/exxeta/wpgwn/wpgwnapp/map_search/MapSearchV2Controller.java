@@ -354,7 +354,12 @@ public class MapSearchV2Controller {
         if (split.splitToList(query).size() == 1) {
             searchFieldsForQuery = searchFieldsForQuery
                     .or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query));
+                    .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.street.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.city.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.zipCode.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.state.containsIgnoreCase(query))
+                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.country.containsIgnoreCase(query));
         }
         return searchFieldsForQuery;
     }
