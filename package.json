@@ -4,13 +4,13 @@
   "private": true,
   "devDependencies": {
     "@semantic-release/git": "10.0.1",
-    "semantic-release-maven": "1.1.7"
+    "semantic-release-maven": "1.1.8"
   },
   "dependencies": {
     "@semantic-release/exec": "6.0.3",
-    "husky": "8.0.1",
-    "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3"
+    "husky": "9.0.10",
+    "@commitlint/cli": "18.6.1",
+    "@commitlint/config-conventional": "18.6.1"
   },
   "scripts": {
     "prepare": "husky install"
