@@ -10,7 +10,10 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class NavActionsComponent {
   @Input() mobile = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   login() {
     this.authService.login();

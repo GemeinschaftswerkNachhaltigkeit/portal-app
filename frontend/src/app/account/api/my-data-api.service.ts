@@ -9,7 +9,10 @@ import UserData from '../models/user-data';
   providedIn: 'root'
 })
 export class MyDataApiService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) {}
 
   changeMyData(data: UserData): Observable<object> {
     const accessToken = this.auth.getAccessToken();

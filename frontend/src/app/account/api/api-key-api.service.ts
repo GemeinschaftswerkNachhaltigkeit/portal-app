@@ -9,7 +9,10 @@ import { ApiKey } from '../models/api-key-dto';
   providedIn: 'root'
 })
 export class ApiKeyApiService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) {}
 
   createApiKey(): Observable<ApiKey> {
     return this.http.post<ApiKey>(`${environment.apiUrl}/api-keys/`, {});

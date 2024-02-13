@@ -11,7 +11,10 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthGuardWithOrga {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

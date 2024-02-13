@@ -26,7 +26,10 @@ export class OrganisationService {
   } | null>();
   orgUpdateStateData$ = this.orgUpdateStateSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   async getOrganisation(orgUuid: string) {
     try {

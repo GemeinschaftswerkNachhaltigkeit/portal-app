@@ -40,7 +40,9 @@ $xl: 3.2rem;
   mark {
     box-decoration-break: clone;
     background: transparent;
-    box-shadow: 0 -16px 0 inset var(--shadow-color), 0 6px 0 var(--shadow-color);
+    box-shadow:
+      0 -16px 0 inset var(--shadow-color),
+      0 6px 0 var(--shadow-color);
     color: $blue-navy;
     position: relative;
     z-index: $z1;
@@ -52,35 +54,40 @@ $xl: 3.2rem;
   &.xl {
     font-size: $mobile-xl;
     mark {
-      box-shadow: 0 -16px 0 inset var(--shadow-color),
+      box-shadow:
+        0 -16px 0 inset var(--shadow-color),
         0 6px 0 var(--shadow-color);
     }
   }
   &.lg {
     font-size: $mobile-lg;
     mark {
-      box-shadow: 0 -14px 0 inset var(--shadow-color),
+      box-shadow:
+        0 -14px 0 inset var(--shadow-color),
         0 4px 0 var(--shadow-color);
     }
   }
   &.md {
     font-size: $mobile-md;
     mark {
-      box-shadow: 0 -13px 0 inset var(--shadow-color),
+      box-shadow:
+        0 -13px 0 inset var(--shadow-color),
         0 4px 0 var(--shadow-color);
     }
   }
   &.sm {
     font-size: $mobile-sm;
     mark {
-      box-shadow: 0 -10px 0 inset var(--shadow-color),
+      box-shadow:
+        0 -10px 0 inset var(--shadow-color),
         0 2px 0 var(--shadow-color);
     }
   }
   &.xs {
     font-size: $mobile-xs;
     mark {
-      box-shadow: 0 -8px 0 inset var(--shadow-color),
+      box-shadow:
+        0 -8px 0 inset var(--shadow-color),
         0 2px 0 var(--shadow-color);
     }
   }

@@ -17,7 +17,10 @@ export class DirectusService {
   private externalLinks = new BehaviorSubject<ExternalLinks>({});
   externalLinks$ = this.externalLinks.asObservable();
   //siehe  https://github.com/directus/examples/tree/main/angular
-  constructor(private translate: TranslateService, private http: HttpClient) {
+  constructor(
+    private translate: TranslateService,
+    private http: HttpClient
+  ) {
     this.getExternalLinks();
   }
 

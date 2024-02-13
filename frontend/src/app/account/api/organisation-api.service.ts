@@ -91,9 +91,9 @@ export class OrganisationApiService {
 
   getUsers(orgId: number): Observable<UserListDto[]> {
     return this.http
-      .get<{ members: UserListDto[] }>(
-        `${environment.apiUrl}/organisations/${orgId}/member`
-      )
+      .get<{
+        members: UserListDto[];
+      }>(`${environment.apiUrl}/organisations/${orgId}/member`)
       .pipe(
         map((response: { members: UserListDto[] }) => {
           return response.members || [];

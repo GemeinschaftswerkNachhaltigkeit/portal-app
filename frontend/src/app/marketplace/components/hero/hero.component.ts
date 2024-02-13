@@ -16,7 +16,10 @@ export class HeroComponent {
   @Input() catgegory?: OfferCategories | BestPracticesCategories;
   @Input() expired = false;
 
-  constructor(public utils: UtilsService, private imgService: ImgService) {}
+  constructor(
+    public utils: UtilsService,
+    private imgService: ImgService
+  ) {}
 
   get bgImage(): string | null {
     return this.imgService.url(this.bgImageName);

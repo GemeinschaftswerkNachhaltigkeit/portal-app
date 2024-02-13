@@ -12,9 +12,9 @@ export class UserSelectApiService {
 
   getUsers(orgId: number): Observable<OrgaUserDto[]> {
     return this.http
-      .get<{ members: OrgaUserDto[] }>(
-        `${environment.apiUrl}/organisations/${orgId}/member`
-      )
+      .get<{
+        members: OrgaUserDto[];
+      }>(`${environment.apiUrl}/organisations/${orgId}/member`)
       .pipe(
         map((response: { members: OrgaUserDto[] }) => {
           return response.members || [];

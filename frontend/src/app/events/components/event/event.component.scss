@@ -19,7 +19,9 @@
   }
 
   &.last {
-    box-shadow: 0 1px 0 0 $gray-light inset, 0 -1px 0 0 $gray-light inset;
+    box-shadow:
+      0 1px 0 0 $gray-light inset,
+      0 -1px 0 0 $gray-light inset;
   }
 
   &::before {

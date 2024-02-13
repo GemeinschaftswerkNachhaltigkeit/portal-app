@@ -22,5 +22,8 @@ export class HeroComponent {
   };
   @Input() isExpired = false;
 
-  constructor(public utils: UtilsService, private imgService: ImgService) {}
+  constructor(
+    public utils: UtilsService,
+    private imgService: ImgService
+  ) {}
 }

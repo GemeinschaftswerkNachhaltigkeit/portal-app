@@ -83,7 +83,9 @@
       mark {
         box-decoration-break: clone;
         background: transparent;
-        box-shadow: 0 -7px 0 inset $blue-light, 0 4px 0 $blue-light;
+        box-shadow:
+          0 -7px 0 inset $blue-light,
+          0 4px 0 $blue-light;
         color: $blue-navy;
       }
 

@@ -6,7 +6,10 @@ import { DynamicFilters } from '../../map/models/search-filter';
   providedIn: 'root'
 })
 export class PersistFiltersService {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   setFiltersToUrl(
     filters: {

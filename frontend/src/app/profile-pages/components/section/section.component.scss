@@ -47,7 +47,9 @@
   mark {
     box-decoration-break: clone;
     background: transparent;
-    box-shadow: 0 -16px 0 inset $blue-light, 0 6px 0 $blue-light;
+    box-shadow:
+      0 -16px 0 inset $blue-light,
+      0 6px 0 $blue-light;
     color: $blue-navy;
     position: relative;
     z-index: $z1;
