@@ -42,7 +42,10 @@ export class BaseCardComponent implements AfterViewChecked {
 
   @ViewChild('contentRef') contentRef?: ElementRef<HTMLDivElement>;
 
-  constructor(public card: CardService, public utils: UtilsService) {}
+  constructor(
+    public card: CardService,
+    public utils: UtilsService
+  ) {}
 
   openSlide = 'slide1';
   public contentHeight = 0;

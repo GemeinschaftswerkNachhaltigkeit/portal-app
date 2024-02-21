@@ -30,7 +30,10 @@ export class SearchFormComponent implements OnInit {
   showOrga = true;
   showDan = true;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   openFilters(): void {
     const filters = this.getActiveFilters();

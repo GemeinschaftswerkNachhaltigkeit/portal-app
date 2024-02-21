@@ -7,7 +7,10 @@ import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuardWithRoleCheck {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.authService.canActivateProtectedRoutes$.pipe(

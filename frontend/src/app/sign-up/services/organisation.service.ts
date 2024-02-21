@@ -10,7 +10,7 @@ import { OrganisationWIP } from '../../shared/models/organisation-wip';
 import { ImageType } from '../../shared/models/image-type';
 
 const ORGANISATION_BASE_URL = environment.apiUrl + '/organisations';
-const REQUEST_URL = environment.apiUrl + '/register-organisation/'; //'http://localhost:8081/api/v1/register-organisation/';
+const REQUEST_URL = environment.apiUrl + '/register-organisation'; //'http://localhost:8081/api/v1/register-organisation/';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,10 @@ export class OrganisationService {
   } | null>();
   orgUpdateStateData$ = this.orgUpdateStateSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   async getOrganisation(orgUuid: string) {
     try {
@@ -41,10 +44,10 @@ export class OrganisationService {
       const response = await lastValueFrom(
         noOrg
           ? this.http.post<OrganisationWIP>(
-              `${REQUEST_URL}${orgUuid}/owner`,
+              `${REQUEST_URL}/${orgUuid}/owner`,
               {}
             )
-          : this.http.get<OrganisationWIP>(`${REQUEST_URL}${orgUuid}`)
+          : this.http.get<OrganisationWIP>(`${REQUEST_URL}/${orgUuid}`)
       );
       if (noOrg) {
         await this.authService.refreshToken();
@@ -81,7 +84,7 @@ export class OrganisationService {
     try {
       this.orgUpdateStateSubject.next(null);
       const response = await lastValueFrom(
-        this.http.put<OrganisationWIP>(REQUEST_URL + orgId, orgData)
+        this.http.put<OrganisationWIP>(REQUEST_URL + '/' + orgId, orgData)
       );
       this.orgUpdateStateSubject.next({
         type: 'updateSuccess',
@@ -111,7 +114,7 @@ export class OrganisationService {
   async deleteImage(uuid: string, image: ImageType) {
     try {
       const response = await lastValueFrom(
-        this.http.delete(`${REQUEST_URL}${uuid}/${image}`, {})
+        this.http.delete(`${REQUEST_URL}/${uuid}/${image}`, {})
       );
       this.getOrganisation(uuid);
       return response;
@@ -127,7 +130,7 @@ export class OrganisationService {
   ): Promise<boolean> {
     try {
       await lastValueFrom(
-        this.http.post(REQUEST_URL + orgId + '/releases', {})
+        this.http.post(REQUEST_URL + '/' + orgId + '/releases', {})
       );
       return true;
     } catch (e) {
@@ -165,10 +168,9 @@ export class OrganisationService {
       org.status === OrganisationStatus.AKTUALISIERUNG_ORGANISATION
     ) {
       if (currentUser) {
-        const isOrgOwner = this.authService.hasAnyPermission(currentUser, [
+        return this.authService.hasAnyPermission(currentUser, [
           UserPermission.ORGANISATION_OWNER
         ]);
-        return isOrgOwner;
       }
       return true;
     } else {
@@ -193,8 +195,7 @@ export class OrganisationService {
     return !!orgWipId && currentUser?.orgWipId === +orgWipId;
   }
   private userDoesNotBelongToAnyOrg(currentUser?: User): boolean {
-    const hasNoId = !currentUser?.orgWipId && !currentUser?.orgId;
-    return hasNoId;
+    return !currentUser?.orgWipId && !currentUser?.orgId;
   }
 
   async createWipOrgForOrg(orgId: number) {
@@ -214,7 +215,7 @@ export class OrganisationService {
   async publishOrganisationUpdate(orgId: string): Promise<boolean> {
     try {
       await lastValueFrom(
-        this.http.post(REQUEST_URL + orgId + '/releases', {})
+        this.http.post(REQUEST_URL + '/' + orgId + '/releases', {})
       );
       return true;
     } catch (e) {

@@ -26,7 +26,7 @@ export class OrganisationApiService {
 
   createOrganisation(): Observable<string | null> {
     return this.http
-      .post<OrganisationWIP>(`${environment.apiUrl}/register-organisation/`, {
+      .post<OrganisationWIP>(`${environment.apiUrl}/register-organisation`, {
         name: 'Neue Orga'
       })
       .pipe(map((orgaWIP: OrganisationWIP) => orgaWIP.randomUniqueId || ''));
@@ -91,9 +91,9 @@ export class OrganisationApiService {
 
   getUsers(orgId: number): Observable<UserListDto[]> {
     return this.http
-      .get<{ members: UserListDto[] }>(
-        `${environment.apiUrl}/organisations/${orgId}/member`
-      )
+      .get<{
+        members: UserListDto[];
+      }>(`${environment.apiUrl}/organisations/${orgId}/member`)
       .pipe(
         map((response: { members: UserListDto[] }) => {
           return response.members || [];

@@ -54,6 +54,12 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
 mat-sidenav {
   width: 80%;
 }
+
+.footer-btn {
+  display: flex;
+  gap: $spacing-2;
+}
+
 @media only screen and (min-width: $breakpoint-md) {
   mat-sidenav {
     width: 30%;

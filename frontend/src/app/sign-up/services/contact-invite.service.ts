@@ -4,7 +4,7 @@ import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ContactInvite } from '../models/contact-invite';
 
-const REQUEST_URL = environment.apiUrl + '/contact-invite/'; //'http://localhost:8081/api/v1/register-organisation/';
+const REQUEST_URL = environment.apiUrl + '/contact-invite/';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,9 @@ export class ContactInviteService {
 
   async acceptInvite(invietId: string) {
     try {
-      const response = await lastValueFrom(
+      return await lastValueFrom(
         this.http.put(REQUEST_URL + invietId + '?status=ALLOW', {})
       );
-      return response;
     } catch (e) {
       console.error('acceptInviteError', e);
       return;
@@ -35,10 +34,9 @@ export class ContactInviteService {
 
   async denyInvite(invietId: string) {
     try {
-      const response = await lastValueFrom(
+      return await lastValueFrom(
         this.http.put(REQUEST_URL + invietId + '?status=DENY', {})
       );
-      return response;
     } catch (e) {
       console.error('denyInviteError', e);
       return;

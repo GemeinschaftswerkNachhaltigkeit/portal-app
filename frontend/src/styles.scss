@@ -193,7 +193,7 @@ h6 {
   --mdc-text-button-label-text-color: #{$blue-navy};
 }
 .mat-button-base,
-button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent),
+button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(.mat-warn):not(.mat-primary),
 .mat-paginator,
 .mat-mdc-select-value,
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label,
@@ -345,8 +345,7 @@ mat-dialog-container.mat-dialog-container {
   }
   .view-type {
     .orga {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
-        .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
         background: $orange;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
@@ -354,8 +353,7 @@ mat-dialog-container.mat-dialog-container {
       }
     }
     .activity {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
-        .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
         background: $green;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
@@ -363,8 +361,7 @@ mat-dialog-container.mat-dialog-container {
       }
     }
     .dan {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
-        .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
         background: $dan-blue;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
@@ -405,8 +402,8 @@ mat-dialog-container.mat-dialog-container {
   align-items: center !important;
 }
 
-/* 
-  Material Icons 
+/*
+  Material Icons
 */
 
 @font-face {
@@ -425,7 +422,7 @@ mat-dialog-container.mat-dialog-container {
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: 'Material Icons', serif;
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -441,7 +438,7 @@ mat-dialog-container.mat-dialog-container {
 }
 
 .material-icons-outlined {
-  font-family: 'Material Icons Outlined';
+  font-family: 'Material Icons Outlined', serif;
   font-weight: normal;
   font-style: normal;
   font-size: 24px;

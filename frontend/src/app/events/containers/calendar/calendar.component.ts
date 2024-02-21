@@ -18,13 +18,12 @@ import {
 } from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
-import { FeaturesService } from 'src/app/shared/components/feature/features.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 @Component({
   selector: 'app-calendar',

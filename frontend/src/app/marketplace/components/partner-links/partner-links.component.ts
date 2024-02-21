@@ -48,7 +48,10 @@ export class PartnerLinksComponent
     value: 0
   };
 
-  constructor(breakpointObserver: BreakpointObserver, private ngZone: NgZone) {
+  constructor(
+    breakpointObserver: BreakpointObserver,
+    private ngZone: NgZone
+  ) {
     breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
       .pipe(takeUntil(this.destroyed))

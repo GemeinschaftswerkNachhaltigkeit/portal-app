@@ -10,7 +10,10 @@ export class NotifiacationSuccessComponent {
   type: string;
   validTypes = ['success', 'error'];
 
-  constructor(private router: Router, route: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    route: ActivatedRoute
+  ) {
     this.type = route.snapshot.queryParams['type'] || 'success';
     if (!this.isValidType()) {
       this.close();

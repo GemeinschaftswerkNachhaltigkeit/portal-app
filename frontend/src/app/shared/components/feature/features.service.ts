@@ -23,9 +23,8 @@ export class FeaturesService {
 
   public async getFeatures() {
     try {
-      const features = await this.directusService.getContentItems<Feature>(
-        'features'
-      );
+      const features =
+        await this.directusService.getContentItems<Feature>('features');
       if (features && features.length) {
         this.features.next(features);
       }
