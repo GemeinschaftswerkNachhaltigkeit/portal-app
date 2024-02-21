@@ -1,16 +1,15 @@
 /*  eslint-disable  @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, lastValueFrom, take } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, map, Observable, take } from 'rxjs';
 import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import Paging, { PageQuerParams } from 'src/app/shared/models/paging';
 import { environment } from 'src/environments/environment';
 import PagedOrganisationWipResponse from '../models/paged-org-wip-response';
-import { map, Observable } from 'rxjs';
 import DuplicateDto from '../models/duplicate-dto';
 
-const REQUEST_URL = environment.apiUrl + '/manage-organisations'; //'http://localhost:8081/api/v1/register-organisation/';
+const REQUEST_URL = environment.apiUrl + '/manage-organisations';
 
 @Injectable({
   providedIn: 'root'
@@ -52,10 +51,9 @@ export class ClearingService {
 
   async publishOrganisation(orgId: number) {
     try {
-      const response = await lastValueFrom(
+      return await lastValueFrom(
         this.http.post<any>(`${REQUEST_URL}/${orgId}/publish`, {})
       );
-      return response;
     } catch (e) {
       console.error('publishError', e);
       return;
@@ -64,12 +62,11 @@ export class ClearingService {
 
   async requireFeedbackForOrganisation(orgId: number, feedback: string) {
     try {
-      const response = await lastValueFrom(
+      return await lastValueFrom(
         this.http.post<any>(`${REQUEST_URL}/${orgId}/require-feedback`, {
           feedback: feedback
         })
       );
-      return response;
     } catch (e) {
       console.error('requireFeedbackError', e);
       return;
@@ -78,12 +75,11 @@ export class ClearingService {
 
   async rejectOrganisation(orgId: number, reason: string) {
     try {
-      const response = await lastValueFrom(
+      return await lastValueFrom(
         this.http.post<any>(`${REQUEST_URL}/${orgId}/reject`, {
           rejectionReason: reason
         })
       );
-      return response;
     } catch (e) {
       console.error('requireFeedbackError', e);
       return;
@@ -118,27 +114,18 @@ export class ClearingService {
   }
 
   isAllowedToRequestFeedback(status: OrganisationStatus): boolean {
-    if (status === OrganisationStatus.FREIGABE_KONTAKT_ORGANISATION) {
-      return true;
-    }
-    return false;
+    return status === OrganisationStatus.FREIGABE_KONTAKT_ORGANISATION;
   }
 
   isAllowedToReject(status: OrganisationStatus): boolean {
-    if (status === OrganisationStatus.FREIGABE_KONTAKT_ORGANISATION) {
-      return true;
-    }
-    return false;
+    return status === OrganisationStatus.FREIGABE_KONTAKT_ORGANISATION;
   }
 
   isAllowedToPublish(status: OrganisationStatus): boolean {
-    if (
+    return (
       status === OrganisationStatus.FREIGABE_KONTAKT_ORGANISATION ||
       status === OrganisationStatus.RUECKFRAGE_CLEARING
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
   getDuplicate(orgId: number) {

@@ -26,7 +26,7 @@ export class OrganisationApiService {
 
   createOrganisation(): Observable<string | null> {
     return this.http
-      .post<OrganisationWIP>(`${environment.apiUrl}/register-organisation/`, {
+      .post<OrganisationWIP>(`${environment.apiUrl}/register-organisation`, {
         name: 'Neue Orga'
       })
       .pipe(map((orgaWIP: OrganisationWIP) => orgaWIP.randomUniqueId || ''));

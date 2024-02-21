@@ -1,9 +1,9 @@
-<h3 mat-dialog-title>
-  {{ data.translationKeys.title! | translate: data.titleParams }}
-</h3>
+<div mat-dialog-title>
+  <h3 class="title">{{ data.translationKeys.title! | translate: data.titleParams }}</h3>
+</div>
 <div mat-dialog-content>
-  <form [formGroup]="msgForm">
-    <mat-form-field>
+  <form [formGroup]="msgForm" >
+    <mat-form-field appearance="outline">
       <mat-label>
         {{ data.translationKeys.messageFieldLabel! | translate }}
       </mat-label>
@@ -25,7 +25,6 @@
     mat-flat-button
     [color]="'primary'"
     (click)="confirm()"
-    cdkFocusInitial
     [disabled]="!msgForm.valid"
   >
     {{ data.translationKeys.confirmBtn! | translate }}

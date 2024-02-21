@@ -83,8 +83,10 @@
               (click)="openSidebar(orgWIP.id!, 'duplicates')"
               *ngIf="orgWIP.hasDuplicates"
             >
-              <app-outlined-icon>content_copy</app-outlined-icon>
-              {{ 'clearing.btn.showDuplicates' | translate }}
+              <span class="footer-btn">
+                <app-outlined-icon>content_copy</app-outlined-icon>
+                {{ 'clearing.btn.showDuplicates' | translate }}
+              </span>
             </button>
             <a
               *ngIf="orgWIP.randomUniqueId"
@@ -97,7 +99,12 @@
               class="details-btn"
               mat-flat-button
             >
-              <app-outlined-icon>info</app-outlined-icon> Alle Infos anzeigen</a
+
+            <span class="footer-btn">
+              <app-outlined-icon>info</app-outlined-icon>
+              <span>Alle Infos anzeigen</span>
+            </span>
+            </a
             >
             <!--           <button><app-outlined-icon>content_copy</app-outlined-icon></button> -->
             <button
@@ -106,8 +113,15 @@
               (click)="publishOrg(orgWIP.id!)"
               [disabled]="!isAllowedToPublish(orgWIP.status!)"
             >
-              <app-outlined-icon>publish</app-outlined-icon>
-              {{ 'clearing.btn.publish' | translate }}
+              <div class="footer-btn"
+              >
+
+                <div class="footer-btn">
+                  <app-outlined-icon>publish</app-outlined-icon>
+                  {{ 'clearing.btn.publish' | translate }}
+                </div>
+              </div>
+
             </button>
             <button
               mat-flat-button
@@ -115,8 +129,10 @@
               (click)="requireFeedback(orgWIP.id!, orgWIP.name!)"
               [disabled]="!isAllowedToRequestFeedback(orgWIP.status!)"
             >
-              <app-outlined-icon> help_outline </app-outlined-icon>
-              {{ 'clearing.btn.requireFeedback' | translate }}
+              <span class="footer-btn">
+                <app-outlined-icon> help_outline</app-outlined-icon>
+                {{ 'clearing.btn.requireFeedback' | translate }}
+              </span>
             </button>
             <button
               mat-flat-button
@@ -124,8 +140,10 @@
               (click)="rejectOrg(orgWIP.id!, orgWIP.name!)"
               [disabled]="!isAllowedToReject(orgWIP.status!)"
             >
-              <app-outlined-icon> close </app-outlined-icon>
-              {{ 'clearing.btn.reject' | translate }}
+              <span class="footer-btn">
+                <app-outlined-icon> close</app-outlined-icon>
+                {{ 'clearing.btn.reject' | translate }}
+              </span>
             </button>
           </app-organisation-card>
           <div
