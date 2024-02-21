@@ -3,14 +3,14 @@ name: build mvn and docker, push specific tag, semantic release
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/backend"
   REGISTRY: ghcr.io
-  GITHUB_NAME:  gemeinschaftswerknachhaltigkeit
+  GITHUB_NAME: gemeinschaftswerknachhaltigkeit
   IMAGE_NAME: gw-portal-app
 
 jobs:
@@ -22,17 +22,17 @@ jobs:
         with:
           repository: ${{env.GITHUB_NAME}}/${{env.IMAGE_NAME}}
           releases-only: false
-        id: latestVersion  # The step ID to refer to later.
+        id: latestVersion # The step ID to refer to later.
       - run: echo "latestVersion is ${{ steps.latestVersion.outputs.tag }}"
       - uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
       - name: Build with Maven
-        run: mvn clean package -DskipTests=true --file ${{ github.workspace }}/backend/pom.xml
+        run: mvn clean package -X -DskipTests=true --file ${{ github.workspace }}/backend/pom.xml
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{env.REGISTRY}}/${{ env.GITHUB_NAME }}/${{env.IMAGE_NAME}}:${{ steps.latestVersion.outputs.tag }}
       - name: login to GitHub Container Registry
@@ -70,4 +70,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-
