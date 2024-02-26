@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="DE">
-    <head th:replace="email/shared/head :: head">
+    <head th:replace="~{email/shared/head :: head}">
         <title>Organisation published email</title>
         header
     </head>
@@ -42,7 +42,7 @@
             >
                 <tr>
                     <td valign="top" style="padding: 0; margin: 0">
-                        <header th:replace="email/shared/header :: header">header</header>
+                        <header th:replace="~{email/shared/header :: header}">header</header>
                         <!-- BEGIN Content -->
                         <table
                             class="es-content"
@@ -473,7 +473,7 @@
                                             </td>
                                         </tr>
 
-                                        <tr th:replace="email/shared/invitation :: invite">
+                                        <tr th:replace="~{email/shared/invitation :: invite}">
                                             invite
                                         </tr>
                                     </table>
@@ -481,7 +481,7 @@
                             </tr>
                         </table>
                         <!-- END Content -->
-                        <footer th:replace="email/shared/footer :: footer">
+                        <footer th:replace="~{email/shared/footer :: footer}">
                             footer
                         </footer>
                     </td>
