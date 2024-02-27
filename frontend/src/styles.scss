@@ -81,19 +81,19 @@ $wpgwn-app-typography: mat.define-typography-config(
     mat.define-typography-level(
       $font-size: 3.2rem,
       $line-height: 150%,
-      $font-weight: 900
+      $font-weight: 700
     ),
   $headline-2:
     mat.define-typography-level(
       $font-size: 2.4rem,
       $line-height: 150%,
-      $font-weight: 900
+      $font-weight: 700
     ),
   $subtitle-1:
     mat.define-typography-level(
       $font-size: 1.6rem,
       $line-height: 150%,
-      $font-weight: 900
+      $font-weight: 700
     )
 );
 
