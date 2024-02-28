@@ -1,6 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.keycloak_client.service;
 
 import jakarta.ws.rs.core.Response;
+
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +131,7 @@ public class KeycloakService {
 
     public String getAdminsGroupId(@NonNull String keycloakGroupId) {
         final List<GroupRepresentation> subgroups =
-                getGroup(keycloakGroupId).toRepresentation().getSubGroups();
+                getGroup(keycloakGroupId).getSubGroups(SEARCH_PAGE_INDEX, MAX_SEARCH_RESULTS, true);
         return subgroups.stream()
                 .filter(group -> Objects.equals(group.getName(), KeycloakConstants.GROUP_NAME_ADMIN))
                 .map(GroupRepresentation::getId)
