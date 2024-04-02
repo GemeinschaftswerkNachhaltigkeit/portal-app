@@ -39,7 +39,7 @@
         <jackson-datatype-jts.version>1.2.10</jackson-datatype-jts.version>
         <excel-streaming-reader.version>4.3.0</excel-streaming-reader.version>
         <h2.version>2.2.224</h2.version>
-        <keycloak.version>23.0.7</keycloak.version>
+        <keycloak.version>24.0.2</keycloak.version>
         <resteasy.versions>6.2.8.Final</resteasy.versions>
         <guava.version>33.1.0-jre</guava.version>
         <json-smart.version>2.5.1</json-smart.version>
