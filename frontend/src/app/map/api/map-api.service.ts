@@ -71,7 +71,7 @@ export class MapApiService {
     return this.http.get<MarkerDto[]>(
       `${environment.apiV2Url}/search/markers`,
       {
-        params: this.searchParams(searchFilter)
+        params: this.searchParams(searchFilter, true)
       }
     );
   }

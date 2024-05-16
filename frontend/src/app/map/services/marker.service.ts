@@ -9,7 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
 
-const getIcon = (type: string, isActive = false, isHovered = false) => {
+const getIcon = (
+  type: string,
+  isActive = false,
+  isHovered = false,
+  expired = false
+) => {
   const defaultIcon = L.divIcon({
     className: 'custom-pin',
     iconAnchor: [0, 24],
@@ -34,7 +39,7 @@ const getIcon = (type: string, isActive = false, isHovered = false) => {
     className: 'custom-pin',
     iconAnchor: [0, 24],
     popupAnchor: [0, -36],
-    html: `<div class="map-marker dan ${
+    html: `<div class="map-marker dan ${expired ? 'expired' : ''} ${
       isActive ? 'highlighted active ' : ''
     } ${isHovered ? 'highlighted' : ''}" >
       <div class="inner"></div>
@@ -90,6 +95,18 @@ export class SharedMarkerService {
   utils = inject(UtilsService);
   mapFacade = inject(SharedMapFacade);
 
+  expiredDan(maker?: {
+    resultType: string;
+    period?: {
+      start: string;
+      end: string;
+    };
+  }): boolean {
+    return maker?.resultType === 'DAN' && maker
+      ? this.utils.isExpiredActivity(maker.period)
+      : false;
+  }
+
   makeMarkers(
     map: L.Map,
     data: MarkerDto[],
@@ -117,7 +134,12 @@ export class SharedMarkerService {
     });
 
     for (const c of markerData) {
-      const icon = getIcon(c.data.resultType);
+      const icon = getIcon(
+        c.data.resultType,
+        false,
+        false,
+        this.expiredDan(c.data)
+      );
 
       if (c.lat && c.lon) {
         const lon = c.lon;
@@ -284,7 +306,12 @@ export class SharedMarkerService {
             getClusterIcon((danCluster as any).getChildCount(), 'DAN', '')
           );
         } else {
-          const inactiveIcon = getIcon(marker.data.resultType);
+          const inactiveIcon = getIcon(
+            marker.data.resultType,
+            false,
+            false,
+            this.expiredDan(marker.data)
+          );
 
           marker.marker.setIcon(inactiveIcon);
         }
@@ -324,7 +351,12 @@ export class SharedMarkerService {
           )
         );
       } else {
-        const activeIcon = getIcon(res.resultType, active, hover);
+        const activeIcon = getIcon(
+          res.resultType,
+          active,
+          hover,
+          this.expiredDan(res)
+        );
 
         marker?.setIcon(activeIcon);
       }

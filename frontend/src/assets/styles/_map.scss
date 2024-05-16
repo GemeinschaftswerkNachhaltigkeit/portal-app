@@ -67,6 +67,11 @@
     .inner {
       box-shadow: 0 0 0 50px $dan-blue;
     }
+    &.expired {
+      .inner {
+        box-shadow: 0 0 0 50px $dan-blue-expired;
+      }
+    }
   }
 
   &.hovered {
