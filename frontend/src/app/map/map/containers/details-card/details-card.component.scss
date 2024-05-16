@@ -206,6 +206,9 @@
     box-shadow: 0 2px 0 0 $gray-light inset;
     .info-btn {
       margin-right: $spacing-2;
+      button {
+        white-space: nowrap;
+      }
     }
     // box-shadow: 0 -2px 0 0 black;
   }
