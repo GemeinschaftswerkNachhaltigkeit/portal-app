@@ -187,6 +187,11 @@ export class SearchFormComponent implements OnInit {
   private setActiveFilters(): void {
     if (this.activeFilters) {
       this.searchForm.patchValue(this.activeFilters);
+      if (this.activeFilters['viewType']) {
+        const viewTypes = this.activeFilters['viewType'] as string[];
+        this.showOrga = viewTypes.includes('ORGANISATION');
+        this.showDan = viewTypes.includes('DAN');
+      }
     }
   }
 
@@ -221,6 +226,7 @@ export class SearchFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('>>>>', this.activeFilters);
     this.setActiveFilters();
     this.searchForm.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())
