@@ -142,6 +142,9 @@ body {
 }
 html {
   font-size: 62.5%; //.1rem === 1px and 1rem === 10px
+
+  // Increase Expension Panel Title Size (Default 1rem)
+  --mdc-dialog-supporting-text-size: 1.4rem;
 }
 
 h1,
@@ -193,7 +196,9 @@ h6 {
   --mdc-text-button-label-text-color: #{$blue-navy};
 }
 .mat-button-base,
-button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(.mat-warn):not(.mat-primary),
+button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
+    .mat-warn
+  ):not(.mat-primary),
 .mat-paginator,
 .mat-mdc-select-value,
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label,
@@ -345,7 +350,8 @@ mat-dialog-container.mat-dialog-container {
   }
   .view-type {
     .orga {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
         background: $orange;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
@@ -353,7 +359,8 @@ mat-dialog-container.mat-dialog-container {
       }
     }
     .activity {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
         background: $green;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
@@ -361,7 +368,8 @@ mat-dialog-container.mat-dialog-container {
       }
     }
     .dan {
-      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary .mat-ripple-element {
+      &.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-primary
+        .mat-ripple-element {
         background: $dan-blue;
       }
       &.mat-checkbox-checked.mat-primary .mat-checkbox-background {

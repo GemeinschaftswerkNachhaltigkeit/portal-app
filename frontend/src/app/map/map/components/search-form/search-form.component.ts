@@ -226,7 +226,6 @@ export class SearchFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('>>>>', this.activeFilters);
     this.setActiveFilters();
     this.searchForm.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged())

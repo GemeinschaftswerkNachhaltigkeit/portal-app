@@ -16,11 +16,13 @@
         </div>
       </div>
     </form>
-    <app-filter-modal-button
-      [count]="filterCount()"
-      (clear)="clearAll()"
-      (openModal)="openFilters()"
-    ></app-filter-modal-button>
+    <div class="filter-button">
+      <app-filter-modal-button
+        [count]="filterCount()"
+        (clear)="clearAll()"
+        (openModal)="openFilters()"
+      ></app-filter-modal-button>
+    </div>
   </div>
 
   <div class="right">

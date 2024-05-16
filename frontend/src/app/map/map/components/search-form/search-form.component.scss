@@ -34,6 +34,12 @@
       flex-shrink: 1;
       width: 100%;
     }
+
+    .filter-button {
+      display: flex;
+      width: 100%;
+      padding-inline: $spacing-4;
+    }
   }
 
   .right {
