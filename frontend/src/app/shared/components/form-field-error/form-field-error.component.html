@@ -76,5 +76,9 @@
       translationPrefix + '.loadingOptionsError' + translationSuffix
         | translate: translationParams
     }}</span>
+    <span *ngIf="field?.errors?.['invalidDuration']">{{
+      translationPrefix + '.invalidDuration' + translationSuffix
+        | translate: getParams(field?.errors?.['invalidDuration'])
+    }}</span>
   </ng-container>
 </ng-container>

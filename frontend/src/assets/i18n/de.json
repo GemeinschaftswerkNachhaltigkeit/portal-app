@@ -166,7 +166,27 @@
     "online": "Online",
     "private": "Privat",
     "new": "Neu",
-    "for": "für"
+    "for": "für",
+    "dateUnits": {
+      "years": "Jahre",
+      "quarters": "Quartale",
+      "months": "Monate",
+      "weeks": "Wochen",
+      "days": "Tage",
+      "hours": "Stunden",
+      "minutes": "Minuten",
+      "seconds": "Sekunden",
+      "milliseconds": "Millisekonden",
+      "year": "Jahr",
+      "quarter": "Quartal",
+      "month": "Monat",
+      "week": "Woche",
+      "day": "Tag",
+      "hour": "Stunde",
+      "minute": "Minute",
+      "second": "Sekunde",
+      "millisecond": "Millisekonde"
+    }
   },
   "search": {
     "noResultsOrga": "Leider konnten keine Treffer für deine Suche gefunden werden. Versuche es mit einem anderen Begriff oder Ort oder schaue dich direkt auf der Karte um.",
@@ -643,7 +663,8 @@
     "coordinatesNotFound": "Für die von dir angegebene Adresse konnten wir leider keinen Ort finden. Bitte prüfe noch einmal deine Eingabe. Ohne einen gültigen Standort sind wir nicht in der Lage den Eintrag auf der Karte anzuzeigen.",
     "activitiesCoordinatesTitle": "Veranstaltungen ohne Ort vorhanden!",
     "activitiesCoordinates": "Du hast Veranstaltungen, für die wir keinen Standort finden können. Ohne einen gültigen Standort sind wir nicht in der Lage die Einträge auf der Karte anzuzeigen.",
-    "loadingOptionsError": "Die Optionen konnten nicht geladen werden."
+    "loadingOptionsError": "Die Optionen konnten nicht geladen werden.",
+    "invalidDuration": "Max. gültiger Zeitraum ist {{duration}}"
   },
   "SDGS": {
     "goal_1": "Keine Armut",

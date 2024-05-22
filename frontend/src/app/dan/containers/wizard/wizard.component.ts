@@ -28,6 +28,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import { DirectusService } from 'src/app/shared/services/directus.service';
+import { durationValidator } from 'src/app/shared/components/validator/duration.validator';
 
 @Component({
   selector: 'app-wizard',
@@ -91,7 +92,10 @@ export class WizardComponent implements OnDestroy {
         ]),
         description: fb.control('', [wysiwygContentRequired(100, 1500)]),
         start: fb.control('', [Validators.required]),
-        end: fb.control('', [Validators.required]),
+        end: fb.control('', [
+          Validators.required,
+          durationValidator('start', 3, 'months')
+        ]),
         url: fb.control('', [Validators.maxLength(1000), urlPattern()]),
         registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()])
       })

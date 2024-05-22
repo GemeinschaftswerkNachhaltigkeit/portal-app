@@ -90,5 +90,18 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
     <mat-hint>{{ danContent?.period_hint }}</mat-hint>
+    <mat-error>
+      <app-form-field-error [field]="form.get('start')"></app-form-field-error>
+      <span
+        *ngIf="
+          form.get('start')?.invalid &&
+          form.get('end')?.invalid &&
+          (form.get('start')?.dirty || form.get('start')?.touched) &&
+          (form.get('end')?.dirty || form.get('end')?.touched)
+        "
+        >,
+      </span>
+      <app-form-field-error [field]="form.get('end')"></app-form-field-error>
+    </mat-error>
   </mat-form-field>
 </ng-container>

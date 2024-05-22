@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-form-field-error',
@@ -11,4 +11,11 @@ export class FormFieldErrorComponent {
   @Input() translationPrefix = 'validationErrors';
   @Input() translationSuffix = '';
   @Input() translationParams = {};
+
+  getParams(error?: ValidationErrors | null) {
+    console.log('Field', error);
+    return Object.keys(this.translationParams).length
+      ? this.translationParams
+      : error;
+  }
 }
