@@ -80,5 +80,9 @@
       translationPrefix + '.invalidDuration' + translationSuffix
         | translate: getParams(field?.errors?.['invalidDuration'])
     }}</span>
+    <span *ngIf="field?.errors?.['notInDanPeriod']">{{
+      translationPrefix + '.notInDanPeriod' + translationSuffix
+        | translate: getParams(field?.errors?.['notInDanPeriod'])
+    }}</span>
   </ng-container>
 </ng-container>

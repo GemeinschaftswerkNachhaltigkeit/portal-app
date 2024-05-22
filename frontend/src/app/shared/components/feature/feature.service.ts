@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { Feature, FeaturesService } from './features.service';
 
 export type FeedbackType = 'success' | 'error';
@@ -18,6 +18,10 @@ export class FeatureService {
         return this.show(features, feature);
       })
     );
+  }
+
+  getFeature(featureKey: string): Feature | undefined {
+    return this.features.getFeature(featureKey);
   }
 
   show(features: Feature[] = [], featureKey?: string): boolean {

@@ -664,7 +664,8 @@
     "activitiesCoordinatesTitle": "Veranstaltungen ohne Ort vorhanden!",
     "activitiesCoordinates": "Du hast Veranstaltungen, für die wir keinen Standort finden können. Ohne einen gültigen Standort sind wir nicht in der Lage die Einträge auf der Karte anzuzeigen.",
     "loadingOptionsError": "Die Optionen konnten nicht geladen werden.",
-    "invalidDuration": "Max. gültiger Zeitraum ist {{duration}}"
+    "invalidDuration": "Max. gültiger Zeitraum ist {{duration}}",
+    "notInDanPeriod": "Nicht im DAN Zeitraum: {{period}}"
   },
   "SDGS": {
     "goal_1": "Keine Armut",

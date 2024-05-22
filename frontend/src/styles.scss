@@ -10,6 +10,7 @@
 @use 'swiper/scss/pagination';
 @use 'slider' as *;
 @use 'wizard' as *;
+@use 'theme' as *;
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -172,7 +173,7 @@ h6 {
 .mat-mdc-unelevated-button,
 .mat-button,
 .mdc-button--outlined,
-.mat-icon-button,
+.mat-mdc-icon-button,
 .mat-flat-button {
   border-radius: 0 !important;
 }
@@ -223,7 +224,7 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
   text-decoration: none;
 }
 
-.mat-icon-button,
+.mat-mdc-icon-button,
 .mdc-button--outlined {
   background-color: white;
 }
@@ -240,7 +241,7 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
     border-color: white !important;
   }
 }
-.mat-paginator .mat-icon-button {
+.mat-paginator .mat-mdc-icon-button {
   background: transparent;
 }
 div.mat-paginator-page-size {
@@ -408,6 +409,14 @@ mat-dialog-container.mat-dialog-container {
 */
 .mat-form-field-flex {
   align-items: center !important;
+}
+
+div.mat-mdc-form-field-icon-suffix .mat-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*
