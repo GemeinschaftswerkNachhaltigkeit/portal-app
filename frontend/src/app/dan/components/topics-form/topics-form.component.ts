@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { ImpactArea } from 'src/app/shared/models/impact-area';
 import LocationData from 'src/app/shared/models/location-data';
 import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordinate-lookup.service';
 
@@ -16,6 +17,7 @@ export class TopicsFormComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject();
   coordinatesNotFound = false;
   sdgOptions = Array.from({ length: 17 }, (_, i) => i + 1);
+  impactAreaOpts = Object.values(ImpactArea);
 
   constructor(
     private rootFormGroup: FormGroupDirective,

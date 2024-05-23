@@ -21,6 +21,23 @@
     [label]="'forms.labels.thematicFocus' | translate"
   ></app-thematic-focus-control>
 
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
+    <mat-select formControlName="impactArea">
+      <mat-option
+        *ngFor="let impactArea of impactAreaOpts"
+        [value]="impactArea"
+      >
+        {{ 'impactArea.' + impactArea | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('impactArea')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
   <div class="fields">
     <div class="field">
       <mat-radio-group aria-label="Select an option" formControlName="location">

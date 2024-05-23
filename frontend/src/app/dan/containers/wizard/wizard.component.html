@@ -65,6 +65,27 @@
               [position]="false"
               formGroupName="contact"
             ></app-contact-controls>
+            <app-upload-image
+              [config]="
+                dzService.getImageConfig(
+                  'contact',
+                  orgId,
+                  activity.randomUniqueId
+                )
+              "
+              [labelTranslationKey]="'forms.labels.danLogo'"
+              [fileId]="activity.contact?.image"
+              imageSizeTranslationKey="sign-up.upload.logoWidthTooltipExt"
+              [aspectRatio]="dzService.getAspectRatio('logo')"
+              style="width: 200px"
+              [errorMsg]="'error.unknown' | translate"
+              [info]="
+                ('sign-up.upload.tooltip' | translate) +
+                ', ' +
+                ('sign-up.upload.logoWidthTooltipExt' | translate)
+              "
+              (delete)="deleteHandler(imageTypes.CONTACT)"
+            ></app-upload-image>
           </form>
           <app-actions
             [finalStep]="true"

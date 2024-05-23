@@ -30,6 +30,8 @@ import { FeedbackService } from 'src/app/shared/components/feedback/feedback.ser
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { durationValidator } from 'src/app/shared/components/validator/duration.validator';
 import { danPeriodValidator } from 'src/app/shared/components/validator/danPeriod.validator';
+import { DateTime } from 'luxon';
+import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 
 @Component({
   selector: 'app-wizard',
@@ -39,6 +41,8 @@ import { danPeriodValidator } from 'src/app/shared/components/validator/danPerio
 export class WizardComponent implements OnDestroy {
   activityId = '';
   orgId = '';
+  data: ActivityWIP | null = null;
+  imageType = ImageType;
   private paramsSub: Subscription;
 
   public activityData$ = this.activityService.activityData$;
@@ -83,6 +87,7 @@ export class WizardComponent implements OnDestroy {
     private geoService: GeoCoordinateLookupService,
     private feedback: FeedbackService,
     private fb: FormBuilder,
+    public dzService: DropzoneService,
     breakpointObserver: BreakpointObserver
   ) {
     this.step1Form = fb.group({
@@ -106,6 +111,7 @@ export class WizardComponent implements OnDestroy {
       topics: fb.group({
         sustainableDevelopmentGoals: fb.control([], [Validators.required]),
         thematicFocus: fb.control([], [Validators.required]),
+        impactArea: [''],
         location: fb.control<string>('ADDRESS'),
         address: fb.group({
           name: ['', [Validators.maxLength(200)]],
@@ -139,6 +145,7 @@ export class WizardComponent implements OnDestroy {
                 this.route.snapshot.queryParams['edit'] === 'true';
               this.patchFormData(activity);
               this.trackFromChanges();
+              this.data = activity;
             } else {
               this.feedback.showFeedback(
                 this.translate.instant('error.unknown'),
@@ -189,6 +196,7 @@ export class WizardComponent implements OnDestroy {
       sustainableDevelopmentGoals:
         step2Values.topics.sustainableDevelopmentGoals,
       thematicFocus: step2Values.topics.thematicFocus,
+      impactArea: step2Values.topics.impactArea,
       location: {
         url: step1Values.masterData.url,
         address: step2Values.topics.address || null,
@@ -206,8 +214,8 @@ export class WizardComponent implements OnDestroy {
         name: data.name,
         activityType: ActivityType.DAN,
         description: data.description,
-        start: data.period?.start,
-        end: data.period?.end,
+        start: data.period?.start ? DateTime.fromISO(data.period.start) : null,
+        end: data.period?.end ? DateTime.fromISO(data.period.end) : null,
         url: data.location?.url,
         registerUrl: data.registerUrl
       }
@@ -216,6 +224,7 @@ export class WizardComponent implements OnDestroy {
       topics: {
         sustainableDevelopmentGoals: data.sustainableDevelopmentGoals,
         thematicFocus: data.thematicFocus,
+        impactArea: data.impactArea,
         location: this.getLocationType(data),
         address: data.location?.address
       }
@@ -288,6 +297,7 @@ export class WizardComponent implements OnDestroy {
   }
 
   saveActivity(activityWIP: ActivityWIP, stepKey: string) {
+    console.log('save');
     if (
       this.enableAutosave &&
       this.orgId &&
