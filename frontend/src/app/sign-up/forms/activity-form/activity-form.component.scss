@@ -27,6 +27,13 @@ form {
   }
 }
 
+.date-checkbox {
+  margin-bottom: $spacing-4;
+  span {
+    color: $blue-navy;
+  }
+}
+
 .file-uploads {
   display: flex;
   gap: 2em;

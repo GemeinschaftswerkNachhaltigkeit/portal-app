@@ -1,20 +1,29 @@
 <ng-container [formGroup]="form">
-  <!-- register url -->
-
-  <!-- external url -->
-
-  <!-- <mat-form-field appearance="outline">
-    <mat-label>{{ 'forms.labels.externalLinkDan' | translate }}</mat-label>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.url' | translate }}</mat-label>
     <input
       matInput
-      [placeholder]="'forms.labels.externalLinkDan' | translate"
+      [placeholder]="'forms.labels.url' | translate"
       formControlName="url"
     />
-    <div matSuffix><mat-icon>language</mat-icon></div>
     <app-valid-check [form]="form" controlName="url"></app-valid-check>
-
     <mat-error>
       <app-form-field-error [field]="form.get('url')"></app-form-field-error>
     </mat-error>
-  </mat-form-field> -->
+  </mat-form-field>
+
+  <mat-form-field *ngFor="let type of socialMediaTypes" appearance="outline">
+    <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.' + type | translate"
+      [formControlName]="type"
+    />
+
+    <app-valid-check [form]="form" [controlName]="type"></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error [field]="form.get(type)"></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
 </ng-container>

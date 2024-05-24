@@ -26,14 +26,8 @@
       <app-outlined-icon>cloud_done</app-outlined-icon>
       {{ 'labels.saved' | translate }}
     </div>
-    <div>
-      <button
-        mat-flat-button
-        color="accent"
-        matStepperNext
-        *ngIf="showNextBtn && nextBtnCallback === undefined"
-        id="next-step"
-      >
+    <div *ngIf="showNextBtn && nextBtnCallback === undefined">
+      <button mat-flat-button color="accent" matStepperNext id="next-step">
         {{ 'btn.next' | translate }}
       </button>
       <button
@@ -48,12 +42,11 @@
         {{ 'btn.saveCurrentState' | translate }}
       </button>
     </div>
-    <div>
+    <div *ngIf="showNextBtn && nextBtnCallback !== undefined">
       <button
         mat-flat-button
         color="accent"
         matStepperNext
-        *ngIf="showNextBtn && nextBtnCallback !== undefined"
         (click)="nextBtnCallback()"
         [disabled]="disableNextBtn"
         id="next-step"

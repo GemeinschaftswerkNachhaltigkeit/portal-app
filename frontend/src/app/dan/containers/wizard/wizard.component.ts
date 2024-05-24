@@ -33,6 +33,8 @@ import { danPeriodValidator } from 'src/app/shared/components/validator/danPerio
 import { DateTime } from 'luxon';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
+import { SocialMediaContact } from 'src/app/shared/models/social-media-contact';
+import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 
 @Component({
   selector: 'app-wizard',
@@ -77,6 +79,7 @@ export class WizardComponent implements OnDestroy {
   step1Form: FormGroup;
   step2Form: FormGroup;
   step3Form: FormGroup;
+  step4Form: FormGroup;
 
   constructor(
     private router: Router,
@@ -107,7 +110,6 @@ export class WizardComponent implements OnDestroy {
           durationValidator('start', 3, 'months'),
           danPeriodValidator('start')
         ]),
-        url: fb.control('', [Validators.maxLength(1000), urlPattern()]),
         registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()])
       })
     });
@@ -128,7 +130,19 @@ export class WizardComponent implements OnDestroy {
         })
       })
     });
+
     this.step3Form = fb.group({
+      links: fb.group({
+        url: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        FACEBOOK: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        INSTAGRAM: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        TIKTOK: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        LINKEDIN: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        YOUTUBE: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        TWITTER: fb.control('', [Validators.maxLength(1000), urlPattern()])
+      })
+    });
+    this.step4Form = fb.group({
       contact: fb.group({
         firstName: fb.control('', [Validators.required]),
         lastName: fb.control('', [Validators.required]),
@@ -188,6 +202,16 @@ export class WizardComponent implements OnDestroy {
     const step1Values = this.step1Form.value;
     const step2Values = this.step2Form.value;
     const step3Values = this.step3Form.value;
+    const step4Values = this.step4Form.value;
+
+    const socialMedia = Object.keys(step3Values.links)
+      .filter((key) => {
+        return key !== 'url' && !!step3Values.links[key];
+      })
+      .map((key) => ({
+        type: key as SocialMediaType,
+        contact: step3Values.links[key]
+      }));
 
     return {
       name: step1Values.masterData.name,
@@ -202,13 +226,14 @@ export class WizardComponent implements OnDestroy {
       thematicFocus: step2Values.topics.thematicFocus,
       impactArea: step2Values.topics.impactArea,
       location: {
-        url: step1Values.masterData.url,
+        url: step3Values.links.url,
         address: step2Values.topics.address || null,
         online: step2Values.topics.location === 'ONLINE',
         privateLocation: step2Values.topics.location === 'PRIVATE'
       },
-      contact: step3Values.contact,
-      registerUrl: step1Values.masterData.registerUrl
+      registerUrl: step1Values.masterData.registerUrl,
+      socialMediaContacts: socialMedia,
+      contact: step4Values.contact
     };
   }
 
@@ -234,6 +259,12 @@ export class WizardComponent implements OnDestroy {
       }
     });
     this.step3Form.patchValue({
+      links: {
+        url: data.location?.url,
+        ...data.socialMediaContacts
+      }
+    });
+    this.step4Form.patchValue({
       contact: {
         ...data.contact,
         firstName: data.contact?.firstName || this.authService.getFirstName(),
@@ -283,6 +314,14 @@ export class WizardComponent implements OnDestroy {
       .pipe(takeUntil(this.$unsubscribe))
       .subscribe(() => {
         if (this.step3Form.valid && this.enableAutosave) {
+          this.saveActivity(this.getPayload(), 'links');
+        }
+      });
+    this.step4Form.valueChanges
+      .pipe(debounceTime(100))
+      .pipe(takeUntil(this.$unsubscribe))
+      .subscribe(() => {
+        if (this.step4Form.valid && this.enableAutosave) {
           this.saveActivity(this.getPayload(), 'contact');
         }
       });
@@ -301,7 +340,7 @@ export class WizardComponent implements OnDestroy {
   }
 
   saveActivity(activityWIP: ActivityWIP, stepKey: string) {
-    console.log('save');
+    console.log('save', activityWIP);
     if (
       this.enableAutosave &&
       this.orgId &&
@@ -319,7 +358,7 @@ export class WizardComponent implements OnDestroy {
   }
 
   submit = (): void => {
-    if (this.step1Form.valid && this.step2Form.valid && this.step3Form.valid) {
+    if (this.step1Form.valid && this.step2Form.valid && this.step4Form.valid) {
       const loadingId = this.loading.start('publishActivity');
       this.enableAutosave = false;
 

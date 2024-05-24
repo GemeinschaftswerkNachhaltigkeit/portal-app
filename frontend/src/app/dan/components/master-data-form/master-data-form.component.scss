@@ -1,12 +1,6 @@
 @use 'theme' as *;
 @use 'palette' as *;
 
-form {
-  display: flex;
-  flex-direction: column;
-  margin: 2em;
-}
-
 .char-count {
   position: absolute;
   top: 4rem;

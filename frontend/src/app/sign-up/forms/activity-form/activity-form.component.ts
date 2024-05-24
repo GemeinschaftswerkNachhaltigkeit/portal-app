@@ -91,6 +91,12 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
       this.changeDatePickerLang(event.lang);
     });
   }
+
+  currentCharsHtml(field: string): number {
+    const desc = this.activityFormGroup.get(field)?.value || '';
+    return UtilsService.stripHtml(desc).length;
+  }
+
   updateForm() {
     if (this.activity) {
       this.activityFormGroup.patchValue({

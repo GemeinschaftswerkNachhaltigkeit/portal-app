@@ -13,7 +13,8 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <!-- At the moment the type is always EVENT for this wizard -->
+  <!-- <mat-form-field>
     <mat-label>{{ 'forms.labels.activityType' | translate }}</mat-label>
     <mat-select formControlName="activityType">
       <mat-option
@@ -28,7 +29,7 @@
         [field]="activityFormGroup.get('activityType')"
       ></app-form-field-error>
     </mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <div
     class="mat-form-field-appearance-outline wysiwyg-form-field"
@@ -41,7 +42,7 @@
     <div class="description">
       {{ 'events.texts.wizard.description' | translate }}
     </div>
-    <div class="mat-form-field-wrapper">
+    <div class="mat-form-field-wrapper tip-tap-wrapper">
       <app-tiptap-menu-bar [editor]="editor"
         >{{
           'forms.labels.activityDescription' | translate
@@ -52,6 +53,12 @@
         [editor]="editor"
         formControlName="description"
       ></tiptap-editor>
+      <div class="char-count">
+        <app-char-count
+          [count]="currentCharsHtml('description')"
+          [total]="1500"
+        ></app-char-count>
+      </div>
       <div class="char-count">
         <app-char-count
           [count]="currentChars()"
@@ -68,7 +75,14 @@
     </div>
   </div>
 
-  <div class="two-cols">
+  <div>
+    <div class="date-checkbox">
+      <mat-checkbox matInput formControlName="permanent">
+        <span>
+          {{ 'forms.labels.permanet' | translate }}
+        </span>
+      </mat-checkbox>
+    </div>
     <mat-form-field>
       <mat-label> {{ 'forms.labels.period' | translate }}</mat-label>
       <mat-date-range-input [rangePicker]="picker">
@@ -83,16 +97,9 @@
           formControlName="end"
         />
       </mat-date-range-input>
-      <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-
-    <mat-checkbox matInput formControlName="permanent">
-      <span>
-        {{ 'forms.labels.permanet' | translate }}
-      </span>
-    </mat-checkbox>
   </div>
 
   <mat-date-range-picker #picker></mat-date-range-picker>

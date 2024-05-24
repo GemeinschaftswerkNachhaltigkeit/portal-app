@@ -14,6 +14,7 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
+            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.aboutDan' | translate"
             [content]="'dan.texts.wizard.about' | translate"
           >
@@ -29,9 +30,6 @@
               [orgId]="orgId"
               (deleteImage)="deleteHandler($event)"
             ></app-images-form>
-            <app-external-links-form
-              formGroupName="masterData"
-            ></app-external-links-form>
           </form>
           <app-actions [showPrevBtn]="false"></app-actions>
         </div>
@@ -50,6 +48,7 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
+            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.topics' | translate"
             [content]="'dan.texts.wizard.topics' | translate"
           >
@@ -68,14 +67,46 @@
 
     <mat-step
       [stepControl]="step3Form!"
+      [label]="'labels.wizard.externalLinks' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout>
+        <div class="form-container">
+          <app-title-with-content
+            [type]="'labels.dan' | translate"
+            [title]="'labels.wizard.externalLinks' | translate"
+            [content]="'dan.texts.wizard.externalLinks' | translate"
+          >
+          </app-title-with-content>
+          <form [formGroup]="step3Form">
+            <app-external-links-form
+              formGroupName="links"
+            ></app-external-links-form>
+          </form>
+          <app-actions></app-actions>
+        </div>
+        <app-form-advatages
+          sidebar
+          [content]="danContent$ | async"
+        ></app-form-advatages>
+      </app-wizard-sidebar-layout>
+    </mat-step>
+
+    <mat-step
+      [stepControl]="step4Form!"
       [label]="'labels.wizard.contact' | translate"
       [editable]="isEditable"
     >
       <app-wizard-sidebar-layout>
         <div class="form-container">
-          <form [formGroup]="step3Form">
+          <app-title-with-content
+            [type]="'labels.dan' | translate"
+            [title]="'labels.wizard.contact' | translate"
+            [content]="'dan.texts.wizard.contact' | translate"
+          >
+          </app-title-with-content>
+          <form [formGroup]="step4Form">
             <app-contact-controls
-              [position]="false"
               formGroupName="contact"
             ></app-contact-controls>
             <app-upload-image
@@ -86,7 +117,7 @@
                   activity.randomUniqueId
                 )
               "
-              [labelTranslationKey]="'forms.labels.danLogo'"
+              [labelTranslationKey]="'forms.labels.profileImage'"
               [fileId]="activity.contact?.image"
               imageSizeTranslationKey="sign-up.upload.logoWidthTooltipExt"
               [aspectRatio]="dzService.getAspectRatio('logo')"
@@ -109,6 +140,10 @@
             (canceled)="backToDansHandler()"
           ></app-actions>
         </div>
+        <app-form-advatages
+          sidebar
+          [content]="danContent$ | async"
+        ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
 

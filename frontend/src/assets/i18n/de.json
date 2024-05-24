@@ -141,6 +141,8 @@
     "projectSustainabilityWinnerLong": "Preisträger:in vom Projekt Nachhaltigkeit",
     "permanent": "Dauerhaft",
     "upcoming": "Bevorstehend",
+    "event": "Veranstaltung",
+    "dan": "DAN Aktion",
     "expiredActivity": "Vergangene Veranstaltung",
     "expiredDanActivity": "Vergangene Aktion",
     "copied": "kopiert",
@@ -236,7 +238,9 @@
       "wizard.period": "Achtung! Bitte erstelle nur Aktionen innerhalb des Aktionszeitraums",
       "wizard.about": "Trage hier die wichtigsten Informationen zu deiner Aktion im Rahmen der Deutschen Aktionstage Nachhaltigkeit ein.",
       "wizard.description": "Erkläre hier deine Aktion und beschreibe wie man mitmachen kann.",
-      "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein."
+      "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein.",
+      "wizard.externalLinks": "Trage hier die Links zur Aktions-Webseite oder anderen relevanten Kanälen ein.",
+      "wizard.contact": "Trage hier die Kontaktinformationen für die Aktion ein."
     }
   },
   "events": {

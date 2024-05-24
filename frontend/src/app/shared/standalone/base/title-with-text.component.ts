@@ -13,7 +13,12 @@ export type CardData = {
   imports: [CommonModule],
   template: `
     <div class="title-with-content">
-      <h2 class="title">{{ title() }}</h2>
+      <h2 class="title">
+        @if (type()) {
+          <ng-container>{{ type() }}:</ng-container>
+        }
+        {{ title() }}
+      </h2>
       <div [innerHTML]="content()"></div>
     </div>
   `,
@@ -34,6 +39,7 @@ export type CardData = {
   `
 })
 export class TitleWithContentComponent {
+  type = input<string | undefined>(undefined);
   title = input<string>();
   content = input<string>();
 }

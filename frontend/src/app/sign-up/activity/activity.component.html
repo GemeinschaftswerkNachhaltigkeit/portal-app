@@ -13,6 +13,7 @@
     <app-wizard-sidebar-layout>
       <div class="form-container">
         <app-title-with-content
+          [type]="'labels.event' | translate"
           [title]="'labels.wizard.masterData' | translate"
           [content]="
             (activityContent$ | async)?.stepDescriptions?.[0]?.description || ''
@@ -52,6 +53,7 @@
     <app-wizard-sidebar-layout>
       <div step class="form-container">
         <app-title-with-content
+          [type]="'labels.event' | translate"
           [title]="'labels.wizard.topics' | translate"
           [content]="
             (activityContent$ | async)?.stepDescriptions?.[1]?.description || ''
@@ -90,6 +92,7 @@
     <app-wizard-sidebar-layout>
       <div step class="form-container">
         <app-title-with-content
+          [type]="'labels.event' | translate"
           [title]="'labels.wizard.externalLinks' | translate"
           [content]="
             (activityContent$ | async)?.stepDescriptions?.[2]?.description || ''

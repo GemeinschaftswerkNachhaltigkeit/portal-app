@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroupDirective, FormGroup } from '@angular/forms';
+import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 
 @Component({
   selector: 'app-external-links-form',
@@ -9,6 +10,7 @@ import { FormGroupDirective, FormGroup } from '@angular/forms';
 export class ExternalLinksFormComponent implements OnInit {
   @Input() formGroupName!: string;
   form!: FormGroup;
+  socialMediaTypes = Object.values(SocialMediaType);
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
