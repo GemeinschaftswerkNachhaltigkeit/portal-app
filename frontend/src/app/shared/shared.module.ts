@@ -87,12 +87,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { UploadImageComponent } from './components/form/upload-image/upload-image.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
-import { WizardSidebarLayoutComponent } from './components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { WizardSidebarLayoutComponent } from './standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
 import { ImageComponent } from './components/image/image.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
+import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 
 @NgModule({
   declarations: [
@@ -168,10 +169,10 @@ import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filte
     FormStepActionsComponent,
     FormStepDescriptionComponent,
     UploadImageComponent,
-    WizardSidebarLayoutComponent,
     OnlineFilterComponent,
     OnlyDanFilterComponent,
-    ImageComponent
+    ImageComponent,
+    FormAdvantagesComponent
   ],
   imports: [
     CommonModule,
@@ -257,9 +258,9 @@ import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filte
     FormStepActionsComponent,
     FormStepDescriptionComponent,
     UploadImageComponent,
-    WizardSidebarLayoutComponent,
     AddressControlsComponent,
-    ImageComponent
+    ImageComponent,
+    FormAdvantagesComponent
   ]
 })
 export class SharedModule {}

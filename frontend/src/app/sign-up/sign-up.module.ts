@@ -15,7 +15,6 @@ import { TopicsFormComponent } from './forms/topics-form/topics-form.component';
 import { ExternalLinksFormComponent } from './forms/external-links-form/external-links-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormAdvantagesComponent } from './form-advatages/form-advatages.component';
 import { FormFeedbackComponent } from './form-feedback/form-feedback.component';
 import { ImportComponent } from './import/import.component';
 import { ActivityComponent } from './activity/activity.component';
@@ -38,6 +37,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { OrganisationSuccessPageComponent } from './organisation-success-page/organisation-success-page.component';
 import { OrgaMembershipComponent } from './orga-membership/orga-membership.component';
 import { AdminWarningComponent } from './admin-warning/admin-warning.component';
+import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
+import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -58,7 +60,6 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     OrganisationFormComponent,
     TopicsFormComponent,
     ExternalLinksFormComponent,
-    FormAdvantagesComponent,
     FormFeedbackComponent,
     ImportComponent,
     ActivityComponent,
@@ -84,7 +85,10 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatLuxonDateModule,
     NgxTiptapModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatRadioModule,
+    TitleWithContentComponent,
+    WizardSidebarLayoutComponent
   ],
   providers: [
     {

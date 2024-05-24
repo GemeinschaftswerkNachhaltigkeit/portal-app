@@ -1,8 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {
+  SignUpOrgContent,
   SignUpActivityContent,
-  SignUpOrgContent
-} from '../services/directus-content.service';
+  DanContent
+} from 'src/app/sign-up/services/directus-content.service';
 
 @Component({
   selector: 'app-form-advatages',
@@ -11,5 +12,9 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class FormAdvantagesComponent {
-  @Input() content: SignUpOrgContent | SignUpActivityContent | null = null;
+  @Input() content:
+    | SignUpOrgContent
+    | SignUpActivityContent
+    | DanContent
+    | null = null;
 }

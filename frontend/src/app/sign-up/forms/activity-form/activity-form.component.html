@@ -38,6 +38,9 @@
         activityFormGroup.get('description')?.touched)
     "
   >
+    <div class="description">
+      {{ 'events.texts.wizard.description' | translate }}
+    </div>
     <div class="mat-form-field-wrapper">
       <app-tiptap-menu-bar [editor]="editor"
         >{{
@@ -94,6 +97,27 @@
 
   <mat-date-range-picker #picker></mat-date-range-picker>
 
+  <!-- register url -->
+
+  <mat-form-field>
+    <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.registerUrl' | translate"
+      formControlName="registerUrl"
+    />
+    <div matSuffix><mat-icon>language</mat-icon></div>
+    <app-valid-check
+      [form]="activityFormGroup"
+      controlName="registerUrl"
+    ></app-valid-check>
+    <mat-error>
+      <app-form-field-error
+        [field]="activityFormGroup.get('registerUrl')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
   <div
     class="file-uploads"
     *ngIf="activity && activity.randomUniqueId && isActiveStep"
@@ -133,24 +157,4 @@
       (delete)="deleteHandler(imageTypes.TITLE)"
     ></app-upload-image>
   </div>
-
-  <!-- register url -->
-
-  <mat-form-field>
-    <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
-    <input
-      matInput
-      [placeholder]="'forms.labels.registerUrl' | translate"
-      formControlName="registerUrl"
-    />
-    <app-valid-check
-      [form]="activityFormGroup"
-      controlName="registerUrl"
-    ></app-valid-check>
-    <mat-error>
-      <app-form-field-error
-        [field]="activityFormGroup.get('registerUrl')"
-      ></app-form-field-error>
-    </mat-error>
-  </mat-form-field>
 </form>

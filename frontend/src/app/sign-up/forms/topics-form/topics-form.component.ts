@@ -51,6 +51,7 @@ export class TopicsFormComponent implements OnChanges, OnDestroy {
       sustainableDevelopmentGoals: [[], Validators.required],
       thematicFocus: [[], Validators.required],
       impactArea: ['', Validators.required],
+      location: ['ADDRESS'],
       online: [false],
       name: ['', [Validators.maxLength(200)]],
       street: ['', [Validators.required, Validators.maxLength(200)]],
@@ -93,6 +94,7 @@ export class TopicsFormComponent implements OnChanges, OnDestroy {
         thematicFocus: this.data.thematicFocus,
         impactArea: this.data.impactArea,
         name: this.data.location?.address?.name,
+        location: this.getLocationType(this.data),
         street: this.data.location?.address?.street,
         streetNo: this.data.location?.address?.streetNo,
         supplement: this.data.location?.address?.supplement,
@@ -114,19 +116,28 @@ export class TopicsFormComponent implements OnChanges, OnDestroy {
     }
   }
 
+  private getLocationType(data: ActivityWIP): string {
+    if (data.location?.online) {
+      return 'ONLINE';
+    }
+    if (data.location?.privateLocation) {
+      return 'PRIVATE';
+    }
+    return 'ADDRESS';
+  }
+
   saveFormData(formVals: {
     sustainableDevelopmentGoals: number[];
     thematicFocus: string[];
     organisationType: string;
     impactArea: string;
     name: string;
+    location: 'ADDRESS' | 'ONLINE';
     street: string;
     streetNo: string;
     supplement: string;
     zipCode: string;
     city: string;
-    online: boolean;
-    //  state: string;
     country: string;
   }) {
     if (
@@ -141,7 +152,7 @@ export class TopicsFormComponent implements OnChanges, OnDestroy {
         impactArea: formVals.impactArea as ImpactArea,
         location: {
           ...this.data?.location,
-          online: formVals.online,
+          online: formVals.location === 'ONLINE',
           address: {
             name: formVals.name,
             street: formVals.street,
@@ -177,10 +188,10 @@ export class TopicsFormComponent implements OnChanges, OnDestroy {
 
   updateFormLocation() {
     this.topicsFormGroup
-      .get('online')
+      .get('location')
       ?.valueChanges.pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isOnline) => {
-        this.handleOnline(isOnline);
+      .subscribe((locationValue) => {
+        this.handleOnline(locationValue === 'ONLINE');
       });
   }
 

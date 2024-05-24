@@ -7,10 +7,6 @@ form {
   margin: 2em;
 }
 
-.wysiwyg-form-field {
-  margin-bottom: $spacing-4;
-}
-
 .char-count {
   position: absolute;
   top: 4rem;
@@ -21,6 +17,7 @@ form {
   position: relative;
 }
 
-.wysiwyg-form-field {
-  margin-bottom: $spacing-10;
+.description {
+  font-weight: bold;
+  margin-bottom: $spacing-2;
 }

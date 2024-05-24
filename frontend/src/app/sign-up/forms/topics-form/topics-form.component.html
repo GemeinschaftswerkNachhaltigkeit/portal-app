@@ -36,159 +36,162 @@
     </mat-error>
   </mat-form-field>
 
-  <mat-checkbox
-    matInput
-    formControlName="online"
-    *ngIf="isLocationRequired === false"
-  >
-    <span class="online-checkbox-long">
-      {{ 'forms.labels.onlineLocation' | translate }}
-    </span>
-    <span class="online-checkbox-short">
-      {{ 'forms.labels.online' | translate }}
-    </span>
-  </mat-checkbox>
+  <div class="fields">
+    <div class="field">
+      <mat-radio-group aria-label="Select an option" formControlName="location">
+        <div class="radio-options">
+          <mat-radio-button value="ADDRESS">
+            {{ 'forms.labels.onSite' | translate }}</mat-radio-button
+          >
+          <mat-radio-button value="ONLINE">
+            {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
+          >
+        </div>
+      </mat-radio-group>
+    </div>
 
-  <mat-form-field *ngIf="isAddressNameVisible">
-    <mat-label>{{ 'forms.labels.addressName' | translate }}</mat-label>
-    <input
-      matInput
-      [placeholder]="'forms.labels.addressName' | translate"
-      formControlName="name"
-    />
-    <app-valid-check
-      [form]="topicsFormGroup"
-      controlName="name"
-    ></app-valid-check>
-    <mat-error>
-      <app-form-field-error
-        [field]="topicsFormGroup.get('name')"
-      ></app-form-field-error>
-    </mat-error>
-  </mat-form-field>
+    <div class="field">
+      <mat-form-field *ngIf="isAddressNameVisible">
+        <mat-label>{{ 'forms.labels.addressName' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.addressName' | translate"
+          formControlName="name"
+        />
+        <app-valid-check
+          [form]="topicsFormGroup"
+          controlName="name"
+        ></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="topicsFormGroup.get('name')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+      <div class="address-row-1">
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.street' | translate"
+            formControlName="street"
+          />
 
-  <div class="address-row-1">
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.street' | translate"
-        formControlName="street"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="street"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="street"
-      ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('street')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
 
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('street')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.streetNo' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.streetNo' | translate"
+            formControlName="streetNo"
+          />
 
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.streetNo' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.streetNo' | translate"
-        formControlName="streetNo"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="streetNo"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="streetNo"
-      ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('streetNo')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
 
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('streetNo')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.supplement' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.supplement' | translate"
+            formControlName="supplement"
+          />
 
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.supplement' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.supplement' | translate"
-        formControlName="supplement"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="supplement"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="supplement"
-      ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('supplement')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('supplement')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
-  </div>
+      <div class="address-row-2">
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.zipCode' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.zipCode' | translate"
+            formControlName="zipCode"
+          />
 
-  <div class="address-row-2">
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.zipCode' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.zipCode' | translate"
-        formControlName="zipCode"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="zipCode"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="zipCode"
-      ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('zipCode')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
 
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('zipCode')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.city' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.city' | translate"
+            formControlName="city"
+          />
 
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.city' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.city' | translate"
-        formControlName="city"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="city"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="city"
-      ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('city')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
 
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('city')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ 'forms.labels.country' | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.country' | translate"
+            formControlName="country"
+          />
 
-    <mat-form-field>
-      <mat-label>{{ 'forms.labels.country' | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="'forms.labels.country' | translate"
-        formControlName="country"
-      />
+          <app-valid-check
+            [form]="topicsFormGroup"
+            controlName="country"
+          ></app-valid-check>
 
-      <app-valid-check
-        [form]="topicsFormGroup"
-        controlName="country"
-      ></app-valid-check>
-
-      <mat-error>
-        <app-form-field-error
-          [field]="topicsFormGroup.get('country')"
-        ></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+          <mat-error>
+            <app-form-field-error
+              [field]="topicsFormGroup.get('country')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
   </div>
 
   <div

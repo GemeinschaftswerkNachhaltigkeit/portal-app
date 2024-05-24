@@ -11,11 +11,14 @@
       [label]="'labels.wizard.aboutDan' | translate"
       [editable]="isEditable"
     >
-      <app-wizard-layout>
-        <p class="step-description">
-          {{ 'dan.texts.wizard.about' | translate }}
-        </p>
+      <app-wizard-sidebar-layout>
         <div class="form-container">
+          <app-title-with-content
+            [title]="'labels.wizard.aboutDan' | translate"
+            [content]="'dan.texts.wizard.about' | translate"
+          >
+          </app-title-with-content>
+
           <form [formGroup]="step1Form">
             <app-master-data-form
               [danContent]="danContent"
@@ -32,7 +35,11 @@
           </form>
           <app-actions [showPrevBtn]="false"></app-actions>
         </div>
-      </app-wizard-layout>
+        <app-form-advatages
+          sidebar
+          [content]="danContent$ | async"
+        ></app-form-advatages>
+      </app-wizard-sidebar-layout>
     </mat-step>
 
     <mat-step
@@ -40,17 +47,23 @@
       [label]="'labels.wizard.topics' | translate"
       [editable]="isEditable"
     >
-      <app-wizard-layout>
-        <p class="step-description">
-          {{ 'dan.texts.wizard.topics' | translate }}
-        </p>
+      <app-wizard-sidebar-layout>
         <div class="form-container">
+          <app-title-with-content
+            [title]="'labels.wizard.topics' | translate"
+            [content]="'dan.texts.wizard.topics' | translate"
+          >
+          </app-title-with-content>
           <form [formGroup]="step2Form">
             <app-topics-form formGroupName="topics"></app-topics-form>
           </form>
           <app-actions></app-actions>
         </div>
-      </app-wizard-layout>
+        <app-form-advatages
+          sidebar
+          [content]="danContent$ | async"
+        ></app-form-advatages>
+      </app-wizard-sidebar-layout>
     </mat-step>
 
     <mat-step
@@ -58,7 +71,7 @@
       [label]="'labels.wizard.contact' | translate"
       [editable]="isEditable"
     >
-      <app-wizard-layout>
+      <app-wizard-sidebar-layout>
         <div class="form-container">
           <form [formGroup]="step3Form">
             <app-contact-controls
@@ -96,7 +109,7 @@
             (canceled)="backToDansHandler()"
           ></app-actions>
         </div>
-      </app-wizard-layout>
+      </app-wizard-sidebar-layout>
     </mat-step>
 
     <mat-step class="final-step">

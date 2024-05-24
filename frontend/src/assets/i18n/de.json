@@ -244,7 +244,8 @@
       "addLoginModal": "Veranstaltung hinzufügen"
     },
     "texts": {
-      "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen."
+      "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen.",
+      "wizard.description": "Erkläre hier deine Veranstaltung und beschreibe wie man mitmachen kann."
     }
   },
   "account": {

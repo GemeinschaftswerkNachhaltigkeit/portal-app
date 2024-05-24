@@ -260,8 +260,15 @@ div.mat-paginator-page-size {
 
 .mat-mdc-form-field,
 .mat-mdc-select,
-.mat-mdc-textarea {
+.mat-mdc-textarea,
+.wysiwyg-form-field {
   font-family: 'Verdana', sans-serif;
+  margin-bottom: $spacing-2;
+}
+.mat-mdc-form-field-hint,
+.mat-mdc-form-field-error {
+  font-size: 1.2rem;
+  opacity: 0.8;
 }
 .mat-mdc-slide-toggle-thumb {
   background-color: #c0c0c0;
@@ -400,6 +407,12 @@ mat-dialog-container.mat-dialog-container {
 
 .mat-menu-item[disabled] {
   opacity: 0.5;
+}
+
+.mat-stepper-horizontal,
+.mat-horizontal-stepper-wrapper,
+.mat-horizontal-stepper-content {
+  height: 100%;
 }
 
 /**

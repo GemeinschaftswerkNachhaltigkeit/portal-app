@@ -44,6 +44,9 @@
     "
     [class.mat-form-field-disabled]="form.get('description')?.disabled"
   >
+    <div class="description">
+      {{ 'dan.texts.wizard.description' | translate }}
+    </div>
     <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
       <app-tiptap-menu-bar
         [editor]="editor"
@@ -66,7 +69,6 @@
             [field]="form.get('description')"
           ></app-form-field-error>
         </mat-error>
-        <mat-hint>{{ 'dan.texts.wizard.description' | translate }}</mat-hint>
       </div>
     </div>
   </div>
@@ -102,6 +104,25 @@
         >,
       </span>
       <app-form-field-error [field]="form.get('end')"></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Link zur Anmeldung -->
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+    <input
+      matInput
+      [placeholder]="'forms.labels.registerUrl' | translate"
+      formControlName="registerUrl"
+    />
+    <div matSuffix><mat-icon>language</mat-icon></div>
+    <app-valid-check [form]="form" controlName="registerUrl"></app-valid-check>
+
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('registerUrl')"
+      ></app-form-field-error>
     </mat-error>
   </mat-form-field>
 </ng-container>

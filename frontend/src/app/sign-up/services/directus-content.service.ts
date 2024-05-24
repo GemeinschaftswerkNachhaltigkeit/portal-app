@@ -19,6 +19,12 @@ export type SignUpActivityContent = {
   stepDescriptions: { description: string }[];
 };
 
+export type DanContent = {
+  advantages: string;
+  completedMessage: string;
+  stepDescriptions?: { description: string }[];
+};
+
 export type ImportOrgContent = {
   description: string;
   denyCompleteMessage: string;
@@ -42,6 +48,9 @@ export class DirectusContentService {
 
   activityContentSubject = new ReplaySubject<SignUpActivityContent | null>();
   activityContent$ = this.activityContentSubject.asObservable();
+
+  danContentSubject = new ReplaySubject<DanContent | null>();
+  danContent$ = this.danContentSubject.asObservable();
 
   contactInviteSubject = new ReplaySubject<ContactInviteContent | null>();
   contactInvite$ = this.contactInviteSubject.asObservable();
@@ -140,6 +149,21 @@ export class DirectusContentService {
         );
 
       this.activityContentSubject.next(response);
+      return response;
+    } catch (e) {
+      console.error('loadError', e);
+      return;
+    }
+  }
+
+  public async getDanTranslations() {
+    try {
+      const response =
+        await this.directusService.getContentItemForCurrentLang<DanContent>(
+          'dan_wizard_translations'
+        );
+
+      this.danContentSubject.next(response);
       return response;
     } catch (e) {
       console.error('loadError', e);

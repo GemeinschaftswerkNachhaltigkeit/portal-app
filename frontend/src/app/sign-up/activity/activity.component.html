@@ -11,11 +11,14 @@
     [editable]="isEditable"
   >
     <app-wizard-sidebar-layout>
-      <div step class="form-container">
-        <app-form-step-description
-          [content]="activityContent$ | async"
-          [stepDescriptionId]="0"
-        ></app-form-step-description>
+      <div class="form-container">
+        <app-title-with-content
+          [title]="'labels.wizard.masterData' | translate"
+          [content]="
+            (activityContent$ | async)?.stepDescriptions?.[0]?.description || ''
+          "
+        >
+        </app-title-with-content>
 
         <app-activity-form
           #stepOne
@@ -48,10 +51,13 @@
   >
     <app-wizard-sidebar-layout>
       <div step class="form-container">
-        <app-form-step-description
-          [content]="activityContent$ | async"
-          [stepDescriptionId]="1"
-        ></app-form-step-description>
+        <app-title-with-content
+          [title]="'labels.wizard.topics' | translate"
+          [content]="
+            (activityContent$ | async)?.stepDescriptions?.[1]?.description || ''
+          "
+        >
+        </app-title-with-content>
 
         <app-topics-form
           #stepTwo
@@ -83,10 +89,13 @@
   >
     <app-wizard-sidebar-layout>
       <div step class="form-container">
-        <app-form-step-description
-          [content]="activityContent$ | async"
-          [stepDescriptionId]="2"
-        ></app-form-step-description>
+        <app-title-with-content
+          [title]="'labels.wizard.externalLinks' | translate"
+          [content]="
+            (activityContent$ | async)?.stepDescriptions?.[2]?.description || ''
+          "
+        >
+        </app-title-with-content>
 
         <app-external-links-form
           #stepThree

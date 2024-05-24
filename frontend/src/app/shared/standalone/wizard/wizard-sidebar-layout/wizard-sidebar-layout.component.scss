@@ -1,0 +1,22 @@
+@use 'palette' as *;
+@use 'theme' as *;
+
+.layout {
+  height: 100%;
+  .content {
+    width: 100%;
+    max-width: 110rem;
+    margin: 0rem auto;
+    padding-block: $spacing-8;
+    padding-inline: $spacing-8;
+  }
+}
+
+@media screen and (min-width: $breakpoint-md) {
+  .layout {
+    margin: 0rem auto;
+    max-width: none;
+    display: grid;
+    grid-template-columns: 3fr minmax(400px, 1fr);
+  }
+}

@@ -4,11 +4,6 @@
 form {
   display: flex;
   flex-direction: column;
-  margin: 2em;
-}
-
-.wysiwyg-form-field {
-  margin-bottom: $spacing-4;
 }
 
 .char-count {
@@ -37,6 +32,11 @@ form {
   gap: 2em;
   flex-direction: column;
   margin-bottom: $spacing-4;
+}
+
+.description {
+  font-weight: bold;
+  margin-bottom: $spacing-2;
 }
 
 @media screen and (min-width: $breakpoint-sm) {

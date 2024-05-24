@@ -21,9 +21,10 @@ import { ActionsComponent } from './components/actions/actions.component';
 import { MatButtonModule } from '@angular/material/button';
 import { StateInfoComponent } from './components/state-info/state-info.component';
 import { ImagesFormComponent } from './components/images-form/images-form.component';
-import { WizardLayoutComponent } from './components/wizard-layout/wizard-layout.component';
 import { TopicsFormComponent } from './components/topics-form/topics-form.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
+import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,6 @@ import { MatRadioModule } from '@angular/material/radio';
     ActionsComponent,
     StateInfoComponent,
     ImagesFormComponent,
-    WizardLayoutComponent,
     TopicsFormComponent
   ],
   imports: [
@@ -54,7 +54,9 @@ import { MatRadioModule } from '@angular/material/radio';
     MatIconModule,
     MatSelectModule,
     MatButtonModule,
-    MatRadioModule
+    MatRadioModule,
+    TitleWithContentComponent,
+    WizardSidebarLayoutComponent
   ]
 })
 export class DanModule {}

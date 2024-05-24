@@ -32,6 +32,7 @@ import { durationValidator } from 'src/app/shared/components/validator/duration.
 import { danPeriodValidator } from 'src/app/shared/components/validator/danPeriod.validator';
 import { DateTime } from 'luxon';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
+import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
 
 @Component({
   selector: 'app-wizard',
@@ -50,6 +51,7 @@ export class WizardComponent implements OnDestroy {
     completed_message?: string;
     period_hint?: string;
   } | null = null;
+  public danContent$ = this.directusContentService.danContent$;
 
   public activityStepState$ = this.activityService.activityUpdateStateData$;
 
@@ -82,6 +84,7 @@ export class WizardComponent implements OnDestroy {
     private route: ActivatedRoute,
     private activityService: ActivityService,
     private directus: DirectusService,
+    private directusContentService: DirectusContentService,
     private loading: LoadingService,
     private translate: TranslateService,
     private geoService: GeoCoordinateLookupService,
@@ -90,6 +93,7 @@ export class WizardComponent implements OnDestroy {
     public dzService: DropzoneService,
     breakpointObserver: BreakpointObserver
   ) {
+    this.directusContentService.getDanTranslations();
     this.step1Form = fb.group({
       masterData: fb.group({
         name: fb.control('', [Validators.required]),
