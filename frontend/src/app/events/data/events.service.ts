@@ -126,7 +126,6 @@ export class EventsService {
   }
 
   loadAvailableEvents(month: DateTime, cb?: () => void): void {
-    console.log('LOAD EVENTS', month);
     this.eventsApi
       .getDates(month)
       .pipe(take(1))
@@ -167,8 +166,6 @@ export class EventsService {
       const nextPage = this.nextPage + 1;
       const hasItemsLeft = total - itemsPerPage * nextPage > 0;
       if (hasItemsLeft) {
-        console.log('LOAD MORE');
-
         this.nextPage = nextPage;
         const filters = this.getFilters();
         this.searchFilters.next(filters);
@@ -202,7 +199,6 @@ export class EventsService {
 
   setFilters() {
     const filters = this.getFilters();
-    console.log('SET FILTERS', filters);
     this.searchFilters.next(filters);
   }
 

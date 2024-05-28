@@ -22,7 +22,6 @@ export function durationValidator(
     const startDateValue = control.parent?.get(startDateName)
       ?.value as DateTime;
     if (!startDateValue || !endDateValue) return null;
-    console.log('END', endDateValue);
     const duration = endDateValue.diff(startDateValue, unit).as(unit);
     let error = null;
     const normalizedUnit = unit.endsWith('s') ? unit.slice(0, -1) : unit;
@@ -35,7 +34,6 @@ export function durationValidator(
       duration > maxDuration
         ? { invalidDuration: { duration: maxDurationText } }
         : error;
-    console.log('Error', error);
 
     return error;
   };

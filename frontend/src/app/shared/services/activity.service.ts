@@ -11,6 +11,8 @@ import { ImageType } from '../models/image-type';
 import { StepState } from '../../sign-up/models/step-state';
 import { FeedbackService } from '../components/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
+import { FeatureService } from '../components/feature/feature.service';
+import { DateTime } from 'luxon';
 
 const REQUEST_BASE_URL = environment.apiUrl + '/organisations';
 
@@ -29,7 +31,8 @@ export class ActivityService {
     private authService: AuthService,
     private router: Router,
     private feedback: FeedbackService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private featureService: FeatureService
   ) {}
 
   async getActivity(orgId: string, randomUniqueId: string, dan = false) {
@@ -212,5 +215,22 @@ export class ActivityService {
       console.error('createError', e);
       return;
     }
+  }
+
+  isInDanPeriod(start: string | null, end: string | null): boolean {
+    if (!start || !end) return false;
+
+    const endDateValue = DateTime.fromISO(end);
+    const startDateValue = DateTime.fromISO(start);
+
+    const feature = this.featureService.getFeature('dan-range');
+
+    if (!feature || !feature.start || !feature.end) return false;
+    const featureStart = DateTime.fromISO(feature.start);
+    const featureEnd = DateTime.fromISO(feature.end);
+    const inDanPeriod =
+      featureStart <= endDateValue && featureEnd >= startDateValue;
+
+    return inDanPeriod;
   }
 }

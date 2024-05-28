@@ -10,4 +10,5 @@ export class AlertComponent {
   @Input() showIcon = false;
   @Input() bgIcon = '';
   @Input() fgIcon = '';
+  @Input() color = '#dd1367';
 }

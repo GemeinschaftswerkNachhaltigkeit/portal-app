@@ -34,6 +34,10 @@ form {
   }
 }
 
+.error-wrapper {
+  margin-bottom: $spacing-8;
+}
+
 .file-uploads {
   display: flex;
   gap: 2em;

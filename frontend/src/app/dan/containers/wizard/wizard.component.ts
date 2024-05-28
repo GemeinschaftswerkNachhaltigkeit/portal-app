@@ -340,7 +340,6 @@ export class WizardComponent implements OnDestroy {
   }
 
   saveActivity(activityWIP: ActivityWIP, stepKey: string) {
-    console.log('save', activityWIP);
     if (
       this.enableAutosave &&
       this.orgId &&

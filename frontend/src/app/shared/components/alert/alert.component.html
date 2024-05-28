@@ -1,13 +1,11 @@
-<div class="no-data mat-elevation-z8">
+<div class="no-data mat-elevation-z8" [style]="{ 'border-color': color }">
   <div class="icon-wrapper" *ngIf="showIcon">
     <div class="bg-icon">
       <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
     </div>
 
-    <div class="fg-icon">
-      <mat-icon class="material-icons-outlined" color="accent">{{
-        fgIcon
-      }}</mat-icon>
+    <div class="fg-icon" [style]="{ color: color }">
+      <mat-icon class="material-icons-outlined">{{ fgIcon }}</mat-icon>
     </div>
   </div>
   <div class="msg">

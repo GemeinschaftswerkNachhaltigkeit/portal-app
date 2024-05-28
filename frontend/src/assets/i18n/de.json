@@ -54,6 +54,7 @@
   },
   "forms": {
     "labels": {
+      "asDanAction": "Ja, bitte als DAN Aktion veröffentlichen",
       "onlyNoCoordinates": "Nur Organisationen ohne Standort",
       "expireDate": "Ablaufdatum",
       "query": "Was",
@@ -234,6 +235,7 @@
     "description": "Möchtest du die Aktion wirklich ausführen? Du kannst die Aktion im Anschluss nicht mehr rückgängig machen!"
   },
   "dan": {
+    "titles": {},
     "texts": {
       "wizard.period": "Achtung! Bitte erstelle nur Aktionen innerhalb des Aktionszeitraums",
       "wizard.about": "Trage hier die wichtigsten Informationen zu deiner Aktion im Rahmen der Deutschen Aktionstage Nachhaltigkeit ein.",
@@ -245,9 +247,11 @@
   },
   "events": {
     "titles": {
-      "addLoginModal": "Veranstaltung hinzufügen"
+      "addLoginModal": "Veranstaltung hinzufügen",
+      "inDanPeriod": "Veranstalung als DAN Aktion veröffentlichen?"
     },
     "texts": {
+      "wizard.inDanPeriod": "Der Zeitraum Iher Veranstaltung liegt im diesjährigen DAN Zeitraum. Möchten Sie die Veranstaltung als DAN Aktion veröffentlichen?",
       "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen.",
       "wizard.description": "Erkläre hier deine Veranstaltung und beschreibe wie man mitmachen kann."
     }

@@ -1,10 +1,5 @@
 export enum ActivityType {
   /**
-   * Netzwerk
-   */
-  NETWORK = 'NETWORK',
-
-  /**
    * Veranstaltung
    */
   EVENT = 'EVENT',
@@ -12,10 +7,5 @@ export enum ActivityType {
   /**
    * DAN
    */
-  DAN = 'DAN',
-
-  /**
-   * Sonstiges
-   */
-  OTHER = 'OTHER'
+  DAN = 'DAN'
 }

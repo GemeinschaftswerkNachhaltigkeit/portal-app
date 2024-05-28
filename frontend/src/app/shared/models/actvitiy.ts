@@ -3,6 +3,7 @@ import LocationData from 'src/app/shared/models/location-data';
 import { Contact } from 'src/app/shared/models/contact';
 import { SocialMediaContact } from 'src/app/shared/models/social-media-contact';
 import { ActivityType } from './activity-type';
+import { SpecialActivityType } from './special-activity-type';
 
 type Activity = {
   id?: number;
@@ -11,6 +12,7 @@ type Activity = {
   sustainableDevelopmentGoals?: number[];
   thematicFocus?: ThematicFocus[];
   activityType?: ActivityType;
+  specialType?: SpecialActivityType;
   description?: string;
   impactArea?: string;
   logo?: string;

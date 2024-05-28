@@ -112,7 +112,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   handleToday(): void {
     const today = DateTime.now().startOf('day');
     this.eventsService.loadAvailableEvents(today, () => {
-      console.log('CB');
       this.selected = today;
       this.eventsService.search({ startDate: this.selected.toISO() || '' });
     });

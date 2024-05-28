@@ -100,9 +100,33 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    <div class="error-wrapper" *ngIf="inDanPeriod">
+      <app-alert
+        color="#009ee3"
+        [title]="'events.titles.inDanPeriod' | translate"
+        [showIcon]="true"
+        bgIcon="eco"
+        fgIcon="check"
+      >
+        <div>
+          {{ 'events.texts.wizard.inDanPeriod' | translate }}
+        </div>
+        <div class="date-checkbox">
+          <mat-checkbox matInput formControlName="isDan">
+            <span>
+              {{ 'forms.labels.asDanAction' | translate }}
+            </span>
+          </mat-checkbox>
+        </div>
+      </app-alert>
+      <app-spinner
+        forId="load-coords"
+        [noPadding]="true"
+        [small]="true"
+      ></app-spinner>
+    </div>
   </div>
-
-  <mat-date-range-picker #picker></mat-date-range-picker>
 
   <!-- register url -->
 

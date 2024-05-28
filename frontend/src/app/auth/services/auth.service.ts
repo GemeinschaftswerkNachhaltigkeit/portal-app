@@ -179,7 +179,7 @@ export class AuthService {
                 // );
                 return Promise.resolve();
               } else {
-                console.log('Unhandled error');
+                console.log('Unhandled error - Log out');
                 this.oauthService.logOut(true);
               }
 

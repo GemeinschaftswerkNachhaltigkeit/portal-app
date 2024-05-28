@@ -13,7 +13,6 @@ export class FormFieldErrorComponent {
   @Input() translationParams = {};
 
   getParams(error?: ValidationErrors | null) {
-    console.log('Field', error);
     return Object.keys(this.translationParams).length
       ? this.translationParams
       : error;
