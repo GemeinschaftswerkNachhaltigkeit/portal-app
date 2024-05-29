@@ -53,6 +53,10 @@ export class DanActivitiesComponent implements OnInit {
     this.actiFacade.updateActivity(uuid, true);
   }
 
+  copyHandler(uuid?: number): void {
+    this.actiFacade.copyActivity(uuid, true);
+  }
+
   deleteWipHandler(uuid?: string): void {
     this.actiFacade.deleteActivityWip(uuid, true);
   }

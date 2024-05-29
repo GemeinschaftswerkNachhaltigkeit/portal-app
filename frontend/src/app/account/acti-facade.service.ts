@@ -144,6 +144,16 @@ export class ActiFacadeService {
       });
   }
 
+  copyActivity(id?: number, dan = false) {
+    const user = this.auth.getUser();
+    this.activitiesApi
+      .copyActivity(user, id, dan)
+      .pipe(take(1))
+      .subscribe({
+        next: (ids) => this.openActivityWizard(ids, dan, true)
+      });
+  }
+
   deleteActivity(id?: number, dan = false): void {
     const ref = this.confirm.open({
       title: this.translate.instant(

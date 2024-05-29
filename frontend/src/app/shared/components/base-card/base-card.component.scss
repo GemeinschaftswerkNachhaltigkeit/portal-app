@@ -72,10 +72,10 @@ $text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
     position: absolute;
     left: 8rem;
     right: auto;
-    top: $spacing-14;
+    top: $spacing-10;
     z-index: $z3;
     align-self: center;
-    margin-left: -16px;
+    margin-left: -10px;
   }
 
   .logo-column {

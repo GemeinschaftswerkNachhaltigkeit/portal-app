@@ -48,6 +48,10 @@ export class ActivitiesComponent implements OnInit {
     this.actiFacade.updateActivity(uuid);
   }
 
+  copyHandler(uuid?: number): void {
+    this.actiFacade.copyActivity(uuid, true);
+  }
+
   deleteWipHandler(uuid?: string): void {
     this.actiFacade.deleteActivityWip(uuid);
   }

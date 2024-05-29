@@ -24,6 +24,7 @@ export class ActionComponent implements OnInit {
   @Input() small? = false;
   @Input() toggle? = false;
   @Input() toggleValue? = false;
+  @Input() tooltip = '';
   @Output() clicked = new EventEmitter();
   @HostBinding('class.full') isFull = false;
 

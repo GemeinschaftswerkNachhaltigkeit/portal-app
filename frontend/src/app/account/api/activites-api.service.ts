@@ -106,4 +106,29 @@ export class ActivitesApiService {
       }))
     );
   }
+
+  copyActivity(
+    user?: User,
+    activityId?: number,
+    dan = false
+  ): Observable<ActivityIds | null> {
+    let orgaIdOfUser = user?.orgId;
+    if (!orgaIdOfUser) {
+      if (!dan || !activityId) {
+        return of(null);
+      } else {
+        orgaIdOfUser = environment.danId;
+      }
+    }
+    let endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/activities/${activityId}/copy`;
+    if (dan) {
+      endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dans/${activityId}/copy`;
+    }
+    return this.http.put<ActivityWIP>(endpoint, {}).pipe(
+      map((activityWIP: ActivityWIP) => ({
+        activityId: activityWIP.randomUniqueId,
+        orgaId: orgaIdOfUser
+      }))
+    );
+  }
 }

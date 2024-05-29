@@ -187,15 +187,20 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
 
   checkDanPeriod() {
     if (this.activityFormGroup) {
+      this.isDanPeriod();
       this.activityFormGroup?.valueChanges
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(() => {
-          this.inDanPeriod = this.activityService.isInDanPeriod(
-            this.activityFormGroup.get('start')?.value,
-            this.activityFormGroup.get('end')?.value
-          );
+          this.isDanPeriod();
         });
     }
+  }
+
+  private isDanPeriod(): void {
+    this.inDanPeriod = this.activityService.isInDanPeriod(
+      this.activityFormGroup.get('start')?.value,
+      this.activityFormGroup.get('end')?.value
+    );
   }
 
   handleIsPermanent(isPermanent: boolean): void {

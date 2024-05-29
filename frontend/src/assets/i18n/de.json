@@ -170,6 +170,9 @@
     "private": "Privat",
     "new": "Neu",
     "for": "für",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "copy": "Kopieren",
     "dateUnits": {
       "years": "Jahre",
       "quarters": "Quartale",

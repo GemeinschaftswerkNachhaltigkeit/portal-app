@@ -16,6 +16,7 @@
 </ng-container>
 <ng-container *ngIf="onlyIcon">
   <button
+    [matTooltip]="tooltip"
     mat-icon-button
     (click)="clickHandler()"
     [color]="getColor()"

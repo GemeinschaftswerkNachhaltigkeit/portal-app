@@ -35,6 +35,7 @@
       </app-activity-subscription-action>
     </ng-container>
     <ng-container *ngIf="showActions">
+      <ng-content select="[more-actions]"></ng-content>
       <app-action
         *ngIf="toggleInitiatiorVisible"
         [onlyIcon]="true"
@@ -53,12 +54,14 @@
         *ngIf="editVisible"
         [onlyIcon]="true"
         [icon]="'edit'"
+        [tooltip]="'labels.edit' | translate"
         (clicked)="editHandler()"
       ></app-action>
       <app-action
         *ngIf="deleteVisible"
         [onlyIcon]="true"
         [icon]="'delete'"
+        [tooltip]="'labels.delete' | translate"
         (clicked)="deleteHandler()"
       ></app-action>
     </ng-container>

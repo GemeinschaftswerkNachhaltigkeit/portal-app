@@ -87,7 +87,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { UploadImageComponent } from './components/form/upload-image/upload-image.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
-import { WizardSidebarLayoutComponent } from './standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';

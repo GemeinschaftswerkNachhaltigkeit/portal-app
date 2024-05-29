@@ -33,7 +33,6 @@ import { danPeriodValidator } from 'src/app/shared/components/validator/danPerio
 import { DateTime } from 'luxon';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
-import { SocialMediaContact } from 'src/app/shared/models/social-media-contact';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 
 @Component({
