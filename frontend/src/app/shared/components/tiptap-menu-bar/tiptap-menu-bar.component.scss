@@ -3,7 +3,7 @@
 @use '@angular/material' as mat;
 
 .wysiwig-toolbar {
-  border: 1px solid mat.get-color-from-palette($wpgwn-app-primary, 500);
+  border: 1px solid mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   box-sizing: border-box;
   padding: 16px 5px !important;
   //border-radius: 4px;
@@ -39,13 +39,13 @@
     //  margin-right: 15px;
 
     &:hover {
-      color: mat.get-color-from-palette($wpgwn-app-primary, 500) !important;
+      color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500) !important;
     }
   }
 }
 
 .ng-invalid {
   .wysiwig-toolbar {
-    border-color: mat.get-color-from-palette($wpgwn-app-warn, 500);
+    border-color: mat.m2-get-color-from-palette($wpgwn-app-warn, 500);
   }
 }

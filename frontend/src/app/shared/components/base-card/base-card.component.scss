@@ -5,7 +5,7 @@
 // Must be px fixed as the design is created for a specific width
 $card-width: fit-content;
 $card-height: 300px;
-$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+$text-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
 
 .card {
   width: 100%;

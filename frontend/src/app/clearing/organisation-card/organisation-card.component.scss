@@ -2,7 +2,7 @@
 @use 'palette' as *;
 @use '@angular/material' as mat;
 
-$text-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+$text-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
 
 :host {
   height: 100%;

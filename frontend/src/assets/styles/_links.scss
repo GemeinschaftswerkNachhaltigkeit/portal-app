@@ -4,12 +4,12 @@
 
 a,
 a:hover {
-  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   cursor: pointer;
 }
 a.accent {
   text-decoration: none;
-  color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
 }
 a.accent:hover {
   text-decoration: underline;

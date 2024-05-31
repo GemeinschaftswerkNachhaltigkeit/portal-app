@@ -58,40 +58,40 @@
   font-weight: 900;
 }
 
-$wpgwn-app-typography: mat.define-typography-config(
+$wpgwn-app-typography: mat.m2-define-typography-config(
   $font-family: 'AzeretMono',
 
   $body-1:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-family: Verdana,
       $font-size: 1.4rem,
       $line-height: 24px
     ),
   $body-2:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-family: Verdana,
       $font-size: 1.4rem,
       $line-height: 24px
     ),
   $button:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-size: 1.4rem,
       $line-height: 1.4rem
     ),
   $headline-1:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-size: 3.2rem,
       $line-height: 150%,
       $font-weight: 700
     ),
   $headline-2:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-size: 2.4rem,
       $line-height: 150%,
       $font-weight: 700
     ),
   $subtitle-1:
-    mat.define-typography-level(
+    mat.m2-define-typography-level(
       $font-size: 1.6rem,
       $line-height: 150%,
       $font-weight: 700
@@ -102,7 +102,7 @@ $wpgwn-app-typography: mat.define-typography-config(
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$wpgwn-app-theme: mat.define-light-theme(
+$wpgwn-app-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $wpgwn-app-primary,
@@ -137,9 +137,9 @@ body {
 }
 body {
   margin: 0;
-  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   background-color: $background;
-  //font-family: mat.font-family($wpgwn-app-typography);/*font-family: Roboto, "Helvetica Neue", sans-serif;*/
+  //font-family: mat.font-family($wpgwn-app-typography);__<<ngM2ThemingMigrationEscapedComment1>>__
 }
 html {
   font-size: 62.5%; //.1rem === 1px and 1rem === 10px
@@ -182,7 +182,7 @@ h6 {
   .mdc-notched-outline__trailing,
   .mdc-notched-outline__notch {
     border-radius: 0 !important;
-    border-color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+    border-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   }
 }
 .no-sub .mat-mdc-form-field-subscript-wrapper {
@@ -216,7 +216,7 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
   color: $blue-navy;
 
   &.mat-accent {
-    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
   }
 }
 
@@ -285,26 +285,26 @@ div.mat-paginator-page-size {
   text-transform: uppercase;
 }
 .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   background: white;
 
   &.mat-accent {
-    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
     .mat-form-field-outline-start,
     .mat-form-field-outline-gap,
     .mat-form-field-outline-end {
-      color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+      color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
     }
   }
 }
 .mat-form-field-appearance-outline.mat-accent .mat-form-field-outline {
-  color: mat.get-color-from-palette($wpgwn-app-primary, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
 
-  color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+  color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
   .mat-form-field-outline-start,
   .mat-form-field-outline-gap,
   .mat-form-field-outline-end {
-    color: mat.get-color-from-palette($wpgwn-app-accent, 500);
+    color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
     background: white;
   }
 }

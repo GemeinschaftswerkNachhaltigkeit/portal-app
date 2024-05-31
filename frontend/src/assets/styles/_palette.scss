@@ -25,7 +25,7 @@ $gray: #6b7280;
 $gray-dark: #374151;
 $background: #fafafa;
 
-$magenta-palette: mat.define-palette(
+$magenta-palette: mat.m2-define-palette(
   (
     50: #fbe3ed,
     100: #f5b8d1,
@@ -59,7 +59,7 @@ $magenta-palette: mat.define-palette(
     )
   )
 );
-$orange-palette: mat.define-palette(
+$orange-palette: mat.m2-define-palette(
   (
     50: #ffede5,
     100: #fed2be,
@@ -93,7 +93,7 @@ $orange-palette: mat.define-palette(
     )
   )
 );
-$yellow-palette: mat.define-palette(
+$yellow-palette: mat.m2-define-palette(
   (
     50: #feffe0,
     100: #fcfeb3,
@@ -128,7 +128,7 @@ $yellow-palette: mat.define-palette(
   )
 );
 
-$bordeauxe-palette: mat.define-palette(
+$bordeauxe-palette: mat.m2-define-palette(
   (
     50: #f4e3e8,
     100: #e3bac6,
@@ -162,7 +162,7 @@ $bordeauxe-palette: mat.define-palette(
     )
   )
 );
-$blue-navy-palette: mat.define-palette(
+$blue-navy-palette: mat.m2-define-palette(
   (
     50: #e3e9ed,
     100: #bac8d2,
@@ -196,7 +196,7 @@ $blue-navy-palette: mat.define-palette(
     )
   )
 );
-$blue-light-palette: mat.define-palette(
+$blue-light-palette: mat.m2-define-palette(
   (
     50: #f9ffff,
     100: #f1ffff,
@@ -230,7 +230,7 @@ $blue-light-palette: mat.define-palette(
     )
   )
 );
-$green-palette: mat.define-palette(
+$green-palette: mat.m2-define-palette(
   (
     50: #eaf3e7,
     100: #c9e2c3,
@@ -265,7 +265,7 @@ $green-palette: mat.define-palette(
   )
 );
 //#fcba03
-$orange-light-palette: mat.define-palette(
+$orange-light-palette: mat.m2-define-palette(
   (
     50: #fff7e1,
     100: #feeab3,
@@ -322,8 +322,8 @@ $wpgwn-app-warn: $bordeauxe-palette; // mat.define-palette(mat.$red-palette);
     )
 {
   .bg-#{$colorName} {
-    background-color: mat.get-color-from-palette($palette, default);
-    color: mat.get-color-from-palette(
+    background-color: mat.m2-get-color-from-palette($palette, default);
+    color: mat.m2-get-color-from-palette(
       $palette,
       default-contrast
     ); //mat.get-color-from-palette($palette, '500-contrast') //mat.get-color-from-palette($palette, '500-contrast');
@@ -344,12 +344,12 @@ $wpgwn-app-warn: $bordeauxe-palette; // mat.define-palette(mat.$red-palette);
     )
 {
   .mat-button.mat-#{$colorName} {
-    color: mat.get-color-from-palette($palette, default);
+    color: mat.m2-get-color-from-palette($palette, default);
   }
   .mat-flat-button.mat-#{$colorName},
   .mat-raised-button.mat-#{$colorName} {
-    background-color: mat.get-color-from-palette($palette, default);
-    color: mat.get-color-from-palette($palette, default-contrast);
+    background-color: mat.m2-get-color-from-palette($palette, default);
+    color: mat.m2-get-color-from-palette($palette, default-contrast);
   }
   .mat-flat-button.mat-button-disabled.mat-#{$colorName},
   .mat-raised-button.mat-button-disabled.mat-#{$colorName} {
