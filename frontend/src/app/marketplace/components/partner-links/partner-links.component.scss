@@ -6,9 +6,20 @@
   padding: $spacing-10 0;
   position: relative;
 
+
+  swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  swiper-slide {
+    width: 280px
+  }
+
   .slide-wrapper {
     display: block;
     height: 200px;
+    width: 100%;
     background-color: white;
     padding: $spacing-4;
     margin: $spacing-4 0;
@@ -25,7 +36,6 @@
         object-fit: contain;
       }
     }
-    // width: 200px;
   }
 
   .no-slider {

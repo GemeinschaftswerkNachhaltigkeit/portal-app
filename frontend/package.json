@@ -51,7 +51,7 @@
     "ngx-tiptap": "10.1.0",
     "query-string": "9.0.0",
     "rxjs": "7.8.1",
-    "swiper": "8.4.7",
+    "swiper": "11.1.4",
     "tslib": "2.6.2",
     "uuid": "9.0.1",
     "zone.js": "0.14.6"

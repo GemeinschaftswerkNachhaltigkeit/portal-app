@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OffersFormComponent } from './containers/offers-form/offers-form.component';
 import { MarketplcaeRoutingModule } from './marketplace-routing.module';
@@ -25,7 +25,6 @@ import { MarketplaceItemDetailsComponent } from './containers/marketplace-item-d
 import { MarketplaceItemDetailsLayoutComponent } from './components/marketplace-item-details-layout/marketplace-item-details-layout.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { SwiperModule } from 'swiper/angular';
 import { PartnerLinksComponent } from './components/partner-links/partner-links.component';
 import { AddBannerComponent } from './components/add-banner/add-banner.component';
 import { AuthModule } from '../auth/auth.module';
@@ -71,9 +70,9 @@ import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
     MatSelectModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    SwiperModule,
     MatIconModule
   ],
-  exports: [CardComponent]
+  exports: [CardComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]  
 })
 export class MarketplaceModule {}

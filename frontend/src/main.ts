@@ -3,6 +3,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment, overrideEnvironment } from './environments/environment';
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
 
 (async () => {
   try {

@@ -10,45 +10,21 @@
       }}</app-heading>
     </div>
 
-    <div *ngIf="isSlider(); else noSlider">
-      <ng-container #outlet [ngTemplateOutlet]="content"> </ng-container>
-      <ng-template #content>
-        <swiper
-          #swiper
-          [slidesPerView]="slides"
-          [slidesPerGroup]="slides"
-          [centeredSlides]="true"
-          [spaceBetween]="12"
-          [loop]="true"
-          [loopFillGroupWithBlank]="false"
-        >
-          <ng-container *ngFor="let link of filtered">
-            <ng-template swiperSlide
-              ><a class="slide-wrapper" target="_blank" [href]="link.url">
-                <div class="image-wrapper">
-                  <img [src]="link.logo" alt="" />
-                </div>
-                <h5>{{ link.title }}</h5>
-              </a></ng-template
-            >
-          </ng-container>
-        </swiper>
-      </ng-template>
-    </div>
-
-    <ng-template #noSlider>
-      <div class="no-slider">
-        <ng-container *ngFor="let link of filtered">
+    <swiper-container #swiper slides-per-view="auto" loop="true" space-between="12" loop-fill-group-with-blank="true" >
+      <ng-container *ngFor="let link of filtered">
+        <swiper-slide >
           <a class="slide-wrapper" target="_blank" [href]="link.url">
             <div class="image-wrapper">
               <img [src]="link.logo" alt="" />
             </div>
             <h5>{{ link.title }}</h5>
           </a>
-        </ng-container>
-      </div>
-    </ng-template>
-    <div class="buttons" *ngIf="isSlider()">
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+
+    
+    <div class="buttons" *ngIf="filtered.length">
       <button class="button prev" type="button" (click)="slidePrev()">
         <mat-icon>chevron_left</mat-icon>
       </button>
