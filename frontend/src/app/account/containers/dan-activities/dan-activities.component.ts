@@ -17,7 +17,7 @@ import { DanHelpModalComponent } from './dan-help-modal/dan-help-modal.component
   styleUrls: ['./dan-activities.component.scss']
 })
 export class DanActivitiesComponent implements OnInit {
-  readonly danLimit = 50;
+  readonly danLimit = 100;
 
   loading$ = this.loader.isLoading$();
   activities$ = this.actiFacade.activities$;
