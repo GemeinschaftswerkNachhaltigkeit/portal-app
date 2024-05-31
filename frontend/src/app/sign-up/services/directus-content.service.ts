@@ -1,5 +1,5 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ReplaySubject } from 'rxjs';
 import { DirectusService } from 'src/app/shared/services/directus.service';
@@ -23,6 +23,15 @@ export type DanContent = {
   advantages: string;
   completedMessage: string;
   stepDescriptions?: { description: string }[];
+};
+
+export type SearchContent = {
+  titel_line_1: string;
+  titel_line_2: string;
+  contet: string;
+  organisation_info_text: string;
+  event_info_text: string;
+  markteplace_info_text: string;
 };
 
 export type ImportOrgContent = {
@@ -55,6 +64,8 @@ export class DirectusContentService {
   contactInviteSubject = new ReplaySubject<ContactInviteContent | null>();
   contactInvite$ = this.contactInviteSubject.asObservable();
 
+  searchContent = signal<SearchContent | null>(null);
+
   constructor(
     private translate: TranslateService,
     private directusService: DirectusService
@@ -63,6 +74,8 @@ export class DirectusContentService {
       this.getSignUpOrganisationtTranslations();
       this.getImportDescisionTranslations();
       this.getSignUpActivityTranslations();
+      this.getDanTranslations();
+      this.getSearchTranslations();
     });
   }
 
@@ -164,6 +177,21 @@ export class DirectusContentService {
         );
 
       this.danContentSubject.next(response);
+      return response;
+    } catch (e) {
+      console.error('loadError', e);
+      return;
+    }
+  }
+
+  public async getSearchTranslations() {
+    try {
+      const response =
+        await this.directusService.getContentItemForCurrentLang<SearchContent>(
+          'search_translations'
+        );
+
+      this.searchContent.set(response);
       return response;
     } catch (e) {
       console.error('loadError', e);

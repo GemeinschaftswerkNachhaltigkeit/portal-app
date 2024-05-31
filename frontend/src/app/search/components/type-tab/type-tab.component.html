@@ -1,1 +1,8 @@
-<button><ng-content></ng-content></button>
+<button class="tab">
+  <ng-content></ng-content>
+  @if (info()) {
+    <button class="info" (click)="handleInfoClick($event)">
+      <app-outlined-icon>help</app-outlined-icon>
+    </button>
+  }
+</button>
