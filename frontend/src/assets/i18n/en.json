@@ -53,9 +53,12 @@
   },
   "forms": {
     "labels": {
+      "danOption": {
+        "yes": "Yes, please also publish as an action",
+        "no": "No, please publish only as an event"
+      },
       "onlyNoCoordinates": "Only organisation without location",
       "expireDate": "Expire date",
-
       "query": "What",
       "location": "Where",
       "upload": "Select file",
@@ -222,10 +225,13 @@
   },
   "events": {
     "titles": {
+      "inDanPeriod": "Atomatically take part in the action days!",
       "addLoginModal": "Add event"
     },
     "texts": {
-      "addLoginModal": "Please log in to add an event."
+      "wizard.inDanPeriod": "The period of your event falls within the period of this year's <a href='{{url}}' target='_blank'>action days</a>. Would you like your event to be visible as an action as well? This means no extra work for you, just a tick in the box:",
+      "addLoginModal": "Please log in to add an event.",
+      "wizard.description": "Explain your event here and describe how people can take part."
     }
   },
   "account": {

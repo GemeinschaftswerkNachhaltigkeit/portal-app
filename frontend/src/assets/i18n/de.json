@@ -54,7 +54,10 @@
   },
   "forms": {
     "labels": {
-      "asDanAction": "Ja, bitte als DAN Aktion veröffentlichen",
+      "danOption": {
+        "yes": "Ja, bitte auch als Aktion veröffentlichen",
+        "no": "Nein, bitte nur als Veranstaltung veröffentlichen"
+      },
       "onlyNoCoordinates": "Nur Organisationen ohne Standort",
       "expireDate": "Ablaufdatum",
       "query": "Was",
@@ -251,10 +254,10 @@
   "events": {
     "titles": {
       "addLoginModal": "Veranstaltung hinzufügen",
-      "inDanPeriod": "Veranstalung als DAN Aktion veröffentlichen?"
+      "inDanPeriod": "Macht automatisch bei den Aktionstagen mit!"
     },
     "texts": {
-      "wizard.inDanPeriod": "Der Zeitraum Iher Veranstaltung liegt im diesjährigen DAN Zeitraum. Möchten Sie die Veranstaltung als DAN Aktion veröffentlichen?",
+      "wizard.inDanPeriod": "Der Zeitraum deiner Veranstaltung fällt in den Zeitraum der diesjährigen <a href='{{url}}' target='_blank'>Aktionstage</a> . Möchtet ihr, dass eure Veranstaltung ebenfalls als Aktion sichtbar wird? Das bedeutet keinen Mehraufwand für euch, sondern nur ein gesetztes Häkchen:",
       "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen.",
       "wizard.description": "Erkläre hier deine Veranstaltung und beschreibe wie man mitmachen kann."
     }

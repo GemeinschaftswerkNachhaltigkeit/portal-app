@@ -212,12 +212,28 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
 .mat-menu-item .mat-icon-no-color,
 .mat-menu-item[disabled] .mat-icon-no-color,
 .mat-mdc-radio-button .mdc-form-field,
+.mdc-label,
 .label {
   color: $blue-navy;
 
   &.mat-accent {
     color: mat.m2-get-color-from-palette($wpgwn-app-accent, 500);
   }
+}
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:not(:checked)
+  + .mdc-radio__background
+  div.mdc-radio__outer-circle {
+  border-color: $blue-navy;
+}
+
+.mdc-checkbox
+  .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not(
+    [data-indeterminate='true']
+  )
+  ~ div.mdc-checkbox__background {
+  border-color: $blue-navy;
 }
 
 .mdc-button {

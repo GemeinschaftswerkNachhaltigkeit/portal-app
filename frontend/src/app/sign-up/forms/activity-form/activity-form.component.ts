@@ -23,6 +23,7 @@ import { ImageType } from '../../../shared/models/image-type';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { SpecialActivityType } from 'src/app/shared/models/special-activity-type';
+import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 
 @Component({
   selector: 'app-activity-form',
@@ -35,6 +36,9 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
   activityFormGroup: FormGroup;
   unsubscribe$ = new Subject();
   inDanPeriod = false;
+  danPeriodParams = {
+    url: this.lpService.getDanUrl()
+  };
 
   @Input() activity: ActivityWIP | null = null;
   @Input() enableAutosave = true;
@@ -50,6 +54,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
   editor: Editor;
 
   constructor(
+    private lpService: LandingpageService,
     public dzService: DropzoneService,
     private _formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
@@ -74,7 +79,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
 
       start: _formBuilder.control('', [Validators.required]),
       end: _formBuilder.control('', [Validators.required]),
-      isDan: _formBuilder.control(false, []),
+      isDan: _formBuilder.control('DAN', []),
 
       permanent: _formBuilder.control(false, []),
       registerUrl: _formBuilder.control('', [
@@ -96,6 +101,9 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
 
     this.translateService.onLangChange.subscribe((event) => {
       this.changeDatePickerLang(event.lang);
+      this.danPeriodParams = {
+        url: this.lpService.getDanUrl()
+      };
     });
   }
 
@@ -112,7 +120,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
         description: this.wysiwygService.htmlDecode(this.activity.description),
         start: this.activity.period?.start,
         end: this.activity.period?.end,
-        isDan: this.activity.specialType === 'DAN',
+        isDan: this.activity.specialType || 'DAN',
         permanent: this.activity.period?.permanent,
         registerUrl: this.activity.registerUrl
       });
@@ -134,7 +142,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
     description: string;
     start: string;
     end: string;
-    isDan: boolean;
+    isDan: 'DAN' | 'EVENT';
     permanent: boolean;
     registerUrl: string;
   }) {
@@ -153,7 +161,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
           end: formVals.end,
           permanent: formVals?.permanent
         },
-        specialType: formVals.isDan ? SpecialActivityType.DAN : undefined,
+        specialType: formVals.isDan as SpecialActivityType,
         registerUrl: formVals.registerUrl
       });
     }
@@ -211,7 +219,7 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
       this.activityFormGroup.get('end')?.clearValidators();
       this.activityFormGroup.get('end')?.setValue('');
       this.activityFormGroup.get('end')?.disable();
-      this.activityFormGroup.get('isDan')?.setValue(false);
+      this.activityFormGroup.get('isDan')?.setValue('EVENT');
     } else {
       this.activityFormGroup.get('start')?.setValidators([Validators.required]);
       this.activityFormGroup.get('start')?.enable();

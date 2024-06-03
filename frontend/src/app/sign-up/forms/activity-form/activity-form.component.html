@@ -109,15 +109,25 @@
         bgIcon="eco"
         fgIcon="check"
       >
-        <div>
-          {{ 'events.texts.wizard.inDanPeriod' | translate }}
-        </div>
+        <div
+          [innerHTML]="
+            'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
+          "
+        ></div>
         <div class="date-checkbox">
-          <mat-checkbox matInput formControlName="isDan">
-            <span>
-              {{ 'forms.labels.asDanAction' | translate }}
-            </span>
-          </mat-checkbox>
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="isDan"
+          >
+            <div class="radio-options">
+              <mat-radio-button [value]="'DAN'">
+                {{ 'forms.labels.danOption.yes' | translate }}</mat-radio-button
+              >
+              <mat-radio-button [value]="'EVENT'">
+                {{ 'forms.labels.danOption.no' | translate }}</mat-radio-button
+              >
+            </div>
+          </mat-radio-group>
         </div>
       </app-alert>
       <app-spinner
