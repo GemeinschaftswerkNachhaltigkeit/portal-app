@@ -4,6 +4,7 @@
 :host {
   &[active='true'] {
     .tab {
+      height: 50px;
       font-weight: bold;
       box-shadow: 0 -2px 0 0 $magenta inset;
       &:hover {
