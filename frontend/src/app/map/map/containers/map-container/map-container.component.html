@@ -68,14 +68,17 @@
               [bookmarked]="subscription.activityIsSubcribed(result.id)"
               (cardClicked)="openCard(result)"
             >
-              <ng-container badge
-                ><app-initiator-badge
-                  *ngIf="utils.asOrga(result)?.initiator"
-                ></app-initiator-badge
-                ><app-project-sustainability-winner-badge
-                  *ngIf="utils.asOrga(result)?.projectSustainabilityWinner"
-                ></app-project-sustainability-winner-badge
-              ></ng-container>
+              @if (result.resultType === 'ORGANISATION') {
+                <app-orga-badges
+                  badge
+                  [organisation]="utils.asOrga(result)"
+                ></app-orga-badges>
+              } @else {
+                <app-event-badges
+                  badge
+                  [activity]="utils.asActivity(result)"
+                ></app-event-badges>
+              }
             </app-base-card>
           </div>
         </div>

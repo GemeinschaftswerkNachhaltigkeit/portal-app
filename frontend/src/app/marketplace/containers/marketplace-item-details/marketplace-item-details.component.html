@@ -23,11 +23,14 @@
         <div>
           <div class="createdAt">
             <div>{{ 'labels.publishedAt' | translate }}</div>
-            <div>{{ item.createdAt | date : 'dd.MM.yyyy' }}</div>
+            <div>{{ item.createdAt | date: 'dd.MM.yyyy' }}</div>
           </div>
           <div class="createdAt" *ngIf="item.endUntil">
             <div>{{ 'labels.availableUntil' | translate }}</div>
-            <div>{{ item.endUntil | date : 'dd.MM.yyyy' }}</div>
+            <div>{{ item.endUntil | date: 'dd.MM.yyyy' }}</div>
+          </div>
+          <div class="badge">
+            <app-event-badges [activity]="item"></app-event-badges>
           </div>
         </div>
       </section>

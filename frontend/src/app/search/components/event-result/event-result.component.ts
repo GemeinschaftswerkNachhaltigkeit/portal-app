@@ -5,11 +5,12 @@ import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
 
 @Component({
   selector: 'app-event-result',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, EventBadgesComponent],
   templateUrl: './event-result.component.html',
   styleUrl: './event-result.component.scss'
 })

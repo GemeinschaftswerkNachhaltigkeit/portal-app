@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfilePagesModule } from '../profile-pages.module';
 import { RouterModule } from '@angular/router';
+import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     ProfilePagesModule,
     ActivityProfileRoutingModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    EventBadgesComponent
   ]
 })
 export class ActivityProfileModule {}

@@ -1,7 +1,7 @@
 <a [routerLink]="['/organisations/', event.organisation?.id, event.id]">
   <div class="logo">
     @if (event.logo) {
-    <img [src]="logoUrl()" alt="organisation logo" />
+      <img [src]="logoUrl()" alt="organisation logo" />
     }
   </div>
   <div class="content">
@@ -9,6 +9,8 @@
       {{ 'activityType.' + event.activityType | translate }}
     </div>
     <h5>{{ event.name }}</h5>
+    <app-event-badges [activity]="event"></app-event-badges>
+
     <footer>
       <app-content-row
         [small]="true"

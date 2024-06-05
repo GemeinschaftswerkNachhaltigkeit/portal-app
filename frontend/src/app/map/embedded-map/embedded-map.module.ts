@@ -6,6 +6,7 @@ import { EmbeddedMapContainerComponent } from './containers/embedded-map-contain
 import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout/embedded-map-layout.component';
 import { EmbeddedDetailsCardComponent } from './containers/embedded-details-card/embedded-details-card.component';
 import { EmbeddedMapComponent } from './components/map/embedded-map.component';
+import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,11 @@ import { EmbeddedMapComponent } from './components/map/embedded-map.component';
     EmbeddedDetailsCardComponent,
     EmbeddedMapComponent
   ],
-  imports: [EmbeddedMapRoutingModule, SharedMapModule, CommonModule]
+  imports: [
+    EmbeddedMapRoutingModule,
+    SharedMapModule,
+    CommonModule,
+    OrgaBadgesComponent
+  ]
 })
 export class EmbeddedMapModule {}

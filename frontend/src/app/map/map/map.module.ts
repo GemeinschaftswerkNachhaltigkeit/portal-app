@@ -28,6 +28,8 @@ import {
   MAT_DATE_LOCALE
 } from '@angular/material/core';
 import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
+import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
+import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -64,7 +66,9 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatExpansionModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatLuxonDateModule
+    MatLuxonDateModule,
+    OrgaBadgesComponent,
+    EventBadgesComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

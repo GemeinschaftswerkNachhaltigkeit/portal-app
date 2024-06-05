@@ -66,12 +66,8 @@
           [subtitle]="'profile.titles.aboutUs' | translate"
           [info]="'organisationType.' + orga.organisationType | translate"
         >
-          <ng-container badge>
-            <app-initiator-badge *ngIf="orga?.initiator"></app-initiator-badge
-            ><app-project-sustainability-winner-badge
-              *ngIf="orga?.projectSustainabilityWinner"
-            ></app-project-sustainability-winner-badge>
-          </ng-container>
+          <app-orga-badges badge [organisation]="orga"></app-orga-badges>
+          ´
           <app-html-wrapper [html]="orga.description || ''"></app-html-wrapper>
         </app-section>
       </section>

@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
-import Organisation from '../../models/organisation';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-initiator-badge',
@@ -29,8 +31,8 @@ import Organisation from '../../models/organisation';
       <div class="icon"><app-outlined-icon>verified</app-outlined-icon></div>
       <div class="label">{{ 'labels.initiator' | translate }}</div>
     </div>
-  `
+  `,
+  standalone: true,
+  imports: [CommonModule, SharedModule, TranslateModule]
 })
-export class InitiatorBadgeComponent {
-  @Input() organisation?: Organisation;
-}
+export class InitiatorBadgeComponent {}

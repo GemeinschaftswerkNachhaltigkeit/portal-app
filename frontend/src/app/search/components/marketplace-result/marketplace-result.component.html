@@ -1,7 +1,7 @@
 <a [routerLink]="['/marketplace/search/', item.id]">
   <div class="logo">
     @if (item.image) {
-    <img [src]="imageUrl()" alt="organisation logo" />
+      <img [src]="imageUrl()" alt="organisation logo" />
     }
   </div>
   <div class="content">
@@ -9,6 +9,7 @@
       {{ getMarketplaceCategory(item) }}
     </div>
     <h5>{{ item.name }}</h5>
+    <app-event-badges [activity]="item"></app-event-badges>
     <p>{{ utils.excerpt(item.description) }}</p>
   </div>
 </a>

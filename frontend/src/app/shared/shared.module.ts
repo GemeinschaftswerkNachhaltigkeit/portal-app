@@ -70,12 +70,10 @@ import { BestPracticeCategoryFilterComponent } from './components/form/filters/b
 import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { InitiatorBadgeComponent } from './components/badges/initiator-badge.component';
 import { CategoryComponent } from './components/category/category.component';
 import { OfferSubscriptionActionComponent } from './components/subscription/containers/offer-subscription-action/offer-subscription-action.component';
 import { BestPracticeSubscriptionActionComponent } from './components/subscription/containers/best-practice-subscription-action/best-practice-subscription-action.component';
 import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
-import { ProjectSustainabilityWinnerBadgeComponent } from './components/badges/project-sustainability-winner-badge';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { NewBadgeComponent } from './components/new-badge/new-badge.component';
 import { HtmlWrapperComponent } from './components/html-wrapper/html-wrapper.component';
@@ -157,10 +155,8 @@ import { FormAdvantagesComponent } from './components/wizard/form-advatages/form
     FilterModalButtonComponent,
     OrderedFilterComponent,
     BreadcrumbComponent,
-    InitiatorBadgeComponent,
     CategoryComponent,
     ContactControlsComponent,
-    ProjectSustainabilityWinnerBadgeComponent,
     SpecialOrgasFilterComponent,
     NewBadgeComponent,
     HtmlWrapperComponent,
@@ -247,10 +243,8 @@ import { FormAdvantagesComponent } from './components/wizard/form-advatages/form
     CheckboxFilterComponent,
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
-    InitiatorBadgeComponent,
     CategoryComponent,
     ContactControlsComponent,
-    ProjectSustainabilityWinnerBadgeComponent,
     NewBadgeComponent,
     HtmlWrapperComponent,
     FeatureComponent,

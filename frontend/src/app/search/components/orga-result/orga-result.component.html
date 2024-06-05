@@ -1,7 +1,7 @@
 <a [routerLink]="['/organisations/', orga.id]">
   <div class="logo">
     @if (orga.logo) {
-    <img [src]="logoUrl()" alt="organisation logo" />
+      <img [src]="logoUrl()" alt="organisation logo" />
     }
   </div>
   <div class="content">
@@ -9,6 +9,7 @@
       {{ 'organisationType.' + orga.organisationType | translate }}
     </div>
     <h5>{{ orga.name }}</h5>
+    <app-orga-badges [organisation]="orga"></app-orga-badges>
     <p>{{ utils.excerpt(orga.description) }}</p>
     <footer>
       <app-content-row

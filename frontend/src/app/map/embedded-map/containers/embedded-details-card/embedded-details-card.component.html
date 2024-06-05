@@ -62,12 +62,9 @@
             <h3 class="title">{{ currentResult.name }}</h3>
             <p class="desc">{{ utils.excerpt(currentResult.description) }}</p>
             <div class="badge" *ngIf="card.isOrga(currentResult.resultType)">
-              <app-initiator-badge
-                *ngIf="utils.asOrga(currentResult)?.initiator"
-              ></app-initiator-badge
-              ><app-project-sustainability-winner-badge
-              *ngIf="utils.asOrga(currentResult)?.projectSustainabilityWinner"
-            ></app-project-sustainability-winner-badge>
+              <app-orga-badges
+                [organisation]="utils.asOrga(currentResult)"
+              ></app-orga-badges>
             </div>
           </div>
         </app-details-link>

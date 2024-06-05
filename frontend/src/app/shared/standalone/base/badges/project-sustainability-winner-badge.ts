@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
-import Organisation from '../../models/organisation';
-import { DirectusService } from '../../services/directus.service';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DirectusService } from 'src/app/shared/services/directus.service';
 
 @Component({
   selector: 'app-project-sustainability-winner-badge',
@@ -43,11 +45,11 @@ import { DirectusService } from '../../services/directus.service';
         {{ 'labels.projectSustainabilityWinner' | translate }}
       </div>
     </a>
-  `
+  `,
+  standalone: true,
+  imports: [CommonModule, SharedModule, TranslateModule]
 })
 export class ProjectSustainabilityWinnerBadgeComponent {
-  @Input() organisation?: Organisation;
-
   externalLinks$ = this.directus.externalLinks$;
 
   constructor(private directus: DirectusService) {}

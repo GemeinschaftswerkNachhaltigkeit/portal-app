@@ -3,7 +3,11 @@
     <div class="logo">
       <img [src]="logoUrl()" alt="logo" *ngIf="orga.logo" />
     </div>
+    <div class="badge">
+      <app-orga-badges [organisation]="orga"></app-orga-badges>
+    </div>
     <h3 class="title">{{ orga.name }}</h3>
+
     <div class="description">{{ utils.excerpt(orga.description) }}</div>
   </article>
   <footer>

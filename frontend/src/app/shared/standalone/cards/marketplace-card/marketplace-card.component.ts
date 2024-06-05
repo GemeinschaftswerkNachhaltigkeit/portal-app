@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MarketplaceItem } from '../../../models/marketplaceItem';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { TranslateService } from '@ngx-translate/core';
+import { EventBadgesComponent } from '../../base/badges/event-badges.component copy';
 
 export type CardData = {
   title: string;
@@ -17,7 +18,13 @@ export type CardData = {
 @Component({
   selector: 'app-marketplace-card',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, NgClass],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    NgClass,
+    EventBadgesComponent
+  ],
   templateUrl: './marketplace-card.component.html',
   styleUrl: './marketplace-card.component.scss'
 })

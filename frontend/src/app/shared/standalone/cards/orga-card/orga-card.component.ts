@@ -5,6 +5,7 @@ import Organisation from '../../../models/organisation';
 import { SharedModule } from '../../../shared.module';
 import { UtilsService } from '../../../services/utils.service';
 import { RouterModule } from '@angular/router';
+import { OrgaBadgesComponent } from '../../base/badges/orga-badges.component';
 
 export type CardData = {
   title: string;
@@ -15,7 +16,7 @@ export type CardData = {
 @Component({
   selector: 'app-orga-card',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, OrgaBadgesComponent],
   templateUrl: './orga-card.component.html',
   styleUrl: './orga-card.component.scss'
 })

@@ -6,12 +6,16 @@
     <div class="logo">
       <img [src]="logoUrl()" alt="logo" *ngIf="event.logo" />
     </div>
+
+    <div class="badge">
+      <app-event-badges [activity]="utils.asActivity(event)"></app-event-badges>
+    </div>
     @if (event.organisation?.id) {
-    <a
-      class="orga-link"
-      [routerLink]="['/organisations', event.organisation?.id]"
-      >{{ event.organisation?.name }}</a
-    >
+      <a
+        class="orga-link"
+        [routerLink]="['/organisations', event.organisation?.id]"
+        >{{ event.organisation?.name }}</a
+      >
     }
     <h3 class="title">{{ event.name }}</h3>
     <div class="description">{{ utils.excerpt(event.description) }}</div>

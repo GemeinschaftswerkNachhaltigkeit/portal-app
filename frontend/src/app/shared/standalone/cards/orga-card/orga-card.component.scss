@@ -21,7 +21,6 @@
     .logo {
       width: $spacing-22;
       height: $spacing-22;
-      margin-bottom: $spacing-6;
 
       img {
         width: 100%;
@@ -29,6 +28,14 @@
         object-fit: contain;
         border: 2px solid $gray-light;
       }
+    }
+
+    .badge {
+      height: $spacing-8;
+      margin-top: $spacing-2;
+      margin-bottom: $spacing-2;
+      display: flex;
+      align-items: center;
     }
 
     .title {

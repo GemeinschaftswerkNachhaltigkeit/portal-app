@@ -32,6 +32,7 @@ import { VisibilityControlsComponent } from './components/visibility-controls/vi
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
+import { EventBadgesComponent } from '../shared/standalone/base/badges/event-badges.component copy';
 
 @NgModule({
   declarations: [
@@ -70,9 +71,10 @@ import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
     MatSelectModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    EventBadgesComponent
   ],
   exports: [CardComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MarketplaceModule {}

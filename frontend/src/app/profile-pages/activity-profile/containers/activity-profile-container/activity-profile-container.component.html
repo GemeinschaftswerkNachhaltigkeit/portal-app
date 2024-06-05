@@ -74,6 +74,8 @@
           [info]="'activityType.' + activity.activityType | translate"
           [infoType]="'ACTIVITY'"
         >
+          <app-event-badges badge [activity]="activity"></app-event-badges>
+
           <app-html-wrapper
             [html]="activity.description || ''"
           ></app-html-wrapper>

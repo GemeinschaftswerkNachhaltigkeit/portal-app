@@ -13,6 +13,8 @@ export type Type = 'orga' | 'event' | 'marketplace';
   providedIn: 'root'
 })
 export class SearchService {
+  private readonly MAIN_RESULTS = 1;
+
   api = inject(SearchApiService);
   route = inject(ActivatedRoute);
   persistFilters = inject(PersistFiltersService);
@@ -45,8 +47,8 @@ export class SearchService {
   results = computed(() => {
     return this.pagedResults()?.content || [];
   });
-  mainResults = computed(() => this.results().slice(0, 3));
-  remainingResults = computed(() => this.results().slice(3));
+  mainResults = computed(() => this.results().slice(0, this.MAIN_RESULTS));
+  remainingResults = computed(() => this.results().slice(this.MAIN_RESULTS));
   searchValue = computed(() => (this.filters()['query'] as string) || '');
   activeType = computed(() => (this.filters()['type'] as Type) || '');
 

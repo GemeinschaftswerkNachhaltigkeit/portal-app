@@ -21,16 +21,15 @@
 
     .orga-link {
       display: block;
-      margin-bottom: $spacing-8;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      margin-bottom: $spacing-4;
     }
 
     .logo {
       width: $spacing-22;
       height: $spacing-22;
-      margin-bottom: $spacing-6;
 
       img {
         width: 100%;
@@ -38,6 +37,14 @@
         border: 2px solid $gray-light;
         object-fit: contain;
       }
+    }
+
+    .badge {
+      height: $spacing-8;
+      margin-top: $spacing-2;
+      margin-bottom: $spacing-2;
+      display: flex;
+      align-items: center;
     }
 
     .title {

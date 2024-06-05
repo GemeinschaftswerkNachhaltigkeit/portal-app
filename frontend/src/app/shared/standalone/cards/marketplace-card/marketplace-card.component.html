@@ -8,15 +8,18 @@
         {{ getMarketplaceCategory(marketplaceItem) }}
       </div>
       @if (marketplaceItem.organisation?.id) {
-      <a
-        class="orga-link"
-        [routerLink]="['/organisations', marketplaceItem.organisation?.id]"
-        >{{ marketplaceItem.organisation?.name }}</a
-      >
+        <a
+          class="orga-link"
+          [routerLink]="['/organisations', marketplaceItem.organisation?.id]"
+          >{{ marketplaceItem.organisation?.name }}</a
+        >
       }
     </div>
   </header>
   <article>
+    <div class="badge">
+      <app-event-badges [activity]="marketplaceItem"></app-event-badges>
+    </div>
     <h3 class="title">{{ marketplaceItem.name }}</h3>
     <div class="description">
       {{ utils.excerpt(marketplaceItem.description) }}

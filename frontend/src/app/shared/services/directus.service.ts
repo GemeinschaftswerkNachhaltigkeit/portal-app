@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 export type ExternalLinks = {
   projectn_winner_page?: string;
+  biodiversity_page?: string;
 };
 
 @Injectable({
@@ -16,7 +17,6 @@ export type ExternalLinks = {
 export class DirectusService {
   private externalLinks = new BehaviorSubject<ExternalLinks>({});
   externalLinks$ = this.externalLinks.asObservable();
-  //siehe  https://github.com/directus/examples/tree/main/angular
   constructor(
     private translate: TranslateService,
     private http: HttpClient

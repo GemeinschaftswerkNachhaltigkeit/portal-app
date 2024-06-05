@@ -5,11 +5,12 @@ import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
 
 @Component({
   selector: 'app-orga-result',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule],
+  imports: [CommonModule, SharedModule, RouterModule, OrgaBadgesComponent],
   templateUrl: './orga-result.component.html',
   styleUrl: './orga-result.component.scss'
 })
