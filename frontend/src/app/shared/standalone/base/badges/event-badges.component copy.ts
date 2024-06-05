@@ -4,7 +4,6 @@ import { ProjectSustainabilityWinnerBadgeComponent } from './project-sustainabil
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { InitiatorBadgeComponent } from './initiator-badge.component';
 import { BiodiversityBadgeComponent } from './biodiversity-badge';
-import Activity from 'src/app/shared/models/actvitiy';
 
 @Component({
   selector: 'app-event-badges',
@@ -37,9 +36,9 @@ import Activity from 'src/app/shared/models/actvitiy';
   ]
 })
 export class EventBadgesComponent {
-  @Input() activity?: Activity;
+  @Input() activity?: { thematicFocus?: ThematicFocus[] };
 
-  isBiodiversityTopic(activity: Activity) {
+  isBiodiversityTopic(activity: { thematicFocus?: ThematicFocus[] }) {
     return activity.thematicFocus?.includes(ThematicFocus.BIODIVERSITY);
   }
 }
