@@ -13,7 +13,7 @@ export type Type = 'orga' | 'event' | 'marketplace';
   providedIn: 'root'
 })
 export class SearchService {
-  private readonly MAIN_RESULTS = 1;
+  private readonly MAIN_RESULTS = 3;
 
   api = inject(SearchApiService);
   route = inject(ActivatedRoute);
