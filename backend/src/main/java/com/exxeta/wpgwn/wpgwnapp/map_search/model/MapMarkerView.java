@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Point;
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.map_search.MapSearchResultType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
 
 /**
  * Bean für eine Projektion zum Abrufen der Daten mit QueryDSL.
@@ -19,5 +20,7 @@ public class MapMarkerView {
     private MapSearchResultType resultType;
 
     private Point coordinate;
+
+    private Period period;
 
 }

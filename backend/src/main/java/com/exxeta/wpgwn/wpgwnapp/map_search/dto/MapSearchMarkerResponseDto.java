@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Point;
 import lombok.Value;
 
 import com.exxeta.wpgwn.wpgwnapp.map_search.MapSearchResultType;
+import com.exxeta.wpgwn.wpgwnapp.shared.dto.PeriodDto;
 
 @Value
 public class MapSearchMarkerResponseDto {
@@ -14,5 +15,7 @@ public class MapSearchMarkerResponseDto {
     private final MapSearchResultType resultType;
 
     private final Point coordinate;
+
+    private final PeriodDto period;
 
 }
