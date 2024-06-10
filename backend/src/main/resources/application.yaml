@@ -76,7 +76,7 @@ wpgwn:
       max-offers: 30
       max-best-practises: 30
     dan:
-      max-dans: 50
+      max-dans: 100
 keycloak:
   admin:
     admin-realm: master

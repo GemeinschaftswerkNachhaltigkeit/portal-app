@@ -1,8 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.dto;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
@@ -18,8 +15,13 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.ContactDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.LocationDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.PeriodDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SocialMediaContactDto;
+import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Data
 @Validated
@@ -34,6 +36,7 @@ public class ActivityWorkInProgressRequestDto implements Serializable {
     private final ContactDto contact;
     private final ImpactArea impactArea;
     private final ActivityTypeDto activityType;
+    private final SpecialTypeDto specialType;
     @Valid
     private final LocationDto location;
     private final Set<@NotNull @Valid SocialMediaContactDto> socialMediaContacts;

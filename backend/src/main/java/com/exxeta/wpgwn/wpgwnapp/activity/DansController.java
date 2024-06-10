@@ -1,6 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -40,6 +39,7 @@ import com.exxeta.wpgwn.wpgwnapp.utils.PrincipalMapper;
 
 import com.querydsl.core.types.Predicate;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.persistence.EntityNotFoundException;
 
 import static java.util.Objects.nonNull;
 
@@ -103,15 +103,15 @@ public class DansController {
                                                 @PathVariable("actId") Long actId,
                                                 @Parameter(hidden = true) @AuthenticationPrincipal
                                                 OAuth2AuthenticatedPrincipal principal) {
-        final Activity activity = findDanAndCheckPermission(actId, principal);
+        return cloneOrUpdateDan(actId, principal, false);
+    }
 
-        final ActivityWorkInProgress activityWorkInProgress =
-                activityMapper.mapActivityToWorkInProgress(activity);
-
-        final ActivityWorkInProgress savedActivityWorkInProgress =
-                activityWorkInProgressService.save(activityWorkInProgress);
-
-        return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWorkInProgress);
+    @PutMapping("/{actId}/copy")
+    ActivityWorkInProgressResponseDto duplicateDan(@PathVariable("orgId") Long orgId,
+                                                   @PathVariable("actId") Long actId,
+                                                   @Parameter(hidden = true) @AuthenticationPrincipal
+                                                   OAuth2AuthenticatedPrincipal principal) {
+        return cloneOrUpdateDan(actId, principal, true);
     }
 
     /**
@@ -175,6 +175,21 @@ public class DansController {
         danValidator.checkReadOrWriteDanPermission(principal, organisation, activity.getCreatedBy());
 
         return activity;
+    }
+
+    private ActivityWorkInProgressResponseDto cloneOrUpdateDan(Long actId, OAuth2AuthenticatedPrincipal principal,
+                                                               boolean duplicate) {
+        final Activity activity = findDanAndCheckPermission(actId, principal);
+        final ActivityWorkInProgress activityWorkInProgress =
+                activityMapper.mapActivityToWorkInProgress(activity);
+
+        if (duplicate) {
+            activityWorkInProgress.setActivity(null);
+        }
+
+        final ActivityWorkInProgress savedActivityWorkInProgress =
+                activityWorkInProgressService.save(activityWorkInProgress);
+        return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWorkInProgress);
     }
 
 }
