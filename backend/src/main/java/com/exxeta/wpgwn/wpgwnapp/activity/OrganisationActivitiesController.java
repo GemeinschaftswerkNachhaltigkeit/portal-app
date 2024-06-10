@@ -1,7 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
-import jakarta.annotation.security.RolesAllowed;
-import jakarta.persistence.EntityNotFoundException;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +43,8 @@ import com.exxeta.wpgwn.wpgwnapp.shared.model.ItemStatus;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 
 /**
  * Controller für Aktivitäten einer Organisation.
@@ -113,14 +114,17 @@ public class OrganisationActivitiesController {
                                                      @Parameter(hidden = true) @AuthenticationPrincipal
                                                      OAuth2AuthenticatedPrincipal principal) {
 
-        final Activity activity = findActivityAndCheckPermission(actId, principal);
+        return cloneOrUpdateActivity(actId, principal, false);
+    }
 
-        final ActivityWorkInProgress activityWorkInProgress =
-                activityMapper.mapActivityToWorkInProgress(activity);
-
-        final ActivityWorkInProgress savedActivityWorkInProgress =
-                activityWorkInProgressService.save(activityWorkInProgress);
-        return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWorkInProgress);
+    @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
+    @PostMapping("/{actId}/copy")
+    public ActivityWorkInProgressResponseDto duplicateActivity(@PathVariable("orgId") Long orgId,
+                                                               @PathVariable("actId") Long actId,
+                                                               @Parameter(hidden = true)
+                                                               @AuthenticationPrincipal
+                                                               OAuth2AuthenticatedPrincipal principal) {
+        return cloneOrUpdateActivity(actId, principal, true);
     }
 
     /**
@@ -183,6 +187,19 @@ public class OrganisationActivitiesController {
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
 
         return activity;
+    }
+
+    private ActivityWorkInProgressResponseDto cloneOrUpdateActivity(Long actId, OAuth2AuthenticatedPrincipal principal,
+                                                                    boolean duplicate) {
+        final Activity activity = findActivityAndCheckPermission(actId, principal);
+        final ActivityWorkInProgress activityWorkInProgress =
+                activityMapper.mapActivityToWorkInProgress(activity);
+        if (duplicate) {
+            activityWorkInProgress.setActivity(null);
+        }
+        final ActivityWorkInProgress savedActivityWorkInProgress =
+                activityWorkInProgressService.save(activityWorkInProgress);
+        return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWorkInProgress);
     }
 
 }

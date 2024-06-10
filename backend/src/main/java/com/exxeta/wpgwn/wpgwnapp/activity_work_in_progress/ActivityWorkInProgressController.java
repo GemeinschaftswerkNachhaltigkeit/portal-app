@@ -1,7 +1,5 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress;
 
-import jakarta.annotation.security.RolesAllowed;
-import jakarta.validation.Valid;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;
@@ -29,7 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.ActivityMapper;
+import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
+import com.exxeta.wpgwn.wpgwnapp.activity.DanValidator;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
 import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.dto.ActivityWorkInProgressRequestDto;
 import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.dto.ActivityWorkInProgressResponseDto;
@@ -38,10 +39,17 @@ import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationService;
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationValidator;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
+import com.exxeta.wpgwn.wpgwnapp.shared.dto.ActivityTypeDto;
+import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
 
 import com.querydsl.core.types.Predicate;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.validation.Valid;
 
+import static com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.QActivityWorkInProgress.activityWorkInProgress;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
 
 
@@ -66,6 +74,10 @@ public class ActivityWorkInProgressController {
 
     private final OrganisationValidator organisationValidator;
 
+    private final DanValidator danValidator;
+
+    private final DanRangeService danRangeService;
+
     private final Clock clock;
 
     /**
@@ -77,7 +89,7 @@ public class ActivityWorkInProgressController {
      * @return
      */
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
-    @GetMapping
+    @GetMapping()
     Page<ActivityWorkInProgressResponseDto> getActivitiesWorkInProgress(@PathVariable("orgId") Long orgId,
                                                                         @Parameter(hidden = true)
                                                                         @AuthenticationPrincipal
@@ -87,11 +99,11 @@ public class ActivityWorkInProgressController {
         final Organisation organisation = organisationService.getOrganisation(orgId);
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
 
-        final Predicate predicate = QActivityWorkInProgress.activityWorkInProgress.organisation.id.eq(orgId)
-                .and(QActivityWorkInProgress.activityWorkInProgress.activityType.ne(DAN)
-                        .or(QActivityWorkInProgress.activityWorkInProgress.activityType.isNull()))
-                .and(QActivityWorkInProgress.activityWorkInProgress.importProcess.isNotNull()
-                        .or(QActivityWorkInProgress.activityWorkInProgress.createdBy.eq(principal.getName())));
+        final Predicate predicate = activityWorkInProgress.organisation.id.eq(orgId)
+                .and(activityWorkInProgress.activityType.ne(DAN)
+                        .or(activityWorkInProgress.activityType.isNull()))
+                .and(activityWorkInProgress.importProcess.isNotNull()
+                        .or(activityWorkInProgress.createdBy.eq(principal.getName())));
         return activityWorkInProgressService.findByPredicate(predicate, pageable)
                 .map(workInProgressMapper::activityWorkInProgressToActivityDto);
     }
@@ -104,24 +116,21 @@ public class ActivityWorkInProgressController {
      * @return
      */
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
-    @PostMapping
+    @PostMapping("/{type}")
     public ActivityWorkInProgressResponseDto createActivity(@PathVariable("orgId") Long orgId,
+                                                            @PathVariable("type") SpecialTypeDto type,
                                                             @Parameter(hidden = true) @AuthenticationPrincipal
                                                             OAuth2AuthenticatedPrincipal principal) {
 
-        final Organisation organisation = organisationService.getOrganisation(orgId);
-        organisationValidator.checkPermissionForOrganisation(principal, organisation);
+        final Organisation organisation = validateOrganisation(principal, orgId);
 
-        final ActivityWorkInProgress activityWorkInProgress =
-                workInProgressMapper.activityDtoToActivityWip(organisation);
-
-        activityWorkInProgress.setOrganisation(organisation);
-        activityWorkInProgress.setRandomUniqueId(UUID.randomUUID());
-        activityWorkInProgress.setRandomIdGenerationTime(Instant.now(clock));
+        ActivityWorkInProgress activityWorkInProgress = createActivityWip(organisation, type);
 
         final ActivityWorkInProgress savedActivityWip = activityWorkInProgressService.save(activityWorkInProgress);
+
         return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWip);
     }
+
 
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
     @PutMapping("/{randomUniqueId}")
@@ -133,19 +142,21 @@ public class ActivityWorkInProgressController {
             @Parameter(hidden = true) @AuthenticationPrincipal
             OAuth2AuthenticatedPrincipal principal) {
 
-        final Organisation organisation = organisationService.getOrganisation(orgId);
-        organisationValidator.checkPermissionForOrganisation(principal, organisation);
+        validateOrganisation(principal, orgId);
 
         final ActivityWorkInProgress savedActivityWorkInProgress =
                 activityWorkInProgressService.findByRandomUniqueId(activityWipId);
 
         workInProgressMapper.updateActivityFromWorkInProgressActivityDto(activityWorkInProgressDto,
                 savedActivityWorkInProgress);
+
+        updateActivityType(savedActivityWorkInProgress, activityWorkInProgressDto.getSpecialType(),
+                activityWorkInProgressDto.getActivityType());
+
         final ActivityWorkInProgress
                 updatedActivityWorkInProgress = activityWorkInProgressService.save(savedActivityWorkInProgress);
         return workInProgressMapper.activityWorkInProgressToActivityDto(updatedActivityWorkInProgress);
     }
-
 
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
     @GetMapping("/{randomUniqueId}")
@@ -193,6 +204,9 @@ public class ActivityWorkInProgressController {
 
         final ActivityWorkInProgress workInProgress =
                 activityWorkInProgressService.findByRandomUniqueId(activityRandomUniqueId);
+
+        danValidator.validateMaxItemNumber(workInProgress, principal);
+
         final Activity savedActivity = activityWorkInProgressPublishService
                 .updateActivityWithActivityWorkInProgress(workInProgress, principal);
         workInProgress.setActivity(savedActivity);
@@ -292,6 +306,41 @@ public class ActivityWorkInProgressController {
         final ActivityWorkInProgress activityWorkInProgress =
                 activityWorkInProgressService.findByRandomUniqueId(activityWipId);
         activityWorkInProgressService.deleteActivityContactImage(activityWorkInProgress);
+    }
+
+    private void updateActivityType(ActivityWorkInProgress activityWip, SpecialTypeDto specialType,
+                                    ActivityTypeDto activityType) {
+        if (SpecialTypeDto.DAN == specialType && ActivityTypeDto.EVENT == activityType) {
+            danRangeService.isDanAvailable();
+            activityWip.setActivityType(ActivityType.DAN);
+        } else {
+            activityWip.setActivityType(ActivityType.EVENT);
+        }
+    }
+
+
+    private Organisation validateOrganisation(OAuth2AuthenticatedPrincipal principal, Long orgId) {
+        Organisation organisation = organisationService.getOrganisation(orgId);
+        organisationValidator.checkPermissionForOrganisation(principal, organisation);
+        return organisation;
+    }
+
+    private ActivityWorkInProgress createActivityWip(Organisation organisation, SpecialTypeDto type) {
+        ActivityWorkInProgress activityWip = workInProgressMapper.activityDtoToActivityWip(organisation);
+
+        if (SpecialTypeDto.DAN == type) {
+            danRangeService.isDanAvailable();
+            DanSetting danSetting = danRangeService.getDanSetting();
+            activityWip.setPeriod(new Period(danSetting.startMin(), danSetting.endMax()));
+            activityWip.setActivityType(ActivityType.DAN);
+        } else {
+            activityWip.setActivityType(ActivityType.EVENT);
+        }
+
+        activityWip.setOrganisation(organisation);
+        activityWip.setRandomUniqueId(UUID.randomUUID());
+        activityWip.setRandomIdGenerationTime(Instant.now(clock));
+        return activityWip;
     }
 
 }
