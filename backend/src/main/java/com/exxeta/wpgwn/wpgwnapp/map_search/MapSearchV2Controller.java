@@ -1,9 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.map_search;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,7 +44,10 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberTemplate;
 import com.querydsl.jpa.impl.JPAQuery;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
+import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_ZONE_ID;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_END;
 import static com.exxeta.wpgwn.wpgwnapp.shared.SharedMapper.PERMANENT_START;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
@@ -82,17 +85,15 @@ public class MapSearchV2Controller {
             @RequestParam(value = "online", required = false) Boolean online,
             @RequestParam(value = "projectSustainabilityWinner", required = false) Boolean projectSustainabilityWinner,
             @QuerydslPredicate(root = MapSearchV2Result.class, bindings = MapSearchV2ResultBindingCustomizer.class)
-            Predicate mapSearchFilterPredicate,
-            Pageable pageable) {
+            Predicate mapSearchFilterPredicate, Pageable pageable) {
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
                         includeExpiredActivities, includeNoCoords, initiator, permanent, online,
-                        projectSustainabilityWinner,
-                        mapSearchFilterPredicate);
+                        projectSustainabilityWinner, mapSearchFilterPredicate);
 
-        JPAQuery<MapSearchV2Result> jpaQuery = new JPAQuery<MapSearchV2Result>(entityManager)
-                .from(QMapSearchV2Result.mapSearchV2Result)
-                .where(searchPredicate);
+        JPAQuery<MapSearchV2Result> jpaQuery =
+                new JPAQuery<MapSearchV2Result>(entityManager).from(QMapSearchV2Result.mapSearchV2Result)
+                        .where(searchPredicate);
 
         jpaQuery.orderBy(expiredExpression().asc());
 
@@ -102,8 +103,7 @@ public class MapSearchV2Controller {
 
         jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.modifiedAt.desc())
                 .orderBy(QMapSearchV2Result.mapSearchV2Result.createdAt.desc());
-        jpaQuery.offset(pageable.getOffset())
-                .limit(pageable.getPageSize());
+        jpaQuery.offset(pageable.getOffset()).limit(pageable.getPageSize());
 
         final Page<MapSearchV2Result> activitiesPage =
                 PageableExecutionUtils.getPage(jpaQuery.fetch(), pageable, jpaQuery::fetchCount);
@@ -125,26 +125,23 @@ public class MapSearchV2Controller {
             @RequestParam(value = "initiator", required = false) Boolean initiator,
             @RequestParam(value = "permanent", required = false) Boolean permanent,
             @RequestParam(value = "online", required = false) Boolean online,
-            @RequestParam(value = "projectSustainabilityWinner", required = false)
-            Boolean projectSustainabilityWinner,
+            @RequestParam(value = "projectSustainabilityWinner", required = false) Boolean projectSustainabilityWinner,
             @QuerydslPredicate(root = MapSearchV2Result.class, bindings = MapSearchV2ResultBindingCustomizer.class)
-            Predicate mapSearchFilterPredicate
-    ) {
+            Predicate mapSearchFilterPredicate) {
 
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
                         includeExpiredActivities, includeNoCoords, initiator, permanent, online,
-                        projectSustainabilityWinner,
-                        mapSearchFilterPredicate);
+                        projectSustainabilityWinner, mapSearchFilterPredicate);
 
-        JPAQuery<MapMarkerView> jpaQuery = new JPAQuery<QMapSearchV2Result>(entityManager)
-                .from(QMapSearchV2Result.mapSearchV2Result)
-                .select(Projections.bean(MapMarkerView.class,
-                        QMapSearchV2Result.mapSearchV2Result.activity.id.as("activityId"),
-                        QMapSearchV2Result.mapSearchV2Result.organisation.id.as("organisationId"),
-                        QMapSearchV2Result.mapSearchV2Result.resultType,
-                        QMapSearchV2Result.mapSearchV2Result.location.coordinate))
-                .where(searchPredicate);
+        JPAQuery<MapMarkerView> jpaQuery =
+                new JPAQuery<QMapSearchV2Result>(entityManager).from(QMapSearchV2Result.mapSearchV2Result)
+                        .select(Projections.bean(MapMarkerView.class,
+                                QMapSearchV2Result.mapSearchV2Result.activity.id.as("activityId"),
+                                QMapSearchV2Result.mapSearchV2Result.organisation.id.as("organisationId"),
+                                QMapSearchV2Result.mapSearchV2Result.resultType,
+                                QMapSearchV2Result.mapSearchV2Result.location.coordinate,
+                                QMapSearchV2Result.mapSearchV2Result.period)).where(searchPredicate);
 
         if (hasText(query)) {
             jpaQuery.orderBy(tsRankExpression(query).desc());
@@ -153,10 +150,7 @@ public class MapSearchV2Controller {
         jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.modifiedAt.desc())
                 .orderBy(QMapSearchV2Result.mapSearchV2Result.createdAt.desc());
 
-        return jpaQuery
-                .stream()
-                .map(mapper::mapSearchMarkerResponseDto)
-                .collect(Collectors.toUnmodifiableList());
+        return jpaQuery.stream().map(mapper::mapSearchMarkerResponseDto).collect(Collectors.toUnmodifiableList());
     }
 
     private NumberTemplate<Integer> expiredExpression() {
@@ -174,13 +168,9 @@ public class MapSearchV2Controller {
     @SuppressWarnings("ParameterNumber")
     private BooleanBuilder getSearchPredicate(Envelope envelope, String query, String location,
                                               List<OrganisationType> organisationTypes,
-                                              List<ActivityType> activityTypes,
-                                              boolean includeExpiredActivities,
-                                              boolean includeDataWithoutCoordinates,
-                                              Boolean initiator,
-                                              Boolean permanent,
-                                              Boolean online,
-                                              Boolean projectSustainabilityWinner,
+                                              List<ActivityType> activityTypes, boolean includeExpiredActivities,
+                                              boolean includeDataWithoutCoordinates, Boolean initiator,
+                                              Boolean permanent, Boolean online, Boolean projectSustainabilityWinner,
                                               Predicate mapSearchFilterPredicate) {
         final BooleanBuilder searchPredicate = new BooleanBuilder(mapSearchFilterPredicate);
 
@@ -188,11 +178,11 @@ public class MapSearchV2Controller {
 
         buildLocationPredicate(searchPredicate, location);
 
-        buildTypePredicate(searchPredicate, organisationTypes, activityTypes);
+        buildTypePredicate(searchPredicate, organisationTypes, activityTypes, includeExpiredActivities);
 
         buildQueryPredicate(searchPredicate, query);
 
-        buildExpiredActivitiesPredicate(searchPredicate, includeExpiredActivities);
+        // buildExpiredActivitiesPredicate(searchPredicate, includeExpiredActivities);
 
         buildSpecialOrganisationsPredicate(searchPredicate, initiator, projectSustainabilityWinner);
 
@@ -207,8 +197,8 @@ public class MapSearchV2Controller {
     private void buildCoordinatePredicate(BooleanBuilder searchPredicate, Envelope envelope,
                                           boolean includeDataWithoutCoordinates) {
         if (Objects.nonNull(envelope)) {
-            BooleanExpression coordinateExpression = QMapSearchV2Result.mapSearchV2Result.location.coordinate
-                    .within(factory.toGeometry(envelope));
+            BooleanExpression coordinateExpression =
+                    QMapSearchV2Result.mapSearchV2Result.location.coordinate.within(factory.toGeometry(envelope));
             if (includeDataWithoutCoordinates) {
                 coordinateExpression =
                         coordinateExpression.or(QMapSearchV2Result.mapSearchV2Result.location.coordinate.isNull());
@@ -231,17 +221,15 @@ public class MapSearchV2Controller {
     }
 
     private void buildTypePredicate(BooleanBuilder searchPredicate, List<OrganisationType> organisationTypes,
-                                    List<ActivityType> activityTypes) {
+                                    List<ActivityType> activityTypes, boolean includeExpiredActivities) {
 
 
         final BooleanBuilder typePredicate = new BooleanBuilder();
         boolean gotTypePredicate = false;
         if (Objects.nonNull(organisationTypes) && !organisationTypes.isEmpty()) {
             gotTypePredicate = true;
-            typePredicate.or(
-                    QMapSearchV2Result.mapSearchV2Result.organisationType.in(organisationTypes)
-                            .and(QMapSearchV2Result.mapSearchV2Result.activityType.isNull())
-            );
+            typePredicate.or(QMapSearchV2Result.mapSearchV2Result.organisationType.in(organisationTypes)
+                    .and(QMapSearchV2Result.mapSearchV2Result.activityType.isNull()));
         } else {
             typePredicate.or(QMapSearchV2Result.mapSearchV2Result.activityType.isNull());
         }
@@ -254,10 +242,10 @@ public class MapSearchV2Controller {
 
             DanSetting danSetting = danRangeService.getDanSetting();
 
-            if (!danSetting.active()) {
+            /*if (!danSetting.active()) {
                 activityTypes.remove(DAN);
                 searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.resultType.ne(MapSearchResultType.DAN));
-            }
+            }*/
 
             if (!CollectionUtils.isEmpty(activityTypes)) {
                 gotTypePredicate = true;
@@ -266,9 +254,15 @@ public class MapSearchV2Controller {
                     BooleanExpression activityTypePredicate =
                             QMapSearchV2Result.mapSearchV2Result.activityType.eq(activityType);
                     if (activityType == ActivityType.DAN) {
-                        activityTypePredicate = activityTypePredicate
-                                .and(QMapSearchV2Result.mapSearchV2Result.period.start.goe(danSetting.startMin()))
-                                .and(QMapSearchV2Result.mapSearchV2Result.period.end.loe(danSetting.endMax()));
+                        activityTypePredicate = activityTypePredicate.and(
+                                        QMapSearchV2Result.mapSearchV2Result.period.start.goe(
+                                                danSetting.startMin().isBefore(startOfYear()) ? startOfYear()
+                                                        : danSetting.startMin()))
+                                .and(QMapSearchV2Result.mapSearchV2Result.period.end.loe(endOfYear()));
+                    } else if (activityType == ActivityType.EVENT && !includeExpiredActivities) {
+                        final Instant now = Instant.now(clock);
+                        searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.period.isNull()
+                                .or(QMapSearchV2Result.mapSearchV2Result.period.end.after(now)));
                     }
                     orExpression =
                             orExpression == null ? activityTypePredicate : orExpression.or(activityTypePredicate);
@@ -335,13 +329,11 @@ public class MapSearchV2Controller {
     private void buildPermanentPredicate(BooleanBuilder searchPredicate, Boolean permanent) {
         if (Objects.nonNull(permanent)) {
             if (permanent) {
-                searchPredicate.and(
-                        QMapSearchV2Result.mapSearchV2Result.period.start.eq(PERMANENT_START)
-                                .and(QMapSearchV2Result.mapSearchV2Result.period.end.eq(PERMANENT_END)));
+                searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.period.start.eq(PERMANENT_START)
+                        .and(QMapSearchV2Result.mapSearchV2Result.period.end.eq(PERMANENT_END)));
             } else {
-                searchPredicate.and(
-                        QMapSearchV2Result.mapSearchV2Result.period.start.ne(PERMANENT_START)
-                                .or(QMapSearchV2Result.mapSearchV2Result.period.end.ne(PERMANENT_END)));
+                searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.period.start.ne(PERMANENT_START)
+                        .or(QMapSearchV2Result.mapSearchV2Result.period.end.ne(PERMANENT_END)));
             }
         }
     }
@@ -349,25 +341,36 @@ public class MapSearchV2Controller {
     private BooleanExpression inNameOrDescription(String query) {
         final String queryWithOr = fullTextSearchHelper.splitQuery(query);
         BooleanExpression searchFieldsForQuery = fullTextSearchInNameOrDescription(queryWithOr);
-        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults()
-                .omitEmptyStrings();
+        Splitter split = Splitter.on(CharMatcher.anyOf(" ")).trimResults().omitEmptyStrings();
         if (split.splitToList(query).size() == 1) {
-            searchFieldsForQuery = searchFieldsForQuery
-                    .or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.street.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.city.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.zipCode.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.state.containsIgnoreCase(query))
-                    .or(QMapSearchV2Result.mapSearchV2Result.location.address.country.containsIgnoreCase(query));
+            searchFieldsForQuery =
+                    searchFieldsForQuery.or(QMapSearchV2Result.mapSearchV2Result.name.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.description.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.location.address.street.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.location.address.city.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.location.address.zipCode.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.location.address.state.containsIgnoreCase(query))
+                            .or(QMapSearchV2Result.mapSearchV2Result.location.address.country.containsIgnoreCase(
+                                    query));
         }
         return searchFieldsForQuery;
     }
 
     private BooleanExpression fullTextSearchInNameOrDescription(String queryWithOr) {
         return fullTextSearchHelper.fullTextSearchInTsVector(
-                QMapSearchV2Result.mapSearchV2Result.nameAndDescriptionTsvec,
-                queryWithOr);
+                QMapSearchV2Result.mapSearchV2Result.nameAndDescriptionTsvec, queryWithOr);
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private Instant endOfYear() {
+        LocalDateTime endOfYear = LocalDateTime.of(LocalDate.now(clock).getYear(), 12, 31, 23, 59, 59);
+        return endOfYear.atZone(DEFAULT_ZONE_ID).toInstant();
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private Instant startOfYear() {
+        LocalDateTime startOfYear = LocalDateTime.of(LocalDate.now(clock).getYear(), 1, 1, 0, 0, 1);
+        return startOfYear.atZone(DEFAULT_ZONE_ID).toInstant();
     }
 
 }

@@ -23,6 +23,7 @@ public interface MapSearchV2ResultMapper {
 
     @Mapping(target = "id", source = "mapMarkerView", qualifiedByName = "mapId")
     @Mapping(target = "coordinate", source = "coordinate")
+    @Mapping(target = "period", source = "period")
     MapSearchMarkerResponseDto mapSearchMarkerResponseDto(MapMarkerView mapMarkerView);
 
     @Named("mapId")
