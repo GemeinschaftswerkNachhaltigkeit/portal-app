@@ -35,7 +35,7 @@ export class ActivitesApiService {
       endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dans`;
     }
     return this.http.get<PagedResponse<Activity>>(endpoint, {
-      params: { ...paging, ...filters }
+      params: { ...paging, includeDan: true, ...filters }
     });
   }
 
@@ -61,7 +61,11 @@ export class ActivitesApiService {
     return this.http.delete(endpoint);
   }
 
-  createActivity(user?: User, dan = false): Observable<ActivityIds | null> {
+  createActivity(
+    user?: User,
+    dan = false,
+    danActivity = false
+  ): Observable<ActivityIds | null> {
     let orgaIdOfUser = user?.orgId;
     if (!orgaIdOfUser) {
       if (!dan) {
@@ -70,7 +74,10 @@ export class ActivitesApiService {
         orgaIdOfUser = environment.danId;
       }
     }
-    let endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/activities-wip`;
+    let endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/activities-wip/event`;
+    if (danActivity) {
+      endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/activities-wip/dan`;
+    }
     if (dan) {
       endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dan-wip`;
     }

@@ -115,7 +115,7 @@ export class WizardComponent implements OnDestroy, OnInit {
   ) {
     this.endDateValidators = [
       Validators.required,
-      durationValidator('start', 3, 'weeks'),
+      durationValidator('start', 3, 'months'),
       danPeriodValidator('start')
     ];
     this.directusContentService.getDanTranslations();
@@ -233,6 +233,7 @@ export class WizardComponent implements OnDestroy, OnInit {
       this.step1Form?.valueChanges
         .pipe(takeUntil(this.$unsubscribe))
         .subscribe(async () => {
+          console.log('Check dan period');
           this.inDanPeriod = await this.isDanPeriod();
           if (!this.inDanPeriod) {
             end.setValidators([Validators.required]);
@@ -352,7 +353,8 @@ export class WizardComponent implements OnDestroy, OnInit {
       },
       registerUrl: step1Values.masterData.registerUrl,
       socialMediaContacts: socialMedia,
-      contact: step4Values.contact
+      contact: step4Values.contact,
+      specialType: this.isDan ? 'DAN' : step1Values.masterData.isDan
     };
   }
 
@@ -364,7 +366,8 @@ export class WizardComponent implements OnDestroy, OnInit {
         start: data.period?.start ? DateTime.fromISO(data.period.start) : null,
         end: data.period?.end ? DateTime.fromISO(data.period.end) : null,
         url: data.location?.url,
-        registerUrl: data.registerUrl
+        registerUrl: data.registerUrl,
+        isDan: this.isDan ? 'DAN' : data.specialType || 'EVENT'
       }
     });
 
@@ -505,7 +508,7 @@ export class WizardComponent implements OnDestroy, OnInit {
                     contact: { ...activity?.contact }
                   },
                   'getCoords',
-                  true
+                  this.useDanEndpoint
                 )
                 .then(() => {
                   this.activityService

@@ -124,10 +124,10 @@ export class ActiFacadeService {
       });
   }
 
-  createActivity(dan = false) {
+  createActivity(dan = false, danActivity = false) {
     const user = this.auth.getUser();
     this.activitiesApi
-      .createActivity(user, dan)
+      .createActivity(user, dan, danActivity)
       .pipe(take(1))
       .subscribe({
         next: (ids) => this.openActivityWizard(ids, dan)
@@ -237,7 +237,7 @@ export class ActiFacadeService {
     dan = false,
     edit = false
   ): void {
-    const urlPrefix = dan ? '/dan/' : '/event/';
+    const urlPrefix = dan ? '/dan/' : '/activity/';
     if (
       ids &&
       ids.activityId &&

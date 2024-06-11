@@ -32,7 +32,7 @@ export class ActivityWipsApiService {
       endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dan-wip`;
     }
     return this.http.get<PagedResponse<ActivityWIP>>(endpoint, {
-      params: { ...paging, ...filters }
+      params: { ...paging, includeDan: true, ...filters }
     });
   }
 

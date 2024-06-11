@@ -18,15 +18,28 @@
               : ('account.texts.activities' | translate)
           }}
         </ng-container>
-        <button
-          headerAction
-          mat-flat-button
-          color="accent"
-          (click)="createHandler()"
-          [disabled]="!utils.hasOrga()"
-        >
-          {{ 'account.buttons.addActivity' | translate }}
-        </button>
+        <div class="buttons">
+          <button
+            headerAction
+            mat-flat-button
+            color="accent"
+            (click)="createHandler()"
+            [disabled]="!utils.hasOrga()"
+          >
+            {{ 'account.buttons.addActivity' | translate }}
+          </button>
+          <app-feature feature="dan-account">
+            <button
+              headerAction
+              mat-flat-button
+              color="dan"
+              (click)="createDanHandler()"
+              [disabled]="!utils.hasOrga()"
+            >
+              {{ 'account.buttons.addDanActivity' | translate }}
+            </button>
+          </app-feature>
+        </div>
         <ng-container noEntriesContent>
           {{ 'account.texts.noActivities' | translate }}
         </ng-container>
@@ -45,7 +58,9 @@
                     <div class="card-wrapper">
                       <app-base-card
                         [entity]="activity"
-                        type="ACTIVITY"
+                        [type]="
+                          activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
+                        "
                         [showActions]="true"
                         [clickable]="false"
                         [draft]="true"
@@ -102,7 +117,9 @@
                     <div class="card-wrapper">
                       <app-base-card
                         [entity]="activity"
-                        type="ACTIVITY"
+                        [type]="
+                          activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
+                        "
                         [showActions]="true"
                         (delete)="deleteHandler(activity.id)"
                         (edit)="editHandler(activity.id)"

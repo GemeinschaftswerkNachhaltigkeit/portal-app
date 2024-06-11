@@ -64,6 +64,10 @@ export class ActivitiesComponent implements OnInit {
     this.actiFacade.createActivity();
   }
 
+  createDanHandler(): void {
+    this.actiFacade.createActivity(false, true);
+  }
+
   openActivity(acti: Activity): void {
     this.actiFacade.openActivity(acti);
   }

@@ -27,3 +27,15 @@
     }
   }
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  margin-bottom: $spacing-8;
+}
+
+button[color='dan'] {
+  background: $dan-blue;
+  color: white !important;
+}

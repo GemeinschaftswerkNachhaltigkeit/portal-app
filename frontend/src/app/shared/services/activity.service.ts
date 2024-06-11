@@ -150,6 +150,7 @@ export class ActivityService {
           this.translate.instant('error.itemLimit'),
           'error'
         );
+
         if (dan) {
           this.router.navigate(['/account/dan-activities']);
         }

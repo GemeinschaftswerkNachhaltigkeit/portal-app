@@ -61,7 +61,7 @@ const routes: Routes = [
       import('./events/events.module').then((m) => m.EventsModule)
   },
   {
-    path: 'event',
+    path: 'activity',
     loadChildren: () =>
       import('./activity/activity.module').then((m) => m.ActivityModule),
     canActivate: [AuthGuardWithLoginCheck]
