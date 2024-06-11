@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.char-count {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+}
+
+.tip-tap-wrapper {
+  position: relative;
+}
+
+.description {
+  font-weight: bold;
+  margin-bottom: $spacing-2;
+}
+
+.error-wrapper {
+  margin-bottom: $spacing-8;
+}
+
+.date-checkbox {
+  margin-bottom: $spacing-4;
+}

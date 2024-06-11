@@ -217,12 +217,15 @@ export class ActivityService {
     }
   }
 
-  isInDanPeriod(start: string | null, end: string | null): boolean {
+  async isInDanPeriod(
+    start: string | null,
+    end: string | null
+  ): Promise<boolean> {
     if (!start || !end) return false;
 
     const endDateValue = DateTime.fromISO(end);
     const startDateValue = DateTime.fromISO(start);
-
+    await this.featureService.ready;
     const feature = this.featureService.getFeature('dan-range');
 
     if (!feature || !feature.start || !feature.end) return false;

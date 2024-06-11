@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Feature, FeaturesService } from './features.service';
 
 export type FeedbackType = 'success' | 'error';
@@ -9,6 +9,7 @@ export type FeedbackType = 'success' | 'error';
 })
 export class FeatureService {
   features$ = this.features.features$;
+  ready = this.features.ready;
 
   constructor(private features: FeaturesService) {}
 

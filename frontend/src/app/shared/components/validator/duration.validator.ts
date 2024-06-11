@@ -6,7 +6,6 @@ import { DateTime, DurationUnit } from 'luxon';
 
 /**
  * Add the validator to the end date
- * @returns
  */
 export function durationValidator(
   startDateName: string,
@@ -30,6 +29,7 @@ export function durationValidator(
         ? translateService.instant('labels.dateUnits.' + normalizedUnit)
         : translateService.instant('labels.dateUnits.' + normalizedUnit + 's');
     const maxDurationText = `${maxDuration} ${dateUnitText}`;
+
     error =
       duration > maxDuration
         ? { invalidDuration: { duration: maxDurationText } }

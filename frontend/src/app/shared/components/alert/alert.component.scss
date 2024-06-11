@@ -7,10 +7,14 @@
   background: white;
   width: 100%;
   border-left: $spacing-4 solid $magenta;
+  border-top: 2px solid $magenta;
+  border-bottom: 2px solid $magenta;
+  border-right: 2px solid $magenta;
   color: $blue-navy;
   display: flex;
   gap: $spacing-4;
   flex-direction: column;
+
   .msg {
     .title {
       font-weight: bold;

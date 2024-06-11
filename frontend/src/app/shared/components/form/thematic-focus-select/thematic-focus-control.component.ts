@@ -12,7 +12,7 @@ import { ThematicFocus } from '../../../models/thematic-focus';
 export class ThematicFocusControlComponent implements OnInit {
   thematicFocusOpts = Object.values(ThematicFocus);
   @Input() controlName!: string;
-  @Input() maxSelectable = this.thematicFocusOpts.length;
+  @Input() maxSelectable? = this.thematicFocusOpts.length;
   @Input() label = this.thematicFocusOpts.length;
   selectedValues = new Set();
 
@@ -30,15 +30,21 @@ export class ThematicFocusControlComponent implements OnInit {
       this.controlName
     ) as FormControl;
     this.selectedValues.clear();
+    this.addValues(this.formControl.value);
     this.formControl.valueChanges
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((values: ThematicFocus[]) => {
         this.selectedValues.clear();
-        values.forEach((v) => this.selectedValues.add(v));
+        this.addValues(values);
       });
   }
 
+  private addValues(values: ThematicFocus[]): void {
+    values.forEach((v) => this.selectedValues.add(v));
+  }
+
   setOptionDisabled(value: ThematicFocus): boolean {
+    if (!this.maxSelectable) return false;
     return (
       this.selectedValues.size >= this.maxSelectable &&
       !this.selectedValues.has(value)

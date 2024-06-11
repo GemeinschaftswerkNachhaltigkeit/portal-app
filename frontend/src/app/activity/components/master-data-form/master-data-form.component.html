@@ -2,10 +2,10 @@
   <!-- name -->
 
   <mat-form-field appearance="outline">
-    <mat-label>{{ 'forms.labels.danName' | translate }}</mat-label>
+    <mat-label>{{ 'forms.labels.activityTitle' | translate }}</mat-label>
     <input
       matInput
-      [placeholder]="'forms.labels.danName' | translate"
+      [placeholder]="'forms.labels.activityTitle' | translate"
       formControlName="name"
     />
     <app-valid-check [form]="form" controlName="name"></app-valid-check>
@@ -14,25 +14,6 @@
       <app-form-field-error [field]="form.get('name')"></app-form-field-error>
     </mat-error>
   </mat-form-field>
-
-  <!-- At the moment the type is always DAN for this wizard -->
-  <!-- <mat-form-field appearance="outline">
-    <mat-label>{{ 'forms.labels.danType' | translate }}</mat-label>
-    <mat-select formControlName="activityType">
-      <mat-option
-        *ngFor="let activityType of activityTypeOpts"
-        [value]="activityType"
-      >
-        {{ 'activityType.' + activityType | translate }}
-      </mat-option>
-    </mat-select>
-
-    <mat-error>
-      <app-form-field-error
-        [field]="form.get('activityType')"
-      ></app-form-field-error>
-    </mat-error>
-  </mat-form-field> -->
 
   <!-- WYSIWYG Input -->
 
@@ -45,7 +26,7 @@
     [class.mat-form-field-disabled]="form.get('description')?.disabled"
   >
     <div class="description">
-      {{ 'dan.texts.wizard.description' | translate }}
+      {{ 'events.texts.wizard.description' | translate }}
     </div>
     <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
       <app-tiptap-menu-bar
@@ -75,8 +56,17 @@
 
   <!-- date -->
 
+  @if (!isDan) {
+    <div class="date-checkbox">
+      <mat-checkbox matInput formControlName="permanent">
+        <span>
+          {{ 'forms.labels.permanet' | translate }}
+        </span>
+      </mat-checkbox>
+    </div>
+  }
   <mat-form-field appearance="outline">
-    <mat-label> {{ 'forms.labels.periodDan' | translate }}</mat-label>
+    <mat-label> {{ 'forms.labels.period' | translate }}</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input
         matStartDate
@@ -91,10 +81,11 @@
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
-    <mat-hint>{{ danContent?.period_hint }}</mat-hint>
+    @if (isDan) {
+      <mat-hint>{{ danContent?.period_hint }}</mat-hint>
+    }
     <mat-error>
       <app-form-field-error [field]="form.get('start')"></app-form-field-error>
-
       <span
         *ngIf="
           form.get('start')?.invalid &&
@@ -104,9 +95,47 @@
         "
         >,
       </span>
+
       <app-form-field-error [field]="form.get('end')"></app-form-field-error>
     </mat-error>
   </mat-form-field>
+  @if (!isDan) {
+    <div class="error-wrapper" *ngIf="inDanPeriod">
+      <app-alert
+        color="#009ee3"
+        [title]="'events.titles.inDanPeriod' | translate"
+        [showIcon]="true"
+        bgIcon="eco"
+        fgIcon="check"
+      >
+        <div
+          [innerHTML]="
+            'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
+          "
+        ></div>
+        <div class="date-checkbox">
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="isDan"
+          >
+            <div class="radio-options">
+              <mat-radio-button [value]="'DAN'">
+                {{ 'forms.labels.danOption.yes' | translate }}</mat-radio-button
+              >
+              <mat-radio-button [value]="'EVENT'">
+                {{ 'forms.labels.danOption.no' | translate }}</mat-radio-button
+              >
+            </div>
+          </mat-radio-group>
+        </div>
+      </app-alert>
+      <app-spinner
+        forId="load-coords"
+        [noPadding]="true"
+        [small]="true"
+      ></app-spinner>
+    </div>
+  }
 
   <!-- Link zur Anmeldung -->
 

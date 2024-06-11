@@ -60,7 +60,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./events/events.module').then((m) => m.EventsModule)
   },
-
+  {
+    path: 'event',
+    loadChildren: () =>
+      import('./activity/activity.module').then((m) => m.ActivityModule),
+    canActivate: [AuthGuardWithLoginCheck]
+  },
   {
     path: 'organisations/:orgaId',
     loadChildren: () =>
@@ -116,7 +121,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      onSameUrlNavigation: 'reload'
+      onSameUrlNavigation: 'reload',
+      bindToComponentInputs: true
     })
   ],
   exports: [RouterModule]

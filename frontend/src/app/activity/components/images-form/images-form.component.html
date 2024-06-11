@@ -1,0 +1,31 @@
+<div class="file-uploads" *ngIf="activity && activity.randomUniqueId">
+  <app-upload-image
+    [config]="dzService.getImageConfig('logo', orgId, activity.randomUniqueId)"
+    [labelTranslationKey]="'forms.labels.activityLogo'"
+    [fileId]="activity.logo"
+    imageSizeTranslationKey="sign-up.upload.logoWidthTooltipExt"
+    [aspectRatio]="dzService.getAspectRatio('logo')"
+    style="width: 200px"
+    [errorMsg]="'error.unknown' | translate"
+    [info]="
+      ('sign-up.upload.tooltip' | translate) +
+      ', ' +
+      ('sign-up.upload.logoWidthTooltipExt' | translate)
+    "
+    (delete)="deleteImageHandler(imageTypes.LOGO)"
+  ></app-upload-image>
+
+  <app-upload-image
+    [config]="dzService.getImageConfig('image', orgId, activity.randomUniqueId)"
+    [labelTranslationKey]="'forms.labels.activityImage'"
+    [fileId]="activity.image"
+    imageSizeTranslationKey="sign-up.upload.titleImageWidthTooltipExt"
+    [aspectRatio]="dzService.getAspectRatio('banner')"
+    [info]="
+      ('sign-up.upload.tooltip' | translate) +
+      ', ' +
+      ('sign-up.upload.titleImageWidthTooltipExt' | translate)
+    "
+    (delete)="deleteImageHandler(imageTypes.TITLE)"
+  ></app-upload-image>
+</div>

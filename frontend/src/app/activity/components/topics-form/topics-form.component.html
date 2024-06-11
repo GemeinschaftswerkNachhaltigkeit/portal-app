@@ -1,0 +1,84 @@
+<ng-container [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>{{
+      'forms.labels.sustainableDevelopmentGoals' | translate
+    }}</mat-label>
+    <mat-select formControlName="sustainableDevelopmentGoals" multiple>
+      <mat-option *ngFor="let goalNo of sdgOptions" [value]="goalNo">
+        {{ goalNo }} {{ 'SDGS.goal_' + goalNo | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('sustainableDevelopmentGoals')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <app-thematic-focus-control
+    controlName="thematicFocus"
+    [maxSelectable]="isDan || markedAsDan ? 3 : undefined"
+    [label]="'forms.labels.thematicFocus' | translate"
+  ></app-thematic-focus-control>
+
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
+    <mat-select formControlName="impactArea">
+      <mat-option
+        *ngFor="let impactArea of impactAreaOpts"
+        [value]="impactArea"
+      >
+        {{ 'impactArea.' + impactArea | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      <app-form-field-error
+        [field]="form.get('impactArea')"
+      ></app-form-field-error>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="fields">
+    <div class="field">
+      <mat-radio-group aria-label="Select an option" formControlName="location">
+        <div class="radio-options">
+          <mat-radio-button value="ADDRESS">
+            {{ 'forms.labels.onSite' | translate }}</mat-radio-button
+          >
+          <mat-radio-button value="ONLINE">
+            {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
+          >
+          @if (isDan || markedAsDan) {
+            <mat-radio-button value="PRIVATE">
+              {{ 'forms.labels.private' | translate }}</mat-radio-button
+            >
+          }
+        </div>
+      </mat-radio-group>
+    </div>
+    <div class="field">
+      <app-address-controls
+        [withNameField]="true"
+        [nameFieldLabel]="'forms.labels.addressNameDan' | translate"
+        formGroupName="address"
+      ></app-address-controls>
+    </div>
+  </div>
+  <div class="error-wrapper" *ngIf="form.get('location')?.value === 'ADDRESS'">
+    <app-alert
+      *ngIf="coordinatesNotFound"
+      [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
+      [showIcon]="true"
+      bgIcon="travel_explore"
+      fgIcon="priority_high"
+    >
+      {{ 'validationErrors.coordinatesNotFound' | translate }}
+    </app-alert>
+    <app-spinner
+      *ngIf="!coordinatesNotFound"
+      forId="load-coords"
+      [noPadding]="true"
+      [small]="true"
+    ></app-spinner>
+  </div>
+</ng-container>

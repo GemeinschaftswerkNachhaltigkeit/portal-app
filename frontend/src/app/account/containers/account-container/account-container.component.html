@@ -29,7 +29,7 @@
           </a>
         </ng-container>
         <ng-container *appWithOrga>
-          <ng-container *ngIf="featureService.show$('dan-account') | async">
+          <!-- <ng-container *ngIf="featureService.show$('dan-account') | async">
             <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
               <a
                 *appMenuItem
@@ -43,7 +43,8 @@
                 </div>
               </a>
             </ng-container>
-          </ng-container>
+          </ng-container> -->
+
           <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
             <a
               class="indented"
@@ -51,7 +52,11 @@
               [routerLink]="['/account/activities']"
               [routerLinkActive]="'active'"
             >
-              {{ 'account.nav.activities' | translate }}
+              @if (featureService.show$('dan-account') | async) {
+                {{ 'account.nav.activitiesAndDan' | translate }}
+              } @else {
+                {{ 'account.nav.activities' | translate }}
+              }
             </a>
           </ng-container>
           <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">

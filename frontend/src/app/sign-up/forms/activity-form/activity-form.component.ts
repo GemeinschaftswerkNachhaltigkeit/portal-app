@@ -204,8 +204,8 @@ export class ActivityFormComponent implements OnChanges, OnDestroy {
     }
   }
 
-  private isDanPeriod(): void {
-    this.inDanPeriod = this.activityService.isInDanPeriod(
+  private async isDanPeriod() {
+    this.inDanPeriod = await this.activityService.isInDanPeriod(
       this.activityFormGroup.get('start')?.value,
       this.activityFormGroup.get('end')?.value
     );

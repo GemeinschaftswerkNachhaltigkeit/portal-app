@@ -237,7 +237,7 @@ export class ActiFacadeService {
     dan = false,
     edit = false
   ): void {
-    const urlPrefix = dan ? '/dan/' : '/sign-up/activity/';
+    const urlPrefix = dan ? '/dan/' : '/event/';
     if (
       ids &&
       ids.activityId &&

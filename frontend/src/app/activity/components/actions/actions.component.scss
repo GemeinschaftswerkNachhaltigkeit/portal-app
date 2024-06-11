@@ -1,0 +1,25 @@
+@use 'theme' as *;
+@use 'palette' as *;
+
+.actions-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2em;
+
+  .actions {
+    display: flex;
+    gap: $spacing-2;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .actions-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

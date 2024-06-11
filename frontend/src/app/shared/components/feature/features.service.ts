@@ -1,5 +1,5 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
-import { Injectable } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 
@@ -16,9 +16,14 @@ export type Feature = {
 export class FeaturesService {
   features = new BehaviorSubject<Feature[]>([]);
   features$ = this.features.asObservable();
+  featuresState = signal<'OK' | 'ERROR' | 'PENDING'>('PENDING');
+  featuresLoaded = computed(() =>
+    ['OK', 'ERROR'].includes(this.featuresState())
+  );
+  ready: Promise<void>;
 
   constructor(private directusService: DirectusService) {
-    this.getFeatures();
+    this.ready = this.getFeatures();
   }
 
   getFeature(featureKey: string): Feature | undefined {
@@ -30,9 +35,11 @@ export class FeaturesService {
       const features =
         await this.directusService.getContentItems<Feature>('features');
       if (features && features.length) {
+        this.featuresState.set('OK');
         this.features.next(features);
       }
     } catch (e) {
+      this.featuresState.set('ERROR');
       console.error('loadError', e);
       return;
     }
