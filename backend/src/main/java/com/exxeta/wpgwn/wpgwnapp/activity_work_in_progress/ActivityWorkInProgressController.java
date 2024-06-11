@@ -310,7 +310,8 @@ public class ActivityWorkInProgressController {
 
     private void updateActivityType(ActivityWorkInProgress activityWip, SpecialTypeDto specialType,
                                     ActivityTypeDto activityType) {
-        if (SpecialTypeDto.DAN == specialType && ActivityTypeDto.EVENT == activityType) {
+
+        if (SpecialTypeDto.DAN == specialType) {
             danRangeService.isDanAvailable();
             activityWip.setActivityType(ActivityType.DAN);
         } else {
