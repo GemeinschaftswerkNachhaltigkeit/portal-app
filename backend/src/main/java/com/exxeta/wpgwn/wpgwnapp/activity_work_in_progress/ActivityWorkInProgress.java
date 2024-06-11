@@ -1,5 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.SpecialType;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -95,6 +97,10 @@ public class ActivityWorkInProgress extends AuditableEntityBase implements IWork
     @Column(name = "activity_type")
     @Enumerated(EnumType.STRING)
     private ActivityType activityType;
+
+    @Column(name = "special_type")
+    @Enumerated(EnumType.STRING)
+    private SpecialType specialType;
 
     @Embedded
     private ContactWorkInProgress contactWorkInProgress;

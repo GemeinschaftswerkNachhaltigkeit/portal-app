@@ -12,6 +12,7 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.ImpactAreaDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.LocationDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.PeriodDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SocialMediaContactDto;
+import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ThematicFocusDto;
 
 @Data
@@ -27,6 +28,7 @@ public class ActivityWorkInProgressResponseDto implements Serializable {
     private String description;
     private ImpactAreaDto impactArea;
     private ActivityTypeDto activityType;
+    private SpecialTypeDto specialType;
     private Set<SocialMediaContactDto> socialMediaContacts;
     private String registerUrl;
     private PeriodDto period;

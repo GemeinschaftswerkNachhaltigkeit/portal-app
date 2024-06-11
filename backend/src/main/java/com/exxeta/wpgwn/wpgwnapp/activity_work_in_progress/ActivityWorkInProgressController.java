@@ -39,7 +39,6 @@ import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationService;
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationValidator;
 import com.exxeta.wpgwn.wpgwnapp.organisation.model.Organisation;
 import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
-import com.exxeta.wpgwn.wpgwnapp.shared.dto.ActivityTypeDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
@@ -51,6 +50,7 @@ import jakarta.validation.Valid;
 
 import static com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.QActivityWorkInProgress.activityWorkInProgress;
 import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.DAN;
+import static com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType.EVENT;
 
 
 /**
@@ -151,7 +151,7 @@ public class ActivityWorkInProgressController {
                 savedActivityWorkInProgress);
 
         updateActivityType(savedActivityWorkInProgress, activityWorkInProgressDto.getSpecialType(),
-                activityWorkInProgressDto.getActivityType());
+                savedActivityWorkInProgress.getActivityType());
 
         final ActivityWorkInProgress
                 updatedActivityWorkInProgress = activityWorkInProgressService.save(savedActivityWorkInProgress);
@@ -309,12 +309,14 @@ public class ActivityWorkInProgressController {
     }
 
     private void updateActivityType(ActivityWorkInProgress activityWip, SpecialTypeDto specialType,
-                                    ActivityTypeDto activityType) {
-        if (SpecialTypeDto.DAN == specialType) {
+                                    ActivityType activityType) {
+        if ((SpecialTypeDto.DAN == specialType && EVENT == activityType)) {
             danRangeService.isDanAvailable();
-            activityWip.setActivityType(ActivityType.DAN);
+            activityWip.setActivityType(DAN);
+        } else if (SpecialTypeDto.EVENT == specialType && DAN == activityType) {
+            activityWip.setActivityType(EVENT);
         } else {
-            activityWip.setActivityType(ActivityType.EVENT);
+            activityWip.setActivityType(activityType);
         }
     }
 
@@ -334,7 +336,7 @@ public class ActivityWorkInProgressController {
             activityWip.setPeriod(new Period(danSetting.startMin(), danSetting.endMax()));
             activityWip.setActivityType(ActivityType.DAN);
         } else {
-            activityWip.setActivityType(ActivityType.EVENT);
+            activityWip.setActivityType(EVENT);
         }
 
         activityWip.setOrganisation(organisation);

@@ -87,6 +87,7 @@ public abstract class ActivityMapper {
     @Mapping(target = "modifiedAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "lastModifiedBy", ignore = true)
+    @Mapping(target = "specialType", ignore = true)
     @Mapping(target = "version", ignore = true)
     @Mapping(target = "organisationWorkInProgress", ignore = true)
     @Mapping(target = "importProcess", ignore = true)
