@@ -494,7 +494,7 @@ export class WizardComponent implements OnDestroy, OnInit {
       this.enableAutosave = false;
 
       this.activityService
-        .getActivity(this.orgId(), this.activityId(), true)
+        .getActivity(this.orgId(), this.activityId(), this.useDanEndpoint)
         .then((activity) => {
           this.geoService
             .getCoordinates(activity?.location as LocationData)
