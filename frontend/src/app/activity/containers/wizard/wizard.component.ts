@@ -233,7 +233,6 @@ export class WizardComponent implements OnDestroy, OnInit {
       this.step1Form?.valueChanges
         .pipe(takeUntil(this.$unsubscribe))
         .subscribe(async () => {
-          console.log('Check dan period');
           this.inDanPeriod = await this.isDanPeriod();
           if (!this.inDanPeriod) {
             end.setValidators([Validators.required]);
@@ -490,6 +489,7 @@ export class WizardComponent implements OnDestroy, OnInit {
 
   submit = (): void => {
     if (this.step1Form.valid && this.step2Form.valid && this.step4Form.valid) {
+      const step1Values = this.step1Form.value;
       const loadingId = this.loading.start('publishActivity');
       this.enableAutosave = false;
 
@@ -505,7 +505,10 @@ export class WizardComponent implements OnDestroy, OnInit {
                   this.activityId(),
                   {
                     location: { ...activity?.location, coordinate: coords },
-                    contact: { ...activity?.contact }
+                    contact: { ...activity?.contact },
+                    specialType: this.isDan
+                      ? 'DAN'
+                      : step1Values.masterData.isDan
                   },
                   'getCoords',
                   this.useDanEndpoint
