@@ -255,10 +255,8 @@ public class MapSearchV2Controller {
                             QMapSearchV2Result.mapSearchV2Result.activityType.eq(activityType);
                     if (activityType == ActivityType.DAN) {
                         activityTypePredicate = activityTypePredicate.and(
-                                        QMapSearchV2Result.mapSearchV2Result.period.start.goe(
-                                                danSetting.startMin().isBefore(startOfYear()) ? startOfYear()
-                                                        : danSetting.startMin()))
-                                .and(QMapSearchV2Result.mapSearchV2Result.period.end.loe(endOfYear()));
+                                QMapSearchV2Result.mapSearchV2Result.period.start.goe(startOfYear())
+                                        .and(QMapSearchV2Result.mapSearchV2Result.period.end.loe(endOfYear())));
                     } else if (activityType == ActivityType.EVENT && !includeExpiredActivities) {
                         final Instant now = Instant.now(clock);
                         searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.period.isNull()
