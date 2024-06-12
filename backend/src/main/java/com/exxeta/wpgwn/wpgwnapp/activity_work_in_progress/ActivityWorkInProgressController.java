@@ -42,7 +42,9 @@ import com.exxeta.wpgwn.wpgwnapp.security.PermissionPool;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ActivityType;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.Period;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.SpecialType;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.security.RolesAllowed;
@@ -91,6 +93,8 @@ public class ActivityWorkInProgressController {
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
     @GetMapping()
     Page<ActivityWorkInProgressResponseDto> getActivitiesWorkInProgress(@PathVariable("orgId") Long orgId,
+                                                                        @RequestParam(value = "includeDan", defaultValue = "false")
+                                                                        Boolean includeDan,
                                                                         @Parameter(hidden = true)
                                                                         @AuthenticationPrincipal
                                                                         OAuth2AuthenticatedPrincipal principal,
@@ -98,15 +102,12 @@ public class ActivityWorkInProgressController {
 
         final Organisation organisation = organisationService.getOrganisation(orgId);
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
+        Predicate predicate = buildPredicate(orgId, includeDan, principal);
 
-        final Predicate predicate = activityWorkInProgress.organisation.id.eq(orgId)
-                .and(activityWorkInProgress.activityType.ne(DAN)
-                        .or(activityWorkInProgress.activityType.isNull()))
-                .and(activityWorkInProgress.importProcess.isNotNull()
-                        .or(activityWorkInProgress.createdBy.eq(principal.getName())));
         return activityWorkInProgressService.findByPredicate(predicate, pageable)
                 .map(workInProgressMapper::activityWorkInProgressToActivityDto);
     }
+
 
     /**
      * Erstellen einer neuen Aktivität.
@@ -146,12 +147,11 @@ public class ActivityWorkInProgressController {
 
         final ActivityWorkInProgress savedActivityWorkInProgress =
                 activityWorkInProgressService.findByRandomUniqueId(activityWipId);
-
+        ActivityType orginalActivityType = savedActivityWorkInProgress.getActivityType();
         workInProgressMapper.updateActivityFromWorkInProgressActivityDto(activityWorkInProgressDto,
                 savedActivityWorkInProgress);
 
-        updateActivityType(savedActivityWorkInProgress, activityWorkInProgressDto.getSpecialType(),
-                savedActivityWorkInProgress.getActivityType());
+        savedActivityWorkInProgress.setActivityType(orginalActivityType);
 
         final ActivityWorkInProgress
                 updatedActivityWorkInProgress = activityWorkInProgressService.save(savedActivityWorkInProgress);
@@ -204,6 +204,8 @@ public class ActivityWorkInProgressController {
 
         final ActivityWorkInProgress workInProgress =
                 activityWorkInProgressService.findByRandomUniqueId(activityRandomUniqueId);
+
+        updateTypeActivityWorkInProgress(workInProgress);
 
         danValidator.validateMaxItemNumber(workInProgress, principal);
 
@@ -308,19 +310,6 @@ public class ActivityWorkInProgressController {
         activityWorkInProgressService.deleteActivityContactImage(activityWorkInProgress);
     }
 
-    private void updateActivityType(ActivityWorkInProgress activityWip, SpecialTypeDto specialType,
-                                    ActivityType activityType) {
-        if ((SpecialTypeDto.DAN == specialType)) {
-            danRangeService.isDanAvailable();
-            activityWip.setActivityType(DAN);
-        } else if (SpecialTypeDto.EVENT == specialType) {
-            activityWip.setActivityType(EVENT);
-        } else {
-            activityWip.setActivityType(activityType);
-        }
-    }
-
-
     private Organisation validateOrganisation(OAuth2AuthenticatedPrincipal principal, Long orgId) {
         Organisation organisation = organisationService.getOrganisation(orgId);
         organisationValidator.checkPermissionForOrganisation(principal, organisation);
@@ -343,6 +332,34 @@ public class ActivityWorkInProgressController {
         activityWip.setRandomUniqueId(UUID.randomUUID());
         activityWip.setRandomIdGenerationTime(Instant.now(clock));
         return activityWip;
+    }
+
+
+    private Predicate buildPredicate(Long orgId, Boolean includeDan, OAuth2AuthenticatedPrincipal principal) {
+        BooleanBuilder predicate = new BooleanBuilder();
+        predicate.and(activityWorkInProgress.organisation.id.eq(orgId));
+
+        if (!includeDan) {
+            predicate.and(activityWorkInProgress.activityType.ne(DAN)
+                    .or(activityWorkInProgress.activityType.isNull()));
+        }
+
+        predicate.and(activityWorkInProgress.importProcess.isNotNull()
+                .or(activityWorkInProgress.createdBy.eq(principal.getName())));
+
+        return predicate;
+    }
+
+
+    private void updateTypeActivityWorkInProgress(ActivityWorkInProgress workInProgress) {
+        SpecialType specialType = workInProgress.getSpecialType();
+        ActivityType activityType = workInProgress.getActivityType();
+
+        if (SpecialType.DAN.equals(specialType) || ActivityType.DAN.equals(activityType)) {
+            workInProgress.setActivityType(ActivityType.DAN);
+        } else {
+            workInProgress.setActivityType(ActivityType.EVENT);
+        }
     }
 
 }
