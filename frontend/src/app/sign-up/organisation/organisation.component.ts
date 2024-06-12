@@ -18,7 +18,7 @@ import { ExternalLinksFormComponent } from '../forms/external-links-form/externa
 import { OrganisationFormComponent } from '../forms/organisation-form/organisation-form.component';
 import { TopicsFormComponent } from '../forms/topics-form/topics-form.component';
 import { UserFormComponent } from '../forms/user-form/user-form.component';
-import { DirectusContentService } from '../services/directus-content.service';
+import { DirectusContentService } from '../../shared/services/directus-content.service';
 import { OrganisationService } from '../services/organisation.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { OrganisationStatus } from 'src/app/shared/models/organisation-status';

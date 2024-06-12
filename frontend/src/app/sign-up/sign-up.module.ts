@@ -17,8 +17,6 @@ import { SharedModule } from '../shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormFeedbackComponent } from './form-feedback/form-feedback.component';
 import { ImportComponent } from './import/import.component';
-import { ActivityComponent } from './activity/activity.component';
-import { ActivityFormComponent } from './forms/activity-form/activity-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   LuxonDateAdapter,
@@ -62,8 +60,6 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ExternalLinksFormComponent,
     FormFeedbackComponent,
     ImportComponent,
-    ActivityComponent,
-    ActivityFormComponent,
     ContactInviteComponent,
     OrganisationSuccessPageComponent,
     OrgaMembershipComponent,

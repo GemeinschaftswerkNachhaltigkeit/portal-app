@@ -38,19 +38,6 @@
 
   <div class="fields">
     <div class="field">
-      <mat-radio-group aria-label="Select an option" formControlName="location">
-        <div class="radio-options">
-          <mat-radio-button value="ADDRESS">
-            {{ 'forms.labels.onSite' | translate }}</mat-radio-button
-          >
-          <mat-radio-button value="ONLINE">
-            {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
-          >
-        </div>
-      </mat-radio-group>
-    </div>
-
-    <div class="field">
       <mat-form-field *ngIf="isAddressNameVisible">
         <mat-label>{{ 'forms.labels.addressName' | translate }}</mat-label>
         <input

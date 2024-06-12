@@ -32,8 +32,8 @@ import { durationValidator } from 'src/app/shared/components/validator/duration.
 import { danPeriodValidator } from 'src/app/shared/components/validator/danPeriod.validator';
 import { DateTime } from 'luxon';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
+import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 
 @Component({
   selector: 'app-wizard',

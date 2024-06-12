@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from '../auth/guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from '../auth/guard/auth-guard-with-role-check.service';
-import { ActivityComponent } from './activity/activity.component';
 import { ContactInviteComponent } from './contact-invite/contact-invite.component';
 import { ImportComponent } from './import/import.component';
 import { OrgaMembershipComponent } from './orga-membership/orga-membership.component';
@@ -23,10 +22,6 @@ const routes: Routes = [
   {
     path: 'import/:organisationId',
     component: ImportComponent
-  },
-  {
-    path: 'activity/:orgId/:activityId',
-    component: ActivityComponent
   },
   {
     path: 'contact-invite/:inviteId',

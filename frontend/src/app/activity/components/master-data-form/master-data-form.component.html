@@ -99,43 +99,49 @@
       <app-form-field-error [field]="form.get('end')"></app-form-field-error>
     </mat-error>
   </mat-form-field>
-  @if (!isDan) {
-    <div class="error-wrapper" *ngIf="inDanPeriod">
-      <app-alert
-        color="#009ee3"
-        [title]="'events.titles.inDanPeriod' | translate"
-        [showIcon]="true"
-        bgIcon="eco"
-        fgIcon="check"
-      >
-        <div
-          [innerHTML]="
-            'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
-          "
-        ></div>
-        <div class="date-checkbox">
-          <mat-radio-group
-            aria-label="Select an option"
-            formControlName="isDan"
-          >
-            <div class="radio-options">
-              <mat-radio-button [value]="'DAN'">
-                {{ 'forms.labels.danOption.yes' | translate }}</mat-radio-button
-              >
-              <mat-radio-button [value]="'EVENT'">
-                {{ 'forms.labels.danOption.no' | translate }}</mat-radio-button
-              >
-            </div>
-          </mat-radio-group>
-        </div>
-      </app-alert>
-      <app-spinner
-        forId="load-coords"
-        [noPadding]="true"
-        [small]="true"
-      ></app-spinner>
-    </div>
-  }
+  <app-feature feature="dan-account">
+    @if (!isDan) {
+      <div class="error-wrapper" *ngIf="inDanPeriod">
+        <app-alert
+          color="#009ee3"
+          [title]="'events.titles.inDanPeriod' | translate"
+          [showIcon]="true"
+          bgIcon="eco"
+          fgIcon="check"
+        >
+          <div
+            [innerHTML]="
+              'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
+            "
+          ></div>
+          <div class="date-checkbox">
+            <mat-radio-group
+              aria-label="Select an option"
+              formControlName="isDan"
+            >
+              <div class="radio-options">
+                <mat-radio-button [value]="'DAN'">
+                  {{
+                    'forms.labels.danOption.yes' | translate
+                  }}</mat-radio-button
+                >
+                <mat-radio-button [value]="'EVENT'">
+                  {{
+                    'forms.labels.danOption.no' | translate
+                  }}</mat-radio-button
+                >
+              </div>
+            </mat-radio-group>
+          </div>
+        </app-alert>
+        <app-spinner
+          forId="load-coords"
+          [noPadding]="true"
+          [small]="true"
+        ></app-spinner>
+      </div>
+    }
+  </app-feature>
 
   <!-- Link zur Anmeldung -->
 

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import {
   SignUpActivityContent,
   SignUpOrgContent
-} from '../../../../sign-up/services/directus-content.service';
+} from '../../../services/directus-content.service';
 
 @Component({
   selector: 'app-form-step-description',

@@ -1,9 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {
-  SignUpOrgContent,
+  DanContent,
   SignUpActivityContent,
-  DanContent
-} from 'src/app/sign-up/services/directus-content.service';
+  SignUpOrgContent
+} from 'src/app/shared/services/directus-content.service';
 
 @Component({
   selector: 'app-form-advatages',

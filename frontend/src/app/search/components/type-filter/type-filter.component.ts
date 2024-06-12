@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Type } from '../../data/search.service';
 import { TypeTabComponent } from '../type-tab/type-tab.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { DirectusContentService } from 'src/app/sign-up/services/directus-content.service';
+import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 
 @Component({
   selector: 'app-type-filter',

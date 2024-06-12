@@ -2,6 +2,10 @@
 @use 'palette' as *;
 @use 'theme' as *;
 
+a {
+  line-height: 130%;
+}
+
 a,
 a:hover {
   color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
@@ -30,9 +34,9 @@ a.accent:hover {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -0.2rem;
+    bottom: -0.3rem;
     background-color: $yellow;
-    height: 1.2rem;
+    height: 1rem;
     width: 0%;
     z-index: -1;
     transition: width 200ms;

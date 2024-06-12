@@ -6,7 +6,7 @@ import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { environment } from 'src/environments/environment';
-import { DirectusContentService } from '../services/directus-content.service';
+import { DirectusContentService } from '../../shared/services/directus-content.service';
 import { ImportDescisionService } from '../services/import-descision.service';
 import { OrganisationService } from '../services/organisation.service';
 

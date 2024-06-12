@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
-import { DirectusContentService } from '../services/directus-content.service';
+import { DirectusContentService } from '../../shared/services/directus-content.service';
 import { OrganisationService } from '../services/organisation.service';
 
 @Component({

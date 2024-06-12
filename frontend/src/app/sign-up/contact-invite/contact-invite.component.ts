@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { environment } from 'src/environments/environment';
 import { ContactInviteService } from '../services/contact-invite.service';
-import { DirectusContentService } from '../services/directus-content.service';
+import { DirectusContentService } from '../../shared/services/directus-content.service';
 
 @Component({
   selector: 'app-contact-invite',
