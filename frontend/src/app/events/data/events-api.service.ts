@@ -41,7 +41,7 @@ export class EventsApiService {
           resultType: string;
           activity: Activity;
         }>
-      >(`${environment.apiUrl}/search`, {
+      >(`${environment.apiV2Url}/search`, {
         params: this.searchParams(searchFilter, page, true, true)
       })
       .pipe(
