@@ -1,5 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.activity;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -25,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ActivityResponseDto;
-import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.ItemStatusChangeDto;
 import com.exxeta.wpgwn.wpgwnapp.activity.event.ActivityDeleteEvent;
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
@@ -45,6 +48,8 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
+
+import static com.exxeta.wpgwn.wpgwnapp.WpgwnAppApplication.DEFAULT_ZONE_ID;
 
 /**
  * Controller für Aktivitäten einer Organisation.
@@ -69,7 +74,7 @@ public class OrganisationActivitiesController {
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    private final DanRangeService danRangeService;
+    private final Clock clock;
 
     @GetMapping
     Page<ActivityResponseDto> findActivitiesForOrganisation(@PathVariable("orgId") Long orgId,
@@ -78,15 +83,15 @@ public class OrganisationActivitiesController {
                                                             Pageable pageable) {
         BooleanExpression predicateExpression = QActivity.activity.organisation.id.eq(orgId)
                 .and(QActivity.activity.status.eq(ItemStatus.ACTIVE));
-        DanSetting danSetting = danRangeService.getDanSetting();
-        if (!includeDan || !danSetting.active()) {
+
+        if (!includeDan) {
             predicateExpression = predicateExpression
                     .and(QActivity.activity.activityType.eq(ActivityType.EVENT));
         } else {
             BooleanExpression danPredicate =
                     QActivity.activity.activityType.eq(ActivityType.DAN)
-                            .and(QActivity.activity.period.start.goe(danSetting.startMin()))
-                            .and(QActivity.activity.period.end.loe(danSetting.endMax()));
+                            .and(QActivity.activity.period.start.goe(startOfYear()))
+                            .and(QActivity.activity.period.end.loe(endOfYear()));
             predicateExpression = predicateExpression
                     .and(QActivity.activity.activityType.eq(ActivityType.EVENT).or(danPredicate));
         }
@@ -200,6 +205,18 @@ public class OrganisationActivitiesController {
         final ActivityWorkInProgress savedActivityWorkInProgress =
                 activityWorkInProgressService.save(activityWorkInProgress);
         return workInProgressMapper.activityWorkInProgressToActivityDto(savedActivityWorkInProgress);
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private Instant endOfYear() {
+        LocalDateTime endOfYear = LocalDateTime.of(LocalDate.now(clock).getYear(), 12, 31, 23, 59, 59);
+        return endOfYear.atZone(DEFAULT_ZONE_ID).toInstant();
+    }
+
+    @SuppressWarnings("MagicNumber")
+    private Instant startOfYear() {
+        LocalDateTime startOfYear = LocalDateTime.of(LocalDate.now(clock).getYear(), 1, 1, 0, 0, 1);
+        return startOfYear.atZone(DEFAULT_ZONE_ID).toInstant();
     }
 
 }
