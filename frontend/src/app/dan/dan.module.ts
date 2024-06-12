@@ -25,6 +25,7 @@ import { TopicsFormComponent } from './components/topics-form/topics-form.compon
 import { MatRadioModule } from '@angular/material/radio';
 import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
 import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard
     MatButtonModule,
     MatRadioModule,
     TitleWithContentComponent,
-    WizardSidebarLayoutComponent
+    WizardSidebarLayoutComponent,
+    SavedIndicatorComponent
   ]
 })
 export class DanModule {}

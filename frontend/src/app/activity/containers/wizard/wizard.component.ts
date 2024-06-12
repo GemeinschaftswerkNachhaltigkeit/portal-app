@@ -41,6 +41,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 import { MasterDataFormComponent } from '../../components/master-data-form/master-data-form.component';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
+import { SavedService } from 'src/app/shared/services/saved.service';
 
 @Component({
   selector: 'app-wizard',
@@ -111,7 +112,8 @@ export class WizardComponent implements OnDestroy, OnInit {
     private feedback: FeedbackService,
     private fb: FormBuilder,
     public dzService: DropzoneService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private savedService: SavedService
   ) {
     this.endDateValidators = [
       Validators.required,
@@ -470,20 +472,25 @@ export class WizardComponent implements OnDestroy, OnInit {
     this.router.navigate(['/', 'account', 'activities']);
   }
 
-  saveActivity(activityWIP: ActivityWIP, stepKey: string) {
+  async saveActivity(activityWIP: ActivityWIP, stepKey: string) {
     if (
       this.enableAutosave &&
       this.orgId &&
       this.activityId &&
       this.isEditable
     ) {
-      this.activityService.updateActivity(
-        this.orgId(),
-        this.activityId(),
-        activityWIP,
-        stepKey,
-        this.useDanEndpoint
-      );
+      try {
+        await this.activityService.updateActivity(
+          this.orgId(),
+          this.activityId(),
+          activityWIP,
+          stepKey,
+          this.useDanEndpoint
+        );
+        this.savedService.showSaved();
+      } catch (error) {
+        console.log('Error while saving activity', error);
+      }
     }
   }
 

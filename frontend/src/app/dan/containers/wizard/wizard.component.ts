@@ -34,6 +34,7 @@ import { DateTime } from 'luxon';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
+import { SavedService } from 'src/app/shared/services/saved.service';
 
 @Component({
   selector: 'app-wizard',
@@ -93,6 +94,7 @@ export class WizardComponent implements OnDestroy {
     private feedback: FeedbackService,
     private fb: FormBuilder,
     public dzService: DropzoneService,
+    private savedService: SavedService,
     breakpointObserver: BreakpointObserver
   ) {
     this.directusContentService.getDanTranslations();
@@ -338,20 +340,25 @@ export class WizardComponent implements OnDestroy {
     this.router.navigate(['/', 'account', 'dan-activities']);
   }
 
-  saveActivity(activityWIP: ActivityWIP, stepKey: string) {
+  async saveActivity(activityWIP: ActivityWIP, stepKey: string) {
     if (
       this.enableAutosave &&
       this.orgId &&
       this.activityId &&
       this.isEditable
     ) {
-      this.activityService.updateActivity(
-        this.orgId,
-        this.activityId,
-        activityWIP,
-        stepKey,
-        true
-      );
+      try {
+        await this.activityService.updateActivity(
+          this.orgId,
+          this.activityId,
+          activityWIP,
+          stepKey,
+          true
+        );
+        this.savedService.showSaved();
+      } catch (error) {
+        console.log('Error while saving activity', error);
+      }
     }
   }
 

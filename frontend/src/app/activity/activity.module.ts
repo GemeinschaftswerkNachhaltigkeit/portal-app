@@ -25,6 +25,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
 import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { MasterDataFormComponent } from './components/master-data-form/master-data-form.component';
+import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MasterDataFormComponent } from './components/master-data-form/master-da
     MatButtonModule,
     MatRadioModule,
     TitleWithContentComponent,
-    WizardSidebarLayoutComponent
+    WizardSidebarLayoutComponent,
+    SavedIndicatorComponent
   ]
 })
 export class ActivityModule {}
