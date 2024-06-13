@@ -65,7 +65,6 @@
       ></app-address-controls>
     </div>
   </div>
-  <pre>{{ coordinatesNotFound }}</pre>
   <div class="error-wrapper" *ngIf="form.get('location')?.value === 'ADDRESS'">
     <app-alert
       *ngIf="coordinatesNotFound === 'NOT_FOUND'"
