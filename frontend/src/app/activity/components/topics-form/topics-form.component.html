@@ -24,6 +24,8 @@
   <mat-form-field appearance="outline">
     <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
     <mat-select formControlName="impactArea">
+      <mat-option [value]="null">-</mat-option>
+
       <mat-option
         *ngFor="let impactArea of impactAreaOpts"
         [value]="impactArea"
@@ -63,9 +65,10 @@
       ></app-address-controls>
     </div>
   </div>
+  <pre>{{ coordinatesNotFound }}</pre>
   <div class="error-wrapper" *ngIf="form.get('location')?.value === 'ADDRESS'">
     <app-alert
-      *ngIf="coordinatesNotFound"
+      *ngIf="coordinatesNotFound === 'NOT_FOUND'"
       [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
       [showIcon]="true"
       bgIcon="travel_explore"

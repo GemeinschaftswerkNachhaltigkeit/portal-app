@@ -1,7 +1,7 @@
 @use 'theme' as *;
 @use 'palette' as *;
 
-.ng-valid .mat-mdc-select-arrow-wrapper::after {
+.ng-valid.ng-dirty .mat-mdc-select-arrow-wrapper::after {
   font-family: 'Material Icons';
   content: '\e876';
   color: $green;
