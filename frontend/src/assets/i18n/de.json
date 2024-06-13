@@ -161,8 +161,8 @@
     "offers": "Angebote",
     "activate": "Aktivieren",
     "deactivate": "Deaktivieren",
-    "wizard.masterData": "Stammdaten",
-    "wizard.aboutDan": "Über die Aktion",
+    "wizard.masterData": "Über die Veranstaltung",
+    "wizard.aboutDan": "Über die Veranstaltung",
     "wizard.topics": "Thema & Ort",
     "wizard.externalLinks": "Online-Auftritte",
     "wizard.contact": "Kontakt",
@@ -257,7 +257,7 @@
     "texts": {
       "wizard.inDanPeriod": "Der Zeitraum deiner Veranstaltung fällt in den Zeitraum der diesjährigen <a href='{{url}}' target='_blank'>Aktionstage</a> . Möchtet ihr, dass eure Veranstaltung ebenfalls als Aktion sichtbar wird? Das bedeutet keinen Mehraufwand für euch, sondern nur ein gesetztes Häkchen:",
       "addLoginModal": "Logge dich bitte ein, um eine neue Veranstaltung hinzuzufügen.",
-      "wizard.description": "Erkläre hier deine Veranstaltung und beschreibe wie man mitmachen kann."
+      "wizard.description": "Erkläre hier deine Veranstaltung und beschreibe, wie man mitmachen kann."
     }
   },
   "account": {
@@ -679,7 +679,7 @@
     "activitiesCoordinates": "Du hast Veranstaltungen, für die wir keinen Standort finden können. Ohne einen gültigen Standort sind wir nicht in der Lage die Einträge auf der Karte anzuzeigen.",
     "loadingOptionsError": "Die Optionen konnten nicht geladen werden.",
     "invalidDuration": "Max. gültiger Zeitraum ist {{duration}}",
-    "notInDanPeriod": "Nicht im DAN Zeitraum: {{period}}"
+    "notInDanPeriod": "Nicht im Aktionszeitraum: {{period}}"
   },
   "SDGS": {
     "goal_1": "Keine Armut",

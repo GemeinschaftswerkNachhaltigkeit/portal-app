@@ -14,20 +14,13 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="(isDan ? 'labels.dan' : 'labels.event') | translate"
-            [title]="
-              (isDan ? 'labels.wizard.aboutDan' : 'labels.wizard.masterData')
-                | translate
-            "
+            [title]="'labels.wizard.masterData' | translate"
             [content]="
-              isDan
-                ? ('dan.texts.wizard.about' | translate)
-                : (activityContent$ | async)?.stepDescriptions?.[0]
-                    ?.description || ''
+              (activityContent$ | async)?.stepDescriptions?.[0]?.description ||
+              ''
             "
           >
           </app-title-with-content>
-
           <form [formGroup]="step1Form">
             <app-master-data-form
               [danContent]="danContent"
@@ -59,16 +52,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="(isDan ? 'labels.dan' : 'labels.event') | translate"
-            [title]="
-              (isDan ? 'labels.wizard.topics' : 'labels.wizard.masterData')
-                | translate
-            "
+            [title]="'labels.wizard.topics' | translate"
             [content]="
-              isDan
-                ? ('dan.texts.wizard.topics' | translate)
-                : (activityContent$ | async)?.stepDescriptions?.[1]
-                    ?.description || ''
+              (activityContent$ | async)?.stepDescriptions?.[1]?.description ||
+              ''
             "
           >
           </app-title-with-content>
@@ -96,18 +83,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="(isDan ? 'labels.dan' : 'labels.event') | translate"
-            [title]="
-              (isDan
-                ? 'labels.wizard.externalLinks'
-                : 'labels.wizard.masterData'
-              ) | translate
-            "
+            [title]="'labels.wizard.externalLinks' | translate"
             [content]="
-              isDan
-                ? ('dan.texts.wizard.externalLinks' | translate)
-                : (activityContent$ | async)?.stepDescriptions?.[2]
-                    ?.description || ''
+              (activityContent$ | async)?.stepDescriptions?.[2]?.description ||
+              ''
             "
           >
           </app-title-with-content>
@@ -133,16 +112,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="(isDan ? 'labels.dan' : 'labels.event') | translate"
-            [title]="
-              (isDan ? 'labels.wizard.contact' : 'labels.wizard.masterData')
-                | translate
-            "
+            [title]="'labels.wizard.contact' | translate"
             [content]="
-              isDan
-                ? ('dan.texts.wizard.contact' | translate)
-                : (activityContent$ | async)?.stepDescriptions?.[3]
-                    ?.description || ''
+              (activityContent$ | async)?.stepDescriptions?.[3]?.description ||
+              ''
             "
           >
           </app-title-with-content>

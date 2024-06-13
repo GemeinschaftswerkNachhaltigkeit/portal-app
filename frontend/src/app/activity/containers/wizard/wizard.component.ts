@@ -165,7 +165,7 @@ export class WizardComponent implements OnDestroy, OnInit {
       contact: fb.group({
         firstName: fb.control('', [Validators.required]),
         lastName: fb.control('', [Validators.required]),
-        position: fb.control('', [Validators.required]),
+        position: fb.control('', []),
         email: fb.control('', [Validators.required, Validators.email]),
         phone: fb.control('', [])
       })
@@ -222,8 +222,6 @@ export class WizardComponent implements OnDestroy, OnInit {
     }
     end.updateValueAndValidity();
     start.updateValueAndValidity();
-    end.markAsTouched();
-    start.markAsTouched();
   }
 
   public async checkDanPeriod() {
@@ -260,6 +258,11 @@ export class WizardComponent implements OnDestroy, OnInit {
             this.markedAsDan = markedAsDan === 'DAN';
             this.handleOptionalFields(this.markedAsDan);
             if (this.markedAsDan) {
+              const masterData = this.step1Form.get('masterData') as FormGroup;
+              const end = masterData?.get('end') as FormControl;
+              const start = masterData?.get('start') as FormControl;
+              end.markAsTouched();
+              start.markAsTouched();
               this.maybeResetThemeFocus();
             }
           });
@@ -340,7 +343,8 @@ export class WizardComponent implements OnDestroy, OnInit {
       description: step1Values.masterData.description,
       period: {
         start: step1Values.masterData.start,
-        end: step1Values.masterData.end
+        end: step1Values.masterData.end,
+        permanent: step1Values.masterData.permanent
       },
       sustainableDevelopmentGoals:
         step2Values.topics.sustainableDevelopmentGoals,
@@ -366,6 +370,7 @@ export class WizardComponent implements OnDestroy, OnInit {
         description: data.description,
         start: data.period?.start ? DateTime.fromISO(data.period.start) : null,
         end: data.period?.end ? DateTime.fromISO(data.period.end) : null,
+        permanent: data.period?.permanent || false,
         url: data.location?.url,
         registerUrl: data.registerUrl,
         isDan: this.isDan ? 'DAN' : data.specialType || 'EVENT'
@@ -378,7 +383,10 @@ export class WizardComponent implements OnDestroy, OnInit {
         thematicFocus: data.thematicFocus,
         impactArea: data.impactArea,
         location: this.getLocationType(data),
-        address: data.location?.address
+        address: {
+          ...data.location?.address,
+          country: 'DE'
+        }
       }
     });
     this.step3Form.patchValue({
@@ -396,7 +404,7 @@ export class WizardComponent implements OnDestroy, OnInit {
       }
     });
     if (!this.isDan && !this.markedAsDan) {
-      this.handleIsPermanent(this.data?.period?.permanent || false);
+      this.handleIsPermanent(data?.period?.permanent || false);
     }
 
     if (this.getLocationType(data) !== 'ADDRESS') {
