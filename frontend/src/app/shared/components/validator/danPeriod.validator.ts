@@ -34,7 +34,6 @@ export function danPeriodValidator(startDateName: string): ValidatorFn {
 
     let error = null;
     error = !inDanPeriod ? { notInDanPeriod: { period: periodText } } : error;
-
     return error;
   };
 }

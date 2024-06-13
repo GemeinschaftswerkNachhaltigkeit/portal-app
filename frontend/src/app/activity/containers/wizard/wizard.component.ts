@@ -178,6 +178,9 @@ export class WizardComponent implements OnDestroy, OnInit {
       .then((activity) => {
         this.isDan = activity?.activityType === ActivityType.DAN;
         this.handleOptionalFields(this.isDan);
+        if (!this.isDan) {
+          this.checkDanPeriod();
+        }
         if (activity) {
           this.isModification =
             this.route.snapshot.queryParams['edit'] === 'true';
@@ -199,7 +202,6 @@ export class WizardComponent implements OnDestroy, OnInit {
 
     this.updateDateSelect();
     this.handleMarkedAsDan();
-    this.checkDanPeriod();
 
     this.getWizardContent();
     this.translate.onLangChange
@@ -227,25 +229,26 @@ export class WizardComponent implements OnDestroy, OnInit {
   public async checkDanPeriod() {
     if (this.step1Form) {
       const masterData = this.step1Form.get('masterData') as FormGroup;
+      const start = masterData?.get('start') as FormControl;
       const end = masterData?.get('end') as FormControl;
+      const isDan = masterData?.get('isDan') as FormControl;
 
-      this.isDanPeriod();
-      this.step1Form?.valueChanges
+      this.isDanPeriod(start?.value, end?.value);
+      end?.valueChanges
         .pipe(takeUntil(this.$unsubscribe))
         .subscribe(async () => {
-          this.inDanPeriod = await this.isDanPeriod();
-          if (!this.inDanPeriod) {
-            end.setValidators([Validators.required]);
+          const inPeriod = await this.isDanPeriod(start?.value, end?.value);
+          if (!inPeriod && isDan.value === 'EVENT') {
+            this.inDanPeriod = false;
+          } else {
+            this.inDanPeriod = true;
           }
         });
     }
   }
 
-  private async isDanPeriod() {
-    return await this.activityService.isInDanPeriod(
-      this.step1Form.get('masterData.start')?.value,
-      this.step1Form.get('masterData.end')?.value
-    );
+  private async isDanPeriod(start: string, end: string) {
+    return await this.activityService.isInDanPeriod(start, end);
   }
 
   private handleMarkedAsDan(): void {
