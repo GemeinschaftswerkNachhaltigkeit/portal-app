@@ -17,6 +17,7 @@ import { OffersComponent } from './containers/offers/offers.component';
 import { BestPracticesComponent } from './containers/best-practices/best-practices.component';
 import { AuthGuardWithOrga } from '../auth/guard/auth-guard-with-orga.service';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
+import { AuthGuardWithoutOrga } from '../auth/guard/auth-guard-without-orga.service';
 
 const routes: Routes = [
   {
@@ -89,7 +90,11 @@ const routes: Routes = [
       {
         path: 'dan-activities',
         component: DanActivitiesComponent,
-        canActivate: [AuthGuardWithForcedLogin, AuthGuardWithRoleCheck],
+        canActivate: [
+          AuthGuardWithForcedLogin,
+          AuthGuardWithRoleCheck,
+          AuthGuardWithoutOrga
+        ],
         data: {
           redirectUrl: ['/', 'account', 'my-organisation'],
           notRoles: [UserPermission.RNE_ADMIN]

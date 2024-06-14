@@ -64,7 +64,7 @@
   </div>
   <div class="error-wrapper" *ngIf="form.get('location')?.value === 'ADDRESS'">
     <app-alert
-      *ngIf="coordinatesNotFound"
+      *ngIf="coordinatesNotFound === 'NOT_FOUND'"
       [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
       [showIcon]="true"
       bgIcon="travel_explore"

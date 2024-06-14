@@ -130,7 +130,7 @@ export class WizardComponent implements OnDestroy, OnInit {
         end: fb.control('', [Validators.required]),
         permanent: fb.control(false, []),
         registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()]),
-        isDan: fb.control('EVENT', [])
+        isDan: fb.control('DAN', [])
       })
     });
     this.step2Form = fb.group({
@@ -240,6 +240,12 @@ export class WizardComponent implements OnDestroy, OnInit {
           const inPeriod = await this.isDanPeriod(start?.value, end?.value);
           if (!inPeriod && isDan.value === 'EVENT') {
             this.inDanPeriod = false;
+            isDan.setValue(null);
+          } else if (inPeriod && isDan.value === null) {
+            isDan.setValue('DAN');
+            this.inDanPeriod = true;
+          } else if (!inPeriod && isDan.value === null) {
+            this.inDanPeriod = false;
           } else {
             this.inDanPeriod = true;
           }
@@ -341,6 +347,8 @@ export class WizardComponent implements OnDestroy, OnInit {
         contact: step3Values.links[key]
       }));
 
+    const danValue = !this.inDanPeriod ? 'EVENT' : step1Values.masterData.isDan;
+
     return {
       name: step1Values.masterData.name,
       description: step1Values.masterData.description,
@@ -362,7 +370,7 @@ export class WizardComponent implements OnDestroy, OnInit {
       registerUrl: step1Values.masterData.registerUrl,
       socialMediaContacts: socialMedia,
       contact: step4Values.contact,
-      specialType: this.isDan ? 'DAN' : step1Values.masterData.isDan
+      specialType: this.isDan ? 'DAN' : danValue
     };
   }
 
@@ -376,7 +384,7 @@ export class WizardComponent implements OnDestroy, OnInit {
         permanent: data.period?.permanent || false,
         url: data.location?.url,
         registerUrl: data.registerUrl,
-        isDan: this.isDan ? 'DAN' : data.specialType || 'EVENT'
+        isDan: this.isDan ? 'DAN' : data.specialType || null
       }
     });
 

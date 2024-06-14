@@ -8,6 +8,7 @@ import { AuthGuardWithLoginCheck } from './auth/guard/auth-guard-login-check.ser
 import { EmailVerifySuccessPageComponent } from './auth/email-verify-success-page/email-verify-success-page.component';
 import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
 import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
+import { AuthGuardWithoutOrga } from './auth/guard/auth-guard-without-orga.service';
 
 const routes: Routes = [
   {
@@ -89,7 +90,7 @@ const routes: Routes = [
   {
     path: 'dan',
     loadChildren: () => import('./dan/dan.module').then((m) => m.DanModule),
-    canActivate: [AuthGuardWithLoginCheck]
+    canActivate: [AuthGuardWithLoginCheck, AuthGuardWithoutOrga]
   },
   {
     path: 'clearing',

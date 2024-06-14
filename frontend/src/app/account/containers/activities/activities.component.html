@@ -26,23 +26,14 @@
             (click)="createHandler()"
             [disabled]="!utils.hasOrga()"
           >
-            {{ 'account.buttons.addActivity' | translate }}
+            @if (featureService.show$('dan-account') | async) {
+              {{ 'account.buttons.addActivityOrDan' | translate }}
+            } @else {
+              {{ 'account.buttons.addActivity' | translate }}
+            }
           </button>
-          <app-feature feature="dan-account">
-            <button
-              headerAction
-              mat-flat-button
-              color="dan"
-              (click)="createDanHandler()"
-              [disabled]="!utils.hasOrga()"
-            >
-              {{ 'account.buttons.addDanActivity' | translate }}
-            </button>
-          </app-feature>
         </div>
-        <ng-container noEntriesContent>
-          {{ 'account.texts.noActivities' | translate }}
-        </ng-container>
+        <ng-container noEntriesContent> </ng-container>
 
         <app-spinner></app-spinner>
 

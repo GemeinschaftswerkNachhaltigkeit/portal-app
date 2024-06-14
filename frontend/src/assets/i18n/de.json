@@ -162,7 +162,7 @@
     "activate": "Aktivieren",
     "deactivate": "Deaktivieren",
     "wizard.masterData": "Über die Veranstaltung",
-    "wizard.aboutDan": "Über die Veranstaltung",
+    "wizard.aboutDan": "Über die Aktion",
     "wizard.topics": "Thema & Ort",
     "wizard.externalLinks": "Online-Auftritte",
     "wizard.contact": "Kontakt",
@@ -242,11 +242,7 @@
     "titles": {},
     "texts": {
       "wizard.period": "Achtung! Bitte erstelle nur Aktionen innerhalb des Aktionszeitraums",
-      "wizard.about": "Trage hier die wichtigsten Informationen zu deiner Aktion im Rahmen der Deutschen Aktionstage Nachhaltigkeit ein.",
-      "wizard.description": "Erkläre hier deine Aktion und beschreibe wie man mitmachen kann.",
-      "wizard.topics": "Trage hier weitere Informationen und Angaben zum Ort ein.",
-      "wizard.externalLinks": "Trage hier die Links zur Aktions-Webseite oder anderen relevanten Kanälen ein.",
-      "wizard.contact": "Trage hier die Kontaktinformationen für die Aktion ein."
+      "wizard.description": "Erkläre hier deine Aktion und beschreibe wie man mitmachen kann."
     }
   },
   "events": {
@@ -289,7 +285,7 @@
       "activitySubs": "Veranstaltungs-Merkliste",
       "noActivities": "Du hast keine Veranstaltungen",
       "noDanActivities": "Du hast keine Aktionen",
-      "activities": "Deine Veranstaltungen",
+      "activities": "Deine Veranstaltungen & Aktionen",
       "leave": "Aus Organisation austreten",
       "deleteOrga": "Organisation löschen",
       "deleteActivity": "Veranstaltung löschen",
@@ -335,7 +331,7 @@
       "activitySubs": "Entdecke Veranstaltungen auf der Plattform und merke sie dir, um den Überblick über deine Favoriten zu behalten. Klicke 'Veranstaltung merken' auf der Karte, um neue Veranstaltungen hinzuzufügen.",
       "noActivities": "Du kannst eine Veranstaltung einfach über den Button 'Veranstaltung anlegen' erstellen.",
       "noDanActivities": "Du kannst eine Aktion einfach über den Button 'Aktion anlegen' erstellen.",
-      "activities": "Hier kannst du Veranstaltungen deiner Organisation anlegen. Diese werden im Veransaltungskalender dargestellt.",
+      "activities": "Hier kannst du Veranstaltungen und Aktionen deiner Organisation anlegen. Diese werden im Veransaltungskalender dargestellt.",
       "leave": "Möchtest du wirklich aus deiner Organisation austreten? Nachdem du ausgetreten bist, musst du erneut hinzugefügt werden um deine Organisation wieder verwalten zu können.",
       "deleteOrga": "Soll deine Organisation wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten deiner Organisation verloren.",
       "deleteActivity": "Soll die Veranstaltung wirklich unwiderruflich gelöscht werden? Mit der Löschung gehen alle gespeicherten Daten dieser Veranstaltung verloren.",
@@ -368,6 +364,7 @@
       "saveUserData": "Speichern",
       "deleteAccount": "Account löschen",
       "addActivity": "Veranstaltung anlegen",
+      "addActivityOrDan": "Veranstaltung oder Aktion anlegen",
       "delete": "Löschen",
       "leave": "Austreten",
       "addOrganisation": "Organisation anlegen",

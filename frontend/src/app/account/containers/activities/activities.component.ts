@@ -8,6 +8,7 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 
 @Component({
   selector: 'app-activities',
@@ -30,7 +31,8 @@ export class ActivitiesComponent implements OnInit {
     private route: ActivatedRoute,
     private feedback: FeedbackService,
     private translate: TranslateService,
-    private loader: LoadingService
+    private loader: LoadingService,
+    public featureService: FeatureService
   ) {}
 
   pageChangedHandler(event: PageEvent): void {

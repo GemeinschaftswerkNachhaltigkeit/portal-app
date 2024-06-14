@@ -12,6 +12,7 @@ type HomeTile = {
   route?: string[];
   extUrl?: string;
   onlyOrga?: boolean;
+  onlyNoOrga?: boolean;
   featureFlag?: Features;
 };
 
@@ -44,7 +45,8 @@ export class HomeComponent implements OnInit {
       title: 'account.titles.danActivities',
       description: 'account.texts.danActivities',
       route: ['/account/dan-activities'],
-      featureFlag: 'dan-account'
+      featureFlag: 'dan-account',
+      onlyNoOrga: true
     },
     {
       title: 'account.titles.activities',

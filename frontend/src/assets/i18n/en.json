@@ -218,9 +218,7 @@
   "dan": {
     "texts": {
       "wizard.period": "Attention! Please only create actions within the action period",
-      "wizard.about": "Add the most important information about your event.",
-      "wizard.description": "Explain your event and describe how to participate.",
-      "wizard.topics": "Enter here more information and details about the location."
+      "wizard.description": "Explain your event and describe how to participate."
     }
   },
   "events": {
@@ -263,7 +261,7 @@
       "activitySubs": "Saved events",
       "noActivities": "You have no events",
       "noDanActivities": "You have no actions",
-      "activities": "Your events",
+      "activities": "Your events and actions",
       "leave": "Leave organisation",
       "deleteOrga": "Delete organisation",
       "deleteActivity": "Delete event",
@@ -309,7 +307,7 @@
       "activitySubs": "Discover and save events on the platform to keep track of your favourites. Click 'Save event' on the map to add new events.",
       "noActivities": "You can create an event by clicking the 'Create event' button.",
       "noDanActivities": "You can create an action by clicking the 'Create action' button.",
-      "activities": "Here you can create events for your organisation. These will be displayed in the event calendar.",
+      "activities": "Here you can create events and actions for your organisation. These will be displayed in the event calendar.",
       "leave": "Do you really want to leave your organisation? After you have left, you need to be added again to be able to manage your organisation again.",
       "deleteOrga": "Do you really want your organisation to be irrevocably deleted? With the deletion, all stored data of your organisation will be lost.",
       "deleteActivity": "Should the event really be irrevocably deleted? With the deletion, all stored data of this event will be lost.",
@@ -339,6 +337,7 @@
       "saveUserData": "Save",
       "deleteAccount": "Delete account",
       "addActivity": "Create event",
+      "addActivityOrDan": "Create event or action",
       "delete": "Delete",
       "leave": "Leave",
       "status": "State",

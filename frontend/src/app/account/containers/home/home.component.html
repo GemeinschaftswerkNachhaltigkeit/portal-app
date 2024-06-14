@@ -8,7 +8,9 @@
     <ng-container *ngFor="let tile of tiles">
       <ng-container *ngIf="featureService.show$(tile.featureFlag) | async">
         <app-info-card
-          *ngIf="tile.onlyOrga ? hasOrga() : true"
+          *ngIf="
+            tile.onlyOrga ? hasOrga() : tile.onlyNoOrga ? !hasOrga() : true
+          "
           [route]="tile.route"
           [extUrl]="tile.extUrl"
           [new]="tile.new"

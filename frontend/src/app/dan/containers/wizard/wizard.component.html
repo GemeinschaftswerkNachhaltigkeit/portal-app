@@ -14,9 +14,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.aboutDan' | translate"
-            [content]="'dan.texts.wizard.about' | translate"
+            [content]="
+              (danContent$ | async)?.stepDescriptions?.[0]?.description || ''
+            "
           >
           </app-title-with-content>
 
@@ -48,9 +49,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.topics' | translate"
-            [content]="'dan.texts.wizard.topics' | translate"
+            [content]="
+              (danContent$ | async)?.stepDescriptions?.[1]?.description || ''
+            "
           >
           </app-title-with-content>
           <form [formGroup]="step2Form">
@@ -73,9 +75,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.externalLinks' | translate"
-            [content]="'dan.texts.wizard.externalLinks' | translate"
+            [content]="
+              (danContent$ | async)?.stepDescriptions?.[2]?.description || ''
+            "
           >
           </app-title-with-content>
           <form [formGroup]="step3Form">
@@ -100,9 +103,10 @@
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
-            [type]="'labels.dan' | translate"
             [title]="'labels.wizard.contact' | translate"
-            [content]="'dan.texts.wizard.contact' | translate"
+            [content]="
+              (danContent$ | async)?.stepDescriptions?.[3]?.description || ''
+            "
           >
           </app-title-with-content>
           <form [formGroup]="step4Form">

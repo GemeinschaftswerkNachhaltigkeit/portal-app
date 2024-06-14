@@ -15,7 +15,7 @@ export class TopicsFormComponent implements OnInit, OnDestroy {
   @Input() descriptionPlaceholder = '';
   form!: FormGroup;
   unsubscribe$ = new Subject();
-  coordinatesNotFound = false;
+  coordinatesNotFound: 'NOT_FOUND' | 'FOUND' | undefined = undefined;
   sdgOptions = Array.from({ length: 17 }, (_, i) => i + 1);
   impactAreaOpts = Object.values(ImpactArea);
 
@@ -60,8 +60,15 @@ export class TopicsFormComponent implements OnInit, OnDestroy {
         state: formValues.state || ''
       }
     };
-    const coordinates = await this.geoService.getCoordinates(location);
-    this.coordinatesNotFound = !coordinates;
+    if (
+      location.address?.city &&
+      location.address?.street &&
+      location.address?.streetNo &&
+      location.address?.zipCode
+    ) {
+      const coordinates = await this.geoService.getCoordinates(location);
+      this.coordinatesNotFound = !coordinates ? 'NOT_FOUND' : 'FOUND';
+    }
   }
 
   private handleAddressState(): void {
