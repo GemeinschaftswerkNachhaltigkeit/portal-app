@@ -123,7 +123,7 @@ public class OrganisationActivitiesController {
     }
 
     @RolesAllowed(PermissionPool.ACTIVITY_CHANGE)
-    @PostMapping("/{actId}/copy")
+    @PutMapping("/{actId}/copy")
     public ActivityWorkInProgressResponseDto duplicateActivity(@PathVariable("orgId") Long orgId,
                                                                @PathVariable("actId") Long actId,
                                                                @Parameter(hidden = true)
