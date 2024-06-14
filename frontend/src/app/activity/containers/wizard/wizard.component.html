@@ -171,7 +171,7 @@
       >
         <div class="final-step-content-wrapper">
           <app-html-wrapper
-            [html]="danContent?.completed_message || ''"
+            [html]="(activityContent$ | async)?.completedMessage || ''"
           ></app-html-wrapper>
 
           <div class="actions">

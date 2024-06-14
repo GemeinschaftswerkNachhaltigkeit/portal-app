@@ -131,7 +131,7 @@ export class ActivitesApiService {
     if (dan) {
       endpoint = `${environment.apiUrl}/organisations/${orgaIdOfUser}/dans/${activityId}/copy`;
     }
-    return this.http.post<ActivityWIP>(endpoint, {}).pipe(
+    return this.http.put<ActivityWIP>(endpoint, {}).pipe(
       map((activityWIP: ActivityWIP) => ({
         activityId: activityWIP.randomUniqueId,
         orgaId: orgaIdOfUser
