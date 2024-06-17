@@ -8,7 +8,7 @@
   >
     <mat-step
       [stepControl]="step1Form!"
-      [label]="'labels.wizard.aboutDan' | translate"
+      [label]="'labels.wizard.masterData' | translate"
       [editable]="isEditable"
     >
       <app-wizard-sidebar-layout>
@@ -39,7 +39,7 @@
         </div>
         <app-form-advatages
           sidebar
-          [content]="danContent$ | async"
+          [content]="activityContent$ | async"
         ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
