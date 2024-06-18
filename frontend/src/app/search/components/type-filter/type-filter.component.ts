@@ -37,7 +37,7 @@ export class TypeFilterComponent {
       return this.searchConent()?.event_info_text || '';
     }
     if (type === 'marketplace') {
-      return this.searchConent()?.markteplace_info_text || '';
+      return this.searchConent()?.marketplace_info_text || '';
     }
     return '';
   }

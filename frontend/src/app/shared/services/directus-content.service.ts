@@ -31,7 +31,7 @@ export type SearchContent = {
   contet: string;
   organisation_info_text: string;
   event_info_text: string;
-  markteplace_info_text: string;
+  marketplace_info_text: string;
 };
 
 export type ImportOrgContent = {
