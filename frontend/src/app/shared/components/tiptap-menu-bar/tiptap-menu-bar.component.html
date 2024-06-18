@@ -3,6 +3,9 @@
   <label class="label">
     <ng-content></ng-content>
   </label>
+  <div class="counter">
+    <ng-content select="[counter]"></ng-content>
+  </div>
   <ng-container *ngIf="!disabled">
     <!-- <button type="button" (click)="editor.chain().focus().liftListItem('listItem').run()">
       <mat-icon>format_indent_decrease</mat-icon>

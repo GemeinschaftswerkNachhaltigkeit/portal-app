@@ -51,21 +51,19 @@
       <app-tiptap-menu-bar
         [editor]="editor"
         [disabled]="organisationFormGroup.get('description')?.disabled!"
-        >{{
-          'forms.labels.organisationDescription' | translate
-        }}
-        *</app-tiptap-menu-bar
-      >
+        ><span>{{ 'forms.labels.organisationDescription' | translate }} *</span>
+
+        <app-char-count
+          counter
+          [count]="currentChars()"
+          [total]="1500"
+        ></app-char-count>
+      </app-tiptap-menu-bar>
       <tiptap-editor
         [editor]="editor"
         formControlName="description"
       ></tiptap-editor>
-      <div class="char-count">
-        <app-char-count
-          [count]="currentChars()"
-          [total]="1500"
-        ></app-char-count>
-      </div>
+
       <div class="mat-form-field-subscript-wrapper">
         <mat-error>
           <app-form-field-error

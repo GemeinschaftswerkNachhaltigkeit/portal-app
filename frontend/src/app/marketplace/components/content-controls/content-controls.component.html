@@ -36,18 +36,19 @@
         <app-tiptap-menu-bar
           [editor]="editor"
           [disabled]="form.get('description')?.disabled!"
-          >{{ 'forms.labels.description' | translate }} *</app-tiptap-menu-bar
-        >
+          ><span>{{ 'forms.labels.description' | translate }} *</span>
+
+          <app-char-count
+            counter
+            [count]="currentCharsHtml('description')"
+            [total]="1500"
+          ></app-char-count>
+        </app-tiptap-menu-bar>
         <tiptap-editor
           [editor]="editor"
           formControlName="description"
         ></tiptap-editor>
-        <div class="char-count">
-          <app-char-count
-            [count]="currentCharsHtml('description')"
-            [total]="1500"
-          ></app-char-count>
-        </div>
+        <div class="char-count"></div>
         <div class="mat-form-field-subscript-wrapper">
           <mat-error>
             <app-form-field-error
