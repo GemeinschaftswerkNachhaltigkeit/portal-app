@@ -18,9 +18,8 @@
               : ('account.texts.activities' | translate)
           }}
         </ng-container>
-        <div class="buttons">
+        <div class="buttons" headerAction>
           <button
-            headerAction
             mat-flat-button
             color="accent"
             (click)="createHandler()"
@@ -33,7 +32,9 @@
             }
           </button>
         </div>
-        <ng-container noEntriesContent> </ng-container>
+        <ng-container noEntriesContent>
+          <div>{{ 'account.texts.noActivities' | translate }}</div>
+        </ng-container>
 
         <app-spinner></app-spinner>
 
