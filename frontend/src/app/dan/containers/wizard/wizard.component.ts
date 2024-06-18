@@ -147,6 +147,7 @@ export class WizardComponent implements OnDestroy {
       contact: fb.group({
         firstName: fb.control('', [Validators.required]),
         lastName: fb.control('', [Validators.required]),
+        position: fb.control('', []),
         email: fb.control('', [Validators.required, Validators.email]),
         phone: fb.control('', [])
       })

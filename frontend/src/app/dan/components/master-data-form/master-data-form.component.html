@@ -58,7 +58,10 @@
           [total]="1500"
         ></app-char-count>
       </app-tiptap-menu-bar>
-      <div class="char-count"></div>
+      <tiptap-editor
+        [editor]="editor"
+        formControlName="description"
+      ></tiptap-editor>
       <div class="mat-form-field-subscript-wrapper">
         <mat-error>
           <app-form-field-error
