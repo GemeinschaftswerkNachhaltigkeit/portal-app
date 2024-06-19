@@ -15,6 +15,8 @@ import com.querydsl.core.types.dsl.PathBuilder;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
@@ -64,6 +66,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RequiredArgsConstructor
 public class MapSearchV2Controller {
 
+    private static final Logger log = LoggerFactory.getLogger(MapSearchV2Controller.class);
     private final GeometryFactory factory;
     private final MapSearchV2ResultMapper mapper;
     @PersistenceContext
@@ -102,10 +105,8 @@ public class MapSearchV2Controller {
 
         jpaQuery.orderBy(expiredExpression().asc());
 
-
-
         if (pageable.getSort().isSorted()) {
-            jpaQuery.orderBy(getOrderSpecifiers(pageable, QMapSearchV2Result.class));
+            jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.period.start.asc());
         } else {
             if (hasText(query)) {
                 jpaQuery.orderBy(tsRankExpression(query).desc());
