@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
+
+import com.querydsl.core.types.dsl.PathBuilder;
+
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.data.domain.Page;
@@ -97,12 +102,18 @@ public class MapSearchV2Controller {
 
         jpaQuery.orderBy(expiredExpression().asc());
 
-        if (hasText(query)) {
-            jpaQuery.orderBy(tsRankExpression(query).desc());
+
+
+        if (pageable.getSort().isSorted()) {
+            jpaQuery.orderBy(getOrderSpecifiers(pageable, QMapSearchV2Result.class));
+        } else {
+            if (hasText(query)) {
+                jpaQuery.orderBy(tsRankExpression(query).desc());
+            }
+            jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.modifiedAt.desc())
+                    .orderBy(QMapSearchV2Result.mapSearchV2Result.createdAt.desc());
         }
 
-        jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.modifiedAt.desc())
-                .orderBy(QMapSearchV2Result.mapSearchV2Result.createdAt.desc());
         jpaQuery.offset(pageable.getOffset()).limit(pageable.getPageSize());
 
         final Page<MapSearchV2Result> activitiesPage =
@@ -151,6 +162,21 @@ public class MapSearchV2Controller {
                 .orderBy(QMapSearchV2Result.mapSearchV2Result.createdAt.desc());
 
         return jpaQuery.stream().map(mapper::mapSearchMarkerResponseDto).collect(Collectors.toUnmodifiableList());
+    }
+
+    private OrderSpecifier[] getOrderSpecifiers(Pageable pageable, Class klass) {
+
+        // orderVariable must match the variable of FROM
+        String className = klass.getSimpleName();
+        final String orderVariable =
+                String.valueOf(Character.toLowerCase(className.charAt(0))).concat(className.substring(1));
+
+        return pageable.getSort().stream()
+                .map(order -> new OrderSpecifier(
+                        Order.valueOf(order.getDirection().toString()),
+                        new PathBuilder(klass, orderVariable).get(order.getProperty()))
+                )
+                .toArray(OrderSpecifier[]::new);
     }
 
     private NumberTemplate<Integer> expiredExpression() {
