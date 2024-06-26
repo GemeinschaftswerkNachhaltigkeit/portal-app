@@ -96,7 +96,7 @@ const routes: Routes = [
           AuthGuardWithoutOrga
         ],
         data: {
-          redirectUrl: ['/', 'account', 'my-organisation'],
+          redirectUrl: ['/', 'account', 'activities'],
           notRoles: [UserPermission.RNE_ADMIN]
         }
       },
