@@ -7,6 +7,7 @@ import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout
 import { EmbeddedDetailsCardComponent } from './containers/embedded-details-card/embedded-details-card.component';
 import { EmbeddedMapComponent } from './components/map/embedded-map.component';
 import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-
     EmbeddedMapRoutingModule,
     SharedMapModule,
     CommonModule,
-    OrgaBadgesComponent
+    OrgaBadgesComponent,
+    MatButtonModule
   ]
 })
 export class EmbeddedMapModule {}
