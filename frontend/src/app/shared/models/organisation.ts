@@ -4,6 +4,7 @@ import LocationData from 'src/app/shared/models/location-data';
 import { Contact } from 'src/app/shared/models/contact';
 import { SocialMediaContact } from 'src/app/shared/models/social-media-contact';
 import { OrganisationStatus } from './organisation-status';
+import { ImageMode } from '../components/form/upload-image/upload-image.component';
 
 type Organisation = {
   id?: number;
@@ -23,6 +24,7 @@ type Organisation = {
   modifiedAt?: string;
   initiator?: boolean;
   projectSustainabilityWinner?: boolean;
+  bannerImageMode?: ImageMode;
 };
 
 export default Organisation;

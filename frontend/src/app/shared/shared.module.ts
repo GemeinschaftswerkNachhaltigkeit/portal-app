@@ -91,6 +91,7 @@ import { OnlineFilterComponent } from './components/form/filters/online-filter/o
 import { ImageComponent } from './components/image/image.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -190,7 +191,8 @@ import { FormAdvantagesComponent } from './components/wizard/form-advatages/form
     MatStepperModule,
     MatTooltipModule,
     DropzoneModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatButtonToggleModule
   ],
   exports: [
     CommonModule,

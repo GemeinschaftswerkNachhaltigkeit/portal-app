@@ -81,7 +81,6 @@
       [labelTranslationKey]="'forms.labels.organisationLogo'"
       [disabled]="organisationFormGroup.disabled"
       [fileId]="org.logo"
-      imageFillType="contain"
       style="width: 200px"
       [errorMsg]="'sign-up.upload.error' | translate"
       [info]="
@@ -93,6 +92,8 @@
     ></app-upload-image>
 
     <app-upload-image
+      [imageTools]="true"
+      [imageMode]="org.bannerImageMode"
       [config]="dzService.getImageConfig('image', org.randomUniqueId)"
       [aspectRatio]="dzService.getAspectRatio('banner')"
       [labelTranslationKey]="'forms.labels.organisationImage'"
@@ -105,6 +106,7 @@
         ('sign-up.upload.titleImageWidthTooltipExt' | translate)
       "
       (delete)="deleteHandler(imageTypes.TITLE)"
+      (imageModeChanged)="imageModeHandler($event)"
     ></app-upload-image>
   </div>
   <div>

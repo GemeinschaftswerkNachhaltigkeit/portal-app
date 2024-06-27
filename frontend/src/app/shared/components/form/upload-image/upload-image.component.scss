@@ -29,7 +29,6 @@ dropzone.image {
   margin-top: $spacing-2;
   max-width: 22rem;
 }
-.upload-label,
 .upload-error {
   flex: 0 0 100%;
 }
@@ -68,4 +67,12 @@ dropzone.image {
 .disabled {
   border-color: rgba(0, 0, 0, 0.06);
   color: rgba(0, 0, 0, 0.38);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-block: $spacing-1;
 }

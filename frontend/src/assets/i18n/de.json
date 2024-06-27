@@ -50,7 +50,9 @@
     "addNewEvent": "Veranstaltung hinzufügen",
     "toDan": "Aktion hinzufügen",
     "registerUrlButton": "Zur Veranstaltung anmelden",
-    "resetZoom": "Karte zurücksetzen"
+    "resetZoom": "Karte zurücksetzen",
+    "contain": "einpassen",
+    "cover": "ausfüllen"
   },
   "forms": {
     "labels": {

@@ -49,7 +49,9 @@
     "addNewEvent": "Add event",
     "toDan": "Add action",
     "registerUrlButton": "Register for the event",
-    "resetZoom": "Reset map"
+    "resetZoom": "Reset map",
+    "contain": "Contain",
+    "cover": "Cover"
   },
   "forms": {
     "labels": {

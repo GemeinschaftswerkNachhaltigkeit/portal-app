@@ -1,6 +1,25 @@
 <ng-container *ngIf="configuration">
-  <div class="upload-label" [class.disabled]="disabled">
-    {{ labelTranslationKey | translate }}
+  <div class="header">
+    <div class="upload-label" [class.disabled]="disabled">
+      {{ labelTranslationKey | translate }}
+    </div>
+    @if (imageTools) {
+      <div class="adjust-image-actions small">
+        <mat-button-toggle-group
+          name="imageMode"
+          aria-label="Image Mode"
+          [value]="imageMode"
+          (valueChange)="setImageMode($event)"
+        >
+          <mat-button-toggle value="contain">{{
+            'btn.contain' | translate
+          }}</mat-button-toggle>
+          <mat-button-toggle value="cover">{{
+            'btn.cover' | translate
+          }}</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    }
   </div>
 
   <div class="dropzone-wrapper">
@@ -8,7 +27,7 @@
       <img
         *ngIf="fileId"
         [src]="dropzoneService.getFileUrl(fileId)"
-        [ngStyle]="{ 'object-fit': imageFillType }"
+        [ngStyle]="{ 'object-fit': imageMode }"
         alt="upload-image"
       />
     </div>

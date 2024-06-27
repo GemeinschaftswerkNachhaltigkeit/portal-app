@@ -52,6 +52,7 @@ export class OrganisationService {
       if (noOrg) {
         await this.authService.refreshToken();
       }
+      response.bannerImageMode = 'contain';
       this.orgDataSubject.next(response);
       this.orgUpdateStateSubject.next(null);
       return response;
@@ -91,6 +92,7 @@ export class OrganisationService {
         error: false,
         formStep: formStep
       });
+      response.bannerImageMode = 'contain';
       this.orgDataSubject.next(response);
       return response;
     } catch (e) {
