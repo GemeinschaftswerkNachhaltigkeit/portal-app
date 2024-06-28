@@ -1,6 +1,13 @@
 img {
-  object-fit: cover;
   width: 100%;
   height: 100%;
   object-position: center;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.contain {
+  object-fit: contain;
 }

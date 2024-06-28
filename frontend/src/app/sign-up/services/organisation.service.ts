@@ -52,6 +52,9 @@ export class OrganisationService {
       if (noOrg) {
         await this.authService.refreshToken();
       }
+      /**
+       * Todo Remove if backend is ready
+       */
       response.bannerImageMode = 'contain';
       this.orgDataSubject.next(response);
       this.orgUpdateStateSubject.next(null);
@@ -92,6 +95,9 @@ export class OrganisationService {
         error: false,
         formStep: formStep
       });
+      /**
+       * Todo Remove if backend is ready
+       */
       response.bannerImageMode = 'contain';
       this.orgDataSubject.next(response);
       return response;

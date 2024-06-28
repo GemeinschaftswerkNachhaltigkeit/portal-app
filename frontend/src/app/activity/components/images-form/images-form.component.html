@@ -16,6 +16,8 @@
   ></app-upload-image>
 
   <app-upload-image
+    [imageTools]="bannerImageTools"
+    [imageMode]="bannerImageMode"
     [config]="dzService.getImageConfig('image', orgId, activity.randomUniqueId)"
     [labelTranslationKey]="'forms.labels.activityImage'"
     [fileId]="activity.image"
@@ -27,5 +29,6 @@
       ('sign-up.upload.titleImageWidthTooltipExt' | translate)
     "
     (delete)="deleteImageHandler(imageTypes.TITLE)"
+    (imageModeChanged)="imageModeHandler($event)"
   ></app-upload-image>
 </div>

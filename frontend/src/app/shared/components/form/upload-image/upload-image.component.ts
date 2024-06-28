@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { DropzoneService } from '../../../services/dropzone.service';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 export type ImageMode = 'cover' | 'contain';
 
@@ -61,9 +62,10 @@ export class UploadImageComponent implements OnInit, OnChanges {
     }
   }
 
-  setImageMode(imageMode: 'cover' | 'contain') {
-    this.imageMode = imageMode;
-    this.imageModeChanged.emit(imageMode);
+  setImageMode(change: MatButtonToggleChange) {
+    const value = change.value as ImageMode;
+    this.imageMode = value;
+    this.imageModeChanged.emit(value);
   }
 
   onDropZoneInit(event: any) {

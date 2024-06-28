@@ -9,7 +9,7 @@
           name="imageMode"
           aria-label="Image Mode"
           [value]="imageMode"
-          (valueChange)="setImageMode($event)"
+          (change)="setImageMode($event)"
         >
           <mat-button-toggle value="contain">{{
             'btn.contain' | translate

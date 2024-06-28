@@ -30,11 +30,16 @@
               [isDan]="isDan"
             ></app-master-data-form>
             <app-images-form
+              [bannerImageTools]="true"
+              [bannerImageMode]="activity.bannerImageMode"
               [activity]="activity"
               [orgId]="orgId()"
               (deleteImage)="deleteHandler($event)"
+              (imageMode)="imageModeHandler($event)"
             ></app-images-form>
           </form>
+          <pre>{{ this.step1Form.value | json }}</pre>
+
           <app-actions [showPrevBtn]="false"></app-actions>
         </div>
         <app-form-advatages

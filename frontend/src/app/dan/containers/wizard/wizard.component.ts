@@ -35,6 +35,7 @@ import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
+import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-wizard',
@@ -111,7 +112,8 @@ export class WizardComponent implements OnDestroy {
           durationValidator('start', 3, 'months'),
           danPeriodValidator('start')
         ]),
-        registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()])
+        registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()]),
+        bannerImageMode: fb.control('cover', [])
       })
     });
     this.step2Form = fb.group({
@@ -235,7 +237,8 @@ export class WizardComponent implements OnDestroy {
       },
       registerUrl: step1Values.masterData.registerUrl,
       socialMediaContacts: socialMedia,
-      contact: step4Values.contact
+      contact: step4Values.contact,
+      bannerImageMode: step1Values.masterData.bannerImageMode
     };
   }
 
@@ -248,7 +251,8 @@ export class WizardComponent implements OnDestroy {
         start: data.period?.start ? DateTime.fromISO(data.period.start) : null,
         end: data.period?.end ? DateTime.fromISO(data.period.end) : null,
         url: data.location?.url,
-        registerUrl: data.registerUrl
+        registerUrl: data.registerUrl,
+        bannerImageMode: data.bannerImageMode || 'cover'
       }
     });
     this.step2Form.patchValue({
@@ -331,6 +335,12 @@ export class WizardComponent implements OnDestroy {
 
   deleteHandler(image: ImageType): void {
     this.activityService.deleteImage(this.orgId, this.activityId, image, true);
+  }
+
+  imageModeHandler(imageMode: ImageMode) {
+    const control = this.step1Form.get('masterData.bannerImageMode');
+    control?.setValue(imageMode);
+    control?.markAsDirty();
   }
 
   isAllowedToEdit() {
