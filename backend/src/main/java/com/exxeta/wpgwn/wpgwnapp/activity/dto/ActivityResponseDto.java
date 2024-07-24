@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ActivityTypeDto;
@@ -35,6 +37,6 @@ public class ActivityResponseDto implements Serializable {
     private final String logo;
     private final String image;
     private final Set<SocialMediaContactDto> socialMediaContacts = new LinkedHashSet<>();
-
+    private BannerImageMode bannerImageMode;
     private final OrganisationDataDto organisation;
 }

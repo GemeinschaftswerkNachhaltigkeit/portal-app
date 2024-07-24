@@ -1,5 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -144,6 +146,11 @@ public class OrganisationWorkInProgress extends AuditableEntityBase implements I
 
     @Column(name = "keycloak_group_id")
     private String keycloakGroupId;
+
+
+    @Column(name = "banner_image_mode")
+    @Enumerated(EnumType.STRING)
+    private BannerImageMode bannerImageMode;
 
     /**
      * Speichert die Daten, wenn eine E-Mail mit der Aufforderung zum Aktualisieren der Daten gesendet wurde.

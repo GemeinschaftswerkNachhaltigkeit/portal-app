@@ -1,5 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress.dto;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
@@ -79,4 +81,5 @@ public class OrganisationWorkInProgressWithDuplicateFlagResponseDto implements S
     private Source source;
     private ImportProcessDto importProcess;
     private boolean hasDuplicates;
+    private BannerImageMode bannerImageMode;
 }

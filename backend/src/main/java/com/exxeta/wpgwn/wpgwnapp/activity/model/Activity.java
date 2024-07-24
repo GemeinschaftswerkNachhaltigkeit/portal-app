@@ -1,5 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.activity.model;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -127,5 +129,9 @@ public class Activity extends AuditableEntityBase {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ItemStatus status;
+
+    @Column(name = "banner_image_mode")
+    @Enumerated(EnumType.STRING)
+    private BannerImageMode bannerImageMode;
 
 }

@@ -16,6 +16,7 @@ import com.exxeta.wpgwn.wpgwnapp.shared.dto.LocationDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.PeriodDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SocialMediaContactDto;
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.SpecialTypeDto;
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ImpactArea;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.ThematicFocus;
 
@@ -55,5 +56,7 @@ public class ActivityWorkInProgressRequestDto implements Serializable {
     private LocalDate approvedUntil;
 
     private Boolean privacyConsent;
+
+    private BannerImageMode bannerImageMode;
 
 }

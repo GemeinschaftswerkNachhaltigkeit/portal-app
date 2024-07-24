@@ -1,5 +1,6 @@
 package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.SpecialType;
 
 import jakarta.persistence.CascadeType;
@@ -154,6 +155,10 @@ public class ActivityWorkInProgress extends AuditableEntityBase implements IWork
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ItemStatus status;
+
+    @Column(name = "banner_image_mode")
+    @Enumerated(EnumType.STRING)
+    private BannerImageMode bannerImageMode;
 
     @Override
     public boolean equals(Object o) {
