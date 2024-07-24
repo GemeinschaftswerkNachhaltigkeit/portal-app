@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ContactDto;
@@ -30,7 +32,7 @@ public class OrganisationResponseDto implements Serializable {
     private final OrganisationType organisationType;
     private final Boolean initiator;
     private final Boolean projectSustainabilityWinner;
-
+    private BannerImageMode bannerImageMode;
 //    private final List<ActivityResponseDto> activities;
 
 }

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ActivityTypeDto;
@@ -36,5 +38,6 @@ public class ActivityDetailsResponseDto implements Serializable {
     private final PeriodDto period;
     private final String logo;
     private final String image;
+    private BannerImageMode bannerImageMode;
     private final OrganisationDataDto organisation;
 }

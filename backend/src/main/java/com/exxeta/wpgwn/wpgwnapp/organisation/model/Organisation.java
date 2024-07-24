@@ -1,5 +1,7 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation.model;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -133,5 +135,9 @@ public class Organisation extends AuditableEntityBase {
     @NotBlank
     @Column(name = "keycloak_group_id")
     private String keycloakGroupId;
+
+    @Column(name = "banner_image_mode")
+    @Enumerated(EnumType.STRING)
+    private BannerImageMode bannerImageMode;
 
 }

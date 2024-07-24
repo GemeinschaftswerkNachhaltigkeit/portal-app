@@ -7,6 +7,8 @@ import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.excel_import.dto.ImportProcessDto;
@@ -66,4 +68,5 @@ public class OrganisationWorkInProgressWithContactInviteStatusResponseDto implem
     private final String rejectionReason;
     private Source source;
     private ImportProcessDto importProcess;
+    private BannerImageMode bannerImageMode;
 }
