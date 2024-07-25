@@ -29,9 +29,12 @@
               [danPeriodParams]="danPeriodParams"
               [isDan]="isDan"
             ></app-master-data-form>
+
             <app-images-form
               [bannerImageTools]="true"
-              [bannerImageMode]="activity.bannerImageMode"
+              [bannerImageMode]="
+                step1Form.get('masterData.bannerImageMode')?.value
+              "
               [activity]="activity"
               [orgId]="orgId()"
               (deleteImage)="deleteHandler($event)"

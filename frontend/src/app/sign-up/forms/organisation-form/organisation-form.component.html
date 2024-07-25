@@ -93,7 +93,7 @@
 
     <app-upload-image
       [imageTools]="true"
-      [imageMode]="org.bannerImageMode"
+      [imageMode]="organisationFormGroup.get('bannerImageMode')?.value"
       [config]="dzService.getImageConfig('image', org.randomUniqueId)"
       [aspectRatio]="dzService.getAspectRatio('banner')"
       [labelTranslationKey]="'forms.labels.organisationImage'"

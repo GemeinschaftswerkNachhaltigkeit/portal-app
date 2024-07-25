@@ -378,6 +378,7 @@ export class WizardComponent implements OnDestroy, OnInit {
   }
 
   private patchFormData(data: ActivityWIP): void {
+    console.log('>>>> BANNER MODE', data.bannerImageMode || 'cover');
     this.step1Form.patchValue({
       masterData: {
         name: data.name,

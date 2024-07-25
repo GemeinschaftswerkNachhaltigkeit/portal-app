@@ -45,10 +45,6 @@ export class MapApiService {
             newResults.content = results.content.map((r) => {
               const resType = r.resultType;
               if (resType === 'ORGANISATION') {
-                /**
-                 * Todo Remove if backend is ready
-                 */
-                r.organisation.bannerImageMode = 'contain';
                 return {
                   ...r.organisation,
                   resultType: resType
@@ -86,10 +82,6 @@ export class MapApiService {
       .get<SearchResult>(`${environment.apiUrl}/${enpoint}/${id}`, {})
       .pipe(
         map((result: SearchResult) => {
-          /**
-           * Todo Remove if backend is ready
-           */
-          result.bannerImageMode = 'contain';
           result.resultType = type;
           return result;
         })

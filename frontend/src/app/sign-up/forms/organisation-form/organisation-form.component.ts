@@ -116,7 +116,7 @@ export class OrganisationFormComponent implements OnInit, OnChanges, OnDestroy {
         organisationType: this.org.organisationType,
         description: this.wysiwygService.htmlDecode(this.org.description),
         privacyConsent: this.org.privacyConsent,
-        bannerImageMode: this.org.bannerImageMode
+        bannerImageMode: this.org.bannerImageMode || 'cover'
       });
       this.organisationFormGroup.markAllAsTouched();
 

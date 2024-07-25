@@ -44,10 +44,7 @@ export class ActivityService {
       const response = await lastValueFrom(
         this.http.get<ActivityWIP>(endpoint)
       );
-      /**
-       * Todo Remove if backend is ready
-       */
-      response.bannerImageMode = 'contain';
+
       this.activityDataSubject.next(response);
       this.activityUpdateStateSubject.next(null);
       return response;
@@ -81,10 +78,6 @@ export class ActivityService {
         error: false,
         formStep: formStep
       });
-      /**
-       * Todo Remove if backend is ready
-       */
-      response.bannerImageMode = 'contain';
       this.activityDataSubject.next(response);
       return response;
     } catch (e) {
