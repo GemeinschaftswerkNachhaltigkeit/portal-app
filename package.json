@@ -1,6 +1,6 @@
 {
   "name": "WPGWN-WebApp",
-  "version": "1.46.3",
+  "version": "1.47.0",
   "private": true,
   "devDependencies": {
     "@semantic-release/git": "10.0.1",
