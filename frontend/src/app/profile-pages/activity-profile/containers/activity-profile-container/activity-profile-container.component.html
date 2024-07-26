@@ -28,6 +28,7 @@
           resultType: 'ACTIVITY'
         }"
         [bgImageName]="activity.image || activity.organisation?.image"
+        [imageMode]="activity.bannerImageMode"
         [name]="activity.name"
         [period]="activity.period"
         [isExpired]="isExpired(activity)"
