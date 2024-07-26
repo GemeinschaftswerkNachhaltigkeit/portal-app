@@ -23,6 +23,7 @@ import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysi
 import { OrganisationType } from 'src/app/shared/models/organisation-type';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
+import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-organisation-form',
@@ -65,7 +66,8 @@ export class OrganisationFormComponent implements OnInit, OnChanges, OnDestroy {
       name: ['', [Validators.required, Validators.maxLength(100)]],
       organisationType: ['', Validators.required],
       description: ['', [wysiwygContentRequired(100, 1500)]],
-      privacyConsent: [false, [Validators.requiredTrue]]
+      privacyConsent: [false, [Validators.requiredTrue]],
+      bannerImageMode: ['cover']
     });
 
     this.getParticipationUrl();
@@ -90,6 +92,12 @@ export class OrganisationFormComponent implements OnInit, OnChanges, OnDestroy {
     this.deleteImage.emit(image);
   }
 
+  imageModeHandler(imageMode: ImageMode) {
+    const control = this.organisationFormGroup.get('bannerImageMode');
+    control?.setValue(imageMode);
+    control?.markAsDirty();
+  }
+
   currentChars(): number {
     const desc = this.organisationFormGroup.get('description')?.value;
     return UtilsService.stripHtml(desc).length;
@@ -107,7 +115,8 @@ export class OrganisationFormComponent implements OnInit, OnChanges, OnDestroy {
         name: this.org.name,
         organisationType: this.org.organisationType,
         description: this.wysiwygService.htmlDecode(this.org.description),
-        privacyConsent: this.org.privacyConsent
+        privacyConsent: this.org.privacyConsent,
+        bannerImageMode: this.org.bannerImageMode || 'cover'
       });
       this.organisationFormGroup.markAllAsTouched();
 

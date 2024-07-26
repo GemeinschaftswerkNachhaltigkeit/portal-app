@@ -1,1 +1,5 @@
-<img [src]="getSrc()" alt="alt" />
+<img
+  [src]="getSrc()"
+  alt="alt"
+  [ngClass]="{ cover: mode === 'cover', contain: mode === 'contain' }"
+/>

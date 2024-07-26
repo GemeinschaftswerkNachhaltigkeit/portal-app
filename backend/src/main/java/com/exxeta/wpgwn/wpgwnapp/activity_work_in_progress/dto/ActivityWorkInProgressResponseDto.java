@@ -3,6 +3,8 @@ package com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.dto;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.excel_import.dto.ImportProcessDto;
@@ -34,4 +36,5 @@ public class ActivityWorkInProgressResponseDto implements Serializable {
     private PeriodDto period;
     private String logo;
     private String image;
+    private BannerImageMode bannerImageMode;
 }

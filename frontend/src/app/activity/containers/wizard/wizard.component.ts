@@ -42,6 +42,7 @@ import { MasterDataFormComponent } from '../../components/master-data-form/maste
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
+import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-wizard',
@@ -130,7 +131,8 @@ export class WizardComponent implements OnDestroy, OnInit {
         end: fb.control('', [Validators.required]),
         permanent: fb.control(false, []),
         registerUrl: fb.control('', [Validators.maxLength(1000), urlPattern()]),
-        isDan: fb.control('DAN', [])
+        isDan: fb.control('DAN', []),
+        bannerImageMode: fb.control('cover', [])
       })
     });
     this.step2Form = fb.group({
@@ -370,11 +372,13 @@ export class WizardComponent implements OnDestroy, OnInit {
       registerUrl: step1Values.masterData.registerUrl,
       socialMediaContacts: socialMedia,
       contact: step4Values.contact,
-      specialType: this.isDan ? 'DAN' : danValue
+      specialType: this.isDan ? 'DAN' : danValue,
+      bannerImageMode: step1Values.masterData.bannerImageMode
     };
   }
 
   private patchFormData(data: ActivityWIP): void {
+    console.log('>>>> BANNER MODE', data.bannerImageMode || 'cover');
     this.step1Form.patchValue({
       masterData: {
         name: data.name,
@@ -384,7 +388,8 @@ export class WizardComponent implements OnDestroy, OnInit {
         permanent: data.period?.permanent || false,
         url: data.location?.url,
         registerUrl: data.registerUrl,
-        isDan: this.isDan ? 'DAN' : data.specialType || null
+        isDan: this.isDan ? 'DAN' : data.specialType || null,
+        bannerImageMode: data.bannerImageMode || 'cover'
       }
     });
 
@@ -481,6 +486,12 @@ export class WizardComponent implements OnDestroy, OnInit {
       image,
       true
     );
+  }
+
+  imageModeHandler(imageMode: ImageMode) {
+    const control = this.step1Form.get('masterData.bannerImageMode');
+    control?.setValue(imageMode);
+    control?.markAsDirty();
   }
 
   isAllowedToEdit() {

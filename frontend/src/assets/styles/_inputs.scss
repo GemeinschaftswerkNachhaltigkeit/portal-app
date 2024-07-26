@@ -48,3 +48,18 @@ button.date-with-data {
   border-radius: 9999px;
   border: 2px solid white;
 }
+
+.mat-button-toggle-appearance-standard.mat-button-toggle-checked {
+  background-color: $blue-navy !important;
+  color: white !important;
+}
+
+.mat-button-toggle-group-appearance-standard .mat-pseudo-checkbox {
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: white !important;
+}
+
+.small {
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 0;
+  }
+}

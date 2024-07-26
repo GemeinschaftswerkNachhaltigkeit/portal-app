@@ -44,6 +44,7 @@ export class ActivityService {
       const response = await lastValueFrom(
         this.http.get<ActivityWIP>(endpoint)
       );
+
       this.activityDataSubject.next(response);
       this.activityUpdateStateSubject.next(null);
       return response;

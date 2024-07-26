@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.DanRangeService;
 import com.exxeta.wpgwn.wpgwnapp.activity.dto.DanSetting;
@@ -60,6 +61,7 @@ import static org.springframework.util.StringUtils.hasText;
 @RestController
 @RequestMapping("/api/v2/search")
 @RequiredArgsConstructor
+@Slf4j
 public class MapSearchV2Controller {
 
     private final GeometryFactory factory;
@@ -82,6 +84,7 @@ public class MapSearchV2Controller {
             @RequestParam(value = "organisationType", required = false) List<OrganisationType> organisationTypes,
             @RequestParam(value = "activityTypes", required = false) List<ActivityType> activityTypes,
             @RequestParam(value = "includeExpiredActivities", defaultValue = "false") Boolean includeExpiredActivities,
+            @RequestParam(value = "expiredOnEnd", defaultValue = "true") Boolean expiredOnEnd,
             @RequestParam(value = "includeNoCoords", defaultValue = "true") Boolean includeNoCoords,
             @RequestParam(value = "initiator", required = false) Boolean initiator,
             @RequestParam(value = "permanent", required = false) Boolean permanent,
@@ -98,10 +101,12 @@ public class MapSearchV2Controller {
                 new JPAQuery<MapSearchV2Result>(entityManager).from(QMapSearchV2Result.mapSearchV2Result)
                         .where(searchPredicate);
 
-        jpaQuery.orderBy(expiredExpression().asc());
+        if (expiredOnEnd) {
+            jpaQuery.orderBy(expiredExpression().asc());
+        }
 
         if (pageable.getSort().isSorted()) {
-            jpaQuery.orderBy(QMapSearchV2Result.mapSearchV2Result.period.start.asc());
+            jpaQuery.orderBy(getOrderSpecifiers(pageable, MapSearchV2Result.class));
         } else {
             if (hasText(query)) {
                 jpaQuery.orderBy(tsRankExpression(query).desc());

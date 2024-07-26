@@ -35,6 +35,7 @@ public abstract class ActivityMapper {
 
     @Mapping(target = "logo", ignore = true)
     @Mapping(target = "image", ignore = true)
+    @Mapping(target = "bannerImageMode", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "modifiedAt", ignore = true)
@@ -53,6 +54,7 @@ public abstract class ActivityMapper {
 
     @Mapping(target = "logo", ignore = true)
     @Mapping(target = "image", ignore = true)
+    @Mapping(target = "bannerImageMode", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "modifiedAt", ignore = true)

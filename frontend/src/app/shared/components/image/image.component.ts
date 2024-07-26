@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ImgService } from '../../services/img.service';
+import { ImageMode } from '../form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-image',
@@ -9,6 +10,7 @@ import { ImgService } from '../../services/img.service';
 export class ImageComponent {
   @Input() src!: string;
   @Input() alt = '';
+  @Input() mode?: ImageMode = 'contain';
 
   constructor(private imgService: ImgService) {}
 

@@ -47,6 +47,7 @@ public abstract class ActivityWorkInProgressMapper {
     @Mapping(target = "impactArea", ignore = true)
     @Mapping(target = "activityType", ignore = true)
     @Mapping(target = "specialType", ignore = true)
+    @Mapping(target = "bannerImageMode", ignore = true)
     @Mapping(target = "period", ignore = true)
     @Mapping(target = "approvedUntil", ignore = true)
     @Mapping(target = "source", constant = "WEB_APP")

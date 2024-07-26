@@ -2,7 +2,12 @@
   <div class="expiredOverlay" *ngIf="isExpired"></div>
 
   <div class="img">
-    <app-image [src]="bgImageName" alt="header" *ngIf="bgImageName" />
+    <app-image
+      [src]="bgImageName"
+      alt="header"
+      [mode]="imageMode"
+      *ngIf="bgImageName"
+    />
   </div>
   <div class="expiredBadge" *ngIf="isExpired">
     <app-expired-badge [dan]="dan"></app-expired-badge>

@@ -5,6 +5,8 @@ import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.exxeta.wpgwn.wpgwnapp.shared.model.BannerImageMode;
+
 import lombok.Data;
 
 import com.exxeta.wpgwn.wpgwnapp.shared.dto.ContactDto;
@@ -40,6 +42,7 @@ public class OrganisationRequestDto implements Serializable {
     private final OrganisationType organisationType;
     private final String externalId;
     private final Source source;
+    private BannerImageMode bannerImageMode;
 
 //    private final List<ActivityResponseDto> activities;
 

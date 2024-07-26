@@ -19,7 +19,12 @@
         <div class="expiredOverlay" *ngIf="showAsExpired(currentResult)"></div>
 
         <app-details-link [currentResult]="currentResult">
-          <app-image [src]="bgImage" alt="header" *ngIf="bgImage" />
+          <app-image
+            [src]="bgImage"
+            alt="header"
+            *ngIf="bgImage"
+            [mode]="currentResult.bannerImageMode"
+          />
         </app-details-link>
         <div class="type" [ngClass]="{ noLogo: !currentResult.logo }">
           <div

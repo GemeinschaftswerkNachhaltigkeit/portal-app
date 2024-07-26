@@ -51,7 +51,7 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.map = L.map('map', {
       center: this.center,
       zoom:
-        screenWidth && screenWidth < 1200 ? this.zoomService.defaultZoom : 8,
+        screenWidth && screenWidth < 1200 ? this.zoomService.defaultZoom : 7,
       // minZoom: 4,
       maxZoom: 17
     });

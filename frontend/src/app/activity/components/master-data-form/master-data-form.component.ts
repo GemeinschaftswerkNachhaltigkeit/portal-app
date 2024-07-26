@@ -12,7 +12,6 @@ import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Editor } from '@tiptap/core';
-import { ActivityType } from 'src/app/shared/models/activity-type';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';

@@ -29,12 +29,19 @@
               [danPeriodParams]="danPeriodParams"
               [isDan]="isDan"
             ></app-master-data-form>
+
             <app-images-form
+              [bannerImageTools]="true"
+              [bannerImageMode]="
+                step1Form.get('masterData.bannerImageMode')?.value
+              "
               [activity]="activity"
               [orgId]="orgId()"
               (deleteImage)="deleteHandler($event)"
+              (imageMode)="imageModeHandler($event)"
             ></app-images-form>
           </form>
+
           <app-actions [showPrevBtn]="false"></app-actions>
         </div>
         <app-form-advatages

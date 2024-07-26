@@ -90,6 +90,7 @@ export class EventsApiService {
     }
     params = params.append('resultType', 'DAN');
     params = params.append('includeNoCoords', includeNoCoords);
+    params = params.append('expiredOnEnd', false);
     params = params.append('page', nextPage);
     params = params.append('size', defaultPaginatorOptions.pageSize);
     params = params.append('sort', `period.start,asc,ignorecase`);
