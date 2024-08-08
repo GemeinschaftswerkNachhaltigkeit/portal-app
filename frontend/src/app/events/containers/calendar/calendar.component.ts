@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  effect,
   ElementRef,
   Inject,
   OnDestroy,
@@ -24,13 +25,13 @@ import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
-import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { FeaturesService } from 'src/app/shared/components/feature/features.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CalendarComponent implements AfterViewInit, OnDestroy {
   @ViewChild('marker') marker: ElementRef;
   unsubscribe$ = new Subject();
 
@@ -49,6 +50,7 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     SecondaryFilters.ONLY_DAN,
     SecondaryFilters.THEMATIC_FOCUS
   ];
+  featureState = this.features.featuresState;
 
   observer = new IntersectionObserver(
     (entries) => {
@@ -71,33 +73,27 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     public translate: TranslateService,
     public dialog: MatDialog,
     private _adapter: DateAdapter<LuxonDateAdapter>,
-    private feature: FeatureService,
+    private features: FeaturesService,
     @Inject(MAT_DATE_LOCALE) private _locale: string
   ) {
     this.handleOnlyOnlineChange();
     this.translate.onLangChange.subscribe((event) => {
       this.changeDatePickerLang(event.lang);
     });
-    feature
-      .show$('dan-range')
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((danFeature) => {
-        this.hideDan(danFeature);
-      });
-  }
 
-  private hideDan(danFeature: boolean) {
-    const foundFilter = this.includedFilters.find(
-      (filter) => SecondaryFilters.ONLY_DAN === filter
-    );
-    if (danFeature && !foundFilter) {
-      this.includedFilters.push(SecondaryFilters.ONLY_DAN);
-    }
-    if (!danFeature && foundFilter) {
-      this.includedFilters = this.includedFilters.filter(
-        (filter) => filter !== SecondaryFilters.ONLY_DAN
-      );
-    }
+    effect(() => {
+      if (this.featureState() !== 'PENDING') {
+        const filters = this.eventsService.getFilters();
+        this.searchControl.setValue({
+          query: (filters['query'] || '') as string,
+          location: (filters['location'] || '') as string
+        });
+        const start = (filters['startDate'] as string) || '';
+        this.selected = start ? DateTime.fromISO(start) : DateTime.now();
+        this.eventsService.loadAvailableEvents(this.selected);
+        this.triggerSearchOnQueryParamsChange();
+      }
+    });
   }
 
   changeDatePickerLang(locale: string) {
@@ -217,18 +213,6 @@ export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.queryParamMap.subscribe(() => {
       this.eventsService.setFilters();
     });
-  }
-
-  ngOnInit(): void {
-    const filters = this.eventsService.getFilters();
-    this.searchControl.setValue({
-      query: (filters['query'] || '') as string,
-      location: (filters['location'] || '') as string
-    });
-    const start = (filters['startDate'] as string) || '';
-    this.selected = start ? DateTime.fromISO(start) : DateTime.now();
-    this.eventsService.loadAvailableEvents(this.selected);
-    this.triggerSearchOnQueryParamsChange();
   }
 
   ngAfterViewInit(): void {

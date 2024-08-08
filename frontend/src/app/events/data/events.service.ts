@@ -3,6 +3,7 @@ import EventDto from '../models/event-dto';
 import {
   BehaviorSubject,
   Observable,
+  count,
   filter,
   map,
   skip,
@@ -24,6 +25,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 
+export type EventCalenderEntry = { count: number; inDanPeriod: boolean };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +39,7 @@ export class EventsService {
   });
   private eventsState = new BehaviorSubject<EventDto[]>([]);
   private availableEventsState = new BehaviorSubject<{
-    [key: string]: number;
+    [key: string]: EventCalenderEntry;
   } | null>(null);
   initialized = false;
 
@@ -82,7 +85,9 @@ export class EventsService {
       });
   }
 
-  get availableEvents$(): Observable<{ [key: string]: number } | null> {
+  get availableEvents$(): Observable<{
+    [key: string]: EventCalenderEntry;
+  } | null> {
     return this.availableEventsState.asObservable();
   }
 
@@ -131,7 +136,18 @@ export class EventsService {
       .pipe(take(1))
       .subscribe({
         next: (dates) => {
-          this.availableEventsState.next(dates);
+          const entries = Object.entries(dates).reduce(
+            (
+              entries: { [key: string]: EventCalenderEntry },
+              [date, count]: [string, number]
+            ) => {
+              const inDanPeriod = this.inDanPeriod(DateTime.fromISO(date));
+              entries[date] = { count, inDanPeriod };
+              return entries;
+            },
+            {}
+          );
+          this.availableEventsState.next(entries);
           if (cb) cb();
         },
         error: (e) => {
@@ -252,5 +268,15 @@ export class EventsService {
           this.finalizeAddNewEvent();
         }
       });
+  }
+
+  private inDanPeriod(date: DateTime): boolean {
+    const feature = this.feature.getFeature('dan-range');
+
+    if (!feature || !feature.start || !feature.end) return false;
+    const featureStart = DateTime.fromISO(feature.start).startOf('day');
+    const featureEnd = DateTime.fromISO(feature.end).startOf('day');
+    const inDanPeriod = featureStart <= date && featureEnd >= date;
+    return inDanPeriod;
   }
 }

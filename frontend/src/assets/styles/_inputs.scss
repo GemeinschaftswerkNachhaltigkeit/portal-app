@@ -47,6 +47,10 @@ button.date-with-data {
   background-color: transparentize($color: $green, $amount: 0.5);
   border-radius: 9999px;
   border: 2px solid white;
+
+  &.dan {
+    background-color: transparentize($color: $dan-blue, $amount: 0.5);
+  }
 }
 
 .mat-button-toggle-appearance-standard.mat-button-toggle-checked {

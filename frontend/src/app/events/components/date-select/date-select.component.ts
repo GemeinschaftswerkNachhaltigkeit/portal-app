@@ -18,6 +18,7 @@ import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DateSelectHeaderComponent } from '../date-select-header/date-select-header.component';
+import { EventCalenderEntry } from '../../data/events.service';
 
 @Component({
   selector: 'app-date-select',
@@ -26,7 +27,7 @@ import { DateSelectHeaderComponent } from '../date-select-header/date-select-hea
 })
 export class DateSelectComponent implements AfterViewInit, OnChanges {
   @Input() selected: DateTime = DateTime.now();
-  @Input() data: { [key: string]: number } = {};
+  @Input() data: { [key: string]: EventCalenderEntry } = {};
   @Output() dateSelected = new EventEmitter<DateTime>();
   @ViewChild('cal') cal: MatCalendar<DateTime>;
 
@@ -59,9 +60,10 @@ export class DateSelectComponent implements AfterViewInit, OnChanges {
               .startOf('day')
               .toUTC()
               .toISO({ suppressMilliseconds: true });
-            const inData = date && this.data[date] > 0;
+            const inData = date && this.data[date]?.count > 0;
+            const danClass = date && this.data[date]?.inDanPeriod ? 'dan' : '';
 
-            return inData ? 'date-with-data' : '';
+            return inData ? `date-with-data ${danClass}` : '';
           }
         }
 
