@@ -12,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -111,7 +112,7 @@ class OrganisationWorkInProgressServiceTest {
                 new WpgwnProperties.ContactInvite(Duration.of(42, ChronoUnit.DAYS)),
                 new WpgwnProperties.OrganisationMembership(Duration.of(42, ChronoUnit.DAYS), 12),
                 new WpgwnProperties.MarketplaceProperties(10, 10),
-                new WpgwnProperties.DanProperties(50)
+                new WpgwnProperties.DanProperties(50, true, Set.of())
         );
 
         MailProperties mailProperties = new MailProperties();

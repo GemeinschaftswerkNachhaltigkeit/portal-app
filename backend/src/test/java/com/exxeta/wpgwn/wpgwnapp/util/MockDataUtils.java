@@ -1,7 +1,9 @@
 package com.exxeta.wpgwn.wpgwnapp.util;
 
 import java.time.Clock;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +15,7 @@ import org.locationtech.jts.geom.GeometryFactory;
 
 import com.exxeta.wpgwn.wpgwnapp.activity.model.Activity;
 import com.exxeta.wpgwn.wpgwnapp.activity_work_in_progress.ActivityWorkInProgress;
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
 import com.exxeta.wpgwn.wpgwnapp.email_opt_out.model.EmailOptOutEntry;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.marketplace.model.Offer;
 import com.exxeta.wpgwn.wpgwnapp.marketplace.shared.OfferCategory;
@@ -262,5 +265,25 @@ public class MockDataUtils {
         offer.setContact(contact);
 
         return offer;
+    }
+
+    public static WpgwnProperties getWpgwnProperties(boolean sdgRequired) {
+        return
+
+                new WpgwnProperties(0L, null, null, "null", "null",
+                        "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html",
+                        "null", "test",
+                        "test",
+                        new WpgwnProperties.ReminderEmail(2,
+                                Duration.of(2, ChronoUnit.SECONDS),
+                                "* 6 * * * * *",
+                                100),
+                        new WpgwnProperties.CronProperty("* 6 * * * * *"),
+                        new WpgwnProperties.Duplicate(0.7),
+                        new WpgwnProperties.ContactInvite(Duration.of(42, ChronoUnit.DAYS)),
+                        new WpgwnProperties.OrganisationMembership(Duration.of(42, ChronoUnit.DAYS), 12),
+                        new WpgwnProperties.MarketplaceProperties(10, 10),
+                        new WpgwnProperties.DanProperties(50, sdgRequired, Set.of(13L))
+                );
     }
 }

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 import com.exxeta.wpgwn.wpgwnapp.shared.model.SustainableDevelopmentGoals;
@@ -18,9 +19,12 @@ import com.google.common.base.Splitter;
 @Component
 public class CampaignSdgMapper {
 
+    private final WpgwnProperties wpgwnProperties;
+
     private final Map<String, Long> sdgMap;
 
-    public CampaignSdgMapper() {
+    public CampaignSdgMapper(WpgwnProperties wpgwnProperties) {
+        this.wpgwnProperties = wpgwnProperties;
         sdgMap = Arrays.stream(SustainableDevelopmentGoals.values())
                 .collect(Collectors.toMap(SustainableDevelopmentGoals::getNameDe,
                         sdg -> Long.valueOf(sdg.getNumber())));
@@ -40,6 +44,10 @@ public class CampaignSdgMapper {
 
         if (!sustainableDevelopmentGoals.isEmpty()) {
             return sustainableDevelopmentGoals;
+        }
+
+        if (!wpgwnProperties.getDan().getSdgRequired()) {
+            return wpgwnProperties.getDan().getDefaultSdgs();
         }
 
         throw new DanXmlImportCancelledException(Map.of("sdg", "validation.sdg.required"));

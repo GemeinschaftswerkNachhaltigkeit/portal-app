@@ -105,6 +105,9 @@ wpgwn:
       max-best-practises: 10
     dan:
       max-dans: 50
+      sdg-required: false
+      default-sdgs:
+        - 13
 file:
   base-directory: ${java.io.tmpdir}
 keycloak:

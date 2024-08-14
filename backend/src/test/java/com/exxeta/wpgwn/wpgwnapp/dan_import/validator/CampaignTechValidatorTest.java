@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 
+import static com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils.getWpgwnProperties;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -31,7 +32,7 @@ public class CampaignTechValidatorTest {
         campaign.setDateEnd(null);
 
         // Create the object under test
-        CampaignTechValidator validator = new CampaignTechValidator();
+        CampaignTechValidator validator = new CampaignTechValidator(getWpgwnProperties(true));
 
         // Assert that the exception is thrown
         DanXmlImportCancelledException exception = assertThrows(DanXmlImportCancelledException.class,
@@ -67,7 +68,7 @@ public class CampaignTechValidatorTest {
         campaign.setDateEnd(Instant.now().minus(1, ChronoUnit.DAYS)); // End date before start date
 
         // Create the object under test
-        CampaignTechValidator validator = new CampaignTechValidator();
+        CampaignTechValidator validator = new CampaignTechValidator(getWpgwnProperties(true));
 
         // Assert that the exception is thrown
         DanXmlImportCancelledException exception = assertThrows(DanXmlImportCancelledException.class,
@@ -93,10 +94,17 @@ public class CampaignTechValidatorTest {
         campaign.setDateEnd(Instant.now().plus(1, ChronoUnit.DAYS));
 
         // Create the object under test
-        CampaignTechValidator validator = new CampaignTechValidator();
+        CampaignTechValidator validator = new CampaignTechValidator(getWpgwnProperties(true));
 
         // Call the method and assert no exception is thrown
         assertDoesNotThrow(() -> validator.validate(campaign));
+
+        campaign.setCategory(null);
+        // Create the object under test
+        CampaignTechValidator validatorWithSdgNotRequired = new CampaignTechValidator(getWpgwnProperties(false));
+
+        // Call the method and assert no exception is thrown
+        assertDoesNotThrow(() -> validatorWithSdgNotRequired.validate(campaign));
     }
 }
 

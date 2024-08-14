@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 
+import static com.exxeta.wpgwn.wpgwnapp.util.MockDataUtils.getWpgwnProperties;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,7 +24,7 @@ public class CampaignSdgMapperTest {
         campaign.setCategory("Keine Armut; Kein Hunger; Gesundheit und Wohlergehen");
 
         // Create the object under test
-        CampaignSdgMapper mapper = new CampaignSdgMapper();
+        CampaignSdgMapper mapper = new CampaignSdgMapper(getWpgwnProperties(true));
 
         // Call the method
         Set<Long> sdgSet = mapper.mapperSustainableDevelopmentGoals(campaign);
@@ -40,7 +41,7 @@ public class CampaignSdgMapperTest {
         campaign.setCategory("Invalid Category");
 
         // Create the object under test
-        CampaignSdgMapper mapper = new CampaignSdgMapper();
+        CampaignSdgMapper mapper = new CampaignSdgMapper(getWpgwnProperties(true));
 
         // Assert that the exception is thrown
         DanXmlImportCancelledException exception = assertThrows(DanXmlImportCancelledException.class,
@@ -50,6 +51,23 @@ public class CampaignSdgMapperTest {
         Map<String, String> errorMessages = exception.getErrorMessages();
         assertTrue(errorMessages.containsKey("sdg"));
         assertEquals("validation.sdg.required", errorMessages.get("sdg"));
+    }
+
+    @Test
+    public void testMapperSustainableDevelopmentGoals_WhenInvalidCategories_and_SdgRequiredFalse_ReturnsDefaultSdgs() {
+        // Create test data for a campaign with invalid categories
+        Campaign campaign = new Campaign();
+        campaign.setCategory("Invalid Category");
+
+        // Create the object under test
+        CampaignSdgMapper mapper = new CampaignSdgMapper(getWpgwnProperties(false));
+
+        // Call the method
+        Set<Long> sdgSet = mapper.mapperSustainableDevelopmentGoals(campaign);
+
+        // Assert the result
+        Set<Long> expectedSdgSet = new LinkedHashSet<>(Arrays.asList(13L));
+        assertEquals(expectedSdgSet, sdgSet);
     }
 }
 

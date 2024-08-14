@@ -6,6 +6,9 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
+
+import com.exxeta.wpgwn.wpgwnapp.configuration.properties.WpgwnProperties;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.exception.DanXmlImportCancelledException;
 import com.exxeta.wpgwn.wpgwnapp.dan_import.xml.Campaign;
 
@@ -15,7 +18,10 @@ import com.google.common.collect.Maps;
 import static java.util.Objects.nonNull;
 
 @Component
+@RequiredArgsConstructor
 public class CampaignTechValidator {
+
+    private final WpgwnProperties wpgwnProperties;
 
     public static void isRequired(String stringValue, String field, Map<String, String> messages) {
         isRequired(stringValue, field, "validation." + field + ".required", messages);
@@ -42,7 +48,11 @@ public class CampaignTechValidator {
         final Map<String, String> errorMessages = Maps.newConcurrentMap();
 
         isRequired(campaign.getId(), "id", errorMessages);
-        isRequired(campaign.getCategory(), "category", errorMessages);
+
+        if (wpgwnProperties.getDan().getSdgRequired()) {
+            isRequired(campaign.getCategory(), "category", errorMessages);
+        }
+
         isRequired(campaign.getName(), "name", errorMessages);
         isRequired(campaign.getDetailText(), "detailtext", errorMessages);
         isRequired(campaign.getOrganizer(), "organizer", errorMessages);
