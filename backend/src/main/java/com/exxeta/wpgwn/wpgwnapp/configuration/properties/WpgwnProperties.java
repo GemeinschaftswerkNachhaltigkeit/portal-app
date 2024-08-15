@@ -2,6 +2,7 @@ package com.exxeta.wpgwn.wpgwnapp.configuration.properties;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -213,6 +214,10 @@ public class WpgwnProperties {
         @NotNull
         @PositiveOrZero
         private final Integer maxDans;
+
+        private final Boolean sdgRequired;
+
+        private final Set<Long> defaultSdgs;
 
     }
 

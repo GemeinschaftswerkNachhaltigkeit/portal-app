@@ -77,6 +77,9 @@ wpgwn:
       max-best-practises: 30
     dan:
       max-dans: 100
+      sdg-required: false
+      default-sdgs:
+        - 13
 keycloak:
   admin:
     admin-realm: master

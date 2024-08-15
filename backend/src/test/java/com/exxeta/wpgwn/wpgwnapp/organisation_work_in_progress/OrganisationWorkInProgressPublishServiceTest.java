@@ -1,12 +1,10 @@
 package com.exxeta.wpgwn.wpgwnapp.organisation_work_in_progress;
 
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,6 +48,9 @@ import com.exxeta.wpgwn.wpgwnapp.utils.converter.DateMapperImpl;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -99,7 +100,8 @@ class OrganisationWorkInProgressPublishServiceTest {
     @BeforeEach
     void setUp() {
         WpgwnProperties wpgwnProps = new WpgwnProperties(0L, null, null, "null", "null",
-                "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html","null", "test", "test",
+                "email/organisation-work-in-progress/privacy-consent/organisation-privacy-consent.html", "null", "test",
+                "test",
                 new WpgwnProperties.ReminderEmail(2,
                         Duration.of(2, ChronoUnit.SECONDS),
                         "* 6 * * * * *",
@@ -109,7 +111,7 @@ class OrganisationWorkInProgressPublishServiceTest {
                 new WpgwnProperties.ContactInvite(Duration.of(42, ChronoUnit.DAYS)),
                 new WpgwnProperties.OrganisationMembership(Duration.of(42, ChronoUnit.DAYS), 12),
                 new WpgwnProperties.MarketplaceProperties(10, 10),
-                new WpgwnProperties.DanProperties(50)
+                new WpgwnProperties.DanProperties(50, true, Set.of())
         );
 
         MailProperties mailProperties = new MailProperties();
