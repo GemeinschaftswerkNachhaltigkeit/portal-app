@@ -128,7 +128,8 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
 
   handlePermanentFilter(isPermanent: boolean): void {
     this.eventsService.search({
-      permanent: isPermanent
+      permanent: isPermanent,
+      onlyDan: false
     });
   }
 
