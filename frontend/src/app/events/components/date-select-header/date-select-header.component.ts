@@ -70,9 +70,9 @@ export class DateSelectHeaderComponent<D> implements OnDestroy {
       this._locale = event.lang;
       this._dateAdapter.setLocale(this._locale);
     });
-    _calendar.stateChanges
-      .pipe(takeUntil(this._destroyed))
-      .subscribe(() => cdr.markForCheck());
+    _calendar.stateChanges.pipe(takeUntil(this._destroyed)).subscribe((x) => {
+      cdr.markForCheck();
+    });
   }
 
   ngOnDestroy() {
@@ -94,7 +94,8 @@ export class DateSelectHeaderComponent<D> implements OnDestroy {
       mode === 'month'
         ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, -1)
         : this._dateAdapter.addCalendarYears(this._calendar.activeDate, -1);
-    this.eventsService.loadAvailableEvents(newDate as DateTime, () => {
+    this.eventsService.setCurrentMonthOfCalendar(newDate as DateTime);
+    this.eventsService.loadAvailableEvents(() => {
       this._calendar.activeDate = newDate;
     });
   }
@@ -104,7 +105,8 @@ export class DateSelectHeaderComponent<D> implements OnDestroy {
       mode === 'month'
         ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, 1)
         : this._dateAdapter.addCalendarYears(this._calendar.activeDate, 1);
-    this.eventsService.loadAvailableEvents(newDate as DateTime, () => {
+    this.eventsService.setCurrentMonthOfCalendar(newDate as DateTime);
+    this.eventsService.loadAvailableEvents(() => {
       this._calendar.activeDate = newDate;
     });
   }

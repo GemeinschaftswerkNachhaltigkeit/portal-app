@@ -5,7 +5,6 @@ import {
   ElementRef,
   Inject,
   OnDestroy,
-  OnInit,
   ViewChild
 } from '@angular/core';
 import { EventsService } from '../../data/events.service';
@@ -90,7 +89,7 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
         });
         const start = (filters['startDate'] as string) || '';
         this.selected = start ? DateTime.fromISO(start) : DateTime.now();
-        this.eventsService.loadAvailableEvents(this.selected);
+        this.eventsService.setCurrentMonthOfCalendar(this.selected);
         this.triggerSearchOnQueryParamsChange();
       }
     });
@@ -107,7 +106,9 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
   }
   handleToday(): void {
     const today = DateTime.now().startOf('day');
-    this.eventsService.loadAvailableEvents(today, () => {
+    const month = DateTime.now().startOf('month');
+    this.eventsService.setCurrentMonthOfCalendar(month);
+    this.eventsService.loadAvailableEvents(() => {
       this.selected = today;
       this.eventsService.search({ startDate: this.selected.toISO() || '' });
     });
@@ -174,7 +175,12 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
     const filters: AdditionalFilters = this.eventsService.getFilters();
 
     return {
-      use: this.includedFilters,
+      use: this.includedFilters.filter((f) => {
+        if (this.isPermanent() && f === SecondaryFilters.ONLY_DAN) {
+          return false;
+        }
+        return true;
+      }),
       selectedThematicFocusValues: filters['thematicFocus'],
       online: filters['online'],
       onlyDan: filters['onlyDan']
@@ -194,6 +200,7 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
   clearAll(): void {
     this.searchControl.setValue({ query: '', location: '' });
     this.selected = DateTime.now();
+    this.eventsService.setCurrentMonthOfCalendar(this.selected);
     this.eventsService.triggerSearch();
   }
 

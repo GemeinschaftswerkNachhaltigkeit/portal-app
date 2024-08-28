@@ -24,10 +24,17 @@
         <div class="group" *ngFor="let entry of groups">
           <div class="date" *ngIf="entry.group !== 'undefined'">
             <div class="text">
-              {{
-                entry.group
-                  | date: 'dd. MMM' : undefined : translate.currentLang
-              }}
+              <div class="month-day">
+                {{
+                  entry.group
+                    | date: 'dd. MMM' : undefined : translate.currentLang
+                }}
+              </div>
+              <div class="year">
+                {{
+                  entry.group | date: 'YYYY' : undefined : translate.currentLang
+                }}
+              </div>
             </div>
           </div>
           <app-event-list>
@@ -81,14 +88,17 @@
 
 <ng-template #actions>
   <ng-container *ngIf="availableEvents$ | async as events">
-    <app-date-select
-      (dateSelected)="handleDateChange($event)"
-      [selected]="selected"
-      [data]="events"
-    ></app-date-select>
-    <button class="today" (click)="handleToday()">
-      {{ 'btn.today' | translate }}
-    </button>
+    <ng-container *ngIf="!isPermanent()">
+      <app-date-select
+        (dateSelected)="handleDateChange($event)"
+        [selected]="selected"
+        [data]="events"
+      ></app-date-select>
+      <button class="today" (click)="handleToday()">
+        {{ 'btn.today' | translate }}
+      </button>
+    </ng-container>
+
     <div class="actions">
       <button
         class="action"
