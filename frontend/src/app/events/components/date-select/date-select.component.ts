@@ -70,12 +70,17 @@ export class DateSelectComponent implements AfterViewInit, OnChanges {
 
     cells.forEach((cell) => {
       cell.classList.remove('date-with-data');
+      cell.classList.remove('dan');
       const cellContent = cell.querySelector(
         '.mat-calendar-body-cell-content'
       ) as HTMLElement;
       if (cellContent) {
-        if (newData[cellContent.innerText]) {
+        const cellData = newData[cellContent.innerText];
+        if (cellData) {
           cell.classList.add('date-with-data');
+          if (cellData.inDanPeriod) {
+            cell.classList.add('dan');
+          }
         }
       }
     });
