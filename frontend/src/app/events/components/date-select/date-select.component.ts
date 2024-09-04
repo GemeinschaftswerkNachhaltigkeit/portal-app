@@ -49,27 +49,36 @@ export class DateSelectComponent implements AfterViewInit, OnChanges {
         this.cal.activeDate = changes['selected'].currentValue as DateTime;
       }
     }
+    setTimeout(() => {
+      this.addClasses();
+    });
   }
+
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.ready = true;
-      this.dateClass = (cellDate, view) => {
-        if (view === 'month') {
-          if (cellDate) {
-            const date = cellDate
-              .startOf('day')
-              .toUTC()
-              .toISO({ suppressMilliseconds: true });
-            const inData = date && this.data[date]?.count > 0;
-            const danClass = date && this.data[date]?.inDanPeriod ? 'dan' : '';
+      this.addClasses();
+    });
+  }
 
-            return inData ? `date-with-data ${danClass}` : '';
-          }
+  addClasses(): void {
+    const cells = document.querySelectorAll('.mat-calendar-body-cell');
+    const newData: { [key: string]: EventCalenderEntry } = {};
+    for (const key of Object.keys(this.data)) {
+      const index = DateTime.fromISO(key).get('day') + '';
+      newData[index] = this.data[key];
+    }
+
+    cells.forEach((cell) => {
+      cell.classList.remove('date-with-data');
+      const cellContent = cell.querySelector(
+        '.mat-calendar-body-cell-content'
+      ) as HTMLElement;
+      if (cellContent) {
+        if (newData[cellContent.innerText]) {
+          cell.classList.add('date-with-data');
         }
-
-        return '';
-      };
-    }, 200);
+      }
+    });
   }
 
   changeDatePickerLang(locale: string) {

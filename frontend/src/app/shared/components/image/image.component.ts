@@ -10,7 +10,7 @@ import { ImageMode } from '../form/upload-image/upload-image.component';
 export class ImageComponent {
   @Input() src!: string;
   @Input() alt = '';
-  @Input() mode?: ImageMode = 'contain';
+  @Input() mode?: ImageMode = 'cover';
 
   constructor(private imgService: ImgService) {}
 

@@ -4,7 +4,10 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,7 @@ import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,6 +88,7 @@ public class MapSearchV2Controller {
             @RequestParam(value = "organisationType", required = false) List<OrganisationType> organisationTypes,
             @RequestParam(value = "activityTypes", required = false) List<ActivityType> activityTypes,
             @RequestParam(value = "includeExpiredActivities", defaultValue = "false") Boolean includeExpiredActivities,
+            @RequestParam(value = "includeAllActionDays", defaultValue = "false") Boolean includeAllActionDays,
             @RequestParam(value = "expiredOnEnd", defaultValue = "true") Boolean expiredOnEnd,
             @RequestParam(value = "includeNoCoords", defaultValue = "true") Boolean includeNoCoords,
             @RequestParam(value = "initiator", required = false) Boolean initiator,
@@ -95,7 +100,7 @@ public class MapSearchV2Controller {
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
                         includeExpiredActivities, includeNoCoords, initiator, permanent, online,
-                        projectSustainabilityWinner, mapSearchFilterPredicate);
+                        projectSustainabilityWinner, includeAllActionDays, mapSearchFilterPredicate);
 
         JPAQuery<MapSearchV2Result> jpaQuery =
                 new JPAQuery<MapSearchV2Result>(entityManager).from(QMapSearchV2Result.mapSearchV2Result)
@@ -124,6 +129,51 @@ public class MapSearchV2Controller {
     }
 
     @SuppressWarnings("ParameterNumber")
+    @GetMapping("/month/{monthStart}")
+    @Transactional(readOnly = true)
+    public Map<Instant, Integer> activityStatisticCalendar(@PathVariable("monthStart") Instant monthStart,
+                                                           @RequestParam(value = "envelope", required = false)
+                                                           Envelope envelope,
+                                                           @RequestParam(value = "query", required = false)
+                                                           String query,
+                                                           @RequestParam(value = "location", required = false)
+                                                           String location,
+                                                           @RequestParam(value = "organisationType", required = false)
+                                                           List<OrganisationType> organisationTypes,
+                                                           @RequestParam(value = "activityTypes", required = false)
+                                                           List<ActivityType> activityTypes,
+                                                           @RequestParam(value = "includeExpiredActivities", defaultValue = "true")
+                                                           Boolean includeExpiredActivities,
+                                                           @RequestParam(value = "includeAllActionDays", defaultValue = "true")
+                                                           Boolean includeAllActionDays,
+                                                           @RequestParam(value = "includeNoCoords", defaultValue = "true")
+                                                           Boolean includeNoCoords,
+                                                           @RequestParam(value = "initiator", required = false)
+                                                           Boolean initiator,
+                                                           @RequestParam(value = "permanent", required = false)
+                                                           Boolean permanent,
+                                                           @RequestParam(value = "online", required = false)
+                                                           Boolean online,
+                                                           @RequestParam(value = "projectSustainabilityWinner", required = false)
+                                                           Boolean projectSustainabilityWinner,
+                                                           @QuerydslPredicate(root = MapSearchV2Result.class, bindings = MapSearchV2ResultBindingCustomizer.class)
+                                                           Predicate mapSearchFilterPredicate) {
+
+        final BooleanBuilder searchPredicate =
+                getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
+                        includeExpiredActivities, includeNoCoords, initiator, permanent, online,
+                        projectSustainabilityWinner, includeAllActionDays, mapSearchFilterPredicate);
+
+        Instant[] range = initMonthRange(monthStart);
+
+        searchPredicate.and(QMapSearchV2Result.mapSearchV2Result.period.start.goe(range[0])
+                .and(QMapSearchV2Result.mapSearchV2Result.period.start.loe(range[1])));
+
+        return executeQueryAndAggregateResults(searchPredicate);
+    }
+
+
+    @SuppressWarnings("ParameterNumber")
     @GetMapping("markers")
     @Transactional(readOnly = true)
     public List<MapSearchMarkerResponseDto> searchMap(
@@ -133,6 +183,7 @@ public class MapSearchV2Controller {
             @RequestParam(value = "organisationType", required = false) List<OrganisationType> organisationTypes,
             @RequestParam(value = "activityTypes", required = false) List<ActivityType> activityTypes,
             @RequestParam(value = "includeExpiredActivities", defaultValue = "false") Boolean includeExpiredActivities,
+            @RequestParam(value = "includeAllActionDays", defaultValue = "false") Boolean includeAllActionDays,
             @RequestParam(value = "includeNoCoords", defaultValue = "true") Boolean includeNoCoords,
             @RequestParam(value = "initiator", required = false) Boolean initiator,
             @RequestParam(value = "permanent", required = false) Boolean permanent,
@@ -144,7 +195,7 @@ public class MapSearchV2Controller {
         final BooleanBuilder searchPredicate =
                 getSearchPredicate(envelope, query, location, organisationTypes, activityTypes,
                         includeExpiredActivities, includeNoCoords, initiator, permanent, online,
-                        projectSustainabilityWinner, mapSearchFilterPredicate);
+                        projectSustainabilityWinner, includeAllActionDays, mapSearchFilterPredicate);
 
         JPAQuery<MapMarkerView> jpaQuery =
                 new JPAQuery<QMapSearchV2Result>(entityManager).from(QMapSearchV2Result.mapSearchV2Result)
@@ -198,14 +249,15 @@ public class MapSearchV2Controller {
                                               List<ActivityType> activityTypes, boolean includeExpiredActivities,
                                               boolean includeDataWithoutCoordinates, Boolean initiator,
                                               Boolean permanent, Boolean online, Boolean projectSustainabilityWinner,
-                                              Predicate mapSearchFilterPredicate) {
+                                              Boolean includeAllActionDays, Predicate mapSearchFilterPredicate) {
         final BooleanBuilder searchPredicate = new BooleanBuilder(mapSearchFilterPredicate);
 
         buildCoordinatePredicate(searchPredicate, envelope, includeDataWithoutCoordinates);
 
         buildLocationPredicate(searchPredicate, location);
 
-        buildTypePredicate(searchPredicate, organisationTypes, activityTypes, includeExpiredActivities);
+        buildTypePredicate(searchPredicate, includeAllActionDays, organisationTypes, activityTypes,
+                includeExpiredActivities);
 
         buildQueryPredicate(searchPredicate, query);
 
@@ -247,7 +299,8 @@ public class MapSearchV2Controller {
         }
     }
 
-    private void buildTypePredicate(BooleanBuilder searchPredicate, List<OrganisationType> organisationTypes,
+    private void buildTypePredicate(BooleanBuilder searchPredicate, boolean includeAllActionDays,
+                                    List<OrganisationType> organisationTypes,
                                     List<ActivityType> activityTypes, boolean includeExpiredActivities) {
 
 
@@ -280,7 +333,7 @@ public class MapSearchV2Controller {
                 for (ActivityType activityType : activityTypes) {
                     BooleanExpression activityTypePredicate =
                             QMapSearchV2Result.mapSearchV2Result.activityType.eq(activityType);
-                    if (activityType == ActivityType.DAN) {
+                    if (activityType == ActivityType.DAN && !includeAllActionDays) {
                         activityTypePredicate = activityTypePredicate.and(
                                 QMapSearchV2Result.mapSearchV2Result.period.start.goe(startOfYear())
                                         .and(QMapSearchV2Result.mapSearchV2Result.period.end.loe(endOfYear())));
@@ -396,6 +449,33 @@ public class MapSearchV2Controller {
     private Instant startOfYear() {
         LocalDateTime startOfYear = LocalDateTime.of(LocalDate.now(clock).getYear(), 1, 1, 0, 0, 1);
         return startOfYear.atZone(DEFAULT_ZONE_ID).toInstant();
+    }
+
+    private Map<Instant, Integer> executeQueryAndAggregateResults(BooleanBuilder searchPredicate) {
+        JPAQuery<MapSearchV2Result> jpaQuery = new JPAQuery<MapSearchV2Result>(entityManager)
+                .from(QMapSearchV2Result.mapSearchV2Result)
+                .where(searchPredicate);
+
+        return jpaQuery.fetch().stream()
+                .collect(Collectors.toMap(
+                        result -> result.getPeriod().getStart(),
+                        result -> 1,
+                        Integer::sum
+                ));
+    }
+
+    private Instant[] initMonthRange(Instant startDate) {
+        LocalDateTime startDateTime = LocalDateTime.ofInstant(startDate, DEFAULT_ZONE_ID);
+
+
+        LocalDateTime firstDayOfMonth = startDateTime.with(TemporalAdjusters.firstDayOfMonth()).with(LocalTime.MIN);
+        LocalDateTime lastDayOfMonth = startDateTime.with(TemporalAdjusters.lastDayOfMonth()).with(LocalTime.MAX);
+
+
+        Instant firstDayInstant = firstDayOfMonth.atZone(DEFAULT_ZONE_ID).toInstant();
+        Instant lastDayInstant = lastDayOfMonth.atZone(DEFAULT_ZONE_ID).toInstant();
+
+        return new Instant[] {firstDayInstant, lastDayInstant};
     }
 
 }

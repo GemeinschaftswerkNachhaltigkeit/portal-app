@@ -20,10 +20,16 @@ export class EventsApiService {
     private readonly tracker: MatomoTracker
   ) {}
 
-  getDates(date: DateTime): Observable<{ [key: string]: number }> {
+  getDates(
+    date: DateTime,
+    searchFilter: SearchFilter
+  ): Observable<{ [key: string]: number }> {
     const month = date.startOf('month').startOf('day').toUTC().toISO();
     return this.http.get<{ [key: string]: number }>(
-      `${environment.apiUrl}/activities/month/${month}`
+      `${environment.apiV2Url}/search/month/${month}`,
+      {
+        params: this.searchParamsCalendar(searchFilter)
+      }
     );
   }
 
@@ -74,6 +80,30 @@ export class EventsApiService {
       );
   }
 
+  private searchParamsCalendar(searchFilter: SearchFilter): HttpParams {
+    let params = new HttpParams();
+    params = params.append('includeExpiredActivities', true);
+    if (!searchFilter.onlyDan) {
+      params = params.append('resultType', 'ACTIVITY');
+    }
+    params = params.append('resultType', 'DAN');
+    params = params.append('includeAllActionDays', true);
+    params = params.append('includeNoCoords', true);
+    params = params.append('expiredOnEnd', false);
+    params = params.append('query', (searchFilter.query || '').trim());
+    params = params.append('location', searchFilter.location || '');
+    if (searchFilter.online) {
+      params = params.append('online', !!searchFilter.online);
+    }
+    params = params.append('permanent', !!searchFilter.permanent);
+
+    searchFilter.thematicFocus?.forEach((tf) => {
+      params = params.append('thematicFocus', tf);
+    });
+
+    return params;
+  }
+
   private searchParams(
     searchFilter: SearchFilter,
     nextPage = 0,
@@ -89,6 +119,7 @@ export class EventsApiService {
       params = params.append('resultType', 'ACTIVITY');
     }
     params = params.append('resultType', 'DAN');
+    params = params.append('includeAllActionDays', true);
     params = params.append('includeNoCoords', includeNoCoords);
     params = params.append('expiredOnEnd', false);
     params = params.append('page', nextPage);

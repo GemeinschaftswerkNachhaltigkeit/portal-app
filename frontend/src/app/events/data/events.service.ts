@@ -3,7 +3,6 @@ import EventDto from '../models/event-dto';
 import {
   BehaviorSubject,
   Observable,
-  count,
   filter,
   map,
   skip,
@@ -41,6 +40,9 @@ export class EventsService {
   private availableEventsState = new BehaviorSubject<{
     [key: string]: EventCalenderEntry;
   } | null>(null);
+  private currentCalenderMonth = new BehaviorSubject<DateTime>(
+    DateTime.now().startOf('month')
+  );
   initialized = false;
 
   constructor(
@@ -64,6 +66,7 @@ export class EventsService {
         skip(1),
         switchMap((searchParams) => {
           this.loader.start('load-events');
+          this.loadAvailableEvents();
           return this.eventsApi.search(searchParams, this.nextPage);
         })
       )
@@ -130,9 +133,18 @@ export class EventsService {
     );
   }
 
-  loadAvailableEvents(month: DateTime, cb?: () => void): void {
+  getCurrentMonthOfCalendar(): DateTime {
+    return this.currentCalenderMonth.value;
+  }
+
+  setCurrentMonthOfCalendar(month: DateTime): void {
+    this.currentCalenderMonth.next(month.startOf('month'));
+  }
+
+  loadAvailableEvents(cb?: () => void): void {
+    const month = this.currentCalenderMonth.value;
     this.eventsApi
-      .getDates(month)
+      .getDates(month, this.getFilters())
       .pipe(take(1))
       .subscribe({
         next: (dates) => {
