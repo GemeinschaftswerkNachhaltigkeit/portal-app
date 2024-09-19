@@ -1,17 +1,17 @@
 package com.exxeta.wpgwn.wpgwnapp.nominatim;
 
-import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
-
-import com.github.benmanes.caffeine.cache.Cache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+
+import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
+
+import com.github.benmanes.caffeine.cache.Cache;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -38,18 +38,19 @@ public class NominatimService {
             return nominatimDto;
         }
 
-        if (hasText(address)) {
-            List<NominatimDto> nominatimDtos = nominatimClient.getNominatim(address.toLowerCase());
+        if (hasText(lat) && hasText(lon)) {
+            nominatimDto = nominatimClient.getNominatim(lat, lon);
             //Nominatim API Limit: 1 request pro 1s
             sleep();
+        }
+
+        if (isNull(nominatimDto) && hasText(address)) {
+            List<NominatimDto> nominatimDtos = nominatimClient.getNominatim(address.toLowerCase());
             if (!CollectionUtils.isEmpty(nominatimDtos)) {
                 nominatimDto = nominatimDtos.get(0);
             }
         }
 
-        if (isNull(nominatimDto)) {
-            nominatimDto = nominatimClient.getNominatim(lat, lon);
-        }
 
         if (nonNull(nominatimDto)) {
             nominatimCache.put(searchKey, nominatimDto);
