@@ -12,7 +12,7 @@ import com.exxeta.wpgwn.wpgwnapp.nominatim.dto.NominatimDto;
 @FeignClient(name = "nominatim-client", url = "${nominatim.url}")
 public interface NominatimClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/search.php")
+    @RequestMapping(method = RequestMethod.GET, value = "/search")
     List<NominatimDto> getNominatim(@RequestParam("q") String address,
                                     @RequestParam("format") String format,
                                     @RequestParam("addressdetails") String addressDetails,
