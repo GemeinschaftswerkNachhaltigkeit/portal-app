@@ -11,7 +11,10 @@ import {
   OAuthModuleConfigService
 } from './services/auth-config.service';
 import { AuthService } from './services/auth.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthGuardWithForcedLogin } from './guard/auth-guard-with-forced-login.service';
@@ -34,32 +37,38 @@ export function storageFactory(): OAuthStorage {
   return localStorage;
 }
 
-@NgModule({ declarations: [
-        AuthenticatedDirective,
-        AuthenticatedExcludingRolesDirective,
-        WithOrgaDirective,
-        WithoutOrgaDirective,
-        EmailVerifySuccessPageComponent
-    ],
-    exports: [
-        AuthenticatedDirective,
-        AuthenticatedExcludingRolesDirective,
-        WithOrgaDirective,
-        WithoutOrgaDirective
-    ], imports: [CommonModule,
-        SharedModule,
-        OAuthModule.forRoot(), // OAuthModuleConfig is provided via OAuthModuleConfigService
-        TranslateModule.forChild({
-            extend: true
-        }),
-        RouterModule,
-        MatIconModule,
-        MatButtonModule,
-        MatMenuModule], providers: [
-        { provide: OAuthModuleConfig, useExisting: OAuthModuleConfigService },
-        { provide: OAuthStorage, useFactory: storageFactory },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [
+    AuthenticatedDirective,
+    AuthenticatedExcludingRolesDirective,
+    WithOrgaDirective,
+    WithoutOrgaDirective,
+    EmailVerifySuccessPageComponent
+  ],
+  exports: [
+    AuthenticatedDirective,
+    AuthenticatedExcludingRolesDirective,
+    WithOrgaDirective,
+    WithoutOrgaDirective
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    OAuthModule.forRoot(), // OAuthModuleConfig is provided via OAuthModuleConfigService
+    TranslateModule.forChild({
+      extend: true
+    }),
+    RouterModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule
+  ],
+  providers: [
+    { provide: OAuthModuleConfig, useExisting: OAuthModuleConfigService },
+    { provide: OAuthStorage, useFactory: storageFactory },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AuthModule {
   static forRoot(
     config: AuthConfig,
