@@ -70,7 +70,7 @@ export class DateSelectHeaderComponent<D> implements OnDestroy {
       this._locale = event.lang;
       this._dateAdapter.setLocale(this._locale);
     });
-    _calendar.stateChanges.pipe(takeUntil(this._destroyed)).subscribe((x) => {
+    _calendar.stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
       cdr.markForCheck();
     });
   }

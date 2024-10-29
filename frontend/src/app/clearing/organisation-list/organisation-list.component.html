@@ -99,29 +99,24 @@
               class="details-btn"
               mat-flat-button
             >
-
-            <span class="footer-btn">
-              <app-outlined-icon>info</app-outlined-icon>
-              <span>Alle Infos anzeigen</span>
-            </span>
-            </a
-            >
+              <span class="footer-btn">
+                <app-outlined-icon>info</app-outlined-icon>
+                <span>Alle Infos anzeigen</span>
+              </span>
+            </a>
             <!--           <button><app-outlined-icon>content_copy</app-outlined-icon></button> -->
             <button
               mat-flat-button
               color="green"
               (click)="publishOrg(orgWIP.id!)"
-              [disabled]="!isAllowedToPublish(orgWIP.status!)"
+              [disabled]="isPublishing || !isAllowedToPublish(orgWIP.status!)"
             >
-              <div class="footer-btn"
-              >
-
+              <div class="footer-btn">
                 <div class="footer-btn">
                   <app-outlined-icon>publish</app-outlined-icon>
                   {{ 'clearing.btn.publish' | translate }}
                 </div>
               </div>
-
             </button>
             <button
               mat-flat-button
@@ -148,7 +143,7 @@
           </app-organisation-card>
           <div
             *ngIf="(orgData$ | async)?.length === 0"
-            class="mat-elevation-z8 org-details card"
+            class="mat-elevation-z8 no-data"
           >
             {{ 'clearing.no-data' | translate }}
           </div>

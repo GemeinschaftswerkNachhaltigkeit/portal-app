@@ -29,6 +29,7 @@ export class OrganisationListComponent {
   orgListPaging$ = this.clearingService.orgListPaging$;
   orgDuplicate$ = this.clearingService.orgDuplicate$;
 
+  isPublishing = false;
   opened = false;
 
   sortDirection = 'asc';
@@ -100,10 +101,14 @@ export class OrganisationListComponent {
       });
   }
 
-  publishOrg(id: number) {
-    this.clearingService
-      .publishOrganisation(id)
-      .finally(() => this.fetchClearingData());
+  async publishOrg(id: number) {
+    try {
+      this.isPublishing = true;
+      await this.clearingService.publishOrganisation(id);
+    } finally {
+      this.isPublishing = false;
+      this.fetchClearingData();
+    }
   }
 
   requireFeedback(id: number, orgName: string) {

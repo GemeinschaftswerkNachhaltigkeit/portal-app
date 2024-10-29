@@ -16,14 +16,12 @@ import { BestPracticesCategories } from '../../models/best-practices-categories'
   templateUrl: './partner-links.component.html',
   styleUrls: ['./partner-links.component.scss']
 })
-export class PartnerLinksComponent
-  implements OnDestroy, OnChanges
-{
+export class PartnerLinksComponent implements OnDestroy, OnChanges {
   @Input() links: PartnerLink[] = [];
   @Input() selectedCategories: (OfferCategories | BestPracticesCategories)[] =
     [];
 
-  swiper = viewChild<ElementRef>('swiper')
+  swiper = viewChild<ElementRef>('swiper');
   filtered: PartnerLink[] = [];
   destroyed = new Subject<void>();
   sm = false;
@@ -35,12 +33,10 @@ export class PartnerLinksComponent
     value: 0
   };
 
-
   ngOnChanges(): void {
     this.filtered = this.filterLinks(this.links, this.selectedCategories);
   }
 
- 
   filterLinks(
     links: PartnerLink[],
     cats: (OfferCategories | BestPracticesCategories)[]
@@ -61,9 +57,9 @@ export class PartnerLinksComponent
   }
 
   slideNext() {
-    this.swiper()?.nativeElement.swiper.slideNext()
+    this.swiper()?.nativeElement.swiper.slideNext();
   }
   slidePrev() {
-    this.swiper()?.nativeElement.swiper.slidePrev()
+    this.swiper()?.nativeElement.swiper.slidePrev();
   }
 }
