@@ -33,13 +33,13 @@ public class CampaignExpiredValidator {
         final Map<String, String> errorMessages = Maps.newConcurrentMap();
 
         Instant startMin = danRangeService.getDanSetting().startMin();
+        Instant endMax = danRangeService.getDanSetting().endMax();
 
-        if (nonNull(campaign.getDateStart()) && nonNull(campaign.getDateEnd())) {
+        if (isCampaignDateRangeSet(campaign)) {
 
-            if (nonNull(startMin) && campaign.getDateStart().isBefore(startMin)) {
+            if (isStartDateOutsideAllowedRange(campaign, startMin, endMax)) {
                 errorMessages.put("date_start", "validation.campaign.is.expired");
-
-            } else if (isNull(startMin) && campaign.getDateEnd().isBefore(Instant.now(clock))) {
+            } else if (isCampaignEnded(campaign, startMin, endMax)) {
                 errorMessages.put("date_end", "validation.campaign.is.expired");
             }
         }
@@ -47,5 +47,18 @@ public class CampaignExpiredValidator {
         if (!errorMessages.isEmpty()) {
             throw new DanXmlImportIgnoredException(errorMessages);
         }
+    }
+
+    private boolean isCampaignDateRangeSet(Campaign campaign) {
+        return nonNull(campaign.getDateStart()) && nonNull(campaign.getDateEnd());
+    }
+
+    private boolean isStartDateOutsideAllowedRange(Campaign campaign, Instant startMin, Instant endMax) {
+        return (nonNull(startMin) && campaign.getDateStart().isBefore(startMin))
+                || (nonNull(endMax) && campaign.getDateStart().isAfter(endMax));
+    }
+
+    private boolean isCampaignEnded(Campaign campaign, Instant startMin, Instant endMax) {
+        return (isNull(startMin) || isNull(endMax)) && campaign.getDateEnd().isBefore(Instant.now(clock));
     }
 }
