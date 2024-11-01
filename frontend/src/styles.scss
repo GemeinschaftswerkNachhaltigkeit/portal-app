@@ -247,7 +247,14 @@ button.mat-mdc-unelevated-button:not(:disabled):not(.mat-accent):not(
 
 .mat-mdc-paginator {
   background-color: white;
-  padding-block: 1rem;
+  padding: 0;
+}
+div.mat-mdc-paginator-container {
+  padding: 0;
+  justify-content: flex-start;
+}
+div.mat-mdc-paginator-range-label {
+  margin: 0;
 }
 .mat-mdc-paginator > * {
   color: $blue-navy !important;

@@ -4,28 +4,23 @@
 .wrapper {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   background-color: white;
-  color: $blue-navy;
+
   .total {
-    padding: $spacing-2;
-    position: absolute;
-    top: -0.8rem;
-    left: 0;
+    padding-block: 0;
+    padding-inline: $spacing-4;
     font-size: 1.2rem;
+    border-bottom: 1px solid $blue-navy;
+    border-color: $gray-light2;
+    width: 100%;
+  }
+  .content {
+    padding-inline: $spacing-4;
   }
   .noBreak {
     white-space: nowrap;
-  }
-}
-
-@media screen and (min-width: $breakpoint-lg) {
-  .wrapper {
-    .total {
-      top: $spacing-4;
-      left: 1rem;
-      font-size: inherit;
-    }
   }
 }
