@@ -106,10 +106,11 @@ export class MapApiService {
     );
     params = params.append('query', (searchFilter.query || '').trim());
     params = params.append('location', searchFilter.location || '');
-    searchFilter.viewType &&
+    if (searchFilter.viewType) {
       searchFilter.viewType?.forEach((resultType) => {
         params = params.append('resultType', resultType);
       });
+    }
     if (!searchFilter.viewType || !searchFilter.viewType?.length) {
       params = params.append('resultType', 'DAN');
       params = params.append('resultType', 'ORGANISATION');

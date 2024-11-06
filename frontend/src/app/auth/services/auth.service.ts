@@ -371,7 +371,7 @@ export class AuthService {
         await this.oauthService.refreshToken();
       }
     } catch (e) {
-      console.debug('Silent refresh error -> fallback to normal token refresh');
+      console.error(e);
       this.silentRefreshErrors++;
       await this.oauthService.refreshToken();
     }

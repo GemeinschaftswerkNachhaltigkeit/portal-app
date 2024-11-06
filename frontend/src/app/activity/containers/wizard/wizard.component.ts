@@ -330,6 +330,7 @@ export class WizardComponent implements OnDestroy, OnInit {
         period_hint: string;
       }>('dan_wizard_translations');
     } catch (error) {
+      console.error(error);
       this.danContent = null;
     }
   }
@@ -440,7 +441,7 @@ export class WizardComponent implements OnDestroy, OnInit {
 
   ngOnDestroy() {
     this.$unsubscribe.next(null);
-    this.$unsubscribe.complete;
+    this.$unsubscribe.complete();
   }
 
   private trackFromChanges(): void {
