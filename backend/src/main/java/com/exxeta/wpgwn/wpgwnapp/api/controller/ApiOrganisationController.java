@@ -1,16 +1,19 @@
 package com.exxeta.wpgwn.wpgwnapp.api.controller;
 
-import jakarta.annotation.security.RolesAllowed;
-import jakarta.persistence.EntityNotFoundException;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 import com.exxeta.wpgwn.wpgwnapp.api.dto.ApiOrganisationResponseDto;
+import com.exxeta.wpgwn.wpgwnapp.api.mapper.ApiCsvMapper;
 import com.exxeta.wpgwn.wpgwnapp.api.mapper.ApiOrganisationMapper;
 import com.exxeta.wpgwn.wpgwnapp.exception.ErrorResponse;
 import com.exxeta.wpgwn.wpgwnapp.organisation.OrganisationBindingCustomizer;
@@ -41,6 +45,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/openapi/v1/organisations")
@@ -56,6 +62,43 @@ public class ApiOrganisationController {
     private final GeometryFactory factory;
 
     private final ApiOrganisationMapper organisationMapper;
+
+    private final ApiCsvMapper apiCsvMapper;
+
+    @Operation(summary = "Get a page of organisations as csv")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A CSV File with organisations", content = {
+                    @Content(mediaType = "text/csv"
+                    )}),
+            @ApiResponse(responseCode = "401", description = "Authorization header is missing or api key is invalid")
+    })
+    @GetMapping("/csv")
+    public ResponseEntity<Resource> getPagedOrganisationAsCsv(
+            @Parameter(description = "Filter organisations by location. String with bounding box coordinates in a 'southwest_lng,southwest_lat,northeast_lng,northeast_lat' format.",
+                    example = "-3.62,47.57,15.74,54.55")
+            @RequestParam(value = "envelope", required = false) Envelope envelope,
+            @Parameter(description = "Search organisations by name and description. Search is case insensitive.")
+            @RequestParam(value = "query", required = false) String query,
+            @ParameterObject
+            @QuerydslPredicate(root = Organisation.class, bindings = OrganisationBindingCustomizer.class)
+            Predicate filterPredicate,
+            @ParameterObject Pageable pageable) {
+        Page<ApiOrganisationResponseDto> pagedOrganisation =
+                getPagedOrganisation(envelope, query, filterPredicate, pageable);
+
+        List<ApiOrganisationResponseDto> results = new ArrayList<>();
+
+        if (Objects.nonNull(pagedOrganisation) && pagedOrganisation.hasContent()) {
+            results = pagedOrganisation.getContent();
+        }
+        Resource resource = apiCsvMapper.organisationsToCsv(results);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                .contentType(MediaType.parseMediaType("text/csv"))
+                .body(resource);
+    }
+
 
     @Operation(summary = "Get a page of organisations")
     @ApiResponses(value = {
