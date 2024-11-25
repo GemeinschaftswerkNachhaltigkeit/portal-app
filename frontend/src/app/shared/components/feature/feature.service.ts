@@ -30,7 +30,7 @@ export class FeatureService {
     const feature = features?.find((f) => f.feature === featureKey);
 
     if (!feature) {
-      show = true;
+      show = false;
     }
 
     if (feature && feature.active) {
