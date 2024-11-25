@@ -18,6 +18,7 @@ import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
 import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
+import { FeaturesService } from '../shared/components/feature/features.service';
 
 // common map facade services
 @Injectable({ providedIn: 'root' })
@@ -29,6 +30,7 @@ export class SharedMapFacade {
   private loading = inject(LoadingService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private features = inject(FeaturesService);
 
   listQueryParams = [
     'thematicFocus',
@@ -113,7 +115,9 @@ export class SharedMapFacade {
     this.uiState.setFilters(filters);
   }
 
-  getById(type: string, id: number): void {
+  async getById(type: string, id: number): Promise<void> {
+    await this.features.ready;
+
     const loadingId = this.loading.start('detail-popup-data');
     this.mapApi
       .byId(type, id)
@@ -123,8 +127,10 @@ export class SharedMapFacade {
           this.loading.stop(loadingId);
           this.mapState.setCurrentResult(res);
         },
-        error: () => {
+        error: (e) => {
+          console.error(e);
           this.loading.stop(loadingId);
+          this.closeCard();
         }
       });
   }
@@ -202,6 +208,7 @@ export class InternalMapFacade {
   private internalUiState = inject(InternalUiStateService);
   private mapApi = inject(MapApiService);
   private loading = inject(LoadingService);
+  private features = inject(FeaturesService);
 
   currentResult$ = this.internalMapState.currentResult$;
   markers$ = this.internalMapState.markers$;
@@ -246,8 +253,9 @@ export class InternalMapFacade {
     this.sharedMapFacade.getById(type, id);
   }
 
-  search(searchFilter?: DynamicFilters): void {
+  async search(searchFilter?: DynamicFilters): Promise<void> {
     const filters = this.sharedMapFacade.composeFilter(searchFilter);
+    await this.features.ready;
     this.searchCards(filters);
     this.sharedMapFacade.searchMarkers(filters);
   }

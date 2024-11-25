@@ -85,7 +85,7 @@
       </div>
 
       <mat-paginator
-        class="mat-elevation-z8"
+        class="mat-elevation-z8 paginator-bottom"
         *ngIf="(searchResults$ | async)?.length"
         color="accent"
         [length]="(searchPaging$ | async)?.totalElements"

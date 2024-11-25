@@ -198,6 +198,7 @@ export class WizardComponent implements OnDestroy {
         period_hint: string;
       }>('dan_wizard_translations');
     } catch (error) {
+      console.error(error);
       this.danContent = null;
     }
   }
