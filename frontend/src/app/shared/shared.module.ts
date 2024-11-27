@@ -8,7 +8,6 @@ import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { MatButtonModule } from '@angular/material/button';
-import { LabelComponent } from './components/label/label.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -105,6 +104,7 @@ import { RegisterOrLoginModalComponent } from './components/register-or-login-mo
 import { HeadingComponent } from './standalone/base/heading.component';
 import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
 import { OutlinedIconComponent } from './standalone/base/outlined-icon.component';
+import { LabelComponent } from './standalone/base/label.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +113,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     ContentWrapperComponent,
     SdgIconComponent,
     ToggleButtonComponent,
-    LabelComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     ContentRowComponent,
@@ -218,7 +217,8 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     ExpiredBadgeComponent,
     OutlinedIconComponent,
     ActionComponent,
-    AlertComponent
+    AlertComponent,
+    LabelComponent
   ],
   exports: [
     CommonModule,
@@ -228,7 +228,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     FormFieldErrorComponent,
     ContentWrapperComponent,
     ToggleButtonComponent,
-    LabelComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     ContentRowComponent,
