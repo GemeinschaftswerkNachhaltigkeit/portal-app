@@ -18,6 +18,7 @@ import {
   BreadcrumbComponent,
   BreadcrumbsComponent
 } from 'src/app/shared/standalone/base/breadcrumb';
+import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {
     OrgaBadgesComponent,
     HeadingComponent,
     BreadcrumbsComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ExpiredBadgeComponent
   ]
 })
 export class OrgaProfileModule {}

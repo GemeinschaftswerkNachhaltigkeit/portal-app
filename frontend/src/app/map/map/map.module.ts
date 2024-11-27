@@ -30,6 +30,7 @@ import {
 import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
 import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
 import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
+import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -68,7 +69,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatDatepickerModule,
     MatLuxonDateModule,
     OrgaBadgesComponent,
-    EventBadgesComponent
+    EventBadgesComponent,
+    ExpiredBadgeComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

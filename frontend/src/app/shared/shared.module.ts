@@ -36,7 +36,6 @@ import { FeedbackComponent } from './components/feedback/feedback/feedback.compo
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { HeaderComponent } from './components/layout/header/header.component';
-import { ExpiredBadgeComponent } from './components/expired-badge/expired-badge.component';
 import { CharCountComponent } from './components/char-count/char-count.component';
 import { PageWithHeaderLayoutComponent } from './components/layout/page-with-header-layout/page-with-header-layout.component';
 import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
@@ -105,6 +104,7 @@ import { MenuEntryComponent } from './components/layout/main-menu/menu-entry/men
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 import { HeadingComponent } from './standalone/base/heading.component';
+import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +139,6 @@ import { HeadingComponent } from './standalone/base/heading.component';
     FeedbackComponent,
     CardListComponent,
     HeaderComponent,
-    ExpiredBadgeComponent,
     CharCountComponent,
     PageWithHeaderLayoutComponent,
     ListWithHeadingLayoutComponent,
@@ -218,7 +217,8 @@ import { HeadingComponent } from './standalone/base/heading.component';
     MatButtonToggleModule,
     MatSidenavModule,
     CdkMenuModule,
-    HeadingComponent
+    HeadingComponent,
+    ExpiredBadgeComponent
   ],
   exports: [
     CommonModule,
@@ -252,7 +252,6 @@ import { HeadingComponent } from './standalone/base/heading.component';
     NotFoundPageComponent,
     CardListComponent,
     HeaderComponent,
-    ExpiredBadgeComponent,
     CharCountComponent,
     PageWithHeaderLayoutComponent,
     ListWithHeadingLayoutComponent,

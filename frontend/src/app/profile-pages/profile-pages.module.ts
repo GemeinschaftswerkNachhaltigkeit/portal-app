@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
+import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HeadingComponent } from '../shared/standalone/base/heading.component';
     MatButtonModule,
     MatIconModule,
     RouterModule,
-    HeadingComponent
+    HeadingComponent,
+    ExpiredBadgeComponent
   ]
 })
 export class ProfilePagesModule {}
