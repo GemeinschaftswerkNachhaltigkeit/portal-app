@@ -20,7 +20,6 @@ import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu
 import { PageMenuComponent } from './components/layout/page-menu/page-menu.component';
 import { MenuItemDirective } from './components/layout/page-menu/menu-item.directive';
 import { MenuItemActiveDirective } from './components/layout/page-menu/menu-item-active.directive';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
 import { CardLogoComponent } from './components/card-logo/card-logo.component';
 import { CardLabelComponent } from './components/card-label/card-label.component';
@@ -68,7 +67,6 @@ import { OfferCategoryFilterComponent } from './components/form/filters/offer-ca
 import { BestPracticeCategoryFilterComponent } from './components/form/filters/best-practice-category-filter/best-practice-category-filter.component';
 import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CategoryComponent } from './components/category/category.component';
 import { OfferSubscriptionActionComponent } from './components/subscription/containers/offer-subscription-action/offer-subscription-action.component';
 import { BestPracticeSubscriptionActionComponent } from './components/subscription/containers/best-practice-subscription-action/best-practice-subscription-action.component';
@@ -125,7 +123,6 @@ import { HeadingComponent } from './standalone/base/heading.component';
     PageMenuComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    BreadcrumbsComponent,
     CardLogoComponent,
     CardLabelComponent,
     SocialMediaLinksComponent,
@@ -169,7 +166,6 @@ import { HeadingComponent } from './standalone/base/heading.component';
     BestPracticeCategoryFilterComponent,
     FilterModalButtonComponent,
     OrderedFilterComponent,
-    BreadcrumbComponent,
     CategoryComponent,
     ContactControlsComponent,
     SpecialOrgasFilterComponent,
@@ -242,8 +238,6 @@ import { HeadingComponent } from './standalone/base/heading.component';
     PageMenuComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    BreadcrumbComponent,
-    BreadcrumbsComponent,
     CardLogoComponent,
     CardLabelComponent,
     SocialMediaLinksComponent,

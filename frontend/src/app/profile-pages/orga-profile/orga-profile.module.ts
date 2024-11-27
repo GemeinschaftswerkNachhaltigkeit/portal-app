@@ -14,6 +14,10 @@ import { TabComponent } from './components/tabs/tab.component';
 import { OrgaProfileContainerComponent } from './containers/orga-profile-container/orga-profile-container.component';
 import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
 import { HeadingComponent } from 'src/app/shared/standalone/base/heading.component';
+import {
+  BreadcrumbComponent,
+  BreadcrumbsComponent
+} from 'src/app/shared/standalone/base/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { HeadingComponent } from 'src/app/shared/standalone/base/heading.compone
     MatIconModule,
     RouterModule,
     OrgaBadgesComponent,
-    HeadingComponent
+    HeadingComponent,
+    BreadcrumbsComponent,
+    BreadcrumbComponent
   ]
 })
 export class OrgaProfileModule {}

@@ -8,6 +8,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfilePagesModule } from '../profile-pages.module';
 import { RouterModule } from '@angular/router';
 import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
+import {
+  BreadcrumbsComponent,
+  BreadcrumbComponent
+} from 'src/app/shared/standalone/base/breadcrumb';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],
@@ -19,7 +23,9 @@ import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/even
     ActivityProfileRoutingModule,
     MatButtonModule,
     MatIconModule,
-    EventBadgesComponent
+    EventBadgesComponent,
+    BreadcrumbsComponent,
+    BreadcrumbComponent
   ]
 })
 export class ActivityProfileModule {}
