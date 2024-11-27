@@ -26,7 +26,7 @@ import { CardLabelComponent } from './components/card-label/card-label.component
 import { SocialMediaLinksComponent } from './components/social-media-links/social-media-links.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { TopicComponent } from './components/topic/topic.component';
-import { ActionComponent } from './components/action/action.component';
+import { ActionComponent } from './standalone/base/action.component';
 import { NotificationPageComponent } from './components/layout/notification-page/notification-page.component';
 import { BaseCardComponent } from './components/base-card/base-card.component';
 import { OrganisationSubscriptionActionComponent } from './components/subscription/containers/organisation-subscription-action/organisation-subscription-action.component';
@@ -127,7 +127,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     SocialMediaLinksComponent,
     ErrorPageComponent,
     TopicComponent,
-    ActionComponent,
     NotificationPageComponent,
     BaseCardComponent,
     OrganisationSubscriptionActionComponent,
@@ -218,7 +217,8 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     CdkMenuModule,
     HeadingComponent,
     ExpiredBadgeComponent,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    ActionComponent
   ],
   exports: [
     CommonModule,
@@ -241,7 +241,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     CardLabelComponent,
     SocialMediaLinksComponent,
     TopicComponent,
-    ActionComponent,
     NotificationPageComponent,
     BaseCardComponent,
     ActivitySubscriptionActionComponent,
