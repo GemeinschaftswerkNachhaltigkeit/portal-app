@@ -368,6 +368,9 @@ mat-form-field {
 .mat-expansion-panel {
   color: $blue-navy;
 }
+.mat-mdc-dialog-container-with-actions div.mat-mdc-dialog-content {
+  padding: 0;
+}
 mat-dialog-container.mat-dialog-container {
   padding-top: 0;
 }

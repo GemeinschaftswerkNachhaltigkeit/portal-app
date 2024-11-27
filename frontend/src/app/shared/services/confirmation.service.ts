@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
   ConfirmationModalComponent,
   ConfirmationModalData
-} from '../confirmation-modal/confirmation-modal.component';
+} from '../components/confirmation-modal/confirmation-modal.component';
 
 @Injectable({
   providedIn: 'root'

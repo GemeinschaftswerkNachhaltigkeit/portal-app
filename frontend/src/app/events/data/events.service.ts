@@ -19,7 +19,7 @@ import { PersistFiltersService } from 'src/app/shared/services/persist-filters.s
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { DateTime } from 'luxon';
-import { RegisterOrLoginService } from 'src/app/core/services/register-or-login.service.service';
+import { RegisterOrLoginService } from 'src/app/shared/services/register-or-login.service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';

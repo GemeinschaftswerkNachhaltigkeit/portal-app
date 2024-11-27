@@ -51,25 +51,3 @@ Runs:
 - builds app
 
 `npm run validate`
-
-# Modules
-
-## Core Module
-
-This module is imported only once in AppModule
-
-Contains:
-
-- singleton services -> services used in the whole application (Logging, Auth ...)
-- singleton components -> components which are instanciated once but impact the application as a whole (Gloable App Layout, Main Menu and more)
-- configuration
-- exports of third party modules which are needed by the AppModule
-
-## Shared Module
-
-This module can be imported in multiple other feature modules which need functionality provided by the shared module.
-
-Contains:
-
-- Services, Directives, Components, Types ... which are reusable
-- exports commonly used angular modules (like CommonModule)

@@ -92,6 +92,21 @@ import { ImageComponent } from './components/image/image.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { BaseLayoutComponent } from './components/layout/base-layout/base-layout.component';
+import { MainHeaderComponent } from './components/layout/main-header/main-header.component';
+import { SidebarContentComponent } from './components/layout/sidebar-content/sidebar-content.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { LangToggleComponent } from './components/layout/lang-toggle/lang-toggle.component';
+import { NavActionsComponent } from './components/layout/nav-actions/nav-actions.component';
+import { LogoComponent } from './components/layout/logo/logo.component';
+import { MainMenuComponent } from './components/layout/main-menu/main-menu.component';
+import { AccordionMenuItemComponent } from './components/layout/main-menu/accordion-menu-item/accordion-menu-item.component';
+import { DropdownMenuComponent } from './components/layout/main-menu/dropdown-menu/dropdown-menu.component';
+import { MenuEntryComponent } from './components/layout/main-menu/menu-entry/menu-entry.component';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 
 @NgModule({
   declarations: [
@@ -168,7 +183,20 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     OnlineFilterComponent,
     OnlyDanFilterComponent,
     ImageComponent,
-    FormAdvantagesComponent
+    FormAdvantagesComponent,
+    ConfirmationModalComponent,
+    BaseLayoutComponent,
+    MainHeaderComponent,
+    SidebarContentComponent,
+    FooterComponent,
+    LangToggleComponent,
+    NavActionsComponent,
+    LogoComponent,
+    MainMenuComponent,
+    DropdownMenuComponent,
+    MenuEntryComponent,
+    AccordionMenuItemComponent,
+    RegisterOrLoginModalComponent
   ],
   imports: [
     CommonModule,
@@ -192,7 +220,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatTooltipModule,
     DropzoneModule,
     MatSlideToggleModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSidenavModule,
+    CdkMenuModule
   ],
   exports: [
     CommonModule,
@@ -255,7 +285,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     UploadImageComponent,
     AddressControlsComponent,
     ImageComponent,
-    FormAdvantagesComponent
+    FormAdvantagesComponent,
+    ConfirmationModalComponent,
+    BaseLayoutComponent
   ]
 })
 export class SharedModule {}

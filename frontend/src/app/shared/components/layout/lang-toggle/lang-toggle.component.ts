@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { CookieService } from '../../services/coockie.service';
+import { CookieService } from 'src/app/shared/services/coockie.service';
 
 const LP_LANG_COOKIE = 'i18n_redirected';
 

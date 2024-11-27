@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, take } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
-import { ConfirmationService } from '../core/services/confirmation.service';
+import { ConfirmationService } from '../shared/services/confirmation.service';
 import { FeedbackService } from '../shared/components/feedback/feedback.service';
 import PagedResponse from '../shared/models/paged-response';
 import Paging, {

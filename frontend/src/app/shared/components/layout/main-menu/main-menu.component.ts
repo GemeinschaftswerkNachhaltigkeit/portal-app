@@ -5,7 +5,7 @@ import { LandingpageService } from 'src/app/shared/services/landingpage.service'
 import {
   NavContentService,
   NavItemContent
-} from '../services/nav-content.service';
+} from 'src/app/shared/services/nav-content.service';
 
 @Component({
   selector: 'app-main-menu',
