@@ -7,7 +7,6 @@ import {
 } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { ExampleComponent } from './example/example.component';
 import { AuthModule } from './auth/auth.module';
 import { authConfig, restrictedUrls } from './app-auth.config';
 import { NgxMatomoTrackerModule } from 'ngx-matomo-client';
@@ -40,7 +39,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
 };
 
 @NgModule({
-  declarations: [AppComponent, ExampleComponent],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     CoreModule,

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from './auth/guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from './auth/guard/auth-guard-with-role-check.service';
 import { UserPermission } from './auth/models/user-role';
-import { ExampleComponent } from './example/example.component';
 import { AuthGuardWithLoginCheck } from './auth/guard/auth-guard-login-check.service';
 import { EmailVerifySuccessPageComponent } from './auth/email-verify-success-page/email-verify-success-page.component';
 import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
@@ -100,10 +99,6 @@ const routes: Routes = [
     data: {
       roles: [UserPermission.RNE_ADMIN]
     }
-  },
-  {
-    path: 'example',
-    component: ExampleComponent
   },
   {
     path: 'emailVerifySuccess',
