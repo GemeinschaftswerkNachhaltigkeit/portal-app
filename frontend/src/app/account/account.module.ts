@@ -42,6 +42,7 @@ import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { ActionComponent } from '../shared/standalone/base/action.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
+import { CardListComponent } from '../shared/standalone/cards/card-list.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
     HeadingComponent,
     OutlinedIconComponent,
     ActionComponent,
-    AlertComponent
+    AlertComponent,
+    CardListComponent
   ]
 })
 export class AccountModule {}

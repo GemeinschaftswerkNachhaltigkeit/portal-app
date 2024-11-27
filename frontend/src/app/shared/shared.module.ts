@@ -30,7 +30,6 @@ import { ActivitySubscriptionActionComponent } from './components/subscription/c
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CardListComponent } from './components/card-list/card-list.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { CharCountComponent } from './components/char-count/char-count.component';
 import { PageWithHeaderLayoutComponent } from './components/layout/page-with-header-layout/page-with-header-layout.component';
@@ -130,7 +129,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     BestPracticeSubscriptionActionComponent,
     NotFoundPageComponent,
     FeedbackComponent,
-    CardListComponent,
     HeaderComponent,
     CharCountComponent,
     PageWithHeaderLayoutComponent,
@@ -243,7 +241,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     OfferSubscriptionActionComponent,
     BestPracticeSubscriptionActionComponent,
     NotFoundPageComponent,
-    CardListComponent,
     HeaderComponent,
     CharCountComponent,
     PageWithHeaderLayoutComponent,

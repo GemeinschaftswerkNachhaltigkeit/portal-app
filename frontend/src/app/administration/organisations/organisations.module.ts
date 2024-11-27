@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
+import { CardListComponent } from 'src/app/shared/standalone/cards/card-list.component';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],
@@ -30,7 +31,8 @@ import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
     MatButtonModule,
     MatMenuModule,
     MatCheckboxModule,
-    AlertComponent
+    AlertComponent,
+    CardListComponent
   ]
 })
 export class OrganisationsModule {}
