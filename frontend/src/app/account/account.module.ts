@@ -40,6 +40,8 @@ import { DanHelpModalComponent } from './containers/dan-activities/dan-help-moda
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
+import { ActionComponent } from '../shared/standalone/base/action.component';
+import { AlertComponent } from '../shared/standalone/base/alert.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
     MatMenuModule,
     MatDialogModule,
     HeadingComponent,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    ActionComponent,
+    AlertComponent
   ]
 })
 export class AccountModule {}

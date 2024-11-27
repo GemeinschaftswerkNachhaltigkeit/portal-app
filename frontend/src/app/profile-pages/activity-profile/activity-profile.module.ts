@@ -12,6 +12,8 @@ import {
   BreadcrumbsComponent,
   BreadcrumbComponent
 } from 'src/app/shared/standalone/base/breadcrumb';
+import { ActionComponent } from 'src/app/shared/standalone/base/action.component';
+import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],
@@ -25,7 +27,9 @@ import {
     MatIconModule,
     EventBadgesComponent,
     BreadcrumbsComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    ActionComponent,
+    AlertComponent
   ]
 })
 export class ActivityProfileModule {}

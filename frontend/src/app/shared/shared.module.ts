@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ContentRowComponent } from './components/content-row/content-row.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from './standalone/base/alert.component';
 import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu-bar.component';
 import { PageMenuComponent } from './components/layout/page-menu/page-menu.component';
 import { MenuItemDirective } from './components/layout/page-menu/menu-item.directive';
@@ -117,7 +117,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     SpinnerComponent,
     MessageInputDialogComponent,
     ContentRowComponent,
-    AlertComponent,
     TiptapMenuBarComponent,
     PageMenuComponent,
     MenuItemDirective,
@@ -218,7 +217,8 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     HeadingComponent,
     ExpiredBadgeComponent,
     OutlinedIconComponent,
-    ActionComponent
+    ActionComponent,
+    AlertComponent
   ],
   exports: [
     CommonModule,
@@ -233,7 +233,6 @@ import { OutlinedIconComponent } from './standalone/base/outlined-icon.component
     MessageInputDialogComponent,
     ContentRowComponent,
     TiptapMenuBarComponent,
-    AlertComponent,
     PageMenuComponent,
     MenuItemDirective,
     MenuItemActiveDirective,

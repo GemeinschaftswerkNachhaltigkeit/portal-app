@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { SavedService } from '../../services/saved.service';
 import { OutlinedIconComponent } from '../base/outlined-icon.component';
 

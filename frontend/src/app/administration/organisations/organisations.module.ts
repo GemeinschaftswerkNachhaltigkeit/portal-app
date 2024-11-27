@@ -13,6 +13,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],
@@ -28,7 +29,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatPaginatorModule,
     MatButtonModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    AlertComponent
   ]
 })
 export class OrganisationsModule {}

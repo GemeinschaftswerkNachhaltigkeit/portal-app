@@ -26,6 +26,7 @@ import { TitleWithContentComponent } from '../shared/standalone/base/title-with-
 import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { MasterDataFormComponent } from './components/master-data-form/master-data-form.component';
 import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
+import { AlertComponent } from '../shared/standalone/base/alert.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indic
     MatRadioModule,
     TitleWithContentComponent,
     WizardSidebarLayoutComponent,
-    SavedIndicatorComponent
+    SavedIndicatorComponent,
+    AlertComponent
   ]
 })
 export class ActivityModule {}
