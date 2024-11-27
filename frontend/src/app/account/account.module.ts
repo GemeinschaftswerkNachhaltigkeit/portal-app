@@ -38,6 +38,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
 import { DanHelpModalComponent } from './containers/dan-activities/dan-help-modal/dan-help-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HeadingComponent } from '../shared/standalone/base/heading.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTooltipModule,
     MatSelectModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    HeadingComponent
   ]
 })
 export class AccountModule {}

@@ -32,7 +32,6 @@ import { NotificationPageComponent } from './components/layout/notification-page
 import { BaseCardComponent } from './components/base-card/base-card.component';
 import { OrganisationSubscriptionActionComponent } from './components/subscription/containers/organisation-subscription-action/organisation-subscription-action.component';
 import { ActivitySubscriptionActionComponent } from './components/subscription/containers/activity-subscription-action/activity-subscription-action.component';
-import { HeadingComponent } from './components/heading/heading.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -107,6 +106,7 @@ import { DropdownMenuComponent } from './components/layout/main-menu/dropdown-me
 import { MenuEntryComponent } from './components/layout/main-menu/menu-entry/menu-entry.component';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
+import { HeadingComponent } from './standalone/base/heading.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +138,6 @@ import { RegisterOrLoginModalComponent } from './components/register-or-login-mo
     ActivitySubscriptionActionComponent,
     OfferSubscriptionActionComponent,
     BestPracticeSubscriptionActionComponent,
-    HeadingComponent,
     NotFoundPageComponent,
     FeedbackComponent,
     CardListComponent,
@@ -222,7 +221,8 @@ import { RegisterOrLoginModalComponent } from './components/register-or-login-mo
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatSidenavModule,
-    CdkMenuModule
+    CdkMenuModule,
+    HeadingComponent
   ],
   exports: [
     CommonModule,
@@ -255,7 +255,6 @@ import { RegisterOrLoginModalComponent } from './components/register-or-login-mo
     OrganisationSubscriptionActionComponent,
     OfferSubscriptionActionComponent,
     BestPracticeSubscriptionActionComponent,
-    HeadingComponent,
     NotFoundPageComponent,
     CardListComponent,
     HeaderComponent,

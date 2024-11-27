@@ -13,6 +13,7 @@ import { TabButtonsComponent } from './components/tabs/tab-buttons.component';
 import { TabComponent } from './components/tabs/tab.component';
 import { OrgaProfileContainerComponent } from './containers/orga-profile-container/orga-profile-container.component';
 import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
+import { HeadingComponent } from 'src/app/shared/standalone/base/heading.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-
     MatButtonModule,
     MatIconModule,
     RouterModule,
-    OrgaBadgesComponent
+    OrgaBadgesComponent,
+    HeadingComponent
   ]
 })
 export class OrgaProfileModule {}

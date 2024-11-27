@@ -8,6 +8,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { HeadingComponent } from '../shared/standalone/base/heading.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     MatButtonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    HeadingComponent
   ]
 })
 export class ProfilePagesModule {}
