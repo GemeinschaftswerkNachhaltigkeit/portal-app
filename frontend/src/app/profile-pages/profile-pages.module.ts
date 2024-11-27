@@ -12,6 +12,7 @@ import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { CardLabelComponent } from '../shared/standalone/cards/card-label.component';
+import { CardLogoComponent } from '../shared/standalone/cards/card-logo.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CardLabelComponent } from '../shared/standalone/cards/card-label.compon
     HeadingComponent,
     ExpiredBadgeComponent,
     OutlinedIconComponent,
-    CardLabelComponent
+    CardLabelComponent,
+    CardLogoComponent
   ]
 })
 export class ProfilePagesModule {}

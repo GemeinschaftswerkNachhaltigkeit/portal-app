@@ -34,6 +34,7 @@ import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/exp
 import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
 import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
+import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -76,7 +77,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ExpiredBadgeComponent,
     AlertComponent,
     CardLabelComponent,
-    ContentRowComponent
+    ContentRowComponent,
+    CardLogoComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
