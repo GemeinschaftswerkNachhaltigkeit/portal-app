@@ -6,11 +6,18 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
+import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 
 @Component({
   selector: 'app-event-result',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, EventBadgesComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    EventBadgesComponent,
+    ContentRowComponent
+  ],
   templateUrl: './event-result.component.html',
   styleUrl: './event-result.component.scss'
 })

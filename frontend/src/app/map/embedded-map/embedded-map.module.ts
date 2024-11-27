@@ -10,6 +10,7 @@ import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-
 import { MatButtonModule } from '@angular/material/button';
 import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
 import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
+import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.c
     OrgaBadgesComponent,
     MatButtonModule,
     ExpiredBadgeComponent,
-    CardLabelComponent
+    CardLabelComponent,
+    ContentRowComponent
   ]
 })
 export class EmbeddedMapModule {}

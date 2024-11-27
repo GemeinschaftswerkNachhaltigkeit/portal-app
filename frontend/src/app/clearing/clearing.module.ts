@@ -17,6 +17,7 @@ import { DuplicateEntryComponent } from './duplicate-entry/duplicate-entry.compo
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
+import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
     MatSidenavModule,
     MatSlideToggleModule,
     HeadingComponent,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    ContentRowComponent
   ]
 })
 export class ClearingModule {}

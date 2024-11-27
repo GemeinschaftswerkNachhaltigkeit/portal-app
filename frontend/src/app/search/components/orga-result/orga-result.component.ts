@@ -6,11 +6,18 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
+import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 
 @Component({
   selector: 'app-orga-result',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, OrgaBadgesComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    OrgaBadgesComponent,
+    ContentRowComponent
+  ],
   templateUrl: './orga-result.component.html',
   styleUrl: './orga-result.component.scss'
 })

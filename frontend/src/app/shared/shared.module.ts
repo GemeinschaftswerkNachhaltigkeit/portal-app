@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ContentRowComponent } from './components/content-row/content-row.component';
 import { AlertComponent } from './standalone/base/alert.component';
 import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu-bar.component';
 import { PageMenuComponent } from './components/layout/page-menu/page-menu.component';
@@ -105,6 +104,7 @@ import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.co
 import { OutlinedIconComponent } from './standalone/base/outlined-icon.component';
 import { LabelComponent } from './standalone/base/label.component';
 import { CardLabelComponent } from './standalone/cards/card-label.component';
+import { ContentRowComponent } from './standalone/base/content-row.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +115,6 @@ import { CardLabelComponent } from './standalone/cards/card-label.component';
     ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
-    ContentRowComponent,
     TiptapMenuBarComponent,
     PageMenuComponent,
     MenuItemDirective,
@@ -218,7 +217,8 @@ import { CardLabelComponent } from './standalone/cards/card-label.component';
     ActionComponent,
     AlertComponent,
     LabelComponent,
-    CardLabelComponent
+    CardLabelComponent,
+    ContentRowComponent
   ],
   exports: [
     CommonModule,
@@ -230,7 +230,6 @@ import { CardLabelComponent } from './standalone/cards/card-label.component';
     ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
-    ContentRowComponent,
     TiptapMenuBarComponent,
     PageMenuComponent,
     MenuItemDirective,
