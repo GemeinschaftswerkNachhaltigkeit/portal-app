@@ -2,10 +2,11 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImgService } from '../../../services/img.service';
 import Organisation from '../../../models/organisation';
-import { SharedModule } from '../../../shared.module';
 import { UtilsService } from '../../../services/utils.service';
 import { RouterModule } from '@angular/router';
 import { OrgaBadgesComponent } from '../../base/badges/orga-badges.component';
+import { OutlinedIconComponent } from '../../base/outlined-icon.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 export type CardData = {
   title: string;
@@ -16,7 +17,13 @@ export type CardData = {
 @Component({
   selector: 'app-orga-card',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, OrgaBadgesComponent],
+  imports: [
+    CommonModule,
+    OutlinedIconComponent,
+    RouterModule,
+    OrgaBadgesComponent,
+    TranslateModule
+  ],
   templateUrl: './orga-card.component.html',
   styleUrl: './orga-card.component.scss'
 })

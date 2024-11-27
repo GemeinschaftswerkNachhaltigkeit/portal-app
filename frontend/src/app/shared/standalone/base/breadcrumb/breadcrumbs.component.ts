@@ -13,6 +13,7 @@ export type Breadcrumb = {
   template: ` <ng-content></ng-content> `,
   styles: `
     @use 'theme' as *;
+    @use 'palette' as *;
     :host {
       display: flex;
       flex-wrap: wrap;

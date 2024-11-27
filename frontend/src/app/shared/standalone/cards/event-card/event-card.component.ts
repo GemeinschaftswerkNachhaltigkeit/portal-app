@@ -1,11 +1,11 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImgService } from '../../../services/img.service';
-import { SharedModule } from '../../../shared.module';
 import { UtilsService } from '../../../services/utils.service';
 import Activity from '../../../models/actvitiy';
 import { RouterModule } from '@angular/router';
 import { EventBadgesComponent } from '../../base/badges/event-badges.component copy';
+import { OutlinedIconComponent } from '../../base/outlined-icon.component';
 
 export type CardData = {
   title: string;
@@ -16,7 +16,12 @@ export type CardData = {
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, EventBadgesComponent],
+  imports: [
+    CommonModule,
+    OutlinedIconComponent,
+    RouterModule,
+    EventBadgesComponent
+  ],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.scss'
 })

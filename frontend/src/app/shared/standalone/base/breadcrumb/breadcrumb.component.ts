@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
   `,
   styles: `
     @use 'theme' as *;
+    @use 'palette' as *;
     .breadcrumb {
       display: flex;
       align-items: center;

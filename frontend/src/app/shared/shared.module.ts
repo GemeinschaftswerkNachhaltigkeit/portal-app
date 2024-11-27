@@ -73,7 +73,6 @@ import { ContactControlsComponent } from './components/form/contact-controls/con
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { NewBadgeComponent } from './components/new-badge/new-badge.component';
 import { HtmlWrapperComponent } from './components/html-wrapper/html-wrapper.component';
-import { OutlinedIconComponent } from './components/outlined-icon/outlined-icon.component';
 import { FeatureComponent } from './components/feature/feature.component';
 import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
 import { FormStepDescriptionComponent } from './components/wizard/form-step-description/form-step-description.component';
@@ -105,13 +104,13 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 import { HeadingComponent } from './standalone/base/heading.component';
 import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
+import { OutlinedIconComponent } from './standalone/base/outlined-icon.component';
 
 @NgModule({
   declarations: [
     SdgsListComponent,
     FormFieldErrorComponent,
     ContentWrapperComponent,
-    OutlinedIconComponent,
     SdgIconComponent,
     ToggleButtonComponent,
     LabelComponent,
@@ -218,14 +217,14 @@ import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.co
     MatSidenavModule,
     CdkMenuModule,
     HeadingComponent,
-    ExpiredBadgeComponent
+    ExpiredBadgeComponent,
+    OutlinedIconComponent
   ],
   exports: [
     CommonModule,
     TranslateModule,
     SdgsListComponent,
     SdgIconComponent,
-    OutlinedIconComponent,
     FormFieldErrorComponent,
     ContentWrapperComponent,
     ToggleButtonComponent,

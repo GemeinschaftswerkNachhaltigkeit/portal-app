@@ -16,6 +16,7 @@ import { FeedbackHistoryComponent } from './feedback-history/feedback-history.co
 import { DuplicateEntryComponent } from './duplicate-entry/duplicate-entry.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
+import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HeadingComponent } from '../shared/standalone/base/heading.component';
     MatMenuModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    HeadingComponent
+    HeadingComponent,
+    OutlinedIconComponent
   ]
 })
 export class ClearingModule {}

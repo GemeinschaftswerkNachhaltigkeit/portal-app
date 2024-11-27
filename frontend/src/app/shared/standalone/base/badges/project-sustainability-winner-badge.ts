@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { DirectusService } from 'src/app/shared/services/directus.service';
+import { OutlinedIconComponent } from '../outlined-icon.component';
 
 @Component({
   selector: 'app-project-sustainability-winner-badge',
@@ -47,7 +47,7 @@ import { DirectusService } from 'src/app/shared/services/directus.service';
     </a>
   `,
   standalone: true,
-  imports: [CommonModule, SharedModule, TranslateModule]
+  imports: [CommonModule, OutlinedIconComponent, TranslateModule]
 })
 export class ProjectSustainabilityWinnerBadgeComponent {
   externalLinks$ = this.directus.externalLinks$;

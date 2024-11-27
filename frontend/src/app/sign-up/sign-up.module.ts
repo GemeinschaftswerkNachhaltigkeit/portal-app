@@ -38,6 +38,7 @@ import { AdminWarningComponent } from './admin-warning/admin-warning.component';
 import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
 import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -84,7 +85,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatIconModule,
     MatRadioModule,
     TitleWithContentComponent,
-    WizardSidebarLayoutComponent
+    WizardSidebarLayoutComponent,
+    OutlinedIconComponent
   ],
   providers: [
     {

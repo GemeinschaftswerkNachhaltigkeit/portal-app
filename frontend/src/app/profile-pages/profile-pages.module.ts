@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
+import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-
     MatIconModule,
     RouterModule,
     HeadingComponent,
-    ExpiredBadgeComponent
+    ExpiredBadgeComponent,
+    OutlinedIconComponent
   ]
 })
 export class ProfilePagesModule {}

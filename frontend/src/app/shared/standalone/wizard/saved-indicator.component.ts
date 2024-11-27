@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SavedService } from '../../services/saved.service';
+import { OutlinedIconComponent } from '../base/outlined-icon.component';
 
 @Component({
   selector: 'app-saved-indicator',
@@ -28,7 +29,7 @@ import { SavedService } from '../../services/saved.service';
     }
   `,
   standalone: true,
-  imports: [CommonModule, SharedModule, TranslateModule]
+  imports: [CommonModule, OutlinedIconComponent, TranslateModule]
 })
 export class SavedIndicatorComponent {
   savedService = inject(SavedService);

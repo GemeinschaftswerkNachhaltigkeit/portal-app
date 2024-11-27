@@ -17,6 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateSelectComponent } from './components/date-select/date-select.component';
 import { DateSelectHeaderComponent } from './components/date-select-header/date-select-header.component';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
+import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HeadingComponent } from '../shared/standalone/base/heading.component';
     MatSlideToggleModule,
     MatDatepickerModule,
     FormsModule,
-    HeadingComponent
+    HeadingComponent,
+    OutlinedIconComponent
   ]
 })
 export class EventsModule {}

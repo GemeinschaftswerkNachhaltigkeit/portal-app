@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { OutlinedIconComponent } from '../outlined-icon.component';
 
 @Component({
   selector: 'app-initiator-badge',
@@ -33,6 +33,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     </div>
   `,
   standalone: true,
-  imports: [CommonModule, SharedModule, TranslateModule]
+  imports: [CommonModule, OutlinedIconComponent, TranslateModule]
 })
 export class InitiatorBadgeComponent {}

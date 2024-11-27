@@ -8,7 +8,6 @@ import { MarketplaceItem } from '../../../models/marketplaceItem';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { TranslateService } from '@ngx-translate/core';
 import { EventBadgesComponent } from '../../base/badges/event-badges.component copy';
-import { BreadcrumbComponent } from '../../base/breadcrumb/breadcrumb.component';
 
 export type CardData = {
   title: string;
