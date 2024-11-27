@@ -32,6 +32,7 @@ import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-
 import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
 import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
 import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
+import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -72,7 +73,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     OrgaBadgesComponent,
     EventBadgesComponent,
     ExpiredBadgeComponent,
-    AlertComponent
+    AlertComponent,
+    CardLabelComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

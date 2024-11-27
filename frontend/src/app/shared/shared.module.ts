@@ -21,7 +21,6 @@ import { MenuItemDirective } from './components/layout/page-menu/menu-item.direc
 import { MenuItemActiveDirective } from './components/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
 import { CardLogoComponent } from './components/card-logo/card-logo.component';
-import { CardLabelComponent } from './components/card-label/card-label.component';
 import { SocialMediaLinksComponent } from './components/social-media-links/social-media-links.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { TopicComponent } from './components/topic/topic.component';
@@ -105,6 +104,7 @@ import { HeadingComponent } from './standalone/base/heading.component';
 import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
 import { OutlinedIconComponent } from './standalone/base/outlined-icon.component';
 import { LabelComponent } from './standalone/base/label.component';
+import { CardLabelComponent } from './standalone/cards/card-label.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +121,6 @@ import { LabelComponent } from './standalone/base/label.component';
     MenuItemDirective,
     MenuItemActiveDirective,
     CardLogoComponent,
-    CardLabelComponent,
     SocialMediaLinksComponent,
     ErrorPageComponent,
     TopicComponent,
@@ -218,7 +217,8 @@ import { LabelComponent } from './standalone/base/label.component';
     OutlinedIconComponent,
     ActionComponent,
     AlertComponent,
-    LabelComponent
+    LabelComponent,
+    CardLabelComponent
   ],
   exports: [
     CommonModule,
@@ -236,7 +236,6 @@ import { LabelComponent } from './standalone/base/label.component';
     MenuItemDirective,
     MenuItemActiveDirective,
     CardLogoComponent,
-    CardLabelComponent,
     SocialMediaLinksComponent,
     TopicComponent,
     NotificationPageComponent,

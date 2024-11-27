@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
+import { CardLabelComponent } from '../shared/standalone/cards/card-label.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
     RouterModule,
     HeadingComponent,
     ExpiredBadgeComponent,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    CardLabelComponent
   ]
 })
 export class ProfilePagesModule {}
