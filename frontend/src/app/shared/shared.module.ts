@@ -65,7 +65,6 @@ import { OnlineFilterComponent } from './components/form/filters/online-filter/o
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 import { HeadingComponent } from './standalone/base/heading.component';
@@ -125,7 +124,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     OnlineFilterComponent,
     OnlyDanFilterComponent,
     FormAdvantagesComponent,
-    ConfirmationModalComponent,
     RegisterOrLoginModalComponent
   ],
   imports: [
@@ -198,8 +196,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     FormStepDescriptionComponent,
     UploadImageComponent,
     AddressControlsComponent,
-    FormAdvantagesComponent,
-    ConfirmationModalComponent
+    FormAdvantagesComponent
   ]
 })
 export class SharedModule {}
