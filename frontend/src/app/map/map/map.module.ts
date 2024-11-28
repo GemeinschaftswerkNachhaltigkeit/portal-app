@@ -40,6 +40,7 @@ import {
   ActivitySubscriptionActionComponent,
   OrganisationSubscriptionActionComponent
 } from 'src/app/shared/standalone/subscription';
+import { ImageComponent } from 'src/app/shared/standalone/base/image.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -86,7 +87,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     CardLogoComponent,
     BaseCardComponent,
     ActivitySubscriptionActionComponent,
-    OrganisationSubscriptionActionComponent
+    OrganisationSubscriptionActionComponent,
+    ImageComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

@@ -71,7 +71,6 @@ import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
-import { ImageComponent } from './components/image/image.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -153,7 +152,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     UploadImageComponent,
     OnlineFilterComponent,
     OnlyDanFilterComponent,
-    ImageComponent,
     FormAdvantagesComponent,
     ConfirmationModalComponent,
     BaseLayoutComponent,
@@ -245,7 +243,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     FormStepDescriptionComponent,
     UploadImageComponent,
     AddressControlsComponent,
-    ImageComponent,
     FormAdvantagesComponent,
     ConfirmationModalComponent,
     BaseLayoutComponent
