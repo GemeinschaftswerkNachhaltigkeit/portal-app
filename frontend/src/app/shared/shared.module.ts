@@ -24,9 +24,6 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { TopicComponent } from './components/topic/topic.component';
 import { ActionComponent } from './standalone/base/action.component';
 import { NotificationPageComponent } from './components/layout/notification-page/notification-page.component';
-import { BaseCardComponent } from './components/base-card/base-card.component';
-import { OrganisationSubscriptionActionComponent } from './components/subscription/containers/organisation-subscription-action/organisation-subscription-action.component';
-import { ActivitySubscriptionActionComponent } from './components/subscription/containers/activity-subscription-action/activity-subscription-action.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -62,8 +59,6 @@ import { BestPracticeCategoryFilterComponent } from './components/form/filters/b
 import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
 import { CategoryComponent } from './components/category/category.component';
-import { OfferSubscriptionActionComponent } from './components/subscription/containers/offer-subscription-action/offer-subscription-action.component';
-import { BestPracticeSubscriptionActionComponent } from './components/subscription/containers/best-practice-subscription-action/best-practice-subscription-action.component';
 import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { NewBadgeComponent } from './components/new-badge/new-badge.component';
@@ -122,11 +117,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     ErrorPageComponent,
     TopicComponent,
     NotificationPageComponent,
-    BaseCardComponent,
-    OrganisationSubscriptionActionComponent,
-    ActivitySubscriptionActionComponent,
-    OfferSubscriptionActionComponent,
-    BestPracticeSubscriptionActionComponent,
     NotFoundPageComponent,
     FeedbackComponent,
     HeaderComponent,
@@ -235,11 +225,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     SocialMediaLinksComponent,
     TopicComponent,
     NotificationPageComponent,
-    BaseCardComponent,
-    ActivitySubscriptionActionComponent,
-    OrganisationSubscriptionActionComponent,
-    OfferSubscriptionActionComponent,
-    BestPracticeSubscriptionActionComponent,
     NotFoundPageComponent,
     HeaderComponent,
     CharCountComponent,

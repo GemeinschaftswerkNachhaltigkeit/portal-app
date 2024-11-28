@@ -9,7 +9,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
-import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
+import { SubscriptionFacadeService } from 'src/app/shared/standalone/subscription/subscription-facade.service';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';

@@ -35,6 +35,11 @@ import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
 import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
+import { BaseCardComponent } from 'src/app/shared/standalone/cards/base-card/base-card.component';
+import {
+  ActivitySubscriptionActionComponent,
+  OrganisationSubscriptionActionComponent
+} from 'src/app/shared/standalone/subscription';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -78,7 +83,10 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     AlertComponent,
     CardLabelComponent,
     ContentRowComponent,
-    CardLogoComponent
+    CardLogoComponent,
+    BaseCardComponent,
+    ActivitySubscriptionActionComponent,
+    OrganisationSubscriptionActionComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

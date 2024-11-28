@@ -21,6 +21,10 @@ import {
 import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
 import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 import { ActionComponent } from 'src/app/shared/standalone/base/action.component';
+import {
+  ActivitySubscriptionActionComponent,
+  OrganisationSubscriptionActionComponent
+} from 'src/app/shared/standalone/subscription';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { ActionComponent } from 'src/app/shared/standalone/base/action.component
     BreadcrumbComponent,
     ExpiredBadgeComponent,
     AlertComponent,
-    ActionComponent
+    ActionComponent,
+    ActivitySubscriptionActionComponent,
+    OrganisationSubscriptionActionComponent
   ]
 })
 export class OrgaProfileModule {}

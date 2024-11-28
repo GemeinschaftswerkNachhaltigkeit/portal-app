@@ -9,14 +9,37 @@ import {
 } from '@angular/core';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
-import { CardService } from '../../../map/services/card.service';
-import Activity from '../../models/actvitiy';
-import Organisation from '../../models/organisation';
+import { CardService } from '../../../../map/services/card.service';
+import Activity from '../../../models/actvitiy';
+import Organisation from '../../../models/organisation';
+import { CommonModule } from '@angular/common';
+import { ActionComponent } from '../../base/action.component';
+import { CardLabelComponent } from '../card-label.component';
+import { ExpiredBadgeComponent } from '../../base/badges/expired-badge.component';
+import { CardLogoComponent } from '../card-logo.component';
+import { ContentRowComponent } from '../../base/content-row.component';
+import {
+  ActivitySubscriptionActionComponent,
+  OrganisationSubscriptionActionComponent
+} from '../../subscription';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-base-card',
   templateUrl: './base-card.component.html',
-  styleUrls: ['./base-card.component.scss']
+  styleUrls: ['./base-card.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ActionComponent,
+    CardLogoComponent,
+    CardLabelComponent,
+    ExpiredBadgeComponent,
+    ContentRowComponent,
+    OrganisationSubscriptionActionComponent,
+    ActivitySubscriptionActionComponent,
+    TranslateModule
+  ]
 })
 export class BaseCardComponent implements AfterViewChecked {
   @Input() entity?: Organisation | Activity;

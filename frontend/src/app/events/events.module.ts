@@ -19,6 +19,7 @@ import { DateSelectHeaderComponent } from './components/date-select-header/date-
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
+import { ActivitySubscriptionActionComponent } from '../shared/standalone/subscription';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
     FormsModule,
     HeadingComponent,
     OutlinedIconComponent,
-    AlertComponent
+    AlertComponent,
+    ActivitySubscriptionActionComponent
   ]
 })
 export class EventsModule {}
