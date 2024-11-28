@@ -27,6 +27,7 @@ import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard
 import { MasterDataFormComponent } from './components/master-data-form/master-data-form.component';
 import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
+import { CharCountComponent } from '../shared/standalone/base/char-count.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
     TitleWithContentComponent,
     WizardSidebarLayoutComponent,
     SavedIndicatorComponent,
-    AlertComponent
+    AlertComponent,
+    CharCountComponent
   ]
 })
 export class ActivityModule {}

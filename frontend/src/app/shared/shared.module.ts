@@ -28,7 +28,6 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HeaderComponent } from './components/layout/header/header.component';
-import { CharCountComponent } from './components/char-count/char-count.component';
 import { PageWithHeaderLayoutComponent } from './components/layout/page-with-header-layout/page-with-header-layout.component';
 import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
 import { ListWithHeadingLayoutComponent } from './components/layout/list-with-heading-layout/list-with-heading-layout.component';
@@ -119,7 +118,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     NotFoundPageComponent,
     FeedbackComponent,
     HeaderComponent,
-    CharCountComponent,
     PageWithHeaderLayoutComponent,
     ListWithHeadingLayoutComponent,
     InfoCardComponent,
@@ -225,7 +223,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     NotificationPageComponent,
     NotFoundPageComponent,
     HeaderComponent,
-    CharCountComponent,
     PageWithHeaderLayoutComponent,
     ListWithHeadingLayoutComponent,
     InfoCardComponent,
@@ -240,7 +237,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     CheckboxFilterComponent,
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
-
     ContactControlsComponent,
     NewBadgeComponent,
     HtmlWrapperComponent,

@@ -40,6 +40,7 @@ import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard
 import { MatRadioModule } from '@angular/material/radio';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
+import { CharCountComponent } from '../shared/standalone/base/char-count.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -88,7 +89,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     TitleWithContentComponent,
     WizardSidebarLayoutComponent,
     OutlinedIconComponent,
-    AlertComponent
+    AlertComponent,
+    CharCountComponent
   ],
   providers: [
     {
