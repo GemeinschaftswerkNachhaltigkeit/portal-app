@@ -20,6 +20,7 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
 import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
+import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.com
     OutlinedIconComponent,
     ContentRowComponent,
     ContentWrapperComponent,
-    HtmlWrapperComponent
+    HtmlWrapperComponent,
+    SpinnerComponent
   ]
 })
 export class ClearingModule {}

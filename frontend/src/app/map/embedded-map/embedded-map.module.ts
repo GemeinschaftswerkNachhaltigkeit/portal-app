@@ -12,6 +12,7 @@ import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/exp
 import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
 import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
+import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.com
     ExpiredBadgeComponent,
     CardLabelComponent,
     ContentRowComponent,
-    CardLogoComponent
+    CardLogoComponent,
+    SpinnerComponent
   ]
 })
 export class EmbeddedMapModule {}

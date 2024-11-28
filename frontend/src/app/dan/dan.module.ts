@@ -30,6 +30,7 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { CharCountComponent } from '../shared/standalone/base/char-count.component';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
+import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.com
     AlertComponent,
     CharCountComponent,
     ContentWrapperComponent,
-    HtmlWrapperComponent
+    HtmlWrapperComponent,
+    SpinnerComponent
   ]
 })
 export class DanModule {}

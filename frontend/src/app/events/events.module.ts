@@ -21,6 +21,7 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
 import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { ActivitySubscriptionActionComponent } from '../shared/standalone/subscription';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ContentWrapperComponent } from '../shared/standalone/layout/content-wra
     OutlinedIconComponent,
     AlertComponent,
     ActivitySubscriptionActionComponent,
-    ContentWrapperComponent
+    ContentWrapperComponent,
+    SpinnerComponent
   ]
 })
 export class EventsModule {}

@@ -44,6 +44,7 @@ import { CharCountComponent } from '../shared/standalone/base/char-count.compone
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
+import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -96,7 +97,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     CharCountComponent,
     ContentWrapperComponent,
     NotificationPageComponent,
-    HtmlWrapperComponent
+    HtmlWrapperComponent,
+    SpinnerComponent
   ],
   providers: [
     {

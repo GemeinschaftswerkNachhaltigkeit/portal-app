@@ -28,6 +28,7 @@ import {
 import { CategoryComponent } from 'src/app/shared/standalone/base/category.component';
 import { HtmlWrapperComponent } from 'src/app/shared/standalone/base/html-wrapper.component';
 import { PageMenuComponent } from 'src/app/shared/standalone/layout/page-menu/page-menu.component';
+import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { PageMenuComponent } from 'src/app/shared/standalone/layout/page-menu/pa
     OrganisationSubscriptionActionComponent,
     CategoryComponent,
     HtmlWrapperComponent,
-    PageMenuComponent
+    PageMenuComponent,
+    SpinnerComponent
   ]
 })
 export class OrgaProfileModule {}

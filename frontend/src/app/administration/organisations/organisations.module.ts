@@ -18,6 +18,7 @@ import { CardListComponent } from 'src/app/shared/standalone/cards/card-list.com
 import { BaseCardComponent } from 'src/app/shared/standalone/cards/base-card/base-card.component';
 import { HeaderComponent } from 'src/app/shared/standalone/layout/header.component';
 import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
+import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],
@@ -38,7 +39,8 @@ import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/conten
     CardListComponent,
     BaseCardComponent,
     ContentWrapperComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent
   ]
 })
 export class OrganisationsModule {}

@@ -6,7 +6,6 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
 import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -82,7 +81,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     SdgsListComponent,
     FormFieldErrorComponent,
     SdgIconComponent,
-    SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
     MenuItemDirective,
@@ -168,7 +166,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     SdgsListComponent,
     SdgIconComponent,
     FormFieldErrorComponent,
-    SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
     MenuItemDirective,

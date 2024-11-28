@@ -51,6 +51,7 @@ import { ListWithHeadingLayoutComponent } from '../shared/standalone/layout/list
 import { PageMenuComponent } from '../shared/standalone/layout/page-menu/page-menu.component';
 import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { ContentWrapperComponent } from '../shared/standalone/layout/content-wra
     ListWithHeadingLayoutComponent,
     PageMenuComponent,
     NotificationPageComponent,
-    ContentWrapperComponent
+    ContentWrapperComponent,
+    SpinnerComponent
   ]
 })
 export class AccountModule {}

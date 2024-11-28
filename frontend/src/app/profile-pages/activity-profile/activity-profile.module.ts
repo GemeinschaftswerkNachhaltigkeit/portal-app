@@ -17,6 +17,7 @@ import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
 import { ActivitySubscriptionActionComponent } from 'src/app/shared/standalone/subscription';
 import { HtmlWrapperComponent } from 'src/app/shared/standalone/base/html-wrapper.component';
 import { PageMenuComponent } from 'src/app/shared/standalone/layout/page-menu/page-menu.component';
+import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],
@@ -35,7 +36,8 @@ import { PageMenuComponent } from 'src/app/shared/standalone/layout/page-menu/pa
     AlertComponent,
     ActivitySubscriptionActionComponent,
     HtmlWrapperComponent,
-    PageMenuComponent
+    PageMenuComponent,
+    SpinnerComponent
   ]
 })
 export class ActivityProfileModule {}
