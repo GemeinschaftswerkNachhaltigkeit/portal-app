@@ -15,7 +15,6 @@ import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu
 import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.directive';
 import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
-import { SocialMediaLinksComponent } from './components/social-media-links/social-media-links.component';
 import { ActionComponent } from './standalone/base/action.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
@@ -84,7 +83,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    SocialMediaLinksComponent,
     NotFoundPageComponent,
     FeedbackComponent,
     InfoCardComponent,
@@ -168,7 +166,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    SocialMediaLinksComponent,
     NotFoundPageComponent,
     InfoCardComponent,
     ThematicFocusControlComponent,

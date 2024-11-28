@@ -16,6 +16,7 @@ import { CardLogoComponent } from '../shared/standalone/cards/card-logo.componen
 import { ImageComponent } from '../shared/standalone/base/image.component';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { TopicComponent } from '../shared/standalone/base/topic.component';
+import { SocialMediaLinksComponent } from '../shared/standalone/base/social-media-links/social-media-links.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TopicComponent } from '../shared/standalone/base/topic.component';
     CardLogoComponent,
     ImageComponent,
     ContentWrapperComponent,
-    TopicComponent
+    TopicComponent,
+    SocialMediaLinksComponent
   ]
 })
 export class ProfilePagesModule {}
