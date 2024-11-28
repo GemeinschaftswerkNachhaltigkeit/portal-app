@@ -44,6 +44,7 @@ import { ImageComponent } from 'src/app/shared/standalone/base/image.component';
 import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
 import { ToggleButtonComponent } from 'src/app/shared/standalone/base/toggle-button.component';
 import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
+import { TopicComponent } from 'src/app/shared/standalone/base/topic.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -94,7 +95,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ImageComponent,
     ContentWrapperComponent,
     ToggleButtonComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TopicComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
