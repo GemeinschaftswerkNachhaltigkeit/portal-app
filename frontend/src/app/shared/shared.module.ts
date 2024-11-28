@@ -59,7 +59,6 @@ import { FilterModalButtonComponent } from './components/form/filters/filter-mod
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
 import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
-import { NewBadgeComponent } from './components/new-badge/new-badge.component';
 import { HtmlWrapperComponent } from './components/html-wrapper/html-wrapper.component';
 import { FeatureComponent } from './components/feature/feature.component';
 import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
@@ -96,6 +95,7 @@ import { LabelComponent } from './standalone/base/label.component';
 import { CardLabelComponent } from './standalone/cards/card-label.component';
 import { ContentRowComponent } from './standalone/base/content-row.component';
 import { CardLogoComponent } from './standalone/cards/card-logo.component';
+import { NewBadgeComponent } from './standalone/base/badges/new-badge.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +144,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     OrderedFilterComponent,
     ContactControlsComponent,
     SpecialOrgasFilterComponent,
-    NewBadgeComponent,
     HtmlWrapperComponent,
     FeatureComponent,
     FormStepActionsComponent,
@@ -200,7 +199,8 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     LabelComponent,
     CardLabelComponent,
     ContentRowComponent,
-    CardLogoComponent
+    CardLogoComponent,
+    NewBadgeComponent
   ],
   exports: [
     CommonModule,
@@ -236,7 +236,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
     ContactControlsComponent,
-    NewBadgeComponent,
     HtmlWrapperComponent,
     FeatureComponent,
     FormStepActionsComponent,

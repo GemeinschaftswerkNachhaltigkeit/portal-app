@@ -45,6 +45,7 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { CardListComponent } from '../shared/standalone/cards/card-list.component';
 import { BaseCardComponent } from '../shared/standalone/cards/base-card/base-card.component';
 import { CharCountComponent } from '../shared/standalone/base/char-count.component';
+import { NewBadgeComponent } from '../shared/standalone/base/badges/new-badge.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { CharCountComponent } from '../shared/standalone/base/char-count.compone
     AlertComponent,
     CardListComponent,
     BaseCardComponent,
-    CharCountComponent
+    CharCountComponent,
+    NewBadgeComponent
   ]
 })
 export class AccountModule {}
