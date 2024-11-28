@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
 import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,7 +82,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     SdgsListComponent,
     FormFieldErrorComponent,
     SdgIconComponent,
-    ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
@@ -170,7 +168,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     SdgsListComponent,
     SdgIconComponent,
     FormFieldErrorComponent,
-    ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
