@@ -20,7 +20,6 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
-import { InfoCardComponent } from './components/info-card/info-card.component';
 import { ThematicFocusControlComponent } from './components/form/thematic-focus-select/thematic-focus-control.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryControlComponent } from './components/form/category-control/category-control.component';
@@ -85,7 +84,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemActiveDirective,
     NotFoundPageComponent,
     FeedbackComponent,
-    InfoCardComponent,
     ThematicFocusControlComponent,
     AddressControlsComponent,
     CategoryControlComponent,
@@ -167,7 +165,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemDirective,
     MenuItemActiveDirective,
     NotFoundPageComponent,
-    InfoCardComponent,
     ThematicFocusControlComponent,
     CategoryControlComponent,
     UserSelectControlComponent,

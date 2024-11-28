@@ -52,6 +52,7 @@ import { PageMenuComponent } from '../shared/standalone/layout/page-menu/page-me
 import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
+import { InfoCardComponent } from '../shared/standalone/cards/info-card.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
     PageMenuComponent,
     NotificationPageComponent,
     ContentWrapperComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    InfoCardComponent
   ]
 })
 export class AccountModule {}
