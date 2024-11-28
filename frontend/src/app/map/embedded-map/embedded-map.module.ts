@@ -13,6 +13,7 @@ import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.c
 import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
 import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
 import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
+import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.compone
     CardLabelComponent,
     ContentRowComponent,
     CardLogoComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SdgIconComponent
   ]
 })
 export class EmbeddedMapModule {}

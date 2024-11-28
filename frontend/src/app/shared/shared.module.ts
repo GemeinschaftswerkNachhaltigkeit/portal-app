@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SdgsListComponent } from './components/sdgs-list/sdgs-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
-import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,9 +72,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
 
 @NgModule({
   declarations: [
-    SdgsListComponent,
     FormFieldErrorComponent,
-    SdgIconComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
     MenuItemDirective,
@@ -155,8 +151,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
   exports: [
     CommonModule,
     TranslateModule,
-    SdgsListComponent,
-    SdgIconComponent,
     FormFieldErrorComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
