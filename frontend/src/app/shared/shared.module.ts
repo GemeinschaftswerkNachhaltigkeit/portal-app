@@ -16,7 +16,6 @@ import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.direc
 import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
 import { ActionComponent } from './standalone/base/action.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
@@ -82,7 +81,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    NotFoundPageComponent,
     FeedbackComponent,
     ThematicFocusControlComponent,
     AddressControlsComponent,
@@ -164,7 +162,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    NotFoundPageComponent,
     ThematicFocusControlComponent,
     CategoryControlComponent,
     UserSelectControlComponent,

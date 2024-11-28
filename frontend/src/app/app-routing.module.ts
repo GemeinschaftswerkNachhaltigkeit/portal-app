@@ -6,7 +6,7 @@ import { UserPermission } from './auth/models/user-role';
 import { AuthGuardWithLoginCheck } from './auth/guard/auth-guard-login-check.service';
 import { EmailVerifySuccessPageComponent } from './auth/email-verify-success-page/email-verify-success-page.component';
 import { ErrorPageComponent } from './shared/standalone/layout/error-page.component';
-import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
+import { NotFoundPageComponent } from './shared/standalone/layout/not-found-page/not-found-page.component';
 import { AuthGuardWithoutOrga } from './auth/guard/auth-guard-without-orga.service';
 
 const routes: Routes = [
