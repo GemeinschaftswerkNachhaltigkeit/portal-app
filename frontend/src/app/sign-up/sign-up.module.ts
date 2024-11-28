@@ -45,6 +45,7 @@ import { ContentWrapperComponent } from '../shared/standalone/layout/content-wra
 import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
+import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -98,7 +99,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ContentWrapperComponent,
     NotificationPageComponent,
     HtmlWrapperComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FormFieldErrorComponent
   ],
   providers: [
     {

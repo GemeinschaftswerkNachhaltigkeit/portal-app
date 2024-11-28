@@ -31,6 +31,7 @@ import { CharCountComponent } from '../shared/standalone/base/char-count.compone
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
+import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
     CharCountComponent,
     ContentWrapperComponent,
     HtmlWrapperComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    FormFieldErrorComponent
   ]
 })
 export class DanModule {}

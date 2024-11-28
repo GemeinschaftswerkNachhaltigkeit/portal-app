@@ -6,7 +6,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import {
   MessageInputDialogComponent,
   MessageInput
-} from 'src/app/shared/components/message-input-dialog/message-input-dialog.component';
+} from 'src/app/shared/standalone/dialogs/message-input-dialog.component';
 import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
+import { FormFieldErrorComponent } from './standalone/form/form-field-error/form-field-error.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,6 @@ import { RouterModule } from '@angular/router';
 import { ActionComponent } from './standalone/base/action.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
 import { ThematicFocusControlComponent } from './components/form/thematic-focus-select/thematic-focus-control.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryControlComponent } from './components/form/category-control/category-control.component';
@@ -72,8 +71,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
 
 @NgModule({
   declarations: [
-    FormFieldErrorComponent,
-    MessageInputDialogComponent,
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
@@ -146,13 +143,12 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     CardLogoComponent,
     NewBadgeComponent,
     HtmlWrapperComponent,
-    ContentWrapperComponent
+    ContentWrapperComponent,
+    FormFieldErrorComponent
   ],
   exports: [
     CommonModule,
     TranslateModule,
-    FormFieldErrorComponent,
-    MessageInputDialogComponent,
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,

@@ -53,6 +53,7 @@ import { NotificationPageComponent } from '../shared/standalone/layout/notificat
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 import { InfoCardComponent } from '../shared/standalone/cards/info-card.component';
+import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { InfoCardComponent } from '../shared/standalone/cards/info-card.componen
     NotificationPageComponent,
     ContentWrapperComponent,
     SpinnerComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    FormFieldErrorComponent
   ]
 })
 export class AccountModule {}

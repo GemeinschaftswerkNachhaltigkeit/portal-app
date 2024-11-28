@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AccountContentFacadeService } from 'src/app/account/account-content-facade.service';
-import { MessageInputDialogComponent } from 'src/app/shared/components/message-input-dialog/message-input-dialog.component';
+import { MessageInputDialogComponent } from 'src/app/shared/standalone/dialogs/message-input-dialog.component';
 
 @Component({
   selector: 'app-dan-help-modal',

@@ -1,10 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-field-error',
   templateUrl: './form-field-error.component.html',
-  styleUrls: ['./form-field-error.component.scss']
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
+  styles: `
+    span + span:before {
+      content: ',';
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+  `
 })
 export class FormFieldErrorComponent {
   @Input() field: FormControl | AbstractControl | null | undefined = null;
