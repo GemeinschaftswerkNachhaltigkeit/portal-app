@@ -32,6 +32,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BaseLayoutComponent } from './shared/standalone/layout/base-layout/base-layout.component';
+import { ErrorPageComponent } from './shared/standalone/layout/error-page.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -59,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SharedModule,
     AppRoutingModule,
     BaseLayoutComponent,
+    ErrorPageComponent,
     TranslateModule.forRoot({
       defaultLanguage: 'de',
       loader: {

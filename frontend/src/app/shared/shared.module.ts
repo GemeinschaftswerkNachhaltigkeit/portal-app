@@ -18,7 +18,6 @@ import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.direc
 import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
 import { SocialMediaLinksComponent } from './components/social-media-links/social-media-links.component';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { TopicComponent } from './components/topic/topic.component';
 import { ActionComponent } from './standalone/base/action.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
@@ -92,7 +91,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemDirective,
     MenuItemActiveDirective,
     SocialMediaLinksComponent,
-    ErrorPageComponent,
     TopicComponent,
     NotFoundPageComponent,
     FeedbackComponent,
