@@ -58,7 +58,6 @@ import { OfferCategoryFilterComponent } from './components/form/filters/offer-ca
 import { BestPracticeCategoryFilterComponent } from './components/form/filters/best-practice-category-filter/best-practice-category-filter.component';
 import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
-import { CategoryComponent } from './components/category/category.component';
 import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { NewBadgeComponent } from './components/new-badge/new-badge.component';
@@ -146,7 +145,6 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     BestPracticeCategoryFilterComponent,
     FilterModalButtonComponent,
     OrderedFilterComponent,
-    CategoryComponent,
     ContactControlsComponent,
     SpecialOrgasFilterComponent,
     NewBadgeComponent,
@@ -242,7 +240,7 @@ import { CardLogoComponent } from './standalone/cards/card-logo.component';
     CheckboxFilterComponent,
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
-    CategoryComponent,
+
     ContactControlsComponent,
     NewBadgeComponent,
     HtmlWrapperComponent,

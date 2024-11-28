@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Color } from '../../models/color';
+import { CommonModule } from '@angular/common';
+import { LabelComponent } from './label.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 export enum CategoryType {
   OFFER = 'OFFER',
@@ -10,6 +13,8 @@ export enum CategoryType {
 
 @Component({
   selector: 'app-category',
+  standalone: true,
+  imports: [CommonModule, LabelComponent, TranslateModule],
   template: `
     <div class="category">
       <app-label [color]="typeColor(type)" *ngIf="type && category">

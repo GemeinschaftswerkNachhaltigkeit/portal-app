@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ProfileUtilsService } from 'src/app/profile-pages/services/profile-utils.service';
-import { CategoryType } from 'src/app/shared/components/category/category.component';
+import { CategoryType } from 'src/app/shared/standalone/base/category.component';
 import LocationData from 'src/app/shared/models/location-data';
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { ImgService } from 'src/app/shared/services/img.service';

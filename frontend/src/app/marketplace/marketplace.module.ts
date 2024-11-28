@@ -33,6 +33,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
 import { EventBadgesComponent } from '../shared/standalone/base/badges/event-badges.component copy';
+import { CardListComponent } from '../shared/standalone/cards/card-list.component';
+import { CategoryComponent } from '../shared/standalone/base/category.component';
+import { LabelComponent } from '../shared/standalone/base/label.component';
+import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
+import { ActionComponent } from '../shared/standalone/base/action.component';
+import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
+import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +79,15 @@ import { EventBadgesComponent } from '../shared/standalone/base/badges/event-bad
     MatPaginatorModule,
     MatCheckboxModule,
     MatIconModule,
-    EventBadgesComponent
+    EventBadgesComponent,
+    CardListComponent,
+    CategoryComponent,
+    LabelComponent,
+    ExpiredBadgeComponent,
+    ActionComponent,
+    ContentRowComponent,
+    EventBadgesComponent,
+    OutlinedIconComponent
   ],
   exports: [CardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

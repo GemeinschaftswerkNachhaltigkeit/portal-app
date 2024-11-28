@@ -25,6 +25,7 @@ import {
   ActivitySubscriptionActionComponent,
   OrganisationSubscriptionActionComponent
 } from 'src/app/shared/standalone/subscription';
+import { CategoryComponent } from 'src/app/shared/standalone/base/category.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {
     AlertComponent,
     ActionComponent,
     ActivitySubscriptionActionComponent,
-    OrganisationSubscriptionActionComponent
+    OrganisationSubscriptionActionComponent,
+    CategoryComponent
   ]
 })
 export class OrgaProfileModule {}
