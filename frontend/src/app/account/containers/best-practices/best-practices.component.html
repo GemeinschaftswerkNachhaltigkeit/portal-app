@@ -126,13 +126,16 @@
                         </button>
                         <mat-menu #menu="matMenu">
                           <button
-                            class="action-option"
                             *ngIf="bp.status === status.INACTIVE"
                             mat-menu-item
                             (click)="handleStatusChange(bp, status.ACTIVE)"
                           >
-                            <app-outlined-icon>check_circle</app-outlined-icon>
-                            <span>{{ 'labels.activate' | translate }}</span>
+                            <div class="action-option">
+                              <app-outlined-icon
+                                >check_circle</app-outlined-icon
+                              >
+                              <span>{{ 'labels.activate' | translate }}</span>
+                            </div>
                           </button>
                           <button
                             class="action-option"
@@ -140,8 +143,10 @@
                             mat-menu-item
                             (click)="handleStatusChange(bp, status.INACTIVE)"
                           >
-                            <app-outlined-icon>cancel</app-outlined-icon>
-                            <span>{{ 'labels.deactivate' | translate }}</span>
+                            <div class="action-option">
+                              <app-outlined-icon>cancel</app-outlined-icon>
+                              <span>{{ 'labels.deactivate' | translate }}</span>
+                            </div>
                           </button>
                         </mat-menu>
                       </ng-container></app-card

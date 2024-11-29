@@ -5,7 +5,7 @@ import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { UserRole } from 'src/app/auth/models/user-role';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import { defaultContactGroupFields } from 'src/app/shared/standalone/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { LabeledKey } from 'src/app/shared/models/labeled-key';

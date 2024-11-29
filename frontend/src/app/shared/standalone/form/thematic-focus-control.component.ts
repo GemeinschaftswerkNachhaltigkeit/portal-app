@@ -1,13 +1,56 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective } from '@angular/forms';
+import {
+  FormControl,
+  FormGroupDirective,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ThematicFocus } from '../../../models/thematic-focus';
+import { ThematicFocus } from '../../models/thematic-focus';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormFieldErrorComponent } from './form-field-error/form-field-error.component';
 
 @Component({
   selector: 'app-thematic-focus-control',
-  templateUrl: './thematic-focus-control.component.html',
-  styleUrls: ['./thematic-focus-control.component.scss']
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    FormFieldErrorComponent
+  ],
+  template: `
+    <div class="select-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ label }}</mat-label>
+        <mat-select [formControl]="formControl" multiple>
+          <mat-option
+            *ngFor="let thema of thematicFocusOpts"
+            [value]="thema"
+            [disabled]="setOptionDisabled(thema)"
+          >
+            {{ 'thematicFocus.' + thema | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <app-form-field-error [field]="formControl"></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  `,
+  styles: `
+    :host {
+      width: 100%;
+      display: block;
+    }
+  `
 })
 export class ThematicFocusControlComponent implements OnInit {
   thematicFocusOpts = Object.values(ThematicFocus);

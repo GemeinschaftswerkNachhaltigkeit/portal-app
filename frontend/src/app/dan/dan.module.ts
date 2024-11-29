@@ -32,6 +32,11 @@ import { ContentWrapperComponent } from '../shared/standalone/layout/content-wra
 import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
 import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
+import { UploadImageComponent } from '../shared/standalone/form/upload-image/upload-image.component';
+import { AddressControlsComponent } from '../shared/standalone/form/address-control/address-controls.component';
+import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
+import { ValidCheckComponent } from '../shared/standalone/form/valid-check.component';
+import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +75,12 @@ import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-er
     ContentWrapperComponent,
     HtmlWrapperComponent,
     SpinnerComponent,
-    FormFieldErrorComponent
+    FormFieldErrorComponent,
+    UploadImageComponent,
+    AddressControlsComponent,
+    ThematicFocusControlComponent,
+    ValidCheckComponent,
+    ContactControlsComponent
   ]
 })
 export class DanModule {}

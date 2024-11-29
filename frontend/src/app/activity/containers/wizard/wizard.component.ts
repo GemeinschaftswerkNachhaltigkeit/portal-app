@@ -42,7 +42,7 @@ import { MasterDataFormComponent } from '../../components/master-data-form/maste
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
-import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-wizard',

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ImgService } from '../../services/img.service';
-import { ImageMode } from '../../components/form/upload-image/upload-image.component';
+import { ImageMode } from '../form/upload-image/upload-image.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

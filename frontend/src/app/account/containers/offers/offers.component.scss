@@ -5,7 +5,10 @@
   padding-top: $spacing-4;
 }
 .action-option {
+  display: flex;
+  align-items: center;
   span {
+    display: block;
     padding-left: $spacing-2;
   }
 }

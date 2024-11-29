@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import Type from '../../../shared/models/type';
 import { ImgService } from '../../../shared/services/img.service';
-import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-hero',

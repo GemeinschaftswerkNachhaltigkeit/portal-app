@@ -47,6 +47,14 @@ import {
   BreadcrumbComponent,
   BreadcrumbsComponent
 } from '../shared/standalone/base/breadcrumb';
+import { SearchInputComponent } from '../shared/standalone/form/search-input.component';
+import { CategoryControlComponent } from '../shared/standalone/form/category-control.component';
+import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
+import { PageWithHeaderLayoutComponent } from '../shared/standalone/layout/page-with-header-layout.component';
+import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
+import { AddressControlsComponent } from '../shared/standalone/form/address-control/address-controls.component';
+import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
+import { UploadImageComponent } from '../shared/standalone/form/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +107,15 @@ import {
     HeadingComponent,
     HtmlWrapperComponent,
     BreadcrumbComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    SearchInputComponent,
+    CategoryControlComponent,
+    ThematicFocusControlComponent,
+    PageWithHeaderLayoutComponent,
+    FormFieldErrorComponent,
+    AddressControlsComponent,
+    ContactControlsComponent,
+    UploadImageComponent
   ],
   exports: [CardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

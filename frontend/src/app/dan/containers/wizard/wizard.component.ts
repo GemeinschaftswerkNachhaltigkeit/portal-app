@@ -35,7 +35,7 @@ import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
-import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-wizard',

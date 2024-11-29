@@ -23,7 +23,7 @@ import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysi
 import { OrganisationType } from 'src/app/shared/models/organisation-type';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-organisation-form',

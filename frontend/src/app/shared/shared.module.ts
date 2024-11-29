@@ -16,12 +16,8 @@ import { RouterModule } from '@angular/router';
 import { ActionComponent } from './standalone/base/action.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ThematicFocusControlComponent } from './components/form/thematic-focus-select/thematic-focus-control.component';
 import { MatSelectModule } from '@angular/material/select';
-import { CategoryControlComponent } from './components/form/category-control/category-control.component';
-import { UserSelectControlComponent } from './components/form/user-select-control/user-select-control.component';
-import { ValidCheckComponent } from './components/form/valid-check/valid-check.component';
-import { SearchInputComponent } from './components/form/search-input/search-input.component';
+import { UserSelectControlComponent } from './standalone/form/user-select-control/user-select-control.component';
 import { AdditionalFiltersModalComponent } from './components/form/filters/additional-filters-modal/additional-filters-modal.component';
 import { FilterCountBadgeComponent } from './components/form/filters/filter-count-badge/filter-count-badge.component';
 import { CheckboxFilterComponent } from './components/form/filters/checkbox-filter/checkbox-filter.component';
@@ -40,17 +36,14 @@ import { OfferCategoryFilterComponent } from './components/form/filters/offer-ca
 import { BestPracticeCategoryFilterComponent } from './components/form/filters/best-practice-category-filter/best-practice-category-filter.component';
 import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
-import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { HtmlWrapperComponent } from './standalone/base/html-wrapper.component';
 import { FeatureComponent } from './components/feature/feature.component';
 import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
 import { FormStepDescriptionComponent } from './components/wizard/form-step-description/form-step-description.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { UploadImageComponent } from './components/form/upload-image/upload-image.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
-import { AddressControlsComponent } from './components/form/address-control/address-controls.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
 import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
@@ -75,12 +68,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemDirective,
     MenuItemActiveDirective,
     FeedbackComponent,
-    ThematicFocusControlComponent,
-    AddressControlsComponent,
-    CategoryControlComponent,
     UserSelectControlComponent,
-    ValidCheckComponent,
-    SearchInputComponent,
     AdditionalFiltersModalComponent,
     FilterCountBadgeComponent,
     CheckboxFilterComponent,
@@ -96,12 +84,10 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     BestPracticeCategoryFilterComponent,
     FilterModalButtonComponent,
     OrderedFilterComponent,
-    ContactControlsComponent,
     SpecialOrgasFilterComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    UploadImageComponent,
     OnlineFilterComponent,
     OnlyDanFilterComponent,
     FormAdvantagesComponent,
@@ -152,22 +138,15 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    ThematicFocusControlComponent,
-    CategoryControlComponent,
     UserSelectControlComponent,
-    ValidCheckComponent,
-    SearchInputComponent,
     AdditionalFiltersModalComponent,
     FilterCountBadgeComponent,
     CheckboxFilterComponent,
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
-    ContactControlsComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    UploadImageComponent,
-    AddressControlsComponent,
     FormAdvantagesComponent
   ]
 })
