@@ -5,8 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   AdditionalFiltersModalComponent,
   AdditionalFiltersData
-} from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
+} from 'src/app/shared/standalone/form/filters/additional-filters-modal.component';
+import { SecondaryFilters } from 'src/app/shared/standalone/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 

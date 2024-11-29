@@ -17,26 +17,9 @@ import { ActionComponent } from './standalone/base/action.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { UserSelectControlComponent } from './standalone/form/user-select-control/user-select-control.component';
-import { AdditionalFiltersModalComponent } from './components/form/filters/additional-filters-modal/additional-filters-modal.component';
-import { FilterCountBadgeComponent } from './components/form/filters/filter-count-badge/filter-count-badge.component';
-import { CheckboxFilterComponent } from './components/form/filters/checkbox-filter/checkbox-filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ThematicFocusFilterComponent } from './components/form/filters/thematic-focus-filter/thematic-focus-filter.component';
-import { CollapsibleFilterComponent } from './components/form/filters/collapsible-filter/collapsible-filter.component';
-import { SdgFilterComponent } from './components/form/filters/sdg-filter/sdg-filter.component';
-import { ImpactAreasFilterComponent } from './components/form/filters/impact-areas-filter/impact-areas-filter.component';
-import { OrgaTypesFilterComponent } from './components/form/filters/orga-types-filter/orga-types-filter.component';
-import { ActiTypesFilterComponent } from './components/form/filters/acti-types-filter/acti-types-filter.component';
-import { ActivityPeriodFilterComponent } from './components/form/filters/activity-period-filter/activity-period-filter.component';
-import { SecondaryFiltersComponent } from './components/form/filters/secondary-filters/secondary-filters.component';
-import { OfferCategoryFilterComponent } from './components/form/filters/offer-category-filter/offer-category-filter.component';
-import { BestPracticeCategoryFilterComponent } from './components/form/filters/best-practice-category-filter/best-practice-category-filter.component';
-import { FilterModalButtonComponent } from './components/form/filters/filter-modal-button/filter-modal-button.component';
-import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
-import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
 import { HtmlWrapperComponent } from './standalone/base/html-wrapper.component';
 import { FeatureComponent } from './components/feature/feature.component';
 import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
@@ -45,8 +28,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { OnlineFilterComponent } from './components/form/filters/online-filter/online-filter.component';
-import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filter/only-dan-filter.component';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -68,28 +49,9 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemDirective,
     MenuItemActiveDirective,
     FeedbackComponent,
-    UserSelectControlComponent,
-    AdditionalFiltersModalComponent,
-    FilterCountBadgeComponent,
-    CheckboxFilterComponent,
-    ThematicFocusFilterComponent,
-    CollapsibleFilterComponent,
-    SdgFilterComponent,
-    ImpactAreasFilterComponent,
-    OrgaTypesFilterComponent,
-    ActiTypesFilterComponent,
-    ActivityPeriodFilterComponent,
-    SecondaryFiltersComponent,
-    OfferCategoryFilterComponent,
-    BestPracticeCategoryFilterComponent,
-    FilterModalButtonComponent,
-    OrderedFilterComponent,
-    SpecialOrgasFilterComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    OnlineFilterComponent,
-    OnlyDanFilterComponent,
     FormAdvantagesComponent,
     RegisterOrLoginModalComponent
   ],
@@ -138,12 +100,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
-    UserSelectControlComponent,
-    AdditionalFiltersModalComponent,
-    FilterCountBadgeComponent,
-    CheckboxFilterComponent,
-    FilterModalButtonComponent,
-    SecondaryFiltersComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,

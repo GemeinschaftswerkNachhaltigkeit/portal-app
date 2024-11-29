@@ -55,6 +55,7 @@ import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-er
 import { AddressControlsComponent } from '../shared/standalone/form/address-control/address-controls.component';
 import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
 import { UploadImageComponent } from '../shared/standalone/form/upload-image/upload-image.component';
+import { SecondaryFiltersComponent } from '../shared/standalone/form/filters/secondary-filters.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import { UploadImageComponent } from '../shared/standalone/form/upload-image/upl
     FormFieldErrorComponent,
     AddressControlsComponent,
     ContactControlsComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    SecondaryFiltersComponent
   ],
   exports: [CardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

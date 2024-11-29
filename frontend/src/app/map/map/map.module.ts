@@ -46,6 +46,7 @@ import { ToggleButtonComponent } from 'src/app/shared/standalone/base/toggle-but
 import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
 import { TopicComponent } from 'src/app/shared/standalone/base/topic.component';
 import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
+import { FilterModalButtonComponent } from 'src/app/shared/standalone/form/filters/filter-modal-button.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -98,7 +99,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ToggleButtonComponent,
     SpinnerComponent,
     TopicComponent,
-    SdgIconComponent
+    SdgIconComponent,
+    FilterModalButtonComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

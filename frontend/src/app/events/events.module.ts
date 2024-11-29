@@ -22,6 +22,8 @@ import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { ActivitySubscriptionActionComponent } from '../shared/standalone/subscription';
 import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
+import { SecondaryFiltersComponent } from '../shared/standalone/form/filters/secondary-filters.component';
+import { FilterModalButtonComponent } from '../shared/standalone/form/filters/filter-modal-button.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
     AlertComponent,
     ActivitySubscriptionActionComponent,
     ContentWrapperComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SecondaryFiltersComponent,
+    FilterModalButtonComponent
   ]
 })
 export class EventsModule {}
