@@ -9,7 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AlertComponent } from './standalone/base/alert.component';
-import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu-bar.component';
 import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.directive';
 import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
@@ -45,7 +44,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
 
 @NgModule({
   declarations: [
-    TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
     FeedbackComponent,
@@ -97,7 +95,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
   exports: [
     CommonModule,
     TranslateModule,
-    TiptapMenuBarComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
     FeatureComponent,

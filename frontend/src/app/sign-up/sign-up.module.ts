@@ -50,6 +50,7 @@ import { UploadImageComponent } from '../shared/standalone/form/upload-image/upl
 import { ValidCheckComponent } from '../shared/standalone/form/valid-check.component';
 import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
 import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
+import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-bar.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -108,7 +109,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     FormFieldErrorComponent,
     ValidCheckComponent,
     ThematicFocusControlComponent,
-    ContactControlsComponent
+    ContactControlsComponent,
+    TiptapMenuBarComponent
   ],
   providers: [
     {

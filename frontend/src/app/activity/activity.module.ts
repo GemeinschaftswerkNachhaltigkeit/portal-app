@@ -37,6 +37,7 @@ import { AddressControlsComponent } from '../shared/standalone/form/address-cont
 import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
 import { ValidCheckComponent } from '../shared/standalone/form/valid-check.component';
 import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
+import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-bar.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { ContactControlsComponent } from '../shared/standalone/form/contact-cont
     AddressControlsComponent,
     ThematicFocusControlComponent,
     ValidCheckComponent,
-    ContactControlsComponent
+    ContactControlsComponent,
+    TiptapMenuBarComponent
   ]
 })
 export class ActivityModule {}
