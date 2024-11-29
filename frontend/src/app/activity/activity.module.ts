@@ -41,6 +41,7 @@ import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-ba
 import { FormAdvantagesComponent } from '../shared/standalone/wizard/form-advatages.component';
 import { FormStepActionsComponent } from '../shared/standalone/wizard/form-step-actions.component';
 import { FormStepDescriptionComponent } from '../shared/standalone/wizard/form-step-description.component';
+import { FeatureComponent } from '../shared/standalone/feature/feature.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { FormStepDescriptionComponent } from '../shared/standalone/wizard/form-s
     TiptapMenuBarComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    FormAdvantagesComponent
+    FormAdvantagesComponent,
+    FeatureComponent
   ]
 })
 export class ActivityModule {}

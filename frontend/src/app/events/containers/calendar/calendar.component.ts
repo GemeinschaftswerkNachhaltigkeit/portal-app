@@ -24,7 +24,7 @@ import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
-import { FeaturesService } from 'src/app/shared/components/feature/features.service';
+import { FeaturesService } from 'src/app/shared/standalone/feature/features.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',

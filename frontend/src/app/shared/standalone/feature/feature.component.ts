@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FeatureService } from './feature.service';
+import { CommonModule } from '@angular/common';
 
 export type Features = 'menu' | 'dan-account' | 'dan-range';
 
 @Component({
   selector: 'app-feature',
+  standalone: true,
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container *ngIf="featureService.features$ | async as features">

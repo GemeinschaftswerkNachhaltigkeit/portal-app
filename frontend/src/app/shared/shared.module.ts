@@ -20,7 +20,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HtmlWrapperComponent } from './standalone/base/html-wrapper.component';
-import { FeatureComponent } from './components/feature/feature.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
@@ -39,12 +38,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { ContentWrapperComponent } from './standalone/layout/content-wrapper.component';
 
 @NgModule({
-  declarations: [
-    MenuItemDirective,
-    MenuItemActiveDirective,
-    FeedbackComponent,
-    FeatureComponent
-  ],
+  declarations: [MenuItemDirective, MenuItemActiveDirective, FeedbackComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -88,8 +82,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     CommonModule,
     TranslateModule,
     MenuItemDirective,
-    MenuItemActiveDirective,
-    FeatureComponent
+    MenuItemActiveDirective
   ]
 })
 export class SharedModule {}

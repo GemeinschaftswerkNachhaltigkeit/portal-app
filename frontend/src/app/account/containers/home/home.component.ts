@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { AccountFacadeService } from '../../account-facade.service';
 import UserData from '../../models/user-data';
-import { FeatureService } from 'src/app/shared/components/feature/feature.service';
-import { Features } from 'src/app/shared/components/feature/feature.component';
+import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
+import { Features } from 'src/app/shared/standalone/feature/feature.component';
 
 type HomeTile = {
   new?: boolean;

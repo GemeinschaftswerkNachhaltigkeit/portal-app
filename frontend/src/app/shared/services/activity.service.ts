@@ -11,7 +11,7 @@ import { ImageType } from '../models/image-type';
 import { StepState } from '../../sign-up/models/step-state';
 import { FeedbackService } from '../components/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
-import { FeatureService } from '../components/feature/feature.service';
+import { FeatureService } from '../standalone/feature/feature.service';
 import { DateTime } from 'luxon';
 
 const REQUEST_BASE_URL = environment.apiUrl + '/organisations';

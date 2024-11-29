@@ -47,6 +47,7 @@ import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.compone
 import { TopicComponent } from 'src/app/shared/standalone/base/topic.component';
 import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
 import { FilterModalButtonComponent } from 'src/app/shared/standalone/form/filters/filter-modal-button.component';
+import { FeatureComponent } from 'src/app/shared/standalone/feature/feature.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -100,7 +101,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     SpinnerComponent,
     TopicComponent,
     SdgIconComponent,
-    FilterModalButtonComponent
+    FilterModalButtonComponent,
+    FeatureComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

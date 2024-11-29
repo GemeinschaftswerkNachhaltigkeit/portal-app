@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import { CommonModule } from '@angular/common';
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {

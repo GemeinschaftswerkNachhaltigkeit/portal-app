@@ -8,7 +8,7 @@ import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
-import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
 
 @Component({
   selector: 'app-activities',

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { DateTime } from 'luxon';
-import { FeatureService } from '../feature/feature.service';
+import { FeatureService } from '../../standalone/feature/feature.service';
 
 /**
  * Add the validator to the end date
