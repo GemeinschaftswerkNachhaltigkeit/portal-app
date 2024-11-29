@@ -51,6 +51,9 @@ import { ValidCheckComponent } from '../shared/standalone/form/valid-check.compo
 import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
 import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
 import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-bar.component';
+import { FormStepActionsComponent } from '../shared/standalone/wizard/form-step-actions.component';
+import { FormStepDescriptionComponent } from '../shared/standalone/wizard/form-step-description.component';
+import { FormAdvantagesComponent } from '../shared/standalone/wizard/form-advatages.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -110,7 +113,10 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     ValidCheckComponent,
     ThematicFocusControlComponent,
     ContactControlsComponent,
-    TiptapMenuBarComponent
+    TiptapMenuBarComponent,
+    FormStepActionsComponent,
+    FormStepDescriptionComponent,
+    FormAdvantagesComponent
   ],
   providers: [
     {

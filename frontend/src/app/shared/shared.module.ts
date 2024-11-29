@@ -21,13 +21,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HtmlWrapperComponent } from './standalone/base/html-wrapper.component';
 import { FeatureComponent } from './components/feature/feature.component';
-import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
-import { FormStepDescriptionComponent } from './components/wizard/form-step-description/form-step-description.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeadingComponent } from './standalone/base/heading.component';
@@ -46,10 +43,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     MenuItemDirective,
     MenuItemActiveDirective,
     FeedbackComponent,
-    FeatureComponent,
-    FormStepActionsComponent,
-    FormStepDescriptionComponent,
-    FormAdvantagesComponent
+    FeatureComponent
   ],
   imports: [
     CommonModule,
@@ -95,10 +89,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     TranslateModule,
     MenuItemDirective,
     MenuItemActiveDirective,
-    FeatureComponent,
-    FormStepActionsComponent,
-    FormStepDescriptionComponent,
-    FormAdvantagesComponent
+    FeatureComponent
   ]
 })
 export class SharedModule {}

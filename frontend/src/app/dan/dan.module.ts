@@ -38,6 +38,9 @@ import { ThematicFocusControlComponent } from '../shared/standalone/form/themati
 import { ValidCheckComponent } from '../shared/standalone/form/valid-check.component';
 import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
 import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-bar.component';
+import { FormAdvantagesComponent } from '../shared/standalone/wizard/form-advatages.component';
+import { FormStepActionsComponent } from '../shared/standalone/wizard/form-step-actions.component';
+import { FormStepDescriptionComponent } from '../shared/standalone/wizard/form-step-description.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,10 @@ import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-ba
     ThematicFocusControlComponent,
     ValidCheckComponent,
     ContactControlsComponent,
-    TiptapMenuBarComponent
+    TiptapMenuBarComponent,
+    FormStepActionsComponent,
+    FormStepDescriptionComponent,
+    FormAdvantagesComponent
   ]
 })
 export class DanModule {}
