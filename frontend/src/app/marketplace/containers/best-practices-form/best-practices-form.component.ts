@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
-import { defaultContactGroupFields } from 'src/app/shared/standalone/form/contact-controls/contact-controls.component';
+import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';

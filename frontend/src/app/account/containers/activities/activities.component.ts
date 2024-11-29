@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import Activity from 'src/app/shared/models/actvitiy';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
-import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 
 @Component({
   selector: 'app-activities',

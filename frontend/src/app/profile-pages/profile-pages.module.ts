@@ -8,15 +8,15 @@ import { ContactComponent } from './components/contact/contact.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { HeadingComponent } from '../shared/standalone/base/heading.component';
-import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
-import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
-import { CardLabelComponent } from '../shared/standalone/cards/card-label.component';
-import { CardLogoComponent } from '../shared/standalone/cards/card-logo.component';
-import { ImageComponent } from '../shared/standalone/base/image.component';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { TopicComponent } from '../shared/standalone/base/topic.component';
-import { SocialMediaLinksComponent } from '../shared/standalone/base/social-media-links/social-media-links.component';
+import { HeadingComponent } from '../shared/components/base/heading.component';
+import { ExpiredBadgeComponent } from '../shared/components/base/badges/expired-badge.component';
+import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
+import { CardLabelComponent } from '../shared/components/cards/card-label.component';
+import { CardLogoComponent } from '../shared/components/cards/card-logo.component';
+import { ImageComponent } from '../shared/components/base/image.component';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { TopicComponent } from '../shared/components/base/topic.component';
+import { SocialMediaLinksComponent } from '../shared/components/base/social-media-links/social-media-links.component';
 
 @NgModule({
   declarations: [

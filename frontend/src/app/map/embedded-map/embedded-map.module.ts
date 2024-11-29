@@ -6,14 +6,14 @@ import { EmbeddedMapContainerComponent } from './containers/embedded-map-contain
 import { EmbeddedMapLayoutComponent } from './components/map/embedded-map-layout/embedded-map-layout.component';
 import { EmbeddedDetailsCardComponent } from './containers/embedded-details-card/embedded-details-card.component';
 import { EmbeddedMapComponent } from './components/map/embedded-map.component';
-import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
-import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
-import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
-import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
-import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
-import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
+import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
+import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
+import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
+import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
 
 @NgModule({
   declarations: [

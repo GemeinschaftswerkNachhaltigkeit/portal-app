@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SubscriptionFacadeService } from 'src/app/shared/standalone/subscription/subscription-facade.service';
+import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import Organisation from 'src/app/shared/models/organisation';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { OrgaFacadeService } from '../../orga-facade.service';

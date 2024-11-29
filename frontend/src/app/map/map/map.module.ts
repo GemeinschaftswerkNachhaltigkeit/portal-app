@@ -28,26 +28,26 @@ import {
   MAT_DATE_LOCALE
 } from '@angular/material/core';
 import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
-import { OrgaBadgesComponent } from 'src/app/shared/standalone/base/badges/orga-badges.component';
-import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
-import { ExpiredBadgeComponent } from 'src/app/shared/standalone/base/badges/expired-badge.component';
-import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
-import { CardLabelComponent } from 'src/app/shared/standalone/cards/card-label.component';
-import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
-import { CardLogoComponent } from 'src/app/shared/standalone/cards/card-logo.component';
-import { BaseCardComponent } from 'src/app/shared/standalone/cards/base-card/base-card.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
+import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
+import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
+import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
 import {
   ActivitySubscriptionActionComponent,
   OrganisationSubscriptionActionComponent
-} from 'src/app/shared/standalone/subscription';
-import { ImageComponent } from 'src/app/shared/standalone/base/image.component';
-import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
-import { ToggleButtonComponent } from 'src/app/shared/standalone/base/toggle-button.component';
-import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
-import { TopicComponent } from 'src/app/shared/standalone/base/topic.component';
-import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
-import { FilterModalButtonComponent } from 'src/app/shared/standalone/form/filters/filter-modal-button.component';
-import { FeatureComponent } from 'src/app/shared/standalone/feature/feature.component';
+} from 'src/app/shared/components/subscription';
+import { ImageComponent } from 'src/app/shared/components/base/image.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-button.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { TopicComponent } from 'src/app/shared/components/base/topic.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { FeatureComponent } from 'src/app/shared/components/feature/feature.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {

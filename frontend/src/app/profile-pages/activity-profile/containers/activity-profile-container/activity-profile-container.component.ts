@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
-import { SubscriptionFacadeService } from 'src/app/shared/standalone/subscription/subscription-facade.service';
+import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import Activity from 'src/app/shared/models/actvitiy';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ActivityFacadeService } from '../../activity-facade.service';

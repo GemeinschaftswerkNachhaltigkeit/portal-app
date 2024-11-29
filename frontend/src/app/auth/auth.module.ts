@@ -29,7 +29,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthenticatedExcludingRolesDirective } from './directives/authenticated-excluding-roles.directive';
 import { WithOrgaDirective } from './directives/with-orga.directive';
 import { WithoutOrgaDirective } from './directives/without-orga.directive';
-import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
+import { NotificationPageComponent } from '../shared/components/layout/notification-page/notification-page.component';
 
 // We need a factory, since localStorage is not available during AOT build time.
 // We use Local storage, because we need the registration across browser tabs.

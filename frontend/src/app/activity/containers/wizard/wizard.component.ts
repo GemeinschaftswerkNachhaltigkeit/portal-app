@@ -31,7 +31,7 @@ import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { ActivityType } from 'src/app/shared/models/activity-type';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
-import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { durationValidator } from 'src/app/shared/components/validator/duration.validator';
 import { danPeriodValidator } from 'src/app/shared/components/validator/danPeriod.validator';
@@ -42,7 +42,7 @@ import { MasterDataFormComponent } from '../../components/master-data-form/maste
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
-import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
 
 @Component({
   selector: 'app-wizard',

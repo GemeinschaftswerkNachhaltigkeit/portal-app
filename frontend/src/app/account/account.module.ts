@@ -38,22 +38,22 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
 import { DanHelpModalComponent } from './containers/dan-activities/dan-help-modal/dan-help-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HeadingComponent } from '../shared/standalone/base/heading.component';
-import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
-import { ActionComponent } from '../shared/standalone/base/action.component';
-import { AlertComponent } from '../shared/standalone/base/alert.component';
-import { CardListComponent } from '../shared/standalone/cards/card-list.component';
-import { BaseCardComponent } from '../shared/standalone/cards/base-card/base-card.component';
-import { CharCountComponent } from '../shared/standalone/base/char-count.component';
-import { NewBadgeComponent } from '../shared/standalone/base/badges/new-badge.component';
-import { PageWithHeaderLayoutComponent } from '../shared/standalone/layout/page-with-header-layout.component';
-import { ListWithHeadingLayoutComponent } from '../shared/standalone/layout/list-with-heading-layout.component';
-import { PageMenuComponent } from '../shared/standalone/layout/page-menu/page-menu.component';
-import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
-import { InfoCardComponent } from '../shared/standalone/cards/info-card.component';
-import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
+import { HeadingComponent } from '../shared/components/base/heading.component';
+import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
+import { ActionComponent } from '../shared/components/base/action.component';
+import { AlertComponent } from '../shared/components/base/alert.component';
+import { CardListComponent } from '../shared/components/cards/card-list.component';
+import { BaseCardComponent } from '../shared/components/cards/base-card/base-card.component';
+import { CharCountComponent } from '../shared/components/base/char-count.component';
+import { NewBadgeComponent } from '../shared/components/base/badges/new-badge.component';
+import { PageWithHeaderLayoutComponent } from '../shared/components/layout/page-with-header-layout.component';
+import { ListWithHeadingLayoutComponent } from '../shared/components/layout/list-with-heading-layout.component';
+import { PageMenuComponent } from '../shared/components/layout/page-menu/page-menu.component';
+import { NotificationPageComponent } from '../shared/components/layout/notification-page/notification-page.component';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { SpinnerComponent } from '../shared/components/base/spinner.component';
+import { InfoCardComponent } from '../shared/components/cards/info-card.component';
+import { FormFieldErrorComponent } from '../shared/components/form/form-field-error/form-field-error.component';
 
 @NgModule({
   declarations: [

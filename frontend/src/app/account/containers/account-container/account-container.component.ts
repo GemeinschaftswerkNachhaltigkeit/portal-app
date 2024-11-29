@@ -5,7 +5,7 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 import { OrganisationService } from 'src/app/sign-up/services/organisation.service';
 import { OrgaFacadeService } from 'src/app/profile-pages/orga-profile/orga-facade.service';
 import { AccountFacadeService } from '../../account-facade.service';
-import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 
 @Component({
   selector: 'app-account-container',

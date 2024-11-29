@@ -12,7 +12,7 @@ import {
 import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
-import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import SearchFilter, { DynamicFilters } from '../models/search-filter';
 import { TranslateService } from '@ngx-translate/core';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
@@ -21,7 +21,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { DateTime } from 'luxon';
 import { RegisterOrLoginService } from 'src/app/shared/services/register-or-login.service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 
 export type EventCalenderEntry = { count: number; inDanPeriod: boolean };

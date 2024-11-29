@@ -15,12 +15,12 @@ import { DuplicateComponent } from './duplicate/duplicate.component';
 import { FeedbackHistoryComponent } from './feedback-history/feedback-history.component';
 import { DuplicateEntryComponent } from './duplicate-entry/duplicate-entry.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { HeadingComponent } from '../shared/standalone/base/heading.component';
-import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
-import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
-import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
+import { HeadingComponent } from '../shared/components/base/heading.component';
+import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
+import { ContentRowComponent } from '../shared/components/base/content-row.component';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { HtmlWrapperComponent } from '../shared/components/base/html-wrapper.component';
+import { SpinnerComponent } from '../shared/components/base/spinner.component';
 
 @NgModule({
   declarations: [

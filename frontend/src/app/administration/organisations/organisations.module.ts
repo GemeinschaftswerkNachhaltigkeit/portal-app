@@ -13,12 +13,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
-import { CardListComponent } from 'src/app/shared/standalone/cards/card-list.component';
-import { BaseCardComponent } from 'src/app/shared/standalone/cards/base-card/base-card.component';
-import { HeaderComponent } from 'src/app/shared/standalone/layout/header.component';
-import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
-import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { HeaderComponent } from 'src/app/shared/components/layout/header.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],

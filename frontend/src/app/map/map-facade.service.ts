@@ -18,7 +18,7 @@ import { LoadingService } from '../shared/services/loading.service';
 import SearchResult from './models/search-result';
 import { ActivatedRoute, Router } from '@angular/router';
 import MarkerDto from './models/markerDto';
-import { FeaturesService } from '../shared/standalone/feature/features.service';
+import { FeaturesService } from '../shared/components/feature/features.service';
 
 // common map facade services
 @Injectable({ providedIn: 'root' })

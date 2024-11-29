@@ -19,7 +19,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 
 @Component({
   selector: 'app-search-header',

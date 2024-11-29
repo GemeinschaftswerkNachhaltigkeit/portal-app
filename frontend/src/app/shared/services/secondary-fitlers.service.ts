@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SecondaryFilters } from '../standalone/form/filters/secondary-filters.component';
+import { SecondaryFilters } from '../components/form/filters/secondary-filters.component';
 
 @Injectable({
   providedIn: 'root'

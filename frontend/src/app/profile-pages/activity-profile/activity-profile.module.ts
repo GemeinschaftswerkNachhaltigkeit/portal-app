@@ -7,18 +7,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfilePagesModule } from '../profile-pages.module';
 import { RouterModule } from '@angular/router';
-import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
 import {
   BreadcrumbsComponent,
   BreadcrumbComponent
-} from 'src/app/shared/standalone/base/breadcrumb';
-import { ActionComponent } from 'src/app/shared/standalone/base/action.component';
-import { AlertComponent } from 'src/app/shared/standalone/base/alert.component';
-import { ActivitySubscriptionActionComponent } from 'src/app/shared/standalone/subscription';
-import { HtmlWrapperComponent } from 'src/app/shared/standalone/base/html-wrapper.component';
-import { PageMenuComponent } from 'src/app/shared/standalone/layout/page-menu/page-menu.component';
-import { SpinnerComponent } from 'src/app/shared/standalone/base/spinner.component';
-import { SdgIconComponent } from 'src/app/shared/standalone/base/sdg-icon.component';
+} from 'src/app/shared/components/base/breadcrumb';
+import { ActionComponent } from 'src/app/shared/components/base/action.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/subscription';
+import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
+import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],

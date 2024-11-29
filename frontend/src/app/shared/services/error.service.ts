@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FeedbackService } from '../standalone/feedback/feedback.service';
+import { FeedbackService } from '../components/feedback/feedback.service';
 
 @Injectable({
   providedIn: 'root'

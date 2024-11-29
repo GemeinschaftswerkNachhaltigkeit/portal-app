@@ -31,8 +31,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BaseLayoutComponent } from './shared/standalone/layout/base-layout/base-layout.component';
-import { ErrorPageComponent } from './shared/standalone/layout/error-page.component';
+import { BaseLayoutComponent } from './shared/components/layout/base-layout/base-layout.component';
+import { ErrorPageComponent } from './shared/components/layout/error-page.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {

@@ -32,30 +32,30 @@ import { VisibilityControlsComponent } from './components/visibility-controls/vi
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatLuxonDateModule } from '@angular/material-luxon-adapter';
-import { EventBadgesComponent } from '../shared/standalone/base/badges/event-badges.component copy';
-import { CardListComponent } from '../shared/standalone/cards/card-list.component';
-import { CategoryComponent } from '../shared/standalone/base/category.component';
-import { LabelComponent } from '../shared/standalone/base/label.component';
-import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-badge.component';
-import { ActionComponent } from '../shared/standalone/base/action.component';
-import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
-import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { HeadingComponent } from '../shared/standalone/base/heading.component';
-import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
+import { EventBadgesComponent } from '../shared/components/base/badges/event-badges.component copy';
+import { CardListComponent } from '../shared/components/cards/card-list.component';
+import { CategoryComponent } from '../shared/components/base/category.component';
+import { LabelComponent } from '../shared/components/base/label.component';
+import { ExpiredBadgeComponent } from '../shared/components/base/badges/expired-badge.component';
+import { ActionComponent } from '../shared/components/base/action.component';
+import { ContentRowComponent } from '../shared/components/base/content-row.component';
+import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { HeadingComponent } from '../shared/components/base/heading.component';
+import { HtmlWrapperComponent } from '../shared/components/base/html-wrapper.component';
 import {
   BreadcrumbComponent,
   BreadcrumbsComponent
-} from '../shared/standalone/base/breadcrumb';
-import { SearchInputComponent } from '../shared/standalone/form/search-input.component';
-import { CategoryControlComponent } from '../shared/standalone/form/category-control.component';
-import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
-import { PageWithHeaderLayoutComponent } from '../shared/standalone/layout/page-with-header-layout.component';
-import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
-import { AddressControlsComponent } from '../shared/standalone/form/address-control/address-controls.component';
-import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
-import { UploadImageComponent } from '../shared/standalone/form/upload-image/upload-image.component';
-import { SecondaryFiltersComponent } from '../shared/standalone/form/filters/secondary-filters.component';
+} from '../shared/components/base/breadcrumb';
+import { SearchInputComponent } from '../shared/components/form/search-input.component';
+import { CategoryControlComponent } from '../shared/components/form/category-control.component';
+import { ThematicFocusControlComponent } from '../shared/components/form/thematic-focus-control.component';
+import { PageWithHeaderLayoutComponent } from '../shared/components/layout/page-with-header-layout.component';
+import { FormFieldErrorComponent } from '../shared/components/form/form-field-error/form-field-error.component';
+import { AddressControlsComponent } from '../shared/components/form/address-control/address-controls.component';
+import { ContactControlsComponent } from '../shared/components/form/contact-controls/contact-controls.component';
+import { UploadImageComponent } from '../shared/components/form/upload-image/upload-image.component';
+import { SecondaryFiltersComponent } from '../shared/components/form/filters/secondary-filters.component';
 
 @NgModule({
   declarations: [

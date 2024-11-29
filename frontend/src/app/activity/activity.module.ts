@@ -22,26 +22,26 @@ import { StateInfoComponent } from './components/state-info/state-info.component
 import { ImagesFormComponent } from './components/images-form/images-form.component';
 import { TopicsFormComponent } from './components/topics-form/topics-form.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { TitleWithContentComponent } from '../shared/standalone/base/title-with-text.component';
-import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { TitleWithContentComponent } from '../shared/components/base/title-with-text.component';
+import { WizardSidebarLayoutComponent } from '../shared/components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
 import { MasterDataFormComponent } from './components/master-data-form/master-data-form.component';
-import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
-import { AlertComponent } from '../shared/standalone/base/alert.component';
-import { CharCountComponent } from '../shared/standalone/base/char-count.component';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
-import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
-import { FormFieldErrorComponent } from '../shared/standalone/form/form-field-error/form-field-error.component';
-import { UploadImageComponent } from '../shared/standalone/form/upload-image/upload-image.component';
-import { AddressControlsComponent } from '../shared/standalone/form/address-control/address-controls.component';
-import { ThematicFocusControlComponent } from '../shared/standalone/form/thematic-focus-control.component';
-import { ValidCheckComponent } from '../shared/standalone/form/valid-check.component';
-import { ContactControlsComponent } from '../shared/standalone/form/contact-controls/contact-controls.component';
-import { TiptapMenuBarComponent } from '../shared/standalone/form/tiptap-menu-bar.component';
-import { FormAdvantagesComponent } from '../shared/standalone/wizard/form-advatages.component';
-import { FormStepActionsComponent } from '../shared/standalone/wizard/form-step-actions.component';
-import { FormStepDescriptionComponent } from '../shared/standalone/wizard/form-step-description.component';
-import { FeatureComponent } from '../shared/standalone/feature/feature.component';
+import { SavedIndicatorComponent } from '../shared/components/wizard/saved-indicator.component';
+import { AlertComponent } from '../shared/components/base/alert.component';
+import { CharCountComponent } from '../shared/components/base/char-count.component';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { HtmlWrapperComponent } from '../shared/components/base/html-wrapper.component';
+import { SpinnerComponent } from '../shared/components/base/spinner.component';
+import { FormFieldErrorComponent } from '../shared/components/form/form-field-error/form-field-error.component';
+import { UploadImageComponent } from '../shared/components/form/upload-image/upload-image.component';
+import { AddressControlsComponent } from '../shared/components/form/address-control/address-controls.component';
+import { ThematicFocusControlComponent } from '../shared/components/form/thematic-focus-control.component';
+import { ValidCheckComponent } from '../shared/components/form/valid-check.component';
+import { ContactControlsComponent } from '../shared/components/form/contact-controls/contact-controls.component';
+import { TiptapMenuBarComponent } from '../shared/components/form/tiptap-menu-bar.component';
+import { FormAdvantagesComponent } from '../shared/components/wizard/form-advatages.component';
+import { FormStepActionsComponent } from '../shared/components/wizard/form-step-actions.component';
+import { FormStepDescriptionComponent } from '../shared/components/wizard/form-step-description.component';
+import { FeatureComponent } from '../shared/components/feature/feature.component';
 
 @NgModule({
   declarations: [

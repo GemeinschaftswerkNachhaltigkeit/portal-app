@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ImageMode } from 'src/app/shared/standalone/form/upload-image/upload-image.component';
+import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { ImageType } from 'src/app/shared/models/image-type';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';

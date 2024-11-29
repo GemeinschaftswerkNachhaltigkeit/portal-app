@@ -16,7 +16,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ImageType } from '../../../shared/models/image-type';
-import { defaultContactGroupFields } from 'src/app/shared/standalone/form/contact-controls/contact-controls.component';
+import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';

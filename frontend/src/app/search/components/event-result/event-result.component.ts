@@ -5,8 +5,8 @@ import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
-import { ContentRowComponent } from 'src/app/shared/standalone/base/content-row.component';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
+import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
 
 @Component({
   selector: 'app-event-result',

@@ -2,9 +2,9 @@ import { Component, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { InfoDialogComponent } from 'src/app/shared/standalone/dialogs/info-dialog.component';
+import { InfoDialogComponent } from 'src/app/shared/components/dialogs/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { OutlinedIconComponent } from 'src/app/shared/standalone/base/outlined-icon.component';
+import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
 
 @Component({
   selector: 'app-type-tab',

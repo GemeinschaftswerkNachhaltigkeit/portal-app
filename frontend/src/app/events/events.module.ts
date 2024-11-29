@@ -16,14 +16,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateSelectComponent } from './components/date-select/date-select.component';
 import { DateSelectHeaderComponent } from './components/date-select-header/date-select-header.component';
-import { HeadingComponent } from '../shared/standalone/base/heading.component';
-import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
-import { AlertComponent } from '../shared/standalone/base/alert.component';
-import { ActivitySubscriptionActionComponent } from '../shared/standalone/subscription';
-import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
-import { SpinnerComponent } from '../shared/standalone/base/spinner.component';
-import { SecondaryFiltersComponent } from '../shared/standalone/form/filters/secondary-filters.component';
-import { FilterModalButtonComponent } from '../shared/standalone/form/filters/filter-modal-button.component';
+import { HeadingComponent } from '../shared/components/base/heading.component';
+import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
+import { AlertComponent } from '../shared/components/base/alert.component';
+import { ActivitySubscriptionActionComponent } from '../shared/components/subscription';
+import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
+import { SpinnerComponent } from '../shared/components/base/spinner.component';
+import { SecondaryFiltersComponent } from '../shared/components/form/filters/secondary-filters.component';
+import { FilterModalButtonComponent } from '../shared/components/form/filters/filter-modal-button.component';
 
 @NgModule({
   declarations: [

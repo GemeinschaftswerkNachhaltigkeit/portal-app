@@ -7,7 +7,7 @@ import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { EventBadgesComponent } from 'src/app/shared/standalone/base/badges/event-badges.component copy';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
 
 @Component({
   selector: 'app-marketplace-result',

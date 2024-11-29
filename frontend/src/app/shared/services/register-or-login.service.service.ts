@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   AuthModalData,
   RegisterOrLoginModalComponent
-} from '../standalone/dialogs/register-or-login-modal.component';
+} from '../components/dialogs/register-or-login-modal.component';
 
 @Injectable({
   providedIn: 'root'

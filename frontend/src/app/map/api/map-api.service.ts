@@ -10,7 +10,7 @@ import SearchResult, {
 } from '../models/search-result';
 import { MatomoTracker } from 'ngx-matomo-client';
 import MarkerDto from '../models/markerDto';
-import { FeatureService } from 'src/app/shared/standalone/feature/feature.service';
+import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 
 @Injectable({
   providedIn: 'root'

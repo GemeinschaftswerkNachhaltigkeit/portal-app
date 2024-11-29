@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { AdditionalFiltersModalComponent } from 'src/app/shared/standalone/form/filters/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/standalone/form/filters/secondary-filters.component';
+import { AdditionalFiltersModalComponent } from 'src/app/shared/components/form/filters/additional-filters-modal.component';
+import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { DynamicFilters } from '../../../models/search-filter';
 
