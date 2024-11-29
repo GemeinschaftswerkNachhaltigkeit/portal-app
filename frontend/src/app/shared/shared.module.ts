@@ -30,7 +30,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 import { HeadingComponent } from './standalone/base/heading.component';
 import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
 import { OutlinedIconComponent } from './standalone/base/outlined-icon.component';
@@ -50,8 +49,7 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    FormAdvantagesComponent,
-    RegisterOrLoginModalComponent
+    FormAdvantagesComponent
   ],
   imports: [
     CommonModule,
