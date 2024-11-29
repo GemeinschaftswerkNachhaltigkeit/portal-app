@@ -12,7 +12,7 @@ import {
 import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
-import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
 import SearchFilter, { DynamicFilters } from '../models/search-filter';
 import { TranslateService } from '@ngx-translate/core';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';

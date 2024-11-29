@@ -9,11 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AlertComponent } from './standalone/base/alert.component';
-import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.directive';
-import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
 import { ActionComponent } from './standalone/base/action.component';
-import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,7 +35,6 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { ContentWrapperComponent } from './standalone/layout/content-wrapper.component';
 
 @NgModule({
-  declarations: [MenuItemDirective, MenuItemActiveDirective, FeedbackComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -78,11 +74,6 @@ import { ContentWrapperComponent } from './standalone/layout/content-wrapper.com
     ContentWrapperComponent,
     FormFieldErrorComponent
   ],
-  exports: [
-    CommonModule,
-    TranslateModule,
-    MenuItemDirective,
-    MenuItemActiveDirective
-  ]
+  exports: [CommonModule, TranslateModule]
 })
 export class SharedModule {}

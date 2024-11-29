@@ -11,7 +11,7 @@ import { OrganisationApiService } from './api/organisation-api.service';
 import { OrganisationStateService } from './state/organisation-state.service';
 import { OrganisationUiStateService } from './state/organisation-ui-state.service';
 import { environment } from 'src/environments/environment';
-import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
 import Organisation from 'src/app/shared/models/organisation';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import Paging from 'src/app/shared/models/paging';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
+import { FeedbackService } from 'src/app/shared/standalone/feedback/feedback.service';
 import Organisation from 'src/app/shared/models/organisation';
 import { UserStatus } from 'src/app/shared/models/user-status';
 import { UserType } from 'src/app/shared/models/user-type';

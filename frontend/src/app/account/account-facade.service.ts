@@ -6,7 +6,7 @@ import { MyDataApiService } from './api/my-data-api.service';
 import UserData from './models/user-data';
 import { UserPermission } from '../auth/models/user-role';
 import { environment } from '../../environments/environment';
-import { FeedbackService } from '../shared/components/feedback/feedback.service';
+import { FeedbackService } from '../shared/standalone/feedback/feedback.service';
 
 @Injectable({
   providedIn: 'root'

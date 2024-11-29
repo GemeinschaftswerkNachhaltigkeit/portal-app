@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 import { ActivityWIP } from '../models/activity-wip';
 import { ImageType } from '../models/image-type';
 import { StepState } from '../../sign-up/models/step-state';
-import { FeedbackService } from '../components/feedback/feedback.service';
+import { FeedbackService } from '../standalone/feedback/feedback.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FeatureService } from '../standalone/feature/feature.service';
 import { DateTime } from 'luxon';

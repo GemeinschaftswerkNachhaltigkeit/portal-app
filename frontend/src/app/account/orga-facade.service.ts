@@ -7,7 +7,7 @@ import { User } from '../auth/models/user';
 import { UserRole } from '../auth/models/user-role';
 import { AuthService } from '../auth/services/auth.service';
 import { ConfirmationService } from '../shared/services/confirmation.service';
-import { FeedbackService } from '../shared/components/feedback/feedback.service';
+import { FeedbackService } from '../shared/standalone/feedback/feedback.service';
 import Organisation from '../shared/models/organisation';
 import { OrganisationStatus } from '../shared/models/organisation-status';
 import { OrganisationWIP } from '../shared/models/organisation-wip';
