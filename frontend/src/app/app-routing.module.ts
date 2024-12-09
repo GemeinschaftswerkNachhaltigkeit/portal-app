@@ -58,7 +58,7 @@ const routes: Routes = [
   {
     path: 'events',
     loadChildren: () =>
-      import('./events/events.module').then((m) => m.EventsModule)
+      import('./events/events.routes').then((r) => r.EVENT_ROUTES)
   },
   {
     path: 'activity',

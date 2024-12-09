@@ -6,6 +6,7 @@ import {
   ControlValueAccessor,
   FormControl,
   FormGroup,
+  FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule
 } from '@angular/forms';
@@ -24,6 +25,7 @@ export type SearchFields = {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     TranslateModule
   ],

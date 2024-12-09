@@ -8,15 +8,18 @@ import {
   ViewChild
 } from '@angular/core';
 import { EventsService } from '../../data/events.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   AdditionalFiltersData,
   AdditionalFiltersModalComponent
 } from 'src/app/shared/components/form/filters/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters.component';
+import {
+  SecondaryFilters,
+  SecondaryFiltersComponent
+} from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,8 +28,40 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
 import { FeaturesService } from 'src/app/shared/components/feature/features.service';
+import { CommonModule } from '@angular/common';
+import { CalendarLayoutComponent } from '../../components/calendar-layout.component';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { SearchControlsComponent } from '../../components/search-controls.component';
+import { EventListComponent } from '../../components/event-list.component';
+import { EventComponent } from '../../components/event.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { FilterSidebarComponent } from '../../components/filter-sidebar.component';
+import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
+import { MatButtonModule } from '@angular/material/button';
+import { DateSelectComponent } from '../../components/date-select.component';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-calendar',
+  standalone: true,
+  imports: [
+    CommonModule,
+    CalendarLayoutComponent,
+    TranslateModule,
+    FilterModalButtonComponent,
+    SearchControlsComponent,
+    EventListComponent,
+    EventComponent,
+    SpinnerComponent,
+    AlertComponent,
+    FilterSidebarComponent,
+    HeadingComponent,
+    SecondaryFiltersComponent,
+    MatButtonModule,
+    DateSelectComponent,
+    MatIconModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
