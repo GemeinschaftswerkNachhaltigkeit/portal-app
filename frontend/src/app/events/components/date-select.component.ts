@@ -11,19 +11,37 @@ import {
 } from '@angular/core';
 import {
   MatCalendar,
-  MatCalendarCellClassFunction
+  MatCalendarCellClassFunction,
+  MatDatepickerModule
 } from '@angular/material/datepicker';
 import { DateTime } from 'luxon';
 import { LuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DateSelectHeaderComponent } from '../date-select-header/date-select-header.component';
-import { EventCalenderEntry } from '../../data/events.service';
+import { DateSelectHeaderComponent } from './date-select-header.component';
+import { EventCalenderEntry } from '../data/events.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-date-select',
-  templateUrl: './date-select.component.html',
-  styleUrls: ['./date-select.component.scss']
+  standalone: true,
+  imports: [CommonModule, MatDatepickerModule],
+  template: `
+    <div class="wrapper">
+      <mat-calendar
+        #cal
+        [selected]="selected"
+        (selectedChange)="handleDateChange($event)"
+        [dateClass]="dateClass"
+        [headerComponent]="header"
+        [startAt]="selected"
+      ></mat-calendar>
+    </div>
+  `,
+  styles: `
+    @use 'theme' as *;
+    @use 'palette' as *;
+  `
 })
 export class DateSelectComponent implements AfterViewInit, OnChanges {
   @Input() selected: DateTime = DateTime.now();

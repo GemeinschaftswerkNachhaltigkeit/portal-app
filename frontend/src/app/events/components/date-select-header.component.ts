@@ -11,14 +11,19 @@ import {
   MAT_DATE_LOCALE,
   MatDateFormats
 } from '@angular/material/core';
-import { MatCalendar } from '@angular/material/datepicker';
+import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { EventsService } from '../../data/events.service';
+import { EventsService } from '../data/events.service';
 import { DateTime } from 'luxon';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-date-select-header',
+  standalone: true,
+  imports: [CommonModule, MatDatepickerModule, MatIconModule, MatButtonModule],
   styles: [
     `
       .header {

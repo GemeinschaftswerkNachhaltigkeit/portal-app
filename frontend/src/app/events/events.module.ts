@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './containers/calendar/calendar.component';
 import { EventsRoutingModule } from './events-routing.module';
-import { CalendarLayoutComponent } from './components/calendar-layout/calendar-layout.component';
-import { SearchControlsComponent } from './components/search-controls/search-controls.component';
+import { CalendarLayoutComponent } from './components/calendar-layout.component';
+import { SearchControlsComponent } from './components/search-controls.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { EventComponent } from './components/event/event.component';
-import { EventListComponent } from './components/event-list/event-list.component';
-import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar.component';
+import { EventComponent } from './components/event.component';
+import { EventListComponent } from './components/event-list.component';
+import { FilterSidebarComponent } from './components/filter-sidebar.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateSelectComponent } from './components/date-select/date-select.component';
-import { DateSelectHeaderComponent } from './components/date-select-header/date-select-header.component';
+import { DateSelectComponent } from './components/date-select.component';
+import { DateSelectHeaderComponent } from './components/date-select-header.component';
 import { HeadingComponent } from '../shared/components/base/heading.component';
 import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
 import { AlertComponent } from '../shared/components/base/alert.component';
@@ -26,16 +26,7 @@ import { FilterModalButtonComponent } from '../shared/components/form/filters/fi
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    CalendarComponent,
-    CalendarLayoutComponent,
-    SearchControlsComponent,
-    EventComponent,
-    EventListComponent,
-    FilterSidebarComponent,
-    DateSelectComponent,
-    DateSelectHeaderComponent
-  ],
+  declarations: [CalendarComponent],
   imports: [
     CommonModule,
     EventsRoutingModule,
@@ -54,7 +45,15 @@ import { TranslateModule } from '@ngx-translate/core';
     SpinnerComponent,
     SecondaryFiltersComponent,
     FilterModalButtonComponent,
-    TranslateModule
+    TranslateModule,
+
+    SearchControlsComponent,
+    FilterSidebarComponent,
+    EventComponent,
+    EventListComponent,
+    CalendarLayoutComponent,
+    DateSelectComponent,
+    DateSelectHeaderComponent
   ]
 })
 export class EventsModule {}
