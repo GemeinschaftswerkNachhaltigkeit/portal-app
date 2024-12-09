@@ -13,7 +13,6 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { TranslateModule } from '@ngx-translate/core';
 import { TopicsFormComponent } from './forms/topics-form/topics-form.component';
 import { ExternalLinksFormComponent } from './forms/external-links-form/external-links-form.component';
-import { SharedModule } from '../shared/shared.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormFeedbackComponent } from './form-feedback/form-feedback.component';
 import { ImportComponent } from './import/import.component';
@@ -91,7 +90,6 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     MatSelectModule,
     SignUpRoutingModule,
     TranslateModule,
-    SharedModule,
     MatCheckboxModule,
     MatDatepickerModule,
     MatLuxonDateModule,
@@ -116,7 +114,9 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     TiptapMenuBarComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
-    FormAdvantagesComponent
+    FormAdvantagesComponent,
+    MatIconModule,
+    OutlinedIconComponent
   ],
   providers: [
     {

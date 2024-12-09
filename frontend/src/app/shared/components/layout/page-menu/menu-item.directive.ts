@@ -1,7 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[appMenuItem]'
+  selector: '[appMenuItem]',
+  standalone: true
 })
 export class MenuItemDirective {
   public itemTemplate: TemplateRef<HTMLAnchorElement>;

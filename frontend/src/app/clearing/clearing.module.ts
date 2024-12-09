@@ -5,7 +5,6 @@ import { OrganisationListComponent } from './organisation-list/organisation-list
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SharedModule } from '../shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -36,7 +35,6 @@ import { SpinnerComponent } from '../shared/components/base/spinner.component';
     TranslateModule,
     MatButtonModule,
     MatPaginatorModule,
-    SharedModule,
     MatDialogModule,
     MatIconModule,
     MatMenuModule,

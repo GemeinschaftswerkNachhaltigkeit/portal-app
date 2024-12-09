@@ -1,7 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { ImgService } from '../../../services/img.service';
-import { SharedModule } from '../../../shared.module';
 import { UtilsService } from '../../../services/utils.service';
 import { RouterModule } from '@angular/router';
 import { MarketplaceItem } from '../../../models/marketplaceItem';
@@ -18,13 +17,7 @@ export type CardData = {
 @Component({
   selector: 'app-marketplace-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    NgClass,
-    EventBadgesComponent
-  ],
+  imports: [CommonModule, RouterModule, NgClass, EventBadgesComponent],
   templateUrl: './marketplace-card.component.html',
   styleUrl: './marketplace-card.component.scss'
 })

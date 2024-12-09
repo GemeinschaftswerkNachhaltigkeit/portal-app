@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrgasContainerComponent } from './containers/orgas-container/orgas-container.component';
-import { OrganisationsRoutingModule } from './organisations-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FiltersComponent } from '../components/filters/filters.component';
@@ -19,13 +17,14 @@ import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/bas
 import { HeaderComponent } from 'src/app/shared/components/layout/header.component';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { OrganisationsRoutingModule } from './organisations-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [OrgasContainerComponent, FiltersComponent],
   imports: [
     CommonModule,
     OrganisationsRoutingModule,
-    SharedModule,
     ReactiveFormsModule,
     MatIconModule,
     MatTooltipModule,
@@ -40,7 +39,8 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
     BaseCardComponent,
     ContentWrapperComponent,
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TranslateModule
   ]
 })
 export class OrganisationsModule {}

@@ -14,10 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DirectusService } from 'src/app/shared/services/directus.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 
@@ -31,8 +30,8 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
     MatFormFieldModule,
     ReactiveFormsModule,
     MatIconModule,
-    SharedModule,
-    ContentWrapperComponent
+    ContentWrapperComponent,
+    TranslateModule
   ],
   templateUrl: './search-header.component.html',
   styleUrl: './search-header.component.scss'

@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '../../../services/utils.service';
 
 @Directive({
-  selector: '[appMenuItemActive]'
+  selector: '[appMenuItemActive]',
+  standalone: true
 })
 export class MenuItemActiveDirective implements OnInit {
   @Input() appMenuItemActive = '';

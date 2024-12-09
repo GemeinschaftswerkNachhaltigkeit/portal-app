@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileLayoutComponent } from './components/profile-layout/profile-layout.component';
-import { SharedModule } from '../shared/shared.module';
 import { HeroComponent } from './components/hero/hero.component';
 import { SectionComponent } from './components/section/section.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -17,6 +16,7 @@ import { ImageComponent } from '../shared/components/base/image.component';
 import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
 import { TopicComponent } from '../shared/components/base/topic.component';
 import { SocialMediaLinksComponent } from '../shared/components/base/social-media-links/social-media-links.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { SocialMediaLinksComponent } from '../shared/components/base/social-medi
   ],
   imports: [
     CommonModule,
-    SharedModule,
     MatButtonModule,
     MatIconModule,
     RouterModule,
@@ -45,7 +44,8 @@ import { SocialMediaLinksComponent } from '../shared/components/base/social-medi
     ImageComponent,
     ContentWrapperComponent,
     TopicComponent,
-    SocialMediaLinksComponent
+    SocialMediaLinksComponent,
+    TranslateModule
   ]
 })
 export class ProfilePagesModule {}

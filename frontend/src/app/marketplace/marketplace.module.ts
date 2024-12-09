@@ -2,7 +2,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OffersFormComponent } from './containers/offers-form/offers-form.component';
 import { MarketplcaeRoutingModule } from './marketplace-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { FormSectionComponent } from './components/form-section/form-section.component';
 import { FormSectionListComponent } from './components/form-section-list/form-section-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +55,7 @@ import { AddressControlsComponent } from '../shared/components/form/address-cont
 import { ContactControlsComponent } from '../shared/components/form/contact-controls/contact-controls.component';
 import { UploadImageComponent } from '../shared/components/form/upload-image/upload-image.component';
 import { SecondaryFiltersComponent } from '../shared/components/form/filters/secondary-filters.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,6 @@ import { SecondaryFiltersComponent } from '../shared/components/form/filters/sec
   ],
   imports: [
     CommonModule,
-    SharedModule,
     AuthModule,
     MarketplcaeRoutingModule,
     ReactiveFormsModule,
@@ -117,7 +116,8 @@ import { SecondaryFiltersComponent } from '../shared/components/form/filters/sec
     AddressControlsComponent,
     ContactControlsComponent,
     UploadImageComponent,
-    SecondaryFiltersComponent
+    SecondaryFiltersComponent,
+    TranslateModule
   ],
   exports: [CardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

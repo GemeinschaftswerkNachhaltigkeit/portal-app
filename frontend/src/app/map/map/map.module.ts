@@ -48,6 +48,8 @@ import { TopicComponent } from 'src/app/shared/components/base/topic.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
 import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
 import { FeatureComponent } from 'src/app/shared/components/feature/feature.component';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -71,6 +73,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     DetailsCardComponent
   ],
   imports: [
+    CommonModule,
     SharedMapModule,
     MapRoutingModule,
     FormsModule,
@@ -102,7 +105,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     TopicComponent,
     SdgIconComponent,
     FilterModalButtonComponent,
-    FeatureComponent
+    FeatureComponent,
+    TranslateModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

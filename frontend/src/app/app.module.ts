@@ -6,7 +6,6 @@ import {
   provideHttpClient,
   withInterceptorsFromDi
 } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { authConfig, restrictedUrls } from './app-auth.config';
 import { NgxMatomoTrackerModule } from 'ngx-matomo-client';
@@ -57,7 +56,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
     AppRoutingModule,
     BaseLayoutComponent,
     ErrorPageComponent,

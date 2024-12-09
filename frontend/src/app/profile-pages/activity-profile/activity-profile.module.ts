@@ -4,7 +4,6 @@ import { ActivityProfileContainerComponent } from './containers/activity-profile
 import { ActivityProfileRoutingModule } from './activity-profile-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfilePagesModule } from '../profile-pages.module';
 import { RouterModule } from '@angular/router';
 import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
@@ -19,12 +18,14 @@ import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrappe
 import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
 import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
+import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
 
 @NgModule({
   declarations: [ActivityProfileContainerComponent],
   imports: [
     CommonModule,
-    SharedModule,
     RouterModule,
     ProfilePagesModule,
     ActivityProfileRoutingModule,
@@ -39,7 +40,10 @@ import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.compon
     HtmlWrapperComponent,
     PageMenuComponent,
     SpinnerComponent,
-    SdgIconComponent
+    SdgIconComponent,
+    TranslateModule,
+    MenuItemDirective,
+    MenuItemActiveDirective
   ]
 })
 export class ActivityProfileModule {}

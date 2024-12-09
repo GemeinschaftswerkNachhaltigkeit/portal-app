@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrgaProfileRoutingModule } from './orga-profile-routing.module';
 import { ProfilePagesModule } from '../profile-pages.module';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,6 +29,9 @@ import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrappe
 import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
 import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
+import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,6 @@ import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.compon
   ],
   imports: [
     CommonModule,
-    SharedModule,
     ProfilePagesModule,
     OrgaProfileRoutingModule,
     MatButtonModule,
@@ -61,7 +62,10 @@ import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.compon
     HtmlWrapperComponent,
     PageMenuComponent,
     SpinnerComponent,
-    SdgIconComponent
+    SdgIconComponent,
+    TranslateModule,
+    MenuItemDirective,
+    MenuItemActiveDirective
   ]
 })
 export class OrgaProfileModule {}

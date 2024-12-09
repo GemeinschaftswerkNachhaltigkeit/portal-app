@@ -12,7 +12,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { NgxTiptapModule } from 'ngx-tiptap';
-import { SharedModule } from '../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MasterDataFormComponent } from './components/master-data-form/master-data-form.component';
 import { MatInputModule } from '@angular/material/input';
@@ -60,7 +59,6 @@ import { FormStepDescriptionComponent } from '../shared/components/wizard/form-s
     MatInputModule,
     MatStepperModule,
     TranslateModule,
-    SharedModule,
     DropzoneModule,
     MatCheckboxModule,
     MatDatepickerModule,

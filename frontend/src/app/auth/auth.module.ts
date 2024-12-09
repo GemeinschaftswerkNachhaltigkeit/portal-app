@@ -25,7 +25,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AuthGuardWithLoginCheck } from './guard/auth-guard-login-check.service';
 import { EmailVerifySuccessPageComponent } from './email-verify-success-page/email-verify-success-page.component';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
 import { AuthenticatedExcludingRolesDirective } from './directives/authenticated-excluding-roles.directive';
 import { WithOrgaDirective } from './directives/with-orga.directive';
 import { WithoutOrgaDirective } from './directives/without-orga.directive';
@@ -54,7 +53,6 @@ export function storageFactory(): OAuthStorage {
   ],
   imports: [
     CommonModule,
-    SharedModule,
     OAuthModule.forRoot(), // OAuthModuleConfig is provided via OAuthModuleConfigService
     TranslateModule.forChild({
       extend: true

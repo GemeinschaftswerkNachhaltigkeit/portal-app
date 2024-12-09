@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './containers/calendar/calendar.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { CalendarLayoutComponent } from './components/calendar-layout/calendar-layout.component';
-import { SharedModule } from '../shared/shared.module';
 import { SearchControlsComponent } from './components/search-controls/search-controls.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +23,7 @@ import { ContentWrapperComponent } from '../shared/components/layout/content-wra
 import { SpinnerComponent } from '../shared/components/base/spinner.component';
 import { SecondaryFiltersComponent } from '../shared/components/form/filters/secondary-filters.component';
 import { FilterModalButtonComponent } from '../shared/components/form/filters/filter-modal-button.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { FilterModalButtonComponent } from '../shared/components/form/filters/fi
   imports: [
     CommonModule,
     EventsRoutingModule,
-    SharedModule,
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -54,7 +53,8 @@ import { FilterModalButtonComponent } from '../shared/components/form/filters/fi
     ContentWrapperComponent,
     SpinnerComponent,
     SecondaryFiltersComponent,
-    FilterModalButtonComponent
+    FilterModalButtonComponent,
+    TranslateModule
   ]
 })
 export class EventsModule {}

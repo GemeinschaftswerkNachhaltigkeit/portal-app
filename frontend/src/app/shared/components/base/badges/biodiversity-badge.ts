@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared/shared.module';
 import Organisation from 'src/app/shared/models/organisation';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 
@@ -49,7 +48,7 @@ import { DirectusService } from 'src/app/shared/services/directus.service';
     </a>
   `,
   standalone: true,
-  imports: [CommonModule, SharedModule, TranslateModule]
+  imports: [CommonModule, TranslateModule]
 })
 export class BiodiversityBadgeComponent {
   @Input() organisation?: Organisation;

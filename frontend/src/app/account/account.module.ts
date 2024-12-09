@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
 import { AccountRoutingModule } from './account-routing.module';
-import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { AccountLayoutComponent } from './components/account-layout/account-layout.component';
 import { OrganisationSubscriptionsComponent } from './containers/organisation-subscriptions/organisation-subscriptions.component';
@@ -54,6 +53,9 @@ import { ContentWrapperComponent } from '../shared/components/layout/content-wra
 import { SpinnerComponent } from '../shared/components/base/spinner.component';
 import { InfoCardComponent } from '../shared/components/cards/info-card.component';
 import { FormFieldErrorComponent } from '../shared/components/form/form-field-error/form-field-error.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MenuItemDirective } from '../shared/components/layout/page-menu/menu-item.directive';
+import { MenuItemActiveDirective } from '../shared/components/layout/page-menu/menu-item-active.directive';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,6 @@ import { FormFieldErrorComponent } from '../shared/components/form/form-field-er
   ],
   imports: [
     CommonModule,
-    SharedModule,
     MarketplaceModule,
     AuthModule,
     AccountRoutingModule,
@@ -113,7 +114,10 @@ import { FormFieldErrorComponent } from '../shared/components/form/form-field-er
     ContentWrapperComponent,
     SpinnerComponent,
     InfoCardComponent,
-    FormFieldErrorComponent
+    FormFieldErrorComponent,
+    TranslateModule,
+    MenuItemDirective,
+    MenuItemActiveDirective
   ]
 })
 export class AccountModule {}

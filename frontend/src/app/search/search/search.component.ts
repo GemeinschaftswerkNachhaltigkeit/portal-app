@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SearchHeaderComponent } from '../components/search-header/search-header.component';
 import { SearchService, Type } from '../data/search.service';
 import { TypeFilterComponent } from '../components/type-filter/type-filter.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ResultsHeadingComponent } from '../components/results-heading/results-heading.component';
 import { OrgaCardComponent } from 'src/app/shared/components/cards/orga-card/orga-card.component';
 import { EventCardComponent } from 'src/app/shared/components/cards/event-card/event-card.component';
@@ -24,7 +23,6 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
   standalone: true,
   imports: [
     CommonModule,
-    SharedModule,
     SearchHeaderComponent,
     TypeFilterComponent,
     ResultsHeadingComponent,
