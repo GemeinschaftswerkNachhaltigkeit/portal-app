@@ -1,0 +1,94 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { MarketplaceItemAnimation } from 'src/app/shared/components/animations/marketplace-item-animation';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+
+@Component({
+  selector: 'app-marketplace-item-details-layout',
+  animations: [MarketplaceItemAnimation],
+  standalone: true,
+  imports: [CommonModule, ContentWrapperComponent],
+  template: `
+    <app-content-wrapper size="xl" [mobileNoMargin]="true">
+      <div class="profile" @slideIn>
+        <main id="main-container">
+          <section class="breadcrumbs">
+            <ng-content select="[breadcrumbs]"></ng-content>
+          </section>
+          <header class="header">
+            <section class="hero">
+              <ng-content select="[hero]"></ng-content>
+            </section>
+          </header>
+          <section class="body">
+            <div class="content">
+              <ng-content select="[content]"></ng-content>
+            </div>
+          </section>
+        </main>
+        <aside id="sidebar" class="sidebar">
+          <ng-content select="[sidebar]"></ng-content>
+        </aside>
+      </div>
+    </app-content-wrapper>
+  `,
+  styles: `
+    @use 'palette' as *;
+    @use 'theme' as *;
+
+    .profile {
+      display: grid;
+      gap: $spacing-8;
+
+      .breadcrumbs {
+        display: flex;
+        align-items: center;
+        padding: $spacing-1 $spacing-8;
+      }
+
+      .header {
+        display: grid;
+        gap: $spacing-4;
+        background-color: $gray-light;
+        padding: $spacing-11 $spacing-8 $spacing-4 $spacing-8;
+      }
+
+      .body {
+        display: grid;
+        background-color: $gray-light;
+        padding: $spacing-4 $spacing-8 $spacing-20 $spacing-8;
+
+        .content {
+          display: grid;
+          gap: $spacing-12;
+        }
+      }
+
+      .sidebar {
+        padding: 0 $spacing-8;
+      }
+    }
+
+    @media screen and (min-width: $breakpoint-mobile-menu) {
+      .profile {
+        display: grid;
+        grid-template-columns: 1fr minmax(300px, 400px);
+        .breadcrumbs {
+          padding: $spacing-2 0;
+        }
+        .header {
+          padding: $spacing-11 $spacing-30 $spacing-4 $spacing-30;
+        }
+        .body {
+          display: grid;
+          position: relative;
+          padding: $spacing-4 $spacing-30 $spacing-20 $spacing-30;
+        }
+        .sidebar {
+          margin-top: 4rem;
+        }
+      }
+    }
+  `
+})
+export class MarketplaceItemDetailsLayoutComponent {}

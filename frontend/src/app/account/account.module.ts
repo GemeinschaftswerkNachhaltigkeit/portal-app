@@ -56,6 +56,7 @@ import { FormFieldErrorComponent } from '../shared/components/form/form-field-er
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuItemDirective } from '../shared/components/layout/page-menu/menu-item.directive';
 import { MenuItemActiveDirective } from '../shared/components/layout/page-menu/menu-item-active.directive';
+import { CardComponent } from '../marketplace/components/card.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { MenuItemActiveDirective } from '../shared/components/layout/page-menu/m
     FormFieldErrorComponent,
     TranslateModule,
     MenuItemDirective,
-    MenuItemActiveDirective
+    MenuItemActiveDirective,
+    CardComponent
   ]
 })
 export class AccountModule {}
