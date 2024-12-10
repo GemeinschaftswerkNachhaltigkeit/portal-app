@@ -127,24 +127,28 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
           </div>
         </div>
 
-        <div class="field">
-          <!-- date -->
+        @if (form.get('endUntil')) {
+          <div class="field">
+            <!-- date -->
 
-          <mat-form-field appearance="outline">
-            <mat-label> {{ 'forms.labels.expireDate' | translate }}</mat-label>
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ 'forms.labels.expireDate' | translate }}</mat-label
+              >
 
-            <input
-              matInput
-              [matDatepicker]="picker"
-              formControlName="endUntil"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="endUntil"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        }
       </div>
     </ng-container>
   `,

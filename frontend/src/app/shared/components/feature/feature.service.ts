@@ -16,7 +16,6 @@ export class FeatureService {
   show$(feature?: string): Observable<boolean> {
     return this.features$.pipe(
       map((features) => {
-        console.log('features', features);
         return this.show(features, feature);
       })
     );

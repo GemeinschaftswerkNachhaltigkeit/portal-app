@@ -1,11 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  NgForm,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { UserRole } from 'src/app/auth/models/user-role';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import {
+  ContactControlsComponent,
+  defaultContactGroupFields
+} from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { LabeledKey } from 'src/app/shared/models/labeled-key';
@@ -18,9 +27,48 @@ import { OfferCategories } from '../../models/offer-categories';
 import { OfferWipDto } from '../../models/offer-wip-dto';
 import { OffersFacadeService } from '../../offers-facade.service';
 import { DateTime } from 'luxon';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
+import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
+import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { ContentControlsComponent } from '../../components/content-controls.component';
+import { FormSectionListComponent } from '../../components/form-section-list.component';
+import { FormSectionComponent } from '../../components/form-section.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { AddressControlsComponent } from 'src/app/shared/components/form/address-control/address-controls.component';
+import { VisibilityControlsComponent } from '../../components/visibility-controls.component';
 
 @Component({
   selector: 'app-offers-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    FormSectionListComponent,
+    FormSectionComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    SpinnerComponent,
+    UploadImageComponent,
+    ContactControlsComponent,
+    ContentWrapperComponent,
+    TranslateModule,
+    ContentControlsComponent,
+    ThematicFocusControlComponent,
+    CategoryControlComponent,
+    MatRadioModule,
+    AddressControlsComponent,
+    VisibilityControlsComponent
+  ],
   templateUrl: './offers-form.component.html',
   styleUrls: ['./offers-form.component.scss']
 })

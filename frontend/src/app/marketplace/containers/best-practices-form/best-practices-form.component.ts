@@ -1,8 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  NgForm,
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import {
+  ContactControlsComponent,
+  defaultContactGroupFields
+} from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
@@ -14,9 +23,42 @@ import { BestPracticesWipDto } from '../../models/best-practices-wip-dto';
 import { environment } from 'src/environments/environment';
 import { MimeTypeEnum } from 'src/app/shared/models/mimetype';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { FormSectionListComponent } from '../../components/form-section-list.component';
+import { FormSectionComponent } from '../../components/form-section.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ContentControlsComponent } from '../../components/content-controls.component';
+import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
+import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
 
 @Component({
   selector: 'app-best-practices-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    FormSectionListComponent,
+    FormSectionComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    SpinnerComponent,
+    UploadImageComponent,
+    ContactControlsComponent,
+    ContentWrapperComponent,
+    TranslateModule,
+    ContentControlsComponent,
+    ThematicFocusControlComponent,
+    CategoryControlComponent
+  ],
   templateUrl: './best-practices-form.component.html',
   styleUrls: ['./best-practices-form.component.scss']
 })

@@ -31,7 +31,6 @@ import { ApiKeyContentComponent } from './containers/developer/api-key-content/a
 import { ApiKeyDocLinkComponent } from './containers/developer/api-key-doc-link/api-key-doc-link.component';
 import { ApiKeyDocLinksComponent } from './containers/developer/api-key-doc-links/api-key-doc-links.component';
 import { OffersComponent } from './containers/offers/offers.component';
-import { MarketplaceModule } from '../marketplace/marketplace.module';
 import { BestPracticesComponent } from './containers/best-practices/best-practices.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
@@ -57,6 +56,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MenuItemDirective } from '../shared/components/layout/page-menu/menu-item.directive';
 import { MenuItemActiveDirective } from '../shared/components/layout/page-menu/menu-item-active.directive';
 import { CardComponent } from '../marketplace/components/card.component';
+import { BestPracticesFormComponent } from '../marketplace/containers/best-practices-form/best-practices-form.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +88,6 @@ import { CardComponent } from '../marketplace/components/card.component';
   ],
   imports: [
     CommonModule,
-    MarketplaceModule,
     AuthModule,
     AccountRoutingModule,
     ReactiveFormsModule,
@@ -119,7 +118,8 @@ import { CardComponent } from '../marketplace/components/card.component';
     TranslateModule,
     MenuItemDirective,
     MenuItemActiveDirective,
-    CardComponent
+    CardComponent,
+    BestPracticesFormComponent
   ]
 })
 export class AccountModule {}

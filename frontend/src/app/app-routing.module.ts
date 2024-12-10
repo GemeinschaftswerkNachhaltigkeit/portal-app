@@ -51,8 +51,8 @@ const routes: Routes = [
   {
     path: 'marketplace',
     loadChildren: () =>
-      import('./marketplace/marketplace.module').then(
-        (m) => m.MarketplaceModule
+      import('./marketplace/marketplace.routes').then(
+        (r) => r.MARKETPLACE_ROUTES
       )
   },
   {

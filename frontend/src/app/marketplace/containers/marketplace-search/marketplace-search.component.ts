@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { TranslateService } from '@ngx-translate/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   AdditionalFiltersModalComponent,
   AdditionalFiltersData
 } from 'src/app/shared/components/form/filters/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters.component';
+import {
+  SecondaryFilters,
+  SecondaryFiltersComponent
+} from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 
@@ -20,9 +23,36 @@ import { MarketplaceTypes } from '../../models/marketplace-type';
 import { OfferCategories } from '../../models/offer-categories';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { expired } from '../../marketplace-utils';
+import { CommonModule } from '@angular/common';
+import { MarketplaceLayoutComponent } from '../../components/marketplace-layout.component';
+import { AddBannerComponent } from '../../components/add-banner.component';
+import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SearchInputComponent } from 'src/app/shared/components/form/search-input.component';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { CardComponent } from '../../components/card.component';
+import { PartnerLinksComponent } from '../../components/partner-links.component';
 
 @Component({
   selector: 'app-marketplace-search',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MarketplaceLayoutComponent,
+    AddBannerComponent,
+    HeadingComponent,
+    MatButtonModule,
+    SecondaryFiltersComponent,
+    SearchInputComponent,
+    FilterModalButtonComponent,
+    CardListComponent,
+    CardComponent,
+    MatPaginatorModule,
+    PartnerLinksComponent,
+    TranslateModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './marketplace-search.component.html',
   styleUrls: ['./marketplace-search.component.scss']
 })

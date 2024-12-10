@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-field-error/form-field-error.component';
@@ -22,7 +23,8 @@ import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.
     ReactiveFormsModule,
     MatFormFieldModule,
     ValidCheckComponent,
-    FormFieldErrorComponent
+    FormFieldErrorComponent,
+    MatInputModule
   ],
   template: `
     <ng-container [formGroup]="form">

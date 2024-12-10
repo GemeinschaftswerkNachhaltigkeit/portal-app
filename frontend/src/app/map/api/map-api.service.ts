@@ -103,7 +103,6 @@ export class MapApiService {
     const danActive$ = this.feature.show$('dan-account');
     const enpoint = type === 'DAN' ? 'activities' : 'organisations';
     const getRequest = (active: boolean) => {
-      console.log('BY ID', active, type);
       if (!active && type === 'DAN') {
         throw new Error('DAN period not active');
       }
