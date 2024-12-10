@@ -100,7 +100,7 @@ public class ImportDanXmlService {
             "activities/act5.jpg",
             "activities/act6.jpg"};
 
-    private final String defaultEmail = "gemeinschaftswerk@nachhaltigkeitsrat.de";
+    private final String defaultEmail = "gemeinschaftswerk-nachhaltigkeit@engagement-global.de";
 
     public Campaigns loadXmlFromFile(MultipartFile xmlFile) {
         ObjectMapper xmlMapper = mappingJackson2XmlHttpMessageConverter.getObjectMapper();
