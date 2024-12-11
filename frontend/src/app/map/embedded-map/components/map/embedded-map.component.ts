@@ -20,11 +20,68 @@ import {
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-embedded-map',
-  templateUrl: './embedded-map.component.html',
-  styleUrls: ['./embedded-map.component.scss']
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule],
+  template: `
+    <div class="map-container" #mapRef>
+      <div class="map-frame">
+        <div id="map"></div>
+      </div>
+      <button class="zoomOutBtn" (click)="zoomOutHandler()">
+        <mat-icon>zoom_out_map</mat-icon>
+      </button>
+    </div>
+  `,
+  styles: `
+    @use 'theme' as *;
+    @use 'palette' as *;
+
+    .map-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .map-frame {
+      height: 100%;
+    }
+
+    #map {
+      height: 100%;
+      font-size: 1.4rem;
+    }
+
+    .zoomOutBtn {
+      width: 33px;
+      height: 33px;
+      border-radius: 4px;
+      position: absolute;
+      right: 10px;
+      bottom: 100px;
+      z-index: 1000;
+      background-color: white;
+      border: 2px solid #aaaaaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      &:hover {
+        background-color: #eeeeee;
+        cursor: pointer;
+      }
+      mat-icon {
+        transform: scale(0.8);
+      }
+    }
+  `
 })
 export class EmbeddedMapComponent
   implements AfterViewInit, OnChanges, OnDestroy
