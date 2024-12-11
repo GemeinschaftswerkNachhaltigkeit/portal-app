@@ -7,7 +7,7 @@ import {
   query
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
@@ -19,9 +19,39 @@ import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
 import { MapZoomService } from 'src/app/map/services/map-zoom.service';
+import { CommonModule } from '@angular/common';
+import { SearchFormComponent } from '../../components/search-form.component';
+import { MapLayoutComponent } from '../../components/map/map-layout.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { MatButtonModule } from '@angular/material/button';
+import { PaginatorWrapperComponent } from '../../components/map/paginator-wrapper.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
+import { MapComponent } from '../../components/map/map.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { DetailsCardComponent } from '../details-card/details-card.component';
 
 @Component({
   selector: 'app-map-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    SearchFormComponent,
+    MapLayoutComponent,
+    SpinnerComponent,
+    AlertComponent,
+    MatButtonModule,
+    PaginatorWrapperComponent,
+    MatPaginatorModule,
+    BaseCardComponent,
+    OrgaBadgesComponent,
+    EventBadgesComponent,
+    MapComponent,
+    TranslateModule,
+    DetailsCardComponent
+  ],
   templateUrl: './map-container.component.html',
   styleUrls: ['./map-container.component.scss'],
   animations: [

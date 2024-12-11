@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { EmbeddedMapFacade } from '../../../map-facade.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { EmbeddedMapLayoutComponent } from '../../components/map/embedded-map-layout.component';
+import { EmbeddedDetailsCardComponent } from '../embedded-details-card/embedded-details-card.component';
+import { EmbeddedMapComponent } from '../../components/map/embedded-map.component';
 
 @Component({
   selector: 'app-embedded-map-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    EmbeddedMapLayoutComponent,
+    EmbeddedDetailsCardComponent,
+    EmbeddedMapComponent
+  ],
   templateUrl: './embedded-map-container.component.html',
   styleUrls: ['./embedded-map-container.component.scss']
 })

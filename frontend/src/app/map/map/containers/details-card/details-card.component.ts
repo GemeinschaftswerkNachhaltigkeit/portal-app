@@ -14,8 +14,45 @@ import {
 import { SharedMarkerService } from '../../../services/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { DetailsLinkComponent } from 'src/app/map/components/details-link.component';
+import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
+import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.component';
+import { TopicComponent } from 'src/app/shared/components/base/topic.component';
+import {
+  ActivitySubscriptionActionComponent,
+  OrganisationSubscriptionActionComponent
+} from 'src/app/shared/components/subscription';
+import { ImageComponent } from 'src/app/shared/components/base/image.component';
 @Component({
   selector: 'app-details-card',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    SpinnerComponent,
+    ExpiredBadgeComponent,
+    DetailsLinkComponent,
+    CardLabelComponent,
+    MatIconModule,
+    CardLogoComponent,
+    OrgaBadgesComponent,
+    ContentRowComponent,
+    SdgIconComponent,
+    TranslateModule,
+    TopicComponent,
+    OrganisationSubscriptionActionComponent,
+    ActivitySubscriptionActionComponent,
+    ImageComponent
+  ],
   templateUrl: './details-card.component.html',
   styleUrls: ['./details-card.component.scss'],
   animations: [
