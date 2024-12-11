@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tab-buttons',
+  standalone: true,
+  imports: [CommonModule],
   styles: [
     `
       @use 'palette' as *;

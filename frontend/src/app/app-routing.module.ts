@@ -69,15 +69,15 @@ const routes: Routes = [
   {
     path: 'organisations/:orgaId',
     loadChildren: () =>
-      import('./profile-pages/orga-profile/orga-profile.module').then(
-        (m) => m.OrgaProfileModule
+      import('./profile-pages/orga-profile/orga-profile.routes').then(
+        (r) => r.ORGA_PROFILE_ROUTES
       )
   },
   {
     path: 'organisations/:orgaId/:activityId',
     loadChildren: () =>
-      import('./profile-pages/activity-profile/activity-profile.module').then(
-        (m) => m.ActivityProfileModule
+      import('./profile-pages/activity-profile/activity-profile.routes').then(
+        (r) => r.ACTIVITY_PROFILE_ROUTES
       )
   },
   {

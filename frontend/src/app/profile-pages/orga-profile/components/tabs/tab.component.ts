@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-tab',
+  standalone: true,
+  imports: [CommonModule],
   styles: [``],
   template: `
     <ng-template #tabTemplate>

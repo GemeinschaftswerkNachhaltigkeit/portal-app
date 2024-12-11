@@ -10,6 +10,9 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { TabComponent } from './tab.component';
+import { CommonModule } from '@angular/common';
+import { TabButtonsComponent } from './tab-buttons.component';
+import { TabButtonComponent } from './tab-button.component';
 
 export type TabButton = {
   key: number;
@@ -18,6 +21,8 @@ export type TabButton = {
 
 @Component({
   selector: 'app-tabs',
+  standalone: true,
+  imports: [CommonModule, TabButtonsComponent, TabButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
