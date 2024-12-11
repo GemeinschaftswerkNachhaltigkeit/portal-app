@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MapContainerComponent } from './containers/map-container/map-container.component';
-import { SharedMapModule } from '../shared-map.module';
 import { MapRoutingModule } from './map-routing.module';
-import { MapLayoutComponent } from './components/map/map-layout/map-layout.component';
-import { SearchFormComponent } from './components/search-form/search-form.component';
+import { MapLayoutComponent } from './components/map/map-layout.component';
+import { SearchFormComponent } from './components/search-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +26,7 @@ import {
   MatDateFormats,
   MAT_DATE_LOCALE
 } from '@angular/material/core';
-import { PaginatorWrapperComponent } from './components/map/paginator-wrapper/paginator-wrapper.component';
+import { PaginatorWrapperComponent } from './components/map/paginator-wrapper.component';
 import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
 import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
 import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
@@ -50,6 +49,8 @@ import { FilterModalButtonComponent } from 'src/app/shared/components/form/filte
 import { FeatureComponent } from 'src/app/shared/components/feature/feature.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { DetailsLinkComponent } from '../components/details-link.component';
+import { MatIconModule } from '@angular/material/icon';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -64,17 +65,9 @@ export const APP_DATE_FORMATS: MatDateFormats = {
 };
 
 @NgModule({
-  declarations: [
-    MapComponent,
-    MapContainerComponent,
-    MapLayoutComponent,
-    SearchFormComponent,
-    PaginatorWrapperComponent,
-    DetailsCardComponent
-  ],
+  declarations: [MapContainerComponent, DetailsCardComponent],
   imports: [
     CommonModule,
-    SharedMapModule,
     MapRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -106,7 +99,13 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     SdgIconComponent,
     FilterModalButtonComponent,
     FeatureComponent,
-    TranslateModule
+    TranslateModule,
+    DetailsLinkComponent,
+    MatIconModule,
+    MapLayoutComponent,
+    PaginatorWrapperComponent,
+    SearchFormComponent,
+    MapComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

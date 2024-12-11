@@ -15,6 +15,7 @@ import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.com
 import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { DetailsLinkComponent } from '../components/details-link.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CardLogoComponent,
     SpinnerComponent,
     SdgIconComponent,
-    TranslateModule
+    TranslateModule,
+    DetailsLinkComponent
   ]
 })
 export class EmbeddedMapModule {}

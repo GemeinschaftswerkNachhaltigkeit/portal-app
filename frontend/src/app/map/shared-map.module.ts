@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { DetailsLinkComponent } from './components/details-link/details-link.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [DetailsLinkComponent],
+  declarations: [],
   imports: [MatIconModule, CommonModule],
-  exports: [DetailsLinkComponent, MatIconModule]
+  exports: [MatIconModule]
 })
 export class SharedMapModule {}

@@ -1,16 +1,192 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AdditionalFiltersModalComponent } from 'src/app/shared/components/form/filters/additional-filters-modal.component';
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
-import { DynamicFilters } from '../../../models/search-filter';
+import { DynamicFilters } from '../../models/search-filter';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { FeatureComponent } from 'src/app/shared/components/feature/feature.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-form',
-  templateUrl: './search-form.component.html',
-  styleUrls: ['./search-form.component.scss']
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FilterModalButtonComponent,
+    FeatureComponent,
+    MatCheckboxModule,
+    TranslateModule
+  ],
+  template: `
+    <div class="form-wrapper map-filters">
+      <div class="left">
+        <form novalidate [formGroup]="searchForm" *ngIf="searchForm">
+          <div class="what-and-where">
+            <div class="field">
+              <mat-form-field appearance="outline" color="primary">
+                <mat-label>{{ 'forms.labels.query' | translate }}</mat-label>
+                <input matInput formControlName="query" />
+              </mat-form-field>
+            </div>
+            <div class="field">
+              <mat-form-field appearance="outline" color="primary">
+                <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
+                <input matInput formControlName="location" />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="filter-button">
+          <app-filter-modal-button
+            [count]="filterCount()"
+            (clear)="clearAll()"
+            (openModal)="openFilters()"
+          ></app-filter-modal-button>
+        </div>
+      </div>
+
+      <div class="right">
+        <app-feature feature="dan-account">
+          <div class="view-type">
+            <mat-checkbox
+              class="dan"
+              color="primary"
+              [(ngModel)]="showDan"
+              (ngModelChange)="viewTypeHandler()"
+              [ngModelOptions]="{ standalone: true }"
+              >{{ 'map.labels.dan' | translate }}</mat-checkbox
+            >
+            <mat-checkbox
+              class="orga"
+              color="primary"
+              [(ngModel)]="showOrga"
+              (ngModelChange)="viewTypeHandler()"
+              [ngModelOptions]="{ standalone: true }"
+              >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+            >
+          </div>
+        </app-feature>
+      </div>
+    </div>
+  `,
+  styles: `
+    @use 'theme' as *;
+
+    :host {
+      height: 100%;
+    }
+
+    .form-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      height: 100%;
+
+      .left {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-2;
+        width: 100%;
+        align-items: center;
+        form {
+          width: 100%;
+        }
+        .what-and-where {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-2;
+          align-items: center;
+          width: 100%;
+        }
+
+        .field {
+          flex-grow: 1;
+          flex-shrink: 1;
+          width: 100%;
+
+          .mat-mdc-form-field {
+            margin-bottom: 0;
+          }
+        }
+
+        .filter-button {
+          display: flex;
+          width: 100%;
+          padding-inline: $spacing-4;
+        }
+      }
+
+      .right {
+        width: 100%;
+        margin: $spacing-2 0;
+
+        .view-type {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: flex-start;
+          gap: $spacing-2;
+        }
+      }
+    }
+
+    @media screen and (min-width: 600px) {
+      .form-wrapper {
+        .left {
+          .what-and-where {
+            flex-direction: row;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 760px) {
+      .form-wrapper {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .left {
+          flex-direction: row;
+          width: auto;
+
+          .what-and-where {
+            flex-direction: row;
+          }
+        }
+
+        .field {
+          flex-grow: 0;
+          flex-shrink: 1;
+          width: auto;
+          min-width: none;
+        }
+
+        .right {
+          width: auto;
+
+          .view-type {
+            justify-content: flex-end;
+            gap: $spacing-4;
+          }
+        }
+      }
+    }
+  `
 })
 export class SearchFormComponent implements OnInit {
   @Input() activeFilters: DynamicFilters | null = {};
