@@ -1,6 +1,7 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-prototype-builtins */
 /*  eslint-disable  @typescript-eslint/no-explicit-any */
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -13,9 +14,15 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl
+  FormControl,
+  ReactiveFormsModule
 } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-field-error/form-field-error.component';
+import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
@@ -24,8 +31,67 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 
 @Component({
   selector: 'app-external-links-form',
-  templateUrl: './external-links-form.component.html',
-  styleUrls: ['./external-links-form.component.scss']
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ValidCheckComponent,
+    FormFieldErrorComponent,
+    TranslateModule
+  ],
+  template: `
+    <form [formGroup]="linksFormGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.url' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.url' | translate"
+          formControlName="url"
+        />
+        <app-valid-check
+          [form]="linksFormGroup"
+          controlName="url"
+        ></app-valid-check>
+        <mat-error>
+          <app-form-field-error
+            [field]="linksFormGroup.get('url')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngFor="let type of socialMediaTypes"
+        appearance="outline"
+      >
+        <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.' + type | translate"
+          [formControlName]="type"
+        />
+
+        <app-valid-check
+          [form]="linksFormGroup"
+          [controlName]="type"
+        ></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="linksFormGroup.get(type)"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  `,
+  styles: `
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 2em;
+    }
+  `
 })
 export class ExternalLinksFormComponent implements OnChanges, OnDestroy {
   linksFormGroup: FormGroup;

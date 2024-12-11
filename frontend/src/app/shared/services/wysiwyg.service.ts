@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
-import Strike from '@tiptap/extension-strike';
-import BulletList from '@tiptap/extension-bullet-list';
-import OrderedList from '@tiptap/extension-ordered-list';
-import ListItem from '@tiptap/extension-list-item';
 import Placeholder from '@tiptap/extension-placeholder';
 import Link from '@tiptap/extension-link';
 
@@ -45,10 +41,6 @@ export class WysiwygService {
       extensions: [
         StarterKit,
         Underline,
-        Strike,
-        BulletList,
-        OrderedList,
-        ListItem,
         Link.configure({
           openOnClick: false
         }),

@@ -14,26 +14,56 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import LocationData from 'src/app/shared/models/location-data';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordinate-lookup.service';
-import { ExternalLinksFormComponent } from '../forms/external-links-form/external-links-form.component';
-import { OrganisationFormComponent } from '../forms/organisation-form/organisation-form.component';
-import { TopicsFormComponent } from '../forms/topics-form/topics-form.component';
-import { UserFormComponent } from '../forms/user-form/user-form.component';
-import { DirectusContentService } from '../../shared/services/directus-content.service';
-import { OrganisationService } from '../services/organisation.service';
+import { ExternalLinksFormComponent } from '../../components/forms/external-links-form.component';
+import { OrganisationFormComponent } from '../../components/forms/organisation-form.component';
+import { TopicsFormComponent } from '../../components/forms/topics-form.component';
+import { UserFormComponent } from '../../components/forms/user-form.component';
+import { DirectusContentService } from '../../../shared/services/directus-content.service';
+import { OrganisationService } from '../../services/organisation.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { Point } from 'geojson';
 import { UserPermission } from 'src/app/auth/models/user-role';
-import { ImageType } from '../../shared/models/image-type';
+import { ImageType } from '../../../shared/models/image-type';
 import {
   StepperOrientation,
   STEPPER_GLOBAL_OPTIONS
 } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
+import { WizardSidebarLayoutComponent } from 'src/app/shared/components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { FormStepDescriptionComponent } from 'src/app/shared/components/wizard/form-step-description.component';
+import { FormFeedbackComponent } from '../../components/form-feedback.component';
+import { AdminWarningComponent } from '../../components/admin-warning.component';
+import { FormStepActionsComponent } from 'src/app/shared/components/wizard/form-step-actions.component';
+import { FormAdvantagesComponent } from 'src/app/shared/components/wizard/form-advatages.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { MatIconModule } from '@angular/material/icon';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-organisation',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatStepperModule,
+    WizardSidebarLayoutComponent,
+    FormStepDescriptionComponent,
+    FormFeedbackComponent,
+    AdminWarningComponent,
+    OrganisationFormComponent,
+    FormStepActionsComponent,
+    FormAdvantagesComponent,
+    TopicsFormComponent,
+    ExternalLinksFormComponent,
+    UserFormComponent,
+    TranslateModule,
+    ContentWrapperComponent,
+    MatIconModule,
+    SpinnerComponent
+  ],
   templateUrl: './organisation.component.html',
   styleUrls: ['./organisation.component.scss'],
   providers: [

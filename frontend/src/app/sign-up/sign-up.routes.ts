@@ -1,14 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from '../auth/guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from '../auth/guard/auth-guard-with-role-check.service';
-import { ContactInviteComponent } from './contact-invite/contact-invite.component';
-import { ImportComponent } from './import/import.component';
-import { OrgaMembershipComponent } from './orga-membership/orga-membership.component';
-import { OrganisationSuccessPageComponent } from './organisation-success-page/organisation-success-page.component';
-import { OrganisationComponent } from './organisation/organisation.component';
+import { ImportComponent } from './containers/import/import.component';
+import { OrgaMembershipComponent } from './containers/orga-membership/orga-membership.component';
+import { OrganisationSuccessPageComponent } from './containers/organisation-success-page/organisation-success-page.component';
+import { OrganisationComponent } from './containers/organisation/organisation.component';
+import { ContactInviteComponent } from './containers/contact-invite/contact-invite.component';
 
-const routes: Routes = [
+export const SIGN_UP_ROUTES: Routes = [
   {
     path: 'organisation/:organisationId',
     component: OrganisationComponent,
@@ -33,9 +32,3 @@ const routes: Routes = [
     canActivate: [AuthGuardWithForcedLogin]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class SignUpRoutingModule {}

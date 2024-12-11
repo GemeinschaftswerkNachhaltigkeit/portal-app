@@ -10,21 +10,92 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ImageType } from '../../../shared/models/image-type';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import {
+  ContactControlsComponent,
+  defaultContactGroupFields
+} from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
+import { CommonModule } from '@angular/common';
+import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ContactControlsComponent,
+    UploadImageComponent,
+    TranslateModule
+  ],
+  template: `
+    <form [formGroup]="userFormGroup">
+      <app-contact-controls formGroupName="contact"></app-contact-controls>
+      <div
+        *ngIf="data && data.randomUniqueId && orgId === null && isActiveStep"
+      >
+        <app-upload-image
+          [config]="dzService.getImageConfig('contact', data.randomUniqueId)"
+          [aspectRatio]="dzService.getAspectRatio('contact')"
+          [labelTranslationKey]="'forms.labels.profileImage'"
+          [disabled]="userFormGroup.disabled"
+          [fileId]="data.contact?.image"
+          style="width: 200px"
+          [errorMsg]="'error.unknown' | translate"
+          [info]="
+            ('sign-up.upload.tooltip' | translate) +
+            ', ' +
+            ('sign-up.upload.logoWidthTooltipExt' | translate)
+          "
+          (delete)="deleteHandler(imageType.CONTACT)"
+        ></app-upload-image>
+      </div>
+      <div *ngIf="data && data.randomUniqueId && orgId !== null">
+        <app-upload-image
+          [config]="
+            dzService.getImageConfig('contact', orgId, data.randomUniqueId)
+          "
+          [aspectRatio]="dzService.getAspectRatio('contact')"
+          [labelTranslationKey]="'forms.labels.profileImage'"
+          [disabled]="userFormGroup.disabled"
+          [fileId]="data.contact?.image"
+          style="width: 200px"
+          [errorMsg]="'error.unknown' | translate"
+          [info]="
+            ('sign-up.upload.tooltip' | translate) +
+            ', ' +
+            ('sign-up.upload.logoWidthTooltipExt' | translate)
+          "
+          (delete)="deleteHandler(imageType.CONTACT)"
+        ></app-upload-image>
+      </div>
+    </form>
+  `,
+  styles: `
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 2em;
+
+      > div {
+        // flex-direction: row;
+        display: flex;
+        gap: 2em;
+        > .mat-form-field {
+          flex: 1 1 50%;
+        }
+      }
+    }
+  `
 })
 export class UserFormComponent implements OnChanges, OnDestroy {
   imageType = ImageType;

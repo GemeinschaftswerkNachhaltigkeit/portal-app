@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { OutlinedIconComponent } from '../base/outlined-icon.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-form-step-actions',
@@ -15,7 +16,8 @@ import { OutlinedIconComponent } from '../base/outlined-icon.component';
     CommonModule,
     MatButtonModule,
     TranslateModule,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    MatStepperModule
   ],
   template: `
     <div class="actions-container">

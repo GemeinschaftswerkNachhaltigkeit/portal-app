@@ -51,3 +51,14 @@ Runs:
 - builds app
 
 `npm run validate`
+
+## Work in Progress
+
+### Transform components to standalone components
+
+- Search Module
+- Map Module
+- Events Module
+- Marketplace Module
+- SignUp Module
+- Shared Components

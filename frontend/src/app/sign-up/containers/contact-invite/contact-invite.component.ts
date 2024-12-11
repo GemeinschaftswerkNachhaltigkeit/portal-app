@@ -1,13 +1,29 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { environment } from 'src/environments/environment';
-import { ContactInviteService } from '../services/contact-invite.service';
-import { DirectusContentService } from '../../shared/services/directus-content.service';
+import { ContactInviteService } from '../../services/contact-invite.service';
+import { CommonModule } from '@angular/common';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { MatIconModule } from '@angular/material/icon';
+import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-contact-invite',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ContentWrapperComponent,
+    MatIconModule,
+    HtmlWrapperComponent,
+    TranslateModule,
+    MatButtonModule,
+    SpinnerComponent
+  ],
   templateUrl: './contact-invite.component.html',
   styleUrls: ['./contact-invite.component.scss']
 })

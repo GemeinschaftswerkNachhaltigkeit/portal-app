@@ -8,11 +8,12 @@ import {
   SignUpOrgContent
 } from 'src/app/shared/services/directus-content.service';
 import { HtmlWrapperComponent } from '../base/html-wrapper.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form-advatages',
   standalone: true,
-  imports: [CommonModule, HtmlWrapperComponent],
+  imports: [CommonModule, HtmlWrapperComponent, MatIconModule],
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="bg-blue-light">
@@ -53,14 +54,6 @@ import { HtmlWrapperComponent } from '../base/html-wrapper.component';
         display: flex;
         align-items: center;
         font-size: 1.2rem;
-      }
-
-      ul li:before {
-        font-family: 'Material Icons', sans-serif;
-        content: '\e876';
-        font-weight: bold;
-        font-size: 2em;
-        padding-right: 0.25em;
       }
     }
 

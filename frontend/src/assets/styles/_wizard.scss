@@ -164,3 +164,11 @@
 .mat-stepper-horizontal {
   overflow: hidden;
 }
+
+.advatages-content-wrapper ul li:before {
+  font-family: 'Material Icons', sans-serif;
+  content: '\e876';
+  font-weight: bold;
+  font-size: 2em;
+  padding-right: 0.25em;
+}

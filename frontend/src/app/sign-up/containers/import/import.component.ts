@@ -6,12 +6,25 @@ import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { environment } from 'src/environments/environment';
-import { DirectusContentService } from '../../shared/services/directus-content.service';
-import { ImportDescisionService } from '../services/import-descision.service';
-import { OrganisationService } from '../services/organisation.service';
+import { DirectusContentService } from '../../../shared/services/directus-content.service';
+import { ImportDescisionService } from '../../services/import-descision.service';
+import { OrganisationService } from '../../services/organisation.service';
+import { CommonModule } from '@angular/common';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
+import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-import',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ContentWrapperComponent,
+    HtmlWrapperComponent,
+    MatButtonModule,
+    TranslateModule
+  ],
   templateUrl: './import.component.html',
   styleUrls: ['./import.component.scss']
 })
