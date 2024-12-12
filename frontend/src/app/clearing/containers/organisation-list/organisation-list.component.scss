@@ -8,6 +8,12 @@ $text-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   height: 100%;
 }
 
+.content-wrapper {
+  min-height: calc(100vh - #{$top-nav-height} - 88px - 64px);
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -42,8 +48,7 @@ $text-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
   flex-direction: column;
   gap: $spacing-4;
   justify-content: space-between;
-  //height: 100%;
-
+  flex-grow: 1; //height: 100%;
   .cards {
     display: grid;
     grid-template-columns: 1fr;

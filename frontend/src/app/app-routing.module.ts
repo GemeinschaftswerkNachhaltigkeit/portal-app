@@ -94,7 +94,7 @@ const routes: Routes = [
   {
     path: 'clearing',
     loadChildren: () =>
-      import('./clearing/clearing.module').then((m) => m.ClearingModule),
+      import('./clearing/clearing.routes').then((r) => r.CLEARING_ROUTES),
     canActivate: [AuthGuardWithForcedLogin, AuthGuardWithRoleCheck],
     data: {
       roles: [UserPermission.RNE_ADMIN]

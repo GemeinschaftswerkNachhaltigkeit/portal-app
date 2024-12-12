@@ -1,8 +1,12 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import {
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavModule
+} from '@angular/material/sidenav';
 import {
   MessageInputDialogComponent,
   MessageInput
@@ -14,13 +18,41 @@ import {
   PageQuerParams
 } from 'src/app/shared/models/paging';
 
-import { Feedback } from '../models/feedback';
-import { ClearingService } from '../services/clearing.service';
+import { Feedback } from '../../models/feedback';
+import { ClearingService } from '../../services/clearing.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
+import { DuplicateComponent } from '../../components/duplicate.component';
+import { FeedbackHistoryComponent } from '../../components/feedback-history.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { OrganisationCardComponent } from '../../components/organisation-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 type SidebarContentType = 'duplicates' | 'feedback';
 
 @Component({
   selector: 'app-organisation-list',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatSidenavContainer,
+    MatButtonModule,
+    OutlinedIconComponent,
+    DuplicateComponent,
+    FeedbackHistoryComponent,
+    ContentWrapperComponent,
+    MatSlideToggle,
+    MatIconModule,
+    MatMenuModule,
+    OrganisationCardComponent,
+    MatPaginatorModule,
+    TranslateModule,
+    MatSidenavModule
+  ],
   templateUrl: './organisation-list.component.html',
   styleUrls: ['./organisation-list.component.scss']
 })
