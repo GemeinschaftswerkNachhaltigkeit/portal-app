@@ -88,7 +88,7 @@ const routes: Routes = [
   },
   {
     path: 'dan',
-    loadChildren: () => import('./dan/dan.module').then((m) => m.DanModule),
+    loadChildren: () => import('./dan/dan.routes').then((r) => r.DAN_ROUTES),
     canActivate: [AuthGuardWithLoginCheck, AuthGuardWithoutOrga]
   },
   {

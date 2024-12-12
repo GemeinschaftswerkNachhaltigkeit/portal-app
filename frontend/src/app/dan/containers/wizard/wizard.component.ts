@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   debounceTime,
   map,
@@ -14,14 +14,19 @@ import { environment } from 'src/environments/environment';
 
 import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordinate-lookup.service';
 import LocationData from 'src/app/shared/models/location-data';
-import { MatStepper } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { ImageType } from 'src/app/shared/models/image-type';
 import { ActivityService } from 'src/app/shared/services/activity.service';
-import { MasterDataFormComponent } from '../../components/master-data-form/master-data-form.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MasterDataFormComponent } from '../../components/master-data-form.component';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { ActivityType } from 'src/app/shared/models/activity-type';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -35,10 +40,50 @@ import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { SocialMediaType } from 'src/app/shared/models/social-media-type';
 import { DirectusContentService } from 'src/app/shared/services/directus-content.service';
 import { SavedService } from 'src/app/shared/services/saved.service';
-import { ImageMode } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import {
+  ImageMode,
+  UploadImageComponent
+} from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { CommonModule } from '@angular/common';
+import { WizardSidebarLayoutComponent } from 'src/app/shared/components/wizard/wizard-sidebar-layout/wizard-sidebar-layout.component';
+import { TitleWithContentComponent } from 'src/app/shared/components/base/title-with-text.component';
+import { TopicsFormComponent } from '../../components/topics-form.component';
+import { ExternalLinksFormComponent } from '../../components/external-links-form.component';
+import { ImagesFormComponent } from '../../components/images-form.component';
+import { ActionsComponent } from '../../components/actions.component';
+import { FormAdvantagesComponent } from 'src/app/shared/components/wizard/form-advatages.component';
+import { ContactControlsComponent } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-wizard',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatStepperModule,
+    WizardSidebarLayoutComponent,
+    TitleWithContentComponent,
+    MasterDataFormComponent,
+    TopicsFormComponent,
+    ExternalLinksFormComponent,
+    ImagesFormComponent,
+    ActionsComponent,
+    ReactiveFormsModule,
+    FormAdvantagesComponent,
+    ContactControlsComponent,
+    UploadImageComponent,
+    HtmlWrapperComponent,
+    SpinnerComponent,
+    ContentWrapperComponent,
+    TranslateModule,
+    MatButtonModule,
+    RouterModule,
+    MatIconModule
+  ],
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.scss']
 })

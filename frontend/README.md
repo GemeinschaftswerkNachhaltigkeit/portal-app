@@ -61,4 +61,5 @@ Runs:
 - Events Module
 - Marketplace Module
 - SignUp Module
+- Profiles Module
 - Shared Components
