@@ -63,4 +63,6 @@ Runs:
 - SignUp Module
 - Profiles Module
 - DAN Module
+- Activity Module
+- Admin Module
 - Shared Components

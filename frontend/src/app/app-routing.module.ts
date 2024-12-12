@@ -28,8 +28,8 @@ const routes: Routes = [
   {
     path: 'administration',
     loadChildren: () =>
-      import('./administration/administration.module').then(
-        (m) => m.AdministrationModule
+      import('./administration/administration.routes').then(
+        (r) => r.ADMIN_ROUTES
       )
   },
   {

@@ -1,14 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { DynamicFilters } from 'src/app/map/models/search-filter';
 import Organisation from 'src/app/shared/models/organisation';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { environment } from 'src/environments/environment';
 import { OrgaFacadeService } from '../../orga-facade.service';
+import { CommonModule } from '@angular/common';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { HeaderComponent } from 'src/app/shared/components/layout/header.component';
+import { FiltersComponent } from '../../components/filters.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-orgas-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ContentWrapperComponent,
+    HeaderComponent,
+    FiltersComponent,
+    AlertComponent,
+    SpinnerComponent,
+    TranslateModule,
+    BaseCardComponent,
+    MatIconModule,
+    MatPaginatorModule,
+    CardListComponent,
+    MatTooltipModule
+  ],
   templateUrl: './orgas-container.component.html',
   styleUrls: ['./orgas-container.component.scss']
 })

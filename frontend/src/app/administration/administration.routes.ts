@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from '../auth/guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from '../auth/guard/auth-guard-with-role-check.service';
 import { UserPermission } from '../auth/models/user-role';
 
-const routes: Routes = [
+export const ADMIN_ROUTES: Routes = [
   {
     path: '',
     redirectTo: 'organisations',
@@ -13,8 +12,8 @@ const routes: Routes = [
   {
     path: 'organisations',
     loadChildren: () =>
-      import('./organisations/organisations.module').then(
-        (m) => m.OrganisationsModule
+      import('./organisations/organisations.routes').then(
+        (r) => r.ORGANISATIONS_ROUTES
       ),
     canActivate: [AuthGuardWithForcedLogin, AuthGuardWithRoleCheck],
     data: {
@@ -22,9 +21,3 @@ const routes: Routes = [
     }
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class AdministrationRoutingModule {}
