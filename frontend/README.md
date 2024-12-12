@@ -62,4 +62,5 @@ Runs:
 - Marketplace Module
 - SignUp Module
 - Profiles Module
+- DAN Module
 - Shared Components
