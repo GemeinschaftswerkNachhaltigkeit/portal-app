@@ -1,7 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { ApiKeyDocLinksComponent } from './api-key-doc-links/api-key-doc-links.component';
+import { ApiKeyDocLinkComponent } from './api-key-doc-link/api-key-doc-link.component';
+import { ApiKeyComponent } from './api-key.component';
 
 @Component({
   selector: 'app-developer',
+  standalone: true,
+  imports: [
+    CommonModule,
+    TranslateModule,
+    PageWithHeaderLayoutComponent,
+    ApiKeyDocLinksComponent,
+    ApiKeyDocLinkComponent,
+    ApiKeyComponent
+  ],
   templateUrl: './developer.component.html',
   styleUrls: ['./developer.component.scss']
 })

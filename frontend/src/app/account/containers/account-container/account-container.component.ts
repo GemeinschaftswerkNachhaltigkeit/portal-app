@@ -1,14 +1,34 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { OrganisationService } from 'src/app/sign-up/services/organisation.service';
 import { OrgaFacadeService } from 'src/app/profile-pages/orga-profile/orga-facade.service';
 import { AccountFacadeService } from '../../account-facade.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { CommonModule } from '@angular/common';
+import { AccountLayoutComponent } from '../../components/account-layout.component';
+import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
+import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
+import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthModule } from 'src/app/auth/auth.module';
+import { NewBadgeComponent } from 'src/app/shared/components/base/badges/new-badge.component';
 
 @Component({
   selector: 'app-account-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AccountLayoutComponent,
+    PageMenuComponent,
+    MenuItemActiveDirective,
+    MenuItemDirective,
+    RouterModule,
+    TranslateModule,
+    AuthModule,
+    NewBadgeComponent
+  ],
   templateUrl: './account-container.component.html',
   styleUrls: ['./account-container.component.scss']
 })

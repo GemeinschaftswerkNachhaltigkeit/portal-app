@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
-import { AccountRoutingModule } from './account-routing.module';
 import { MatButtonModule } from '@angular/material/button';
-import { AccountLayoutComponent } from './components/account-layout/account-layout.component';
+import { AccountLayoutComponent } from './components/account-layout.component';
 import { OrganisationSubscriptionsComponent } from './containers/organisation-subscriptions/organisation-subscriptions.component';
 import { ActivitySubscriptionsComponent } from './containers/activity-subscriptions/activity-subscriptions.component';
 import { MyDataComponent } from './containers/my-data/my-data.component';
-import { MyDataFormComponent } from './components/my-data-form/my-data-form.component';
+import { MyDataFormComponent } from './components/my-data-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ActivitiesComponent } from './containers/activities/activities.component';
@@ -16,25 +15,19 @@ import { MyOrganisationComponent } from './containers/my-organisation/my-organis
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthModule } from '../auth/auth.module';
-import { NotificationComponent } from './containers/notifications/notifications.component';
-import { NotifiacationSuccessComponent } from './components/notifiacation-success/notifiacation-success.component';
+import { NotifiacationSuccessComponent } from './components/notifiacation-success.component';
 import { OrgaUserFormComponent } from './containers/my-organisation/orga-user-form/orga-user-form.component';
 import { MatSelectModule } from '@angular/material/select';
-import { OrgaUserListComponent } from './components/orga-user-list/orga-user-list.component';
-import { OrgaUserListEntryComponent } from './components/orga-user-list-entry/orga-user-list-entry.component';
-import { OrgaUserListStatusComponent } from './components/orga-user-list-status/orga-user-list-status.component';
-import { OrgaUserListHeaderComponent } from './components/orga-user-list-header/orga-user-list-header.component';
+import { OrgaUserListComponent } from './components/orga-user-list.component';
+import { OrgaUserListEntryComponent } from './components/orga-user-list-entry.component';
+import { OrgaUserListStatusComponent } from './components/orga-user-list-status.component';
+import { OrgaUserListHeaderComponent } from './components/orga-user-list-header.component';
 import { HomeComponent } from './containers/home/home.component';
 import { DeveloperComponent } from './containers/developer/developer.component';
-import { ApiKeyComponent } from './containers/developer/api-key/api-key.component';
-import { ApiKeyContentComponent } from './containers/developer/api-key-content/api-key-content.component';
-import { ApiKeyDocLinkComponent } from './containers/developer/api-key-doc-link/api-key-doc-link.component';
-import { ApiKeyDocLinksComponent } from './containers/developer/api-key-doc-links/api-key-doc-links.component';
 import { OffersComponent } from './containers/offers/offers.component';
 import { BestPracticesComponent } from './containers/best-practices/best-practices.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
-import { DanHelpModalComponent } from './containers/dan-activities/dan-help-modal/dan-help-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeadingComponent } from '../shared/components/base/heading.component';
 import { OutlinedIconComponent } from '../shared/components/base/outlined-icon.component';
@@ -57,39 +50,12 @@ import { MenuItemDirective } from '../shared/components/layout/page-menu/menu-it
 import { MenuItemActiveDirective } from '../shared/components/layout/page-menu/menu-item-active.directive';
 import { CardComponent } from '../marketplace/components/card.component';
 import { BestPracticesFormComponent } from '../marketplace/containers/best-practices-form/best-practices-form.component';
+import { NotificationComponent } from './containers/notifications.component';
 
 @NgModule({
-  declarations: [
-    AccountContainerComponent,
-    AccountLayoutComponent,
-    OrganisationSubscriptionsComponent,
-    ActivitySubscriptionsComponent,
-    MyDataComponent,
-    MyDataFormComponent,
-    ActivitiesComponent,
-    MyOrganisationComponent,
-    NotificationComponent,
-    NotifiacationSuccessComponent,
-    OrgaUserFormComponent,
-    OrgaUserListComponent,
-    OrgaUserListEntryComponent,
-    OrgaUserListStatusComponent,
-    OrgaUserListHeaderComponent,
-    HomeComponent,
-    DeveloperComponent,
-    ApiKeyComponent,
-    ApiKeyContentComponent,
-    ApiKeyDocLinksComponent,
-    ApiKeyDocLinkComponent,
-    OffersComponent,
-    BestPracticesComponent,
-    DanActivitiesComponent,
-    DanHelpModalComponent
-  ],
   imports: [
     CommonModule,
     AuthModule,
-    AccountRoutingModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
@@ -119,7 +85,27 @@ import { BestPracticesFormComponent } from '../marketplace/containers/best-pract
     MenuItemDirective,
     MenuItemActiveDirective,
     CardComponent,
-    BestPracticesFormComponent
+    BestPracticesFormComponent,
+    AccountLayoutComponent,
+    MyDataFormComponent,
+    NotifiacationSuccessComponent,
+    OrgaUserListComponent,
+    OrgaUserListEntryComponent,
+    OrgaUserListHeaderComponent,
+    OrgaUserListStatusComponent,
+    AccountContainerComponent,
+    ActivitiesComponent,
+    ActivitySubscriptionsComponent,
+    BestPracticesComponent,
+    DanActivitiesComponent,
+    DeveloperComponent,
+    HomeComponent,
+    MyDataComponent,
+    MyOrganisationComponent,
+    OffersComponent,
+    OrgaUserFormComponent,
+    OrganisationSubscriptionsComponent,
+    NotificationComponent
   ]
 })
 export class AccountModule {}

@@ -28,7 +28,7 @@
       >
       </app-organisation-subscription-action>
       <app-activity-subscription-action
-        *ngIf="card.isActivity(type)"
+        *ngIf="card.isActivity(type) || card.isDan(type)"
         [small]="true"
         [activity]="utils.asActivity(entity)"
       >

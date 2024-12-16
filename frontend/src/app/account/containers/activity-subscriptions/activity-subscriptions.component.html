@@ -16,7 +16,7 @@
         <ng-container *ngFor="let activity of activities">
           <app-base-card
             [entity]="activity"
-            [type]="activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'"
+            [type]="activity.activityType === 'DAN' ? 'DAN' : ''"
             [bookmarked]="true"
             (cardClicked)="openActivity(activity)"
           >

@@ -1,10 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NotificationPageComponent } from 'src/app/shared/components/layout/notification-page/notification-page.component';
 
 @Component({
   selector: 'app-notifiacation-success',
-  templateUrl: './notifiacation-success.component.html',
-  styleUrls: ['./notifiacation-success.component.scss']
+  standalone: true,
+  imports: [CommonModule, NotificationPageComponent, TranslateModule],
+  template: `
+    <app-notification-page
+      *ngIf="isValidType()"
+      [title]="getTitle() | translate"
+      [content]="getContent() | translate"
+      [icon]="getIcon()"
+      [buttonText]="'btn.goToApp'"
+      (continue)="close()"
+    >
+    </app-notification-page>
+  `
 })
 export class NotifiacationSuccessComponent {
   type: string;

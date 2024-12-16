@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: () =>
-      import('./account/account.module').then((m) => m.AccountModule)
+      import('./account/account.routes').then((r) => r.ACCOUNT_ROUTES)
   },
   {
     path: 'administration',

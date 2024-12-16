@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import Activity from 'src/app/shared/models/actvitiy';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
@@ -9,10 +9,42 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DanHelpModalComponent } from './dan-help-modal/dan-help-modal.component';
+import { DanHelpModalComponent } from './dan-help-modal.component';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
+import { CharCountComponent } from 'src/app/shared/components/base/char-count.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { ActionComponent } from 'src/app/shared/components/base/action.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-dan-activities',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    OutlinedIconComponent,
+    CharCountComponent,
+    TranslateModule,
+    SpinnerComponent,
+    ListWithHeadingLayoutComponent,
+    CardListComponent,
+    BaseCardComponent,
+    MatPaginatorModule,
+    AlertComponent,
+    ActionComponent,
+    MatIconModule,
+    DanHelpModalComponent,
+    MatTooltipModule
+  ],
   templateUrl: './dan-activities.component.html',
   styleUrls: ['./dan-activities.component.scss']
 })

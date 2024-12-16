@@ -65,4 +65,5 @@ Runs:
 - DAN Module
 - Activity Module
 - Admin Module
+- Clearing Module
 - Shared Components

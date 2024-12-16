@@ -1,17 +1,45 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { TranslateModule } from '@ngx-translate/core';
+import { CardComponent } from 'src/app/marketplace/components/card.component';
 import { expired } from 'src/app/marketplace/marketplace-utils';
 import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { OfferWipDto } from 'src/app/marketplace/models/offer-wip-dto';
 import { Status } from 'src/app/marketplace/models/status';
 import { OffersFacadeService } from 'src/app/marketplace/offers-facade.service';
+import { CharCountComponent } from 'src/app/shared/components/base/char-count.component';
+import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-offers',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    TranslateModule,
+    MatButtonModule,
+    CharCountComponent,
+    SpinnerComponent,
+    ListWithHeadingLayoutComponent,
+    CardListComponent,
+    CardComponent,
+    MatPaginatorModule,
+    MatIconModule,
+    MatMenuModule,
+    OutlinedIconComponent
+  ],
   templateUrl: './offers.component.html',
   styleUrls: ['./offers.component.scss']
 })

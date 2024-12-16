@@ -3,9 +3,24 @@ import { SubscriptionFacadeService } from 'src/app/shared/components/subscriptio
 import Activity from 'src/app/shared/models/actvitiy';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
 
 @Component({
   selector: 'app-activity-subscriptions',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    TranslateModule,
+    SpinnerComponent,
+    CardListComponent,
+    BaseCardComponent
+  ],
   templateUrl: './activity-subscriptions.component.html',
   styleUrls: ['./activity-subscriptions.component.scss']
 })

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotifiacationFacadeService } from '../../notification-facade.service';
+import { NotifiacationFacadeService } from '../notification-facade.service';
+import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.scss']
+  standalone: true,
+  imports: [CommonModule, SpinnerComponent],
+  template: ` <app-spinner></app-spinner> `
 })
 export class NotificationComponent implements OnInit {
   constructor(

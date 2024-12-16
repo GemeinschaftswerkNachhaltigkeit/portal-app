@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { MyOrganisationComponent } from './containers/my-organisation/my-organisation.component';
 import { AccountContainerComponent } from './containers/account-container/account-container.component';
 import { ActivitiesComponent } from './containers/activities/activities.component';
 import { ActivitySubscriptionsComponent } from './containers/activity-subscriptions/activity-subscriptions.component';
 import { MyDataComponent } from './containers/my-data/my-data.component';
 import { OrganisationSubscriptionsComponent } from './containers/organisation-subscriptions/organisation-subscriptions.component';
-import { NotificationComponent } from './containers/notifications/notifications.component';
 import { AuthGuardWithForcedLogin } from '../auth/guard/auth-guard-with-forced-login.service';
-import { NotifiacationSuccessComponent } from './components/notifiacation-success/notifiacation-success.component';
+import { NotifiacationSuccessComponent } from './components/notifiacation-success.component';
 import { AuthGuardWithRoleCheck } from '../auth/guard/auth-guard-with-role-check.service';
 import { UserPermission } from '../auth/models/user-role';
 import { HomeComponent } from './containers/home/home.component';
@@ -18,8 +16,9 @@ import { BestPracticesComponent } from './containers/best-practices/best-practic
 import { AuthGuardWithOrga } from '../auth/guard/auth-guard-with-orga.service';
 import { DanActivitiesComponent } from './containers/dan-activities/dan-activities.component';
 import { AuthGuardWithoutOrga } from '../auth/guard/auth-guard-without-orga.service';
+import { NotificationComponent } from './containers/notifications.component';
 
-const routes: Routes = [
+export const ACCOUNT_ROUTES: Routes = [
   {
     path: '',
     component: AccountContainerComponent,
@@ -126,9 +125,3 @@ const routes: Routes = [
     ]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class AccountRoutingModule {}
