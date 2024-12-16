@@ -18,7 +18,7 @@ import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-i
 import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
 import { OrgaUserFormComponent } from './orga-user-form/orga-user-form.component';
 import { OrgaUserListComponent } from '../../components/orga-user-list.component';
-import { AuthModule } from 'src/app/auth/auth.module';
+import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
 
 @Component({
   selector: 'app-my-organisation',
@@ -34,7 +34,7 @@ import { AuthModule } from 'src/app/auth/auth.module';
     BaseCardComponent,
     OrgaUserFormComponent,
     OrgaUserListComponent,
-    AuthModule
+    AuthenticatedDirective
   ],
   templateUrl: './my-organisation.component.html',
   styleUrls: ['./my-organisation.component.scss']

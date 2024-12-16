@@ -19,15 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthGuardWithForcedLogin } from './guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from './guard/auth-guard-with-role-check.service';
-import { AuthenticatedDirective } from './directives/authenticated.directive';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthGuardWithLoginCheck } from './guard/auth-guard-login-check.service';
-import { EmailVerifySuccessPageComponent } from './email-verify-success-page/email-verify-success-page.component';
 import { RouterModule } from '@angular/router';
-import { AuthenticatedExcludingRolesDirective } from './directives/authenticated-excluding-roles.directive';
-import { WithOrgaDirective } from './directives/with-orga.directive';
-import { WithoutOrgaDirective } from './directives/without-orga.directive';
 import { NotificationPageComponent } from '../shared/components/layout/notification-page/notification-page.component';
 
 // We need a factory, since localStorage is not available during AOT build time.
@@ -38,19 +33,6 @@ export function storageFactory(): OAuthStorage {
 }
 
 @NgModule({
-  declarations: [
-    AuthenticatedDirective,
-    AuthenticatedExcludingRolesDirective,
-    WithOrgaDirective,
-    WithoutOrgaDirective,
-    EmailVerifySuccessPageComponent
-  ],
-  exports: [
-    AuthenticatedDirective,
-    AuthenticatedExcludingRolesDirective,
-    WithOrgaDirective,
-    WithoutOrgaDirective
-  ],
   imports: [
     CommonModule,
     OAuthModule.forRoot(), // OAuthModuleConfig is provided via OAuthModuleConfigService

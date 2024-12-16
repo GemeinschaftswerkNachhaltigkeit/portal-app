@@ -4,7 +4,7 @@ import { AuthGuardWithForcedLogin } from './auth/guard/auth-guard-with-forced-lo
 import { AuthGuardWithRoleCheck } from './auth/guard/auth-guard-with-role-check.service';
 import { UserPermission } from './auth/models/user-role';
 import { AuthGuardWithLoginCheck } from './auth/guard/auth-guard-login-check.service';
-import { EmailVerifySuccessPageComponent } from './auth/email-verify-success-page/email-verify-success-page.component';
+import { EmailVerifySuccessPageComponent } from './auth/containers/email-verify-success-page/email-verify-success-page.component';
 import { ErrorPageComponent } from './shared/components/layout/error-page.component';
 import { NotFoundPageComponent } from './shared/components/layout/not-found-page/not-found-page.component';
 import { AuthGuardWithoutOrga } from './auth/guard/auth-guard-without-orga.service';

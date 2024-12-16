@@ -12,8 +12,11 @@ import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/pa
 import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
 import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthModule } from 'src/app/auth/auth.module';
 import { NewBadgeComponent } from 'src/app/shared/components/base/badges/new-badge.component';
+import { AuthenticatedExcludingRolesDirective } from 'src/app/auth/directives/authenticated-excluding-roles.directive';
+import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
+import { WithOrgaDirective } from 'src/app/auth/directives/with-orga.directive';
+import { WithoutOrgaDirective } from 'src/app/auth/directives/without-orga.directive';
 
 @Component({
   selector: 'app-account-container',
@@ -26,7 +29,10 @@ import { NewBadgeComponent } from 'src/app/shared/components/base/badges/new-bad
     MenuItemDirective,
     RouterModule,
     TranslateModule,
-    AuthModule,
+    AuthenticatedExcludingRolesDirective,
+    AuthenticatedDirective,
+    WithOrgaDirective,
+    WithoutOrgaDirective,
     NewBadgeComponent
   ],
   templateUrl: './account-container.component.html',

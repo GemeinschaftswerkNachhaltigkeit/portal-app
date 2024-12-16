@@ -4,7 +4,8 @@ import { UserRole } from '../models/user-role';
 import { AuthService } from '../services/auth.service';
 
 @Directive({
-  selector: '[appAuthenticatedExcludingRoles]'
+  selector: '[appAuthenticatedExcludingRoles]',
+  standalone: true
 })
 export class AuthenticatedExcludingRolesDirective {
   @Input() set appAuthenticatedExcludingRoles(roles: string[]) {

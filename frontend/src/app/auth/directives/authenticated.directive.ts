@@ -10,7 +10,8 @@ import { AuthService } from '../services/auth.service';
 import { UserRole } from '../models/user-role';
 
 @Directive({
-  selector: '[appAuthenticated]'
+  selector: '[appAuthenticated]',
+  standalone: true
 })
 export class AuthenticatedDirective implements OnInit {
   @Input() set appAuthenticated(roles: string[] | string | null) {

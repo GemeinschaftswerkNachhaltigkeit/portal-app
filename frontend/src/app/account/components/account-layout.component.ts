@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AuthModule } from 'src/app/auth/auth.module';
+import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 
 @Component({
   selector: 'app-account-layout',
   standalone: true,
-  imports: [CommonModule, ContentWrapperComponent, AuthModule],
+  imports: [CommonModule, ContentWrapperComponent, AuthenticatedDirective],
   template: `
     <app-content-wrapper size="xl">
       <div class="profile">

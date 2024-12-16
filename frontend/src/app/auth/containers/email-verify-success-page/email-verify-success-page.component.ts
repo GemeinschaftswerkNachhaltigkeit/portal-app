@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { EmailVerifySuccessService } from '../services/email-verify-success.service';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { EmailVerifySuccessService } from '../../services/email-verify-success.service';
+import { CommonModule } from '@angular/common';
+import { NotificationPageComponent } from 'src/app/shared/components/layout/notification-page/notification-page.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-email-verify-success-page',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NotificationPageComponent,
+    TranslateModule,
+    RouterModule
+  ],
   templateUrl: './email-verify-success-page.component.html',
   styleUrls: ['./email-verify-success-page.component.scss']
 })

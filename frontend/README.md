@@ -66,4 +66,5 @@ Runs:
 - Activity Module
 - Admin Module
 - Clearing Module
+- Account Module
 - Shared Components
