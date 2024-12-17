@@ -8,7 +8,6 @@ import {
 } from '@angular/animations';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuEntryComponent } from './menu-entry.component';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -29,7 +28,6 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     CdkAccordionModule,
     MenuEntryComponent,
     MatIconModule

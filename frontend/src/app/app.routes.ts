@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from './auth/guard/auth-guard-with-forced-login.service';
 import { AuthGuardWithRoleCheck } from './auth/guard/auth-guard-with-role-check.service';
 import { UserPermission } from './auth/models/user-role';
@@ -9,7 +8,18 @@ import { ErrorPageComponent } from './shared/components/layout/error-page.compon
 import { NotFoundPageComponent } from './shared/components/layout/not-found-page/not-found-page.component';
 import { AuthGuardWithoutOrga } from './auth/guard/auth-guard-without-orga.service';
 
-const routes: Routes = [
+// @NgModule({
+//   imports: [
+//     RouterModule.forRoot(routes, {
+//       onSameUrlNavigation: 'reload',
+//       bindToComponentInputs: true
+//     })
+//   ],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule {}
+
+export const APP_ROUTES: Routes = [
   {
     path: '',
     redirectTo: 'map',
@@ -113,14 +123,3 @@ const routes: Routes = [
     component: NotFoundPageComponent
   }
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      onSameUrlNavigation: 'reload',
-      bindToComponentInputs: true
-    })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}
