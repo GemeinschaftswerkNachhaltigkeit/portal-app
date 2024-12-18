@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuardWithForcedLogin } from './auth/guard/auth-guard-with-forced-login.service';
-import { AuthGuardWithRoleCheck } from './auth/guard/auth-guard-with-role-check.service';
+import { VerifyRoles } from './auth/guard/verify-roles';
 import { UserPermission } from './auth/models/user-role';
 import { AuthGuardWithLoginCheck } from './auth/guard/auth-guard-login-check.service';
 import { EmailVerifySuccessPageComponent } from './auth/containers/email-verify-success-page/email-verify-success-page.component';
@@ -105,7 +105,7 @@ export const APP_ROUTES: Routes = [
     path: 'clearing',
     loadChildren: () =>
       import('./clearing/clearing.routes').then((r) => r.CLEARING_ROUTES),
-    canActivate: [AuthGuardWithForcedLogin, AuthGuardWithRoleCheck],
+    canActivate: [AuthGuardWithForcedLogin, VerifyRoles],
     data: {
       roles: [UserPermission.RNE_ADMIN]
     }

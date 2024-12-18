@@ -34,9 +34,9 @@ export class BestPracticesFacadeService {
     private confirm: ConfirmationService
   ) {}
 
-  get tokenRefresh$(): Observable<unknown> {
-    return this.auth.tokenRefresh$;
-  }
+  // get tokenRefresh$(): Observable<unknown> {
+  //   return this.auth.tokenRefresh$;
+  // }
 
   get bestPracticesWip$(): Observable<BestPracticesWipDto | null> {
     return this.bestPracticesState.bestPracticesWip$;

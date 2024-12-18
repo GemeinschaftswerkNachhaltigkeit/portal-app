@@ -31,11 +31,14 @@ export class SubscriptionFacadeService {
     private auth: AuthService,
     private loader: LoadingService
   ) {
-    this.auth.isDoneLoading$.subscribe((ready: boolean) => {
-      if (ready && this.auth.isLoggedIn()) {
-        this.initSubscriptionLists();
-      }
-    });
+    // this.auth.isDoneLoading$.subscribe((ready: boolean) => {
+    //   if (ready && this.auth.isLoggedIn()) {
+    //     this.initSubscriptionLists();
+    //   }
+    // });
+    if (this.auth.isLoggedIn()) {
+      this.initSubscriptionLists();
+    }
     router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe(() => {

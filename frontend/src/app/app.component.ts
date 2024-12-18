@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
       });
 
     this.authService
-      .runInitialLoginSequence()
+      .init()
       .catch((error: string) =>
         console.error('Error initializing OAuth module.', error)
       );

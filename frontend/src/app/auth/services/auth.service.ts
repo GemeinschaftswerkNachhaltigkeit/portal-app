@@ -1,5 +1,5 @@
 /*  eslint-disable @typescript-eslint/no-explicit-any */
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   UserPermission,
   UserPermissionRoleMap,
@@ -7,79 +7,27 @@ import {
 } from '../models/user-role';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  combineLatest,
-  Observable,
-  ReplaySubject,
-  Subject
-} from 'rxjs';
-import { AuthConfigService } from './auth-config.service';
-import { AuthConfig, OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
-import { filter, map } from 'rxjs/operators';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { filter } from 'rxjs/operators';
+import { getAuthConfig } from 'src/app/app-auth.config';
+import { environment } from 'src/environments/environment';
 import { EmailVerifySuccessService } from './email-verify-success.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticatedSubject$ = new BehaviorSubject<boolean>(false);
-  public isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
-
-  private tokenRefreshSubject$ = new Subject();
-  public tokenRefresh$ = this.tokenRefreshSubject$.asObservable();
-
-  private isDoneLoadingSubject$ = new ReplaySubject<boolean>();
-  public isDoneLoading$ = this.isDoneLoadingSubject$.asObservable();
-
   private silentRefreshErrors = 0;
+  oauthService = inject(OAuthService);
+  router = inject(Router);
+  emailVerifyService = inject(EmailVerifySuccessService);
 
-  constructor(
-    private oauthService: OAuthService,
-    private router: Router,
-    private emailVerifyService: EmailVerifySuccessService,
-    @Inject(AuthConfigService) private config: AuthConfig
-  ) {
-    oauthService.configure(config);
+  constructor() {
+    this.oauthService.configure(getAuthConfig(environment));
 
-    // Useful for debugging:
-    // todo: remove when everything works
     this.oauthService.events.subscribe((event) => {
-      if (event instanceof OAuthErrorEvent) {
-        // console.error('OAuthErrorEvent Object:', event);
-      } else {
-        if (event.type === 'token_refreshed') {
-          this.tokenRefreshSubject$.next(null);
-        }
-      }
+      console.log('EVENTS', event);
     });
-
-    // This is tricky, as it might cause race conditions (where access_token is set in another
-    // tab before everything is said and done there.
-    // TODO: Improve this setup. See: https://github.com/jeroenheijmans/sample-angular-oauth2-oidc-with-auth-guards/issues/2
-    window.addEventListener('storage', (event) => {
-      // The `key` is `null` if the event was caused by `.clear()`
-      if (event.key !== 'access_token' && event.key !== null) {
-        return;
-      }
-
-      console.warn(
-        'Noticed changes to access_token (most likely from another tab), updating isAuthenticated'
-      );
-      this.isAuthenticatedSubject$.next(
-        this.oauthService.hasValidAccessToken()
-      );
-    });
-
-    this.oauthService.events.subscribe(() => {
-      this.isAuthenticatedSubject$.next(
-        this.oauthService.hasValidAccessToken()
-      );
-    });
-
-    this.oauthService.events
-      .pipe(filter((e) => ['token_received'].includes(e.type)))
-      .subscribe(() => this.oauthService.loadUserProfile());
 
     this.oauthService.events
       .pipe(
@@ -87,138 +35,57 @@ export class AuthService {
       )
       .subscribe(() => this.navigateToLoginPage());
 
+    this.oauthService.events
+      .pipe(filter((e) => e.type === 'token_received'))
+      .subscribe(() => this.oauthService.loadUserProfile());
+
     this.oauthService.setupAutomaticSilentRefresh();
   }
 
+  public isAuthenticated() {
+    return this.oauthService.hasValidAccessToken();
+  }
+
   private navigateToLoginPage(): void {
-    // TODO: Remember current URL
     this.router
       .navigateByUrl('/')
       .catch((error) => console.error('Error navigating to "/".', error));
   }
 
-  /**
-   * Publishes `true` if and only if (a) all the asynchronous initial
-   * login calls have completed or errorred, and (b) the user ended up
-   * being authenticated.
-   *
-   * In essence, it combines:
-   *
-   * - the latest known state of whether the user is authorized
-   * - whether the ajax calls for initial log in have all been done
-   */
-  public canActivateProtectedRoutes$: Observable<boolean> = combineLatest([
-    this.isAuthenticated$,
-    this.isDoneLoading$
-  ]).pipe(map((values) => values.every((b) => b)));
+  public async init(): Promise<void> {
+    await this.oauthService.loadDiscoveryDocumentAndTryLogin({
+      onTokenReceived: (t) => {
+        console.log('Token received', t);
+      }
+    });
 
-  public runInitialLoginSequence(): Promise<void> {
-    // 0. LOAD CONFIG:
-    // First we have to check to see how the IdServer is
-    // currently configured:
-    return (
-      this.oauthService
-        .loadDiscoveryDocument()
-        // 1. HASH LOGIN:
-        // Try to log in via hash fragment after redirect back
-        // from IdServer from initImplicitFlow:
-        .then(() => this.oauthService.tryLogin())
+    const state = this.oauthService.state;
 
-        .then(() => {
-          if (this.oauthService.hasValidAccessToken()) {
-            return Promise.resolve();
-          }
+    // if (state) {
+    //   this.router.navigate([decodeURIComponent(state)]);
+    // }
 
-          // 2. SILENT LOGIN:
-          // Try to log in via a refresh because then we can prevent
-          // needing to redirect the user:
-          return this.oauthService
-            .silentRefresh()
-            .then(() => {
-              return Promise.resolve();
-            })
-            .catch((result) => {
-              // Subset of situations from https://openid.net/specs/openid-connect-core-1_0.html#AuthError
-              // Only the ones where it's reasonably sure that sending the
-              // user to the IdServer will help.
-              const errorResponsesRequiringUserInteraction = [
-                'interaction_required',
-                'login_required',
-                'account_selection_required',
-                'consent_required'
-              ];
+    if (state && state !== 'undefined' && state !== 'null') {
+      let stateUrl = state;
+      if (!stateUrl.startsWith('/')) {
+        stateUrl = decodeURIComponent(stateUrl);
+      }
 
-              console.log('Auth error', result);
-
-              if (
-                result &&
-                result.reason &&
-                errorResponsesRequiringUserInteraction.indexOf(
-                  result.reason.params.error
-                ) >= 0
-              ) {
-                // 3. ASK FOR LOGIN:
-                // At this point we know for sure that we have to ask the
-                // user to log in, so we redirect them to the IdServer to
-                // enter credentials.
-                //
-                // Enable this to ALWAYS force a user to login.
-                // this.login();
-
-                // if the token is expired and we cannot log, we logout to delete the token from the local storage
-                // to prevent it from being sent to the backend. An expired token will always return 401 even if the
-                // endpoint is unsecured.
-                if (!this.oauthService.hasValidAccessToken()) {
-                  console.log('Invalid token');
-                  this.oauthService.logOut(true);
-                }
-
-                // Instead, we'll now do this:
-                // console.warn(
-                //   'User interaction is needed to log in, we will wait for the user to manually log in.'
-                // );
-                return Promise.resolve();
-              } else {
-                console.log('Unhandled error - Log out');
-                this.oauthService.logOut(true);
-              }
-
-              // We can't handle the truth, just pass on the problem to the
-              // next handler.
-              return Promise.reject(result);
-            });
-        })
-        .then(() => {
-          // Check for the strings 'undefined' and 'null' just to be sure. Our current
-          // login(...) should never have this, but in case someone ever calls
-          // initImplicitFlow(undefined | null) this could happen.
-
-          if (
-            this.oauthService.state &&
-            this.oauthService.state !== 'undefined' &&
-            this.oauthService.state !== 'null'
-          ) {
-            let stateUrl = this.oauthService.state;
-            if (!stateUrl.startsWith('/')) {
-              stateUrl = decodeURIComponent(stateUrl);
-            }
-
-            stateUrl = this.emailVerifyService.getEmailVerifySuccessStateUrl(
-              stateUrl,
-              this.getUser()
-            );
-            this.router
-              .navigateByUrl(stateUrl)
-              .catch((error) =>
-                console.error(`Error navigating to url: [${stateUrl}]`, error)
-              );
-          }
-        })
-        .finally(() => this.isDoneLoadingSubject$.next(true))
-    );
+      stateUrl = this.emailVerifyService.getEmailVerifySuccessStateUrl(
+        stateUrl,
+        this.getUser()
+      );
+      this.router
+        .navigateByUrl(stateUrl)
+        .catch((error) =>
+          console.error(`Error navigating to url: [${stateUrl}]`, error)
+        );
+    }
   }
 
   public login(targetUrl?: string): void {
+    console.log('Login', targetUrl);
+    console.log('Login', this.router.url);
     this.oauthService.initLoginFlow(targetUrl || this.router.url);
   }
 
@@ -290,12 +157,12 @@ export class AuthService {
     }
   }
 
-  public isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     return this.oauthService.hasValidAccessToken();
   }
 
   logout(): void {
-    this.oauthService.logOut();
+    this.oauthService.revokeTokenAndLogout();
   }
 
   getUser(): User | undefined {
@@ -365,15 +232,9 @@ export class AuthService {
 
   async refreshToken(): Promise<void> {
     try {
-      if (this.silentRefreshErrors < 5) {
-        await this.oauthService.silentRefresh();
-      } else {
-        await this.oauthService.refreshToken();
-      }
-    } catch (e) {
-      console.error(e);
-      this.silentRefreshErrors++;
       await this.oauthService.refreshToken();
+    } catch (error) {
+      console.error(error);
     }
   }
 

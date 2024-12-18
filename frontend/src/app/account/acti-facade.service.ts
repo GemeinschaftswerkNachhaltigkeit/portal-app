@@ -126,6 +126,7 @@ export class ActiFacadeService {
 
   createActivity(dan = false, danActivity = false) {
     const user = this.auth.getUser();
+    console.log('user', user);
     this.activitiesApi
       .createActivity(user, dan, danActivity)
       .pipe(take(1))

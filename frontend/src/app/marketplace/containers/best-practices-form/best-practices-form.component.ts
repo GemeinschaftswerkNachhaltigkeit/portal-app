@@ -37,6 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ContentControlsComponent } from '../../components/content-controls.component';
 import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
 import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-best-practices-form',
@@ -75,7 +76,6 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
   debounce$ = new Subject();
   loading$ = this.loader.isLoading$('best-practice-loading');
   bestPracticesWip$ = this.bestPracticesFacade.bestPracticesWip$;
-  tokenRefresh$ = this.bestPracticesFacade.tokenRefresh$;
   orgId: number | null = null;
   uuid: string | null = null;
   token = this.bestPracticesFacade.token;
@@ -89,7 +89,8 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private loader: LoadingService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private auth: AuthService
   ) {
     this.formGroup = fb.group({
       bestPractiseCategory: fb.control<string>('SUSTAINABILITY_REPORTING', {
@@ -121,9 +122,6 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
     this.orgId = routeParams['orgId'];
     this.uuid = routeParams['uuid'];
     this.isModification = this.route.snapshot.queryParams['edit'] === 'true';
-    this.tokenRefresh$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      this.token = this.bestPracticesFacade.token;
-    });
     this.handleSaveOnChange();
     this.handleIntialValues();
     this.loadExistingBestPracticeWip();
@@ -147,7 +145,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
         ','
       ),
       headers: {
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.auth.getAccessToken()}`
       }
     };
   }

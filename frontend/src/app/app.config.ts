@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { APP_ROUTES } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -10,7 +10,7 @@ import {
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
-import { authConfig, restrictedUrls } from './app-auth.config';
+import { restrictedUrls } from './app-auth.config';
 import {
   MAT_DATE_LOCALE,
   DateAdapter,
@@ -22,9 +22,9 @@ import {
   MAT_LUXON_DATE_ADAPTER_OPTIONS
 } from '@angular/material-luxon-adapter';
 import { provideMatomo, withRouter } from 'ngx-matomo-client';
-import { AuthModule } from './auth/auth.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './custom-paginator-intl.service';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,14 +53,17 @@ export const appConfig: ApplicationConfig = {
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
     { provide: Window, useValue: window },
-    provideRouter(APP_ROUTES),
+    provideRouter(APP_ROUTES, withComponentInputBinding()),
+    provideOAuthClient({
+      resourceServer: { sendAccessToken: true, allowedUrls: restrictedUrls }
+    }),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     provideMatomo(
       { trackerUrl: environment.matomoUrl, siteId: environment.matomoSiteId },
       withRouter()
     ),
-    importProvidersFrom(AuthModule.forRoot(authConfig, restrictedUrls)),
+    // importProvidersFrom(AuthModule.forRoot(authConfig, restrictedUrls)),
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'de',

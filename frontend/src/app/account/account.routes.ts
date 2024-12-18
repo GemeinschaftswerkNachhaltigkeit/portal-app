@@ -7,7 +7,7 @@ import { MyDataComponent } from './containers/my-data/my-data.component';
 import { OrganisationSubscriptionsComponent } from './containers/organisation-subscriptions/organisation-subscriptions.component';
 import { AuthGuardWithForcedLogin } from '../auth/guard/auth-guard-with-forced-login.service';
 import { NotifiacationSuccessComponent } from './components/notifiacation-success.component';
-import { AuthGuardWithRoleCheck } from '../auth/guard/auth-guard-with-role-check.service';
+import { VerifyRoles } from '../auth/guard/verify-roles';
 import { UserPermission } from '../auth/models/user-role';
 import { HomeComponent } from './containers/home/home.component';
 import { DeveloperComponent } from './containers/developer/developer.component';
@@ -42,7 +42,7 @@ export const ACCOUNT_ROUTES: Routes = [
       {
         path: 'my-organisation',
         component: MyOrganisationComponent,
-        canActivate: [AuthGuardWithForcedLogin, AuthGuardWithRoleCheck],
+        canActivate: [AuthGuardWithForcedLogin, VerifyRoles],
         data: {
           notRoles: [UserPermission.RNE_ADMIN]
         }
@@ -50,11 +50,7 @@ export const ACCOUNT_ROUTES: Routes = [
       {
         path: 'offers',
         component: OffersComponent,
-        canActivate: [
-          AuthGuardWithForcedLogin,
-          AuthGuardWithRoleCheck,
-          AuthGuardWithOrga
-        ],
+        canActivate: [AuthGuardWithForcedLogin, VerifyRoles, AuthGuardWithOrga],
         data: {
           redirectUrl: ['/', 'account', 'my-organisation'],
           notRoles: [UserPermission.RNE_ADMIN]
@@ -63,11 +59,7 @@ export const ACCOUNT_ROUTES: Routes = [
       {
         path: 'best-practices',
         component: BestPracticesComponent,
-        canActivate: [
-          AuthGuardWithForcedLogin,
-          AuthGuardWithRoleCheck,
-          AuthGuardWithOrga
-        ],
+        canActivate: [AuthGuardWithForcedLogin, VerifyRoles, AuthGuardWithOrga],
         data: {
           redirectUrl: ['/', 'account', 'my-organisation'],
           notRoles: [UserPermission.RNE_ADMIN]
@@ -76,11 +68,7 @@ export const ACCOUNT_ROUTES: Routes = [
       {
         path: 'activities',
         component: ActivitiesComponent,
-        canActivate: [
-          AuthGuardWithForcedLogin,
-          AuthGuardWithRoleCheck,
-          AuthGuardWithOrga
-        ],
+        canActivate: [AuthGuardWithForcedLogin, VerifyRoles, AuthGuardWithOrga],
         data: {
           redirectUrl: ['/', 'account', 'my-organisation'],
           notRoles: [UserPermission.RNE_ADMIN]
@@ -91,7 +79,7 @@ export const ACCOUNT_ROUTES: Routes = [
         component: DanActivitiesComponent,
         canActivate: [
           AuthGuardWithForcedLogin,
-          AuthGuardWithRoleCheck,
+          VerifyRoles,
           AuthGuardWithoutOrga
         ],
         data: {

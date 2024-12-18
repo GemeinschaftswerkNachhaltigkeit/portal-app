@@ -80,7 +80,6 @@ export class OffersFormComponent implements OnInit, OnDestroy {
   debounce$ = new Subject();
   loading$ = this.loader.isLoading$('offer-loading');
   offersWip$ = this.offersFacade.offersWip$;
-  tokenRefresh$ = this.offersFacade.tokenRefresh$;
   orgId: number | null = null;
   uuid: string | null = null;
   token = this.offersFacade.token;
@@ -141,9 +140,6 @@ export class OffersFormComponent implements OnInit, OnDestroy {
     this.orgId = routeParams['orgId'];
     this.uuid = routeParams['uuid'];
     this.isModification = this.route.snapshot.queryParams['edit'] === 'true';
-    this.tokenRefresh$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      this.token = this.offersFacade.token;
-    });
     this.handleAddressState();
     this.handleSaveOnChange();
     this.handleIntialValues();
@@ -186,7 +182,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
         ','
       ),
       headers: {
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.auth.getAccessToken()}`
       }
     };
   }
