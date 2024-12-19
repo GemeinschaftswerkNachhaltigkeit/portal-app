@@ -31,9 +31,11 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   ],
   template: `
     <article class="item">
-      <div class="expired" *ngIf="isExpired()">
-        <app-expired-badge></app-expired-badge>
-      </div>
+      @if (isExpired()) {
+        <div class="expired">
+          <app-expired-badge></app-expired-badge>
+        </div>
+      }
       <div [ngClass]="{ disabled: isExpired() }">
         <app-category [type]="getType()" [category]="category"></app-category>
         <app-heading size="sm" type="h3" color="none">
@@ -56,55 +58,71 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
               {{ 'profile.labels.activityLocation' | translate }}
             </dt>
             <dd class="value">
-              <span *ngIf="profileUtils.addressString(location?.address)">
-                {{ profileUtils.addressString(location?.address) }}
-              </span>
-              <span *ngIf="profileUtils.cityString(location?.address)">
-                {{ profileUtils.cityString(location?.address) }}
-              </span>
-              <span *ngIf="location?.online">
-                {{ 'profile.labels.online' | translate }}
-              </span>
+              @if (profileUtils.addressString(location?.address)) {
+                <span>
+                  {{ profileUtils.addressString(location?.address) }}
+                </span>
+              }
+              @if (profileUtils.cityString(location?.address)) {
+                <span>
+                  {{ profileUtils.cityString(location?.address) }}
+                </span>
+              }
+              @if (location?.online) {
+                <span>
+                  {{ 'profile.labels.online' | translate }}
+                </span>
+              }
             </dd>
           </dl>
         </div>
       </div>
       <aside class="aside" [ngClass]="{ disabled: isExpired() }">
-        <div class="image-wrapper" *ngIf="image">
-          <div class="image" *ngIf="!sdgs">
-            <img [src]="imgService.url(image)" [alt]="title" />
-          </div>
-          <div class="sdgs" *ngIf="!image">
-            <ng-container *ngFor="let sdg of utils.limitedSdgs(sdgs, 3)">
-              <div class="sdg">
-                <app-sdg-icon [goal]="sdg"></app-sdg-icon>
+        @if (image) {
+          <div class="image-wrapper">
+            @if (!sdgs) {
+              <div class="image">
+                <img [src]="imgService.url(image)" [alt]="title" />
               </div>
-            </ng-container>
-            <div class="remaining" *ngIf="utils.remainingSdgs(sdgs, 3).length">
-              +{{ utils.remainingSdgs(sdgs, 3).length }}
-            </div>
+            }
+            @if (!image) {
+              <div class="sdgs">
+                @for (sdg of utils.limitedSdgs(sdgs, 3); track sdg) {
+                  <div class="sdg">
+                    <app-sdg-icon [goal]="sdg"></app-sdg-icon>
+                  </div>
+                }
+                @if (utils.remainingSdgs(sdgs, 3).length) {
+                  <div class="remaining">
+                    +{{ utils.remainingSdgs(sdgs, 3).length }}
+                  </div>
+                }
+              </div>
+            }
           </div>
-        </div>
-        <div class="thematic-focus" *ngIf="thematicFocus?.length">
-          <app-heading type="h4" size="xs" color="none"
-            >{{ 'labels.tags' | translate }}:</app-heading
-          >
-          {{ getThematicFocus() }}
-        </div>
-        <div class="actions">
-          <ng-content></ng-content>
-          <a
-            [routerLink]="openLink"
-            mat-flat-button
-            color="accent"
-            class="open-link"
-          >
-            {{ openTitle | translate }}
-          </a>
-        </div>
-      </aside>
-    </article>
-  `,
+        }
+        @if (thematicFocus?.length) {
+          <div class="thematic-focus">
+            <app-heading type="h4" size="xs" color="none"
+              >{{ 'labels.tags' | translate }}:</app-heading
+              >
+              {{ getThematicFocus() }}
+            </div>
+          }
+          <div class="actions">
+            <ng-content></ng-content>
+            <a
+              [routerLink]="openLink"
+              mat-flat-button
+              color="accent"
+              class="open-link"
+              >
+              {{ openTitle | translate }}
+            </a>
+          </div>
+        </aside>
+      </article>
+    `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

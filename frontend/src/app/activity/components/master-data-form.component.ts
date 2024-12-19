@@ -21,7 +21,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
 import { Subject } from 'rxjs';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,7 +41,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   selector: 'app-master-data-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -58,29 +57,29 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatRadioModule,
     AlertComponent,
     MatCheckboxModule
-  ],
+],
   template: `
     <ng-container [formGroup]="form">
       <!-- name -->
-
+    
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.activityTitle' | translate }}</mat-label>
         <input
           matInput
           [placeholder]="'forms.labels.activityTitle' | translate"
           formControlName="name"
-        />
+          />
         <app-valid-check [form]="form" controlName="name"></app-valid-check>
-
+    
         <mat-error>
           <app-form-field-error
             [field]="form.get('name')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
+    
       <!-- WYSIWYG Input -->
-
+    
       <div
         class="mat-form-field-appearance-outline wysiwyg-form-field"
         [class.ng-invalid]="
@@ -88,39 +87,40 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           (form.get('description')?.dirty || form.get('description')?.touched)
         "
         [class.mat-form-field-disabled]="form.get('description')?.disabled"
-      >
+        >
         <div class="description">
           {{ 'events.texts.wizard.description' | translate }}
         </div>
-        <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
-          <app-tiptap-menu-bar
-            [editor]="editor"
-            [disabled]="form.get('description')?.disabled!"
-          >
-            <span>{{ 'forms.labels.description' | translate }} *</span>
-            <app-char-count
-              counter
-              [count]="currentCharsHtml('description')"
-              [total]="1500"
-            ></app-char-count>
-          </app-tiptap-menu-bar>
-          <tiptap-editor
-            [editor]="editor"
-            formControlName="description"
-          ></tiptap-editor>
-
-          <div class="mat-form-field-subscript-wrapper">
-            <mat-error>
-              <app-form-field-error
-                [field]="form.get('description')"
-              ></app-form-field-error>
-            </mat-error>
+        @if (reload) {
+          <div class="mat-form-field-wrapper tip-tap-wrapper">
+            <app-tiptap-menu-bar
+              [editor]="editor"
+              [disabled]="form.get('description')?.disabled!"
+              >
+              <span>{{ 'forms.labels.description' | translate }} *</span>
+              <app-char-count
+                counter
+                [count]="currentCharsHtml('description')"
+                [total]="1500"
+              ></app-char-count>
+            </app-tiptap-menu-bar>
+            <tiptap-editor
+              [editor]="editor"
+              formControlName="description"
+            ></tiptap-editor>
+            <div class="mat-form-field-subscript-wrapper">
+              <mat-error>
+                <app-form-field-error
+                  [field]="form.get('description')"
+                ></app-form-field-error>
+              </mat-error>
+            </div>
           </div>
-        </div>
+        }
       </div>
-
+    
       <!-- date -->
-
+    
       @if (!isDan) {
         <div class="date-checkbox">
           <mat-checkbox matInput formControlName="permanent">
@@ -137,12 +137,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             matStartDate
             [placeholder]="'forms.labels.start' | translate"
             formControlName="start"
-          />
+            />
           <input
             matEndDate
             [placeholder]="'forms.labels.end' | translate"
             formControlName="end"
-          />
+            />
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -153,16 +153,17 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           <app-form-field-error
             [field]="form.get('start')"
           ></app-form-field-error>
-          <span
-            *ngIf="
-              form.get('start')?.invalid &&
-              form.get('end')?.invalid &&
-              (form.get('start')?.dirty || form.get('start')?.touched) &&
-              (form.get('end')?.dirty || form.get('end')?.touched)
-            "
-            >,
-          </span>
-
+          @if (
+            form.get('start')?.invalid &&
+            form.get('end')?.invalid &&
+            (form.get('start')?.dirty || form.get('start')?.touched) &&
+            (form.get('end')?.dirty || form.get('end')?.touched)
+            ) {
+            <span
+              >,
+            </span>
+          }
+    
           <app-form-field-error
             [field]="form.get('end')"
           ></app-form-field-error>
@@ -170,71 +171,73 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       </mat-form-field>
       <app-feature feature="dan-account">
         @if (!isDan) {
-          <div class="error-wrapper" *ngIf="inDanPeriod">
-            <app-alert
-              color="#009ee3"
-              [title]="'events.titles.inDanPeriod' | translate"
-              [showIcon]="true"
-              bgIcon="eco"
-              fgIcon="check"
-            >
-              <div
+          @if (inDanPeriod) {
+            <div class="error-wrapper">
+              <app-alert
+                color="#009ee3"
+                [title]="'events.titles.inDanPeriod' | translate"
+                [showIcon]="true"
+                bgIcon="eco"
+                fgIcon="check"
+                >
+                <div
                 [innerHTML]="
                   'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
                 "
-              ></div>
-              <div class="date-checkbox">
-                <mat-radio-group
-                  aria-label="Select an option"
-                  formControlName="isDan"
-                >
-                  <div class="radio-options">
-                    <mat-radio-button [value]="'DAN'">
-                      {{
+                ></div>
+                <div class="date-checkbox">
+                  <mat-radio-group
+                    aria-label="Select an option"
+                    formControlName="isDan"
+                    >
+                    <div class="radio-options">
+                      <mat-radio-button [value]="'DAN'">
+                        {{
                         'forms.labels.danOption.yes' | translate
-                      }}</mat-radio-button
-                    >
-                    <mat-radio-button [value]="'EVENT'">
-                      {{
-                        'forms.labels.danOption.no' | translate
-                      }}</mat-radio-button
-                    >
-                  </div>
-                </mat-radio-group>
-              </div>
-            </app-alert>
-            <app-spinner
-              forId="load-coords"
-              [noPadding]="true"
-              [small]="true"
-            ></app-spinner>
-          </div>
-        }
-      </app-feature>
-
-      <!-- Link zur Anmeldung -->
-
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
-        <input
-          matInput
-          [placeholder]="'forms.labels.registerUrl' | translate"
-          formControlName="registerUrl"
-        />
-        <div matSuffix><mat-icon>language</mat-icon></div>
-        <app-valid-check
-          [form]="form"
-          controlName="registerUrl"
-        ></app-valid-check>
-
-        <mat-error>
-          <app-form-field-error
-            [field]="form.get('registerUrl')"
-          ></app-form-field-error>
-        </mat-error>
-      </mat-form-field>
-    </ng-container>
-  `,
+                        }}</mat-radio-button
+                        >
+                        <mat-radio-button [value]="'EVENT'">
+                          {{
+                          'forms.labels.danOption.no' | translate
+                          }}</mat-radio-button
+                          >
+                        </div>
+                      </mat-radio-group>
+                    </div>
+                  </app-alert>
+                  <app-spinner
+                    forId="load-coords"
+                    [noPadding]="true"
+                    [small]="true"
+                  ></app-spinner>
+                </div>
+              }
+            }
+          </app-feature>
+    
+          <!-- Link zur Anmeldung -->
+    
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.registerUrl' | translate"
+              formControlName="registerUrl"
+              />
+            <div matSuffix><mat-icon>language</mat-icon></div>
+            <app-valid-check
+              [form]="form"
+              controlName="registerUrl"
+            ></app-valid-check>
+    
+            <mat-error>
+              <app-form-field-error
+                [field]="form.get('registerUrl')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

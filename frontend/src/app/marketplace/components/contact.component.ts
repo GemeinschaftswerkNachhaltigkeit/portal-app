@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -8,7 +7,7 @@ import { Contact } from 'src/app/shared/models/contact';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, TranslateModule, RouterModule],
+  imports: [MatButtonModule, TranslateModule, RouterModule],
   template: `
     <div class="contact-wrapper">
       <div class="contact-person">
@@ -16,29 +15,32 @@ import { Contact } from 'src/app/shared/models/contact';
           {{ 'marketplace.titles.contactPerson' | translate }}
         </h4>
         <div class="name">{{ getName(contact) }}</div>
-        <button
-          *ngIf="!showContact"
-          class="show-contact-btn"
-          mat-flat-button
-          (click)="toggleShowContact()"
-          [attr.data-track]="type"
-        >
-          {{ 'profile.buttons.contactNow' | translate }}
-        </button>
-        <ng-container *ngIf="showContact"
-          ><div class="info-row">
+        @if (!showContact) {
+          <button
+            class="show-contact-btn"
+            mat-flat-button
+            (click)="toggleShowContact()"
+            [attr.data-track]="type"
+          >
+            {{ 'profile.buttons.contactNow' | translate }}
+          </button>
+        }
+        @if (showContact) {
+          <div class="info-row">
             <h4 class="subtitle">
               {{ 'profile.titles.email' | translate }}
             </h4>
             <p>{{ contact.email }}</p>
           </div>
-          <div class="info-row" *ngIf="contact?.phone">
-            <h4 class="subtitle">
-              {{ 'profile.titles.phone' | translate }}
-            </h4>
-            <p>{{ contact.phone }}</p>
-          </div>
-        </ng-container>
+          @if (contact.phone) {
+            <div class="info-row">
+              <h4 class="subtitle">
+                {{ 'profile.titles.phone' | translate }}
+              </h4>
+              <p>{{ contact.phone }}</p>
+            </div>
+          }
+        }
       </div>
       <div class="orga">
         <div class="info-row no-icon">

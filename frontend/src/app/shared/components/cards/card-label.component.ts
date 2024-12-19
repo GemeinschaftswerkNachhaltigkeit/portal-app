@@ -1,29 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { CardService } from '../../../map/services/card.service';
-import { CommonModule } from '@angular/common';
+
 import { LabelComponent } from '../base/label.component';
 
 @Component({
   selector: 'app-card-label',
   standalone: true,
-  imports: [CommonModule, LabelComponent],
+  imports: [LabelComponent],
   template: `
-    <ng-container *ngIf="(activityTypeLabel || organisationTypeLabel) && type">
-      <ng-container *ngIf="!card.isOrga(type) && activityTypeLabel">
+    @if ((activityTypeLabel || organisationTypeLabel) && type) {
+      @if (!card.isOrga(type) && activityTypeLabel) {
         <app-label
           [color]="dan ? 'blue' : 'green'"
           [limitedWidth]="limitedWidth"
-        >
+          >
           {{ activityTypeLabel }}
         </app-label>
-      </ng-container>
-      <ng-container *ngIf="card.isOrga(type) && organisationTypeLabel">
+      }
+      @if (card.isOrga(type) && organisationTypeLabel) {
         <app-label color="orange" [limitedWidth]="limitedWidth">
           {{ organisationTypeLabel }}
         </app-label>
-      </ng-container>
-    </ng-container>
-  `,
+      }
+    }
+    `,
   styles: `
     :host {
       font-size: 1.2rem;

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
 import { OrganisationStatus } from 'src/app/shared/models/organisation-status';
@@ -7,13 +7,15 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 @Component({
   selector: 'app-form-feedback',
   standalone: true,
-  imports: [CommonModule, OutlinedIconComponent],
+  imports: [OutlinedIconComponent],
   template: `
-    <div *ngIf="showFeedback() && org?.feedbackRequest" class="form-feedback">
-      <app-outlined-icon>help_outline</app-outlined-icon>
-      <span>{{ org?.feedbackRequest }}</span>
-    </div>
-  `,
+    @if (showFeedback() && org?.feedbackRequest) {
+      <div class="form-feedback">
+        <app-outlined-icon>help_outline</app-outlined-icon>
+        <span>{{ org?.feedbackRequest }}</span>
+      </div>
+    }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

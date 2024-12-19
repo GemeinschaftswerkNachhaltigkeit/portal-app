@@ -20,12 +20,12 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DateSelectHeaderComponent } from './date-select-header.component';
 import { EventCalenderEntry } from '../data/events.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-date-select',
   standalone: true,
-  imports: [CommonModule, MatDatepickerModule],
+  imports: [MatDatepickerModule],
   template: `
     <div class="wrapper">
       <mat-calendar

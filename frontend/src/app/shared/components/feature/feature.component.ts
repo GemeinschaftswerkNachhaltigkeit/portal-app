@@ -10,12 +10,12 @@ export type Features = 'menu' | 'dan-account' | 'dan-range';
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container *ngIf="featureService.features$ | async as features">
-      <ng-container *ngIf="featureService.show(features, feature)">
+    @if (featureService.features$ | async; as features) {
+      @if (featureService.show(features, feature)) {
         <ng-content></ng-content>
-      </ng-container>
-    </ng-container>
-  `
+      }
+    }
+    `
 })
 export class FeatureComponent {
   @Input() feature!: Features;

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { FeedbackType } from './feedback.service';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 
 type SnackBarData = {
@@ -12,12 +12,16 @@ type SnackBarData = {
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [MatIconModule],
   template: `
     <div class="feedback">
       <div class="icon">
-        <mat-icon *ngIf="data?.type === 'success'">check</mat-icon>
-        <mat-icon *ngIf="data?.type === 'error'">error</mat-icon>
+        @if (data.type === 'success') {
+          <mat-icon>check</mat-icon>
+        }
+        @if (data.type === 'error') {
+          <mat-icon>error</mat-icon>
+        }
       </div>
       <p>{{ data.msg }}</p>
     </div>

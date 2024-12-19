@@ -21,35 +21,41 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule
   ],
   template: `
-    <ng-container *ngIf="!onlyIcon && !stroked">
+    @if (!onlyIcon && !stroked) {
       <button mat-button (click)="clickHandler()" color="accent">
         <div class="action" [ngClass]="{ small: small }">
-          <app-outlined-icon *ngIf="icon">{{ icon }}</app-outlined-icon>
+          @if (icon) {
+            <app-outlined-icon>{{ icon }}</app-outlined-icon>
+          }
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </div>
       </button>
-    </ng-container>
-    <ng-container *ngIf="!onlyIcon && stroked">
+    }
+    @if (!onlyIcon && stroked) {
       <button mat-stroked-button (click)="clickHandler()" color="accent">
         <div class="action" [ngClass]="{ small: small }">
-          <app-outlined-icon *ngIf="icon">{{ icon }}</app-outlined-icon>
+          @if (icon) {
+            <app-outlined-icon>{{ icon }}</app-outlined-icon>
+          }
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </div>
       </button>
-    </ng-container>
-    <ng-container *ngIf="onlyIcon">
+    }
+    @if (onlyIcon) {
       <button
         [matTooltip]="tooltip"
         mat-icon-button
         (click)="clickHandler()"
         [color]="getColor()"
         [ngClass]="{ small: small, disabled: disabled, toggle: toggle }"
-      >
-        <app-outlined-icon *ngIf="icon">{{ icon }}</app-outlined-icon>
+        >
+        @if (icon) {
+          <app-outlined-icon>{{ icon }}</app-outlined-icon>
+        }
       </button>
-    </ng-container>
+    }
     <ng-template #contentTpl><ng-content></ng-content></ng-template>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

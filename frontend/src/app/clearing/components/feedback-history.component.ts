@@ -14,17 +14,17 @@ import { HeadingComponent } from 'src/app/shared/components/base/heading.compone
         'clearing.titles.feedback' | translate
       }}</app-heading>
       <div class="feedback-list">
-        <ng-container *ngFor="let feedbackEntry of feedback">
+        @for (feedbackEntry of feedback; track feedbackEntry) {
           <div class="feedbackEntry">
             <strong>{{
               feedbackEntry.feedbackRequestSent | date: 'dd.MM.yyyy HH:mm'
             }}</strong>
             {{ feedbackEntry.feedbackRequest }}
           </div>
-        </ng-container>
+        }
       </div>
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

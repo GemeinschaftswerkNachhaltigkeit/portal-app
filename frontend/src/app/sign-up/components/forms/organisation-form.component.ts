@@ -32,7 +32,7 @@ import {
   ImageMode,
   UploadImageComponent
 } from 'src/app/shared/components/form/upload-image/upload-image.component';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-field-error/form-field-error.component';
@@ -47,7 +47,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   selector: 'app-organisation-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -60,37 +59,39 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     UploadImageComponent,
     MatCheckboxModule,
     TranslateModule
-  ],
+],
   template: `
     <form [formGroup]="organisationFormGroup">
       <!--  <p>{{orgId}}</p>
-  <ng-template matStepLabel>Fill out your name</ng-template>-->
+      <ng-template matStepLabel>Fill out your name</ng-template>-->
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.organisationName' | translate }}</mat-label>
         <input
           matInput
           [placeholder]="'forms.labels.organisationName' | translate"
           formControlName="name"
-        />
-
+          />
+    
         <app-valid-check
           [form]="organisationFormGroup"
           controlName="name"
         ></app-valid-check>
-
+    
         <mat-error>
           <app-form-field-error
             [field]="organisationFormGroup.get('name')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
+    
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.organisationType' | translate }}</mat-label>
         <mat-select formControlName="organisationType">
-          <mat-option *ngFor="let orgType of orgTypeOpts" [value]="orgType">
-            {{ 'organisationType.' + orgType | translate }}
-          </mat-option>
+          @for (orgType of orgTypeOpts; track orgType) {
+            <mat-option [value]="orgType">
+              {{ 'organisationType.' + orgType | translate }}
+            </mat-option>
+          }
         </mat-select>
         <mat-error>
           <app-form-field-error
@@ -98,7 +99,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
+    
       <!-- WYSIWYG Input -->
       <div
         class="mat-form-field-appearance-outline wysiwyg-form-field"
@@ -110,15 +111,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         [class.mat-form-field-disabled]="
           organisationFormGroup.get('description')?.disabled
         "
-      >
+        >
         <div class="mat-form-field-wrapper tip-tap-wrapper">
           <app-tiptap-menu-bar
             [editor]="editor"
             [disabled]="organisationFormGroup.get('description')?.disabled!"
             ><span
-              >{{ 'forms.labels.organisationDescription' | translate }} *</span
+            >{{ 'forms.labels.organisationDescription' | translate }} *</span
             >
-
+    
             <app-char-count
               counter
               [count]="currentChars()"
@@ -129,7 +130,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             [editor]="editor"
             formControlName="description"
           ></tiptap-editor>
-
+    
           <div class="mat-form-field-subscript-wrapper">
             <mat-error>
               <app-form-field-error
@@ -139,45 +140,45 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           </div>
         </div>
       </div>
-
-      <div
-        class="file-uploads"
-        *ngIf="org && org.randomUniqueId && isActiveStep"
-      >
-        <app-upload-image
-          [config]="dzService.getImageConfig('logo', org.randomUniqueId)"
-          [aspectRatio]="dzService.getAspectRatio('logo')"
-          [labelTranslationKey]="'forms.labels.organisationLogo'"
-          [disabled]="organisationFormGroup.disabled"
-          [fileId]="org.logo"
-          style="width: 200px"
-          [errorMsg]="'sign-up.upload.error' | translate"
+    
+      @if (org && org.randomUniqueId && isActiveStep) {
+        <div
+          class="file-uploads"
+          >
+          <app-upload-image
+            [config]="dzService.getImageConfig('logo', org.randomUniqueId)"
+            [aspectRatio]="dzService.getAspectRatio('logo')"
+            [labelTranslationKey]="'forms.labels.organisationLogo'"
+            [disabled]="organisationFormGroup.disabled"
+            [fileId]="org.logo"
+            style="width: 200px"
+            [errorMsg]="'sign-up.upload.error' | translate"
           [info]="
             ('sign-up.upload.tooltip' | translate) +
             ', ' +
             ('sign-up.upload.logoWidthTooltipExt' | translate)
           "
-          (delete)="deleteHandler(imageTypes.LOGO)"
-        ></app-upload-image>
-
-        <app-upload-image
-          [imageTools]="true"
-          [imageMode]="organisationFormGroup.get('bannerImageMode')?.value"
-          [config]="dzService.getImageConfig('image', org.randomUniqueId)"
-          [aspectRatio]="dzService.getAspectRatio('banner')"
-          [labelTranslationKey]="'forms.labels.organisationImage'"
-          [disabled]="organisationFormGroup.disabled"
-          [fileId]="org.image"
-          [errorMsg]="'sign-up.upload.error' | translate"
+            (delete)="deleteHandler(imageTypes.LOGO)"
+          ></app-upload-image>
+          <app-upload-image
+            [imageTools]="true"
+            [imageMode]="organisationFormGroup.get('bannerImageMode')?.value"
+            [config]="dzService.getImageConfig('image', org.randomUniqueId)"
+            [aspectRatio]="dzService.getAspectRatio('banner')"
+            [labelTranslationKey]="'forms.labels.organisationImage'"
+            [disabled]="organisationFormGroup.disabled"
+            [fileId]="org.image"
+            [errorMsg]="'sign-up.upload.error' | translate"
           [info]="
             ('sign-up.upload.tooltip' | translate) +
             ', ' +
             ('sign-up.upload.titleImageWidthTooltipExt' | translate)
           "
-          (delete)="deleteHandler(imageTypes.TITLE)"
-          (imageModeChanged)="imageModeHandler($event)"
-        ></app-upload-image>
-      </div>
+            (delete)="deleteHandler(imageTypes.TITLE)"
+            (imageModeChanged)="imageModeHandler($event)"
+          ></app-upload-image>
+        </div>
+      }
       <div>
         <mat-checkbox matInput formControlName="privacyConsent"
           ><span
@@ -188,16 +189,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
                       participationdeclaration: participationDeclarationUrl
                     }
             "
-          ></span
-        ></mat-checkbox>
-        <mat-error>
-          <app-form-field-error
-            [field]="organisationFormGroup.get('privacyConsent')"
-          ></app-form-field-error>
-        </mat-error>
-      </div>
+        ></span
+      ></mat-checkbox>
+      <mat-error>
+        <app-form-field-error
+          [field]="organisationFormGroup.get('privacyConsent')"
+        ></app-form-field-error>
+      </mat-error>
+    </div>
     </form>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

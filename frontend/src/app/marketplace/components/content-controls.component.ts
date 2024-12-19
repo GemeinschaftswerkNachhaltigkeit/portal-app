@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   Inject,
@@ -32,7 +32,6 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
   selector: 'app-content-controls',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -43,7 +42,7 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
     NgxTiptapModule,
     ValidCheckComponent,
     MatDatepickerModule
-  ],
+],
   template: `
     <ng-container [formGroup]="form">
       <div class="fields">
@@ -54,7 +53,7 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
               matInput
               [placeholder]="'forms.labels.title' | translate"
               formControlName="name"
-            />
+              />
             <app-valid-check [form]="form" controlName="name"></app-valid-check>
             <mat-error>
               <app-form-field-error
@@ -69,7 +68,7 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
             ></app-char-count>
           </div>
         </div>
-
+    
         <!-- WYSIWYG Input -->
         <div
           class="mat-form-field-appearance-outline wysiwyg-form-field"
@@ -78,34 +77,35 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
             (form.get('description')?.dirty || form.get('description')?.touched)
           "
           [class.mat-form-field-disabled]="form.get('description')?.disabled"
-        >
-          <div class="mat-form-field-wrapper tip-tap-wrapper" *ngIf="reload">
-            <app-tiptap-menu-bar
-              [editor]="editor"
-              [disabled]="form.get('description')?.disabled!"
-              ><span>{{ 'forms.labels.description' | translate }} *</span>
-
-              <app-char-count
-                counter
-                [count]="currentCharsHtml('description')"
-                [total]="1500"
-              ></app-char-count>
-            </app-tiptap-menu-bar>
-            <tiptap-editor
-              [editor]="editor"
-              formControlName="description"
-            ></tiptap-editor>
-            <div class="char-count"></div>
-            <div class="mat-form-field-subscript-wrapper">
-              <mat-error>
-                <app-form-field-error
-                  [field]="form.get('description')"
-                ></app-form-field-error>
-              </mat-error>
+          >
+          @if (reload) {
+            <div class="mat-form-field-wrapper tip-tap-wrapper">
+              <app-tiptap-menu-bar
+                [editor]="editor"
+                [disabled]="form.get('description')?.disabled!"
+                ><span>{{ 'forms.labels.description' | translate }} *</span>
+                <app-char-count
+                  counter
+                  [count]="currentCharsHtml('description')"
+                  [total]="1500"
+                ></app-char-count>
+              </app-tiptap-menu-bar>
+              <tiptap-editor
+                [editor]="editor"
+                formControlName="description"
+              ></tiptap-editor>
+              <div class="char-count"></div>
+              <div class="mat-form-field-subscript-wrapper">
+                <mat-error>
+                  <app-form-field-error
+                    [field]="form.get('description')"
+                  ></app-form-field-error>
+                </mat-error>
+              </div>
             </div>
-          </div>
+          }
         </div>
-
+    
         <div class="field">
           <mat-form-field appearance="outline">
             <mat-label>{{
@@ -126,32 +126,32 @@ import { WysiwygService } from 'src/app/shared/services/wysiwyg.service';
             ></app-char-count>
           </div>
         </div>
-
+    
         @if (form.get('endUntil')) {
           <div class="field">
             <!-- date -->
-
+    
             <mat-form-field appearance="outline">
               <mat-label>
                 {{ 'forms.labels.expireDate' | translate }}</mat-label
-              >
-
-              <input
-                matInput
-                [matDatepicker]="picker"
-                formControlName="endUntil"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-        }
-      </div>
-    </ng-container>
-  `,
+                >
+    
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="endUntil"
+                  />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          }
+        </div>
+      </ng-container>
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

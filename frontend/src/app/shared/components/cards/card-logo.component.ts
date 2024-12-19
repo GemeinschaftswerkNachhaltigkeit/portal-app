@@ -1,14 +1,16 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { ImgService } from 'src/app/shared/services/img.service';
 
 @Component({
   selector: 'app-card-logo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `<div class="logo">
-    <img *ngIf="logo" class="logo-img" [src]="logo" alt="logo" />
-  </div> `,
+      @if (logo) {
+        <img class="logo-img" [src]="logo" alt="logo" />
+      }
+    </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

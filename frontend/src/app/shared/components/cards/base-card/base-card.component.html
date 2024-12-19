@@ -5,66 +5,74 @@
     notClickable: !clickable,
     draft: draft
   }"
->
+  >
   <div class="active-maker"></div>
-  <div class="expiredBadge" *ngIf="showAsExpired(entity, type)">
-    <app-expired-badge
+  @if (showAsExpired(entity, type)) {
+    <div class="expiredBadge">
+      <app-expired-badge
       [dan]="
         card.isActivity(type) && utils.asActivity(entity).activityType === 'DAN'
       "
-    ></app-expired-badge>
-  </div>
+      ></app-expired-badge>
+    </div>
+  }
   <div
     class="clickable-area"
     [ngClass]="{ expired: showAsExpired(entity, type) }"
     (click)="cardClickHandler()"
   ></div>
   <div class="action">
-    <ng-container *ngIf="!showActions">
-      <app-organisation-subscription-action
-        *ngIf="card.isOrga(type)"
-        [small]="true"
-        [organisation]="utils.asOrga(entity)"
-      >
-      </app-organisation-subscription-action>
-      <app-activity-subscription-action
-        *ngIf="card.isActivity(type) || card.isDan(type)"
-        [small]="true"
-        [activity]="utils.asActivity(entity)"
-      >
-      </app-activity-subscription-action>
-    </ng-container>
-    <ng-container *ngIf="showActions">
+    @if (!showActions) {
+      @if (card.isOrga(type)) {
+        <app-organisation-subscription-action
+          [small]="true"
+          [organisation]="utils.asOrga(entity)"
+          >
+        </app-organisation-subscription-action>
+      }
+      @if (card.isActivity(type) || card.isDan(type)) {
+        <app-activity-subscription-action
+          [small]="true"
+          [activity]="utils.asActivity(entity)"
+          >
+        </app-activity-subscription-action>
+      }
+    }
+    @if (showActions) {
       <ng-content select="[more-actions]"></ng-content>
-      <app-action
-        *ngIf="toggleInitiatiorVisible"
-        [onlyIcon]="true"
-        [icon]="'verified'"
-        [toggle]="true"
-        [toggleValue]="isInitiator"
-        (clicked)="handleToggleInitiator()"
-      ></app-action>
-      <app-action
-        *ngIf="type === 'ORGANISATION' && leaveVisible"
-        [onlyIcon]="true"
-        [icon]="'logout'"
-        (clicked)="leaveOrgaHandler()"
-      ></app-action>
-      <app-action
-        *ngIf="editVisible"
-        [onlyIcon]="true"
-        [icon]="'edit'"
-        [tooltip]="'labels.edit' | translate"
-        (clicked)="editHandler()"
-      ></app-action>
-      <app-action
-        *ngIf="deleteVisible"
-        [onlyIcon]="true"
-        [icon]="'delete'"
-        [tooltip]="'labels.delete' | translate"
-        (clicked)="deleteHandler()"
-      ></app-action>
-    </ng-container>
+      @if (toggleInitiatiorVisible) {
+        <app-action
+          [onlyIcon]="true"
+          [icon]="'verified'"
+          [toggle]="true"
+          [toggleValue]="isInitiator"
+          (clicked)="handleToggleInitiator()"
+        ></app-action>
+      }
+      @if (type === 'ORGANISATION' && leaveVisible) {
+        <app-action
+          [onlyIcon]="true"
+          [icon]="'logout'"
+          (clicked)="leaveOrgaHandler()"
+        ></app-action>
+      }
+      @if (editVisible) {
+        <app-action
+          [onlyIcon]="true"
+          [icon]="'edit'"
+          [tooltip]="'labels.edit' | translate"
+          (clicked)="editHandler()"
+        ></app-action>
+      }
+      @if (deleteVisible) {
+        <app-action
+          [onlyIcon]="true"
+          [icon]="'delete'"
+          [tooltip]="'labels.delete' | translate"
+          (clicked)="deleteHandler()"
+        ></app-action>
+      }
+    }
   </div>
   <div class="logo-column">
     <div class="logo-wrapper">
@@ -106,38 +114,40 @@
     </div>
     <div class="infos">
       <div class="description">
-        <div
-          class="orga-name"
-          [ngClass]="{ dan: utils.asActivity(entity).activityType === 'DAN' }"
-          *ngIf="type === 'ACTIVITY' || type === 'DAN'"
-        >
-          {{ utils.asActivity(entity).organisation?.name }}
-        </div>
+        @if (type === 'ACTIVITY' || type === 'DAN') {
+          <div
+            class="orga-name"
+            [ngClass]="{ dan: utils.asActivity(entity).activityType === 'DAN' }"
+            >
+            {{ utils.asActivity(entity).organisation?.name }}
+          </div>
+        }
         <p class="description-text">{{ utils.excerpt(entity?.description) }}</p>
       </div>
       <div class="details">
         <h4 class="info-title">{{ 'map.labels.info' | translate }}</h4>
 
         <div class="details-entries">
-          <ng-container *ngIf="card.isActivity(type)">
-            <app-content-row
-              *ngIf="card.isActivity(type)"
-              [small]="true"
-              icon="calendar_today"
-              [content]="utils.dateRangeString(utils.asActivity(entity).period)"
-            ></app-content-row>
-          </ng-container>
+          @if (card.isActivity(type)) {
+            @if (card.isActivity(type)) {
+              <app-content-row
+                [small]="true"
+                icon="calendar_today"
+                [content]="utils.dateRangeString(utils.asActivity(entity).period)"
+              ></app-content-row>
+            }
+          }
           <app-content-row
             [small]="true"
             [content]="utils.locationString(entity?.location)"
           ></app-content-row>
-          <ng-container *ngIf="entity?.impactArea">
+          @if (entity?.impactArea) {
             <app-content-row
               [small]="true"
               icon="location_searching"
               [content]="'impactArea.' + entity?.impactArea | translate"
             ></app-content-row>
-          </ng-container>
+          }
         </div>
       </div>
     </div>

@@ -11,40 +11,42 @@ import { RouterModule } from '@angular/router';
     <div
       class="menu-entry-wrapper mat-button"
       [ngClass]="{ underline: underline, last: last }"
-    >
-      <app-new-badge *ngIf="new"></app-new-badge>
-      <a
-        *ngIf="button; else link"
-        class="menu-entry font-2"
-        [ngClass]="{ blue: blue, isActive: active }"
       >
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-      </a>
+      @if (new) {
+        <app-new-badge></app-new-badge>
+      }
+      @if (button) {
+        <a
+          class="menu-entry font-2"
+          [ngClass]="{ blue: blue, isActive: active }"
+          >
+          <ng-container *ngTemplateOutlet="content"></ng-container>
+        </a>
+      } @else {
+        @if (internal) {
+          <a
+            (click)="clickHandler()"
+            [routerLink]="[url]"
+            [routerLinkActive]="'active'"
+            class="menu-entry font-2"
+            [ngClass]="{ blue: blue }"
+            >
+            <ng-container *ngTemplateOutlet="content"></ng-container>
+          </a>
+        } @else {
+          <a [href]="url" class="menu-entry font-2" [ngClass]="{ blue: blue }">
+            <ng-container *ngTemplateOutlet="content"></ng-container>
+          </a>
+        }
+      }
     </div>
-
-    <ng-template #external>
-      <a [href]="url" class="menu-entry font-2" [ngClass]="{ blue: blue }">
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-      </a>
-    </ng-template>
-
-    <ng-template #link>
-      <a
-        *ngIf="internal; else external"
-        (click)="clickHandler()"
-        [routerLink]="[url]"
-        [routerLinkActive]="'active'"
-        class="menu-entry font-2"
-        [ngClass]="{ blue: blue }"
-      >
-        <ng-container *ngTemplateOutlet="content"></ng-container>
-      </a>
-    </ng-template>
-
+    
+    
+    
     <ng-template #content>
       <ng-content></ng-content>
     </ng-template>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

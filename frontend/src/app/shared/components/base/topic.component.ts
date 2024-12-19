@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-topic',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="topic">
       <span><ng-content></ng-content></span>

@@ -21,88 +21,107 @@ import { MatStepperModule } from '@angular/material/stepper';
   ],
   template: `
     <div class="actions-container">
-      <div *ngIf="!showPrevBtn" class="placeholder"></div>
-      <button
-        mat-flat-button
-        matStepperPrevious
-        *ngIf="showPrevBtn"
-        id="prev-step"
-      >
-        {{ 'btn.back' | translate }}
-      </button>
+      @if (!showPrevBtn) {
+        <div class="placeholder"></div>
+      }
+      @if (showPrevBtn) {
+        <button
+          mat-flat-button
+          matStepperPrevious
+          id="prev-step"
+          >
+          {{ 'btn.back' | translate }}
+        </button>
+      }
       <!--{{ errorMsg$ | async | json }}-->
-
-      <div
-        class="step-state-message mat-error"
-        *ngIf="
-          (stepState$ | async)?.error === true &&
-          (stepState$ | async)?.formStep === formStepKey
-        "
-      >
-        {{ 'error.unknown' | translate }}
-      </div>
-
-      <div class="next-buttons">
+    
+      @if (
+        (stepState$ | async)?.error === true &&
+        (stepState$ | async)?.formStep === formStepKey
+        ) {
         <div
-          *ngIf="
-            (stepState$ | async)?.error === false &&
-            (stepState$ | async)?.formStep === formStepKey
-          "
-          class="step-state-message"
-        >
-          <app-outlined-icon>cloud_done</app-outlined-icon>
-          {{ 'labels.saved' | translate }}
-        </div>
-        <div *ngIf="showNextBtn && nextBtnCallback === undefined">
-          <button mat-flat-button color="accent" matStepperNext id="next-step">
-            {{ 'btn.next' | translate }}
-          </button>
-          <button
-            mat-stroked-button
-            color="accent"
-            matStepperNext
-            *ngIf="last && !modification"
-            (click)="cancelHandler()"
-            [disabled]="disableNextBtn"
-            id="next-step"
+          class="step-state-message mat-error"
           >
-            {{ 'btn.saveCurrentState' | translate }}
-          </button>
+          {{ 'error.unknown' | translate }}
         </div>
-        <div *ngIf="showNextBtn && nextBtnCallback !== undefined">
-          <button
-            mat-flat-button
-            color="accent"
-            matStepperNext
-            (click)="nextBtnCallback()"
-            [disabled]="disableNextBtn"
-            id="next-step"
-          >
-            <div>
-              <span *ngIf="!last">{{ 'btn.next' | translate }}</span>
-              <ng-container *ngIf="last && !modification">
-                <span *ngIf="type === 'organisation'">{{
-                  'btn.finishOrgaWizard' | translate
-                }}</span>
-                <span *ngIf="type === 'activity'">{{
-                  'btn.finishActivityWizard' | translate
-                }}</span>
-              </ng-container>
-
-              <ng-container *ngIf="last && modification"
-                ><span *ngIf="type === 'organisation'">{{
-                  'btn.updateOrga' | translate
-                }}</span
-                ><span *ngIf="type === 'activity'">{{
-                  'btn.updateActivity' | translate
-                }}</span></ng-container
+      }
+    
+      <div class="next-buttons">
+        @if (
+          (stepState$ | async)?.error === false &&
+          (stepState$ | async)?.formStep === formStepKey
+          ) {
+          <div
+            class="step-state-message"
+            >
+            <app-outlined-icon>cloud_done</app-outlined-icon>
+            {{ 'labels.saved' | translate }}
+          </div>
+        }
+        @if (showNextBtn && nextBtnCallback === undefined) {
+          <div>
+            <button mat-flat-button color="accent" matStepperNext id="next-step">
+              {{ 'btn.next' | translate }}
+            </button>
+            @if (last && !modification) {
+              <button
+                mat-stroked-button
+                color="accent"
+                matStepperNext
+                (click)="cancelHandler()"
+                [disabled]="disableNextBtn"
+                id="next-step"
+                >
+                {{ 'btn.saveCurrentState' | translate }}
+              </button>
+            }
+          </div>
+        }
+        @if (showNextBtn && nextBtnCallback !== undefined) {
+          <div>
+            <button
+              mat-flat-button
+              color="accent"
+              matStepperNext
+              (click)="nextBtnCallback()"
+              [disabled]="disableNextBtn"
+              id="next-step"
               >
+              <div>
+                @if (!last) {
+                  <span>{{ 'btn.next' | translate }}</span>
+                }
+                @if (last && !modification) {
+                  @if (type === 'organisation') {
+                    <span>{{
+                      'btn.finishOrgaWizard' | translate
+                    }}</span>
+                  }
+                  @if (type === 'activity') {
+                    <span>{{
+                      'btn.finishActivityWizard' | translate
+                    }}</span>
+                  }
+                }
+                @if (last && modification) {
+                  @if (type === 'organisation') {
+                    <span>{{
+                      'btn.updateOrga' | translate
+                      }}</span
+                      >
+                      }@if (type === 'activity') {
+                      <span>{{
+                        'btn.updateActivity' | translate
+                      }}</span>
+                    }
+                  }
+                </div>
+              </button>
             </div>
-          </button>
+          }
         </div>
       </div>
-    </div>
-  `,
+    `,
   styles: `
     .actions-container {
       display: flex;

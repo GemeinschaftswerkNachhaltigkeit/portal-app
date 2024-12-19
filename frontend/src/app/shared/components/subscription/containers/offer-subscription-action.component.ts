@@ -9,37 +9,47 @@ import { ActionComponent } from '../../base/action.component';
   selector: 'app-offer-subscription-action',
   standalone: true,
   imports: [CommonModule, ActionComponent, TranslateModule],
-  template: `<app-action
-      [clickable]="true"
-      [stroked]="stroked"
-      [small]="small"
-      [full]="full"
-      [disabled]="true"
-      *ngIf="!subscriptionFacade.offerIsSubcribed(offer?.id)"
-      icon="bookmark_add"
-      (clicked)="bookmarkHandler()"
+  template: `@if (!subscriptionFacade.offerIsSubcribed(offer?.id)) {
+  <app-action
+    [clickable]="true"
+    [stroked]="stroked"
+    [small]="small"
+    [full]="full"
+    [disabled]="true"
+    icon="bookmark_add"
+    (clicked)="bookmarkHandler()"
     >
-      <span [ngClass]="{ small: small }">
-        <span *ngIf="!short">{{ 'btn.bookmark' | translate }}</span>
-        <span *ngIf="short">{{ 'btn.bookmarkShort' | translate }}</span>
-      </span>
-    </app-action>
+    <span [ngClass]="{ small: small }">
+      @if (!short) {
+        <span>{{ 'btn.bookmark' | translate }}</span>
+      }
+      @if (short) {
+        <span>{{ 'btn.bookmarkShort' | translate }}</span>
+      }
+    </span>
+  </app-action>
+}
 
-    <app-action
-      [clickable]="true"
-      [stroked]="stroked"
-      [small]="small"
-      [full]="full"
-      [disabled]="true"
-      *ngIf="subscriptionFacade.offerIsSubcribed(offer?.id)"
-      icon="bookmark_added"
-      (clicked)="unbookmarkHandler()"
+@if (subscriptionFacade.offerIsSubcribed(offer?.id)) {
+  <app-action
+    [clickable]="true"
+    [stroked]="stroked"
+    [small]="small"
+    [full]="full"
+    [disabled]="true"
+    icon="bookmark_added"
+    (clicked)="unbookmarkHandler()"
     >
-      <span [ngClass]="{ small: small }">
-        <span *ngIf="!short">{{ 'btn.unbookmark' | translate }}</span>
-        <span *ngIf="short">{{ 'btn.unbookmarkShort' | translate }}</span>
-      </span>
-    </app-action> `,
+    <span [ngClass]="{ small: small }">
+      @if (!short) {
+        <span>{{ 'btn.unbookmark' | translate }}</span>
+      }
+      @if (short) {
+        <span>{{ 'btn.unbookmarkShort' | translate }}</span>
+      }
+    </span>
+  </app-action>
+}`,
   styles: `
     :host {
       display: flex;

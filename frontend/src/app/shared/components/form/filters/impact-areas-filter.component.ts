@@ -3,14 +3,14 @@ import FilterOption from 'src/app/shared/models/filter-options';
 import { ImpactArea } from 'src/app/shared/models/impact-area';
 import { SdgsService } from 'src/app/shared/services/sdgs.service';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { CollapsibleFilterComponent } from './collapsible-filter.component';
 
 @Component({
   selector: 'app-impact-areas-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CollapsibleFilterComponent],
+  imports: [TranslateModule, CollapsibleFilterComponent],
   template: `
     <app-collapsible-filter
       [filterName]="filterName"

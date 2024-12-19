@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import FilterOption from 'src/app/shared/models/filter-options';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FilterCountBadgeComponent } from './filter-count-badge.component';
 import { CheckboxFilterComponent } from './checkbox-filter.component';
@@ -11,11 +11,10 @@ import { CheckboxFilterComponent } from './checkbox-filter.component';
   selector: 'app-collapsible-filter',
   standalone: true,
   imports: [
-    CommonModule,
     MatExpansionModule,
     FilterCountBadgeComponent,
     CheckboxFilterComponent
-  ],
+],
   template: `
     <mat-expansion-panel
       class="filter mat-elevation-z0"

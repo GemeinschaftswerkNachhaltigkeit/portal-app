@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-form-section-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <section class="sections">
       <ng-content></ng-content>

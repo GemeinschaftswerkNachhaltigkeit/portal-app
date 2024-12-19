@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,14 +12,13 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-search-input',
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
     TranslateModule
-  ],
+],
   template: `
     <form class="search-form" (submit)="handleSubmit()">
       <div class="input-wrapper">
@@ -29,21 +28,22 @@ import { TranslateModule } from '@ngx-translate/core';
           [value]="value"
           (keyup)="handleChange($event)"
           name="query"
-        />
-        <button
-          type="button"
-          *ngIf="value"
-          class="clear-btn"
-          (click)="handleClear()"
-        >
-          <mat-icon>clear</mat-icon>
-        </button>
+          />
+        @if (value) {
+          <button
+            type="button"
+            class="clear-btn"
+            (click)="handleClear()"
+            >
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
       </div>
       <button type="submit" class="button" mat-flat-button color="accent">
         {{ buttonText || 'btn.search' | translate }}
       </button>
     </form>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

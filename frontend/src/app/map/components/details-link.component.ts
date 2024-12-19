@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import SearchResult from '../models/search-result';
 import { CardService } from '../services/card.service';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-details-link',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <a
       rel="noopener"

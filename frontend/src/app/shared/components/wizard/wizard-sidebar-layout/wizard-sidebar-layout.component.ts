@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './wizard-sidebar-layout.component.html',
   styleUrls: ['./wizard-sidebar-layout.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: []
 })
 export class WizardSidebarLayoutComponent {}

@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import Organisation from 'src/app/shared/models/organisation';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -12,12 +12,11 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-orga-result',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     OrgaBadgesComponent,
     ContentRowComponent,
     TranslateModule
-  ],
+],
   templateUrl: './orga-result.component.html',
   styleUrl: './orga-result.component.scss'
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -29,7 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     }
   `,
   standalone: true,
-  imports: [CommonModule, MatDialogModule, TranslateModule, MatButtonModule]
+  imports: [MatDialogModule, TranslateModule, MatButtonModule]
 })
 export class InfoDialogComponent {
   constructor(

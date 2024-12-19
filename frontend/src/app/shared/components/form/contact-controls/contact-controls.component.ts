@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -25,14 +25,13 @@ export const defaultContactGroupFields = {
   templateUrl: './contact-controls.component.html',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     ValidCheckComponent,
     TranslateModule,
     FormFieldErrorComponent
-  ],
+],
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

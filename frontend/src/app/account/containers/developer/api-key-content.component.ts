@@ -10,39 +10,53 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, TranslateModule, MatIconModule, MatButtonModule],
   template: `
     <div class="api-key" [ngClass]="{ noKey: !apiKey }">
-      <div class="key" (click)="copyHandler()" *ngIf="apiKey">
-        <ng-container *ngIf="visible; else dots">
-          <div class="key-text">
-            <div>{{ apiKey }}</div>
-            <div class="copied">
-              <ng-container *ngIf="copied; else copyIcon">{{
-                'labels.copied' | translate
-              }}</ng-container>
-              <ng-template #copyIcon
-                ><mat-icon>file_copy</mat-icon></ng-template
-              >
+      @if (apiKey) {
+        <div class="key" (click)="copyHandler()">
+          @if (visible) {
+            <div class="key-text">
+              <div>{{ apiKey }}</div>
+              <div class="copied">
+                @if (copied) {
+                  {{
+                  'labels.copied' | translate
+                  }}
+                } @else {
+                  <mat-icon>file_copy</mat-icon>
+                }
+              </div>
             </div>
-          </div>
-        </ng-container>
-        <ng-template #dots>
-          <div class="dots">
-            <div class="dot" *ngFor="let dot of getDots(apiKey)"></div>
-          </div>
-        </ng-template>
-      </div>
-      <button mat-icon-button (click)="toggle()" *ngIf="apiKey">
-        <mat-icon *ngIf="visible; else notVisible">visibility_off</mat-icon>
-        <ng-template #notVisible>
-          <mat-icon>visibility</mat-icon>
-        </ng-template>
-      </button>
-      <ng-container *ngIf="!apiKey">
+          } @else {
+            <div class="dots">
+              @for (dot of getDots(apiKey); track dot) {
+                <div class="dot"></div>
+              }
+            </div>
+          }
+          <ng-template #dots>
+            <div class="dots">
+              @for (dot of getDots(apiKey); track dot) {
+                <div class="dot"></div>
+              }
+            </div>
+          </ng-template>
+        </div>
+      }
+      @if (apiKey) {
+        <button mat-icon-button (click)="toggle()">
+          @if (visible) {
+            <mat-icon>visibility_off</mat-icon>
+          } @else {
+            <mat-icon>visibility</mat-icon>
+          }
+        </button>
+      }
+      @if (!apiKey) {
         <span class="placeholder">{{
           'account.labels.noApiKey' | translate
         }}</span>
-      </ng-container>
+      }
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

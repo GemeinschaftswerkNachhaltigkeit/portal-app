@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -20,12 +20,11 @@ export interface AuthModalData {
   selector: 'app-register-or-login-modal',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
     TranslateModule
-  ],
+],
   template: `
     <div mat-dialog-content class="auth-modal">
       <header class="header">

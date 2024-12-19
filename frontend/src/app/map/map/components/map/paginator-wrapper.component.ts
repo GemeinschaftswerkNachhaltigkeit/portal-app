@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-paginator-wrapper',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   template: `
     <div class="wrapper mat-elevation-z8">
       <div class="total">{{ total }} {{ 'paging.results' | translate }}</div>

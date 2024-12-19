@@ -19,7 +19,7 @@ import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/s
     <div
       class="event"
       [ngClass]="{ dan: event.resultType === 'DAN', last: last }"
-    >
+      >
       <div class="content">
         <div (click)="open(event)">
           <h3 class="title">{{ event.name }}</h3>
@@ -31,32 +31,34 @@ import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/s
             <div class="name">{{ event.location?.address?.name || '' }}</div>
           </div>
         </div>
-        <div *ngIf="event.organisation">
-          <a [routerLink]="['/', 'organisations', event.organisation.id]">{{
-            event.organisation.name
-          }}</a>
-        </div>
+        @if (event.organisation) {
+          <div>
+            <a [routerLink]="['/', 'organisations', event.organisation.id]">{{
+              event.organisation.name
+            }}</a>
+          </div>
+        }
       </div>
-
+    
       <div class="actions">
         <!--
-    <app-action
-      [clickable]="true"
-      icon="launch"
-      [onlyIcon]="true"
-      (clicked)="open(event)"
-    >
-    </app-action>
-  -->
+        <app-action
+          [clickable]="true"
+          icon="launch"
+          [onlyIcon]="true"
+          (clicked)="open(event)"
+          >
+        </app-action>
+        -->
         <div style="width: 40px"></div>
         <app-activity-subscription-action
           [onlyIcon]="true"
           [activity]="utils.asActivity(event)"
-        >
+          >
         </app-activity-subscription-action>
       </div>
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

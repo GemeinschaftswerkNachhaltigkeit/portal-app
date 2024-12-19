@@ -9,17 +9,19 @@
     'emailVerifySuccessPage.advantages.createActivity' | translate
   ]"
   (continue)="goTo()"
->
-  <section *ngIf="!hideOrgaButton(goToPath)">
-    <p>
-      {{ 'emailVerifySuccessPage.texts.orga' | translate }}
-    </p>
-    <a
-      [routerLink]="['/', 'account', 'my-organisation']"
-      mat-flat-button
-      class="orga-link"
-    >
-      {{ 'emailVerifySuccessPage.buttons.orga' | translate }}
-    </a>
-  </section>
+  >
+  @if (!hideOrgaButton(goToPath)) {
+    <section>
+      <p>
+        {{ 'emailVerifySuccessPage.texts.orga' | translate }}
+      </p>
+      <a
+        [routerLink]="['/', 'account', 'my-organisation']"
+        mat-flat-button
+        class="orga-link"
+        >
+        {{ 'emailVerifySuccessPage.buttons.orga' | translate }}
+      </a>
+    </section>
+  }
 </app-notification-page>

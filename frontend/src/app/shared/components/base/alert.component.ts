@@ -1,26 +1,27 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-alert',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [MatIconModule],
   template: `<div class="no-data" [style]="{ 'border-color': color }">
-    <div class="icon-wrapper" *ngIf="showIcon">
-      <div class="bg-icon">
-        <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
+      @if (showIcon) {
+        <div class="icon-wrapper">
+          <div class="bg-icon">
+            <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
+          </div>
+          <div class="fg-icon" [style]="{ color: color }">
+            <mat-icon class="material-icons-outlined">{{ fgIcon }}</mat-icon>
+          </div>
+        </div>
+      }
+      <div class="msg">
+        <h3 class="title">{{ title }}</h3>
+        <p class="text"><ng-content></ng-content></p>
       </div>
-
-      <div class="fg-icon" [style]="{ color: color }">
-        <mat-icon class="material-icons-outlined">{{ fgIcon }}</mat-icon>
-      </div>
-    </div>
-    <div class="msg">
-      <h3 class="title">{{ title }}</h3>
-      <p class="text"><ng-content></ng-content></p>
-    </div>
-  </div> `,
+    </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

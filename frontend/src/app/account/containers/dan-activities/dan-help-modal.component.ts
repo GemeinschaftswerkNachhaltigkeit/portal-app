@@ -20,7 +20,7 @@ import { MessageInputDialogComponent } from 'src/app/shared/components/dialogs/m
   providers: [AccountContentFacadeService],
   template: `
     <div mat-dialog-content class="dan-help-modal">
-      <ng-container *ngIf="content$ | async as content">
+      @if (content$ | async; as content) {
         <header class="header">
           <div class="close">
             <button mat-icon-button (click)="close()">
@@ -32,26 +32,28 @@ import { MessageInputDialogComponent } from 'src/app/shared/components/dialogs/m
         </header>
         <div class="content">
           <div class="left">
-            <ng-container *ngFor="let entry of content.entries">
-              <div class="entry" *ngIf="entry.text">
-                <div class="check"><mat-icon>check</mat-icon></div>
-                <div class="text" [innerHTML]="entry.text"></div>
-              </div>
-            </ng-container>
+            @for (entry of content.entries; track entry) {
+              @if (entry.text) {
+                <div class="entry">
+                  <div class="check"><mat-icon>check</mat-icon></div>
+                  <div class="text" [innerHTML]="entry.text"></div>
+                </div>
+              }
+            }
           </div>
           <div class="right">
             <img [src]="content.image" alt="" />
           </div>
         </div>
-      </ng-container>
+      }
     </div>
-
+    
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>
         {{ 'btn.close' | translate }}
       </button>
     </mat-dialog-actions>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

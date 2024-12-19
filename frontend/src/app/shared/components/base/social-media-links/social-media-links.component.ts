@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SocialMediaContact } from 'src/app/shared/models/social-media-contact';
 
 @Component({
   selector: 'app-social-media-links',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './social-media-links.component.html',
   styles: `
     @use 'theme' as *;

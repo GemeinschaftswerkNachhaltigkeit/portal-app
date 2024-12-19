@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import Activity from 'src/app/shared/models/actvitiy';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -12,12 +12,11 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-event-result',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     EventBadgesComponent,
     ContentRowComponent,
     TranslateModule
-  ],
+],
   templateUrl: './event-result.component.html',
   styleUrl: './event-result.component.scss'
 })

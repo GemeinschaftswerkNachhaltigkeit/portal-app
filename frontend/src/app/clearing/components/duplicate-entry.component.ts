@@ -19,79 +19,82 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
     HtmlWrapperComponent
   ],
   template: `
-    <div class="duplicate" *ngIf="duplicate">
-      <div class="title-wrapper">
-        <div
-          class="title"
-          [ngClass]="{ duplicateField: isDuplicateField('NAME') }"
-        >
-          <app-heading size="sm" color="none">{{ duplicate.name }}</app-heading>
-        </div>
-        <div class="title-info">
-          <p>
-            {{ duplicate.modifiedAt | date: 'dd.MM.yyyy HH:mm' }}
-          </p>
-          <p>
-            {{
+    @if (duplicate) {
+      <div class="duplicate">
+        <div class="title-wrapper">
+          <div
+            class="title"
+            [ngClass]="{ duplicateField: isDuplicateField('NAME') }"
+            >
+            <app-heading size="sm" color="none">{{ duplicate.name }}</app-heading>
+          </div>
+          <div class="title-info">
+            <p>
+              {{ duplicate.modifiedAt | date: 'dd.MM.yyyy HH:mm' }}
+            </p>
+            <p>
+              {{
               duplicate
-                ? ('organisationType.' + duplicate.organisationType | translate)
-                : '-'
-            }}
-          </p>
+              ? ('organisationType.' + duplicate.organisationType | translate)
+              : '-'
+              }}
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="meta-infos">
-        <div class="column">
-          <p
+        <div class="meta-infos">
+          <div class="column">
+            <p
             [ngClass]="{
               noValue: !duplicate.location?.url,
               duplicateField: isDuplicateField('URL')
             }"
-          >
-            {{
+              >
+              {{
               duplicate.location?.url || 'clearing.labels.noWebsite' | translate
-            }}
-          </p>
-          <p [ngClass]="{ duplicateField: isDuplicateField('EMAIL') }">
-            {{ duplicate.contact?.email }}
-          </p>
-        </div>
-
-        <div
-          class="column info"
-          [ngClass]="{ duplicateField: isDuplicateField('ADDRESS') }"
-        >
-          <app-content-row
-            *ngIf="duplicate.location && duplicate.location.address"
+              }}
+            </p>
+            <p [ngClass]="{ duplicateField: isDuplicateField('EMAIL') }">
+              {{ duplicate.contact?.email }}
+            </p>
+          </div>
+          <div
+            class="column info"
+            [ngClass]="{ duplicateField: isDuplicateField('ADDRESS') }"
+            >
+            @if (duplicate.location && duplicate.location.address) {
+              <app-content-row
             [content]="
               duplicate.location.address.city! +
               ' ,' +
               duplicate.location.address.country!
             "
-          ></app-content-row>
-
-          <app-content-row
-            *ngIf="duplicate.impactArea"
-            [content]="'impactArea.' + duplicate.impactArea | translate"
-            icon="location_searching"
-          ></app-content-row>
-
-          <a
-            *ngIf="duplicate.location?.url"
-            [href]="duplicate.location?.url"
-            target="_blank"
-          >
-            <app-content-row
-              *ngIf="duplicate.location?.url"
-              [content]="duplicate.location?.url"
-              icon="link"
-            ></app-content-row
-          ></a>
-        </div>
-      </div>
-      <app-html-wrapper [html]="duplicate.description || ''"></app-html-wrapper>
-    </div>
-  `,
+              ></app-content-row>
+            }
+            @if (duplicate.impactArea) {
+              <app-content-row
+                [content]="'impactArea.' + duplicate.impactArea | translate"
+                icon="location_searching"
+              ></app-content-row>
+            }
+            @if (duplicate.location?.url) {
+              <a
+                [href]="duplicate.location?.url"
+                target="_blank"
+                >
+                @if (duplicate.location?.url) {
+                  <app-content-row
+                    [content]="duplicate.location?.url"
+                    icon="link"
+                    ></app-content-row
+                    >
+                  }</a>
+                }
+              </div>
+            </div>
+            <app-html-wrapper [html]="duplicate.description || ''"></app-html-wrapper>
+          </div>
+        }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

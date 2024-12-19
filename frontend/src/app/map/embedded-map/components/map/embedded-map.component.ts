@@ -20,14 +20,14 @@ import {
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-embedded-map',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule],
   template: `
     <div class="map-container" #mapRef>
       <div class="map-frame">

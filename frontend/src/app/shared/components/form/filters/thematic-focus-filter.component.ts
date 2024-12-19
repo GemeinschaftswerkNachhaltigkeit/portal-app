@@ -3,13 +3,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import FilterOption from 'src/app/shared/models/filter-options';
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { CollapsibleFilterComponent } from './collapsible-filter.component';
 
 @Component({
   selector: 'app-thematic-focus-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CollapsibleFilterComponent],
+  imports: [TranslateModule, CollapsibleFilterComponent],
   template: `
     <app-collapsible-filter
       [filterName]="filterName"

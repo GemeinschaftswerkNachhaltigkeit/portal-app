@@ -1,7 +1,9 @@
 <a class="card" [routerLink]="['/organisations/', orga.id]">
   <article>
     <div class="logo">
-      <img [src]="logoUrl()" alt="logo" *ngIf="orga.logo" />
+      @if (orga.logo) {
+        <img [src]="logoUrl()" alt="logo" />
+      }
     </div>
     <div class="badge">
       <app-orga-badges [organisation]="orga"></app-orga-badges>
@@ -15,21 +17,25 @@
       {{ 'organisationType.' + orga.organisationType | translate }}
     </div>
 
-    <div class="content-row font-2" *ngIf="utils.locationString(orga.location)">
-      <div class="content">
-        <app-outlined-icon>pin_drop</app-outlined-icon>
-        <p class="text">
-          <mark>{{ utils.locationString(orga.location) }}</mark>
-        </p>
+    @if (utils.locationString(orga.location)) {
+      <div class="content-row font-2">
+        <div class="content">
+          <app-outlined-icon>pin_drop</app-outlined-icon>
+          <p class="text">
+            <mark>{{ utils.locationString(orga.location) }}</mark>
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="content-row font-2" *ngIf="orga.impactArea">
-      <div class="content">
-        <app-outlined-icon>location_searching</app-outlined-icon>
-        <p class="text">
-          <mark>{{ 'impactArea.' + orga.impactArea | translate }}</mark>
-        </p>
+    }
+    @if (orga.impactArea) {
+      <div class="content-row font-2">
+        <div class="content">
+          <app-outlined-icon>location_searching</app-outlined-icon>
+          <p class="text">
+            <mark>{{ 'impactArea.' + orga.impactArea | translate }}</mark>
+          </p>
+        </div>
       </div>
-    </div>
+    }
   </footer>
 </a>

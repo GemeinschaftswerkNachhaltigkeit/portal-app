@@ -23,7 +23,7 @@ import {
 import { ActivityWIP } from 'src/app/shared/models/activity-wip';
 import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { CommonModule } from '@angular/common';
+
 import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -31,55 +31,57 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-user-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     ContactControlsComponent,
     UploadImageComponent,
     TranslateModule
-  ],
+],
   template: `
     <form [formGroup]="userFormGroup">
       <app-contact-controls formGroupName="contact"></app-contact-controls>
-      <div
-        *ngIf="data && data.randomUniqueId && orgId === null && isActiveStep"
-      >
-        <app-upload-image
-          [config]="dzService.getImageConfig('contact', data.randomUniqueId)"
-          [aspectRatio]="dzService.getAspectRatio('contact')"
-          [labelTranslationKey]="'forms.labels.profileImage'"
-          [disabled]="userFormGroup.disabled"
-          [fileId]="data.contact?.image"
-          style="width: 200px"
-          [errorMsg]="'error.unknown' | translate"
+      @if (data && data.randomUniqueId && orgId === null && isActiveStep) {
+        <div
+          >
+          <app-upload-image
+            [config]="dzService.getImageConfig('contact', data.randomUniqueId)"
+            [aspectRatio]="dzService.getAspectRatio('contact')"
+            [labelTranslationKey]="'forms.labels.profileImage'"
+            [disabled]="userFormGroup.disabled"
+            [fileId]="data.contact?.image"
+            style="width: 200px"
+            [errorMsg]="'error.unknown' | translate"
           [info]="
             ('sign-up.upload.tooltip' | translate) +
             ', ' +
             ('sign-up.upload.logoWidthTooltipExt' | translate)
           "
-          (delete)="deleteHandler(imageType.CONTACT)"
-        ></app-upload-image>
-      </div>
-      <div *ngIf="data && data.randomUniqueId && orgId !== null">
-        <app-upload-image
+            (delete)="deleteHandler(imageType.CONTACT)"
+          ></app-upload-image>
+        </div>
+      }
+      @if (data && data.randomUniqueId && orgId !== null) {
+        <div>
+          <app-upload-image
           [config]="
             dzService.getImageConfig('contact', orgId, data.randomUniqueId)
           "
-          [aspectRatio]="dzService.getAspectRatio('contact')"
-          [labelTranslationKey]="'forms.labels.profileImage'"
-          [disabled]="userFormGroup.disabled"
-          [fileId]="data.contact?.image"
-          style="width: 200px"
-          [errorMsg]="'error.unknown' | translate"
+            [aspectRatio]="dzService.getAspectRatio('contact')"
+            [labelTranslationKey]="'forms.labels.profileImage'"
+            [disabled]="userFormGroup.disabled"
+            [fileId]="data.contact?.image"
+            style="width: 200px"
+            [errorMsg]="'error.unknown' | translate"
           [info]="
             ('sign-up.upload.tooltip' | translate) +
             ', ' +
             ('sign-up.upload.logoWidthTooltipExt' | translate)
           "
-          (delete)="deleteHandler(imageType.CONTACT)"
-        ></app-upload-image>
-      </div>
+            (delete)="deleteHandler(imageType.CONTACT)"
+          ></app-upload-image>
+        </div>
+      }
     </form>
-  `,
+    `,
   styles: `
     form {
       display: flex;

@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ImgService } from '../../../services/img.service';
 import { UtilsService } from '../../../services/utils.service';
 import Activity from '../../../models/actvitiy';
@@ -17,11 +17,10 @@ export type CardData = {
   selector: 'app-event-card',
   standalone: true,
   imports: [
-    CommonModule,
     OutlinedIconComponent,
     RouterModule,
     EventBadgesComponent
-  ],
+],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.scss'
 })

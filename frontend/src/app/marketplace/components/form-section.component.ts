@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
 import { TextBlockComponent } from 'src/app/shared/components/base/text-block.component';
@@ -6,7 +6,7 @@ import { TextBlockComponent } from 'src/app/shared/components/base/text-block.co
 @Component({
   selector: 'app-form-section',
   standalone: true,
-  imports: [CommonModule, HeadingComponent, TextBlockComponent],
+  imports: [HeadingComponent, TextBlockComponent],
   template: `
     <section class="form-section">
       <header class="header">

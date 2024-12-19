@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-outlined-icon',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [MatIconModule],
   template: `
     <mat-icon class="material-icons-outlined"
       ><ng-content></ng-content

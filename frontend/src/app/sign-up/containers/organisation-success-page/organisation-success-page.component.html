@@ -1,5 +1,5 @@
-<ng-container *ngIf="orgContent$ | async as orgContent">
-  <ng-container *ngIf="orgData$ | async as orgData">
+@if (orgContent$ | async; as orgContent) {
+  @if (orgData$ | async; as orgData) {
     <app-notification-page
       [title]="
         isContactSameAsCurrentUser(orgData)
@@ -15,7 +15,7 @@
         isContactSameAsCurrentUser(orgData) ? 'check' : 'perm_contact_calendar'
       "
       (continue)="leaveWizard()"
-    >
+      >
     </app-notification-page>
-  </ng-container>
-</ng-container>
+  }
+}

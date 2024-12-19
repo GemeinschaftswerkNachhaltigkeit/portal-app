@@ -1,5 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ImgService } from '../../../services/img.service';
 import Organisation from '../../../models/organisation';
 import { UtilsService } from '../../../services/utils.service';
@@ -18,12 +18,11 @@ export type CardData = {
   selector: 'app-orga-card',
   standalone: true,
   imports: [
-    CommonModule,
     OutlinedIconComponent,
     RouterModule,
     OrgaBadgesComponent,
     TranslateModule
-  ],
+],
   templateUrl: './orga-card.component.html',
   styleUrl: './orga-card.component.scss'
 })

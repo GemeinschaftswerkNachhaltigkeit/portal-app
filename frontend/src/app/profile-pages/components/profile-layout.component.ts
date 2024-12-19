@@ -1,5 +1,5 @@
 import {} from '@angular/animations';
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { ProfileAnimation } from 'src/app/shared/components/animations/profile-animation';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
@@ -7,7 +7,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
 @Component({
   selector: 'app-profile-layout',
   standalone: true,
-  imports: [CommonModule, ContentWrapperComponent],
+  imports: [ContentWrapperComponent],
   animations: [ProfileAnimation],
   template: `
     <app-content-wrapper size="xl">

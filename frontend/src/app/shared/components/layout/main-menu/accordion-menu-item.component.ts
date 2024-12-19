@@ -7,7 +7,7 @@ import {
   animate
 } from '@angular/animations';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
-import { CommonModule } from '@angular/common';
+
 import { MenuEntryComponent } from './menu-entry.component';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -27,11 +27,10 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   standalone: true,
   imports: [
-    CommonModule,
     CdkAccordionModule,
     MenuEntryComponent,
     MatIconModule
-  ],
+],
   template: `
     <header (click)="toggle()" class="header">
       <app-menu-entry [button]="true" [active]="expanded" [new]="new">

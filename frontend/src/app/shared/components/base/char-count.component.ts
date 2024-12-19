@@ -7,15 +7,17 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, MatIconModule],
   template: `<div class="char-count" [ngClass]="{ invalid: count > total }">
-    <div class="icon-wrapper">
-      <mat-icon *ngIf="count > total">priority_hight</mat-icon>
-    </div>
-    <div class="wrapper">
-      <div class="count">{{ count }}</div>
-      <div class="sep"></div>
-      <div class="total">{{ total }}</div>
-    </div>
-  </div> `,
+      <div class="icon-wrapper">
+        @if (count > total) {
+          <mat-icon>priority_hight</mat-icon>
+        }
+      </div>
+      <div class="wrapper">
+        <div class="count">{{ count }}</div>
+        <div class="sep"></div>
+        <div class="total">{{ total }}</div>
+      </div>
+    </div>`,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

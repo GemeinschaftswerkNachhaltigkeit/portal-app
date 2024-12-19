@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { InfoDialogComponent } from 'src/app/shared/components/dialogs/info-dialog.component';
@@ -10,12 +10,11 @@ import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-i
   selector: 'app-type-tab',
   standalone: true,
   imports: [
-    CommonModule,
     MatIconModule,
     MatButtonModule,
     OutlinedIconComponent,
     InfoDialogComponent
-  ],
+],
   templateUrl: './type-tab.component.html',
   styleUrl: './type-tab.component.scss'
 })

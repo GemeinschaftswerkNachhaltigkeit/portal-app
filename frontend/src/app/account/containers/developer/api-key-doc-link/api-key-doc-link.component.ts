@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { InfoCardComponent } from 'src/app/shared/components/cards/info-card.component';
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-api-key-doc-link',
   standalone: true,
-  imports: [CommonModule, InfoCardComponent, MatIconModule],
+  imports: [InfoCardComponent, MatIconModule],
   template: `
     <app-info-card [extUrl]="getUrl()" [withTitle]="false" [noPadding]="true">
       <div class="doc-link" body>

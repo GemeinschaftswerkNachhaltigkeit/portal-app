@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ProjectSustainabilityWinnerBadgeComponent } from './project-sustainability-winner-badge';
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
 import { InitiatorBadgeComponent } from './initiator-badge.component';
@@ -29,11 +29,10 @@ import { BiodiversityBadgeComponent } from './biodiversity-badge';
   `,
   standalone: true,
   imports: [
-    CommonModule,
     InitiatorBadgeComponent,
     ProjectSustainabilityWinnerBadgeComponent,
     BiodiversityBadgeComponent
-  ]
+]
 })
 export class EventBadgesComponent {
   @Input() activity?: { thematicFocus?: ThematicFocus[] };

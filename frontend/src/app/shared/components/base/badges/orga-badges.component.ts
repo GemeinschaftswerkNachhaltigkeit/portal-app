@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ProjectSustainabilityWinnerBadgeComponent } from './project-sustainability-winner-badge';
 import Organisation from 'src/app/shared/models/organisation';
 import { InitiatorBadgeComponent } from './initiator-badge.component';
@@ -31,10 +31,9 @@ import { InitiatorBadgeComponent } from './initiator-badge.component';
   `,
   standalone: true,
   imports: [
-    CommonModule,
     InitiatorBadgeComponent,
     ProjectSustainabilityWinnerBadgeComponent
-  ]
+]
 })
 export class OrgaBadgesComponent {
   @Input() organisation?: Organisation;

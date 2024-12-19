@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject } from '@angular/core';
 import {
   FormControl,
@@ -25,7 +25,6 @@ export interface MessageInput {
   selector: 'app-message-input-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     MatDialogModule,
     TranslateModule,
     MatButtonModule,
@@ -33,7 +32,7 @@ export interface MessageInput {
     MatInputModule,
     ReactiveFormsModule,
     FormFieldErrorComponent
-  ],
+],
   template: `
     <div mat-dialog-title>
       <h3 class="title">

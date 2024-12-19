@@ -5,7 +5,7 @@ import {
 } from '@angular/material/checkbox';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateModule } from '@ngx-translate/core';
 import { FilterCountBadgeComponent } from './filter-count-badge.component';
@@ -19,12 +19,11 @@ export type SpecialOrgaFilters = {
   selector: 'app-special-orgas-filter',
   standalone: true,
   imports: [
-    CommonModule,
     MatExpansionModule,
     MatCheckboxModule,
     TranslateModule,
     FilterCountBadgeComponent
-  ],
+],
   template: `
     <mat-expansion-panel class="filter mat-elevation-z0">
       <mat-expansion-panel-header>

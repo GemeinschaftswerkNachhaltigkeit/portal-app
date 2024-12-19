@@ -20,9 +20,11 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
   ],
   template: `
     <app-content-wrapper size="xl">
-      <div *ngIf="notAdmin()">
-        <ng-content select="[banner]"></ng-content>
-      </div>
+      @if (notAdmin()) {
+        <div>
+          <ng-content select="[banner]"></ng-content>
+        </div>
+      }
       <div class="search-page">
         <aside class="sidebar">
           <ng-content select="[filters]"></ng-content>
@@ -43,14 +45,19 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
             </div>
           </header>
           <section class="result-list">
-            <ng-content select="[results]" *ngIf="!loading"></ng-content>
-            <app-spinner *ngIf="loading"></app-spinner>
-            <app-alert
-              *ngIf="total <= 0 && !loading"
-              [title]="'map.titles.noData' | translate"
-            >
-              {{ 'map.texts.noData.0' | translate }}
-            </app-alert>
+            @if (!loading) {
+              <ng-content select="[results]"></ng-content>
+            }
+            @if (loading) {
+              <app-spinner></app-spinner>
+            }
+            @if (total <= 0 && !loading) {
+              <app-alert
+                [title]="'map.titles.noData' | translate"
+                >
+                {{ 'map.texts.noData.0' | translate }}
+              </app-alert>
+            }
           </section>
           <section class="slider">
             <ng-content select="[slider]"></ng-content>
@@ -58,13 +65,13 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
         </main>
       </div>
     </app-content-wrapper>
-
+    
     <ng-template #totalResults
       ><app-heading size="xs"
-        >{{ total }} {{ 'labels.total' | translate }}</app-heading
+      >{{ total }} {{ 'labels.total' | translate }}</app-heading
       ></ng-template
-    >
-  `,
+      >
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

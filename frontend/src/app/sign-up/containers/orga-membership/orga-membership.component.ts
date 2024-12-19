@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { ErrorService } from '../../../shared/services/error.service';
 import { MembershipService } from '../../services/membership.service';
-import { CommonModule } from '@angular/common';
+
 import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-orga-membership',
   standalone: true,
-  imports: [CommonModule, SpinnerComponent],
+  imports: [SpinnerComponent],
   templateUrl: './orga-membership.component.html'
 })
 export class OrgaMembershipComponent {

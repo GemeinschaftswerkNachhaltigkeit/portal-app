@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -10,47 +10,49 @@ import { LangToggleComponent } from './lang-toggle.component';
   selector: 'app-nav-actions',
   standalone: true,
   imports: [
-    CommonModule,
     TranslateModule,
     MatButtonModule,
     LangToggleComponent
-  ],
+],
   template: `
     <div class="buttons" [class.mobile]="mobile">
       <div class="menu highlighted-links font-2">
-        <a
-          *ngIf="!isLoggedIn()"
-          class="menu-entry"
-          color="primary"
-          (click)="login()"
-        >
-          {{ 'btn.login' | translate }}
-        </a>
-        <a
-          *ngIf="isLoggedIn()"
-          class="menu-entry"
-          color="primary"
-          (click)="logout()"
-        >
-          {{ 'btn.logout' | translate }}
-        </a>
+        @if (!isLoggedIn()) {
+          <a
+            class="menu-entry"
+            color="primary"
+            (click)="login()"
+            >
+            {{ 'btn.login' | translate }}
+          </a>
+        }
+        @if (isLoggedIn()) {
+          <a
+            class="menu-entry"
+            color="primary"
+            (click)="logout()"
+            >
+            {{ 'btn.logout' | translate }}
+          </a>
+        }
       </div>
-
-      <button
-        class="registration-btn"
-        mat-flat-button
-        color="accent"
-        (click)="registerUser()"
-        *ngIf="!isLoggedIn()"
-      >
-        {{ 'btn.registration' | translate }}
-      </button>
+    
+      @if (!isLoggedIn()) {
+        <button
+          class="registration-btn"
+          mat-flat-button
+          color="accent"
+          (click)="registerUser()"
+          >
+          {{ 'btn.registration' | translate }}
+        </button>
+      }
     </div>
-
+    
     <div class="toggle" [class.mobile]="mobile">
       <app-lang-toggle></app-lang-toggle>
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
 

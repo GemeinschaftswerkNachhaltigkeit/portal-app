@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { HeadingComponent } from '../base/heading.component';
 
 @Component({
   selector: 'app-list-with-heading-layout',
   standalone: true,
-  imports: [CommonModule, HeadingComponent],
+  imports: [HeadingComponent],
   template: `
     <section class="list-wrapper">
       <app-heading type="h3" size="sm" color="none">{{ title }}</app-heading>

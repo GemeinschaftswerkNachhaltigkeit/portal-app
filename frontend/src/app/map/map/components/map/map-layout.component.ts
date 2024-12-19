@@ -18,7 +18,7 @@ import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-but
         'map-open': (showFullMap$ | async),
         'details-open': hasDetail()
       }"
-    >
+      >
       <header class="filters mat-elevation-z4">
         <app-content-wrapper [narrow]="true">
           <ng-content select="[filter]"></ng-content>
@@ -34,27 +34,28 @@ import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-but
           <ng-content select="[detailsMobile]"></ng-content>
         </section>
         <section class="map-wrapper">
-          <div
-            class="details"
-            [ngClass]="{ clickable: hasDetail() }"
-            *ngIf="hasDetail()"
-          >
-            <div class="outlet">
-              <ng-content select="[detailsDesktop]"></ng-content>
+          @if (hasDetail()) {
+            <div
+              class="details"
+              [ngClass]="{ clickable: hasDetail() }"
+              >
+              <div class="outlet">
+                <ng-content select="[detailsDesktop]"></ng-content>
+              </div>
             </div>
-          </div>
-
+          }
+    
           <ng-content select="[map]"></ng-content>
         </section>
       </div>
-
+    
       <div class="toggle">
         <app-toggle-button color="accent" (toggled)="toggleMap()">{{
           (showFullMap$ | async) ? 'list' : 'map'
         }}</app-toggle-button>
       </div>
     </div>
-  `,
+    `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

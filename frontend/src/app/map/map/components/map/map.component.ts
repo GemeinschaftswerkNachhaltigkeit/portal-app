@@ -21,14 +21,14 @@ import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
 import { SharedMarkerService } from '../../../services/marker.service';
 import { MapZoomService } from 'src/app/map/services/map-zoom.service';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule],
   template: `
     <div class="map-container" #mapRef>
       <div class="map-frame">

@@ -11,7 +11,7 @@ import { MimeTypeEnum } from 'src/app/shared/models/mimetype';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
 import { environment } from 'src/environments/environment';
-import { CommonModule } from '@angular/common';
+
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,48 +21,53 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-image-upload',
   standalone: true,
   imports: [
-    CommonModule,
     DropzoneModule,
     MatIconModule,
     MatButtonModule,
     TranslateModule
-  ],
+],
   template: `
-    <div class="upload-wrapper" *ngIf="config">
-      <label>{{ 'marketplace.labels.image' | translate }}</label>
-      <div class="dropzone-wrapper">
-        <div class="uploaded-image">
-          <img
-            *ngIf="fileId"
-            [src]="imgService.url(fileId)"
-            alt="upload-image"
-          />
+    @if (config) {
+      <div class="upload-wrapper">
+        <label>{{ 'marketplace.labels.image' | translate }}</label>
+        <div class="dropzone-wrapper">
+          <div class="uploaded-image">
+            @if (fileId) {
+              <img
+                [src]="imgService.url(fileId)"
+                alt="upload-image"
+                />
+            }
+          </div>
+          <dropzone
+            [config]="config"
+            [message]="'marketplace.labels.imageUpload' | translate"
+            (init)="onDropZoneInit($event)"
+            (success)="onUploadSuccess($event)"
+            (error)="onUploadError()"
+            [class]="'type'"
+            >
+          </dropzone>
         </div>
-        <dropzone
-          [config]="config"
-          [message]="'marketplace.labels.imageUpload' | translate"
-          (init)="onDropZoneInit($event)"
-          (success)="onUploadSuccess($event)"
-          (error)="onUploadError()"
-          [class]="'type'"
+        <div class="actions">
+          <span class="help">{{
+            'marketplace.labels.imageHelp' | translate
+          }}</span>
+          @if (fileId) {
+            <button mat-icon-button (click)="deleteHandler()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    }
+    
+    @if (error) {
+      <span class="upload-error mat-error">
+        {{ 'marketplace.labels.imageError' | translate }}</span
         >
-        </dropzone>
-      </div>
-
-      <div class="actions">
-        <span class="help">{{
-          'marketplace.labels.imageHelp' | translate
-        }}</span>
-        <button *ngIf="fileId" mat-icon-button (click)="deleteHandler()">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <span *ngIf="error" class="upload-error mat-error">
-      {{ 'marketplace.labels.imageError' | translate }}</span
-    >
-  `,
+      }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

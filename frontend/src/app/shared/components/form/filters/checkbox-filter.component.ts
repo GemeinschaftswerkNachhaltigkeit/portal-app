@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -15,25 +15,29 @@ import FilterOption from 'src/app/shared/models/filter-options';
 @Component({
   selector: 'app-checkbox-filter',
   standalone: true,
-  imports: [CommonModule, MatCheckboxModule, TranslateModule, FormsModule],
+  imports: [MatCheckboxModule, TranslateModule, FormsModule],
   template: `
     <ul class="filter-checkbox-entries">
-      <li class="entry" *ngFor="let fv of filterValues">
-        <mat-checkbox
-          color="primary"
-          [(ngModel)]="fv.checked"
-          (ngModelChange)="checkBoxValueChangedHandler()"
-        >
-          <span class="label"
-            ><span class="prefix" *ngIf="fv.labelPrefix">{{
-              fv.labelPrefix
-            }}</span
-            >{{ fv.labelKey | translate }}</span
-          >
-        </mat-checkbox>
-      </li>
-    </ul>
-  `,
+      @for (fv of filterValues; track fv) {
+        <li class="entry">
+          <mat-checkbox
+            color="primary"
+            [(ngModel)]="fv.checked"
+            (ngModelChange)="checkBoxValueChangedHandler()"
+            >
+            <span class="label"
+              >@if (fv.labelPrefix) {
+              <span class="prefix">{{
+                fv.labelPrefix
+                }}</span
+                >
+                }{{ fv.labelKey | translate }}</span
+                >
+              </mat-checkbox>
+            </li>
+          }
+        </ul>
+    `,
   styles: `
     @use 'theme' as *;
     .filter-checkbox-entries {

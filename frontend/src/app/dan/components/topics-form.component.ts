@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -24,7 +24,6 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
   selector: 'app-topics-form',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -36,7 +35,7 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
     AlertComponent,
     SpinnerComponent,
     TranslateModule
-  ],
+],
   template: `
     <ng-container [formGroup]="form">
       <mat-form-field appearance="outline">
@@ -44,9 +43,11 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
           'forms.labels.sustainableDevelopmentGoals' | translate
         }}</mat-label>
         <mat-select formControlName="sustainableDevelopmentGoals" multiple>
-          <mat-option *ngFor="let goalNo of sdgOptions" [value]="goalNo">
-            {{ goalNo }} {{ 'SDGS.goal_' + goalNo | translate }}
-          </mat-option>
+          @for (goalNo of sdgOptions; track goalNo) {
+            <mat-option [value]="goalNo">
+              {{ goalNo }} {{ 'SDGS.goal_' + goalNo | translate }}
+            </mat-option>
+          }
         </mat-select>
         <mat-error>
           <app-form-field-error
@@ -54,22 +55,23 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
+    
       <app-thematic-focus-control
         controlName="thematicFocus"
         [maxSelectable]="3"
         [label]="'forms.labels.thematicFocus' | translate"
       ></app-thematic-focus-control>
-
+    
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
         <mat-select formControlName="impactArea">
-          <mat-option
-            *ngFor="let impactArea of impactAreaOpts"
-            [value]="impactArea"
-          >
-            {{ 'impactArea.' + impactArea | translate }}
-          </mat-option>
+          @for (impactArea of impactAreaOpts; track impactArea) {
+            <mat-option
+              [value]="impactArea"
+              >
+              {{ 'impactArea.' + impactArea | translate }}
+            </mat-option>
+          }
         </mat-select>
         <mat-error>
           <app-form-field-error
@@ -77,56 +79,59 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
+    
       <div class="fields">
         <div class="field">
           <mat-radio-group
             aria-label="Select an option"
             formControlName="location"
-          >
+            >
             <div class="radio-options">
               <mat-radio-button value="ADDRESS">
                 {{ 'forms.labels.onSite' | translate }}</mat-radio-button
-              >
-              <mat-radio-button value="ONLINE">
-                {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
-              >
-              <mat-radio-button value="PRIVATE">
-                {{ 'forms.labels.private' | translate }}</mat-radio-button
-              >
+                >
+                <mat-radio-button value="ONLINE">
+                  {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
+                  >
+                  <mat-radio-button value="PRIVATE">
+                    {{ 'forms.labels.private' | translate }}</mat-radio-button
+                    >
+                  </div>
+                </mat-radio-group>
+              </div>
+              <div class="field">
+                <app-address-controls
+                  [withNameField]="true"
+                  [nameFieldLabel]="'forms.labels.addressNameDan' | translate"
+                  formGroupName="address"
+                ></app-address-controls>
+              </div>
             </div>
-          </mat-radio-group>
-        </div>
-        <div class="field">
-          <app-address-controls
-            [withNameField]="true"
-            [nameFieldLabel]="'forms.labels.addressNameDan' | translate"
-            formGroupName="address"
-          ></app-address-controls>
-        </div>
-      </div>
-      <div
-        class="error-wrapper"
-        *ngIf="form.get('location')?.value === 'ADDRESS'"
-      >
-        <app-alert
-          *ngIf="coordinatesNotFound === 'NOT_FOUND'"
-          [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
-          [showIcon]="true"
-          bgIcon="travel_explore"
-          fgIcon="priority_high"
-        >
-          {{ 'validationErrors.coordinatesNotFound' | translate }}
-        </app-alert>
-        <app-spinner
-          *ngIf="!coordinatesNotFound"
-          forId="load-coords"
-          [noPadding]="true"
-          [small]="true"
-        ></app-spinner>
-      </div>
-    </ng-container>
-  `,
+            @if (form.get('location')?.value === 'ADDRESS') {
+              <div
+                class="error-wrapper"
+                >
+                @if (coordinatesNotFound === 'NOT_FOUND') {
+                  <app-alert
+                    [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
+                    [showIcon]="true"
+                    bgIcon="travel_explore"
+                    fgIcon="priority_high"
+                    >
+                    {{ 'validationErrors.coordinatesNotFound' | translate }}
+                  </app-alert>
+                }
+                @if (!coordinatesNotFound) {
+                  <app-spinner
+                    forId="load-coords"
+                    [noPadding]="true"
+                    [small]="true"
+                  ></app-spinner>
+                }
+              </div>
+            }
+          </ng-container>
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

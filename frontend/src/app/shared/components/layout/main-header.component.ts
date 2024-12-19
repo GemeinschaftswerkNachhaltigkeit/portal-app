@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContentWrapperComponent } from './content-wrapper.component';
 import { LogoComponent } from './logo.component';
@@ -9,35 +9,34 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
   selector: 'app-main-header',
   standalone: true,
   imports: [
-    CommonModule,
     ContentWrapperComponent,
     LogoComponent,
     NavActionsComponent,
     MainMenuComponent
-  ],
+],
   template: `
     <header
       class="header mat-elevation-z8"
       [class.mobile]="mobile"
       role="banner"
-    >
+      >
       <app-content-wrapper [onlyX]="true">
         <div class="header-content">
           <div class="left-content">
             <app-logo></app-logo>
-            <ng-container *ngIf="!mobile">
+            @if (!mobile) {
               <app-main-menu></app-main-menu>
-            </ng-container>
+            }
           </div>
           <div class="actions">
-            <ng-container *ngIf="!mobile">
+            @if (!mobile) {
               <app-nav-actions></app-nav-actions>
-            </ng-container>
+            }
           </div>
         </div>
       </app-content-wrapper>
     </header>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     :host {

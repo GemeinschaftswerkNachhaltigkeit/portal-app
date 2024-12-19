@@ -6,18 +6,19 @@ import { OutlinedIconComponent } from './outlined-icon.component';
   selector: 'app-content-row',
   standalone: true,
   imports: [CommonModule, OutlinedIconComponent],
-  template: `<div
+  template: `@if (content) {
+  <div
     class="content-row font-2"
-    *ngIf="content"
     [ngClass]="{ small: small, cardFooter: cardFooter }"
-  >
+    >
     <div class="content">
       <app-outlined-icon>{{ icon }}</app-outlined-icon>
       <p class="text">
         <mark>{{ content }}</mark>
       </p>
     </div>
-  </div> `,
+  </div>
+}`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

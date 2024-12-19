@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import UserDataForm from '../models/user-data-form';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-field-error/form-field-error.component';
@@ -17,14 +17,13 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-my-data-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     FormFieldErrorComponent,
     MatButtonModule,
     TranslateModule
-  ],
+],
   template: `
     <form
       class="form"

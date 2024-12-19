@@ -35,16 +35,22 @@ import { RouterModule } from '@angular/router';
   ],
   template: `
     <div class="card-wrapper mat-elevation-z8">
-      <div class="expiredBadge" *ngIf="expired">
-        <app-expired-badge>{{
-          'labels.expiredOffer' | translate
-        }}</app-expired-badge>
-      </div>
-      <div class="featured" *ngIf="featuredText">
-        <div class="new">{{ 'labels.new' | translate }}</div>
-        {{ featuredText }}
-      </div>
-      <div class="expired" *ngIf="expired"></div>
+      @if (expired) {
+        <div class="expiredBadge">
+          <app-expired-badge>{{
+            'labels.expiredOffer' | translate
+          }}</app-expired-badge>
+        </div>
+      }
+      @if (featuredText) {
+        <div class="featured">
+          <div class="new">{{ 'labels.new' | translate }}</div>
+          {{ featuredText }}
+        </div>
+      }
+      @if (expired) {
+        <div class="expired"></div>
+      }
       <div
         class="card"
         [ngClass]="{
@@ -55,37 +61,40 @@ import { RouterModule } from '@angular/router';
         <div class="clickable-area" (click)="cardClickHandler()"></div>
         <div class="top-right">
           <div class="category">
-            <app-label [color]="typeColor(type)" *ngIf="type && category">
-              {{ category | translate }}
-            </app-label>
+            @if (type && category) {
+              <app-label [color]="typeColor(type)">
+                {{ category | translate }}
+              </app-label>
+            }
           </div>
-          <div class="actions" *ngIf="showActions">
-            <app-action
-              [onlyIcon]="true"
-              [icon]="'edit'"
-              (clicked)="editHandler()"
-            ></app-action>
-            <app-action
-              [onlyIcon]="true"
-              [icon]="'delete'"
-              (clicked)="deleteHandler()"
-            ></app-action>
-            <ng-content select="[actionMenu]"></ng-content>
-          </div>
+          @if (showActions) {
+            <div class="actions">
+              <app-action
+                [onlyIcon]="true"
+                [icon]="'edit'"
+                (clicked)="editHandler()"
+              ></app-action>
+              <app-action
+                [onlyIcon]="true"
+                [icon]="'delete'"
+                (clicked)="deleteHandler()"
+              ></app-action>
+              <ng-content select="[actionMenu]"></ng-content>
+            </div>
+          }
         </div>
         <div class="image-column">
-          <div
-            *ngIf="featured"
-            class="featured-icon"
-            [matTooltip]="'marketplace.labels.featured' | translate"
-          >
-            <app-outlined-icon>star</app-outlined-icon>
-          </div>
-          <img
-            [src]="imgService.url(imageId)"
-            alt="Offer image"
-            *ngIf="imageId"
-          />
+          @if (featured) {
+            <div
+              class="featured-icon"
+              [matTooltip]="'marketplace.labels.featured' | translate"
+            >
+              <app-outlined-icon>star</app-outlined-icon>
+            </div>
+          }
+          @if (imageId) {
+            <img [src]="imgService.url(imageId)" alt="Offer image" />
+          }
         </div>
 
         <div class="content-column">
@@ -100,29 +109,37 @@ import { RouterModule } from '@angular/router';
                 <p class="description-text">{{ utils.excerpt(content) }}</p>
               </div>
               <div class="details">
-                <div class="details-entries" *ngIf="location">
-                  <app-content-row
-                    *ngIf="hasAddress(location)"
-                    [small]="true"
-                    [content]="utils.locationString(location)"
-                  ></app-content-row>
-                  <app-content-row
-                    *ngIf="location.online"
-                    [small]="true"
-                    [content]="'forms.labels.online' | translate"
-                  ></app-content-row>
-                </div>
+                @if (location) {
+                  <div class="details-entries">
+                    @if (hasAddress(location)) {
+                      <app-content-row
+                        [small]="true"
+                        [content]="utils.locationString(location)"
+                      ></app-content-row>
+                    }
+                    @if (location.online) {
+                      <app-content-row
+                        [small]="true"
+                        [content]="'forms.labels.online' | translate"
+                      ></app-content-row>
+                    }
+                  </div>
+                }
               </div>
             </div>
           </div>
-          <div class="thematicFocuses" *ngIf="thematicFocus?.length">
-            {{ getFormattedThematicFocus() }}
-          </div>
-          <div *ngIf="orga" class="orga">
-            <a [routerLink]="['/', 'organisations', orga.id]">{{
-              orga.name
-            }}</a>
-          </div>
+          @if (thematicFocus.length) {
+            <div class="thematicFocuses">
+              {{ getFormattedThematicFocus() }}
+            </div>
+          }
+          @if (orga) {
+            <div class="orga">
+              <a [routerLink]="['/', 'organisations', orga.id]">{{
+                orga.name
+              }}</a>
+            </div>
+          }
         </div>
       </div>
     </div>

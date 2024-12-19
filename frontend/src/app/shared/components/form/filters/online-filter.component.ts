@@ -5,13 +5,13 @@ import {
   MatSlideToggleChange,
   MatSlideToggleModule
 } from '@angular/material/slide-toggle';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-online-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, MatSlideToggleModule],
+  imports: [TranslateModule, MatSlideToggleModule],
   template: `
     <div class="slide-toggle">
       <div>{{ 'labels.onlyOnline' | translate }}</div>

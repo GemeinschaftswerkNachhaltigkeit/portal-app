@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 import { PartnerLink } from '../models/partner-link';
 import { OfferCategories } from '../models/offer-categories';
 import { BestPracticesCategories } from '../models/best-practices-categories';
-import { CommonModule } from '@angular/common';
+
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,55 +20,47 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-partner-links',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeadingComponent,
-    MatButtonModule,
-    MatIconModule,
-    TranslateModule
-  ],
+  imports: [HeadingComponent, MatButtonModule, MatIconModule, TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div #slidercontainer id="partner-links">
-      <div
-        id="partner-links-slider"
-        class="slider-wrapper"
-        *ngIf="filtered?.length"
-      >
-        <div class="title">
-          <app-heading size="sm" color="none" [uppercase]="true">{{
-            'marketplace.titles.slider' | translate
-          }}</app-heading>
+      @if (filtered.length) {
+        <div id="partner-links-slider" class="slider-wrapper">
+          <div class="title">
+            <app-heading size="sm" color="none" [uppercase]="true">{{
+              'marketplace.titles.slider' | translate
+            }}</app-heading>
+          </div>
+          <swiper-container
+            #swiper
+            slides-per-view="auto"
+            loop="true"
+            space-between="12"
+            loop-fill-group-with-blank="true"
+          >
+            @for (link of filtered; track link) {
+              <swiper-slide>
+                <a class="slide-wrapper" target="_blank" [href]="link.url">
+                  <div class="image-wrapper">
+                    <img [src]="link.logo" alt="" />
+                  </div>
+                  <h5>{{ link.title }}</h5>
+                </a>
+              </swiper-slide>
+            }
+          </swiper-container>
+          @if (filtered.length) {
+            <div class="buttons">
+              <button class="button prev" type="button" (click)="slidePrev()">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <button class="button next" type="button" (click)="slideNext()">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </div>
+          }
         </div>
-
-        <swiper-container
-          #swiper
-          slides-per-view="auto"
-          loop="true"
-          space-between="12"
-          loop-fill-group-with-blank="true"
-        >
-          <ng-container *ngFor="let link of filtered">
-            <swiper-slide>
-              <a class="slide-wrapper" target="_blank" [href]="link.url">
-                <div class="image-wrapper">
-                  <img [src]="link.logo" alt="" />
-                </div>
-                <h5>{{ link.title }}</h5>
-              </a>
-            </swiper-slide>
-          </ng-container>
-        </swiper-container>
-
-        <div class="buttons" *ngIf="filtered.length">
-          <button class="button prev" type="button" (click)="slidePrev()">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-          <button class="button next" type="button" (click)="slideNext()">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </div>
-      </div>
+      }
     </div>
   `,
   styles: `

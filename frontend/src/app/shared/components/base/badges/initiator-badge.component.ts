@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { OutlinedIconComponent } from '../outlined-icon.component';
@@ -33,6 +33,6 @@ import { OutlinedIconComponent } from '../outlined-icon.component';
     </div>
   `,
   standalone: true,
-  imports: [CommonModule, OutlinedIconComponent, TranslateModule]
+  imports: [OutlinedIconComponent, TranslateModule]
 })
 export class InitiatorBadgeComponent {}

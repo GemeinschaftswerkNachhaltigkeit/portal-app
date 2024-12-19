@@ -1,8 +1,8 @@
-<ng-container *ngIf="paging$ | async as paging">
+@if (paging$ | async; as paging) {
   <app-marketplace-layout
     [total]="paging.totalElements || 0"
     [loading]="loading$ | async"
-  >
+    >
     <ng-container banner
       ><app-add-banner (add)="handleAdd()"></app-add-banner
     ></ng-container>
@@ -29,7 +29,6 @@
       (search)="handleSearch($event)"
       (searchValueChanged)="handleSearchValueChanged($event)"
     ></app-search-input>
-
     <ng-container filter-bar>
       <div>
         <app-filter-modal-button
@@ -40,9 +39,9 @@
       </div>
     </ng-container>
     <div results>
-      <ng-container *ngIf="featuredItems$ | async as featuredItems">
+      @if (featuredItems$ | async; as featuredItems) {
         <app-card-list>
-          <ng-container *ngFor="let featuredItem of featuredItems">
+          @for (featuredItem of featuredItems; track featuredItem) {
             <app-card
               [featuredText]="featuredItem.featuredText"
               [imageId]="featuredItem.image"
@@ -57,14 +56,13 @@
               [expired]="expired(featuredItem)"
               (cardClicked)="open(featuredItem.id)"
             ></app-card>
-          </ng-container>
+          }
         </app-card-list>
         <div class="line"><hr /></div>
-      </ng-container>
-
-      <ng-container *ngIf="items$ | async as items">
+      }
+      @if (items$ | async; as items) {
         <app-card-list>
-          <ng-container *ngFor="let item of items">
+          @for (item of items; track item) {
             <app-card
               [imageId]="item.image"
               [title]="item.name"
@@ -78,31 +76,33 @@
               [expired]="expired(item)"
               (cardClicked)="open(item.id)"
             ></app-card>
-          </ng-container>
+          }
         </app-card-list>
-
         <div class="pager">
-          <mat-paginator
-            class="mat-elevation-z8"
-            *ngIf="items?.length"
-            color="accent"
-            [length]="paging?.totalElements"
-            [pageIndex]="paging?.number"
-            [pageSize]="paging?.size || pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [showFirstLastButtons]="true"
-            (page)="handlePageChanged($event)"
-            aria-label="Select page"
-          >
-          </mat-paginator>
+          @if (items?.length) {
+            <mat-paginator
+              class="mat-elevation-z8"
+              color="accent"
+              [length]="paging?.totalElements"
+              [pageIndex]="paging?.number"
+              [pageSize]="paging?.size || pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              [showFirstLastButtons]="true"
+              (page)="handlePageChanged($event)"
+              aria-label="Select page"
+              >
+            </mat-paginator>
+          }
         </div>
-      </ng-container>
+      }
     </div>
-    <div slider *ngIf="links$ | async as links">
-      <app-partner-links
-        [links]="links"
-        [selectedCategories]="getCategories()"
-      ></app-partner-links>
-    </div>
+    @if (links$ | async; as links) {
+      <div slider>
+        <app-partner-links
+          [links]="links"
+          [selectedCategories]="getCategories()"
+        ></app-partner-links>
+      </div>
+    }
   </app-marketplace-layout>
-</ng-container>
+}

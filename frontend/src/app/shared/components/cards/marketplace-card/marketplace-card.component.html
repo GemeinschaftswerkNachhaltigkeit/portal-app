@@ -1,8 +1,10 @@
 <a class="card" [routerLink]="['/marketplace/search/', marketplaceItem.id]">
   <header>
-    <div class="image" *ngIf="marketplaceItem.image">
-      <img [src]="imageUrl()" alt="banner" />
-    </div>
+    @if (marketplaceItem.image) {
+      <div class="image">
+        <img [src]="imageUrl()" alt="banner" />
+      </div>
+    }
     <div class="header-text">
       <div class="badge" [ngClass]="marketplaceItem.marketplaceType">
         {{ getMarketplaceCategory(marketplaceItem) }}
@@ -12,17 +14,17 @@
           class="orga-link"
           [routerLink]="['/organisations', marketplaceItem.organisation?.id]"
           >{{ marketplaceItem.organisation?.name }}</a
-        >
-      }
-    </div>
-  </header>
-  <article>
-    <div class="badge">
-      <app-event-badges [activity]="marketplaceItem"></app-event-badges>
-    </div>
-    <h3 class="title">{{ marketplaceItem.name }}</h3>
-    <div class="description">
-      {{ utils.excerpt(marketplaceItem.description) }}
-    </div>
-  </article>
-</a>
+          >
+        }
+      </div>
+    </header>
+    <article>
+      <div class="badge">
+        <app-event-badges [activity]="marketplaceItem"></app-event-badges>
+      </div>
+      <h3 class="title">{{ marketplaceItem.name }}</h3>
+      <div class="description">
+        {{ utils.excerpt(marketplaceItem.description) }}
+      </div>
+    </article>
+  </a>

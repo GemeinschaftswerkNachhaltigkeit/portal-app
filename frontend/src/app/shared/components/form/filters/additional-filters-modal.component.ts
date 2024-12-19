@@ -9,7 +9,7 @@ import {
   SecondaryFilters,
   SecondaryFiltersComponent
 } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -34,19 +34,19 @@ export type AdditionalFiltersData = {
   selector: 'app-additional-filters-modal',
   standalone: true,
   imports: [
-    CommonModule,
     SecondaryFiltersComponent,
     TranslateModule,
     MatButtonModule,
     MatDialogModule
-  ],
+],
   template: `
     <div mat-dialog-content>
-      <app-secondary-filters
-        *ngIf="data"
-        [data]="data"
-        (filtersChanged)="handleFiltersChanged($event)"
-      ></app-secondary-filters>
+      @if (data) {
+        <app-secondary-filters
+          [data]="data"
+          (filtersChanged)="handleFiltersChanged($event)"
+        ></app-secondary-filters>
+      }
     </div>
     <div mat-dialog-actions>
       <button mat-flat-button cdkFocusInitial (click)="apply()" color="accent">
@@ -56,7 +56,7 @@ export type AdditionalFiltersData = {
         {{ 'btn.close' | translate }}
       </button>
     </div>
-  `,
+    `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

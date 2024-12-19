@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-api-key-doc-links',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="links">
       <ng-content></ng-content>

@@ -20,20 +20,26 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   template: `
     <header class="header" [ngClass]="{ expired: expired }">
-      <div class="expired" *ngIf="expired"></div>
-
-      <img [src]="bgImage" alt="header" *ngIf="bgImage" />
-
-      <div class="expiredBadge" *ngIf="expired">
-        <app-expired-badge>{{
-          'labels.expiredOffer' | translate
-        }}</app-expired-badge>
-      </div>
+      @if (expired) {
+        <div class="expired"></div>
+      }
+    
+      @if (bgImage) {
+        <img [src]="bgImage" alt="header" />
+      }
+    
+      @if (expired) {
+        <div class="expiredBadge">
+          <app-expired-badge>{{
+            'labels.expiredOffer' | translate
+          }}</app-expired-badge>
+        </div>
+      }
       <div class="type">
         <app-label [color]="color">{{ catgegory }}</app-label>
       </div>
     </header>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

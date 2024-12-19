@@ -43,6 +43,7 @@ export class NavContentService {
         }>('navigation_translations');
       if (navItemsResponse) {
         navItems = navItemsResponse.nav_item;
+
         this.navContent.next(navItems);
       }
     } catch (e) {

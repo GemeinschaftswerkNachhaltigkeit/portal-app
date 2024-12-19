@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 export type CardData = {
   title: string;
@@ -10,7 +10,7 @@ export type CardData = {
 @Component({
   selector: 'app-title-with-content',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="title-with-content">
       <h2 class="title">

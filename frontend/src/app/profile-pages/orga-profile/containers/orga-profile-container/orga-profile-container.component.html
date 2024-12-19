@@ -1,7 +1,7 @@
-<ng-container *ngIf="(orga$ | async) === null">
+@if ((orga$ | async) === null) {
   <app-spinner></app-spinner>
-</ng-container>
-<ng-container *ngIf="orga$ | async as orga">
+}
+@if (orga$ | async; as orga) {
   <app-profile-layout>
     <div id="about-us" breadcrumbs>
       <app-breadcrumbs>
@@ -31,200 +31,202 @@
           fragment="about-us"
           appMenuItemActive="about-us"
           >{{ 'profile.nav.aboutUs' | translate }}</a
-        >
-        <a
-          *appMenuItem
-          routerLink="./"
-          fragment="sdgs"
-          appMenuItemActive="sdgs"
-          >{{ 'profile.nav.sdgs' | translate }}</a
-        >
-        <ng-container *ngIf="(activities$ | async)?.length">
+          >
           <a
             *appMenuItem
             routerLink="./"
-            fragment="activities"
-            appMenuItemActive="activities"
-          >
-            {{ 'profile.nav.activities' | translate }}
-          </a>
-        </ng-container>
-      </app-page-menu>
-    </div>
-    <main content1 class="main-content">
-      <section class="article-wrapper">
-        <div class="top-actions">
-          <a [href]="shareLink(orga)">
-            <app-action [clickable]="false" icon="share">{{
-              'btn.share' | translate
-            }}</app-action>
-          </a>
-          <app-organisation-subscription-action [organisation]="orga">
-          </app-organisation-subscription-action>
+            fragment="sdgs"
+            appMenuItemActive="sdgs"
+            >{{ 'profile.nav.sdgs' | translate }}</a
+            >
+            @if ((activities$ | async)?.length) {
+              <a
+                *appMenuItem
+                routerLink="./"
+                fragment="activities"
+                appMenuItemActive="activities"
+                >
+                {{ 'profile.nav.activities' | translate }}
+              </a>
+            }
+          </app-page-menu>
         </div>
-        <app-section
-          [title]="orga.name"
-          [subtitle]="'profile.titles.aboutUs' | translate"
-          [info]="'organisationType.' + orga.organisationType | translate"
-        >
-          <app-orga-badges badge [organisation]="orga"></app-orga-badges>
-          <app-html-wrapper [html]="orga.description || ''"></app-html-wrapper>
-        </app-section>
-      </section>
-
-      <section
-        class="article-wrapper"
-        id="sdgs"
-        *ngIf="orga.sustainableDevelopmentGoals"
-      >
-        <app-section
-          [title]="'profile.titles.sdgsTagline' | translate"
-          [subtitle]="'profile.titles.sdgs' | translate"
-        >
-          <div class="sdgs" #sdgs>
-            <ng-container *ngFor="let sdg of orga.sustainableDevelopmentGoals">
-              <div class="sdg"><app-sdg-icon [goal]="sdg"></app-sdg-icon></div>
-            </ng-container>
-          </div>
-        </app-section>
-      </section>
-    </main>
-    <div content2>
-      <ng-container *ngIf="offers$ | async as offers">
-        <ng-container *ngIf="activities$ | async as activities">
-          <ng-container *ngIf="bp$ | async as bestPractices">
+        <main content1 class="main-content">
+          <section class="article-wrapper">
+            <div class="top-actions">
+              <a [href]="shareLink(orga)">
+                <app-action [clickable]="false" icon="share">{{
+                  'btn.share' | translate
+                }}</app-action>
+              </a>
+              <app-organisation-subscription-action [organisation]="orga">
+              </app-organisation-subscription-action>
+            </div>
+            <app-section
+              [title]="orga.name"
+              [subtitle]="'profile.titles.aboutUs' | translate"
+              [info]="'organisationType.' + orga.organisationType | translate"
+              >
+              <app-orga-badges badge [organisation]="orga"></app-orga-badges>
+              <app-html-wrapper [html]="orga.description || ''"></app-html-wrapper>
+            </app-section>
+          </section>
+          @if (orga.sustainableDevelopmentGoals) {
             <section
               class="article-wrapper"
-              id="activities"
-              *ngIf="offers.length || activities.length || bestPractices.length"
-            >
-              <app-section
-                [title]="'profile.titles.activitiesTagline' | translate"
-                [subtitle]="'profile.titles.activities' | translate"
+              id="sdgs"
               >
-                <app-tabs>
-                  <app-tab
-                    *ngIf="offers.length"
-                    [title]="'profile.labels.offers' | translate"
-                  >
-                    <ng-container *ngFor="let offer of offers">
-                      <app-list-item
-                        [type]="'OFFER'"
-                        [title]="offer.name || ''"
-                        [description]="offer.description || ''"
-                        [thematicFocus]="offer.thematicFocus"
-                        [image]="offer.image || ''"
+              <app-section
+                [title]="'profile.titles.sdgsTagline' | translate"
+                [subtitle]="'profile.titles.sdgs' | translate"
+                >
+                <div class="sdgs" #sdgs>
+                  @for (sdg of orga.sustainableDevelopmentGoals; track sdg) {
+                    <div class="sdg"><app-sdg-icon [goal]="sdg"></app-sdg-icon></div>
+                  }
+                </div>
+              </app-section>
+            </section>
+          }
+        </main>
+        <div content2>
+          @if (offers$ | async; as offers) {
+            @if (activities$ | async; as activities) {
+              @if (bp$ | async; as bestPractices) {
+                @if (offers.length || activities.length || bestPractices.length) {
+                  <section
+                    class="article-wrapper"
+                    id="activities"
+                    >
+                    <app-section
+                      [title]="'profile.titles.activitiesTagline' | translate"
+                      [subtitle]="'profile.titles.activities' | translate"
+                      >
+                      <app-tabs>
+                        @if (offers.length) {
+                          <app-tab
+                            [title]="'profile.labels.offers' | translate"
+                            >
+                            @for (offer of offers; track offer) {
+                              <app-list-item
+                                [type]="'OFFER'"
+                                [title]="offer.name || ''"
+                                [description]="offer.description || ''"
+                                [thematicFocus]="offer.thematicFocus"
+                                [image]="offer.image || ''"
                         [category]="
                           offer?.offerCategory
                             ? 'marketplace.labels.' +
                               offer?.offerCategory?.toString()
                             : ''
                         "
-                        [openTitle]="'profile.buttons.openOffer'"
-                        [openLink]="['/marketplace/search', offer.id]"
-                      >
-                        <!--
-                        <app-offer-subscription-action
-                          [short]="true"
-                          [stroked]="true"
-                          [offer]="offer"
-                          [full]="true"
-                        ></app-offer-subscription-action>
-                      -->
-                      </app-list-item>
-                    </ng-container>
-                  </app-tab>
-
-                  <app-tab
-                    *ngIf="activities.length"
-                    [title]="'profile.labels.activities' | translate"
-                  >
-                    <ng-container *ngFor="let activity of activities">
-                      <app-list-item
+                                [openTitle]="'profile.buttons.openOffer'"
+                                [openLink]="['/marketplace/search', offer.id]"
+                                >
+                                <!--
+                                <app-offer-subscription-action
+                                  [short]="true"
+                                  [stroked]="true"
+                                  [offer]="offer"
+                                  [full]="true"
+                                ></app-offer-subscription-action>
+                                -->
+                              </app-list-item>
+                            }
+                          </app-tab>
+                        }
+                        @if (activities.length) {
+                          <app-tab
+                            [title]="'profile.labels.activities' | translate"
+                            >
+                            @for (activity of activities; track activity) {
+                              <app-list-item
                         [type]="
                           activity?.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
                         "
-                        [title]="activity.name || ''"
-                        [description]="activity.description || ''"
-                        [impactArea]="activity.impactArea"
-                        [period]="activity.period"
-                        [location]="activity.location"
-                        [thematicFocus]="activity.thematicFocus"
-                        [image]="activity.logo || ''"
+                                [title]="activity.name || ''"
+                                [description]="activity.description || ''"
+                                [impactArea]="activity.impactArea"
+                                [period]="activity.period"
+                                [location]="activity.location"
+                                [thematicFocus]="activity.thematicFocus"
+                                [image]="activity.logo || ''"
                         [category]="
                           activity?.activityType
                             ? 'activityType.' +
                               activity?.activityType?.toString()
                             : ''
                         "
-                        [openTitle]="'profile.buttons.openActivity'"
+                                [openTitle]="'profile.buttons.openActivity'"
                         [openLink]="[
                           '/',
                           'organisations',
                           activity.organisation?.id,
                           activity.id
                         ]"
-                        (bookmark)="bookmarkHandler(activity.id, activity.name)"
-                        (unbookmark)="unbookmarkHandler(activity.id)"
-                      >
-                        <app-activity-subscription-action
-                          [short]="true"
-                          [stroked]="true"
-                          [activity]="activity"
-                          [full]="true"
-                        >
-                        </app-activity-subscription-action>
-                      </app-list-item>
-                    </ng-container>
-                  </app-tab>
-
-                  <app-tab
-                    *ngIf="bestPractices.length"
-                    [title]="'profile.labels.bestPractices' | translate"
-                  >
-                    <ng-container *ngFor="let bestPractice of bestPractices">
-                      <app-list-item
-                        [type]="'BEST_PRACTICE'"
-                        [title]="bestPractice.name || ''"
-                        [description]="bestPractice.description || ''"
-                        [thematicFocus]="bestPractice.thematicFocus"
-                        [image]="bestPractice.image || ''"
+                                (bookmark)="bookmarkHandler(activity.id, activity.name)"
+                                (unbookmark)="unbookmarkHandler(activity.id)"
+                                >
+                                <app-activity-subscription-action
+                                  [short]="true"
+                                  [stroked]="true"
+                                  [activity]="activity"
+                                  [full]="true"
+                                  >
+                                </app-activity-subscription-action>
+                              </app-list-item>
+                            }
+                          </app-tab>
+                        }
+                        @if (bestPractices.length) {
+                          <app-tab
+                            [title]="'profile.labels.bestPractices' | translate"
+                            >
+                            @for (bestPractice of bestPractices; track bestPractice) {
+                              <app-list-item
+                                [type]="'BEST_PRACTICE'"
+                                [title]="bestPractice.name || ''"
+                                [description]="bestPractice.description || ''"
+                                [thematicFocus]="bestPractice.thematicFocus"
+                                [image]="bestPractice.image || ''"
                         [category]="
                           bestPractice?.bestPractiseCategory
                             ? 'marketplace.labels.' +
                               bestPractice?.bestPractiseCategory?.toString()
                             : ''
                         "
-                        [openTitle]="'profile.buttons.openBestPractice'"
-                        [openLink]="['/marketplace/search', bestPractice.id]"
-                      >
-                        <!-- 
-                      <app-best-practice-subscription-action
-                          [short]="true"
-                          [stroked]="true"
-                          [bp]="bestPractice"
-                          [full]="true"
-                        ></app-best-practice-subscription-action>
-                      -->
-                      </app-list-item>
-                    </ng-container></app-tab
-                  >
-                </app-tabs>
-              </app-section>
-            </section>
-          </ng-container>
-        </ng-container>
-      </ng-container>
-    </div>
-    <div contact>
-      <app-contact
-        [name]="orga.name"
-        [impactArea]="orga.impactArea"
-        [contact]="orga.contact"
-        [location]="orga.location"
-        [socialMedia]="orga.socialMediaContacts"
-        [thematicFocus]="orga.thematicFocus"
-      ></app-contact>
-    </div>
-  </app-profile-layout>
-</ng-container>
+                                [openTitle]="'profile.buttons.openBestPractice'"
+                                [openLink]="['/marketplace/search', bestPractice.id]"
+                                >
+                                <!--
+                                <app-best-practice-subscription-action
+                                  [short]="true"
+                                  [stroked]="true"
+                                  [bp]="bestPractice"
+                                  [full]="true"
+                                ></app-best-practice-subscription-action>
+                                -->
+                              </app-list-item>
+                              }</app-tab
+                              >
+                            }
+                          </app-tabs>
+                        </app-section>
+                      </section>
+                    }
+                  }
+                }
+              }
+            </div>
+            <div contact>
+              <app-contact
+                [name]="orga.name"
+                [impactArea]="orga.impactArea"
+                [contact]="orga.contact"
+                [location]="orga.location"
+                [socialMedia]="orga.socialMediaContacts"
+                [thematicFocus]="orga.thematicFocus"
+              ></app-contact>
+            </div>
+          </app-profile-layout>
+        }

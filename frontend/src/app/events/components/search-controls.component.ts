@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -23,12 +23,11 @@ export type SearchFields = {
   selector: 'app-search-controls',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
     TranslateModule
-  ],
+],
   template: `
     <form [formGroup]="formGroup" class="search-form" (submit)="handleSubmit()">
       <div class="input-wrapper">

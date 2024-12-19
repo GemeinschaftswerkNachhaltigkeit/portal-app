@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ContentWrapperComponent } from '../content-wrapper.component';
@@ -11,11 +11,10 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrls: ['./not-found-page.component.scss'],
   standalone: true,
   imports: [
-    CommonModule,
     ContentWrapperComponent,
     MatButtonModule,
     TranslateModule
-  ]
+]
 })
 export class NotFoundPageComponent {
   goToLandingpage() {

@@ -1,17 +1,19 @@
 <ng-container [formGroup]="form">
   <div class="address">
-    <mat-form-field *ngIf="withNameField" appearance="outline">
-      <mat-label>{{ nameFieldLabel | translate }}</mat-label>
-      <input
-        matInput
-        [placeholder]="nameFieldLabel | translate"
-        formControlName="name"
-      />
-      <app-valid-check [form]="form" controlName="name"></app-valid-check>
-      <mat-error>
-        <app-form-field-error [field]="form.get('name')"></app-form-field-error>
-      </mat-error>
-    </mat-form-field>
+    @if (withNameField) {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ nameFieldLabel | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="nameFieldLabel | translate"
+          formControlName="name"
+          />
+        <app-valid-check [form]="form" controlName="name"></app-valid-check>
+        <mat-error>
+          <app-form-field-error [field]="form.get('name')"></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    }
     <div class="address-row-1">
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
@@ -19,7 +21,7 @@
           matInput
           [placeholder]="'forms.labels.street' | translate"
           formControlName="street"
-        />
+          />
         <app-valid-check [form]="form" controlName="street"></app-valid-check>
 
         <mat-error>
@@ -35,7 +37,7 @@
           matInput
           [placeholder]="'forms.labels.streetNo' | translate"
           formControlName="streetNo"
-        />
+          />
 
         <app-valid-check [form]="form" controlName="streetNo"></app-valid-check>
         <mat-error>
@@ -51,7 +53,7 @@
           matInput
           [placeholder]="'forms.labels.supplement' | translate"
           formControlName="supplement"
-        />
+          />
         <app-valid-check
           [form]="form"
           controlName="supplement"
@@ -72,7 +74,7 @@
           matInput
           [placeholder]="'forms.labels.zipCode' | translate"
           formControlName="zipCode"
-        />
+          />
         <app-valid-check [form]="form" controlName="zipCode"></app-valid-check>
 
         <mat-error>
@@ -88,7 +90,7 @@
           matInput
           [placeholder]="'forms.labels.city' | translate"
           formControlName="city"
-        />
+          />
 
         <app-valid-check [form]="form" controlName="city"></app-valid-check>
         <mat-error>
@@ -105,7 +107,7 @@
           readonly
           [placeholder]="'forms.labels.country' | translate"
           formControlName="country"
-        />
+          />
 
         <app-valid-check [form]="form" controlName="country"></app-valid-check>
         <mat-error>

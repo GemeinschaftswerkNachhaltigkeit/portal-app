@@ -13,7 +13,7 @@ import {
   SpecialOrgaFilters,
   SpecialOrgasFilterComponent
 } from './special-orgas-filter.component';
-import { CommonModule } from '@angular/common';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { OrderedFilterComponent } from './ordered-filter.component';
 import { ThematicFocusFilterComponent } from './thematic-focus-filter.component';
@@ -45,7 +45,6 @@ export enum SecondaryFilters {
   selector: 'app-secondary-filters',
   standalone: true,
   imports: [
-    CommonModule,
     MatExpansionModule,
     OrderedFilterComponent,
     ThematicFocusFilterComponent,
@@ -59,106 +58,109 @@ export enum SecondaryFilters {
     ActivityPeriodFilterComponent,
     OnlineFilterComponent,
     OnlyDanFilterComponent
-  ],
+],
   template: `
-    <mat-accordion class="headers" *ngIf="filters" [multi]="true">
-      <div class="ordered-list">
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.THEMATIC_FOCUS)"
-          ><app-thematic-focus-filter
-            *ngIf="useFilter(filterTypes.THEMATIC_FOCUS)"
-            [selected]="filters.thematicFocus || []"
-            (filterChanged)="thematicFocusHandler($event)"
-          ></app-thematic-focus-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.SDGS)"
-          ><app-sdg-filter
-            *ngIf="useFilter(filterTypes.SDGS)"
-            [selected]="filters.sdgs || []"
-            (filterChanged)="sdgsHandler($event)"
-          ></app-sdg-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.IMPACT_AREAS)"
-          ><app-impact-areas-filter
-            *ngIf="useFilter(filterTypes.IMPACT_AREAS)"
-            [selected]="filters.impactAreas || []"
-            (filterChanged)="impactAreaHandler($event)"
-          ></app-impact-areas-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.ORGA_TYPES)"
-          ><app-orga-types-filter
-            *ngIf="useFilter(filterTypes.ORGA_TYPES)"
-            [selected]="filters.orgaTypes || []"
-            (filterChanged)="orgaTypeHandler($event)"
-          ></app-orga-types-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.ACTIVITY_TYPES)"
-          ><app-acti-types-filter
-            *ngIf="useFilter(filterTypes.ACTIVITY_TYPES)"
-            [selected]="filters.activityTypes || []"
-            (filterChanged)="activityTypeHandler($event)"
-          ></app-acti-types-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.SPECIAL_ORGAS)">
-          <app-special-orgas-filter
-            *ngIf="useFilter(filterTypes.SPECIAL_ORGAS)"
-            [initiator]="filters.initiator || false"
+    @if (filters) {
+      <mat-accordion class="headers" [multi]="true">
+        <div class="ordered-list">
+          <app-ordered-filter [orderNumber]="getOrder(filterTypes.THEMATIC_FOCUS)"
+            >@if (useFilter(filterTypes.THEMATIC_FOCUS)) {
+            <app-thematic-focus-filter
+              [selected]="filters.thematicFocus || []"
+              (filterChanged)="thematicFocusHandler($event)"
+              ></app-thematic-focus-filter
+              >
+            }</app-ordered-filter>
+            <app-ordered-filter [orderNumber]="getOrder(filterTypes.SDGS)"
+              >@if (useFilter(filterTypes.SDGS)) {
+              <app-sdg-filter
+                [selected]="filters.sdgs || []"
+                (filterChanged)="sdgsHandler($event)"
+                ></app-sdg-filter
+                >
+              }</app-ordered-filter>
+              <app-ordered-filter [orderNumber]="getOrder(filterTypes.IMPACT_AREAS)"
+                >@if (useFilter(filterTypes.IMPACT_AREAS)) {
+                <app-impact-areas-filter
+                  [selected]="filters.impactAreas || []"
+                  (filterChanged)="impactAreaHandler($event)"
+                  ></app-impact-areas-filter
+                  >
+                }</app-ordered-filter>
+                <app-ordered-filter [orderNumber]="getOrder(filterTypes.ORGA_TYPES)"
+                  >@if (useFilter(filterTypes.ORGA_TYPES)) {
+                  <app-orga-types-filter
+                    [selected]="filters.orgaTypes || []"
+                    (filterChanged)="orgaTypeHandler($event)"
+                    ></app-orga-types-filter
+                    >
+                  }</app-ordered-filter>
+                  <app-ordered-filter [orderNumber]="getOrder(filterTypes.ACTIVITY_TYPES)"
+                    >@if (useFilter(filterTypes.ACTIVITY_TYPES)) {
+                    <app-acti-types-filter
+                      [selected]="filters.activityTypes || []"
+                      (filterChanged)="activityTypeHandler($event)"
+                      ></app-acti-types-filter
+                      >
+                    }</app-ordered-filter>
+                    <app-ordered-filter [orderNumber]="getOrder(filterTypes.SPECIAL_ORGAS)">
+                      @if (useFilter(filterTypes.SPECIAL_ORGAS)) {
+                        <app-special-orgas-filter
+                          [initiator]="filters.initiator || false"
             [projectSustainabilityWinner]="
               filters.projectSustainabilityWinner || false
             "
-            (filterChanged)="specialOrgaHandler($event)"
-          ></app-special-orgas-filter>
-        </app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.OFFER_CATS)"
-          ><app-offer-category-filter
-            *ngIf="useFilter(filterTypes.OFFER_CATS)"
-            [selected]="filters.offerCat || []"
-            (filterChanged)="offerCategoriesHandler($event)"
-          ></app-offer-category-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter
-          [orderNumber]="getOrder(filterTypes.BEST_PRACTICE_CATS)"
-          ><app-best-practice-category-filter
-            *ngIf="useFilter(filterTypes.BEST_PRACTICE_CATS)"
-            [selected]="filters.bestPractiseCat || []"
-            (filterChanged)="bestPracticeCategoriesHandler($event)"
-          ></app-best-practice-category-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter
-          [orderNumber]="getOrder(filterTypes.ACTIVITY_PERIOD)"
-          ><app-activity-period-filter
-            *ngIf="useFilter(filterTypes.ACTIVITY_PERIOD)"
-            [startDate]="filters.startDate"
-            [endDate]="filters.endDate"
-            (filterChanged)="dateRangeHandler($event)"
-          ></app-activity-period-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLINE)"
-          ><app-online-filter
-            *ngIf="useFilter(filterTypes.ONLINE)"
-            [selected]="filters.online"
-            (filterChanged)="onlineHandler($event)"
-          ></app-online-filter
-        ></app-ordered-filter>
-
-        <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLY_DAN)"
-          ><app-only-dan-filter
-            *ngIf="useFilter(filterTypes.ONLY_DAN)"
-            [selected]="filters.onlyDan"
-            (filterChanged)="onlyDanHandler($event)"
-          ></app-only-dan-filter
-        ></app-ordered-filter>
-      </div>
-    </mat-accordion>
-  `,
+                          (filterChanged)="specialOrgaHandler($event)"
+                        ></app-special-orgas-filter>
+                      }
+                    </app-ordered-filter>
+                    <app-ordered-filter [orderNumber]="getOrder(filterTypes.OFFER_CATS)"
+                      >@if (useFilter(filterTypes.OFFER_CATS)) {
+                      <app-offer-category-filter
+                        [selected]="filters.offerCat || []"
+                        (filterChanged)="offerCategoriesHandler($event)"
+                        ></app-offer-category-filter
+                        >
+                      }</app-ordered-filter>
+                      <app-ordered-filter
+                        [orderNumber]="getOrder(filterTypes.BEST_PRACTICE_CATS)"
+                        >@if (useFilter(filterTypes.BEST_PRACTICE_CATS)) {
+                        <app-best-practice-category-filter
+                          [selected]="filters.bestPractiseCat || []"
+                          (filterChanged)="bestPracticeCategoriesHandler($event)"
+                          ></app-best-practice-category-filter
+                          >
+                        }</app-ordered-filter>
+                        <app-ordered-filter
+                          [orderNumber]="getOrder(filterTypes.ACTIVITY_PERIOD)"
+                          >@if (useFilter(filterTypes.ACTIVITY_PERIOD)) {
+                          <app-activity-period-filter
+                            [startDate]="filters.startDate"
+                            [endDate]="filters.endDate"
+                            (filterChanged)="dateRangeHandler($event)"
+                            ></app-activity-period-filter
+                            >
+                          }</app-ordered-filter>
+                          <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLINE)"
+                            >@if (useFilter(filterTypes.ONLINE)) {
+                            <app-online-filter
+                              [selected]="filters.online"
+                              (filterChanged)="onlineHandler($event)"
+                              ></app-online-filter
+                              >
+                            }</app-ordered-filter>
+                            <app-ordered-filter [orderNumber]="getOrder(filterTypes.ONLY_DAN)"
+                              >@if (useFilter(filterTypes.ONLY_DAN)) {
+                              <app-only-dan-filter
+                                [selected]="filters.onlyDan"
+                                (filterChanged)="onlyDanHandler($event)"
+                                ></app-only-dan-filter
+                                >
+                              }</app-ordered-filter>
+                            </div>
+                          </mat-accordion>
+                        }
+    `,
   styles: `
     .ordered-list {
       display: flex;

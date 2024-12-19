@@ -1,19 +1,20 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { SdgsService } from 'src/app/shared/services/sdgs.service';
 
 @Component({
   selector: 'app-sdg-icon',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
-    <img
-      *ngIf="goal !== undefined && goal !== null"
-      [src]="goalUrl"
-      [alt]="goal"
-      [class]="size"
-    />
-  `,
+    @if (goal !== undefined && goal !== null) {
+      <img
+        [src]="goalUrl"
+        [alt]="goal"
+        [class]="size"
+        />
+    }
+    `,
   styles: `
     :host {
       display: flex;

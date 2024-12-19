@@ -17,11 +17,13 @@ import { OutlinedIconComponent } from './outlined-icon.component';
         withIcon: icon,
         limitedWidth: limitedWidth
       }"
-    >
-      <app-outlined-icon *ngIf="icon">{{ icon }}</app-outlined-icon>
+      >
+      @if (icon) {
+        <app-outlined-icon>{{ icon }}</app-outlined-icon>
+      }
       <ng-content></ng-content>
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

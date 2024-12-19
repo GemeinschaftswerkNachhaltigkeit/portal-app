@@ -13,24 +13,25 @@ import { CommonModule } from '@angular/common';
         'map-open': (showFullMap$ | async),
         'details-open': hasDetail()
       }"
-    >
+      >
       <div class="content">
         <section class="map-wrapper">
-          <div
-            class="details"
-            [ngClass]="{ clickable: hasDetail() }"
-            *ngIf="hasDetail()"
-          >
-            <div class="outlet">
-              <ng-content select="[detailsDesktop]"></ng-content>
+          @if (hasDetail()) {
+            <div
+              class="details"
+              [ngClass]="{ clickable: hasDetail() }"
+              >
+              <div class="outlet">
+                <ng-content select="[detailsDesktop]"></ng-content>
+              </div>
             </div>
-          </div>
-
+          }
+    
           <ng-content select="[map]"></ng-content>
         </section>
       </div>
     </div>
-  `
+    `
 })
 export class EmbeddedMapLayoutComponent {
   showFullMap$ = this.facade.showFullMap$;

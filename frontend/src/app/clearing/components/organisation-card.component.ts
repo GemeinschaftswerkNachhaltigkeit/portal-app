@@ -22,71 +22,72 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
     TranslateModule
   ],
   template: `
-    <div
-      *ngIf="orgWIP"
-      class="org-details card"
-      [class.is-active]="active"
-      [class.mat-elevation-z8]="elevation"
-    >
-      <header class="header">
-        <span>
-          <button
-            mat-icon-button
-            color="yellow"
-            [class]="'feedbackHistoryToggle'"
-            *ngIf="hasFeedbackHistory(orgWIP) && showFeedbackToggle"
-            (click)="toggleFeedbackHistory.emit(true)"
-          >
-            <app-outlined-icon>help_outline</app-outlined-icon>
-          </button>
-
-          {{ orgWIP.modifiedAt | date: 'dd.MM.yyyy HH:mm' }}</span
+    @if (orgWIP) {
+      <div
+        class="org-details card"
+        [class.is-active]="active"
+        [class.mat-elevation-z8]="elevation"
         >
-        <h3 class="title">{{ orgWIP.name }}</h3>
-        <span>{{
-          orgWIP.organisationType
-            ? ('organisationType.' + orgWIP.organisationType | translate)
-            : '-'
-        }}</span>
-      </header>
-      <main class="body">
-        <app-html-wrapper [html]="orgWIP.description || ''"></app-html-wrapper>
-
-        <div class="info">
-          <app-content-row
-            *ngIf="orgWIP.location && orgWIP.location.address"
+        <header class="header">
+          <span>
+            @if (hasFeedbackHistory(orgWIP) && showFeedbackToggle) {
+              <button
+                mat-icon-button
+                color="yellow"
+                [class]="'feedbackHistoryToggle'"
+                (click)="toggleFeedbackHistory.emit(true)"
+                >
+                <app-outlined-icon>help_outline</app-outlined-icon>
+              </button>
+            }
+            {{ orgWIP.modifiedAt | date: 'dd.MM.yyyy HH:mm' }}</span
+            >
+            <h3 class="title">{{ orgWIP.name }}</h3>
+            <span>{{
+              orgWIP.organisationType
+              ? ('organisationType.' + orgWIP.organisationType | translate)
+              : '-'
+            }}</span>
+          </header>
+          <main class="body">
+            <app-html-wrapper [html]="orgWIP.description || ''"></app-html-wrapper>
+            <div class="info">
+              @if (orgWIP.location && orgWIP.location.address) {
+                <app-content-row
             [content]="
               orgWIP.location.address.city! +
               ' ,' +
               orgWIP.location.address.country!
             "
-          ></app-content-row>
-
-          <app-content-row
-            *ngIf="orgWIP.impactArea"
-            [content]="'impactArea.' + orgWIP.impactArea | translate"
-            icon="location_searching"
-          ></app-content-row>
-
-          <a
-            *ngIf="orgWIP.location?.url"
-            [href]="orgWIP.location?.url"
-            target="_blank"
-          >
-            <app-content-row
-              *ngIf="orgWIP.location?.url"
-              [content]="orgWIP.location?.url"
-              icon="link"
-            ></app-content-row
-          ></a>
-        </div>
-      </main>
-
-      <footer class="footer">
-        <ng-content></ng-content>
-      </footer>
-    </div>
-  `,
+                ></app-content-row>
+              }
+              @if (orgWIP.impactArea) {
+                <app-content-row
+                  [content]="'impactArea.' + orgWIP.impactArea | translate"
+                  icon="location_searching"
+                ></app-content-row>
+              }
+              @if (orgWIP.location?.url) {
+                <a
+                  [href]="orgWIP.location?.url"
+                  target="_blank"
+                  >
+                  @if (orgWIP.location?.url) {
+                    <app-content-row
+                      [content]="orgWIP.location?.url"
+                      icon="link"
+                      ></app-content-row
+                      >
+                    }</a>
+                  }
+                </div>
+              </main>
+              <footer class="footer">
+                <ng-content></ng-content>
+              </footer>
+            </div>
+          }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

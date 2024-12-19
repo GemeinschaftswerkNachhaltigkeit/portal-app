@@ -28,7 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   template: `
     <div class="category-select">
-      <ng-container *ngFor="let option of options">
+      @for (option of options; track option) {
         <button
           type="button"
           mat-stroked-button
@@ -37,22 +37,26 @@ import { TranslateModule } from '@ngx-translate/core';
           [ngClass]="{ selected: selected(option) }"
           [disabled]="disabled"
           (click)="setOption(option)"
-        >
+          >
           <div class="button-wrapper">
             <span class="text">{{ option.label | translate }}</span>
-            <app-outlined-icon *ngIf="selected(option)"
-              >check</app-outlined-icon
-            >
-          </div>
-        </button>
-      </ng-container>
-    </div>
-    <div class="error" *ngIf="isTouched && !selectedOption">
-      <mat-error>
-        <span>{{ 'validationErrors.required' | translate }}</span>
-      </mat-error>
-    </div>
-  `,
+            @if (selected(option)) {
+              <app-outlined-icon
+                >check</app-outlined-icon
+                >
+              }
+            </div>
+          </button>
+        }
+      </div>
+      @if (isTouched && !selectedOption) {
+        <div class="error">
+          <mat-error>
+            <span>{{ 'validationErrors.required' | translate }}</span>
+          </mat-error>
+        </div>
+      }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

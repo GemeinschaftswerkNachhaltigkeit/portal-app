@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -11,41 +11,45 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-error-page',
   standalone: true,
   imports: [
-    CommonModule,
     ContentWrapperComponent,
     MatButtonModule,
     HtmlWrapperComponent,
     TranslateModule
-  ],
+],
   template: `
-    <app-content-wrapper *ngIf="!error">
-      <div class="error-content-wrapper">
-        <div>
-          <h1>{{ 'error.title' | translate }}</h1>
-          <p *ngIf="!error">{{ 'error.unknown' | translate }}</p>
+    @if (!error) {
+      <app-content-wrapper>
+        <div class="error-content-wrapper">
+          <div>
+            <h1>{{ 'error.title' | translate }}</h1>
+            @if (!error) {
+              <p>{{ 'error.unknown' | translate }}</p>
+            }
+          </div>
+          <div>
+            <button mat-flat-button color="accent" (click)="goToLandingpage()">
+              {{ 'btn.goToLandingpage' | translate }}
+            </button>
+          </div>
         </div>
-        <div>
-          <button mat-flat-button color="accent" (click)="goToLandingpage()">
-            {{ 'btn.goToLandingpage' | translate }}
-          </button>
+      </app-content-wrapper>
+    }
+    
+    @if (error) {
+      <app-content-wrapper>
+        <div class="error-content-wrapper">
+          <app-html-wrapper
+            [html]="'error.' + error | translate"
+          ></app-html-wrapper>
+          <div>
+            <button mat-flat-button color="accent" (click)="goToLandingpage()">
+              {{ 'btn.goToLandingpage' | translate }}
+            </button>
+          </div>
         </div>
-      </div>
-    </app-content-wrapper>
-
-    <app-content-wrapper *ngIf="error">
-      <div class="error-content-wrapper">
-        <app-html-wrapper
-          [html]="'error.' + error | translate"
-        ></app-html-wrapper>
-
-        <div>
-          <button mat-flat-button color="accent" (click)="goToLandingpage()">
-            {{ 'btn.goToLandingpage' | translate }}
-          </button>
-        </div>
-      </div>
-    </app-content-wrapper>
-  `,
+      </app-content-wrapper>
+    }
+    `,
   styles: `
     .error-content-wrapper {
       display: flex;

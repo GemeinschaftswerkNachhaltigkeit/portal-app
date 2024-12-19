@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { MarketplaceItemAnimation } from 'src/app/shared/components/animations/marketplace-item-animation';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
@@ -7,7 +7,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
   selector: 'app-marketplace-item-details-layout',
   animations: [MarketplaceItemAnimation],
   standalone: true,
-  imports: [CommonModule, ContentWrapperComponent],
+  imports: [ContentWrapperComponent],
   template: `
     <app-content-wrapper size="xl" [mobileNoMargin]="true">
       <div class="profile" @slideIn>

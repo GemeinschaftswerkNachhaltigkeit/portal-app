@@ -9,32 +9,42 @@ import { ActionComponent } from '../../base/action.component';
   selector: 'app-organisation-subscription-action',
   standalone: true,
   imports: [CommonModule, ActionComponent, TranslateModule],
-  template: `<app-action
-      [clickable]="true"
-      [stroked]="stroked"
-      [small]="small"
-      *ngIf="!subscriptionFacade.oganisationIsSubcribed(organisation?.id)"
-      icon="add"
-      (clicked)="followHandler()"
+  template: `@if (!subscriptionFacade.oganisationIsSubcribed(organisation?.id)) {
+  <app-action
+    [clickable]="true"
+    [stroked]="stroked"
+    [small]="small"
+    icon="add"
+    (clicked)="followHandler()"
     >
-      <span [ngClass]="{ small: small }">
-        <span *ngIf="!short">{{ 'btn.follow' | translate }}</span>
-        <span *ngIf="short">{{ 'btn.followShort' | translate }}</span>
-      </span>
-    </app-action>
-    <app-action
-      [clickable]="true"
-      [stroked]="stroked"
-      [small]="small"
-      *ngIf="subscriptionFacade.oganisationIsSubcribed(organisation?.id)"
-      icon="check"
-      (clicked)="unfollowHandler()"
+    <span [ngClass]="{ small: small }">
+      @if (!short) {
+        <span>{{ 'btn.follow' | translate }}</span>
+      }
+      @if (short) {
+        <span>{{ 'btn.followShort' | translate }}</span>
+      }
+    </span>
+  </app-action>
+}
+@if (subscriptionFacade.oganisationIsSubcribed(organisation?.id)) {
+  <app-action
+    [clickable]="true"
+    [stroked]="stroked"
+    [small]="small"
+    icon="check"
+    (clicked)="unfollowHandler()"
     >
-      <span [ngClass]="{ small: small }">
-        <span *ngIf="!short">{{ 'btn.unfollow' | translate }}</span>
-        <span *ngIf="short">{{ 'btn.unfollowShort' | translate }}</span>
-      </span>
-    </app-action> `,
+    <span [ngClass]="{ small: small }">
+      @if (!short) {
+        <span>{{ 'btn.unfollow' | translate }}</span>
+      }
+      @if (short) {
+        <span>{{ 'btn.unfollowShort' | translate }}</span>
+      }
+    </span>
+  </app-action>
+}`,
   styles: `
     .small {
       span {

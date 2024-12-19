@@ -42,6 +42,7 @@ export const APP_DATE_FORMATS: MatDateFormats = {
   }
 };
 
+console.log('XXXXXXXXX', environment.apiUrl);
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

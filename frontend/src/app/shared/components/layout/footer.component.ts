@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { ContentWrapperComponent } from './content-wrapper.component';
@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, ContentWrapperComponent, TranslateModule],
+  imports: [ContentWrapperComponent, TranslateModule],
   template: `<footer class="footer">
     <app-content-wrapper>
       <div class="footer-content">

@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { OutlinedIconComponent } from '../../shared/components/base/outlined-icon.component';
 
 @Component({
   selector: 'app-admin-warning',
   standalone: true,
-  imports: [CommonModule, OutlinedIconComponent],
+  imports: [OutlinedIconComponent],
   template: `
     <div class="admin-warning">
       <app-outlined-icon>warning</app-outlined-icon>

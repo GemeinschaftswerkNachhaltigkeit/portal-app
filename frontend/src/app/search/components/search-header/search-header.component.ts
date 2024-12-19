@@ -9,7 +9,7 @@ import {
   inject,
   signal
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +24,6 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
   selector: 'app-search-header',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
@@ -32,7 +31,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
     MatIconModule,
     ContentWrapperComponent,
     TranslateModule
-  ],
+],
   templateUrl: './search-header.component.html',
   styleUrl: './search-header.component.scss'
 })

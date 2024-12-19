@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-logo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <a href="/" aria-current="page" title="Home" id="header-logo" class="logo">
       <img

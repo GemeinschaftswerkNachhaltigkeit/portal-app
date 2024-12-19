@@ -1,5 +1,5 @@
-<ng-container *ngIf="bestPractices$ | async as bestPractices">
-  <ng-container *ngIf="bestPracticeWips$ | async as bestPracticeWips">
+@if (bestPractices$ | async; as bestPractices) {
+  @if (bestPracticeWips$ | async; as bestPracticeWips) {
     <app-page-with-header-layout
       [title]="'account.titles.bestPractices' | translate"
       [noEntriesTitle]="'account.titles.noBestPractices' | translate"
@@ -8,171 +8,174 @@
         !bestPractices.length &&
         !bestPracticeWips.length
       "
-    >
+      >
       <ng-container headerContent>
         {{ 'account.texts.bestPractices' | translate }}
       </ng-container>
       <ng-container headerAction>
         <div class="actions-wrapper">
-          <ng-container *ngIf="bestPracticesPaging$ | async as paging">
+          @if (bestPracticesPaging$ | async; as paging) {
             <button
               action
               mat-flat-button
               color="accent"
               (click)="handleNew()"
               [disabled]="(paging.totalElements || 0) >= 30"
-            >
+              >
               {{ 'account.buttons.addBestPractice' | translate }}
             </button>
-
             <app-char-count
               [count]="paging.totalElements || 0"
               [total]="30"
             ></app-char-count>
-          </ng-container>
+          }
         </div>
       </ng-container>
       <ng-container noEntriesContent>
         {{ 'account.texts.noBestPractices' | translate }}
       </ng-container>
-
       <app-spinner></app-spinner>
-
-      <ng-container *ngIf="(loading$ | async) !== true">
+      @if ((loading$ | async) !== true) {
         <section class="lists">
-          <app-list-with-heading-layout
-            *ngIf="bestPracticeWips.length"
-            [title]="'account.titles.bestPracticeWips' | translate"
-          >
-            <div>
-              <app-card-list>
-                <ng-container *ngFor="let bestPracticeWip of bestPracticeWips">
-                  <div class="card-wrapper">
-                    <app-card
-                      [imageId]="bestPracticeWip.image"
-                      [title]="bestPracticeWip.name"
-                      [content]="bestPracticeWip.description"
-                      [type]="type.BEST_PRACTISE"
+          @if (bestPracticeWips.length) {
+            <app-list-with-heading-layout
+              [title]="'account.titles.bestPracticeWips' | translate"
+              >
+              <div>
+                <app-card-list>
+                  @for (bestPracticeWip of bestPracticeWips; track bestPracticeWip) {
+                    <div class="card-wrapper">
+                      <app-card
+                        [imageId]="bestPracticeWip.image"
+                        [title]="bestPracticeWip.name"
+                        [content]="bestPracticeWip.description"
+                        [type]="type.BEST_PRACTISE"
                       [category]="
                         bestPracticeWip.bestPractiseCategory &&
                         'marketplace.labels.' +
                           bestPracticeWip.bestPractiseCategory
                       "
-                      [location]="bestPracticeWip.location"
-                      [thematicFocus]="bestPracticeWip.thematicFocus"
-                      [draft]="true"
-                      (edit)="handleEditBestPracticeWip(bestPracticeWip)"
-                      (delete)="handleDeleteBestPracticeWip(bestPracticeWip)"
-                    ></app-card>
+                        [location]="bestPracticeWip.location"
+                        [thematicFocus]="bestPracticeWip.thematicFocus"
+                        [draft]="true"
+                        (edit)="handleEditBestPracticeWip(bestPracticeWip)"
+                        (delete)="handleDeleteBestPracticeWip(bestPracticeWip)"
+                      ></app-card>
+                    </div>
+                  }
+                </app-card-list>
+                @if (bestPracticeWipsPaging$ | async; as wipsPaging) {
+                  <div class="pager">
+                    @if (bestPracticeWips?.length) {
+                      <mat-paginator
+                        class="mat-elevation-z8"
+                        color="accent"
+                        [length]="wipsPaging?.totalElements"
+                        [pageIndex]="wipsPaging?.number"
+                        [pageSize]="wipsPaging?.size || pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        [showFirstLastButtons]="true"
+                        (page)="handleWipsPageChanged($event)"
+                        aria-label="Select page"
+                        >
+                      </mat-paginator>
+                    }
                   </div>
-                </ng-container>
-              </app-card-list>
-              <ng-container
-                *ngIf="bestPracticeWipsPaging$ | async as wipsPaging"
+                }
+              </div>
+            </app-list-with-heading-layout>
+          }
+          @if (bestPractices.length) {
+            <app-list-with-heading-layout
+              [title]="'account.titles.releasedBestPractices' | translate"
               >
-                <div class="pager">
-                  <mat-paginator
-                    class="mat-elevation-z8"
-                    *ngIf="bestPracticeWips?.length"
-                    color="accent"
-                    [length]="wipsPaging?.totalElements"
-                    [pageIndex]="wipsPaging?.number"
-                    [pageSize]="wipsPaging?.size || pageSize"
-                    [pageSizeOptions]="pageSizeOptions"
-                    [showFirstLastButtons]="true"
-                    (page)="handleWipsPageChanged($event)"
-                    aria-label="Select page"
-                  >
-                  </mat-paginator>
-                </div>
-              </ng-container>
-            </div>
-          </app-list-with-heading-layout>
-          <app-list-with-heading-layout
-            *ngIf="bestPractices.length"
-            [title]="'account.titles.releasedBestPractices' | translate"
-          >
-            <div>
-              <app-card-list>
-                <ng-container *ngFor="let bp of bestPractices">
-                  <div class="card-wrapper">
-                    <app-card
-                      [imageId]="bp.image"
-                      [title]="bp.name"
-                      [content]="bp.description"
-                      [type]="type.BEST_PRACTISE"
+              <div>
+                <app-card-list>
+                  @for (bp of bestPractices; track bp) {
+                    <div class="card-wrapper">
+                      <app-card
+                        [imageId]="bp.image"
+                        [title]="bp.name"
+                        [content]="bp.description"
+                        [type]="type.BEST_PRACTISE"
                       [category]="
                         bp.bestPractiseCategory &&
                         'marketplace.labels.' + bp.bestPractiseCategory
                       "
-                      [location]="bp.location"
-                      [thematicFocus]="bp.thematicFocus"
-                      [draft]="bp.status === status.INACTIVE"
-                      (edit)="handleEditBestPractice(bp)"
-                      (delete)="handleDeleteBestPractice(bp)"
-                      (cardClicked)="open(bp.id)"
-                      ><ng-container actionMenu>
-                        <button
-                          *ngIf="
-                            bp.status === status.INACTIVE ||
-                            bp.status === status.ACTIVE
-                          "
-                          color="accent"
-                          mat-icon-button
-                          [matMenuTriggerFor]="menu"
-                          aria-label="actions menu"
-                        >
-                          <mat-icon>more_vert</mat-icon>
-                        </button>
+                        [location]="bp.location"
+                        [thematicFocus]="bp.thematicFocus"
+                        [draft]="bp.status === status.INACTIVE"
+                        (edit)="handleEditBestPractice(bp)"
+                        (delete)="handleDeleteBestPractice(bp)"
+                        (cardClicked)="open(bp.id)"
+                        ><ng-container actionMenu>
+                        @if (
+                          bp.status === status.INACTIVE ||
+                          bp.status === status.ACTIVE
+                          ) {
+                          <button
+                            color="accent"
+                            mat-icon-button
+                            [matMenuTriggerFor]="menu"
+                            aria-label="actions menu"
+                            >
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                        }
                         <mat-menu #menu="matMenu">
-                          <button
-                            *ngIf="bp.status === status.INACTIVE"
-                            mat-menu-item
-                            (click)="handleStatusChange(bp, status.ACTIVE)"
-                          >
-                            <div class="action-option">
-                              <app-outlined-icon
-                                >check_circle</app-outlined-icon
+                          @if (bp.status === status.INACTIVE) {
+                            <button
+                              mat-menu-item
+                              (click)="handleStatusChange(bp, status.ACTIVE)"
                               >
-                              <span>{{ 'labels.activate' | translate }}</span>
-                            </div>
-                          </button>
-                          <button
-                            class="action-option"
-                            *ngIf="bp.status === status.ACTIVE"
-                            mat-menu-item
-                            (click)="handleStatusChange(bp, status.INACTIVE)"
+                              <div class="action-option">
+                                <app-outlined-icon
+                                  >check_circle</app-outlined-icon
+                                  >
+                                  <span>{{ 'labels.activate' | translate }}</span>
+                                </div>
+                              </button>
+                            }
+                            @if (bp.status === status.ACTIVE) {
+                              <button
+                                class="action-option"
+                                mat-menu-item
+                                (click)="handleStatusChange(bp, status.INACTIVE)"
+                                >
+                                <div class="action-option">
+                                  <app-outlined-icon>cancel</app-outlined-icon>
+                                  <span>{{ 'labels.deactivate' | translate }}</span>
+                                </div>
+                              </button>
+                            }
+                          </mat-menu>
+                        </ng-container></app-card
+                        >
+                      </div>
+                    }
+                  </app-card-list>
+                  @if (bestPracticesPaging$ | async; as paging) {
+                    <div class="pager">
+                      @if (bestPractices?.length) {
+                        <mat-paginator
+                          class="mat-elevation-z8"
+                          color="accent"
+                          [length]="paging?.totalElements"
+                          [pageIndex]="paging?.number"
+                          [pageSize]="paging?.size || pageSize"
+                          [pageSizeOptions]="pageSizeOptions"
+                          [showFirstLastButtons]="true"
+                          (page)="handlePageChanged($event)"
+                          aria-label="Select page"
                           >
-                            <div class="action-option">
-                              <app-outlined-icon>cancel</app-outlined-icon>
-                              <span>{{ 'labels.deactivate' | translate }}</span>
-                            </div>
-                          </button>
-                        </mat-menu>
-                      </ng-container></app-card
-                    >
-                  </div>
-                </ng-container>
-              </app-card-list>
-              <ng-container *ngIf="bestPracticesPaging$ | async as paging">
-                <div class="pager">
-                  <mat-paginator
-                    class="mat-elevation-z8"
-                    *ngIf="bestPractices?.length"
-                    color="accent"
-                    [length]="paging?.totalElements"
-                    [pageIndex]="paging?.number"
-                    [pageSize]="paging?.size || pageSize"
-                    [pageSizeOptions]="pageSizeOptions"
-                    [showFirstLastButtons]="true"
-                    (page)="handlePageChanged($event)"
-                    aria-label="Select page"
-                  >
-                  </mat-paginator>
+                        </mat-paginator>
+                      }
+                    </div>
+                  }
                 </div>
-              </ng-container>
-            </div>
-          </app-list-with-heading-layout>
-        </section>
-      </ng-container> </app-page-with-header-layout></ng-container
-></ng-container>
+              </app-list-with-heading-layout>
+            }
+          </section>
+        } </app-page-with-header-layout>
+      }
+    }

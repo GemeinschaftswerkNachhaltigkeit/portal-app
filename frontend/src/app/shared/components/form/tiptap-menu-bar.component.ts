@@ -9,28 +9,29 @@ import { Editor } from '@tiptap/core';
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule],
   template: `
-    <div *ngIf="editor !== undefined" class="wysiwig-toolbar">
-      <!--disabled={!editor.can().liftListItem('listItem')}-->
-      <label class="label">
-        <ng-content></ng-content>
-      </label>
-      <div class="counter">
-        <ng-content select="[counter]"></ng-content>
-      </div>
-      <ng-container *ngIf="!disabled">
-        <!-- <button type="button" (click)="editor.chain().focus().liftListItem('listItem').run()">
-      <mat-icon>format_indent_decrease</mat-icon>
-    </button>
-    <button type="button" (click)="editor.chain().focus().sinkListItem('listItem').run()">
-      <mat-icon>format_indent_increase</mat-icon>
-    </button> -->
+    @if (editor !== undefined) {
+      <div class="wysiwig-toolbar">
+        <!--disabled={!editor.can().liftListItem('listItem')}-->
+        <label class="label">
+          <ng-content></ng-content>
+        </label>
+        <div class="counter">
+          <ng-content select="[counter]"></ng-content>
+        </div>
+        @if (!disabled) {
+          <!-- <button type="button" (click)="editor.chain().focus().liftListItem('listItem').run()">
+          <mat-icon>format_indent_decrease</mat-icon>
+        </button>
+        <button type="button" (click)="editor.chain().focus().sinkListItem('listItem').run()">
+          <mat-icon>format_indent_increase</mat-icon>
+        </button> -->
         <button
           type="button"
           (click)="editor.chain().focus().toggleOrderedList().run()"
           [ngClass]="
             editor.isFocused && editor.isActive('orderedList') ? 'active' : ''
           "
-        >
+          >
           <mat-icon>format_list_numbered</mat-icon>
         </button>
         <button
@@ -39,7 +40,7 @@ import { Editor } from '@tiptap/core';
           [ngClass]="
             editor.isFocused && editor.isActive('bulletList') ? 'active' : ''
           "
-        >
+          >
           <mat-icon>format_list_bulleted</mat-icon>
         </button>
         <button
@@ -48,7 +49,7 @@ import { Editor } from '@tiptap/core';
           [ngClass]="
             editor.isFocused && editor.isActive('bold') ? 'active' : ''
           "
-        >
+          >
           <mat-icon>format_bold</mat-icon>
         </button>
         <button
@@ -57,7 +58,7 @@ import { Editor } from '@tiptap/core';
           [ngClass]="
             editor.isFocused && editor.isActive('italic') ? 'active' : ''
           "
-        >
+          >
           <mat-icon>format_italic</mat-icon>
         </button>
         <button
@@ -66,38 +67,45 @@ import { Editor } from '@tiptap/core';
           [ngClass]="
             editor.isFocused && editor.isActive('link') ? 'active' : ''
           "
-        >
-          <mat-icon *ngIf="editor.isActive('link')">link</mat-icon>
-          <mat-icon *ngIf="!editor.isActive('link')">add_link</mat-icon>
+          >
+          @if (editor.isActive('link')) {
+            <mat-icon>link</mat-icon>
+          }
+          @if (!editor.isActive('link')) {
+            <mat-icon>add_link</mat-icon>
+          }
         </button>
-        <button
-          *ngIf="editor.isActive('link')"
-          type="button"
-          (click)="handleRemoveLink()"
+        @if (editor.isActive('link')) {
+          <button
+            type="button"
+            (click)="handleRemoveLink()"
           [ngClass]="
             editor.isFocused && editor.isActive('link') ? 'active' : ''
           "
-        >
-          <mat-icon>link_off</mat-icon>
-        </button>
+            >
+            <mat-icon>link_off</mat-icon>
+          </button>
+        }
         <button
           type="button"
           (click)="editor.chain().focus().toggleUnderline().run()"
           [ngClass]="
             editor.isFocused && editor.isActive('underline') ? 'active' : ''
           "
-        >
+          >
           <mat-icon>format_underlined</mat-icon>
         </button>
         <!--     <button type="button" (click)="editor.chain().focus().toggleStrike().run()">
-      <mat-icon>format_strikethrough</mat-icon>
-    </button> -->
-      </ng-container>
-      <ng-container *ngIf="disabled">
-        <button type="button"><mat-icon></mat-icon></button
-      ></ng-container>
+        <mat-icon>format_strikethrough</mat-icon>
+      </button> -->
+    }
+    @if (disabled) {
+      <button type="button"><mat-icon></mat-icon></button
+      >
+    }
     </div>
-  `,
+    }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

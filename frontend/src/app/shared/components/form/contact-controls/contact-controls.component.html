@@ -36,24 +36,25 @@
       </mat-form-field>
     </div>
 
-    <div class="row" *ngIf="position">
-      <mat-form-field appearance="outline">
-        <mat-label>{{
-          translationOverrides.position || 'forms.labels.position' | translate
-        }}</mat-label>
-        <input matInput formControlName="position" />
-
-        <app-valid-check
-          [form]="contactFormGroup"
-          controlName="position"
-        ></app-valid-check>
-        <mat-error>
-          <app-form-field-error
-            [field]="contactFormGroup.get('position')"
-          ></app-form-field-error>
-        </mat-error>
-      </mat-form-field>
-    </div>
+    @if (position) {
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{
+            translationOverrides.position || 'forms.labels.position' | translate
+          }}</mat-label>
+          <input matInput formControlName="position" />
+          <app-valid-check
+            [form]="contactFormGroup"
+            controlName="position"
+          ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="contactFormGroup.get('position')"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    }
 
     <div class="row">
       <mat-form-field appearance="outline">

@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-text-block',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `<div class="text-block" [class]="width">
     <ng-content></ng-content>
   </div> `,

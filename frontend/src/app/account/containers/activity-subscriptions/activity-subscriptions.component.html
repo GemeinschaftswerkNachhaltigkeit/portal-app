@@ -1,10 +1,10 @@
-<ng-container *ngIf="activitySubscriptions$ | async as activities">
-  <ng-container *ngIf="activities">
+@if (activitySubscriptions$ | async; as activities) {
+  @if (activities) {
     <app-page-with-header-layout
       [title]="'account.titles.activitySubs' | translate"
       [noEntriesTitle]="'account.titles.noActivitySubs' | translate"
       [showNoEntriesWarning]="(loading$ | async) !== true && !activities.length"
-    >
+      >
       <ng-container headerContent>{{
         'account.texts.activitySubs' | translate
       }}</ng-container>
@@ -12,17 +12,19 @@
         {{ 'account.texts.noActivitySubs' | translate }}
       </ng-container>
       <app-spinner></app-spinner>
-      <app-card-list *ngIf="(loading$ | async) !== true">
-        <ng-container *ngFor="let activity of activities">
-          <app-base-card
-            [entity]="activity"
-            [type]="activity.activityType === 'DAN' ? 'DAN' : ''"
-            [bookmarked]="true"
-            (cardClicked)="openActivity(activity)"
-          >
-          </app-base-card>
-        </ng-container>
-      </app-card-list>
+      @if ((loading$ | async) !== true) {
+        <app-card-list>
+          @for (activity of activities; track activity) {
+            <app-base-card
+              [entity]="activity"
+              [type]="activity.activityType === 'DAN' ? 'DAN' : ''"
+              [bookmarked]="true"
+              (cardClicked)="openActivity(activity)"
+              >
+            </app-base-card>
+          }
+        </app-card-list>
+      }
     </app-page-with-header-layout>
-  </ng-container>
-</ng-container>
+  }
+}

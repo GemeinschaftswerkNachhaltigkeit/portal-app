@@ -6,7 +6,7 @@ import { AdditionalFiltersModalComponent } from 'src/app/shared/components/form/
 import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { DynamicFilters } from '../../models/search-filter';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
@@ -18,7 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-search-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
@@ -27,26 +26,28 @@ import { TranslateModule } from '@ngx-translate/core';
     FeatureComponent,
     MatCheckboxModule,
     TranslateModule
-  ],
+],
   template: `
     <div class="form-wrapper map-filters">
       <div class="left">
-        <form novalidate [formGroup]="searchForm" *ngIf="searchForm">
-          <div class="what-and-where">
-            <div class="field">
-              <mat-form-field appearance="outline" color="primary">
-                <mat-label>{{ 'forms.labels.query' | translate }}</mat-label>
-                <input matInput formControlName="query" />
-              </mat-form-field>
+        @if (searchForm) {
+          <form novalidate [formGroup]="searchForm">
+            <div class="what-and-where">
+              <div class="field">
+                <mat-form-field appearance="outline" color="primary">
+                  <mat-label>{{ 'forms.labels.query' | translate }}</mat-label>
+                  <input matInput formControlName="query" />
+                </mat-form-field>
+              </div>
+              <div class="field">
+                <mat-form-field appearance="outline" color="primary">
+                  <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
+                  <input matInput formControlName="location" />
+                </mat-form-field>
+              </div>
             </div>
-            <div class="field">
-              <mat-form-field appearance="outline" color="primary">
-                <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
-                <input matInput formControlName="location" />
-              </mat-form-field>
-            </div>
-          </div>
-        </form>
+          </form>
+        }
         <div class="filter-button">
           <app-filter-modal-button
             [count]="filterCount()"
@@ -55,7 +56,7 @@ import { TranslateModule } from '@ngx-translate/core';
           ></app-filter-modal-button>
         </div>
       </div>
-
+    
       <div class="right">
         <app-feature feature="dan-account">
           <div class="view-type">
@@ -66,20 +67,20 @@ import { TranslateModule } from '@ngx-translate/core';
               (ngModelChange)="viewTypeHandler()"
               [ngModelOptions]="{ standalone: true }"
               >{{ 'map.labels.dan' | translate }}</mat-checkbox
-            >
-            <mat-checkbox
-              class="orga"
-              color="primary"
-              [(ngModel)]="showOrga"
-              (ngModelChange)="viewTypeHandler()"
-              [ngModelOptions]="{ standalone: true }"
-              >{{ 'map.labels.organisation' | translate }}</mat-checkbox
-            >
+              >
+              <mat-checkbox
+                class="orga"
+                color="primary"
+                [(ngModel)]="showOrga"
+                (ngModelChange)="viewTypeHandler()"
+                [ngModelOptions]="{ standalone: true }"
+                >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+                >
+              </div>
+            </app-feature>
           </div>
-        </app-feature>
-      </div>
-    </div>
-  `,
+        </div>
+    `,
   styles: `
     @use 'theme' as *;
 

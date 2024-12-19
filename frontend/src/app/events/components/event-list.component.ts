@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-event-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: ` <ng-content></ng-content> `,
   styles: `
     @use 'theme' as *;

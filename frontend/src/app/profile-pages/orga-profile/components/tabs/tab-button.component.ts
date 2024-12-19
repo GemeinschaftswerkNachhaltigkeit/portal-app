@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
@@ -6,7 +6,7 @@ import { HeadingComponent } from 'src/app/shared/components/base/heading.compone
 @Component({
   selector: 'app-tab-button',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, HeadingComponent],
+  imports: [MatButtonModule, HeadingComponent],
   styles: [
     `
       @use 'palette' as *;

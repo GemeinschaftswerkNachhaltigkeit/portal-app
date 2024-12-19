@@ -2,14 +2,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OfferCategories } from 'src/app/marketplace/models/offer-categories';
 import FilterOption from 'src/app/shared/models/filter-options';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { CollapsibleFilterComponent } from './collapsible-filter.component';
 
 @Component({
   selector: 'app-offer-category-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CollapsibleFilterComponent],
+  imports: [TranslateModule, CollapsibleFilterComponent],
   template: `
     <app-collapsible-filter
       [filterName]="filterName"

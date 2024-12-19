@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { SavedService } from '../../services/saved.service';
 import { OutlinedIconComponent } from '../base/outlined-icon.component';
@@ -28,7 +28,7 @@ import { OutlinedIconComponent } from '../base/outlined-icon.component';
     }
   `,
   standalone: true,
-  imports: [CommonModule, OutlinedIconComponent, TranslateModule]
+  imports: [OutlinedIconComponent, TranslateModule]
 })
 export class SavedIndicatorComponent {
   savedService = inject(SavedService);

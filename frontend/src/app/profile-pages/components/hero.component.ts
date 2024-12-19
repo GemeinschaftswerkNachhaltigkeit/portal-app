@@ -21,19 +21,24 @@ import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.c
   ],
   template: `
     <header class="header">
-      <div class="expiredOverlay" *ngIf="isExpired"></div>
-
+      @if (isExpired) {
+        <div class="expiredOverlay"></div>
+      }
+    
       <div class="img">
-        <app-image
-          [src]="bgImageName"
-          alt="header"
-          [mode]="imageMode"
-          *ngIf="bgImageName"
-        />
+        @if (bgImageName) {
+          <app-image
+            [src]="bgImageName"
+            alt="header"
+            [mode]="imageMode"
+            />
+        }
       </div>
-      <div class="expiredBadge" *ngIf="isExpired">
-        <app-expired-badge [dan]="dan"></app-expired-badge>
-      </div>
+      @if (isExpired) {
+        <div class="expiredBadge">
+          <app-expired-badge [dan]="dan"></app-expired-badge>
+        </div>
+      }
       <div class="type">
         <app-card-label
           [type]="types?.resultType"
@@ -47,24 +52,30 @@ import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.c
         class="logo"
         [class]="types?.resultType || ''"
         [ngClass]="{ noLogo: !logo }"
-      >
-        <div class="expiredOverlay logo-overlay" *ngIf="isExpired"></div>
-        <app-card-logo
-          *ngIf="logo"
-          [logoUrl]="logo"
-          [name]="name"
-        ></app-card-logo>
-        <div
-          *ngIf="period && utils.dateRangeString(period)"
-          class="label"
-          [ngClass]="{ dan: dan }"
         >
-          <div class="expiredOverlay" *ngIf="isExpired"></div>
-          {{ utils.dateRangeString(period) }}
-        </div>
+        @if (isExpired) {
+          <div class="expiredOverlay logo-overlay"></div>
+        }
+        @if (logo) {
+          <app-card-logo
+            [logoUrl]="logo"
+            [name]="name"
+          ></app-card-logo>
+        }
+        @if (period && utils.dateRangeString(period)) {
+          <div
+            class="label"
+            [ngClass]="{ dan: dan }"
+            >
+            @if (isExpired) {
+              <div class="expiredOverlay"></div>
+            }
+            {{ utils.dateRangeString(period) }}
+          </div>
+        }
       </div>
     </header>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

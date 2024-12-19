@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-banner',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, TranslateModule],
+  imports: [MatButtonModule, TranslateModule],
   template: `
     <div>{{ 'marketplace.titles.add' | translate }}</div>
     <button type="button" class="action" mat-flat-button (click)="add.emit()">

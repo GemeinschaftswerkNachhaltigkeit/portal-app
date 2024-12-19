@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import DuplicateDto from '../models/duplicate-dto';
-import { CommonModule } from '@angular/common';
+
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DuplicateEntryComponent } from './duplicate-entry.component';
@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
   selector: 'app-duplicate',
   standalone: true,
   imports: [
-    CommonModule,
     HeadingComponent,
     TranslateModule,
     DuplicateEntryComponent,
@@ -31,38 +30,42 @@ import { RouterModule } from '@angular/router';
           </div>
         </div>
       </div>
-      <ng-container *ngIf="duplicate">
+      @if (duplicate) {
         <div class="duplicates-list">
-          <ng-container *ngFor="let dup of duplicate?.duplicateListItems">
-            <a
-              target="_blank"
-              *ngIf="dup.organisationWorkInProgress"
-              [href]="
-                'sign-up/organisation/' +
-                dup.organisationWorkInProgress.randomUniqueId
-              "
-              class="duplicate"
-            >
-              <app-duplicate-entry
-                [duplicateFields]="dup.duplicateForFields"
-                [duplicate]="dup.organisationWorkInProgress"
-              ></app-duplicate-entry>
-            </a>
-            <a
-              target="_blank"
-              *ngIf="dup.organisation"
-              [href]="'organisations/' + dup.organisation.id"
-              class="duplicate"
-            >
-              <app-duplicate-entry
-                [duplicateFields]="dup.duplicateForFields"
-                [duplicate]="dup.organisation"
-              ></app-duplicate-entry>
-            </a>
-          </ng-container>
+          @for (dup of duplicate.duplicateListItems; track dup) {
+            @if (dup.organisationWorkInProgress) {
+              <a
+                target="_blank"
+                [href]="
+                  'sign-up/organisation/' +
+                  dup.organisationWorkInProgress.randomUniqueId
+                "
+                class="duplicate"
+              >
+                <app-duplicate-entry
+                  [duplicateFields]="dup.duplicateForFields"
+                  [duplicate]="dup.organisationWorkInProgress"
+                ></app-duplicate-entry>
+              </a>
+            }
+            @if (dup.organisation) {
+              <a
+                target="_blank"
+                [href]="'organisations/' + dup.organisation.id"
+                class="duplicate"
+              >
+                <app-duplicate-entry
+                  [duplicateFields]="dup.duplicateForFields"
+                  [duplicate]="dup.organisation"
+                ></app-duplicate-entry>
+              </a>
+            }
+          }
         </div>
-      </ng-container>
-      <app-spinner *ngIf="!duplicate"></app-spinner>
+      }
+      @if (!duplicate) {
+        <app-spinner></app-spinner>
+      }
     </div>
   `,
   styles: `

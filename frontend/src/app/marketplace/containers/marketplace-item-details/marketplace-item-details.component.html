@@ -1,4 +1,4 @@
-<ng-container *ngIf="item$ | async as item">
+@if (item$ | async; as item) {
   <app-marketplace-item-details-layout>
     <div breadcrumbs>
       <app-breadcrumbs>
@@ -25,10 +25,12 @@
             <div>{{ 'labels.publishedAt' | translate }}</div>
             <div>{{ item.createdAt | date: 'dd.MM.yyyy' }}</div>
           </div>
-          <div class="createdAt" *ngIf="item.endUntil">
-            <div>{{ 'labels.availableUntil' | translate }}</div>
-            <div>{{ item.endUntil | date: 'dd.MM.yyyy' }}</div>
-          </div>
+          @if (item.endUntil) {
+            <div class="createdAt">
+              <div>{{ 'labels.availableUntil' | translate }}</div>
+              <div>{{ item.endUntil | date: 'dd.MM.yyyy' }}</div>
+            </div>
+          }
           <div class="badge">
             <app-event-badges [activity]="item"></app-event-badges>
           </div>
@@ -40,14 +42,16 @@
         }}</app-heading>
         <app-html-wrapper [html]="item.description"></app-html-wrapper>
       </section>
-      <section class="sec" *ngIf="item.location?.url">
-        <app-heading size="xs" color="none">{{
-          'marketplace.titles.externalLink' | translate
-        }}</app-heading>
-        <a [href]="item.location.url" target="_blank">{{
-          item.location.url
-        }}</a>
-      </section>
+      @if (item.location.url) {
+        <section class="sec">
+          <app-heading size="xs" color="none">{{
+            'marketplace.titles.externalLink' | translate
+          }}</app-heading>
+          <a [href]="item.location.url" target="_blank">{{
+            item.location.url
+          }}</a>
+        </section>
+      }
     </ng-container>
     <ng-container sidebar>
       <app-contact
@@ -60,27 +64,27 @@
           {{ 'marketplace.titles.thematicFocus' | translate }}
         </h4>
         <div class="thematic-focus">
-          <ng-container *ngFor="let topic of item.thematicFocus">
+          @for (topic of item.thematicFocus; track topic) {
             <app-topic>{{ 'thematicFocus.' + topic | translate }}</app-topic>
-          </ng-container>
+          }
         </div>
       </div>
       <div class="location">
-        <h4
-          class="subtitle"
-          *ngIf="
-            item.location &&
-            (utils.locationString(item.location) || item.location?.online)
-          "
-        >
-          {{ 'marketplace.titles.details' | translate }}
-        </h4>
-        <app-content-row
-          *ngIf="item.location && utils.locationString(item.location)"
-          [small]="true"
-          [content]="utils.locationString(item.location)"
-        ></app-content-row>
+        @if (
+          item.location &&
+          (utils.locationString(item.location) || item.location.online)
+        ) {
+          <h4 class="subtitle">
+            {{ 'marketplace.titles.details' | translate }}
+          </h4>
+        }
+        @if (item.location && utils.locationString(item.location)) {
+          <app-content-row
+            [small]="true"
+            [content]="utils.locationString(item.location)"
+          ></app-content-row>
+        }
       </div>
     </ng-container>
   </app-marketplace-item-details-layout>
-</ng-container>
+}

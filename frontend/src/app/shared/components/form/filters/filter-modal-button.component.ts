@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FilterCountBadgeComponent } from './filter-count-badge.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,12 +9,11 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-filter-modal-button',
   standalone: true,
   imports: [
-    CommonModule,
     FilterCountBadgeComponent,
     MatButtonModule,
     OutlinedIconComponent,
     TranslateModule
-  ],
+],
   template: `
     <div class="filter-btn-wrapper">
       <button mat-button (click)="openFilters()">
@@ -23,14 +22,15 @@ import { TranslateModule } from '@ngx-translate/core';
           <span class="filter-btn-text">{{ 'btn.filters' | translate }}</span>
         </div>
       </button>
-      <app-filter-count-badge
-        [active]="true"
-        *ngIf="count"
-        (clicked)="clearAll()"
-        >{{ count }}</app-filter-count-badge
-      >
-    </div>
-  `,
+      @if (count) {
+        <app-filter-count-badge
+          [active]="true"
+          (clicked)="clearAll()"
+          >{{ count }}</app-filter-count-badge
+          >
+        }
+      </div>
+    `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

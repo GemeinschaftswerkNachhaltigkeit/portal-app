@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {
   DanContent,
@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-form-advatages',
   standalone: true,
-  imports: [CommonModule, HtmlWrapperComponent, MatIconModule],
+  imports: [HtmlWrapperComponent, MatIconModule],
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="bg-blue-light">

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -16,14 +16,13 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './address-controls.component.html',
   standalone: true,
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     FormFieldErrorComponent,
     ValidCheckComponent,
     TranslateModule
-  ],
+],
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

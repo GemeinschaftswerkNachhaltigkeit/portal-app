@@ -17,28 +17,31 @@ import { MatButtonModule } from '@angular/material/button';
   template: `
     <div class="api-key-container">
       <div class="label">API-KEY</div>
-      <ng-container *ngIf="apiKey$ | async as apiKey; else noKey">
+      @if (apiKey$ | async; as apiKey) {
         <app-api-key-content [apiKey]="apiKey.apiKey"></app-api-key-content>
-      </ng-container>
-      <ng-template #noKey
-        ><app-api-key-content></app-api-key-content
-      ></ng-template>
-    </div>
-    <div class="actions">
-      <button mat-flat-button color="primary" (click)="createHandler()">
-        <ng-container *ngIf="apiKey$ | async as apiKey; else refresh">{{
-          'account.buttons.refreshApiKey' | translate
-        }}</ng-container>
-        <ng-template #refresh>{{
-          'account.buttons.createApiKey' | translate
-        }}</ng-template>
-      </button>
-
-      <button mat-flat-button color="warn" (click)="deleteHandler()">
-        {{ 'account.buttons.deleteApiKey' | translate }}
-      </button>
-    </div>
-  `,
+      } @else {
+        <app-api-key-content></app-api-key-content
+          >
+        }
+      </div>
+      <div class="actions">
+        <button mat-flat-button color="primary" (click)="createHandler()">
+          @if (apiKey$ | async; as apiKey) {
+            {{
+            'account.buttons.refreshApiKey' | translate
+            }}
+          } @else {
+            {{
+            'account.buttons.createApiKey' | translate
+            }}
+          }
+        </button>
+    
+        <button mat-flat-button color="warn" (click)="deleteHandler()">
+          {{ 'account.buttons.deleteApiKey' | translate }}
+        </button>
+      </div>
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

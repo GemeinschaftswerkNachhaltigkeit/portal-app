@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { SdgsService } from 'src/app/shared/services/sdgs.service';
 import { SdgIconComponent } from './sdg-icon.component';
@@ -6,12 +6,12 @@ import { SdgIconComponent } from './sdg-icon.component';
 @Component({
   selector: 'app-sdgs-list',
   standalone: true,
-  imports: [CommonModule, SdgIconComponent],
+  imports: [SdgIconComponent],
   template: `
-    <ng-container *ngFor="let goal of sdgs">
+    @for (goal of sdgs; track goal) {
       <app-sdg-icon [goal]="goal"></app-sdg-icon>
-    </ng-container>
-  `,
+    }
+    `,
   styles: `
     :host {
       display: flex;

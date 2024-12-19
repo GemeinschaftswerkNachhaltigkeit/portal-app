@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -17,7 +17,6 @@ import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.
   selector: 'app-visibility-controls',
   standalone: true,
   imports: [
-    CommonModule,
     MatCheckboxModule,
     TranslateModule,
     ReactiveFormsModule,
@@ -25,37 +24,37 @@ import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.
     ValidCheckComponent,
     FormFieldErrorComponent,
     MatInputModule
-  ],
+],
   template: `
     <ng-container [formGroup]="form">
       <div class="address">
         <mat-checkbox matInput formControlName="featured"
           ><span>{{
-            'marketplace.labels.featured' | translate
-          }}</span></mat-checkbox
+          'marketplace.labels.featured' | translate
+        }}</span></mat-checkbox
         >
-        <mat-form-field
-          appearance="outline"
-          *ngIf="form.get('featured')?.value"
-        >
-          <mat-label>{{
-            'marketplace.labels.featuredText' | translate
-          }}</mat-label>
-          <input matInput formControlName="featuredText" />
-          <app-valid-check
-            [form]="form"
-            controlName="featuredText"
-          ></app-valid-check>
-
-          <mat-error>
-            <app-form-field-error
-              [field]="form.get('featuredText')"
-            ></app-form-field-error>
-          </mat-error>
-        </mat-form-field>
+        @if (form.get('featured')?.value) {
+          <mat-form-field
+            appearance="outline"
+            >
+            <mat-label>{{
+              'marketplace.labels.featuredText' | translate
+            }}</mat-label>
+            <input matInput formControlName="featuredText" />
+            <app-valid-check
+              [form]="form"
+              controlName="featuredText"
+            ></app-valid-check>
+            <mat-error>
+              <app-form-field-error
+                [field]="form.get('featuredText')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+        }
       </div>
     </ng-container>
-  `
+    `
 })
 export class VisibilityControlsComponent implements OnInit, OnDestroy {
   @Input() formGroupName!: string;

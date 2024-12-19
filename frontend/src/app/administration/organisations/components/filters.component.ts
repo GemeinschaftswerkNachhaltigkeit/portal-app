@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,6 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
   selector: 'app-filters',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -26,23 +25,24 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
     MatIconModule,
     TranslateModule,
     MatMenuModule
-  ],
+],
   template: `
     <div class="filters">
       <form [formGroup]="filterForm" class="filter-form">
         <mat-form-field appearance="outline" color="primary" class="no-sub">
           <mat-label>{{ 'administration.labels.query' | translate }}</mat-label>
           <input matInput formControlName="query" />
-          <button
-            *ngIf="filterForm.get('query')?.value"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="clearQuery()"
-            type="button"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
+          @if (filterForm.get('query')?.value) {
+            <button
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="clearQuery()"
+              type="button"
+              >
+              <mat-icon>close</mat-icon>
+            </button>
+          }
         </mat-form-field>
         <div class="additional-filters">
           <mat-checkbox formControlName="coordinates">{{
@@ -53,27 +53,35 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
               mat-flat-button
               [matMenuTriggerFor]="menu"
               aria-label="Sort menu button"
-            >
-              <div class="sort-btn-content" *ngIf="sort === 'newestFirst'">
-                <mat-icon>sort</mat-icon>
-                <div>
-                  {{ 'administration.buttons.newestFirst' | translate }}
+              >
+              @if (sort === 'newestFirst') {
+                <div class="sort-btn-content">
+                  <mat-icon>sort</mat-icon>
+                  <div>
+                    {{ 'administration.buttons.newestFirst' | translate }}
+                  </div>
                 </div>
-              </div>
-              <div class="sort-btn-content" *ngIf="sort === 'oldestFirst'">
-                <mat-icon>sort</mat-icon>
-                <div>
-                  {{ 'administration.buttons.oldestFirst' | translate }}
+              }
+              @if (sort === 'oldestFirst') {
+                <div class="sort-btn-content">
+                  <mat-icon>sort</mat-icon>
+                  <div>
+                    {{ 'administration.buttons.oldestFirst' | translate }}
+                  </div>
                 </div>
-              </div>
-              <div class="sort-btn-content" *ngIf="sort === 'aToZ'">
-                <mat-icon>sort</mat-icon>
-                <div>{{ 'administration.buttons.aToZ' | translate }}</div>
-              </div>
-              <div class="sort-btn-content" *ngIf="sort === 'zToA'">
-                <mat-icon>sort</mat-icon>
-                <div>{{ 'administration.buttons.zToA' | translate }}</div>
-              </div>
+              }
+              @if (sort === 'aToZ') {
+                <div class="sort-btn-content">
+                  <mat-icon>sort</mat-icon>
+                  <div>{{ 'administration.buttons.aToZ' | translate }}</div>
+                </div>
+              }
+              @if (sort === 'zToA') {
+                <div class="sort-btn-content">
+                  <mat-icon>sort</mat-icon>
+                  <div>{{ 'administration.buttons.zToA' | translate }}</div>
+                </div>
+              }
             </button>
             <mat-menu #menu="matMenu">
               <button mat-menu-item (click)="setSortHandler('newestFirst')">
@@ -97,7 +105,7 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
         </div>
       </form>
     </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

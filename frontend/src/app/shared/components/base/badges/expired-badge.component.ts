@@ -1,20 +1,20 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-expired-badge',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   template: `<div class="expired-badge">
-    <span #ref><ng-content></ng-content></span>
-    <ng-container *ngIf="!ref.hasChildNodes()">
-      {{
+      <span #ref><ng-content></ng-content></span>
+      @if (!ref.hasChildNodes()) {
+        {{
         (dan ? 'labels.expiredDanActivity' : 'labels.expiredActivity')
-          | translate
-      }}
-    </ng-container>
-  </div> `,
+        | translate
+        }}
+      }
+    </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

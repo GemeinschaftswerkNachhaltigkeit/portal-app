@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 export type Breadcrumb = {
@@ -9,7 +9,7 @@ export type Breadcrumb = {
 @Component({
   selector: 'app-breadcrumbs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: ` <ng-content></ng-content> `,
   styles: `
     @use 'theme' as *;

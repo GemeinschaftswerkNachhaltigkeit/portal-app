@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-form-field-error',
   templateUrl: './form-field-error.component.html',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule],
   styles: `
     span + span:before {
       content: ',';

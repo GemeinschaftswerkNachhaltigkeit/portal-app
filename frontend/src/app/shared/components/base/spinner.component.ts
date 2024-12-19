@@ -8,20 +8,23 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div
-      class="spinner"
-      *ngIf="loading$ && (loading$ | async)"
+    @if (loading$ && (loading$ | async)) {
+      <div
+        class="spinner"
       [ngClass]="{
         small: small,
         miniFixed: miniSpinnerInTopRightCorner,
         noPadding: noPadding,
         noHeight: noHeight
       }"
-    >
-      <h3 class="title" *ngIf="title">{{ title }}</h3>
-      <div class="shapes"></div>
-    </div>
-  `,
+        >
+        @if (title) {
+          <h3 class="title">{{ title }}</h3>
+        }
+        <div class="shapes"></div>
+      </div>
+    }
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

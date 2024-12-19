@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SearchHeaderComponent } from '../components/search-header/search-header.component';
 import { SearchService, Type } from '../data/search.service';
 import { TypeFilterComponent } from '../components/type-filter/type-filter.component';
@@ -22,7 +22,6 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
   selector: 'app-search',
   standalone: true,
   imports: [
-    CommonModule,
     SearchHeaderComponent,
     TypeFilterComponent,
     ResultsHeadingComponent,
@@ -37,7 +36,7 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
     NoResultsComponent,
     ContentWrapperComponent,
     SpinnerComponent
-  ],
+],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })

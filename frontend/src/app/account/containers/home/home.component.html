@@ -1,40 +1,42 @@
 <app-page-with-header-layout
   [title]="('account.titles.welcome' | translate) + ' ' + userData?.firstName"
->
+  >
   <ng-container headerContent>{{
     'account.texts.welcome' | translate
   }}</ng-container>
   <div class="tiles">
-    <ng-container *ngFor="let tile of tiles">
+    @for (tile of tiles; track tile) {
       @if (tile.featureFlag) {
-        <ng-container *ngIf="featureService.show$(tile.featureFlag) | async">
+        @if (featureService.show$(tile.featureFlag) | async) {
+          @if (
+            tile.onlyOrga ? hasOrga() : tile.onlyNoOrga ? !hasOrga() : true
+            ) {
+            <app-info-card
+              [route]="tile.route"
+              [extUrl]="tile.extUrl"
+              [new]="tile.new"
+              minHeight="18rem"
+              >
+              <span title>{{ tile.title | translate }} </span>
+              <span body>{{ tile.description | translate }}</span>
+            </app-info-card>
+          }
+        }
+      } @else {
+        @if (
+          tile.onlyOrga ? hasOrga() : tile.onlyNoOrga ? !hasOrga() : true
+          ) {
           <app-info-card
-            *ngIf="
-              tile.onlyOrga ? hasOrga() : tile.onlyNoOrga ? !hasOrga() : true
-            "
             [route]="tile.route"
             [extUrl]="tile.extUrl"
             [new]="tile.new"
             minHeight="18rem"
-          >
+            >
             <span title>{{ tile.title | translate }} </span>
             <span body>{{ tile.description | translate }}</span>
           </app-info-card>
-        </ng-container>
-      } @else {
-        <app-info-card
-          *ngIf="
-            tile.onlyOrga ? hasOrga() : tile.onlyNoOrga ? !hasOrga() : true
-          "
-          [route]="tile.route"
-          [extUrl]="tile.extUrl"
-          [new]="tile.new"
-          minHeight="18rem"
-        >
-          <span title>{{ tile.title | translate }} </span>
-          <span body>{{ tile.description | translate }}</span>
-        </app-info-card>
+        }
       }
-    </ng-container>
+    }
   </div>
 </app-page-with-header-layout>

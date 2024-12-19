@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `<div class="list">
     <ng-content></ng-content>
   </div> `,

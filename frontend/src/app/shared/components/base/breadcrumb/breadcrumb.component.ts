@@ -9,21 +9,23 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule, MatIconModule],
   template: `
     <div class="breadcrumb">
-      <a
-        *ngIf="route; else label"
-        class="breadcrumb-link"
-        [ngClass]="{ isLast: isLast }"
-        [routerLink]="route"
-        >{{ name }}</a
-      >
-      <ng-template #label>
-        <div class="breadcrumb-label">{{ name }}</div>
-      </ng-template>
-      <div class="icon" *ngIf="!isLast">
-        <mat-icon>chevron_right</mat-icon>
+      @if (route) {
+        <a
+          class="breadcrumb-link"
+          [ngClass]="{ isLast: isLast }"
+          [routerLink]="route"
+          >{{ name }}</a
+          >
+        } @else {
+          <div class="breadcrumb-label">{{ name }}</div>
+        }
+        @if (!isLast) {
+          <div class="icon">
+            <mat-icon>chevron_right</mat-icon>
+          </div>
+        }
       </div>
-    </div>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

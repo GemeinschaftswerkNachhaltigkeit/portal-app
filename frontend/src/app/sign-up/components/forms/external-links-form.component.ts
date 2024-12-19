@@ -1,7 +1,7 @@
 /*  eslint-disable  @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-prototype-builtins */
 /*  eslint-disable  @typescript-eslint/no-explicit-any */
-import { CommonModule } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
@@ -33,14 +33,13 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
   selector: 'app-external-links-form',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     ValidCheckComponent,
     FormFieldErrorComponent,
     TranslateModule
-  ],
+],
   template: `
     <form [formGroup]="linksFormGroup">
       <mat-form-field appearance="outline">
@@ -49,7 +48,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           matInput
           [placeholder]="'forms.labels.url' | translate"
           formControlName="url"
-        />
+          />
         <app-valid-check
           [form]="linksFormGroup"
           controlName="url"
@@ -60,31 +59,30 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-
-      <mat-form-field
-        *ngFor="let type of socialMediaTypes"
-        appearance="outline"
-      >
-        <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
-        <input
-          matInput
-          [placeholder]="'forms.labels.' + type | translate"
-          [formControlName]="type"
-        />
-
-        <app-valid-check
-          [form]="linksFormGroup"
-          [controlName]="type"
-        ></app-valid-check>
-
-        <mat-error>
-          <app-form-field-error
-            [field]="linksFormGroup.get(type)"
-          ></app-form-field-error>
-        </mat-error>
-      </mat-form-field>
+    
+      @for (type of socialMediaTypes; track type) {
+        <mat-form-field
+          appearance="outline"
+          >
+          <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
+          <input
+            matInput
+            [placeholder]="'forms.labels.' + type | translate"
+            [formControlName]="type"
+            />
+          <app-valid-check
+            [form]="linksFormGroup"
+            [controlName]="type"
+          ></app-valid-check>
+          <mat-error>
+            <app-form-field-error
+              [field]="linksFormGroup.get(type)"
+            ></app-form-field-error>
+          </mat-error>
+        </mat-form-field>
+      }
     </form>
-  `,
+    `,
   styles: `
     form {
       display: flex;

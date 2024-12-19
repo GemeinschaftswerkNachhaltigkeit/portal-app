@@ -9,41 +9,45 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, NewBadgeComponent, HeadingComponent, RouterModule],
   template: `
-    <ng-container *ngIf="extUrl !== undefined && route === undefined">
+    @if (extUrl !== undefined && route === undefined) {
       <a
         class="home-tile mat-elevation-z8"
         [ngClass]="{ noPadding: noPadding, noHover: noHover }"
         [style.min-height]="minHeight"
         [href]="extUrl"
         target="_blank"
-      >
+        >
         <ng-container *ngTemplateOutlet="content"></ng-container>
       </a>
-    </ng-container>
-    <ng-container *ngIf="extUrl === undefined && route !== undefined">
+    }
+    @if (extUrl === undefined && route !== undefined) {
       <a
         class="home-tile mat-elevation-z8"
         [ngClass]="{ noPadding: noPadding, noHover: noHover }"
         [style.min-height]="minHeight"
         [routerLink]="route"
-      >
+        >
         <ng-container [ngTemplateOutlet]="content"></ng-container>
       </a>
-    </ng-container>
-
+    }
+    
     <ng-template #content>
       <div class="inline">
-        <app-new-badge *ngIf="new"></app-new-badge>
-        <app-heading size="md" color="blue" *ngIf="withTitle">
-          <ng-content select="[title]"></ng-content>
-        </app-heading>
+        @if (new) {
+          <app-new-badge></app-new-badge>
+        }
+        @if (withTitle) {
+          <app-heading size="md" color="blue">
+            <ng-content select="[title]"></ng-content>
+          </app-heading>
+        }
       </div>
-
+    
       <p class="description">
         <ng-content select="[body]"></ng-content>
       </p>
     </ng-template>
-  `,
+    `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

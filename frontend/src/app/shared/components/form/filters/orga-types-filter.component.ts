@@ -4,13 +4,13 @@ import { ActivityType } from 'src/app/shared/models/activity-type';
 import FilterOption from 'src/app/shared/models/filter-options';
 import { OrganisationType } from 'src/app/shared/models/organisation-type';
 import { SecondaryFilters } from './secondary-filters.component';
-import { CommonModule } from '@angular/common';
+
 import { CollapsibleFilterComponent } from './collapsible-filter.component';
 
 @Component({
   selector: 'app-orga-types-filter',
   standalone: true,
-  imports: [CommonModule, TranslateModule, CollapsibleFilterComponent],
+  imports: [TranslateModule, CollapsibleFilterComponent],
   template: `
     <app-collapsible-filter
       [filterName]="filterName"
