@@ -1,7 +1,6 @@
 @if (activities$ | async; as activities) {
   @if (activityWips$ | async; as activityWips) {
     @if (activities) {
-      xxxx
       <app-page-with-header-layout
         [title]="'account.titles.danActivities' | translate"
         [noEntriesTitle]="'account.titles.noDanActivities' | translate"
@@ -10,7 +9,7 @@
           !activities.length &&
           !activityWips.length
         "
-        >
+      >
         <ng-container headerContent>
           {{ 'account.texts.danActivities' | translate }}
         </ng-container>
@@ -25,7 +24,7 @@
                   color="accent"
                   (click)="createHandler()"
                   [disabled]="(paging.totalElements || 0) >= danLimit"
-                  >
+                >
                   {{ 'account.buttons.addDanActivity' | translate }}
                 </button>
                 <button
@@ -33,7 +32,7 @@
                   mat-button
                   (click)="openHelp()"
                   class="help-button"
-                  >
+                >
                   <div class="help-button-content">
                     <div class="icon">
                       <app-outlined-icon>help</app-outlined-icon>
@@ -60,7 +59,7 @@
             @if (activityWips.length) {
               <app-list-with-heading-layout
                 [title]="'account.titles.danActivitiesWips' | translate"
-                >
+              >
                 <div>
                   <app-card-list>
                     @for (activity of activityWips; track activity) {
@@ -73,7 +72,7 @@
                           [draft]="true"
                           (delete)="deleteWipHandler(activity.randomUniqueId)"
                           (edit)="editWipHandler(activity.randomUniqueId)"
-                          >
+                        >
                         </app-base-card>
                       </div>
                     }
@@ -91,7 +90,7 @@
                           [showFirstLastButtons]="true"
                           (page)="wipsPageChangedHandler($event)"
                           aria-label="Select page"
-                          >
+                        >
                         </mat-paginator>
                       }
                     </div>
@@ -102,23 +101,24 @@
             @if (activities.length) {
               <app-list-with-heading-layout
                 [title]="'account.titles.danActivitiesFinished' | translate"
-                >
+              >
                 <div>
                   @if (
                     activities.length && utils.hasInvalidLocations(activities)
-                    ) {
-                    <div
-                      class="no-coordinates-hint"
-                      >
+                  ) {
+                    <div class="no-coordinates-hint">
                       <app-alert
-                    [title]="
-                      'validationErrors.activitiesCoordinatesTitle' | translate
-                    "
+                        [title]="
+                          'validationErrors.activitiesCoordinatesTitle'
+                            | translate
+                        "
                         [showIcon]="true"
                         bgIcon="travel_explore"
                         fgIcon="priority_high"
-                        >
-                        {{ 'validationErrors.activitiesCoordinates' | translate }}
+                      >
+                        {{
+                          'validationErrors.activitiesCoordinates' | translate
+                        }}
                       </app-alert>
                     </div>
                   }
@@ -132,7 +132,7 @@
                           (delete)="deleteHandler(activity.id)"
                           (edit)="editHandler(activity.id)"
                           (cardClicked)="openActivity(activity)"
-                          >
+                        >
                           <ng-container more-actions>
                             <app-action
                               color="accent"
@@ -144,45 +144,43 @@
                           </ng-container>
                         </app-base-card>
                         @if (utils.noLocation(activity)) {
-                          <div
-                            class="error-badge"
-                            >
+                          <div class="error-badge">
                             <mat-icon
                               color="accent"
-                          [matTooltip]="
-                            'profile.labels.noCoordinates' | translate
-                          "
+                              [matTooltip]="
+                                'profile.labels.noCoordinates' | translate
+                              "
                               >error</mat-icon
-                              >
-                            </div>
-                          }
-                        </div>
-                      }
-                    </app-card-list>
-                    @if (paging$ | async; as paging) {
-                      <div class="pager">
-                        @if (activities?.length) {
-                          <mat-paginator
-                            class="mat-elevation-z8"
-                            color="accent"
-                            [length]="paging?.totalElements"
-                            [pageIndex]="paging?.number"
-                            [pageSize]="paging?.size || pageSize"
-                            [pageSizeOptions]="pageSizeOptions"
-                            [showFirstLastButtons]="true"
-                            (page)="pageChangedHandler($event)"
-                            aria-label="Select page"
                             >
-                          </mat-paginator>
+                          </div>
                         }
                       </div>
                     }
-                  </div>
-                </app-list-with-heading-layout>
-              }
-            </section>
-          }
-        </app-page-with-header-layout>
-      }
+                  </app-card-list>
+                  @if (paging$ | async; as paging) {
+                    <div class="pager">
+                      @if (activities?.length) {
+                        <mat-paginator
+                          class="mat-elevation-z8"
+                          color="accent"
+                          [length]="paging?.totalElements"
+                          [pageIndex]="paging?.number"
+                          [pageSize]="paging?.size || pageSize"
+                          [pageSizeOptions]="pageSizeOptions"
+                          [showFirstLastButtons]="true"
+                          (page)="pageChangedHandler($event)"
+                          aria-label="Select page"
+                        >
+                        </mat-paginator>
+                      }
+                    </div>
+                  }
+                </div>
+              </app-list-with-heading-layout>
+            }
+          </section>
+        }
+      </app-page-with-header-layout>
     }
   }
+}

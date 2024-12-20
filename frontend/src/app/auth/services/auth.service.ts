@@ -17,7 +17,6 @@ import { EmailVerifySuccessService } from './email-verify-success.service';
   providedIn: 'root'
 })
 export class AuthService {
-  private silentRefreshErrors = 0;
   oauthService = inject(OAuthService);
   router = inject(Router);
   emailVerifyService = inject(EmailVerifySuccessService);
@@ -25,9 +24,9 @@ export class AuthService {
   constructor() {
     this.oauthService.configure(getAuthConfig(environment));
 
-    this.oauthService.events.subscribe((event) => {
-      console.log('EVENTS', event);
-    });
+    // this.oauthService.events.subscribe((event) => {
+    //   console.log('EVENTS', event);
+    // });
 
     this.oauthService.events
       .pipe(
@@ -54,16 +53,16 @@ export class AuthService {
 
   public async init(): Promise<void> {
     await this.oauthService.loadDiscoveryDocumentAndTryLogin({
-      onTokenReceived: (t) => {
-        console.log('Token received', t);
+      onTokenReceived: () => {
+        //
       }
     });
 
-    const state = this.oauthService.state;
+    if (!this.oauthService.hasValidAccessToken()) {
+      await this.oauthService.revokeTokenAndLogout();
+    }
 
-    // if (state) {
-    //   this.router.navigate([decodeURIComponent(state)]);
-    // }
+    const state = this.oauthService.state;
 
     if (state && state !== 'undefined' && state !== 'null') {
       let stateUrl = state;
@@ -84,8 +83,6 @@ export class AuthService {
   }
 
   public login(targetUrl?: string): void {
-    console.log('Login', targetUrl);
-    console.log('Login', this.router.url);
     this.oauthService.initLoginFlow(targetUrl || this.router.url);
   }
 

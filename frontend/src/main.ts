@@ -14,7 +14,6 @@ register();
     const env = await fetch(`${environment.apiUrl}/ui/ui-config`).then((res) =>
       res.json()
     );
-    console.log('>>>> UI CONFIG');
 
     // Override the environment with data from the backend. Use the existing environment as fallback
     overrideEnvironment(Object.assign(environment, env));
