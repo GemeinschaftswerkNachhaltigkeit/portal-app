@@ -8,8 +8,9 @@ export const getAuthConfig = (env: any): AuthConfig => {
     issuer: env.keycloak.issuer,
     redirectUri: window.location.origin + env.contextPath,
     clientId: env.keycloak.clientId,
-    scope: 'openid profile email offline_access',
+    scope: 'openid profile email',
     responseType: 'code',
+
     openUri: (uri: string) => {
       /*
        * use 'forceRegistration' as query parameter on routes with forced login to redirect the user to kc-registration instead of kc-login

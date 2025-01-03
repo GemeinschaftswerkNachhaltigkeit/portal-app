@@ -23,10 +23,7 @@ export class AuthService {
 
   constructor() {
     this.oauthService.configure(getAuthConfig(environment));
-
-    // this.oauthService.events.subscribe((event) => {
-    //   console.log('EVENTS', event);
-    // });
+    this.oauthService.setStorage(localStorage);
 
     this.oauthService.events
       .pipe(
@@ -37,6 +34,20 @@ export class AuthService {
     this.oauthService.events
       .pipe(filter((e) => e.type === 'token_received'))
       .subscribe(() => this.oauthService.loadUserProfile());
+
+    window.addEventListener('storage', (event) => {
+      if (event.key !== 'access_token' && event.key !== null) {
+        return;
+      }
+
+      console.warn(
+        'Noticed changes to access_token (most likely from another tab), updating isAuthenticated'
+      );
+
+      if (!this.oauthService.hasValidAccessToken()) {
+        this.navigateToLoginPage();
+      }
+    });
 
     this.oauthService.setupAutomaticSilentRefresh();
   }
@@ -52,11 +63,7 @@ export class AuthService {
   }
 
   public async init(): Promise<void> {
-    await this.oauthService.loadDiscoveryDocumentAndTryLogin({
-      onTokenReceived: () => {
-        //
-      }
-    });
+    await this.oauthService.loadDiscoveryDocumentAndTryLogin({});
 
     if (!this.oauthService.hasValidAccessToken()) {
       await this.oauthService.revokeTokenAndLogout();
