@@ -10,12 +10,12 @@
           !activityWips.length &&
           utils.hasOrga()
         "
-        >
+      >
         <ng-container headerContent>
           {{
-          !utils.hasOrga()
-          ? ('account.texts.noOrganisation' | translate)
-          : ('account.texts.activities' | translate)
+            !utils.hasOrga()
+              ? ('account.texts.noOrganisation' | translate)
+              : ('account.texts.activities' | translate)
           }}
         </ng-container>
         <div class="buttons" headerAction>
@@ -24,7 +24,7 @@
             color="accent"
             (click)="createHandler()"
             [disabled]="!utils.hasOrga()"
-            >
+          >
             @if (featureService.show$('dan-account') | async) {
               {{ 'account.buttons.addActivityOrDan' | translate }}
             } @else {
@@ -35,28 +35,28 @@
         <ng-container noEntriesContent>
           <div>{{ 'account.texts.noActivities' | translate }}</div>
         </ng-container>
-        <app-spinner></app-spinner>
+        <app-loading-indicator></app-loading-indicator>
         @if ((loading$ | async) !== true) {
           <section class="lists">
             @if (activityWips.length) {
               <app-list-with-heading-layout
                 [title]="'account.titles.activityWips' | translate"
-                >
+              >
                 <div>
                   <app-card-list>
                     @for (activity of activityWips; track activity) {
                       <div class="card-wrapper">
                         <app-base-card
                           [entity]="activity"
-                        [type]="
-                          activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
-                        "
+                          [type]="
+                            activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
+                          "
                           [showActions]="true"
                           [clickable]="false"
                           [draft]="true"
                           (delete)="deleteWipHandler(activity.randomUniqueId)"
                           (edit)="editWipHandler(activity.randomUniqueId)"
-                          >
+                        >
                         </app-base-card>
                       </div>
                     }
@@ -74,7 +74,7 @@
                           [showFirstLastButtons]="true"
                           (page)="wipsPageChangedHandler($event)"
                           aria-label="Select page"
-                          >
+                        >
                         </mat-paginator>
                       }
                     </div>
@@ -85,23 +85,24 @@
             @if (activities.length) {
               <app-list-with-heading-layout
                 [title]="'account.titles.finishedActivities' | translate"
-                >
+              >
                 <div>
                   @if (
                     activities.length && utils.hasInvalidLocations(activities)
-                    ) {
-                    <div
-                      class="no-coordinates-hint"
-                      >
+                  ) {
+                    <div class="no-coordinates-hint">
                       <app-alert
-                    [title]="
-                      'validationErrors.activitiesCoordinatesTitle' | translate
-                    "
+                        [title]="
+                          'validationErrors.activitiesCoordinatesTitle'
+                            | translate
+                        "
                         [showIcon]="true"
                         bgIcon="travel_explore"
                         fgIcon="priority_high"
-                        >
-                        {{ 'validationErrors.activitiesCoordinates' | translate }}
+                      >
+                        {{
+                          'validationErrors.activitiesCoordinates' | translate
+                        }}
                       </app-alert>
                     </div>
                   }
@@ -110,14 +111,14 @@
                       <div class="card-wrapper">
                         <app-base-card
                           [entity]="activity"
-                        [type]="
-                          activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
-                        "
+                          [type]="
+                            activity.activityType === 'DAN' ? 'DAN' : 'ACTIVITY'
+                          "
                           [showActions]="true"
                           (delete)="deleteHandler(activity.id)"
                           (edit)="editHandler(activity.id)"
                           (cardClicked)="openActivity(activity)"
-                          >
+                        >
                           <ng-container more-actions>
                             <app-action
                               color="accent"
@@ -129,45 +130,43 @@
                           </ng-container>
                         </app-base-card>
                         @if (utils.noLocation(activity)) {
-                          <div
-                            class="error-badge"
-                            >
+                          <div class="error-badge">
                             <mat-icon
                               color="accent"
-                          [matTooltip]="
-                            'profile.labels.noCoordinates' | translate
-                          "
+                              [matTooltip]="
+                                'profile.labels.noCoordinates' | translate
+                              "
                               >error</mat-icon
-                              >
-                            </div>
-                          }
-                        </div>
-                      }
-                    </app-card-list>
-                    @if (paging$ | async; as paging) {
-                      <div class="pager">
-                        @if (activities?.length) {
-                          <mat-paginator
-                            class="mat-elevation-z8"
-                            color="accent"
-                            [length]="paging?.totalElements"
-                            [pageIndex]="paging?.number"
-                            [pageSize]="paging?.size || pageSize"
-                            [pageSizeOptions]="pageSizeOptions"
-                            [showFirstLastButtons]="true"
-                            (page)="pageChangedHandler($event)"
-                            aria-label="Select page"
                             >
-                          </mat-paginator>
+                          </div>
                         }
                       </div>
                     }
-                  </div>
-                </app-list-with-heading-layout>
-              }
-            </section>
-          }
-        </app-page-with-header-layout>
-      }
+                  </app-card-list>
+                  @if (paging$ | async; as paging) {
+                    <div class="pager">
+                      @if (activities?.length) {
+                        <mat-paginator
+                          class="mat-elevation-z8"
+                          color="accent"
+                          [length]="paging?.totalElements"
+                          [pageIndex]="paging?.number"
+                          [pageSize]="paging?.size || pageSize"
+                          [pageSizeOptions]="pageSizeOptions"
+                          [showFirstLastButtons]="true"
+                          (page)="pageChangedHandler($event)"
+                          aria-label="Select page"
+                        >
+                        </mat-paginator>
+                      }
+                    </div>
+                  }
+                </div>
+              </app-list-with-heading-layout>
+            }
+          </section>
+        }
+      </app-page-with-header-layout>
     }
   }
+}

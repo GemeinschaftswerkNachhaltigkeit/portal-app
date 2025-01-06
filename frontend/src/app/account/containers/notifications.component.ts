@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotifiacationFacadeService } from '../notification-facade.service';
 
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [SpinnerComponent],
-  template: ` <app-spinner></app-spinner> `
+  imports: [LoadingIndicatorComponent],
+  template: ` <app-loading-indicator></app-loading-indicator> `
 })
 export class NotificationComponent implements OnInit {
   constructor(

@@ -42,7 +42,7 @@ import { ListWithHeadingLayoutComponent } from '../shared/components/layout/list
 import { PageMenuComponent } from '../shared/components/layout/page-menu/page-menu.component';
 import { NotificationPageComponent } from '../shared/components/layout/notification-page/notification-page.component';
 import { ContentWrapperComponent } from '../shared/components/layout/content-wrapper.component';
-import { SpinnerComponent } from '../shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from '../shared/components/base/spinner.component';
 import { InfoCardComponent } from '../shared/components/cards/info-card.component';
 import { FormFieldErrorComponent } from '../shared/components/form/form-field-error/form-field-error.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -78,7 +78,7 @@ import { NotificationComponent } from './containers/notifications.component';
     PageMenuComponent,
     NotificationPageComponent,
     ContentWrapperComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     InfoCardComponent,
     FormFieldErrorComponent,
     TranslateModule,

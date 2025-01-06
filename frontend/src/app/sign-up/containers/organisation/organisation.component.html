@@ -5,12 +5,12 @@
     color="accent"
     [orientation]="(stepperOrientation | async)!"
     [disableRipple]="true"
-    >
+  >
     <mat-step
       [stepControl]="formStepOne!"
       [label]="'labels.wizard.masterData' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div step class="form-container">
           <app-form-step-description
@@ -39,7 +39,7 @@
             [showPrevBtn]="false"
             [formStepKey]="'ORGANISATION'"
             [stepState$]="orgStepState$"
-            >
+          >
           </app-form-step-actions>
         </div>
         <app-form-advatages
@@ -52,7 +52,7 @@
       [stepControl]="formStepTwo!"
       [label]="'labels.wizard.topics' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div step class="form-container">
           <app-form-step-description
@@ -79,22 +79,22 @@
           <app-form-step-actions
             [formStepKey]="'topics'"
             [stepState$]="orgStepState$"
-            >
+          >
           </app-form-step-actions>
         </div>
         <app-form-advatages
           sidebar
           [content]="orgContent$ | async"
-          ></app-form-advatages
-        ></app-wizard-sidebar-layout>
-      </mat-step>
-      <mat-step
-        [stepControl]="formStepThree!"
-        [label]="'labels.wizard.externalLinks' | translate"
-        [editable]="isEditable"
-        >
-        <app-wizard-sidebar-layout
-          ><div step class="form-container">
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+    <mat-step
+      [stepControl]="formStepThree!"
+      [label]="'labels.wizard.externalLinks' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout
+        ><div step class="form-container">
           <app-form-step-description
             [content]="orgContent$ | async"
             [stepDescriptionId]="2"
@@ -119,22 +119,22 @@
           <app-form-step-actions
             [formStepKey]="'externalLinks'"
             [stepState$]="orgStepState$"
-            >
+          >
           </app-form-step-actions>
         </div>
         <app-form-advatages
           sidebar
           [content]="orgContent$ | async"
-          ></app-form-advatages
-        ></app-wizard-sidebar-layout>
-      </mat-step>
-      <mat-step
-        [stepControl]="formStepFour!"
-        [label]="'labels.wizard.contact' | translate"
-        [editable]="isEditable"
-        >
-        <app-wizard-sidebar-layout
-          ><div step class="form-container">
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+    <mat-step
+      [stepControl]="formStepFour!"
+      [label]="'labels.wizard.contact' | translate"
+      [editable]="isEditable"
+    >
+      <app-wizard-sidebar-layout
+        ><div step class="form-container">
           <app-form-step-description
             [content]="orgContent$ | async"
             [stepDescriptionId]="3"
@@ -165,31 +165,31 @@
             [last]="true"
             [modification]="isModification"
             (canceled)="backToProile()"
-            >
+          >
           </app-form-step-actions>
         </div>
         <app-form-advatages
           sidebar
           [content]="orgContent$ | async"
-          ></app-form-advatages
-        ></app-wizard-sidebar-layout>
-      </mat-step>
-      <mat-step class="final-step">
-        @if (loading$ | async) {
-          <app-content-wrapper size="xl">
-            <app-spinner></app-spinner>
-          </app-content-wrapper>
-        }
-      </mat-step>
-      <!-- Icon overrides. -->
-      <ng-template matStepperIcon="edit">
-        <mat-icon>arrow_forward_alt</mat-icon>
-      </ng-template>
-      <ng-template matStepperIcon="number">
-        <mat-icon>arrow_forward_alt</mat-icon>
-      </ng-template>
-      <ng-template matStepperIcon="done">
-        <mat-icon>check</mat-icon>
-      </ng-template>
-    </mat-stepper>
-  }
+        ></app-form-advatages
+      ></app-wizard-sidebar-layout>
+    </mat-step>
+    <mat-step class="final-step">
+      @if (loading$ | async) {
+        <app-content-wrapper size="xl">
+          <app-loading-indicator></app-loading-indicator>
+        </app-content-wrapper>
+      }
+    </mat-step>
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="edit">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="number">
+      <mat-icon>arrow_forward_alt</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="done">
+      <mat-icon>check</mat-icon>
+    </ng-template>
+  </mat-stepper>
+}

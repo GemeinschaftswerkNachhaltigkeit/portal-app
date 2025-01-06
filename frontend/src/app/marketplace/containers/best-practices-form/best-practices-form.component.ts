@@ -30,7 +30,7 @@ import { FormSectionListComponent } from '../../components/form-section-list.com
 import { FormSectionComponent } from '../../components/form-section.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -51,7 +51,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     UploadImageComponent,
     ContactControlsComponent,
     ContentWrapperComponent,

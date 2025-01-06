@@ -11,7 +11,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
 import { HeaderComponent } from 'src/app/shared/components/layout/header.component';
 import { FiltersComponent } from '../../components/filters.component';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,7 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HeaderComponent,
     FiltersComponent,
     AlertComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     TranslateModule,
     BaseCardComponent,
     MatIconModule,

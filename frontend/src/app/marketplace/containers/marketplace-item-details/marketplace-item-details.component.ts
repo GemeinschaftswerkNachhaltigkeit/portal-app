@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { MarketplaceFacadeService } from '../../marketplace-facade.service';
 import { BestPracticesCategories } from '../../models/best-practices-categories';
 import { MarketplaceItemDto } from '../../models/marketplace-item-dto';
 import { OfferCategories } from '../../models/offer-categories';
@@ -20,6 +19,9 @@ import { ContactComponent } from '../../components/contact.component';
 import { TopicComponent } from 'src/app/shared/components/base/topic.component';
 import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
 import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
+import { MarketplaceItemService } from '../../marketplace-item.service';
+import { ErrorComponent } from 'src/app/shared/components/base/error.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-marketplace-item-details',
@@ -38,17 +40,22 @@ import { EventBadgesComponent } from 'src/app/shared/components/base/badges/even
     ContactComponent,
     TopicComponent,
     ContentRowComponent,
-    EventBadgesComponent
+    EventBadgesComponent,
+    ErrorComponent,
+    SpinnerComponent
   ],
   templateUrl: './marketplace-item-details.component.html',
   styleUrls: ['./marketplace-item-details.component.scss']
 })
 export class MarketplaceItemDetailsComponent implements OnInit {
-  item$ = this.marketplaceFacade.item$;
+  marketplaceItemService = inject(MarketplaceItemService);
+
+  item = this.marketplaceItemService.item;
+  error = this.marketplaceItemService.error;
+  loading = this.marketplaceItemService.loading;
 
   constructor(
     private route: ActivatedRoute,
-    private marketplaceFacade: MarketplaceFacadeService,
     public utils: UtilsService
   ) {}
 
@@ -70,7 +77,7 @@ export class MarketplaceItemDetailsComponent implements OnInit {
     const params = this.route.snapshot.params;
     const id = params['itemId'];
     if (id) {
-      this.marketplaceFacade.loadItem(id);
+      this.marketplaceItemService.getItem(id);
     }
   }
 }

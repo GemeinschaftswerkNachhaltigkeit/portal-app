@@ -34,7 +34,7 @@ import { FilterModalButtonComponent } from 'src/app/shared/components/form/filte
 import { SearchControlsComponent } from '../../components/search-controls.component';
 import { EventListComponent } from '../../components/event-list.component';
 import { EventComponent } from '../../components/event.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
 import { FilterSidebarComponent } from '../../components/filter-sidebar.component';
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
@@ -52,7 +52,7 @@ import { MatIconModule } from '@angular/material/icon';
     SearchControlsComponent,
     EventListComponent,
     EventComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     AlertComponent,
     FilterSidebarComponent,
     HeadingComponent,

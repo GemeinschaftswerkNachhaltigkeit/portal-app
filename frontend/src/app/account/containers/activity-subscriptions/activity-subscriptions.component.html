@@ -4,14 +4,14 @@
       [title]="'account.titles.activitySubs' | translate"
       [noEntriesTitle]="'account.titles.noActivitySubs' | translate"
       [showNoEntriesWarning]="(loading$ | async) !== true && !activities.length"
-      >
+    >
       <ng-container headerContent>{{
         'account.texts.activitySubs' | translate
       }}</ng-container>
       <ng-container noEntriesContent>
         {{ 'account.texts.noActivitySubs' | translate }}
       </ng-container>
-      <app-spinner></app-spinner>
+      <app-loading-indicator></app-loading-indicator>
       @if ((loading$ | async) !== true) {
         <app-card-list>
           @for (activity of activities; track activity) {
@@ -20,7 +20,7 @@
               [type]="activity.activityType === 'DAN' ? 'DAN' : ''"
               [bookmarked]="true"
               (cardClicked)="openActivity(activity)"
-              >
+            >
             </app-base-card>
           }
         </app-card-list>

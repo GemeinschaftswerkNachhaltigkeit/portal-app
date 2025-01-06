@@ -10,7 +10,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
 import { MatIconModule } from '@angular/material/icon';
 import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
 import { MatButtonModule } from '@angular/material/button';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-contact-invite',
@@ -22,7 +22,7 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
     HtmlWrapperComponent,
     TranslateModule,
     MatButtonModule,
-    SpinnerComponent
+    LoadingIndicatorComponent
   ],
   templateUrl: './contact-invite.component.html',
   styleUrls: ['./contact-invite.component.scss']

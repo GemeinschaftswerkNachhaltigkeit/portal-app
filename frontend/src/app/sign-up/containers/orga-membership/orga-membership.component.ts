@@ -4,12 +4,12 @@ import { take } from 'rxjs';
 import { ErrorService } from '../../../shared/services/error.service';
 import { MembershipService } from '../../services/membership.service';
 
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-orga-membership',
   standalone: true,
-  imports: [SpinnerComponent],
+  imports: [LoadingIndicatorComponent],
   templateUrl: './orga-membership.component.html'
 })
 export class OrgaMembershipComponent {

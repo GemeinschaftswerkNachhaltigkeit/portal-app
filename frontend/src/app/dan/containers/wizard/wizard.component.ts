@@ -54,7 +54,7 @@ import { ActionsComponent } from '../../components/actions.component';
 import { FormAdvantagesComponent } from 'src/app/shared/components/wizard/form-advatages.component';
 import { ContactControlsComponent } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -77,7 +77,7 @@ import { MatIconModule } from '@angular/material/icon';
     ContactControlsComponent,
     UploadImageComponent,
     HtmlWrapperComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ContentWrapperComponent,
     TranslateModule,
     MatButtonModule,

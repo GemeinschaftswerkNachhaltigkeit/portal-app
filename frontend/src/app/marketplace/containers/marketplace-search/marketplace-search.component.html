@@ -1,8 +1,8 @@
-@if (paging$ | async; as paging) {
+@if (!error()) {
   <app-marketplace-layout
-    [total]="paging.totalElements || 0"
-    [loading]="loading$ | async"
-    >
+    [total]="paging()?.totalElements || 0"
+    [loading]="loading()"
+  >
     <ng-container banner
       ><app-add-banner (add)="handleAdd()"></app-add-banner
     ></ng-container>
@@ -39,9 +39,9 @@
       </div>
     </ng-container>
     <div results>
-      @if (featuredItems$ | async; as featuredItems) {
+      @if (featuredItems() && featuredItems()?.length) {
         <app-card-list>
-          @for (featuredItem of featuredItems; track featuredItem) {
+          @for (featuredItem of featuredItems(); track featuredItem) {
             <app-card
               [featuredText]="featuredItem.featuredText"
               [imageId]="featuredItem.image"
@@ -60,49 +60,53 @@
         </app-card-list>
         <div class="line"><hr /></div>
       }
-      @if (items$ | async; as items) {
-        <app-card-list>
-          @for (item of items; track item) {
-            <app-card
-              [imageId]="item.image"
-              [title]="item.name"
-              [content]="item.description"
-              [type]="item.marketplaceType"
-              [category]="getMarketplaceCategory(item)"
-              [location]="item.location"
-              [thematicFocus]="item.thematicFocus"
-              [showActions]="false"
-              [orga]="item.organisation"
-              [expired]="expired(item)"
-              (cardClicked)="open(item.id)"
-            ></app-card>
-          }
-        </app-card-list>
-        <div class="pager">
-          @if (items?.length) {
-            <mat-paginator
-              class="mat-elevation-z8"
-              color="accent"
-              [length]="paging?.totalElements"
-              [pageIndex]="paging?.number"
-              [pageSize]="paging?.size || pageSize"
-              [pageSizeOptions]="pageSizeOptions"
-              [showFirstLastButtons]="true"
-              (page)="handlePageChanged($event)"
-              aria-label="Select page"
-              >
-            </mat-paginator>
-          }
-        </div>
-      }
+      <app-card-list>
+        @for (item of items(); track item) {
+          <app-card
+            [imageId]="item.image"
+            [title]="item.name"
+            [content]="item.description"
+            [type]="item.marketplaceType"
+            [category]="getMarketplaceCategory(item)"
+            [location]="item.location"
+            [thematicFocus]="item.thematicFocus"
+            [showActions]="false"
+            [orga]="item.organisation"
+            [expired]="expired(item)"
+            (cardClicked)="open(item.id)"
+          ></app-card>
+        }
+      </app-card-list>
+      <div class="pager">
+        @if (items()?.length) {
+          <mat-paginator
+            class="mat-elevation-z8"
+            color="accent"
+            [length]="paging()?.totalElements"
+            [pageIndex]="paging()?.number"
+            [pageSize]="paging()?.size || pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            [showFirstLastButtons]="true"
+            (page)="handlePageChanged($event)"
+            aria-label="Select page"
+          >
+          </mat-paginator>
+        }
+      </div>
     </div>
-    @if (links$ | async; as links) {
+    @if (partners().length) {
       <div slider>
         <app-partner-links
-          [links]="links"
+          [links]="partners()"
           [selectedCategories]="getCategories()"
         ></app-partner-links>
       </div>
     }
   </app-marketplace-layout>
+}
+
+@if (error() && !loading()) {
+  <div class="error">
+    <app-error [error]="error()"></app-error>
+  </div>
 }

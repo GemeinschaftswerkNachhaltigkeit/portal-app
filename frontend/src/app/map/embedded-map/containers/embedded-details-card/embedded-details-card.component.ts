@@ -16,7 +16,7 @@ import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
 import { DetailsLinkComponent } from 'src/app/map/components/details-link.component';
 import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
@@ -33,7 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     MatButtonModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ExpiredBadgeComponent,
     DetailsLinkComponent,
     CardLabelComponent,

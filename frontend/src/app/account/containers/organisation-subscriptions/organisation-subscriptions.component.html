@@ -4,14 +4,14 @@
       [title]="'account.titles.orgaSubs' | translate"
       [noEntriesTitle]="'account.titles.noOrgaSubs' | translate"
       [showNoEntriesWarning]="(loading$ | async) !== true && !orgas.length"
-      >
+    >
       <ng-container headerContent>{{
         'account.texts.orgaSubs' | translate
       }}</ng-container>
       <ng-container noEntriesContent>{{
         'account.texts.noOrgaSubs' | translate
       }}</ng-container>
-      <app-spinner></app-spinner>
+      <app-loading-indicator></app-loading-indicator>
       @if ((loading$ | async) !== true) {
         <app-card-list>
           @for (orga of orgas; track orga) {
@@ -20,7 +20,7 @@
               type="organisation"
               [followed]="true"
               (cardClicked)="openOrga(orga)"
-              >
+            >
             </app-base-card>
           }
         </app-card-list>

@@ -5,7 +5,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { OrgaFacadeService } from '../../orga-facade.service';
 import { CommonModule } from '@angular/common';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
 import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     PageWithHeaderLayoutComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     CardListComponent,
     BaseCardComponent,
     TranslateModule

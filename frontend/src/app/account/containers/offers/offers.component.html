@@ -6,7 +6,7 @@
       [showNoEntriesWarning]="
         (loading$ | async) !== true && !offers.length && !offerWips.length
       "
-      >
+    >
       <ng-container headerContent>
         {{ 'account.texts.offers' | translate }}
       </ng-container>
@@ -19,7 +19,7 @@
               color="accent"
               (click)="handleNew()"
               [disabled]="(paging.totalElements || 0) >= 30"
-              >
+            >
               {{ 'account.buttons.addOffer' | translate }}
             </button>
             <app-char-count
@@ -32,13 +32,13 @@
       <ng-container noEntriesContent>
         {{ 'account.texts.noOffers' | translate }}
       </ng-container>
-      <app-spinner></app-spinner>
+      <app-loading-indicator></app-loading-indicator>
       @if ((loading$ | async) !== true) {
         <section class="lists">
           @if (offerWips.length) {
             <app-list-with-heading-layout
               [title]="'account.titles.offerWips' | translate"
-              >
+            >
               <div>
                 <app-card-list>
                   @for (offerWip of offerWips; track offerWip) {
@@ -49,10 +49,10 @@
                         [title]="offerWip.name"
                         [content]="offerWip.description"
                         [type]="type.OFFER"
-                      [category]="
-                        offerWip.offerCategory &&
-                        'marketplace.labels.' + offerWip.offerCategory
-                      "
+                        [category]="
+                          offerWip.offerCategory &&
+                          'marketplace.labels.' + offerWip.offerCategory
+                        "
                         [location]="offerWip.location"
                         [thematicFocus]="offerWip.thematicFocus"
                         [draft]="true"
@@ -76,7 +76,7 @@
                         [showFirstLastButtons]="true"
                         (page)="handleWipsPageChanged($event)"
                         aria-label="Select page"
-                        >
+                      >
                       </mat-paginator>
                     }
                   </div>
@@ -87,7 +87,7 @@
           @if (offers.length) {
             <app-list-with-heading-layout
               [title]="'account.titles.releasedOffers' | translate"
-              >
+            >
               <div>
                 <app-card-list>
                   @for (offer of offers; track offer) {
@@ -99,10 +99,10 @@
                         [title]="offer.name"
                         [content]="offer.description"
                         [type]="type.OFFER"
-                      [category]="
-                        offer.offerCategory &&
-                        'marketplace.labels.' + offer.offerCategory
-                      "
+                        [category]="
+                          offer.offerCategory &&
+                          'marketplace.labels.' + offer.offerCategory
+                        "
                         [location]="offer.location"
                         [thematicFocus]="offer.thematicFocus"
                         [draft]="offer.status === status.INACTIVE"
@@ -111,30 +111,34 @@
                         (delete)="handleDeleteOffer(offer)"
                         (cardClicked)="open(offer)"
                         ><ng-container actionMenu>
-                        @if (
-                          offer.status === status.INACTIVE ||
-                          offer.status === status.ACTIVE
+                          @if (
+                            offer.status === status.INACTIVE ||
+                            offer.status === status.ACTIVE
                           ) {
-                          <button
-                            color="accent"
-                            mat-icon-button
-                            [matMenuTriggerFor]="menu"
-                            aria-label="actions menu"
-                            >
-                            <mat-icon>more_vert</mat-icon>
-                          </button>
-                        }
-                        <mat-menu #menu="matMenu">
-                          @if (offer.status === status.INACTIVE) {
                             <button
-                              mat-menu-item
-                              (click)="handleStatusChange(offer, status.ACTIVE)"
+                              color="accent"
+                              mat-icon-button
+                              [matMenuTriggerFor]="menu"
+                              aria-label="actions menu"
+                            >
+                              <mat-icon>more_vert</mat-icon>
+                            </button>
+                          }
+                          <mat-menu #menu="matMenu">
+                            @if (offer.status === status.INACTIVE) {
+                              <button
+                                mat-menu-item
+                                (click)="
+                                  handleStatusChange(offer, status.ACTIVE)
+                                "
                               >
-                              <div class="action-option">
-                                <app-outlined-icon
-                                  >check_circle</app-outlined-icon
+                                <div class="action-option">
+                                  <app-outlined-icon
+                                    >check_circle</app-outlined-icon
                                   >
-                                  <span>{{ 'labels.activate' | translate }}</span>
+                                  <span>{{
+                                    'labels.activate' | translate
+                                  }}</span>
                                 </div>
                               </button>
                             }
@@ -142,11 +146,15 @@
                               <button
                                 class="action-option"
                                 mat-menu-item
-                                (click)="handleStatusChange(offer, status.INACTIVE)"
-                                >
+                                (click)="
+                                  handleStatusChange(offer, status.INACTIVE)
+                                "
+                              >
                                 <div class="action-option">
                                   <app-outlined-icon>cancel</app-outlined-icon>
-                                  <span>{{ 'labels.deactivate' | translate }}</span>
+                                  <span>{{
+                                    'labels.deactivate' | translate
+                                  }}</span>
                                 </div>
                               </button>
                             }
@@ -169,7 +177,7 @@
                         [showFirstLastButtons]="true"
                         (page)="handlePageChanged($event)"
                         aria-label="Select page"
-                        >
+                      >
                       </mat-paginator>
                     }
                   </div>
@@ -178,6 +186,7 @@
             </app-list-with-heading-layout>
           }
         </section>
-      } </app-page-with-header-layout>
-    }
+      }
+    </app-page-with-header-layout>
   }
+}

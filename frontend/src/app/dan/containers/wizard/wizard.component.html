@@ -5,12 +5,12 @@
     color="accent"
     [orientation]="(stepperOrientation | async)!"
     [disableRipple]="true"
-    >
+  >
     <mat-step
       [stepControl]="step1Form!"
       [label]="'labels.wizard.aboutDan' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
@@ -18,7 +18,7 @@
             [content]="
               (danContent$ | async)?.stepDescriptions?.[0]?.description || ''
             "
-            >
+          >
           </app-title-with-content>
           <form [formGroup]="step1Form">
             <app-master-data-form
@@ -46,7 +46,7 @@
       [stepControl]="step2Form!"
       [label]="'labels.wizard.topics' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
@@ -54,7 +54,7 @@
             [content]="
               (danContent$ | async)?.stepDescriptions?.[1]?.description || ''
             "
-            >
+          >
           </app-title-with-content>
           <form [formGroup]="step2Form">
             <app-topics-form formGroupName="topics"></app-topics-form>
@@ -71,7 +71,7 @@
       [stepControl]="step3Form!"
       [label]="'labels.wizard.externalLinks' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
@@ -79,7 +79,7 @@
             [content]="
               (danContent$ | async)?.stepDescriptions?.[2]?.description || ''
             "
-            >
+          >
           </app-title-with-content>
           <form [formGroup]="step3Form">
             <app-external-links-form
@@ -98,7 +98,7 @@
       [stepControl]="step4Form!"
       [label]="'labels.wizard.contact' | translate"
       [editable]="isEditable"
-      >
+    >
       <app-wizard-sidebar-layout>
         <div class="form-container">
           <app-title-with-content
@@ -106,7 +106,7 @@
             [content]="
               (danContent$ | async)?.stepDescriptions?.[3]?.description || ''
             "
-            >
+          >
           </app-title-with-content>
           <form [formGroup]="step4Form">
             <app-contact-controls
@@ -152,13 +152,11 @@
     <mat-step class="final-step">
       @if (loading$ | async) {
         <app-content-wrapper size="xl">
-          <app-spinner></app-spinner>
+          <app-loading-indicator></app-loading-indicator>
         </app-content-wrapper>
       }
       @if (isSubmissionSuccess && (loading$ | async) === false) {
-        <app-content-wrapper
-          size="xl"
-          >
+        <app-content-wrapper size="xl">
           <div class="final-step-content-wrapper">
             <app-html-wrapper
               [html]="danContent?.completed_message || ''"
@@ -172,7 +170,7 @@
                 color="accent"
                 [routerLink]="['/', 'account', 'dan-activities']"
                 [queryParams]="{ update: 'success' }"
-                >
+              >
                 <span class="short">{{ 'btn.back' | translate }}</span>
                 <span class="long">{{
                   'btn.backToDanOverview' | translate
@@ -183,9 +181,7 @@
         </app-content-wrapper>
       }
       @if (!isSubmissionSuccess && (loading$ | async) === false) {
-        <app-content-wrapper
-          size="xl"
-          >
+        <app-content-wrapper size="xl">
           <div class="final-step-content-wrapper">
             <p>
               {{ 'error.unknown' | translate }}

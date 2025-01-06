@@ -8,16 +8,14 @@
   <div class="results-wrapper" results>
     <div class="results">
       <div class="spinner-wrapper">
-        <app-spinner forId="map-search"></app-spinner>
+        <app-loading-indicator forId="map-search"></app-loading-indicator>
       </div>
       @if ((loading$ | async) === false) {
         @if (
           !(searchResults$ | async)?.length &&
           (mapInitialised$ | async) === true
-          ) {
-          <div
-            class="no-data"
-            >
+        ) {
+          <div class="no-data">
             <app-alert [title]="'map.titles.noData' | translate">
               <div>
                 {{ 'map.texts.noData.0' | translate }}
@@ -27,7 +25,7 @@
                 mat-flat-button
                 color="accent"
                 (click)="resetZoomHandler()"
-                >
+              >
                 {{ 'btn.resetZoom' | translate }}
               </button>
             </app-alert>
@@ -36,9 +34,7 @@
       }
       @if ((searchResults$ | async)?.length) {
         @if (searchPaging$ | async; as paging) {
-          <app-paginator-wrapper
-            [total]="paging.totalElements"
-            >
+          <app-paginator-wrapper [total]="paging.totalElements">
             <mat-paginator
               color="accent"
               [length]="paging?.totalElements"
@@ -48,7 +44,7 @@
               [showFirstLastButtons]="true"
               (page)="pageChangedHandler($event)"
               aria-label="Select page"
-              >
+            >
             </mat-paginator>
           </app-paginator-wrapper>
         }
@@ -59,7 +55,7 @@
           <div
             [id]="'card-' + result.resultType + result.id"
             class="card-entry"
-            >
+          >
             <div (mouseenter)="cardHover(result)" (mouseleave)="clearHovered()">
               <app-base-card
                 [entity]="result"
@@ -69,7 +65,7 @@
                 [followed]="subscription.oganisationIsSubcribed(result.id)"
                 [bookmarked]="subscription.activityIsSubcribed(result.id)"
                 (cardClicked)="openCard(result)"
-                >
+              >
                 @if (result.resultType === 'ORGANISATION') {
                   <app-orga-badges
                     badge
@@ -98,7 +94,7 @@
           [showFirstLastButtons]="true"
           (page)="pageChangedHandler($event)"
           aria-label="Select page"
-          >
+        >
         </mat-paginator>
       }
     </div>

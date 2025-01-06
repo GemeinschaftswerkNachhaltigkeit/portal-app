@@ -32,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
 import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
 import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
@@ -57,7 +57,7 @@ import { VisibilityControlsComponent } from '../../components/visibility-control
     ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     UploadImageComponent,
     ContactControlsComponent,
     ContentWrapperComponent,

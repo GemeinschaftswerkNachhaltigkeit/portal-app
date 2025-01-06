@@ -22,20 +22,12 @@
         }
         <div>
           @if (action === 'ALLOW') {
-            <button
-              mat-flat-button
-              color="accent"
-              (click)="registerUser()"
-              >
+            <button mat-flat-button color="accent" (click)="registerUser()">
               {{ 'btn.registration' | translate }}
             </button>
           }
           @if (action !== 'ALLOW') {
-            <button
-              mat-flat-button
-              color="accent"
-              (click)="goToLandingpage()"
-              >
+            <button mat-flat-button color="accent" (click)="goToLandingpage()">
               {{ 'btn.goToLandingpage' | translate }}
             </button>
           }
@@ -46,6 +38,6 @@
 }
 @if (loading$ | async) {
   <app-content-wrapper size="xl">
-    <app-spinner></app-spinner>
+    <app-loading-indicator></app-loading-indicator>
   </app-content-wrapper>
 }

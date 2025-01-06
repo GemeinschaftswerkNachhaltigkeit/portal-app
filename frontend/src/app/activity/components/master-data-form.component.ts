@@ -32,7 +32,7 @@ import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-fie
 import { TiptapMenuBarComponent } from 'src/app/shared/components/form/tiptap-menu-bar.component';
 import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.component';
 import { FeatureComponent } from 'src/app/shared/components/feature/feature.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -53,33 +53,33 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     CharCountComponent,
     FeatureComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     MatRadioModule,
     AlertComponent,
     MatCheckboxModule
-],
+  ],
   template: `
     <ng-container [formGroup]="form">
       <!-- name -->
-    
+
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.activityTitle' | translate }}</mat-label>
         <input
           matInput
           [placeholder]="'forms.labels.activityTitle' | translate"
           formControlName="name"
-          />
+        />
         <app-valid-check [form]="form" controlName="name"></app-valid-check>
-    
+
         <mat-error>
           <app-form-field-error
             [field]="form.get('name')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <!-- WYSIWYG Input -->
-    
+
       <div
         class="mat-form-field-appearance-outline wysiwyg-form-field"
         [class.ng-invalid]="
@@ -87,7 +87,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           (form.get('description')?.dirty || form.get('description')?.touched)
         "
         [class.mat-form-field-disabled]="form.get('description')?.disabled"
-        >
+      >
         <div class="description">
           {{ 'events.texts.wizard.description' | translate }}
         </div>
@@ -96,7 +96,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             <app-tiptap-menu-bar
               [editor]="editor"
               [disabled]="form.get('description')?.disabled!"
-              >
+            >
               <span>{{ 'forms.labels.description' | translate }} *</span>
               <app-char-count
                 counter
@@ -118,9 +118,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           </div>
         }
       </div>
-    
+
       <!-- date -->
-    
+
       @if (!isDan) {
         <div class="date-checkbox">
           <mat-checkbox matInput formControlName="permanent">
@@ -137,12 +137,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             matStartDate
             [placeholder]="'forms.labels.start' | translate"
             formControlName="start"
-            />
+          />
           <input
             matEndDate
             [placeholder]="'forms.labels.end' | translate"
             formControlName="end"
-            />
+          />
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -158,12 +158,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             form.get('end')?.invalid &&
             (form.get('start')?.dirty || form.get('start')?.touched) &&
             (form.get('end')?.dirty || form.get('end')?.touched)
-            ) {
-            <span
-              >,
-            </span>
+          ) {
+            <span>, </span>
           }
-    
+
           <app-form-field-error
             [field]="form.get('end')"
           ></app-form-field-error>
@@ -179,65 +177,66 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
                 [showIcon]="true"
                 bgIcon="eco"
                 fgIcon="check"
-                >
+              >
                 <div
-                [innerHTML]="
-                  'events.texts.wizard.inDanPeriod' | translate: danPeriodParams
-                "
+                  [innerHTML]="
+                    'events.texts.wizard.inDanPeriod'
+                      | translate: danPeriodParams
+                  "
                 ></div>
                 <div class="date-checkbox">
                   <mat-radio-group
                     aria-label="Select an option"
                     formControlName="isDan"
-                    >
+                  >
                     <div class="radio-options">
                       <mat-radio-button [value]="'DAN'">
                         {{
-                        'forms.labels.danOption.yes' | translate
+                          'forms.labels.danOption.yes' | translate
                         }}</mat-radio-button
-                        >
-                        <mat-radio-button [value]="'EVENT'">
-                          {{
+                      >
+                      <mat-radio-button [value]="'EVENT'">
+                        {{
                           'forms.labels.danOption.no' | translate
-                          }}</mat-radio-button
-                          >
-                        </div>
-                      </mat-radio-group>
+                        }}</mat-radio-button
+                      >
                     </div>
-                  </app-alert>
-                  <app-spinner
-                    forId="load-coords"
-                    [noPadding]="true"
-                    [small]="true"
-                  ></app-spinner>
+                  </mat-radio-group>
                 </div>
-              }
-            }
-          </app-feature>
-    
-          <!-- Link zur Anmeldung -->
-    
-          <mat-form-field appearance="outline">
-            <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
-            <input
-              matInput
-              [placeholder]="'forms.labels.registerUrl' | translate"
-              formControlName="registerUrl"
-              />
-            <div matSuffix><mat-icon>language</mat-icon></div>
-            <app-valid-check
-              [form]="form"
-              controlName="registerUrl"
-            ></app-valid-check>
-    
-            <mat-error>
-              <app-form-field-error
-                [field]="form.get('registerUrl')"
-              ></app-form-field-error>
-            </mat-error>
-          </mat-form-field>
-        </ng-container>
-    `,
+              </app-alert>
+              <app-loading-indicator
+                forId="load-coords"
+                [noPadding]="true"
+                [small]="true"
+              ></app-loading-indicator>
+            </div>
+          }
+        }
+      </app-feature>
+
+      <!-- Link zur Anmeldung -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'forms.labels.registerUrl' | translate"
+          formControlName="registerUrl"
+        />
+        <div matSuffix><mat-icon>language</mat-icon></div>
+        <app-valid-check
+          [form]="form"
+          controlName="registerUrl"
+        ></app-valid-check>
+
+        <mat-error>
+          <app-form-field-error
+            [field]="form.get('registerUrl')"
+          ></app-form-field-error>
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

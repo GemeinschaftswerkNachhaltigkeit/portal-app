@@ -23,7 +23,7 @@ import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/exp
 import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
 import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
 import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.component';
 import { TopicComponent } from 'src/app/shared/components/base/topic.component';
@@ -38,7 +38,7 @@ import { ImageComponent } from 'src/app/shared/components/base/image.component';
   imports: [
     CommonModule,
     MatButtonModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ExpiredBadgeComponent,
     DetailsLinkComponent,
     CardLabelComponent,

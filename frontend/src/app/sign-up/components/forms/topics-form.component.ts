@@ -31,7 +31,7 @@ import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-fie
 import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
 import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.component';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-topics-form',
@@ -46,224 +46,218 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
     ThematicFocusControlComponent,
     ValidCheckComponent,
     AlertComponent,
-    SpinnerComponent
-],
+    LoadingIndicatorComponent
+  ],
   template: `<form [formGroup]="topicsFormGroup">
-      <mat-form-field appearance="outline">
-        <mat-label>{{
-          'forms.labels.sustainableDevelopmentGoals' | translate
-        }}</mat-label>
-        <mat-select formControlName="sustainableDevelopmentGoals" multiple>
-          @for (goalNo of sdgOptions; track goalNo) {
-            <mat-option [value]="goalNo">
-              {{ goalNo }} {{ 'SDGS.goal_' + goalNo | translate }}
-            </mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          <app-form-field-error
-            [field]="topicsFormGroup.get('sustainableDevelopmentGoals')"
-          ></app-form-field-error>
-        </mat-error>
-      </mat-form-field>
-    
-      <app-thematic-focus-control
-        controlName="thematicFocus"
-        [label]="'forms.labels.thematicFocus' | translate"
-      ></app-thematic-focus-control>
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
-        <mat-select formControlName="impactArea">
-          @for (impactArea of impactAreaOpts; track impactArea) {
-            <mat-option
-              [value]="impactArea"
-              >
-              {{ 'impactArea.' + impactArea | translate }}
-            </mat-option>
-          }
-        </mat-select>
-        <mat-error>
-          <app-form-field-error
-            [field]="topicsFormGroup.get('impactArea')"
-          ></app-form-field-error>
-        </mat-error>
-      </mat-form-field>
-    
-      <div class="fields">
-        <div class="field">
-          @if (isAddressNameVisible) {
-            <mat-form-field>
-              <mat-label>{{ 'forms.labels.addressName' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.addressName' | translate"
-                formControlName="name"
-                />
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="name"
-              ></app-valid-check>
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('name')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-          }
-          <div class="address-row-1">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.street' | translate"
-                formControlName="street"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="street"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('street')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.streetNo' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.streetNo' | translate"
-                formControlName="streetNo"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="streetNo"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('streetNo')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.supplement' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.supplement' | translate"
-                formControlName="supplement"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="supplement"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('supplement')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-          </div>
-    
-          <div class="address-row-2">
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.zipCode' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.zipCode' | translate"
-                formControlName="zipCode"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="zipCode"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('zipCode')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.city' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.city' | translate"
-                formControlName="city"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="city"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('city')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field appearance="outline">
-              <mat-label>{{ 'forms.labels.country' | translate }}</mat-label>
-              <input
-                matInput
-                [placeholder]="'forms.labels.country' | translate"
-                formControlName="country"
-                />
-    
-              <app-valid-check
-                [form]="topicsFormGroup"
-                controlName="country"
-              ></app-valid-check>
-    
-              <mat-error>
-                <app-form-field-error
-                  [field]="topicsFormGroup.get('country')"
-                ></app-form-field-error>
-              </mat-error>
-            </mat-form-field>
-          </div>
+    <mat-form-field appearance="outline">
+      <mat-label>{{
+        'forms.labels.sustainableDevelopmentGoals' | translate
+      }}</mat-label>
+      <mat-select formControlName="sustainableDevelopmentGoals" multiple>
+        @for (goalNo of sdgOptions; track goalNo) {
+          <mat-option [value]="goalNo">
+            {{ goalNo }} {{ 'SDGS.goal_' + goalNo | translate }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>
+        <app-form-field-error
+          [field]="topicsFormGroup.get('sustainableDevelopmentGoals')"
+        ></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+
+    <app-thematic-focus-control
+      controlName="thematicFocus"
+      [label]="'forms.labels.thematicFocus' | translate"
+    ></app-thematic-focus-control>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
+      <mat-select formControlName="impactArea">
+        @for (impactArea of impactAreaOpts; track impactArea) {
+          <mat-option [value]="impactArea">
+            {{ 'impactArea.' + impactArea | translate }}
+          </mat-option>
+        }
+      </mat-select>
+      <mat-error>
+        <app-form-field-error
+          [field]="topicsFormGroup.get('impactArea')"
+        ></app-form-field-error>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="fields">
+      <div class="field">
+        @if (isAddressNameVisible) {
+          <mat-form-field>
+            <mat-label>{{ 'forms.labels.addressName' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.addressName' | translate"
+              formControlName="name"
+            />
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="name"
+            ></app-valid-check>
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('name')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+        }
+        <div class="address-row-1">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.street' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.street' | translate"
+              formControlName="street"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="street"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('street')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.streetNo' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.streetNo' | translate"
+              formControlName="streetNo"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="streetNo"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('streetNo')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.supplement' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.supplement' | translate"
+              formControlName="supplement"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="supplement"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('supplement')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="address-row-2">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.zipCode' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.zipCode' | translate"
+              formControlName="zipCode"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="zipCode"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('zipCode')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.city' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.city' | translate"
+              formControlName="city"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="city"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('city')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'forms.labels.country' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'forms.labels.country' | translate"
+              formControlName="country"
+            />
+
+            <app-valid-check
+              [form]="topicsFormGroup"
+              controlName="country"
+            ></app-valid-check>
+
+            <mat-error>
+              <app-form-field-error
+                [field]="topicsFormGroup.get('country')"
+              ></app-form-field-error>
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
-    
-      @if (
-        !(
-        isLocationRequired === false && !!topicsFormGroup.get('online')?.value
-        )
-        ) {
-        <div
-          class="error-wrapper"
+    </div>
+
+    @if (
+      !(isLocationRequired === false && !!topicsFormGroup.get('online')?.value)
+    ) {
+      <div class="error-wrapper">
+        @if (coordinatesNotFound && anyAddressFieldIsDirty()) {
+          <app-alert
+            [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
+            [showIcon]="true"
+            bgIcon="travel_explore"
+            fgIcon="priority_high"
           >
-          @if (coordinatesNotFound && anyAddressFieldIsDirty()) {
-            <app-alert
-              [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
-              [showIcon]="true"
-              bgIcon="travel_explore"
-              fgIcon="priority_high"
-              >
-              {{ 'validationErrors.coordinatesNotFound' | translate }}
-            </app-alert>
-          }
-          @if (!coordinatesNotFound) {
-            <app-spinner
-              forId="load-coords"
-              [noPadding]="true"
-              [small]="true"
-            ></app-spinner>
-          }
-        </div>
-      }
-    </form>`,
+            {{ 'validationErrors.coordinatesNotFound' | translate }}
+          </app-alert>
+        }
+        @if (!coordinatesNotFound) {
+          <app-loading-indicator
+            forId="load-coords"
+            [noPadding]="true"
+            [small]="true"
+          ></app-loading-indicator>
+        }
+      </div>
+    }
+  </form>`,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

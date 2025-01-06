@@ -762,6 +762,8 @@
   },
   "error": {
     "title": "Fehler",
+    "title404": "Eintrag nicht gefunden",
+    "message404": "Der Eintrag konnte nicht gefunden werden.",
     "itemLimit": "Die maximale Anzahl an Einträgen ist bereits erreicht! Bitte löschen sie zuerst einen andren Eintrag.",
     "notFoundTitle": "Seite nicht gefunden",
     "notFound": "Du kannst aber weiterhin alle Aktionen auf unserer Plattform über die Startseite erreichen.",

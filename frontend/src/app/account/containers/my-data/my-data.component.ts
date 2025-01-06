@@ -3,7 +3,7 @@ import { AccountFacadeService } from '../../account-facade.service';
 import UserData from '../../models/user-data';
 import UserDataForm from '../../models/user-data-form';
 
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyDataFormComponent } from '../../components/my-data-form.component';
@@ -12,11 +12,11 @@ import { MyDataFormComponent } from '../../components/my-data-form.component';
   selector: 'app-my-data',
   standalone: true,
   imports: [
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     PageWithHeaderLayoutComponent,
     TranslateModule,
     MyDataFormComponent
-],
+  ],
   templateUrl: './my-data.component.html',
   styleUrls: ['./my-data.component.scss']
 })

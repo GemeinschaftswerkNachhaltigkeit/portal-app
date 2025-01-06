@@ -18,7 +18,7 @@ import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/bas
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ActionComponent } from 'src/app/shared/components/base/action.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
@@ -36,7 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AlertComponent,
     MatIconModule,
     ActionComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     MatTooltipModule
   ],
   templateUrl: './activities.component.html',

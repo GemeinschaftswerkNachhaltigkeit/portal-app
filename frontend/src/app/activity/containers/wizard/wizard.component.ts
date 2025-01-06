@@ -51,7 +51,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { TitleWithContentComponent } from 'src/app/shared/components/base/title-with-text.component';
 import { ContactControlsComponent } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
@@ -80,7 +80,7 @@ import { TopicsFormComponent } from '../../components/topics-form.component';
     ContactControlsComponent,
     UploadImageComponent,
     HtmlWrapperComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ContentWrapperComponent,
     TranslateModule,
     MatButtonModule,

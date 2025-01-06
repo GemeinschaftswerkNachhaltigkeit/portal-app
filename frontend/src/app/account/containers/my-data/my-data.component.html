@@ -1,12 +1,12 @@
 <ng-container>
   <ng-container>
-    <app-spinner></app-spinner>
+    <app-loading-indicator></app-loading-indicator>
   </ng-container>
   <ng-container>
     <app-page-with-header-layout
       [title]="'account.titles.myData' | translate"
       [firstName]="userData?.firstName"
-      >
+    >
       <ng-container headerContent>{{
         'account.texts.myData' | translate
       }}</ng-container>

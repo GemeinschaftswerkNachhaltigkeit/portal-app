@@ -22,7 +22,7 @@ import { MapZoomService } from 'src/app/map/services/map-zoom.service';
 import { CommonModule } from '@angular/common';
 import { SearchFormComponent } from '../../components/search-form.component';
 import { MapLayoutComponent } from '../../components/map/map-layout.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
 import { MatButtonModule } from '@angular/material/button';
 import { PaginatorWrapperComponent } from '../../components/map/paginator-wrapper.component';
@@ -40,7 +40,7 @@ import { DetailsCardComponent } from '../details-card/details-card.component';
     CommonModule,
     SearchFormComponent,
     MapLayoutComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     AlertComponent,
     MatButtonModule,
     PaginatorWrapperComponent,

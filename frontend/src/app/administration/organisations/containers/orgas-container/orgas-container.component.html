@@ -12,15 +12,13 @@
     ></app-filters>
     @if (!orgas.length) {
       @if ((isLoading$ | async) === false) {
-        <app-alert
-          [title]="'administration.titles.noOrgas' | translate"
-          >
+        <app-alert [title]="'administration.titles.noOrgas' | translate">
           {{ 'administration.texts.noOrgas' | translate }}
         </app-alert>
       }
       <div>
         @if (isLoading$ | async) {
-          <app-spinner></app-spinner>
+          <app-loading-indicator></app-loading-indicator>
         }
       </div>
     }
@@ -38,7 +36,7 @@
             (edit)="editHandler(orga)"
             (cardClicked)="open(orga)"
             (toggleInitatior)="handleToggleInitiator(orga)"
-            >
+          >
           </app-base-card>
           @if (noLocation(orga)) {
             <div class="error-badge">
@@ -46,25 +44,25 @@
                 color="accent"
                 [matTooltip]="'profile.labels.noCoordinates' | translate"
                 >error</mat-icon
-                >
-              </div>
-            }
-          </div>
-        }
-        @if (orgas?.length) {
-          <mat-paginator
-            class="mat-elevation-z8"
-            color="accent"
-            [length]="(paging$ | async)?.totalElements"
-            [pageIndex]="(paging$ | async)?.number"
-            [pageSize]="(paging$ | async)?.size || pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [showFirstLastButtons]="true"
-            (page)="pageChangedHandler($event)"
-            aria-label="Select page"
-            >
-          </mat-paginator>
-        }
-      </app-card-list>
-    }
-  </app-content-wrapper>
+              >
+            </div>
+          }
+        </div>
+      }
+      @if (orgas?.length) {
+        <mat-paginator
+          class="mat-elevation-z8"
+          color="accent"
+          [length]="(paging$ | async)?.totalElements"
+          [pageIndex]="(paging$ | async)?.number"
+          [pageSize]="(paging$ | async)?.size || pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true"
+          (page)="pageChangedHandler($event)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      }
+    </app-card-list>
+  }
+</app-content-wrapper>

@@ -41,7 +41,7 @@ import { FormAdvantagesComponent } from 'src/app/shared/components/wizard/form-a
 import { TranslateModule } from '@ngx-translate/core';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 import { MatIconModule } from '@angular/material/icon';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-organisation',
@@ -62,7 +62,7 @@ import { SpinnerComponent } from 'src/app/shared/components/base/spinner.compone
     TranslateModule,
     ContentWrapperComponent,
     MatIconModule,
-    SpinnerComponent
+    LoadingIndicatorComponent
   ],
   templateUrl: './organisation.component.html',
   styleUrls: ['./organisation.component.scss'],

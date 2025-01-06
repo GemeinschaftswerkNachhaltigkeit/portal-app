@@ -1,4 +1,3 @@
-
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -12,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { AddressControlsComponent } from 'src/app/shared/components/form/address-control/address-controls.component';
 import { FormFieldErrorComponent } from 'src/app/shared/components/form/form-field-error/form-field-error.component';
 import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
@@ -33,9 +32,9 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
     MatRadioModule,
     AddressControlsComponent,
     AlertComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     TranslateModule
-],
+  ],
   template: `
     <ng-container [formGroup]="form">
       <mat-form-field appearance="outline">
@@ -55,20 +54,18 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <app-thematic-focus-control
         controlName="thematicFocus"
         [maxSelectable]="3"
         [label]="'forms.labels.thematicFocus' | translate"
       ></app-thematic-focus-control>
-    
+
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.impactArea' | translate }}</mat-label>
         <mat-select formControlName="impactArea">
           @for (impactArea of impactAreaOpts; track impactArea) {
-            <mat-option
-              [value]="impactArea"
-              >
+            <mat-option [value]="impactArea">
               {{ 'impactArea.' + impactArea | translate }}
             </mat-option>
           }
@@ -79,59 +76,57 @@ import { GeoCoordinateLookupService } from 'src/app/shared/services/geo-coordina
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <div class="fields">
         <div class="field">
           <mat-radio-group
             aria-label="Select an option"
             formControlName="location"
-            >
+          >
             <div class="radio-options">
               <mat-radio-button value="ADDRESS">
                 {{ 'forms.labels.onSite' | translate }}</mat-radio-button
-                >
-                <mat-radio-button value="ONLINE">
-                  {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
-                  >
-                  <mat-radio-button value="PRIVATE">
-                    {{ 'forms.labels.private' | translate }}</mat-radio-button
-                    >
-                  </div>
-                </mat-radio-group>
-              </div>
-              <div class="field">
-                <app-address-controls
-                  [withNameField]="true"
-                  [nameFieldLabel]="'forms.labels.addressNameDan' | translate"
-                  formGroupName="address"
-                ></app-address-controls>
-              </div>
+              >
+              <mat-radio-button value="ONLINE">
+                {{ 'forms.labels.onlineLong' | translate }}</mat-radio-button
+              >
+              <mat-radio-button value="PRIVATE">
+                {{ 'forms.labels.private' | translate }}</mat-radio-button
+              >
             </div>
-            @if (form.get('location')?.value === 'ADDRESS') {
-              <div
-                class="error-wrapper"
-                >
-                @if (coordinatesNotFound === 'NOT_FOUND') {
-                  <app-alert
-                    [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
-                    [showIcon]="true"
-                    bgIcon="travel_explore"
-                    fgIcon="priority_high"
-                    >
-                    {{ 'validationErrors.coordinatesNotFound' | translate }}
-                  </app-alert>
-                }
-                @if (!coordinatesNotFound) {
-                  <app-spinner
-                    forId="load-coords"
-                    [noPadding]="true"
-                    [small]="true"
-                  ></app-spinner>
-                }
-              </div>
-            }
-          </ng-container>
-    `,
+          </mat-radio-group>
+        </div>
+        <div class="field">
+          <app-address-controls
+            [withNameField]="true"
+            [nameFieldLabel]="'forms.labels.addressNameDan' | translate"
+            formGroupName="address"
+          ></app-address-controls>
+        </div>
+      </div>
+      @if (form.get('location')?.value === 'ADDRESS') {
+        <div class="error-wrapper">
+          @if (coordinatesNotFound === 'NOT_FOUND') {
+            <app-alert
+              [title]="'validationErrors.coordinatesNotFoundTitle' | translate"
+              [showIcon]="true"
+              bgIcon="travel_explore"
+              fgIcon="priority_high"
+            >
+              {{ 'validationErrors.coordinatesNotFound' | translate }}
+            </app-alert>
+          }
+          @if (!coordinatesNotFound) {
+            <app-loading-indicator
+              forId="load-coords"
+              [noPadding]="true"
+              [small]="true"
+            ></app-loading-indicator>
+          }
+        </div>
+      }
+    </ng-container>
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

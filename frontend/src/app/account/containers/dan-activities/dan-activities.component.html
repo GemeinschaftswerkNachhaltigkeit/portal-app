@@ -53,7 +53,7 @@
         <ng-container noEntriesContent>
           {{ 'account.texts.noDanActivities' | translate }}
         </ng-container>
-        <app-spinner></app-spinner>
+        <app-loading-indicator></app-loading-indicator>
         @if ((loading$ | async) !== true) {
           <section class="lists">
             @if (activityWips.length) {

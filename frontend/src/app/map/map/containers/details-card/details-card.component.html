@@ -5,7 +5,7 @@
 </div>
 <div class="wrapper" [ngClass]="{ mobile: mobile }">
   <div class="details" [ngClass]="{ 'mat-elevation-z8': !mobile }">
-    <app-spinner forId="detail-popup-data"></app-spinner>
+    <app-loading-indicator forId="detail-popup-data"></app-loading-indicator>
     @if (currentResult) {
       <header class="header">
         @if (showAsExpired(currentResult)) {

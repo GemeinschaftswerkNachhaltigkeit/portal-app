@@ -49,12 +49,12 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
               <ng-content select="[results]"></ng-content>
             }
             @if (loading) {
-              <app-spinner></app-spinner>
+              <div class="loader">
+                <app-spinner></app-spinner>
+              </div>
             }
             @if (total <= 0 && !loading) {
-              <app-alert
-                [title]="'map.titles.noData' | translate"
-                >
+              <app-alert [title]="'map.titles.noData' | translate">
                 {{ 'map.texts.noData.0' | translate }}
               </app-alert>
             }
@@ -65,13 +65,13 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
         </main>
       </div>
     </app-content-wrapper>
-    
+
     <ng-template #totalResults
       ><app-heading size="xs"
-      >{{ total }} {{ 'labels.total' | translate }}</app-heading
+        >{{ total }} {{ 'labels.total' | translate }}</app-heading
       ></ng-template
-      >
-    `,
+    >
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;
@@ -120,6 +120,10 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
         width: 100%;
         margin: $spacing-8 0;
       }
+    }
+
+    .loader {
+      margin-top: $spacing-20;
     }
 
     @media screen and (min-width: 1280px) {

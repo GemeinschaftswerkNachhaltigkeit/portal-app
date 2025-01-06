@@ -9,7 +9,7 @@ export type MarketplaceItemDto = {
   id?: number;
   name: string;
   description: string;
-  location: LocationData;
+  location?: LocationData;
   thematicFocus: ThematicFocus[];
   contact: Contact;
   image: string;

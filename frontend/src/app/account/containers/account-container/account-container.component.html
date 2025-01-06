@@ -9,27 +9,27 @@
             [routerLinkActive]="'active'"
             [routerLinkActiveOptions]="{ exact: true }"
             >{{ 'account.nav.home' | translate }}</a
-            >
-          </ng-container>
-          <ng-container *appAuthenticated>
-            <a
-              *appMenuItem
-              [routerLink]="['/account/my-data']"
-              [routerLinkActive]="'active'"
-              >{{ 'account.nav.myData' | translate }}</a
-              >
-            </ng-container>
-            <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-              <a
-                *appMenuItem
-                [routerLink]="['/account/my-organisation']"
-                [routerLinkActive]="'active'"
-                >
-                {{ 'account.nav.myOrga' | translate }}
-              </a>
-            </ng-container>
-            <ng-container *appWithOrga>
-              <!-- <ng-container *ngIf="featureService.show$('dan-account') | async">
+          >
+        </ng-container>
+        <ng-container *appAuthenticated>
+          <a
+            *appMenuItem
+            [routerLink]="['/account/my-data']"
+            [routerLinkActive]="'active'"
+            >{{ 'account.nav.myData' | translate }}</a
+          >
+        </ng-container>
+        <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+          <a
+            *appMenuItem
+            [routerLink]="['/account/my-organisation']"
+            [routerLinkActive]="'active'"
+          >
+            {{ 'account.nav.myOrga' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appWithOrga>
+          <!-- <ng-container *ngIf="featureService.show$('dan-account') | async">
               <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
                 <a
                   *appMenuItem
@@ -45,123 +45,123 @@
                 </ng-container>
               </ng-container> -->
 
-              <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-                <a
-                  class="indented"
-                  *appMenuItem
-                  [routerLink]="['/account/activities']"
-                  [routerLinkActive]="'active'"
-                  >
-                  @if (featureService.show$('dan-account') | async) {
-                    {{ 'account.nav.activitiesAndDan' | translate }}
-                  } @else {
-                    {{ 'account.nav.activities' | translate }}
-                  }
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-                <a
-                  class="indented"
-                  *appMenuItem
-                  [routerLink]="['/account/offers']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.offers' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-                <a
-                  class="indented"
-                  *appMenuItem
-                  [routerLink]="['/account/best-practices']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.bestPractices' | translate }}
-                </a>
-              </ng-container>
-            </ng-container>
-
-            @if (featureService.show$('dan-account') | async) {
-              <ng-container *appWithoutOrga>
-                <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-                  <a
-                    *appMenuItem
-                    [routerLink]="['/account/dan-activities']"
-                    [routerLinkActive]="'active'"
-                    >
-                    <div class="inline">
-                      <app-new-badge></app-new-badge
-                        ><span>{{ 'account.nav.danActivities' | translate }}</span>
-                      </div>
-                    </a>
-                  </ng-container>
-                </ng-container>
+          <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+            <a
+              class="indented"
+              *appMenuItem
+              [routerLink]="['/account/activities']"
+              [routerLinkActive]="'active'"
+            >
+              @if (featureService.show$('dan-account') | async) {
+                {{ 'account.nav.activitiesAndDan' | translate }}
+              } @else {
+                {{ 'account.nav.activities' | translate }}
               }
-
-              <ng-container *appAuthenticated>
-                <a
-                  *appMenuItem
-                  [routerLink]="['/account/organisation-subscriptions']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.organisationSubscriptions' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticated>
-                <a
-                  *appMenuItem
-                  [routerLink]="['/account/activity-subscriptions']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.activitySubscriptions' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticated="['RNE_ADMIN']">
-                <a
-                  *appMenuItem
-                  [routerLink]="['/administration/organisations']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.organisations' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticated="['RNE_ADMIN']">
-                <a
-                  *appMenuItem
-                  [routerLink]="['/clearing']"
-                  [routerLinkActive]="'active'"
-                  >
-                  {{ 'account.nav.clearing' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticated="['RNE_ADMIN']">
-                <a
-                  *appMenuItem
-                  [href]="getKeycloakConsoleUrl()"
-                  target="_blank"
-                  rel="noopener"
-                  >
-                  {{ 'account.nav.user-management' | translate }}
-                </a>
-              </ng-container>
-              <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-                <a
-                  *appMenuItem
-                  [routerLink]="['/account/developer']"
-                  [routerLinkActive]="'active'"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  >{{ 'account.nav.developer' | translate }}</a
-                  >
-                </ng-container>
-              </app-page-menu>
-            </div>
-            <main content class="main-content">
-              <router-outlet></router-outlet>
-            </main>
-          </app-account-layout>
+            </a>
+          </ng-container>
+          <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+            <a
+              class="indented"
+              *appMenuItem
+              [routerLink]="['/account/offers']"
+              [routerLinkActive]="'active'"
+            >
+              {{ 'account.nav.offers' | translate }}
+            </a>
+          </ng-container>
+          <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+            <a
+              class="indented"
+              *appMenuItem
+              [routerLink]="['/account/best-practices']"
+              [routerLinkActive]="'active'"
+            >
+              {{ 'account.nav.bestPractices' | translate }}
+            </a>
+          </ng-container>
         </ng-container>
 
-        <!--
+        @if (featureService.show$('dan-account') | async) {
+          <ng-container *appWithoutOrga>
+            <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+              <a
+                *appMenuItem
+                [routerLink]="['/account/dan-activities']"
+                [routerLinkActive]="'active'"
+              >
+                <div class="inline">
+                  <app-new-badge></app-new-badge
+                  ><span>{{ 'account.nav.danActivities' | translate }}</span>
+                </div>
+              </a>
+            </ng-container>
+          </ng-container>
+        }
+
+        <ng-container *appAuthenticated>
+          <a
+            *appMenuItem
+            [routerLink]="['/account/organisation-subscriptions']"
+            [routerLinkActive]="'active'"
+          >
+            {{ 'account.nav.organisationSubscriptions' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appAuthenticated>
+          <a
+            *appMenuItem
+            [routerLink]="['/account/activity-subscriptions']"
+            [routerLinkActive]="'active'"
+          >
+            {{ 'account.nav.activitySubscriptions' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appAuthenticated="['RNE_ADMIN']">
+          <a
+            *appMenuItem
+            [routerLink]="['/administration/organisations']"
+            [routerLinkActive]="'active'"
+          >
+            {{ 'account.nav.organisations' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appAuthenticated="['RNE_ADMIN']">
+          <a
+            *appMenuItem
+            [routerLink]="['/clearing']"
+            [routerLinkActive]="'active'"
+          >
+            {{ 'account.nav.clearing' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appAuthenticated="['RNE_ADMIN']">
+          <a
+            *appMenuItem
+            [href]="getKeycloakConsoleUrl()"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ 'account.nav.user-management' | translate }}
+          </a>
+        </ng-container>
+        <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+          <a
+            *appMenuItem
+            [routerLink]="['/account/developer']"
+            [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >{{ 'account.nav.developer' | translate }}</a
+          >
+        </ng-container>
+      </app-page-menu>
+    </div>
+    <main content class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </app-account-layout>
+</ng-container>
+
+<!--
         <app-content-wrapper size="xl">
           <p>Activities:</p>
 
@@ -195,7 +195,7 @@
                     </ul>
                   </ng-container>
                 </div>
-                <app-spinner forId="activitiesLoading"></app-spinner>
+                <app-loading-indicator forId="activitiesLoading"></app-loading-indicator>
               </section>
             </div>
           </div>

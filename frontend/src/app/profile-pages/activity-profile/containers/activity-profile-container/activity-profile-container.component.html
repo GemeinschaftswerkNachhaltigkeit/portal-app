@@ -1,5 +1,5 @@
 @if ((activity$ | async) === null) {
-  <app-spinner></app-spinner>
+  <app-loading-indicator></app-loading-indicator>
 }
 @if (activity$ | async; as activity) {
   <app-profile-layout>
@@ -41,92 +41,91 @@
           fragment="about-activity"
           appMenuItemActive="about-activity"
           >{{ 'profile.nav.aboutActivity' | translate }}</a
-          >
-          <a
-            *appMenuItem
-            routerLink="./"
-            fragment="sdgs"
-            appMenuItemActive="sdgs"
-            >{{ 'profile.nav.sdgs' | translate }}</a
+        >
+        <a
+          *appMenuItem
+          routerLink="./"
+          fragment="sdgs"
+          appMenuItemActive="sdgs"
+          >{{ 'profile.nav.sdgs' | translate }}</a
+        >
+      </app-page-menu>
+    </div>
+    <main content1 class="main-content">
+      <section class="article-wrapper">
+        <div class="top-actions">
+          <a [href]="shareLink(activity)">
+            <app-action [clickable]="false" icon="share">{{
+              'btn.share' | translate
+            }}</app-action>
+          </a>
+          <div>
+            <app-activity-subscription-action
+              [short]="true"
+              [activity]="activity"
             >
-          </app-page-menu>
+            </app-activity-subscription-action>
+          </div>
         </div>
-        <main content1 class="main-content">
-          <section class="article-wrapper">
-            <div class="top-actions">
-              <a [href]="shareLink(activity)">
-                <app-action [clickable]="false" icon="share">{{
-                  'btn.share' | translate
-                }}</app-action>
-              </a>
-              <div>
-                <app-activity-subscription-action
-                  [short]="true"
-                  [activity]="activity"
-                  >
-                </app-activity-subscription-action>
+        <app-section
+          [title]="activity.name"
+          [subtitle]="'profile.titles.aboutActivity' | translate"
+          [info]="'activityType.' + activity.activityType | translate"
+          [infoType]="'ACTIVITY'"
+        >
+          <app-event-badges badge [activity]="activity"></app-event-badges>
+          <app-html-wrapper
+            [html]="activity.description || ''"
+          ></app-html-wrapper>
+          @if (activity.registerUrl) {
+            <a
+              [href]="activity.registerUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              mat-flat-button
+              color="accent"
+              class="register-button"
+            >
+              <div class="register-button-content">
+                <div>{{ 'btn.registerUrlButton' | translate }}</div>
+                <mat-icon>launch</mat-icon>
               </div>
-            </div>
-            <app-section
-              [title]="activity.name"
-              [subtitle]="'profile.titles.aboutActivity' | translate"
-              [info]="'activityType.' + activity.activityType | translate"
-              [infoType]="'ACTIVITY'"
-              >
-              <app-event-badges badge [activity]="activity"></app-event-badges>
-              <app-html-wrapper
-                [html]="activity.description || ''"
-              ></app-html-wrapper>
-              @if (activity.registerUrl) {
-                <a
-                  [href]="activity.registerUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  mat-flat-button
-                  color="accent"
-                  class="register-button"
-                  >
-                  <div class="register-button-content">
-                    <div>{{ 'btn.registerUrlButton' | translate }}</div>
-                    <mat-icon>launch</mat-icon>
-                  </div>
-                </a>
-              }
-            </app-section>
-          </section>
-          @if (activity.sustainableDevelopmentGoals) {
-            <section
-              class="article-wrapper"
-              id="sdgs"
-              >
-              <app-section
-                [title]="'profile.titles.sdgsTagline' | translate"
-                [subtitle]="'profile.titles.sdgs' | translate"
-                >
-                <div class="sdgs" #sdgs>
-                  @for (sdg of activity.sustainableDevelopmentGoals; track sdg) {
-                    <div class="sdg"><app-sdg-icon [goal]="sdg"></app-sdg-icon></div>
-                  }
-                </div>
-              </app-section>
-            </section>
+            </a>
           }
-        </main>
-        <div contact>
-          <app-contact
-            [type]="'ACTIVITY'"
-            [dan]="activity.activityType === 'DAN'"
-            [activityOrga]="activity.organisation?.name"
-            [orgaId]="activity.organisation?.id"
+        </app-section>
+      </section>
+      @if (activity.sustainableDevelopmentGoals) {
+        <section class="article-wrapper" id="sdgs">
+          <app-section
+            [title]="'profile.titles.sdgsTagline' | translate"
+            [subtitle]="'profile.titles.sdgs' | translate"
+          >
+            <div class="sdgs" #sdgs>
+              @for (sdg of activity.sustainableDevelopmentGoals; track sdg) {
+                <div class="sdg">
+                  <app-sdg-icon [goal]="sdg"></app-sdg-icon>
+                </div>
+              }
+            </div>
+          </app-section>
+        </section>
+      }
+    </main>
+    <div contact>
+      <app-contact
+        [type]="'ACTIVITY'"
+        [dan]="activity.activityType === 'DAN'"
+        [activityOrga]="activity.organisation?.name"
+        [orgaId]="activity.organisation?.id"
         [name]="
           activity?.location?.address?.name || activity.organisation?.name
         "
-            [impactArea]="activity.impactArea"
-            [contact]="activity.contact"
-            [location]="activity.location"
-            [socialMedia]="activity.socialMediaContacts"
-            [thematicFocus]="activity.thematicFocus"
-          ></app-contact>
-        </div>
-      </app-profile-layout>
-    }
+        [impactArea]="activity.impactArea"
+        [contact]="activity.contact"
+        [location]="activity.location"
+        [socialMedia]="activity.socialMediaContacts"
+        [thematicFocus]="activity.thematicFocus"
+      ></app-contact>
+    </div>
+  </app-profile-layout>
+}

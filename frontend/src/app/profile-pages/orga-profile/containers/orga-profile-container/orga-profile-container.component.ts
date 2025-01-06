@@ -7,7 +7,7 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { OrgaFacadeService } from '../../orga-facade.service';
 import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { ProfileLayoutComponent } from 'src/app/profile-pages/components/profile-layout.component';
 import {
   BreadcrumbComponent,
@@ -36,7 +36,7 @@ import { HeroComponent } from 'src/app/profile-pages/components/hero.component';
   standalone: true,
   imports: [
     CommonModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ProfileLayoutComponent,
     HeroComponent,
     BreadcrumbsComponent,

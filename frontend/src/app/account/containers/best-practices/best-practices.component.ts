@@ -13,7 +13,7 @@ import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { Status } from 'src/app/marketplace/models/status';
 import { CharCountComponent } from 'src/app/shared/components/base/char-count.component';
 import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
 import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
@@ -33,7 +33,7 @@ import { environment } from 'src/environments/environment';
     ListWithHeadingLayoutComponent,
     CardListComponent,
     CardComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     MatPaginatorModule,
     MatMenuModule,
     MatIconModule,

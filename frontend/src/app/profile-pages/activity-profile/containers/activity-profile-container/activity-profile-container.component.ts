@@ -16,7 +16,7 @@ import {
 } from 'src/app/shared/components/base/breadcrumb';
 import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
 import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
 import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
 import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
@@ -31,7 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [
     CommonModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ProfileLayoutComponent,
     HeroComponent,
     BreadcrumbsComponent,

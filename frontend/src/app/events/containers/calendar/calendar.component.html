@@ -27,13 +27,14 @@
                 <div class="text">
                   <div class="month-day">
                     {{
-                    entry.group
-                    | date: 'dd. MMM' : undefined : translate.currentLang
+                      entry.group
+                        | date: 'dd. MMM' : undefined : translate.currentLang
                     }}
                   </div>
                   <div class="year">
                     {{
-                    entry.group | date: 'YYYY' : undefined : translate.currentLang
+                      entry.group
+                        | date: 'YYYY' : undefined : translate.currentLang
                     }}
                   </div>
                 </div>
@@ -50,11 +51,12 @@
             </app-event-list>
           </div>
         }
-        <app-spinner forId="load-events" [noHeight]="true"></app-spinner>
+        <app-loading-indicator
+          forId="load-events"
+          [noHeight]="true"
+        ></app-loading-indicator>
         @if (paging.totalElements! <= 0 && (loading$ | async) === false) {
-          <app-alert
-            [title]="'map.titles.noData' | translate"
-            >
+          <app-alert [title]="'map.titles.noData' | translate">
             {{ 'map.texts.noData.0' | translate }}
           </app-alert>
         }
@@ -69,7 +71,7 @@
       <app-filter-sidebar
         (permanentChanged)="handlePermanentFilter($event)"
         [permanent]="isPermanent()"
-        >
+      >
         <div class="sidebar-actions">
           <ng-container *ngTemplateOutlet="actions"></ng-container>
         </div>
@@ -108,7 +110,7 @@
         mat-flat-button
         color="accent"
         (click)="handleAddNewEvent()"
-        >
+      >
         <div class="action-content">
           <mat-icon>add</mat-icon>
           <span>{{ 'btn.addNewEvent' | translate }}</span>
@@ -126,6 +128,6 @@
         <app-new-badge></app-new-badge>
       </div>
     </button> -->
-  </div>
-}
+    </div>
+  }
 </ng-template>

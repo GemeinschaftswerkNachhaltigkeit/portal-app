@@ -15,7 +15,7 @@ import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/
 import { MatButtonModule } from '@angular/material/button';
 import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
 import { CharCountComponent } from 'src/app/shared/components/base/char-count.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
 import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
 import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
@@ -34,7 +34,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     OutlinedIconComponent,
     CharCountComponent,
     TranslateModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     ListWithHeadingLayoutComponent,
     CardListComponent,
     BaseCardComponent,

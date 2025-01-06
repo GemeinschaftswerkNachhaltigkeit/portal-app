@@ -12,7 +12,7 @@ import { OrgaFacadeService } from '../../orga-facade.service';
 import { CommonModule } from '@angular/common';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
 import { MatButtonModule } from '@angular/material/button';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { AlertComponent } from 'src/app/shared/components/base/alert.component';
 import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
 import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
@@ -27,7 +27,7 @@ import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.di
     CommonModule,
     PageWithHeaderLayoutComponent,
     MatButtonModule,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     AlertComponent,
     OutlinedIconComponent,
     TranslateModule,

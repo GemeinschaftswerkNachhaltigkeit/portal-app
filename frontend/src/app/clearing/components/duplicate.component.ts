@@ -4,7 +4,7 @@ import DuplicateDto from '../models/duplicate-dto';
 import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { DuplicateEntryComponent } from './duplicate-entry.component';
-import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
     HeadingComponent,
     TranslateModule,
     DuplicateEntryComponent,
-    SpinnerComponent,
+    LoadingIndicatorComponent,
     RouterModule
   ],
   template: `
@@ -64,7 +64,7 @@ import { RouterModule } from '@angular/router';
         </div>
       }
       @if (!duplicate) {
-        <app-spinner></app-spinner>
+        <app-loading-indicator></app-loading-indicator>
       }
     </div>
   `,
