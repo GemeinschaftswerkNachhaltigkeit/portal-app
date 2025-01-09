@@ -10,7 +10,7 @@ export let environment = {
   directusBaseUrl: 'from_backend',
   landingPageUrl: 'http://localhost:3000',
   assetsUrl: '/assets',
-  matomoUrl: 'http://localhost',
+  matomoUrl: 'http://localhost:7070/',
   matomoSiteId: 1,
   matomoTagManagerContainerId: 'OpLDkCNf',
   danId: 0,
