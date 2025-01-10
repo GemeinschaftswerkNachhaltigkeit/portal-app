@@ -1,8 +1,8 @@
-
 import { Component } from '@angular/core';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
 import { ContentWrapperComponent } from './content-wrapper.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-footer',
@@ -73,8 +73,14 @@ export class FooterComponent {
   copyrightYear = new Date().getFullYear();
   participationDeclarationUrl = '';
 
-  constructor(public lpService: LandingpageService) {
+  constructor(
+    public lpService: LandingpageService,
+    private translate: TranslateService
+  ) {
     this.loadParticipationDeclarationUrl();
+    translate.onLangChange.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.loadParticipationDeclarationUrl();
+    });
   }
 
   private async loadParticipationDeclarationUrl(): Promise<void> {
