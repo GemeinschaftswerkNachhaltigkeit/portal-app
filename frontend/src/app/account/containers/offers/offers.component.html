@@ -12,8 +12,9 @@
     {{ 'account.texts.offers' | translate }}
   </ng-container>
   <ng-container headerAction>
-    <div class="actions-wrapper">
-      @if (offersPaging$ | async; as paging) {
+    @let paging = offersPaging();
+    @if (paging) {
+      <div class="actions-wrapper">
         <button
           action
           mat-flat-button
@@ -27,8 +28,8 @@
           [count]="paging.totalElements || 0"
           [total]="30"
         ></app-char-count>
-      }
-    </div>
+      </div>
+    }
   </ng-container>
   <ng-container noEntriesContent>
     {{ 'account.texts.noOffers' | translate }}

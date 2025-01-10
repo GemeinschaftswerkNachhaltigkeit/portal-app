@@ -11,7 +11,6 @@ import { MarketplaceTypes } from 'src/app/marketplace/models/marketplace-type';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { OfferWipDto } from 'src/app/marketplace/models/offer-wip-dto';
 import { Status } from 'src/app/marketplace/models/status';
-import { OffersFacadeService } from 'src/app/marketplace/offers-facade.service';
 import { CharCountComponent } from 'src/app/shared/components/base/char-count.component';
 import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
 import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
@@ -54,15 +53,12 @@ export class OffersComponent implements OnInit {
   offerWipsPaging = this.offersService.offerWipsPaging;
   loading = this.offersService.loading;
 
-  offerWips$ = this.offersFacade.offerWips$;
-  offersPaging$ = this.offersFacade.offersPaging$;
-  offerWipsPaging$ = this.offersFacade.offerWipsPaging$;
   pageSize = defaultPaginatorOptions.pageSize;
   pageSizeOptions = defaultPaginatorOptions.pageSizeOptions;
   type = MarketplaceTypes;
   status = Status;
 
-  constructor(private offersFacade: OffersFacadeService) {}
+  constructor() {}
 
   expired(item: OfferDto): boolean {
     return expired(item);
@@ -78,11 +74,11 @@ export class OffersComponent implements OnInit {
   }
 
   handleStatusChange(offer: OfferDto, status: Status) {
-    this.offersFacade.setStatus(offer, status);
+    this.offersService.setStatus(offer, status);
   }
 
   handleNew() {
-    this.offersFacade.newOffer();
+    this.offersService.newOffer();
   }
 
   handlePageChanged(event: PageEvent): void {
@@ -93,19 +89,19 @@ export class OffersComponent implements OnInit {
   }
 
   handleEditOffer(offer: OfferDto): void {
-    this.offersFacade.editOffer(offer);
+    this.offersService.editOffer(offer);
   }
 
   handleEditOfferWip(offerWip: OfferWipDto): void {
-    this.offersFacade.editOfferWip(offerWip);
+    this.offersService.editOfferWip(offerWip);
   }
 
   handleDeleteOffer(offer: OfferDto): void {
-    this.offersFacade.deleteOffer(offer);
+    this.offersService.deleteOffer(offer);
   }
 
   handleDeleteOfferWip(offerWip: OfferWipDto): void {
-    this.offersFacade.deleteOfferWip(offerWip);
+    this.offersService.deleteOfferWip(offerWip);
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { catchError, of, Subject, switchMap, tap } from 'rxjs';
+import { catchError, of, Subject, switchMap, take, tap } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
 import { ConfirmationService } from '../shared/services/confirmation.service';
 import { FeedbackService } from '../shared/components/feedback/feedback.service';
@@ -15,6 +15,7 @@ import { OffersApiService } from './api/offers-api.service';
 import { OfferDto } from './models/offer-dto';
 import { OfferWipDto } from './models/offer-wip-dto';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Status } from './models/status';
 
 export interface OffersState {
   offers: PagedResponse<OfferDto> | null;
@@ -200,5 +201,123 @@ export class OffersService {
         this.setOfferWips(wips);
         this.stopLoading('wips');
       });
+  }
+
+  newOffer(): void {
+    const user = this.auth.getUser();
+    if (user && user.orgId) {
+      const orgId = user.orgId;
+      this.api
+        .createOffer(orgId)
+        .pipe(take(1))
+        .subscribe({
+          next: (uuid) => {
+            this.router.navigate(['/', 'marketplace', 'offers', orgId, uuid]);
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
+    }
+  }
+
+  editOfferWip(offerWip: OfferWipDto): void {
+    const user = this.auth.getUser();
+    if (user && user.orgId) {
+      const orgId = user.orgId;
+      this.router.navigate(
+        ['/', 'marketplace', 'offers', orgId, offerWip.randomUniqueId],
+        { queryParams: { edit: true } }
+      );
+    }
+  }
+
+  editOffer(offer: OfferDto): void {
+    const user = this.auth.getUser();
+    if (user && user.orgId && offer.id) {
+      const orgId = user.orgId;
+      this.api
+        .updateOffer(orgId, offer.id)
+        .pipe(take(1))
+        .subscribe({
+          next: (uuid) => {
+            this.router.navigate(['/', 'marketplace', 'offers', orgId, uuid], {
+              queryParams: { edit: true }
+            });
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
+    }
+  }
+
+  deleteOffer(offer: OfferDto): void {
+    const ref = this.confirm.open({
+      title: this.translate.instant('marketplace.titles.deleteOffer'),
+      description: this.translate.instant('marketplace.texts.deleteOffer'),
+      button: this.translate.instant('marketplace.buttons.deleteOffer')
+    });
+    const user = this.auth.getUser();
+    if (user && user.orgId && offer.id) {
+      const orgId = user.orgId;
+      const offerId = offer.id;
+      ref
+        .afterClosed()
+        .pipe(take(1))
+        .subscribe((confirmed) => {
+          if (confirmed) {
+            this.api
+              .deleteOffer(orgId, offerId)
+              .pipe(take(1))
+              .subscribe({
+                next: () => this.getOffers()
+              });
+          }
+        });
+    }
+  }
+
+  deleteOfferWip(offerWip: OfferWipDto): void {
+    const ref = this.confirm.open({
+      title: this.translate.instant('marketplace.titles.deleteOffer'),
+      description: this.translate.instant('marketplace.texts.deleteOffer'),
+      button: this.translate.instant('btn.delete')
+    });
+    const user = this.auth.getUser();
+    if (user && user.orgId && offerWip.randomUniqueId) {
+      const orgId = user.orgId;
+      const uuid = offerWip.randomUniqueId;
+      ref
+        .afterClosed()
+        .pipe(take(1))
+        .subscribe((confirmed) => {
+          if (confirmed) {
+            this.api
+              .deleteOfferWip(orgId, uuid)
+              .pipe(take(1))
+              .subscribe({
+                next: () => this.getOfferWips()
+              });
+          }
+        });
+    }
+  }
+
+  setStatus(offer: OfferDto, status: Status): void {
+    const user = this.auth.getUser();
+    if (user && user.orgId && offer.id) {
+      const orgId = user.orgId;
+      const offerId = offer.id;
+      this.api
+        .setStatus(orgId, offerId, status)
+        .pipe(take(1))
+        .subscribe({
+          next: () => this.getOffers(),
+          error: (e) => {
+            console.log(e);
+          }
+        });
+    }
   }
 }
