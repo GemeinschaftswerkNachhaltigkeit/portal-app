@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -19,8 +19,9 @@ import { CardListComponent } from 'src/app/shared/components/cards/card-list.com
 import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { environment } from 'src/environments/environment';
+import { OffersService } from 'src/app/marketplace/offers.service';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-offers',
@@ -38,26 +39,30 @@ import { environment } from 'src/environments/environment';
     MatPaginatorModule,
     MatIconModule,
     MatMenuModule,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    SpinnerComponent
   ],
   templateUrl: './offers.component.html',
   styleUrls: ['./offers.component.scss']
 })
 export class OffersComponent implements OnInit {
-  offers$ = this.offersFacade.offers$;
+  offersService = inject(OffersService);
+
+  offers = this.offersService.offers;
+  offersPaging = this.offersService.offersPaging;
+  offerWips = this.offersService.offerWips;
+  offerWipsPaging = this.offersService.offerWipsPaging;
+  loading = this.offersService.loading;
+
   offerWips$ = this.offersFacade.offerWips$;
   offersPaging$ = this.offersFacade.offersPaging$;
   offerWipsPaging$ = this.offersFacade.offerWipsPaging$;
-  loading$ = this.loader.isLoading$('load-all-offers');
   pageSize = defaultPaginatorOptions.pageSize;
   pageSizeOptions = defaultPaginatorOptions.pageSizeOptions;
   type = MarketplaceTypes;
   status = Status;
 
-  constructor(
-    private offersFacade: OffersFacadeService,
-    private loader: LoadingService
-  ) {}
+  constructor(private offersFacade: OffersFacadeService) {}
 
   expired(item: OfferDto): boolean {
     return expired(item);
@@ -81,10 +86,10 @@ export class OffersComponent implements OnInit {
   }
 
   handlePageChanged(event: PageEvent): void {
-    this.offersFacade.changeOffersPage(event.pageIndex, event.pageSize);
+    this.offersService.changeOffersPage(event.pageIndex, event.pageSize);
   }
   handleWipsPageChanged(event: PageEvent): void {
-    this.offersFacade.changeOfferWipsPage(event.pageIndex, event.pageSize);
+    this.offersService.changeOfferWipsPage(event.pageIndex, event.pageSize);
   }
 
   handleEditOffer(offer: OfferDto): void {
@@ -104,6 +109,7 @@ export class OffersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.offersFacade.loadOffersAndOfferWips();
+    this.offersService.getOffers();
+    this.offersService.getOfferWips();
   }
 }

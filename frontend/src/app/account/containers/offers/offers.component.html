@@ -1,192 +1,185 @@
-@if (offers$ | async; as offers) {
-  @if (offerWips$ | async; as offerWips) {
-    <app-page-with-header-layout
-      [title]="'account.titles.offers' | translate"
-      [noEntriesTitle]="'account.titles.noOffers' | translate"
-      [showNoEntriesWarning]="
-        (loading$ | async) !== true && !offers.length && !offerWips.length
-      "
-    >
-      <ng-container headerContent>
-        {{ 'account.texts.offers' | translate }}
-      </ng-container>
-      <ng-container headerAction>
-        <div class="actions-wrapper">
-          @if (offersPaging$ | async; as paging) {
-            <button
-              action
-              mat-flat-button
-              color="accent"
-              (click)="handleNew()"
-              [disabled]="(paging.totalElements || 0) >= 30"
-            >
-              {{ 'account.buttons.addOffer' | translate }}
-            </button>
-            <app-char-count
-              [count]="paging.totalElements || 0"
-              [total]="30"
-            ></app-char-count>
-          }
-        </div>
-      </ng-container>
-      <ng-container noEntriesContent>
-        {{ 'account.texts.noOffers' | translate }}
-      </ng-container>
-      <app-loading-indicator></app-loading-indicator>
-      @if ((loading$ | async) !== true) {
-        <section class="lists">
-          @if (offerWips.length) {
-            <app-list-with-heading-layout
-              [title]="'account.titles.offerWips' | translate"
-            >
-              <div>
-                <app-card-list>
-                  @for (offerWip of offerWips; track offerWip) {
-                    <div class="card-wrapper">
-                      <app-card
-                        [featuredText]="offerWip.featuredText"
-                        [imageId]="offerWip.image"
-                        [title]="offerWip.name"
-                        [content]="offerWip.description"
-                        [type]="type.OFFER"
-                        [category]="
-                          offerWip.offerCategory &&
-                          'marketplace.labels.' + offerWip.offerCategory
-                        "
-                        [location]="offerWip.location"
-                        [thematicFocus]="offerWip.thematicFocus"
-                        [draft]="true"
-                        [expired]="expired(offerWip)"
-                        (edit)="handleEditOfferWip(offerWip)"
-                        (delete)="handleDeleteOfferWip(offerWip)"
-                      ></app-card>
-                    </div>
-                  }
-                </app-card-list>
-                @if (offerWipsPaging$ | async; as wipsPaging) {
-                  <div class="pager">
-                    @if (offerWips?.length) {
-                      <mat-paginator
-                        class="mat-elevation-z8"
-                        color="accent"
-                        [length]="wipsPaging?.totalElements"
-                        [pageIndex]="wipsPaging?.number"
-                        [pageSize]="wipsPaging?.size || pageSize"
-                        [pageSizeOptions]="pageSizeOptions"
-                        [showFirstLastButtons]="true"
-                        (page)="handleWipsPageChanged($event)"
-                        aria-label="Select page"
-                      >
-                      </mat-paginator>
-                    }
-                  </div>
-                }
-              </div>
-            </app-list-with-heading-layout>
-          }
-          @if (offers.length) {
-            <app-list-with-heading-layout
-              [title]="'account.titles.releasedOffers' | translate"
-            >
-              <div>
-                <app-card-list>
-                  @for (offer of offers; track offer) {
-                    <div class="card-wrapper">
-                      <app-card
-                        [featured]="offer.featured"
-                        [featuredText]="offer.featuredText"
-                        [imageId]="offer.image"
-                        [title]="offer.name"
-                        [content]="offer.description"
-                        [type]="type.OFFER"
-                        [category]="
-                          offer.offerCategory &&
-                          'marketplace.labels.' + offer.offerCategory
-                        "
-                        [location]="offer.location"
-                        [thematicFocus]="offer.thematicFocus"
-                        [draft]="offer.status === status.INACTIVE"
-                        [expired]="expired(offer)"
-                        (edit)="handleEditOffer(offer)"
-                        (delete)="handleDeleteOffer(offer)"
-                        (cardClicked)="open(offer)"
-                        ><ng-container actionMenu>
-                          @if (
-                            offer.status === status.INACTIVE ||
-                            offer.status === status.ACTIVE
-                          ) {
-                            <button
-                              color="accent"
-                              mat-icon-button
-                              [matMenuTriggerFor]="menu"
-                              aria-label="actions menu"
-                            >
-                              <mat-icon>more_vert</mat-icon>
-                            </button>
-                          }
-                          <mat-menu #menu="matMenu">
-                            @if (offer.status === status.INACTIVE) {
-                              <button
-                                mat-menu-item
-                                (click)="
-                                  handleStatusChange(offer, status.ACTIVE)
-                                "
-                              >
-                                <div class="action-option">
-                                  <app-outlined-icon
-                                    >check_circle</app-outlined-icon
-                                  >
-                                  <span>{{
-                                    'labels.activate' | translate
-                                  }}</span>
-                                </div>
-                              </button>
-                            }
-                            @if (offer.status === status.ACTIVE) {
-                              <button
-                                class="action-option"
-                                mat-menu-item
-                                (click)="
-                                  handleStatusChange(offer, status.INACTIVE)
-                                "
-                              >
-                                <div class="action-option">
-                                  <app-outlined-icon>cancel</app-outlined-icon>
-                                  <span>{{
-                                    'labels.deactivate' | translate
-                                  }}</span>
-                                </div>
-                              </button>
-                            }
-                          </mat-menu>
-                        </ng-container>
-                      </app-card>
-                    </div>
-                  }
-                </app-card-list>
-                @if (offersPaging$ | async; as paging) {
-                  <div class="pager">
-                    @if (offers?.length) {
-                      <mat-paginator
-                        class="mat-elevation-z8"
-                        color="accent"
-                        [length]="paging?.totalElements"
-                        [pageIndex]="paging?.number"
-                        [pageSize]="paging?.size || pageSize"
-                        [pageSizeOptions]="pageSizeOptions"
-                        [showFirstLastButtons]="true"
-                        (page)="handlePageChanged($event)"
-                        aria-label="Select page"
-                      >
-                      </mat-paginator>
-                    }
-                  </div>
-                }
-              </div>
-            </app-list-with-heading-layout>
-          }
-        </section>
+@let offerEntries = offers();
+@let offerWipEntries = offerWips();
+
+<app-page-with-header-layout
+  [title]="'account.titles.offers' | translate"
+  [noEntriesTitle]="'account.titles.noOffers' | translate"
+  [showNoEntriesWarning]="
+    !loading() && !offerEntries?.length && !offerWipEntries?.length
+  "
+>
+  <ng-container headerContent>
+    {{ 'account.texts.offers' | translate }}
+  </ng-container>
+  <ng-container headerAction>
+    <div class="actions-wrapper">
+      @if (offersPaging$ | async; as paging) {
+        <button
+          action
+          mat-flat-button
+          color="accent"
+          (click)="handleNew()"
+          [disabled]="(paging.totalElements || 0) >= 30"
+        >
+          {{ 'account.buttons.addOffer' | translate }}
+        </button>
+        <app-char-count
+          [count]="paging.totalElements || 0"
+          [total]="30"
+        ></app-char-count>
       }
-    </app-page-with-header-layout>
+    </div>
+  </ng-container>
+  <ng-container noEntriesContent>
+    {{ 'account.texts.noOffers' | translate }}
+  </ng-container>
+
+  @if (!loading()) {
+    <section class="lists">
+      @if (offerWipEntries?.length) {
+        <app-list-with-heading-layout
+          [title]="'account.titles.offerWips' | translate"
+        >
+          <div>
+            <app-card-list>
+              @for (offerWip of offerWipEntries; track offerWip) {
+                <div class="card-wrapper">
+                  <app-card
+                    [featuredText]="offerWip.featuredText"
+                    [imageId]="offerWip.image"
+                    [title]="offerWip.name"
+                    [content]="offerWip.description"
+                    [type]="type.OFFER"
+                    [category]="
+                      offerWip.offerCategory &&
+                      'marketplace.labels.' + offerWip.offerCategory
+                    "
+                    [location]="offerWip.location"
+                    [thematicFocus]="offerWip.thematicFocus"
+                    [draft]="true"
+                    [expired]="expired(offerWip)"
+                    (edit)="handleEditOfferWip(offerWip)"
+                    (delete)="handleDeleteOfferWip(offerWip)"
+                  ></app-card>
+                </div>
+              }
+            </app-card-list>
+            <div class="pager">
+              @if (offerWipEntries?.length) {
+                @let paging = offerWipsPaging();
+                <mat-paginator
+                  class="mat-elevation-z8"
+                  color="accent"
+                  [length]="paging?.totalElements"
+                  [pageIndex]="paging?.number"
+                  [pageSize]="paging?.size || pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  [showFirstLastButtons]="true"
+                  (page)="handleWipsPageChanged($event)"
+                  aria-label="Select page"
+                >
+                </mat-paginator>
+              }
+            </div>
+          </div>
+        </app-list-with-heading-layout>
+      }
+      @if (offerEntries?.length) {
+        <app-list-with-heading-layout
+          [title]="'account.titles.releasedOffers' | translate"
+        >
+          <div>
+            <app-card-list>
+              @for (offer of offerEntries; track offer) {
+                <div class="card-wrapper">
+                  <app-card
+                    [featured]="offer.featured"
+                    [featuredText]="offer.featuredText"
+                    [imageId]="offer.image"
+                    [title]="offer.name"
+                    [content]="offer.description"
+                    [type]="type.OFFER"
+                    [category]="
+                      offer.offerCategory &&
+                      'marketplace.labels.' + offer.offerCategory
+                    "
+                    [location]="offer.location"
+                    [thematicFocus]="offer.thematicFocus"
+                    [draft]="offer.status === status.INACTIVE"
+                    [expired]="expired(offer)"
+                    (edit)="handleEditOffer(offer)"
+                    (delete)="handleDeleteOffer(offer)"
+                    (cardClicked)="open(offer)"
+                    ><ng-container actionMenu>
+                      @if (
+                        offer.status === status.INACTIVE ||
+                        offer.status === status.ACTIVE
+                      ) {
+                        <button
+                          color="accent"
+                          mat-icon-button
+                          [matMenuTriggerFor]="menu"
+                          aria-label="actions menu"
+                        >
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                      }
+                      <mat-menu #menu="matMenu">
+                        @if (offer.status === status.INACTIVE) {
+                          <button
+                            mat-menu-item
+                            (click)="handleStatusChange(offer, status.ACTIVE)"
+                          >
+                            <div class="action-option">
+                              <app-outlined-icon
+                                >check_circle</app-outlined-icon
+                              >
+                              <span>{{ 'labels.activate' | translate }}</span>
+                            </div>
+                          </button>
+                        }
+                        @if (offer.status === status.ACTIVE) {
+                          <button
+                            class="action-option"
+                            mat-menu-item
+                            (click)="handleStatusChange(offer, status.INACTIVE)"
+                          >
+                            <div class="action-option">
+                              <app-outlined-icon>cancel</app-outlined-icon>
+                              <span>{{ 'labels.deactivate' | translate }}</span>
+                            </div>
+                          </button>
+                        }
+                      </mat-menu>
+                    </ng-container>
+                  </app-card>
+                </div>
+              }
+            </app-card-list>
+            <div class="pager">
+              @if (offerEntries?.length) {
+                @let paging = offersPaging();
+                <mat-paginator
+                  class="mat-elevation-z8"
+                  color="accent"
+                  [length]="paging?.totalElements"
+                  [pageIndex]="paging?.number"
+                  [pageSize]="paging?.size || pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  [showFirstLastButtons]="true"
+                  (page)="handlePageChanged($event)"
+                  aria-label="Select page"
+                >
+                </mat-paginator>
+              }
+            </div>
+          </div>
+        </app-list-with-heading-layout>
+      }
+    </section>
+  } @else {
+    <div class="loader">
+      <app-spinner></app-spinner>
+    </div>
   }
-}
+</app-page-with-header-layout>
