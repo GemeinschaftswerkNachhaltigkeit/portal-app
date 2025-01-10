@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -20,12 +20,10 @@ import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysi
 import { LabeledKey } from 'src/app/shared/models/labeled-key';
 import { MimeTypeEnum } from 'src/app/shared/models/mimetype';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { OfferCategories } from '../../models/offer-categories';
 import { OfferWipDto } from '../../models/offer-wip-dto';
-import { OffersFacadeService } from '../../offers-facade.service';
 import { DateTime } from 'luxon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,6 +42,8 @@ import { FormSectionComponent } from '../../components/form-section.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { AddressControlsComponent } from 'src/app/shared/components/form/address-control/address-controls.component';
 import { VisibilityControlsComponent } from '../../components/visibility-controls.component';
+import { OfferFormService } from '../../offer-form.service';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-offers-form',
@@ -75,27 +75,29 @@ import { VisibilityControlsComponent } from '../../components/visibility-control
 export class OffersFormComponent implements OnInit, OnDestroy {
   @ViewChild('form') form!: NgForm;
 
+  offerFormSerivce = inject(OfferFormService);
+
   formGroup: FormGroup;
-  unsubscribe$ = new Subject();
-  debounce$ = new Subject();
-  loading$ = this.loader.isLoading$('offer-loading');
-  offersWip$ = this.offersFacade.offersWip$;
+  loading = this.offerFormSerivce.loading;
+  offerWip = this.offerFormSerivce.offerWip;
   orgId: number | null = null;
   uuid: string | null = null;
-  token = this.offersFacade.token;
+  token = this.offerFormSerivce.token;
   isModification = false;
   image = '';
+
+  unsubscribe$ = new Subject();
+  debounce$ = new Subject();
 
   constructor(
     fb: FormBuilder,
     public dzService: DropzoneService,
-    private offersFacade: OffersFacadeService,
     private route: ActivatedRoute,
     private router: Router,
-    private loader: LoadingService,
     private auth: AuthService,
     private utils: UtilsService
   ) {
+    this.handleIntialValues();
     this.formGroup = fb.group({
       offerCategory: fb.control<string>('JOBS', {
         validators: [Validators.required]
@@ -142,7 +144,6 @@ export class OffersFormComponent implements OnInit, OnDestroy {
     this.isModification = this.route.snapshot.queryParams['edit'] === 'true';
     this.handleAddressState();
     this.handleSaveOnChange();
-    this.handleIntialValues();
     this.loadExistingOfferWip();
   }
 
@@ -193,13 +194,17 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
   handleDelteImage(): void {
     if (this.orgId && this.uuid) {
-      this.offersFacade.deleteImage(this.orgId, this.uuid);
+      this.offerFormSerivce.deleteImage(this.orgId, this.uuid);
     }
   }
 
   handleSave(): void {
-    if (this.orgId && this.uuid && this.form.dirty) {
-      this.offersFacade.saveOffersWip(this.orgId, this.uuid, this.getPayload());
+    if (this.orgId && this.uuid && this.form?.dirty) {
+      this.offerFormSerivce.saveOffersWip(
+        this.orgId,
+        this.uuid,
+        this.getPayload()
+      );
     }
   }
 
@@ -208,7 +213,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
       this.formGroup.markAllAsTouched();
     } else {
       if (this.orgId && this.uuid) {
-        this.offersFacade.releaseOffersWip(
+        this.offerFormSerivce.releaseOffersWip(
           this.orgId,
           this.uuid,
           this.getPayload()
@@ -275,7 +280,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
   }
 
   private handleIntialValues(): void {
-    this.offersWip$
+    toObservable(this.offerFormSerivce.offerWip)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((wipDto: OfferWipDto | null) => {
         if (wipDto) {
@@ -286,7 +291,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
   private loadExistingOfferWip(): void {
     if (this.orgId && this.uuid) {
-      this.offersFacade.getOffersWip(this.orgId, this.uuid);
+      this.offerFormSerivce.getOffersWip(this.orgId, this.uuid);
     }
   }
 

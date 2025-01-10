@@ -10,11 +10,11 @@
       <mat-icon>clear</mat-icon>
     </button>
     <div>
-      @if (loading$ | async) {
-        <app-loading-indicator></app-loading-indicator>
+      @if (loading()) {
+        loading
       }
     </div>
-    @if ((loading$ | async) !== true) {
+    @if (loading() !== true) {
       @if (orgId && uuid) {
         <form
           [formGroup]="formGroup"
