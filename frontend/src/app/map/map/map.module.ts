@@ -41,6 +41,7 @@ import {
   OrganisationSubscriptionActionComponent
 } from 'src/app/shared/standalone/subscription';
 import { ImageComponent } from 'src/app/shared/standalone/base/image.component';
+import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -88,7 +89,8 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     BaseCardComponent,
     ActivitySubscriptionActionComponent,
     OrganisationSubscriptionActionComponent,
-    ImageComponent
+    ImageComponent,
+    ContentWrapperComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

@@ -18,6 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HeadingComponent } from '../shared/standalone/base/heading.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ContentRowComponent } from '../shared/standalone/base/content-row.compo
     MatSlideToggleModule,
     HeadingComponent,
     OutlinedIconComponent,
-    ContentRowComponent
+    ContentRowComponent,
+    ContentWrapperComponent,
+    HtmlWrapperComponent
   ]
 })
 export class ClearingModule {}

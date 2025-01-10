@@ -46,6 +46,11 @@ import { CardListComponent } from '../shared/standalone/cards/card-list.componen
 import { BaseCardComponent } from '../shared/standalone/cards/base-card/base-card.component';
 import { CharCountComponent } from '../shared/standalone/base/char-count.component';
 import { NewBadgeComponent } from '../shared/standalone/base/badges/new-badge.component';
+import { PageWithHeaderLayoutComponent } from '../shared/standalone/layout/page-with-header-layout.component';
+import { ListWithHeadingLayoutComponent } from '../shared/standalone/layout/list-with-heading-layout.component';
+import { PageMenuComponent } from '../shared/standalone/layout/page-menu/page-menu.component';
+import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +102,12 @@ import { NewBadgeComponent } from '../shared/standalone/base/badges/new-badge.co
     CardListComponent,
     BaseCardComponent,
     CharCountComponent,
-    NewBadgeComponent
+    NewBadgeComponent,
+    PageWithHeaderLayoutComponent,
+    ListWithHeadingLayoutComponent,
+    PageMenuComponent,
+    NotificationPageComponent,
+    ContentWrapperComponent
   ]
 })
 export class AccountModule {}

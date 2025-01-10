@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SdgsListComponent } from './components/sdgs-list/sdgs-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormFieldErrorComponent } from './components/form-field-error/form-field-error.component';
-import { ContentWrapperComponent } from './components/layout/content-wrapper/content-wrapper.component';
 import { SdgIconComponent } from './components/sdg-icon/sdg-icon.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ToggleButtonComponent } from './components/toggle-button/toggle-button.component';
@@ -15,28 +14,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AlertComponent } from './standalone/base/alert.component';
 import { TiptapMenuBarComponent } from './components/tiptap-menu-bar/tiptap-menu-bar.component';
-import { PageMenuComponent } from './components/layout/page-menu/page-menu.component';
-import { MenuItemDirective } from './components/layout/page-menu/menu-item.directive';
-import { MenuItemActiveDirective } from './components/layout/page-menu/menu-item-active.directive';
+import { MenuItemDirective } from './standalone/layout/page-menu/menu-item.directive';
+import { MenuItemActiveDirective } from './standalone/layout/page-menu/menu-item-active.directive';
 import { RouterModule } from '@angular/router';
 import { SocialMediaLinksComponent } from './components/social-media-links/social-media-links.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { TopicComponent } from './components/topic/topic.component';
 import { ActionComponent } from './standalone/base/action.component';
-import { NotificationPageComponent } from './components/layout/notification-page/notification-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { FeedbackComponent } from './components/feedback/feedback/feedback.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { HeaderComponent } from './components/layout/header/header.component';
-import { PageWithHeaderLayoutComponent } from './components/layout/page-with-header-layout/page-with-header-layout.component';
 import { MessageInputDialogComponent } from './components/message-input-dialog/message-input-dialog.component';
-import { ListWithHeadingLayoutComponent } from './components/layout/list-with-heading-layout/list-with-heading-layout.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 import { ThematicFocusControlComponent } from './components/form/thematic-focus-select/thematic-focus-control.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CategoryControlComponent } from './components/form/category-control/category-control.component';
 import { UserSelectControlComponent } from './components/form/user-select-control/user-select-control.component';
-import { TextBlockComponent } from './components/text-block/text-block.component';
 import { ValidCheckComponent } from './components/form/valid-check/valid-check.component';
 import { SearchInputComponent } from './components/form/search-input/search-input.component';
 import { AdditionalFiltersModalComponent } from './components/form/filters/additional-filters-modal/additional-filters-modal.component';
@@ -59,7 +52,7 @@ import { FilterModalButtonComponent } from './components/form/filters/filter-mod
 import { OrderedFilterComponent } from './components/form/filters/ordered-filter/ordered-filter.component';
 import { ContactControlsComponent } from './components/form/contact-controls/contact-controls.component';
 import { SpecialOrgasFilterComponent } from './components/form/filters/special-orgas-filter/special-orgas-filter.component';
-import { HtmlWrapperComponent } from './components/html-wrapper/html-wrapper.component';
+import { HtmlWrapperComponent } from './standalone/base/html-wrapper.component';
 import { FeatureComponent } from './components/feature/feature.component';
 import { FormStepActionsComponent } from './components/wizard/form-step-actions/form-step-actions.component';
 import { FormStepDescriptionComponent } from './components/wizard/form-step-description/form-step-description.component';
@@ -74,19 +67,7 @@ import { OnlyDanFilterComponent } from './components/form/filters/only-dan-filte
 import { FormAdvantagesComponent } from './components/wizard/form-advatages/form-advatages.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
-import { BaseLayoutComponent } from './components/layout/base-layout/base-layout.component';
-import { MainHeaderComponent } from './components/layout/main-header/main-header.component';
-import { SidebarContentComponent } from './components/layout/sidebar-content/sidebar-content.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { LangToggleComponent } from './components/layout/lang-toggle/lang-toggle.component';
-import { NavActionsComponent } from './components/layout/nav-actions/nav-actions.component';
-import { LogoComponent } from './components/layout/logo/logo.component';
-import { MainMenuComponent } from './components/layout/main-menu/main-menu.component';
-import { AccordionMenuItemComponent } from './components/layout/main-menu/accordion-menu-item/accordion-menu-item.component';
-import { DropdownMenuComponent } from './components/layout/main-menu/dropdown-menu/dropdown-menu.component';
-import { MenuEntryComponent } from './components/layout/main-menu/menu-entry/menu-entry.component';
-import { CdkMenuModule } from '@angular/cdk/menu';
 import { RegisterOrLoginModalComponent } from './components/register-or-login-modal/register-or-login-modal.component';
 import { HeadingComponent } from './standalone/base/heading.component';
 import { ExpiredBadgeComponent } from './standalone/base/badges/expired-badge.component';
@@ -96,35 +77,30 @@ import { CardLabelComponent } from './standalone/cards/card-label.component';
 import { ContentRowComponent } from './standalone/base/content-row.component';
 import { CardLogoComponent } from './standalone/cards/card-logo.component';
 import { NewBadgeComponent } from './standalone/base/badges/new-badge.component';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { ContentWrapperComponent } from './standalone/layout/content-wrapper.component';
 
 @NgModule({
   declarations: [
     SdgsListComponent,
     FormFieldErrorComponent,
-    ContentWrapperComponent,
     SdgIconComponent,
     ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
-    PageMenuComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
     SocialMediaLinksComponent,
     ErrorPageComponent,
     TopicComponent,
-    NotificationPageComponent,
     NotFoundPageComponent,
     FeedbackComponent,
-    HeaderComponent,
-    PageWithHeaderLayoutComponent,
-    ListWithHeadingLayoutComponent,
     InfoCardComponent,
     ThematicFocusControlComponent,
     AddressControlsComponent,
     CategoryControlComponent,
     UserSelectControlComponent,
-    TextBlockComponent,
     ValidCheckComponent,
     SearchInputComponent,
     AdditionalFiltersModalComponent,
@@ -144,7 +120,6 @@ import { NewBadgeComponent } from './standalone/base/badges/new-badge.component'
     OrderedFilterComponent,
     ContactControlsComponent,
     SpecialOrgasFilterComponent,
-    HtmlWrapperComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
@@ -153,17 +128,6 @@ import { NewBadgeComponent } from './standalone/base/badges/new-badge.component'
     OnlyDanFilterComponent,
     FormAdvantagesComponent,
     ConfirmationModalComponent,
-    BaseLayoutComponent,
-    MainHeaderComponent,
-    SidebarContentComponent,
-    FooterComponent,
-    LangToggleComponent,
-    NavActionsComponent,
-    LogoComponent,
-    MainMenuComponent,
-    DropdownMenuComponent,
-    MenuEntryComponent,
-    AccordionMenuItemComponent,
     RegisterOrLoginModalComponent
   ],
   imports: [
@@ -200,7 +164,9 @@ import { NewBadgeComponent } from './standalone/base/badges/new-badge.component'
     CardLabelComponent,
     ContentRowComponent,
     CardLogoComponent,
-    NewBadgeComponent
+    NewBadgeComponent,
+    HtmlWrapperComponent,
+    ContentWrapperComponent
   ],
   exports: [
     CommonModule,
@@ -208,26 +174,19 @@ import { NewBadgeComponent } from './standalone/base/badges/new-badge.component'
     SdgsListComponent,
     SdgIconComponent,
     FormFieldErrorComponent,
-    ContentWrapperComponent,
     ToggleButtonComponent,
     SpinnerComponent,
     MessageInputDialogComponent,
     TiptapMenuBarComponent,
-    PageMenuComponent,
     MenuItemDirective,
     MenuItemActiveDirective,
     SocialMediaLinksComponent,
     TopicComponent,
-    NotificationPageComponent,
     NotFoundPageComponent,
-    HeaderComponent,
-    PageWithHeaderLayoutComponent,
-    ListWithHeadingLayoutComponent,
     InfoCardComponent,
     ThematicFocusControlComponent,
     CategoryControlComponent,
     UserSelectControlComponent,
-    TextBlockComponent,
     ValidCheckComponent,
     SearchInputComponent,
     AdditionalFiltersModalComponent,
@@ -236,15 +195,13 @@ import { NewBadgeComponent } from './standalone/base/badges/new-badge.component'
     FilterModalButtonComponent,
     SecondaryFiltersComponent,
     ContactControlsComponent,
-    HtmlWrapperComponent,
     FeatureComponent,
     FormStepActionsComponent,
     FormStepDescriptionComponent,
     UploadImageComponent,
     AddressControlsComponent,
     FormAdvantagesComponent,
-    ConfirmationModalComponent,
-    BaseLayoutComponent
+    ConfirmationModalComponent
   ]
 })
 export class SharedModule {}

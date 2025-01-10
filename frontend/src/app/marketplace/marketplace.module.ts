@@ -40,6 +40,13 @@ import { ExpiredBadgeComponent } from '../shared/standalone/base/badges/expired-
 import { ActionComponent } from '../shared/standalone/base/action.component';
 import { ContentRowComponent } from '../shared/standalone/base/content-row.component';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { HeadingComponent } from '../shared/standalone/base/heading.component';
+import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
+import {
+  BreadcrumbComponent,
+  BreadcrumbsComponent
+} from '../shared/standalone/base/breadcrumb';
 
 @NgModule({
   declarations: [
@@ -87,7 +94,12 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
     ActionComponent,
     ContentRowComponent,
     EventBadgesComponent,
-    OutlinedIconComponent
+    OutlinedIconComponent,
+    ContentWrapperComponent,
+    HeadingComponent,
+    HtmlWrapperComponent,
+    BreadcrumbComponent,
+    BreadcrumbsComponent
   ],
   exports: [CardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

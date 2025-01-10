@@ -28,6 +28,8 @@ import { WizardSidebarLayoutComponent } from '../shared/standalone/wizard/wizard
 import { SavedIndicatorComponent } from '../shared/standalone/wizard/saved-indicator.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { CharCountComponent } from '../shared/standalone/base/char-count.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { CharCountComponent } from '../shared/standalone/base/char-count.compone
     WizardSidebarLayoutComponent,
     SavedIndicatorComponent,
     AlertComponent,
-    CharCountComponent
+    CharCountComponent,
+    ContentWrapperComponent,
+    HtmlWrapperComponent
   ]
 })
 export class DanModule {}

@@ -41,6 +41,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.component';
 import { AlertComponent } from '../shared/standalone/base/alert.component';
 import { CharCountComponent } from '../shared/standalone/base/char-count.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
+import { NotificationPageComponent } from '../shared/standalone/layout/notification-page/notification-page.component';
+import { HtmlWrapperComponent } from '../shared/standalone/base/html-wrapper.component';
 
 export const APP_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -90,7 +93,10 @@ export const APP_DATE_FORMATS: MatDateFormats = {
     WizardSidebarLayoutComponent,
     OutlinedIconComponent,
     AlertComponent,
-    CharCountComponent
+    CharCountComponent,
+    ContentWrapperComponent,
+    NotificationPageComponent,
+    HtmlWrapperComponent
   ],
   providers: [
     {

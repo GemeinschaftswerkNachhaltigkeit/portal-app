@@ -16,6 +16,7 @@ import { MarketplaceResultComponent } from '../components/marketplace-result/mar
 import { NoResultsComponent } from '../components/no-results/no-results.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
 
 @Component({
   selector: 'app-search',
@@ -34,7 +35,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
     OrgaResultComponent,
     EventResultComponent,
     MarketplaceResultComponent,
-    NoResultsComponent
+    NoResultsComponent,
+    ContentWrapperComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'

@@ -19,6 +19,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DirectusService } from 'src/app/shared/services/directus.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
+import { ContentWrapperComponent } from 'src/app/shared/standalone/layout/content-wrapper.component';
 
 @Component({
   selector: 'app-search-header',
@@ -30,7 +31,8 @@ import { Subject, takeUntil } from 'rxjs';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    ContentWrapperComponent
   ],
   templateUrl: './search-header.component.html',
   styleUrl: './search-header.component.scss'

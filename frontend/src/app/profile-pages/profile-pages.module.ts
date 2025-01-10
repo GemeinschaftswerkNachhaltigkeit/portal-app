@@ -14,6 +14,7 @@ import { OutlinedIconComponent } from '../shared/standalone/base/outlined-icon.c
 import { CardLabelComponent } from '../shared/standalone/cards/card-label.component';
 import { CardLogoComponent } from '../shared/standalone/cards/card-logo.component';
 import { ImageComponent } from '../shared/standalone/base/image.component';
+import { ContentWrapperComponent } from '../shared/standalone/layout/content-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ImageComponent } from '../shared/standalone/base/image.component';
     OutlinedIconComponent,
     CardLabelComponent,
     CardLogoComponent,
-    ImageComponent
+    ImageComponent,
+    ContentWrapperComponent
   ]
 })
 export class ProfilePagesModule {}
