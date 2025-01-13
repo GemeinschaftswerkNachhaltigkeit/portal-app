@@ -96,7 +96,6 @@
 
 <ng-template #actions>
   @let events = availableEvents();
-  <pre>{{events | json}}</pre>
   @if (events) {
     @if (!isPermanent()) {
       <app-date-select

@@ -9,14 +9,13 @@ import {
   tap
 } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
-import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
+import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import SearchFilter, { DynamicFilters } from '../models/search-filter';
 import { TranslateService } from '@ngx-translate/core';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { DateTime } from 'luxon';
 import { RegisterOrLoginService } from 'src/app/shared/services/register-or-login.service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -187,15 +186,10 @@ export class EventsService {
   resetState() {
     this.state.update((state) => ({
       ...state,
-      filters: {},
       pagedEvents: null,
       events: [],
-      availableEvents: null,
-      currentCalenderMonth: DateTime.now().startOf('month'),
-      loading: false,
       filtersChanged: false,
       nextPage: 0,
-      initialized: false
     }));
   }
 
@@ -213,7 +207,6 @@ export class EventsService {
 
   setFilters() {
     const filters = this.getFilters();
-    console.log('>>> SET Filters',filters)
     this.state.update(state => ({
       ...state,
       filters: filters
@@ -241,7 +234,6 @@ export class EventsService {
       ...existingFilters,
       ...searchFilter
     };
-    console.log('Filters', filters)
     this.persistFilters.setFiltersToUrl(filters);
   }
 
@@ -297,9 +289,7 @@ export class EventsService {
     toObservable(this.filters)
       .pipe(
         tap(() => this.startLoading()),
-        tap(() =>    {
-          console.log('>>> searchEventsOnFilterChange') 
-        }),
+        
         switchMap((filters) => this.api.search(filters, this.nextPage())),
         takeUntilDestroyed(),
         catchError((err) => {
@@ -330,7 +320,6 @@ export class EventsService {
   }
 
   loadAvailableEvents(cb?: () => void): void {
-    console.log('>>> loadAvailableEvents', this.currentMonth(), this.getFilters()) 
     this.api
       .getDates(this.currentMonth(), this.getFilters())
       .pipe(take(1))
@@ -347,7 +336,6 @@ export class EventsService {
           {}
         );
         this.setAvailableEvents(entries)
-        console.log('SET available events', entries)
         if (cb) cb();
       });
   }

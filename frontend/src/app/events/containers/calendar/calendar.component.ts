@@ -139,7 +139,6 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
 
   handleDateChange(date: DateTime): void {
     this.selected = date;
-    console.log('DATE', date)
     this.eventsService.search({ startDate: date.toISO() || '' });
   }
   handleToday(): void {
