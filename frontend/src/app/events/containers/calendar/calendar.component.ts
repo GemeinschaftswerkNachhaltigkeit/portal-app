@@ -69,11 +69,11 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
   @ViewChild('marker') marker: ElementRef;
   unsubscribe$ = new Subject();
 
-  events$ = this.eventsService.events$;
-  groups$ = this.eventsService.groupedEvents$;
-  availableEvents$ = this.eventsService.availableEvents$;
-  paging$ = this.eventsService.eventsPaging$;
-  loading$ = this.loader.isLoading$();
+  events = this.eventsService.events;
+  groups = this.eventsService.groupedEvents;
+  availableEvents = this.eventsService.availableEvents;
+  paging = this.eventsService.eventsPaging;
+  loading = this.eventsService.loading;
 
   selected: DateTime = DateTime.now();
   dateControl = new FormControl('');
@@ -127,6 +127,8 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
         this.eventsService.setCurrentMonthOfCalendar(this.selected);
         this.triggerSearchOnQueryParamsChange();
       }
+    }, {
+      allowSignalWrites: true
     });
   }
 
@@ -137,6 +139,7 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
 
   handleDateChange(date: DateTime): void {
     this.selected = date;
+    console.log('DATE', date)
     this.eventsService.search({ startDate: date.toISO() || '' });
   }
   handleToday(): void {
