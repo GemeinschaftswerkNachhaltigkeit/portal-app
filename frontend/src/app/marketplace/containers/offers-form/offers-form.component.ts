@@ -44,6 +44,7 @@ import { AddressControlsComponent } from 'src/app/shared/components/form/address
 import { VisibilityControlsComponent } from '../../components/visibility-controls.component';
 import { OfferFormService } from '../../offer-form.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-offers-form',
@@ -67,7 +68,8 @@ import { toObservable } from '@angular/core/rxjs-interop';
     CategoryControlComponent,
     MatRadioModule,
     AddressControlsComponent,
-    VisibilityControlsComponent
+    VisibilityControlsComponent,
+    SpinnerComponent
   ],
   templateUrl: './offers-form.component.html',
   styleUrls: ['./offers-form.component.scss']
@@ -75,7 +77,12 @@ import { toObservable } from '@angular/core/rxjs-interop';
 export class OffersFormComponent implements OnInit, OnDestroy {
   @ViewChild('form') form!: NgForm;
 
-  offerFormSerivce = inject(OfferFormService);
+  public dzService = inject(DropzoneService);
+  private offerFormSerivce = inject(OfferFormService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private utils = inject(UtilsService);
 
   formGroup: FormGroup;
   loading = this.offerFormSerivce.loading;
@@ -89,14 +96,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
   unsubscribe$ = new Subject();
   debounce$ = new Subject();
 
-  constructor(
-    fb: FormBuilder,
-    public dzService: DropzoneService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private auth: AuthService,
-    private utils: UtilsService
-  ) {
+  constructor(fb: FormBuilder) {
     this.handleIntialValues();
     this.formGroup = fb.group({
       offerCategory: fb.control<string>('JOBS', {

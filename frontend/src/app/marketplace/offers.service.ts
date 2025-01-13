@@ -61,7 +61,6 @@ export class OffersService {
 
   // selectors
   readonly loading = computed(() => {
-    console.log('loaders', this.state().loaders);
     return this.state().loaders.size > 0;
   });
   readonly offers = computed(() =>
@@ -158,7 +157,6 @@ export class OffersService {
   }
 
   private stopLoading(type: 'offers' | 'wips') {
-    console.log('Stop loading', type);
     this.state.update((state) => {
       const loaders = new Set(state.loaders);
       loaders.delete(type);

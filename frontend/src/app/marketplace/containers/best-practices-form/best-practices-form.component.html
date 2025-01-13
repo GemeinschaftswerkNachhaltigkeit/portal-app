@@ -9,13 +9,8 @@
     <button (click)="handleCancelation()" mat-icon-button class="closeX">
       <mat-icon>clear</mat-icon>
     </button>
-    <div>
-      @if (loading$ | async) {
-        <app-loading-indicator></app-loading-indicator>
-      }
-    </div>
 
-    @if ((loading$ | async) !== true) {
+    @if (loading() !== true) {
       @if (orgId && uuid) {
         <form
           [formGroup]="formGroup"
@@ -97,6 +92,10 @@
           </div>
         </form>
       }
+    } @else {
+      <div class="loader">
+        <app-spinner></app-spinner>
+      </div>
     }
   </app-page-with-header-layout>
 </app-content-wrapper>

@@ -9,11 +9,7 @@
     <button (click)="handleCancelation()" mat-icon-button class="closeX">
       <mat-icon>clear</mat-icon>
     </button>
-    <div>
-      @if (loading()) {
-        loading
-      }
-    </div>
+
     @if (loading() !== true) {
       @if (orgId && uuid) {
         <form
@@ -142,6 +138,10 @@
           </div>
         </form>
       }
+    } @else {
+      <div class="loader">
+        <app-spinner></app-spinner>
+      </div>
     }
   </app-page-with-header-layout>
 </app-content-wrapper>
