@@ -6,7 +6,7 @@ export let environment = {
   directusBaseUrl: 'load-from-backend',
   landingPageUrl: 'load-from-backend',
   assetsUrl: '/app/assets',
-  matomoUrl: 'https://test.gemeinschaftswerk-nachhaltigkeit.de/analytics/',
+  matomoUrl: 'https://gemeinschaftswerk-nachhaltigkeit.de/analytics/',
   matomoTagManagerContainerId: 'jFGzL2wu',
   matomoSiteId: 1,
   danId: 0,
