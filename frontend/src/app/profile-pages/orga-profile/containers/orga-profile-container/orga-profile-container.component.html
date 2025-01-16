@@ -1,7 +1,11 @@
-@if ((orga$ | async) === null) {
-  <app-loading-indicator></app-loading-indicator>
+
+@if (orgaService.hasLoader('organisation')) {
+  <div>
+    <app-spinner></app-spinner>
+  </div>
 }
-@if (orga$ | async; as orga) {
+@let orga = organisation();
+@if (orga) {
   <app-profile-layout>
     <div id="about-us" breadcrumbs>
       <app-breadcrumbs>
@@ -39,7 +43,7 @@
           appMenuItemActive="sdgs"
           >{{ 'profile.nav.sdgs' | translate }}</a
         >
-        @if ((activities$ | async)?.length) {
+        @if (activities()?.length) {
           <a
             *appMenuItem
             routerLink="./"
@@ -89,137 +93,135 @@
       }
     </main>
     <div content2>
-      @if (offers$ | async; as offers) {
-        @if (activities$ | async; as activities) {
-          @if (bp$ | async; as bestPractices) {
-            @if (offers.length || activities.length || bestPractices.length) {
-              <section class="article-wrapper" id="activities">
-                <app-section
-                  [title]="'profile.titles.activitiesTagline' | translate"
-                  [subtitle]="'profile.titles.activities' | translate"
+      @let activityEntries = activities();
+      @let offerEntries = offers();
+      @let bestPracticeEntries = bestPractices();
+   
+      @if (offerEntries?.length || activityEntries?.length || bestPracticeEntries?.length) {
+        <section class="article-wrapper" id="activities">
+          <app-section
+            [title]="'profile.titles.activitiesTagline' | translate"
+            [subtitle]="'profile.titles.activities' | translate"
+          >
+            <app-tabs>
+              @if (offerEntries?.length) {
+                <app-tab [title]="'profile.labels.offers' | translate">
+                  @for (offer of offerEntries; track offer) {
+                    <app-list-item
+                      [type]="'OFFER'"
+                      [title]="offer.name || ''"
+                      [description]="offer.description || ''"
+                      [thematicFocus]="offer.thematicFocus"
+                      [image]="offer.image || ''"
+                      [category]="
+                        offer?.offerCategory
+                          ? 'marketplace.labels.' +
+                            offer?.offerCategory?.toString()
+                          : ''
+                      "
+                      [openTitle]="'profile.buttons.openOffer'"
+                      [openLink]="['/marketplace/search', offer.id]"
+                    >
+                      <!--
+                          <app-offer-subscription-action
+                            [short]="true"
+                            [stroked]="true"
+                            [offer]="offer"
+                            [full]="true"
+                          ></app-offer-subscription-action>
+                          -->
+                    </app-list-item>
+                  }
+                </app-tab>
+              }
+              @if (activityEntries?.length) {
+                <app-tab
+                  [title]="'profile.labels.activities' | translate"
                 >
-                  <app-tabs>
-                    @if (offers.length) {
-                      <app-tab [title]="'profile.labels.offers' | translate">
-                        @for (offer of offers; track offer) {
-                          <app-list-item
-                            [type]="'OFFER'"
-                            [title]="offer.name || ''"
-                            [description]="offer.description || ''"
-                            [thematicFocus]="offer.thematicFocus"
-                            [image]="offer.image || ''"
-                            [category]="
-                              offer?.offerCategory
-                                ? 'marketplace.labels.' +
-                                  offer?.offerCategory?.toString()
-                                : ''
-                            "
-                            [openTitle]="'profile.buttons.openOffer'"
-                            [openLink]="['/marketplace/search', offer.id]"
-                          >
-                            <!--
-                                <app-offer-subscription-action
-                                  [short]="true"
-                                  [stroked]="true"
-                                  [offer]="offer"
-                                  [full]="true"
-                                ></app-offer-subscription-action>
-                                -->
-                          </app-list-item>
-                        }
-                      </app-tab>
-                    }
-                    @if (activities.length) {
-                      <app-tab
-                        [title]="'profile.labels.activities' | translate"
+                  @for (activity of activityEntries; track activity.id) {
+                    <app-list-item
+                      [type]="
+                        activity?.activityType === 'DAN'
+                          ? 'DAN'
+                          : 'ACTIVITY'
+                      "
+                      [title]="activity.name || ''"
+                      [description]="activity.description || ''"
+                      [impactArea]="activity.impactArea"
+                      [period]="activity.period"
+                      [location]="activity.location"
+                      [thematicFocus]="activity.thematicFocus"
+                      [image]="activity.logo || ''"
+                      [category]="
+                        activity?.activityType
+                          ? 'activityType.' +
+                            activity?.activityType?.toString()
+                          : ''
+                      "
+                      [openTitle]="'profile.buttons.openActivity'"
+                      [openLink]="[
+                        '/',
+                        'organisations',
+                        activity.organisation?.id,
+                        activity.id
+                      ]"
+                      (bookmark)="
+                        bookmarkHandler(activity.id, activity.name)
+                      "
+                      (unbookmark)="unbookmarkHandler(activity.id)"
+                    >
+                      <app-activity-subscription-action
+                        [short]="true"
+                        [stroked]="true"
+                        [activity]="activity"
+                        [full]="true"
                       >
-                        @for (activity of activities; track activity) {
-                          <app-list-item
-                            [type]="
-                              activity?.activityType === 'DAN'
-                                ? 'DAN'
-                                : 'ACTIVITY'
-                            "
-                            [title]="activity.name || ''"
-                            [description]="activity.description || ''"
-                            [impactArea]="activity.impactArea"
-                            [period]="activity.period"
-                            [location]="activity.location"
-                            [thematicFocus]="activity.thematicFocus"
-                            [image]="activity.logo || ''"
-                            [category]="
-                              activity?.activityType
-                                ? 'activityType.' +
-                                  activity?.activityType?.toString()
-                                : ''
-                            "
-                            [openTitle]="'profile.buttons.openActivity'"
-                            [openLink]="[
-                              '/',
-                              'organisations',
-                              activity.organisation?.id,
-                              activity.id
-                            ]"
-                            (bookmark)="
-                              bookmarkHandler(activity.id, activity.name)
-                            "
-                            (unbookmark)="unbookmarkHandler(activity.id)"
-                          >
-                            <app-activity-subscription-action
-                              [short]="true"
-                              [stroked]="true"
-                              [activity]="activity"
-                              [full]="true"
-                            >
-                            </app-activity-subscription-action>
-                          </app-list-item>
-                        }
-                      </app-tab>
-                    }
-                    @if (bestPractices.length) {
-                      <app-tab
-                        [title]="'profile.labels.bestPractices' | translate"
-                      >
-                        @for (
-                          bestPractice of bestPractices;
-                          track bestPractice
-                        ) {
-                          <app-list-item
-                            [type]="'BEST_PRACTICE'"
-                            [title]="bestPractice.name || ''"
-                            [description]="bestPractice.description || ''"
-                            [thematicFocus]="bestPractice.thematicFocus"
-                            [image]="bestPractice.image || ''"
-                            [category]="
-                              bestPractice?.bestPractiseCategory
-                                ? 'marketplace.labels.' +
-                                  bestPractice?.bestPractiseCategory?.toString()
-                                : ''
-                            "
-                            [openTitle]="'profile.buttons.openBestPractice'"
-                            [openLink]="[
-                              '/marketplace/search',
-                              bestPractice.id
-                            ]"
-                          >
-                            <!--
-                                <app-best-practice-subscription-action
-                                  [short]="true"
-                                  [stroked]="true"
-                                  [bp]="bestPractice"
-                                  [full]="true"
-                                ></app-best-practice-subscription-action>
-                                -->
-                          </app-list-item>
-                        }
-                      </app-tab>
-                    }
-                  </app-tabs>
-                </app-section>
-              </section>
-            }
-          }
-        }
+                      </app-activity-subscription-action>
+                    </app-list-item>
+                  }
+                </app-tab>
+              }
+              @if (bestPracticeEntries?.length) {
+                <app-tab
+                  [title]="'profile.labels.bestPractices' | translate"
+                >
+                  @for (
+                    bestPractice of bestPracticeEntries;
+                    track bestPractice.id
+                  ) {
+                    <app-list-item
+                      [type]="'BEST_PRACTICE'"
+                      [title]="bestPractice.name || ''"
+                      [description]="bestPractice.description || ''"
+                      [thematicFocus]="bestPractice.thematicFocus"
+                      [image]="bestPractice.image || ''"
+                      [category]="
+                        bestPractice?.bestPractiseCategory
+                          ? 'marketplace.labels.' +
+                            bestPractice?.bestPractiseCategory?.toString()
+                          : ''
+                      "
+                      [openTitle]="'profile.buttons.openBestPractice'"
+                      [openLink]="[
+                        '/marketplace/search',
+                        bestPractice.id
+                      ]"
+                    >
+                      <!--
+                          <app-best-practice-subscription-action
+                            [short]="true"
+                            [stroked]="true"
+                            [bp]="bestPractice"
+                            [full]="true"
+                          ></app-best-practice-subscription-action>
+                          -->
+                    </app-list-item>
+                  }
+                </app-tab>
+              }
+            </app-tabs>
+          </app-section>
+        </section>
       }
     </div>
     <div contact>

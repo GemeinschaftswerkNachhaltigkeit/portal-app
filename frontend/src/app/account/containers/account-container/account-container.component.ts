@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { OrganisationService } from 'src/app/sign-up/services/organisation.service';
-import { OrgaFacadeService } from 'src/app/profile-pages/orga-profile/orga-facade.service';
+import { OrgaService } from 'src/app/profile-pages/orga-profile/orga.service';
 import { AccountFacadeService } from '../../account-facade.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { CommonModule } from '@angular/common';
@@ -39,15 +39,15 @@ import { WithoutOrgaDirective } from 'src/app/auth/directives/without-orga.direc
   styleUrls: ['./account-container.component.scss']
 })
 export class AccountContainerComponent {
-  activities$ = this.orgaFacade.activites$;
-  orga$ = this.orgaFacade.orga$;
+  activities = this.orgaService.activities;
+  orga = this.orgaService.organisation;
 
   constructor(
     private authService: AuthService,
     public activityService: ActivityService,
     public featureService: FeatureService,
     public orgService: OrganisationService,
-    private orgaFacade: OrgaFacadeService,
+    private orgaService: OrgaService,
     private router: Router,
     private accountFacade: AccountFacadeService
   ) {}
@@ -59,7 +59,7 @@ export class AccountContainerComponent {
   private loadOrganisationDataForLoggedInUser() {
     const currentUser = this.authService.getUser();
     if (currentUser && currentUser.orgId) {
-      this.orgaFacade.getById(currentUser.orgId);
+      this.orgaService.getOrganisationById(currentUser.orgId);
     } else {
       throw new Error('error: no activities');
     }
