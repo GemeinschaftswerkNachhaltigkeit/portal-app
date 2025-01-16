@@ -10,18 +10,14 @@ const LP_LANG_COOKIE = 'i18n_redirected';
   standalone: true,
   imports: [CommonModule],
   template: `<div class="lang-switch">
-      @for (lang of availableLangs; track lang) {
-        @if (lang.key !== selectedLang) {
-          <a
-            title="lang.name"
-            class="lang-option"
-            (click)="selectLang(lang.key)"
-            >
-            <div [ngClass]="['flag', lang.key]"></div>
-          </a>
-        }
+    @for (lang of availableLangs; track lang) {
+      @if (lang.key !== selectedLang) {
+        <a title="lang.name" class="lang-option" (click)="selectLang(lang.key)">
+          <div [ngClass]="['flag', lang.key]"></div>
+        </a>
       }
-    </div>`,
+    }
+  </div>`,
   styles: `
     .lang-option {
       display: flex;

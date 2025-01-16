@@ -38,7 +38,7 @@ export type AdditionalFiltersData = {
     TranslateModule,
     MatButtonModule,
     MatDialogModule
-],
+  ],
   template: `
     <div mat-dialog-content>
       @if (data) {
@@ -56,7 +56,7 @@ export type AdditionalFiltersData = {
         {{ 'btn.close' | translate }}
       </button>
     </div>
-    `,
+  `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

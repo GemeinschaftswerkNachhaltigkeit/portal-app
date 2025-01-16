@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -9,50 +8,38 @@ import { LangToggleComponent } from './lang-toggle.component';
 @Component({
   selector: 'app-nav-actions',
   standalone: true,
-  imports: [
-    TranslateModule,
-    MatButtonModule,
-    LangToggleComponent
-],
+  imports: [TranslateModule, MatButtonModule, LangToggleComponent],
   template: `
     <div class="buttons" [class.mobile]="mobile">
       <div class="menu highlighted-links font-2">
         @if (!isLoggedIn()) {
-          <a
-            class="menu-entry"
-            color="primary"
-            (click)="login()"
-            >
+          <a class="menu-entry" color="primary" (click)="login()">
             {{ 'btn.login' | translate }}
           </a>
         }
         @if (isLoggedIn()) {
-          <a
-            class="menu-entry"
-            color="primary"
-            (click)="logout()"
-            >
+          <a class="menu-entry" color="primary" (click)="logout()">
             {{ 'btn.logout' | translate }}
           </a>
         }
       </div>
-    
+
       @if (!isLoggedIn()) {
         <button
           class="registration-btn"
           mat-flat-button
           color="accent"
           (click)="registerUser()"
-          >
+        >
           {{ 'btn.registration' | translate }}
         </button>
       }
     </div>
-    
+
     <div class="toggle" [class.mobile]="mobile">
       <app-lang-toggle></app-lang-toggle>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
 

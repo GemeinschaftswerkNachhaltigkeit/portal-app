@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -31,7 +30,7 @@ export const defaultContactGroupFields = {
     ValidCheckComponent,
     TranslateModule,
     FormFieldErrorComponent
-],
+  ],
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

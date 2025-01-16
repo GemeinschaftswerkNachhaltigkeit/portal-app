@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */
 
-
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import {
   DanContent,

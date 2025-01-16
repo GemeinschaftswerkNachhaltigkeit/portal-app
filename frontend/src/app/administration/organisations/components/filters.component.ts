@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,7 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
     MatIconModule,
     TranslateModule,
     MatMenuModule
-],
+  ],
   template: `
     <div class="filters">
       <form [formGroup]="filterForm" class="filter-form">
@@ -39,7 +38,7 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
               aria-label="Clear"
               (click)="clearQuery()"
               type="button"
-              >
+            >
               <mat-icon>close</mat-icon>
             </button>
           }
@@ -53,7 +52,7 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
               mat-flat-button
               [matMenuTriggerFor]="menu"
               aria-label="Sort menu button"
-              >
+            >
               @if (sort === 'newestFirst') {
                 <div class="sort-btn-content">
                   <mat-icon>sort</mat-icon>
@@ -105,7 +104,7 @@ type SortTypes = 'oldestFirst' | 'newestFirst' | 'aToZ' | 'zToA';
         </div>
       </form>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

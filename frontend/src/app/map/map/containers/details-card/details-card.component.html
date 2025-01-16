@@ -1,11 +1,16 @@
+
 <div class="close-button">
   <button mat-icon-button (click)="close()">
     <mat-icon>clear</mat-icon>
   </button>
 </div>
-<div class="wrapper" [ngClass]="{ mobile: mobile }">
-  <div class="details" [ngClass]="{ 'mat-elevation-z8': !mobile }">
-    <app-loading-indicator forId="detail-popup-data"></app-loading-indicator>
+<div class="wrapper" [ngClass]="{ mobile: mobile() }">
+  <div class="details" [ngClass]="{ 'mat-elevation-z8': !mobile() }">
+    @if (mapService.hasLoader('details')) {
+      <div class="loader">
+        <app-spinner></app-spinner>
+      </div>
+    }
     @if (currentResult) {
       <header class="header">
         @if (showAsExpired(currentResult)) {
@@ -52,6 +57,10 @@
               <app-card-logo
                 [logoUrl]="currentResult.logo"
                 [name]="currentResult.name"
+                [imageDimensions]="{
+                  width: 56,
+                  height: 56
+                }"
               ></app-card-logo>
             </app-details-link>
           </div>

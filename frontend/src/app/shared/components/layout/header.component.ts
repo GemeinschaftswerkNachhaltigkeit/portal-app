@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HeadingComponent } from '../base/heading.component';
@@ -25,7 +24,7 @@ import { TextBlockComponent } from '../base/text-block.component';
     <div class="action">
       <ng-content select="[action]"></ng-content>
     </div>
-    `,
+  `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

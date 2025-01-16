@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { EmbeddedMapFacade } from '../../../map-facade.service';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MapService } from 'src/app/map/data/map.service';
 
 @Component({
   selector: 'app-embedded-map-layout',
@@ -10,35 +10,33 @@ import { CommonModule } from '@angular/common';
     <div
       class="map-layout"
       [ngClass]="{
-        'map-open': (showFullMap$ | async),
+        'map-open': showFullMap(),
         'details-open': hasDetail()
       }"
-      >
+    >
       <div class="content">
         <section class="map-wrapper">
           @if (hasDetail()) {
-            <div
-              class="details"
-              [ngClass]="{ clickable: hasDetail() }"
-              >
+            <div class="details" [ngClass]="{ clickable: hasDetail() }">
               <div class="outlet">
                 <ng-content select="[detailsDesktop]"></ng-content>
               </div>
             </div>
           }
-    
+
           <ng-content select="[map]"></ng-content>
         </section>
       </div>
     </div>
-    `
+  `
 })
 export class EmbeddedMapLayoutComponent {
-  showFullMap$ = this.facade.showFullMap$;
+  private mapService = inject(MapService);
+  showFullMap = this.mapService.showFullMap;
 
-  constructor(private facade: EmbeddedMapFacade) {}
+  constructor() {}
 
   hasDetail(): boolean {
-    return this.facade.hasActiveCard();
+    return this.mapService.hasActiveCard();
   }
 }

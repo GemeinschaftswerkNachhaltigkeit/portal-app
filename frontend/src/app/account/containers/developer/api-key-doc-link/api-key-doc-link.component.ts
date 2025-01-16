@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { InfoCardComponent } from 'src/app/shared/components/cards/info-card.component';

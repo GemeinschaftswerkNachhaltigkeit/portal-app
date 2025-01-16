@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';

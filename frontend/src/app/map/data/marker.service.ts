@@ -4,10 +4,10 @@ import SearchResult from '../models/search-result';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
-import { SharedMapFacade } from '../map-facade.service';
 import { BehaviorSubject } from 'rxjs';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import MarkerDto from '../models/markerDto';
+import { MapService } from './map.service';
 
 const getIcon = (
   type: string,
@@ -74,7 +74,7 @@ const getClusterIcon = (
 @Injectable({
   providedIn: 'root'
 })
-export class SharedMarkerService {
+export class MarkerService {
   searchOnMove = true;
   organisationMarkers: L.MarkerClusterGroup | null = null;
   danMarkers: L.MarkerClusterGroup | null = null;
@@ -90,10 +90,8 @@ export class SharedMarkerService {
   });
   markerLeaved$ = new BehaviorSubject(null);
 
-  // explanation inheritance with dependency injection see here:
-  // https://www.danywalls.com/using-the-inject-function-in-angular-15
   utils = inject(UtilsService);
-  mapFacade = inject(SharedMapFacade);
+  mapFacade = inject(MapService);
 
   expiredDan(maker?: {
     resultType: string;

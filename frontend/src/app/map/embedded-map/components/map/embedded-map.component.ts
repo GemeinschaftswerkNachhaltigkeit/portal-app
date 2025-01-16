@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -19,7 +20,7 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { SharedMarkerService } from '../../../services/marker.service';
+import { MarkerService } from '../../../data/marker.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -86,6 +87,8 @@ import { MatIconModule } from '@angular/material/icon';
 export class EmbeddedMapComponent
   implements AfterViewInit, OnChanges, OnDestroy
 {
+  private marker = inject(MarkerService);
+
   @ViewChild('mapRef') mapRef: ElementRef<HTMLDivElement> | null = null;
   @Input() data: MarkerDto[] = [];
   @Input() center?: L.LatLngTuple;
@@ -96,7 +99,7 @@ export class EmbeddedMapComponent
   mapMoves = new BehaviorSubject<string>('');
   mapInitialized = false;
 
-  constructor(private marker: SharedMarkerService) {}
+  constructor() {}
 
   private getScreenWidth(): number | undefined {
     return this.mapRef?.nativeElement?.offsetWidth;

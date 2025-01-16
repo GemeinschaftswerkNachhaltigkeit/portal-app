@@ -22,7 +22,7 @@ export type CardData = {
     RouterModule,
     OrgaBadgesComponent,
     TranslateModule
-],
+  ],
   templateUrl: './orga-card.component.html',
   styleUrl: './orga-card.component.scss'
 })

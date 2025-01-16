@@ -26,7 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FeatureComponent,
     MatCheckboxModule,
     TranslateModule
-],
+  ],
   template: `
     <div class="form-wrapper map-filters">
       <div class="left">
@@ -41,7 +41,9 @@ import { TranslateModule } from '@ngx-translate/core';
               </div>
               <div class="field">
                 <mat-form-field appearance="outline" color="primary">
-                  <mat-label>{{ 'forms.labels.location' | translate }}</mat-label>
+                  <mat-label>{{
+                    'forms.labels.location' | translate
+                  }}</mat-label>
                   <input matInput formControlName="location" />
                 </mat-form-field>
               </div>
@@ -56,7 +58,7 @@ import { TranslateModule } from '@ngx-translate/core';
           ></app-filter-modal-button>
         </div>
       </div>
-    
+
       <div class="right">
         <app-feature feature="dan-account">
           <div class="view-type">
@@ -67,20 +69,20 @@ import { TranslateModule } from '@ngx-translate/core';
               (ngModelChange)="viewTypeHandler()"
               [ngModelOptions]="{ standalone: true }"
               >{{ 'map.labels.dan' | translate }}</mat-checkbox
-              >
-              <mat-checkbox
-                class="orga"
-                color="primary"
-                [(ngModel)]="showOrga"
-                (ngModelChange)="viewTypeHandler()"
-                [ngModelOptions]="{ standalone: true }"
-                >{{ 'map.labels.organisation' | translate }}</mat-checkbox
-                >
-              </div>
-            </app-feature>
+            >
+            <mat-checkbox
+              class="orga"
+              color="primary"
+              [(ngModel)]="showOrga"
+              (ngModelChange)="viewTypeHandler()"
+              [ngModelOptions]="{ standalone: true }"
+              >{{ 'map.labels.organisation' | translate }}</mat-checkbox
+            >
           </div>
-        </div>
-    `,
+        </app-feature>
+      </div>
+    </div>
+  `,
   styles: `
     @use 'theme' as *;
 

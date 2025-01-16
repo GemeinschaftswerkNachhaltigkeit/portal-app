@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -22,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormFieldErrorComponent,
     ValidCheckComponent,
     TranslateModule
-],
+  ],
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

@@ -25,8 +25,10 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
           <div
             class="title"
             [ngClass]="{ duplicateField: isDuplicateField('NAME') }"
-            >
-            <app-heading size="sm" color="none">{{ duplicate.name }}</app-heading>
+          >
+            <app-heading size="sm" color="none">{{
+              duplicate.name
+            }}</app-heading>
           </div>
           <div class="title-info">
             <p>
@@ -34,9 +36,10 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
             </p>
             <p>
               {{
-              duplicate
-              ? ('organisationType.' + duplicate.organisationType | translate)
-              : '-'
+                duplicate
+                  ? ('organisationType.' + duplicate.organisationType
+                    | translate)
+                  : '-'
               }}
             </p>
           </div>
@@ -44,13 +47,14 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
         <div class="meta-infos">
           <div class="column">
             <p
-            [ngClass]="{
-              noValue: !duplicate.location?.url,
-              duplicateField: isDuplicateField('URL')
-            }"
-              >
+              [ngClass]="{
+                noValue: !duplicate.location?.url,
+                duplicateField: isDuplicateField('URL')
+              }"
+            >
               {{
-              duplicate.location?.url || 'clearing.labels.noWebsite' | translate
+                duplicate.location?.url || 'clearing.labels.noWebsite'
+                  | translate
               }}
             </p>
             <p [ngClass]="{ duplicateField: isDuplicateField('EMAIL') }">
@@ -60,14 +64,14 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
           <div
             class="column info"
             [ngClass]="{ duplicateField: isDuplicateField('ADDRESS') }"
-            >
+          >
             @if (duplicate.location && duplicate.location.address) {
               <app-content-row
-            [content]="
-              duplicate.location.address.city! +
-              ' ,' +
-              duplicate.location.address.country!
-            "
+                [content]="
+                  duplicate.location.address.city! +
+                  ' ,' +
+                  duplicate.location.address.country!
+                "
               ></app-content-row>
             }
             @if (duplicate.impactArea) {
@@ -77,24 +81,23 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
               ></app-content-row>
             }
             @if (duplicate.location?.url) {
-              <a
-                [href]="duplicate.location?.url"
-                target="_blank"
-                >
+              <a [href]="duplicate.location?.url" target="_blank">
                 @if (duplicate.location?.url) {
                   <app-content-row
                     [content]="duplicate.location?.url"
                     icon="link"
-                    ></app-content-row
-                    >
-                  }</a>
+                  ></app-content-row>
                 }
-              </div>
-            </div>
-            <app-html-wrapper [html]="duplicate.description || ''"></app-html-wrapper>
+              </a>
+            }
           </div>
-        }
-    `,
+        </div>
+        <app-html-wrapper
+          [html]="duplicate.description || ''"
+        ></app-html-wrapper>
+      </div>
+    }
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

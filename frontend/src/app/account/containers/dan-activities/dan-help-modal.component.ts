@@ -47,13 +47,13 @@ import { MessageInputDialogComponent } from 'src/app/shared/components/dialogs/m
         </div>
       }
     </div>
-    
+
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>
         {{ 'btn.close' | translate }}
       </button>
     </mat-dialog-actions>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

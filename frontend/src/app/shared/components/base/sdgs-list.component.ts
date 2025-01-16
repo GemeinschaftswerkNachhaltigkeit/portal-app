@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { SdgsService } from 'src/app/shared/services/sdgs.service';
 import { SdgIconComponent } from './sdg-icon.component';
@@ -11,7 +10,7 @@ import { SdgIconComponent } from './sdg-icon.component';
     @for (goal of sdgs; track goal) {
       <app-sdg-icon [goal]="goal"></app-sdg-icon>
     }
-    `,
+  `,
   styles: `
     :host {
       display: flex;

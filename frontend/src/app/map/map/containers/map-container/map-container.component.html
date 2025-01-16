@@ -1,19 +1,18 @@
 <app-map-layout>
   <app-search-form
     filter
-    [activeFilters]="filters$ | async"
+    [activeFilters]="filters()"
     (searchParamsChanged)="searchChangedHandler($event)"
   ></app-search-form>
 
+
   <div class="results-wrapper" results>
     <div class="results">
-      <div class="spinner-wrapper">
-        <app-loading-indicator forId="map-search"></app-loading-indicator>
-      </div>
-      @if ((loading$ | async) === false) {
+      
+      @if (!mapService.hasLoader('search')) {
         @if (
-          !(searchResults$ | async)?.length &&
-          (mapInitialised$ | async) === true
+          !searchResults()?.length &&
+          mapInitialised() === true
         ) {
           <div class="no-data">
             <app-alert [title]="'map.titles.noData' | translate">
@@ -31,9 +30,14 @@
             </app-alert>
           </div>
         }
+      } @else {
+        <div class="loader">
+          <app-spinner></app-spinner>
+        </div>
       }
-      @if ((searchResults$ | async)?.length) {
-        @if (searchPaging$ | async; as paging) {
+      @if (searchResults()?.length) {
+        @let paging = searchPaging();
+        @if (paging) {
           <app-paginator-wrapper [total]="paging.totalElements">
             <mat-paginator
               color="accent"
@@ -50,8 +54,9 @@
         }
       }
 
-      <div class="cards" [@addRemove]="(searchResults$ | async)?.length">
-        @for (result of searchResults$ | async; track result) {
+      <div class="cards" [@addRemove]="searchResults()?.length">
+      
+        @for (result of searchResults(); track result.id) {
           <div
             [id]="'card-' + result.resultType + result.id"
             class="card-entry"
@@ -83,13 +88,14 @@
         }
       </div>
 
-      @if ((searchResults$ | async)?.length) {
+      @if (searchResults()?.length) {
+        @let paging = searchPaging();
         <mat-paginator
           class="mat-elevation-z8 paginator-bottom"
           color="accent"
-          [length]="(searchPaging$ | async)?.totalElements"
-          [pageIndex]="(searchPaging$ | async)?.number"
-          [pageSize]="(searchPaging$ | async)?.size || pageSize"
+          [length]="paging?.totalElements"
+          [pageIndex]="paging?.number"
+          [pageSize]="paging?.size || pageSize"
           [pageSizeOptions]="pageSizeOptions"
           [showFirstLastButtons]="true"
           (page)="pageChangedHandler($event)"
@@ -100,10 +106,11 @@
     </div>
   </div>
   <div map>
-    @if (markers$ | async; as markers) {
+    @let allMarkers = markers();
+    @if (allMarkers) {
       <app-map
         [center]="germanyCenter"
-        [data]="markers"
+        [data]="allMarkers"
         (mapMoved)="mapMovedHandler($event)"
       ></app-map>
     }

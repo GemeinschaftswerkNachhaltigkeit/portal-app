@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { InternalMapFacade } from '../../../map-facade.service';
+import { Component, inject, input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import SearchResult from '../../../models/search-result';
-import { CardService } from '../../../services/card.service';
+import { CardService } from '../../../data/card.service';
 import {
   trigger,
   state,
@@ -11,8 +10,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { SharedMarkerService } from '../../../services/marker.service';
-import { ImgService } from 'src/app/shared/services/img.service';
+import { MarkerService } from '../../../data/marker.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +30,9 @@ import {
   OrganisationSubscriptionActionComponent
 } from 'src/app/shared/components/subscription';
 import { ImageComponent } from 'src/app/shared/components/base/image.component';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { MapService } from 'src/app/map/data/map.service';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 @Component({
   selector: 'app-details-card',
   standalone: true,
@@ -51,7 +52,8 @@ import { ImageComponent } from 'src/app/shared/components/base/image.component';
     TopicComponent,
     OrganisationSubscriptionActionComponent,
     ActivitySubscriptionActionComponent,
-    ImageComponent
+    ImageComponent,
+    SpinnerComponent
   ],
   templateUrl: './details-card.component.html',
   styleUrls: ['./details-card.component.scss'],
@@ -75,21 +77,32 @@ import { ImageComponent } from 'src/app/shared/components/base/image.component';
     ])
   ]
 })
-export class DetailsCardComponent implements OnInit {
-  @Input() mobile = false;
+export class DetailsCardComponent {
+  public mapService = inject(MapService);
+  private route = inject(ActivatedRoute);
+  public card = inject(CardService);
+  public utils = inject(UtilsService);
+  private marker = inject(MarkerService);
+
+  mobile = input(false);
+
   currentResult?: SearchResult = undefined;
   remainingSdgsVisible = false;
+
   unsubscribe$ = new Subject();
 
-  constructor(
-    private mapFacade: InternalMapFacade,
-    private router: Router,
-    private route: ActivatedRoute,
-    public card: CardService,
-    public utils: UtilsService,
-    private marker: SharedMarkerService,
-    private imgService: ImgService
-  ) {}
+  constructor() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['type'] && params['id']) {
+        this.mapService.getEntryByIdAndType(params['type'], +params['id']);
+      }
+    });
+    toObservable(this.mapService.currentResult)
+      .pipe(takeUntilDestroyed())
+      .subscribe((res) => {
+        this.currentResult = res || undefined;
+      });
+  }
 
   get bgImage(): string | undefined {
     return this.currentResult?.image;
@@ -108,7 +121,7 @@ export class DetailsCardComponent implements OnInit {
   }
 
   close(): void {
-    this.mapFacade.closeCard();
+    this.mapService.closeCard();
     this.marker.clearMarkerIcons();
   }
 
@@ -116,18 +129,5 @@ export class DetailsCardComponent implements OnInit {
     return entity?.resultType === 'DAN' && entity
       ? this.utils.isExpiredActivity(entity.period)
       : false;
-  }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params['type'] && params['id']) {
-        this.mapFacade.getById(params['type'], +params['id']);
-      }
-    });
-    this.mapFacade.currentResult$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
-        this.currentResult = res || undefined;
-      });
   }
 }

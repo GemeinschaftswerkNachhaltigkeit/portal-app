@@ -8,11 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-email-verify-success-page',
   standalone: true,
-  imports: [
-    NotificationPageComponent,
-    TranslateModule,
-    RouterModule
-],
+  imports: [NotificationPageComponent, TranslateModule, RouterModule],
   templateUrl: './email-verify-success-page.component.html',
   styleUrls: ['./email-verify-success-page.component.scss']
 })

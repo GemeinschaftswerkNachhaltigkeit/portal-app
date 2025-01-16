@@ -29,6 +29,7 @@ export class MapApiService {
         'MAP_SEARCH'
       );
       const danActive$ = this.feature.show$('dan-account');
+
       const getRequest = (danActive: boolean) =>
         this.http
           .get<PagedResponse<SearchResultResponseContent>>(

@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,10 +15,10 @@ import { NotificationPageComponent } from 'src/app/shared/components/layout/noti
         [icon]="getIcon()"
         [buttonText]="'btn.goToApp'"
         (continue)="close()"
-        >
+      >
       </app-notification-page>
     }
-    `
+  `
 })
 export class NotifiacationSuccessComponent {
   type: string;

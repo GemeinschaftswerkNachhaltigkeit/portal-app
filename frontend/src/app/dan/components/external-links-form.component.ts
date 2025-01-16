@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import {
   FormGroupDirective,
@@ -22,7 +21,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
     ValidCheckComponent,
     FormFieldErrorComponent,
     TranslateModule
-],
+  ],
   template: `
     <ng-container [formGroup]="form">
       <mat-form-field appearance="outline">
@@ -31,7 +30,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           matInput
           [placeholder]="'forms.labels.url' | translate"
           formControlName="url"
-          />
+        />
         <app-valid-check [form]="form" controlName="url"></app-valid-check>
         <mat-error>
           <app-form-field-error
@@ -39,25 +38,25 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       @for (type of socialMediaTypes; track type) {
-        <mat-form-field
-          appearance="outline"
-          >
+        <mat-form-field appearance="outline">
           <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
           <input
             matInput
             [placeholder]="'forms.labels.' + type | translate"
             [formControlName]="type"
-            />
+          />
           <app-valid-check [form]="form" [controlName]="type"></app-valid-check>
           <mat-error>
-            <app-form-field-error [field]="form.get(type)"></app-form-field-error>
+            <app-form-field-error
+              [field]="form.get(type)"
+            ></app-form-field-error>
           </mat-error>
         </mat-form-field>
       }
     </ng-container>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

@@ -25,87 +25,86 @@ import { Editor } from '@tiptap/core';
         <button type="button" (click)="editor.chain().focus().sinkListItem('listItem').run()">
           <mat-icon>format_indent_increase</mat-icon>
         </button> -->
-        <button
-          type="button"
-          (click)="editor.chain().focus().toggleOrderedList().run()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('orderedList') ? 'active' : ''
-          "
-          >
-          <mat-icon>format_list_numbered</mat-icon>
-        </button>
-        <button
-          type="button"
-          (click)="editor.chain().focus().toggleBulletList().run()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('bulletList') ? 'active' : ''
-          "
-          >
-          <mat-icon>format_list_bulleted</mat-icon>
-        </button>
-        <button
-          type="button"
-          (click)="editor.chain().focus().toggleBold().run()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('bold') ? 'active' : ''
-          "
-          >
-          <mat-icon>format_bold</mat-icon>
-        </button>
-        <button
-          type="button"
-          (click)="editor.chain().focus().toggleItalic().run()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('italic') ? 'active' : ''
-          "
-          >
-          <mat-icon>format_italic</mat-icon>
-        </button>
-        <button
-          type="button"
-          (click)="handleLink()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('link') ? 'active' : ''
-          "
-          >
-          @if (editor.isActive('link')) {
-            <mat-icon>link</mat-icon>
-          }
-          @if (!editor.isActive('link')) {
-            <mat-icon>add_link</mat-icon>
-          }
-        </button>
-        @if (editor.isActive('link')) {
           <button
             type="button"
-            (click)="handleRemoveLink()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('link') ? 'active' : ''
-          "
-            >
-            <mat-icon>link_off</mat-icon>
-          </button>
-        }
-        <button
-          type="button"
-          (click)="editor.chain().focus().toggleUnderline().run()"
-          [ngClass]="
-            editor.isFocused && editor.isActive('underline') ? 'active' : ''
-          "
+            (click)="editor.chain().focus().toggleOrderedList().run()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('orderedList') ? 'active' : ''
+            "
           >
-          <mat-icon>format_underlined</mat-icon>
-        </button>
-        <!--     <button type="button" (click)="editor.chain().focus().toggleStrike().run()">
+            <mat-icon>format_list_numbered</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="editor.chain().focus().toggleBulletList().run()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('bulletList') ? 'active' : ''
+            "
+          >
+            <mat-icon>format_list_bulleted</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="editor.chain().focus().toggleBold().run()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('bold') ? 'active' : ''
+            "
+          >
+            <mat-icon>format_bold</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="editor.chain().focus().toggleItalic().run()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('italic') ? 'active' : ''
+            "
+          >
+            <mat-icon>format_italic</mat-icon>
+          </button>
+          <button
+            type="button"
+            (click)="handleLink()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('link') ? 'active' : ''
+            "
+          >
+            @if (editor.isActive('link')) {
+              <mat-icon>link</mat-icon>
+            }
+            @if (!editor.isActive('link')) {
+              <mat-icon>add_link</mat-icon>
+            }
+          </button>
+          @if (editor.isActive('link')) {
+            <button
+              type="button"
+              (click)="handleRemoveLink()"
+              [ngClass]="
+                editor.isFocused && editor.isActive('link') ? 'active' : ''
+              "
+            >
+              <mat-icon>link_off</mat-icon>
+            </button>
+          }
+          <button
+            type="button"
+            (click)="editor.chain().focus().toggleUnderline().run()"
+            [ngClass]="
+              editor.isFocused && editor.isActive('underline') ? 'active' : ''
+            "
+          >
+            <mat-icon>format_underlined</mat-icon>
+          </button>
+          <!--     <button type="button" (click)="editor.chain().focus().toggleStrike().run()">
         <mat-icon>format_strikethrough</mat-icon>
       </button> -->
+        }
+        @if (disabled) {
+          <button type="button"><mat-icon></mat-icon></button>
+        }
+      </div>
     }
-    @if (disabled) {
-      <button type="button"><mat-icon></mat-icon></button
-      >
-    }
-    </div>
-    }
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

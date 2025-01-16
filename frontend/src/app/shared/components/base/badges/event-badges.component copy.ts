@@ -32,7 +32,7 @@ import { BiodiversityBadgeComponent } from './biodiversity-badge';
     InitiatorBadgeComponent,
     ProjectSustainabilityWinnerBadgeComponent,
     BiodiversityBadgeComponent
-]
+  ]
 })
 export class EventBadgesComponent {
   @Input() activity?: { thematicFocus?: ThematicFocus[] };

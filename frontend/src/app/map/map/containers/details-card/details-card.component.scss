@@ -229,6 +229,10 @@
   }
 }
 
+.loader {
+  margin-top: $spacing-20;
+}
+
 @media screen and (min-width: $breakpoint-md) {
   :host {
     width: 100%;

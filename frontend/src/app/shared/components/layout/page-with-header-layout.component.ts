@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { HeaderComponent } from './header.component';
 import { AlertComponent } from '../base/alert.component';
@@ -12,15 +11,15 @@ import { AlertComponent } from '../base/alert.component';
       <ng-content select="[headerContent]"></ng-content>
       <ng-content action select="[headerAction]"></ng-content>
     </app-header>
-    
+
     @if (showNoEntriesWarning) {
       <app-alert [title]="noEntriesTitle">
         <ng-content select="[noEntriesContent]"></ng-content>
       </app-alert>
     }
-    
+
     <ng-content></ng-content>
-    `
+  `
 })
 export class PageWithHeaderLayoutComponent {
   @Input() title = '';

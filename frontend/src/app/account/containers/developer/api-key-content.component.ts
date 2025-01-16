@@ -17,9 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
               <div>{{ apiKey }}</div>
               <div class="copied">
                 @if (copied) {
-                  {{
-                  'labels.copied' | translate
-                  }}
+                  {{ 'labels.copied' | translate }}
                 } @else {
                   <mat-icon>file_copy</mat-icon>
                 }
@@ -56,7 +54,7 @@ import { TranslateModule } from '@ngx-translate/core';
         }}</span>
       }
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

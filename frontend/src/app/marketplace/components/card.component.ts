@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { CardService } from 'src/app/map/services/card.service';
+import { CardService } from 'src/app/map/data/card.service';
 import { Color } from 'src/app/shared/models/color';
 import LocationData from 'src/app/shared/models/location-data';
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';

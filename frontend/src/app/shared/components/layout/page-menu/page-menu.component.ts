@@ -7,14 +7,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `<nav class="page-menu highlighted-links">
-      <ul class="content">
-        @for (item of listItems; track item) {
-          <li class="entry">
-            <ng-container [ngTemplateOutlet]="item.itemTemplate"></ng-container>
-          </li>
-        }
-      </ul>
-    </nav>`,
+    <ul class="content">
+      @for (item of listItems; track item) {
+        <li class="entry">
+          <ng-container [ngTemplateOutlet]="item.itemTemplate"></ng-container>
+        </li>
+      }
+    </ul>
+  </nav>`,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

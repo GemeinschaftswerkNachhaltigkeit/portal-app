@@ -59,7 +59,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     UploadImageComponent,
     MatCheckboxModule,
     TranslateModule
-],
+  ],
   template: `
     <form [formGroup]="organisationFormGroup">
       <!--  <p>{{orgId}}</p>
@@ -70,20 +70,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           matInput
           [placeholder]="'forms.labels.organisationName' | translate"
           formControlName="name"
-          />
-    
+        />
+
         <app-valid-check
           [form]="organisationFormGroup"
           controlName="name"
         ></app-valid-check>
-    
+
         <mat-error>
           <app-form-field-error
             [field]="organisationFormGroup.get('name')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.organisationType' | translate }}</mat-label>
         <mat-select formControlName="organisationType">
@@ -99,7 +99,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <!-- WYSIWYG Input -->
       <div
         class="mat-form-field-appearance-outline wysiwyg-form-field"
@@ -111,15 +111,15 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         [class.mat-form-field-disabled]="
           organisationFormGroup.get('description')?.disabled
         "
-        >
+      >
         <div class="mat-form-field-wrapper tip-tap-wrapper">
           <app-tiptap-menu-bar
             [editor]="editor"
             [disabled]="organisationFormGroup.get('description')?.disabled!"
             ><span
-            >{{ 'forms.labels.organisationDescription' | translate }} *</span
+              >{{ 'forms.labels.organisationDescription' | translate }} *</span
             >
-    
+
             <app-char-count
               counter
               [count]="currentChars()"
@@ -130,7 +130,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             [editor]="editor"
             formControlName="description"
           ></tiptap-editor>
-    
+
           <div class="mat-form-field-subscript-wrapper">
             <mat-error>
               <app-form-field-error
@@ -140,11 +140,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
           </div>
         </div>
       </div>
-    
+
       @if (org && org.randomUniqueId && isActiveStep) {
-        <div
-          class="file-uploads"
-          >
+        <div class="file-uploads">
           <app-upload-image
             [config]="dzService.getImageConfig('logo', org.randomUniqueId)"
             [aspectRatio]="dzService.getAspectRatio('logo')"
@@ -153,11 +151,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             [fileId]="org.logo"
             style="width: 200px"
             [errorMsg]="'sign-up.upload.error' | translate"
-          [info]="
-            ('sign-up.upload.tooltip' | translate) +
-            ', ' +
-            ('sign-up.upload.logoWidthTooltipExt' | translate)
-          "
+            [info]="
+              ('sign-up.upload.tooltip' | translate) +
+              ', ' +
+              ('sign-up.upload.logoWidthTooltipExt' | translate)
+            "
             (delete)="deleteHandler(imageTypes.LOGO)"
           ></app-upload-image>
           <app-upload-image
@@ -169,11 +167,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
             [disabled]="organisationFormGroup.disabled"
             [fileId]="org.image"
             [errorMsg]="'sign-up.upload.error' | translate"
-          [info]="
-            ('sign-up.upload.tooltip' | translate) +
-            ', ' +
-            ('sign-up.upload.titleImageWidthTooltipExt' | translate)
-          "
+            [info]="
+              ('sign-up.upload.tooltip' | translate) +
+              ', ' +
+              ('sign-up.upload.titleImageWidthTooltipExt' | translate)
+            "
             (delete)="deleteHandler(imageTypes.TITLE)"
             (imageModeChanged)="imageModeHandler($event)"
           ></app-upload-image>
@@ -189,16 +187,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
                       participationdeclaration: participationDeclarationUrl
                     }
             "
-        ></span
-      ></mat-checkbox>
-      <mat-error>
-        <app-form-field-error
-          [field]="organisationFormGroup.get('privacyConsent')"
-        ></app-form-field-error>
-      </mat-error>
-    </div>
+          ></span
+        ></mat-checkbox>
+        <mat-error>
+          <app-form-field-error
+            [field]="organisationFormGroup.get('privacyConsent')"
+          ></app-form-field-error>
+        </mat-error>
+      </div>
     </form>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

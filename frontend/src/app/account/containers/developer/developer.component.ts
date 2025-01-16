@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
@@ -15,7 +14,7 @@ import { ApiKeyComponent } from './api-key.component';
     ApiKeyDocLinksComponent,
     ApiKeyDocLinkComponent,
     ApiKeyComponent
-],
+  ],
   templateUrl: './developer.component.html',
   styleUrls: ['./developer.component.scss']
 })

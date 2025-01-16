@@ -23,7 +23,7 @@ export enum CategoryType {
         </app-label>
       }
     </div>
-    `,
+  `,
   styles: [
     `
       @use 'theme' as *;

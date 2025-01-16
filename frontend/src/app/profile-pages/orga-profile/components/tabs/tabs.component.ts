@@ -41,25 +41,23 @@ export type TabButton = {
               [active]="button.key === selectedTab"
               (clicked)="handleTabChange(button.key)"
               >{{ button.title }}</app-tab-button
-              >
-            }
-          </app-tab-buttons>
-        </div>
-        <ng-container>
-          @for (el of content; track el; let i = $index) {
-            <div
-              class="tab-content-wrapper"
-              >
-              @if (i === selectedTab) {
-                <div>
-                  <ng-container *ngTemplateOutlet="el.template"></ng-container>
-                </div>
-              }
-            </div>
+            >
           }
-        </ng-container>
+        </app-tab-buttons>
       </div>
-    `
+      <ng-container>
+        @for (el of content; track el; let i = $index) {
+          <div class="tab-content-wrapper">
+            @if (i === selectedTab) {
+              <div>
+                <ng-container *ngTemplateOutlet="el.template"></ng-container>
+              </div>
+            }
+          </div>
+        }
+      </ng-container>
+    </div>
+  `
 })
 export class TabsComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(TabComponent) content: QueryList<TabComponent> =

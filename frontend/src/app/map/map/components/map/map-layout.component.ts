@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, ChildrenOutletContexts } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from '../../animations';
-import { InternalMapFacade } from '../../../map-facade.service';
 import { CommonModule } from '@angular/common';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
 import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-button.component';
+import { MapService } from 'src/app/map/data/map.service';
 
 @Component({
   selector: 'app-map-layout',
@@ -15,10 +15,10 @@ import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-but
     <div
       class="map-layout"
       [ngClass]="{
-        'map-open': (showFullMap$ | async),
+        'map-open': showFullMap(),
         'details-open': hasDetail()
       }"
-      >
+    >
       <header class="filters mat-elevation-z4">
         <app-content-wrapper [narrow]="true">
           <ng-content select="[filter]"></ng-content>
@@ -35,27 +35,24 @@ import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-but
         </section>
         <section class="map-wrapper">
           @if (hasDetail()) {
-            <div
-              class="details"
-              [ngClass]="{ clickable: hasDetail() }"
-              >
+            <div class="details" [ngClass]="{ clickable: hasDetail() }">
               <div class="outlet">
                 <ng-content select="[detailsDesktop]"></ng-content>
               </div>
             </div>
           }
-    
+
           <ng-content select="[map]"></ng-content>
         </section>
       </div>
-    
+
       <div class="toggle">
         <app-toggle-button color="accent" (toggled)="toggleMap()">{{
-          (showFullMap$ | async) ? 'list' : 'map'
+          showFullMap() ? 'list' : 'map'
         }}</app-toggle-button>
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;
@@ -207,20 +204,19 @@ import { ToggleButtonComponent } from 'src/app/shared/components/base/toggle-but
   `
 })
 export class MapLayoutComponent {
-  showFullMap$ = this.facade.showFullMap$;
+  private mapService = inject(MapService);
+  private contexts = inject(ChildrenOutletContexts);
 
-  constructor(
-    private facade: InternalMapFacade,
-    private contexts: ChildrenOutletContexts,
-    private route: ActivatedRoute
-  ) {}
+  showFullMap = this.mapService.showFullMap;
+
+  constructor() {}
 
   hasDetail(): boolean {
-    return this.facade.hasActiveCard();
+    return this.mapService.hasActiveCard();
   }
 
   toggleMap(): void {
-    this.facade.toggleMap();
+    this.mapService.toggleMap();
   }
 
   getRouteAnimationData() {

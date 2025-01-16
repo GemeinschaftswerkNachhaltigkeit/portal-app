@@ -16,11 +16,7 @@ export type CardData = {
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [
-    OutlinedIconComponent,
-    RouterModule,
-    EventBadgesComponent
-],
+  imports: [OutlinedIconComponent, RouterModule, EventBadgesComponent],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.scss'
 })

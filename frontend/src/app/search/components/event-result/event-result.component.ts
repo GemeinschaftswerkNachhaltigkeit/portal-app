@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     EventBadgesComponent,
     ContentRowComponent,
     TranslateModule
-],
+  ],
   templateUrl: './event-result.component.html',
   styleUrl: './event-result.component.scss'
 })

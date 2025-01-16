@@ -1,4 +1,3 @@
-
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -23,7 +22,7 @@ export interface ConfirmationModalData {
     MatButtonModule,
     HeadingComponent,
     TranslateModule
-],
+  ],
   template: `
     <div mat-dialog-content class="confrimation-modal">
       <header class="header">

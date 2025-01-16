@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -15,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     HtmlWrapperComponent,
     TranslateModule
-],
+  ],
   template: `
     @if (!error) {
       <app-content-wrapper>
@@ -34,7 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </div>
       </app-content-wrapper>
     }
-    
+
     @if (error) {
       <app-content-wrapper>
         <div class="error-content-wrapper">
@@ -49,7 +48,7 @@ import { TranslateModule } from '@ngx-translate/core';
         </div>
       </app-content-wrapper>
     }
-    `,
+  `,
   styles: `
     .error-content-wrapper {
       display: flex;

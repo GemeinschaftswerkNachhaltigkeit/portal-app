@@ -31,7 +31,7 @@ import { ContentWrapperComponent } from 'src/app/shared/components/layout/conten
     MatIconModule,
     ContentWrapperComponent,
     TranslateModule
-],
+  ],
   templateUrl: './search-header.component.html',
   styleUrl: './search-header.component.scss'
 })

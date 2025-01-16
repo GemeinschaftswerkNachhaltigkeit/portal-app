@@ -22,12 +22,7 @@ export type SearchFields = {
 @Component({
   selector: 'app-search-controls',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    MatButtonModule,
-    TranslateModule
-],
+  imports: [ReactiveFormsModule, FormsModule, MatButtonModule, TranslateModule],
   template: `
     <form [formGroup]="formGroup" class="search-form" (submit)="handleSubmit()">
       <div class="input-wrapper">

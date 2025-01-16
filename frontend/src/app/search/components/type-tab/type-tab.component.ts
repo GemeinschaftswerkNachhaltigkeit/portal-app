@@ -14,7 +14,7 @@ import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-i
     MatButtonModule,
     OutlinedIconComponent,
     InfoDialogComponent
-],
+  ],
   templateUrl: './type-tab.component.html',
   styleUrl: './type-tab.component.scss'
 })

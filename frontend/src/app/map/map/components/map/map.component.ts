@@ -19,8 +19,8 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { SharedMarkerService } from '../../../services/marker.service';
-import { MapZoomService } from 'src/app/map/services/map-zoom.service';
+import { MarkerService } from '../../../data/marker.service';
+import { MapZoomService } from 'src/app/map/data/map-zoom.service';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -95,7 +95,7 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
   mapInitialized = false;
 
   constructor(
-    private marker: SharedMarkerService,
+    private marker: MarkerService,
     private zoomService: MapZoomService
   ) {}
 

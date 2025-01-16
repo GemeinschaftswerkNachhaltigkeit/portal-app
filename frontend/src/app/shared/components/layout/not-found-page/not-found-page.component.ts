@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ContentWrapperComponent } from '../content-wrapper.component';
@@ -10,11 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './not-found-page.component.html',
   styleUrls: ['./not-found-page.component.scss'],
   standalone: true,
-  imports: [
-    ContentWrapperComponent,
-    MatButtonModule,
-    TranslateModule
-]
+  imports: [ContentWrapperComponent, MatButtonModule, TranslateModule]
 })
 export class NotFoundPageComponent {
   goToLandingpage() {

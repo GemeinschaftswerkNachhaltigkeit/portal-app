@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
         [style.min-height]="minHeight"
         [href]="extUrl"
         target="_blank"
-        >
+      >
         <ng-container *ngTemplateOutlet="content"></ng-container>
       </a>
     }
@@ -26,11 +26,11 @@ import { RouterModule } from '@angular/router';
         [ngClass]="{ noPadding: noPadding, noHover: noHover }"
         [style.min-height]="minHeight"
         [routerLink]="route"
-        >
+      >
         <ng-container [ngTemplateOutlet]="content"></ng-container>
       </a>
     }
-    
+
     <ng-template #content>
       <div class="inline">
         @if (new) {
@@ -42,12 +42,12 @@ import { RouterModule } from '@angular/router';
           </app-heading>
         }
       </div>
-    
+
       <p class="description">
         <ng-content select="[body]"></ng-content>
       </p>
     </ng-template>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

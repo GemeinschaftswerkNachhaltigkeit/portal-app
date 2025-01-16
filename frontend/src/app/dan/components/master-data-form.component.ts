@@ -48,29 +48,29 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
     MatDatepickerModule,
     MatIconModule,
     CharCountComponent
-],
+  ],
   template: `
     <ng-container [formGroup]="form">
       <!-- name -->
-    
+
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.danName' | translate }}</mat-label>
         <input
           matInput
           [placeholder]="'forms.labels.danName' | translate"
           formControlName="name"
-          />
+        />
         <app-valid-check [form]="form" controlName="name"></app-valid-check>
-    
+
         <mat-error>
           <app-form-field-error
             [field]="form.get('name')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <!-- WYSIWYG Input -->
-    
+
       <div
         class="mat-form-field-appearance-outline wysiwyg-form-field"
         [class.ng-invalid]="
@@ -78,7 +78,7 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
           (form.get('description')?.dirty || form.get('description')?.touched)
         "
         [class.mat-form-field-disabled]="form.get('description')?.disabled"
-        >
+      >
         <div class="description">
           {{ 'dan.texts.wizard.description' | translate }}
         </div>
@@ -108,9 +108,9 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
           </div>
         }
       </div>
-    
+
       <!-- date -->
-    
+
       <mat-form-field appearance="outline">
         <mat-label> {{ 'forms.labels.periodDan' | translate }}</mat-label>
         <mat-date-range-input [rangePicker]="picker">
@@ -118,12 +118,12 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
             matStartDate
             [placeholder]="'forms.labels.start' | translate"
             formControlName="start"
-            />
+          />
           <input
             matEndDate
             [placeholder]="'forms.labels.end' | translate"
             formControlName="end"
-            />
+          />
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -132,38 +132,36 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
           <app-form-field-error
             [field]="form.get('start')"
           ></app-form-field-error>
-    
+
           @if (
             form.get('start')?.invalid &&
             form.get('end')?.invalid &&
             (form.get('start')?.dirty || form.get('start')?.touched) &&
             (form.get('end')?.dirty || form.get('end')?.touched)
-            ) {
-            <span
-              >,
-            </span>
+          ) {
+            <span>, </span>
           }
           <app-form-field-error
             [field]="form.get('end')"
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       <!-- Link zur Anmeldung -->
-    
+
       <mat-form-field appearance="outline">
         <mat-label>{{ 'forms.labels.registerUrl' | translate }}</mat-label>
         <input
           matInput
           [placeholder]="'forms.labels.registerUrl' | translate"
           formControlName="registerUrl"
-          />
+        />
         <div matSuffix><mat-icon>language</mat-icon></div>
         <app-valid-check
           [form]="form"
           controlName="registerUrl"
         ></app-valid-check>
-    
+
         <mat-error>
           <app-form-field-error
             [field]="form.get('registerUrl')"
@@ -171,7 +169,7 @@ import { CharCountComponent } from 'src/app/shared/components/base/char-count.co
         </mat-error>
       </mat-form-field>
     </ng-container>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

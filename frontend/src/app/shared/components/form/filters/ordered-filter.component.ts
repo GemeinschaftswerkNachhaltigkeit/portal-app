@@ -1,4 +1,3 @@
-
 import { Component, Input, HostBinding, OnInit } from '@angular/core';
 
 @Component({

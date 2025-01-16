@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardService } from '../../../map/services/card.service';
+import { CardService } from '../../../map/data/card.service';
 
 import { LabelComponent } from '../base/label.component';
 
@@ -13,7 +13,7 @@ import { LabelComponent } from '../base/label.component';
         <app-label
           [color]="dan ? 'blue' : 'green'"
           [limitedWidth]="limitedWidth"
-          >
+        >
           {{ activityTypeLabel }}
         </app-label>
       }
@@ -23,7 +23,7 @@ import { LabelComponent } from '../base/label.component';
         </app-label>
       }
     }
-    `,
+  `,
   styles: `
     :host {
       font-size: 1.2rem;

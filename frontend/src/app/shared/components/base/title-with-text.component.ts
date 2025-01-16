@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 
-
 export type CardData = {
   title: string;
   description: string;

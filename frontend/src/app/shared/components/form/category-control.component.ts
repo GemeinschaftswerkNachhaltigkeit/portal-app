@@ -37,26 +37,24 @@ import { TranslateModule } from '@ngx-translate/core';
           [ngClass]="{ selected: selected(option) }"
           [disabled]="disabled"
           (click)="setOption(option)"
-          >
+        >
           <div class="button-wrapper">
             <span class="text">{{ option.label | translate }}</span>
             @if (selected(option)) {
-              <app-outlined-icon
-                >check</app-outlined-icon
-                >
-              }
-            </div>
-          </button>
-        }
-      </div>
-      @if (isTouched && !selectedOption) {
-        <div class="error">
-          <mat-error>
-            <span>{{ 'validationErrors.required' | translate }}</span>
-          </mat-error>
-        </div>
+              <app-outlined-icon>check</app-outlined-icon>
+            }
+          </div>
+        </button>
       }
-    `,
+    </div>
+    @if (isTouched && !selectedOption) {
+      <div class="error">
+        <mat-error>
+          <span>{{ 'validationErrors.required' | translate }}</span>
+        </mat-error>
+      </div>
+    }
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

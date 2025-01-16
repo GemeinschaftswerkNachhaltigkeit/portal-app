@@ -24,7 +24,7 @@ import { HeadingComponent } from 'src/app/shared/components/base/heading.compone
         }
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

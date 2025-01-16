@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -17,43 +16,43 @@ import { DropzoneService } from 'src/app/shared/services/dropzone.service';
     @if (activity && activity.randomUniqueId) {
       <div class="file-uploads">
         <app-upload-image
-        [config]="
-          dzService.getImageConfig('logo', orgId, activity.randomUniqueId)
-        "
+          [config]="
+            dzService.getImageConfig('logo', orgId, activity.randomUniqueId)
+          "
           [labelTranslationKey]="'forms.labels.activityLogo'"
           [fileId]="activity.logo"
           imageSizeTranslationKey="sign-up.upload.logoWidthTooltipExt"
           [aspectRatio]="dzService.getAspectRatio('logo')"
           style="width: 200px"
           [errorMsg]="'error.unknown' | translate"
-        [info]="
-          ('sign-up.upload.tooltip' | translate) +
-          ', ' +
-          ('sign-up.upload.logoWidthTooltipExt' | translate)
-        "
+          [info]="
+            ('sign-up.upload.tooltip' | translate) +
+            ', ' +
+            ('sign-up.upload.logoWidthTooltipExt' | translate)
+          "
           (delete)="deleteImageHandler(imageTypes.LOGO)"
         ></app-upload-image>
         <app-upload-image
           [imageTools]="bannerImageTools"
           [imageMode]="bannerImageMode"
-        [config]="
-          dzService.getImageConfig('image', orgId, activity.randomUniqueId)
-        "
+          [config]="
+            dzService.getImageConfig('image', orgId, activity.randomUniqueId)
+          "
           [labelTranslationKey]="'forms.labels.activityImage'"
           [fileId]="activity.image"
           imageSizeTranslationKey="sign-up.upload.titleImageWidthTooltipExt"
           [aspectRatio]="dzService.getAspectRatio('banner')"
-        [info]="
-          ('sign-up.upload.tooltip' | translate) +
-          ', ' +
-          ('sign-up.upload.titleImageWidthTooltipExt' | translate)
-        "
+          [info]="
+            ('sign-up.upload.tooltip' | translate) +
+            ', ' +
+            ('sign-up.upload.titleImageWidthTooltipExt' | translate)
+          "
           (delete)="deleteImageHandler(imageTypes.TITLE)"
           (imageModeChanged)="imageModeHandler($event)"
         ></app-upload-image>
       </div>
     }
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

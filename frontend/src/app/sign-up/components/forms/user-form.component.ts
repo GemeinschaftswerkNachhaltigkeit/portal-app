@@ -35,13 +35,12 @@ import { TranslateModule } from '@ngx-translate/core';
     ContactControlsComponent,
     UploadImageComponent,
     TranslateModule
-],
+  ],
   template: `
     <form [formGroup]="userFormGroup">
       <app-contact-controls formGroupName="contact"></app-contact-controls>
       @if (data && data.randomUniqueId && orgId === null && isActiveStep) {
-        <div
-          >
+        <div>
           <app-upload-image
             [config]="dzService.getImageConfig('contact', data.randomUniqueId)"
             [aspectRatio]="dzService.getAspectRatio('contact')"
@@ -50,11 +49,11 @@ import { TranslateModule } from '@ngx-translate/core';
             [fileId]="data.contact?.image"
             style="width: 200px"
             [errorMsg]="'error.unknown' | translate"
-          [info]="
-            ('sign-up.upload.tooltip' | translate) +
-            ', ' +
-            ('sign-up.upload.logoWidthTooltipExt' | translate)
-          "
+            [info]="
+              ('sign-up.upload.tooltip' | translate) +
+              ', ' +
+              ('sign-up.upload.logoWidthTooltipExt' | translate)
+            "
             (delete)="deleteHandler(imageType.CONTACT)"
           ></app-upload-image>
         </div>
@@ -62,26 +61,26 @@ import { TranslateModule } from '@ngx-translate/core';
       @if (data && data.randomUniqueId && orgId !== null) {
         <div>
           <app-upload-image
-          [config]="
-            dzService.getImageConfig('contact', orgId, data.randomUniqueId)
-          "
+            [config]="
+              dzService.getImageConfig('contact', orgId, data.randomUniqueId)
+            "
             [aspectRatio]="dzService.getAspectRatio('contact')"
             [labelTranslationKey]="'forms.labels.profileImage'"
             [disabled]="userFormGroup.disabled"
             [fileId]="data.contact?.image"
             style="width: 200px"
             [errorMsg]="'error.unknown' | translate"
-          [info]="
-            ('sign-up.upload.tooltip' | translate) +
-            ', ' +
-            ('sign-up.upload.logoWidthTooltipExt' | translate)
-          "
+            [info]="
+              ('sign-up.upload.tooltip' | translate) +
+              ', ' +
+              ('sign-up.upload.logoWidthTooltipExt' | translate)
+            "
             (delete)="deleteHandler(imageType.CONTACT)"
           ></app-upload-image>
         </div>
       }
     </form>
-    `,
+  `,
   styles: `
     form {
       display: flex;

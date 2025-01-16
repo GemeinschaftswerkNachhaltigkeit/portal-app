@@ -15,17 +15,17 @@ import { RouterModule } from '@angular/router';
           [ngClass]="{ isLast: isLast }"
           [routerLink]="route"
           >{{ name }}</a
-          >
-        } @else {
-          <div class="breadcrumb-label">{{ name }}</div>
-        }
-        @if (!isLast) {
-          <div class="icon">
-            <mat-icon>chevron_right</mat-icon>
-          </div>
-        }
-      </div>
-    `,
+        >
+      } @else {
+        <div class="breadcrumb-label">{{ name }}</div>
+      }
+      @if (!isLast) {
+        <div class="icon">
+          <mat-icon>chevron_right</mat-icon>
+        </div>
+      }
+    </div>
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

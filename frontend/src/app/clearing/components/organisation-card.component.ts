@@ -27,7 +27,7 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
         class="org-details card"
         [class.is-active]="active"
         [class.mat-elevation-z8]="elevation"
-        >
+      >
         <header class="header">
           <span>
             @if (hasFeedbackHistory(orgWIP) && showFeedbackToggle) {
@@ -36,58 +36,57 @@ import { OrganisationWIP } from 'src/app/shared/models/organisation-wip';
                 color="yellow"
                 [class]="'feedbackHistoryToggle'"
                 (click)="toggleFeedbackHistory.emit(true)"
-                >
+              >
                 <app-outlined-icon>help_outline</app-outlined-icon>
               </button>
             }
             {{ orgWIP.modifiedAt | date: 'dd.MM.yyyy HH:mm' }}</span
-            >
-            <h3 class="title">{{ orgWIP.name }}</h3>
-            <span>{{
-              orgWIP.organisationType
+          >
+          <h3 class="title">{{ orgWIP.name }}</h3>
+          <span>{{
+            orgWIP.organisationType
               ? ('organisationType.' + orgWIP.organisationType | translate)
               : '-'
-            }}</span>
-          </header>
-          <main class="body">
-            <app-html-wrapper [html]="orgWIP.description || ''"></app-html-wrapper>
-            <div class="info">
-              @if (orgWIP.location && orgWIP.location.address) {
-                <app-content-row
-            [content]="
-              orgWIP.location.address.city! +
-              ' ,' +
-              orgWIP.location.address.country!
-            "
-                ></app-content-row>
-              }
-              @if (orgWIP.impactArea) {
-                <app-content-row
-                  [content]="'impactArea.' + orgWIP.impactArea | translate"
-                  icon="location_searching"
-                ></app-content-row>
-              }
-              @if (orgWIP.location?.url) {
-                <a
-                  [href]="orgWIP.location?.url"
-                  target="_blank"
-                  >
-                  @if (orgWIP.location?.url) {
-                    <app-content-row
-                      [content]="orgWIP.location?.url"
-                      icon="link"
-                      ></app-content-row
-                      >
-                    }</a>
-                  }
-                </div>
-              </main>
-              <footer class="footer">
-                <ng-content></ng-content>
-              </footer>
-            </div>
-          }
-    `,
+          }}</span>
+        </header>
+        <main class="body">
+          <app-html-wrapper
+            [html]="orgWIP.description || ''"
+          ></app-html-wrapper>
+          <div class="info">
+            @if (orgWIP.location && orgWIP.location.address) {
+              <app-content-row
+                [content]="
+                  orgWIP.location.address.city! +
+                  ' ,' +
+                  orgWIP.location.address.country!
+                "
+              ></app-content-row>
+            }
+            @if (orgWIP.impactArea) {
+              <app-content-row
+                [content]="'impactArea.' + orgWIP.impactArea | translate"
+                icon="location_searching"
+              ></app-content-row>
+            }
+            @if (orgWIP.location?.url) {
+              <a [href]="orgWIP.location?.url" target="_blank">
+                @if (orgWIP.location?.url) {
+                  <app-content-row
+                    [content]="orgWIP.location?.url"
+                    icon="link"
+                  ></app-content-row>
+                }
+              </a>
+            }
+          </div>
+        </main>
+        <footer class="footer">
+          <ng-content></ng-content>
+        </footer>
+      </div>
+    }
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FilterCountBadgeComponent } from './filter-count-badge.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     OutlinedIconComponent,
     TranslateModule
-],
+  ],
   template: `
     <div class="filter-btn-wrapper">
       <button mat-button (click)="openFilters()">
@@ -23,14 +22,12 @@ import { TranslateModule } from '@ngx-translate/core';
         </div>
       </button>
       @if (count) {
-        <app-filter-count-badge
-          [active]="true"
-          (clicked)="clearAll()"
-          >{{ count }}</app-filter-count-badge
-          >
-        }
-      </div>
-    `,
+        <app-filter-count-badge [active]="true" (clicked)="clearAll()">{{
+          count
+        }}</app-filter-count-badge>
+      }
+    </div>
+  `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

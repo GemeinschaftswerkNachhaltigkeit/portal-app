@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -13,16 +12,12 @@ import { SavedIndicatorComponent } from 'src/app/shared/components/wizard/saved-
     TranslateModule,
     SavedIndicatorComponent,
     MatStepperModule
-],
+  ],
   template: `
     <div class="actions-container">
       <div>
         @if (showPrevBtn) {
-          <button
-            mat-flat-button
-            matStepperPrevious
-            id="prev-step"
-            >
+          <button mat-flat-button matStepperPrevious id="prev-step">
             {{ 'btn.back' | translate }}
           </button>
         }
@@ -31,12 +26,7 @@ import { SavedIndicatorComponent } from 'src/app/shared/components/wizard/saved-
         <ng-content></ng-content>
         <app-saved-indicator></app-saved-indicator>
         @if (showNextBtn && !finalStep) {
-          <button
-            mat-flat-button
-            color="accent"
-            matStepperNext
-            id="next-step"
-            >
+          <button mat-flat-button color="accent" matStepperNext id="next-step">
             {{ 'btn.next' | translate }}
           </button>
         }
@@ -47,7 +37,7 @@ import { SavedIndicatorComponent } from 'src/app/shared/components/wizard/saved-
             matStepperNext
             (click)="cancelHandler()"
             id="next-step"
-            >
+          >
             {{ 'btn.saveCurrentState' | translate }}
           </button>
         }
@@ -58,7 +48,7 @@ import { SavedIndicatorComponent } from 'src/app/shared/components/wizard/saved-
             matStepperNext
             (click)="completedHandler()"
             id="next-step"
-            >
+          >
             @if (!modification) {
               <span>{{ completedButtonText }}</span>
             }
@@ -69,7 +59,7 @@ import { SavedIndicatorComponent } from 'src/app/shared/components/wizard/saved-
         }
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

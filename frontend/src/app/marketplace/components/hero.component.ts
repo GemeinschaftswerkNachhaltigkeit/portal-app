@@ -23,11 +23,11 @@ import { TranslateModule } from '@ngx-translate/core';
       @if (expired) {
         <div class="expired"></div>
       }
-    
+
       @if (bgImage) {
         <img [src]="bgImage" alt="header" />
       }
-    
+
       @if (expired) {
         <div class="expiredBadge">
           <app-expired-badge>{{
@@ -39,7 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
         <app-label [color]="color">{{ catgegory }}</app-label>
       </div>
     </header>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

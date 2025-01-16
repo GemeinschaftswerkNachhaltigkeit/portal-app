@@ -23,7 +23,7 @@ export type SpecialOrgaFilters = {
     MatCheckboxModule,
     TranslateModule,
     FilterCountBadgeComponent
-],
+  ],
   template: `
     <mat-expansion-panel class="filter mat-elevation-z0">
       <mat-expansion-panel-header>

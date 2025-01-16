@@ -19,7 +19,7 @@ import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/s
     <div
       class="event"
       [ngClass]="{ dan: event.resultType === 'DAN', last: last }"
-      >
+    >
       <div class="content">
         <div (click)="open(event)">
           <h3 class="title">{{ event.name }}</h3>
@@ -39,7 +39,7 @@ import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/s
           </div>
         }
       </div>
-    
+
       <div class="actions">
         <!--
         <app-action
@@ -54,11 +54,11 @@ import { ActivitySubscriptionActionComponent } from 'src/app/shared/components/s
         <app-activity-subscription-action
           [onlyIcon]="true"
           [activity]="utils.asActivity(event)"
-          >
+        >
         </app-activity-subscription-action>
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

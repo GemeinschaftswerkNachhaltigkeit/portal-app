@@ -1,13 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import EventDto from '../models/event-dto';
-import {
-  EMPTY,
-  catchError,
-  filter,
-  switchMap,
-  take,
-  tap
-} from 'rxjs';
+import { EMPTY, catchError, filter, switchMap, take, tap } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
@@ -28,36 +21,34 @@ export type EventCalenderEntry = { count: number; inDanPeriod: boolean };
 
 type AvailableEvents = {
   [key: string]: EventCalenderEntry;
-} | null
+} | null;
 
-interface EventState{
-  filters: SearchFilter,
-  pagedEvents: PagedResponse<EventDto> | null,
-  events: EventDto[],
-  availableEvents: AvailableEvents,
-  currentCalenderMonth: DateTime,
-  loading: boolean,
-  filtersChanged: boolean,
-  nextPage: number
-  initialized: boolean
+interface EventState {
+  filters: SearchFilter;
+  pagedEvents: PagedResponse<EventDto> | null;
+  events: EventDto[];
+  availableEvents: AvailableEvents;
+  currentCalenderMonth: DateTime;
+  loading: boolean;
+  filtersChanged: boolean;
+  nextPage: number;
+  initialized: boolean;
 }
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-
-  private api = inject(EventsApiService)
-  private feedback = inject(FeedbackService)
-  private translate = inject(TranslateService)
-  private route = inject(ActivatedRoute)
-  private persistFilters = inject(PersistFiltersService)
-  private registerOrLogin = inject(RegisterOrLoginService)
-  private router = inject(Router)
-  private auth = inject(AuthService)
-  private feature = inject(FeatureService)
-  private lp = inject(LandingpageService)
+  private api = inject(EventsApiService);
+  private feedback = inject(FeedbackService);
+  private translate = inject(TranslateService);
+  private route = inject(ActivatedRoute);
+  private persistFilters = inject(PersistFiltersService);
+  private registerOrLogin = inject(RegisterOrLoginService);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private feature = inject(FeatureService);
+  private lp = inject(LandingpageService);
 
   // state
   private state = signal<EventState>({
@@ -70,20 +61,21 @@ export class EventsService {
     filtersChanged: false,
     nextPage: 0,
     initialized: false
-  })
-
+  });
 
   // selectors
 
-  readonly filters = computed(() => this.state().filters)
-  readonly filtersChanged = computed(() => this.state().filtersChanged)
-  readonly loading = computed(() => this.state().loading)
-  readonly nextPage = computed(() => this.state().nextPage)
-  readonly currentMonth = computed(() => this.state().currentCalenderMonth)
-  readonly events = computed(() => this.state().events)
-  readonly availableEvents = computed(() => this.state().availableEvents)
-  readonly initialized = computed(() => this.state().availableEvents)
-  readonly currentMonthOfCalendar = computed(() => this.state().currentCalenderMonth)
+  readonly filters = computed(() => this.state().filters);
+  readonly filtersChanged = computed(() => this.state().filtersChanged);
+  readonly loading = computed(() => this.state().loading);
+  readonly nextPage = computed(() => this.state().nextPage);
+  readonly currentMonth = computed(() => this.state().currentCalenderMonth);
+  readonly events = computed(() => this.state().events);
+  readonly availableEvents = computed(() => this.state().availableEvents);
+  readonly initialized = computed(() => this.state().availableEvents);
+  readonly currentMonthOfCalendar = computed(
+    () => this.state().currentCalenderMonth
+  );
   readonly groupedEvents = computed(() => {
     const groups: { [date: string]: EventDto[] } = {};
     this.events().forEach((e) => {
@@ -102,17 +94,15 @@ export class EventsService {
         list: e[1]
       };
     });
-  })
+  });
   readonly eventsPaging = computed(() => ({
     number: this.state().pagedEvents?.number,
     size: this.state().pagedEvents?.size,
     totalElements: this.state().pagedEvents?.totalElements,
     totalPages: this.state().pagedEvents?.totalPages
-  }))
+  }));
 
-  constructor(
-   
-  ) {
+  constructor() {
     this.triggerNewEventRedirect();
     this.searchEventsOnFilterChange();
     this.featchAvailableEventsOnFilterChange();
@@ -138,7 +128,7 @@ export class EventsService {
     this.state.update((state) => ({
       ...state,
       pagedEvents: response,
-      events: [...state.events, ...response?.content || []],
+      events: [...state.events, ...(response?.content || [])],
       loading: false
     }));
   }
@@ -189,7 +179,7 @@ export class EventsService {
       pagedEvents: null,
       events: [],
       filtersChanged: false,
-      nextPage: 0,
+      nextPage: 0
     }));
   }
 
@@ -199,24 +189,24 @@ export class EventsService {
   }
 
   setFilterState(filters: SearchFilter) {
-    this.state.update(state => ({
+    this.state.update((state) => ({
       ...state,
       filters: filters
-    }))
+    }));
   }
 
   setFilters() {
     const filters = this.getFilters();
-    this.state.update(state => ({
+    this.state.update((state) => ({
       ...state,
       filters: filters
-    }))
+    }));
   }
 
   triggerSearch(): void {
     if (this.initialized()) {
       this.reset();
-      this.setFilterState({})
+      this.setFilterState({});
     }
   }
 
@@ -245,9 +235,9 @@ export class EventsService {
       const nextPage = this.nextPage() + 1;
       const hasItemsLeft = total - itemsPerPage * nextPage > 0;
       if (hasItemsLeft) {
-        this.setNextPage(nextPage)
+        this.setNextPage(nextPage);
         const filters = this.getFilters();
-        this.setFilterState(filters)
+        this.setFilterState(filters);
       }
     }
   }
@@ -282,23 +272,21 @@ export class EventsService {
     }
   }
 
-  
-
   // async
   private searchEventsOnFilterChange() {
     toObservable(this.filters)
       .pipe(
         tap(() => this.startLoading()),
-        
+
         switchMap((filters) => this.api.search(filters, this.nextPage())),
         takeUntilDestroyed(),
         catchError((err) => {
-          this.setFilterChanged(false)
+          this.setFilterChanged(false);
           this.feedback.showFeedback(
             'error',
             this.translate.instant('errors.unkown')
           );
-          return this.setError(err)
+          return this.setError(err);
         })
       )
       .subscribe((response) => {
@@ -312,9 +300,9 @@ export class EventsService {
     toObservable(this.filters)
       .pipe(
         tap(() => this.loadAvailableEvents()),
-        
+
         takeUntilDestroyed(),
-        catchError(err => EMPTY)
+        catchError(() => EMPTY)
       )
       .subscribe(() => {});
   }
@@ -335,7 +323,7 @@ export class EventsService {
           },
           {}
         );
-        this.setAvailableEvents(entries)
+        this.setAvailableEvents(entries);
         if (cb) cb();
       });
   }

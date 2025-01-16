@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
     OrgaBadgesComponent,
     ContentRowComponent,
     TranslateModule
-],
+  ],
   templateUrl: './orga-result.component.html',
   styleUrl: './orga-result.component.scss'
 })

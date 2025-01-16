@@ -18,20 +18,18 @@ import { HtmlWrapperComponent } from '../base/html-wrapper.component';
         stepDescriptionId !== null &&
         content?.stepDescriptions?.[stepDescriptionId] !== undefined &&
         content?.stepDescriptions?.[stepDescriptionId]?.description !==
-        undefined
-        ) {
-        <div
-          class="description-content-wrapper"
-          >
+          undefined
+      ) {
+        <div class="description-content-wrapper">
           <app-html-wrapper
-          [html]="
-            content?.stepDescriptions?.[stepDescriptionId]?.description || ''
-          "
+            [html]="
+              content?.stepDescriptions?.[stepDescriptionId]?.description || ''
+            "
           ></app-html-wrapper>
         </div>
       }
     </div>
-    `,
+  `,
   styles: `
     .form-step-description {
       padding: 2em;

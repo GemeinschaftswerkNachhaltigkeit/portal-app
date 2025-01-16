@@ -14,7 +14,7 @@ import { CheckboxFilterComponent } from './checkbox-filter.component';
     MatExpansionModule,
     FilterCountBadgeComponent,
     CheckboxFilterComponent
-],
+  ],
   template: `
     <mat-expansion-panel
       class="filter mat-elevation-z0"

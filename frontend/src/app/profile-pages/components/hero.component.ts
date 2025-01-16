@@ -24,14 +24,10 @@ import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.c
       @if (isExpired) {
         <div class="expiredOverlay"></div>
       }
-    
+
       <div class="img">
         @if (bgImageName) {
-          <app-image
-            [src]="bgImageName"
-            alt="header"
-            [mode]="imageMode"
-            />
+          <app-image [src]="bgImageName" alt="header" [mode]="imageMode" />
         }
       </div>
       @if (isExpired) {
@@ -52,21 +48,15 @@ import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.c
         class="logo"
         [class]="types?.resultType || ''"
         [ngClass]="{ noLogo: !logo }"
-        >
+      >
         @if (isExpired) {
           <div class="expiredOverlay logo-overlay"></div>
         }
         @if (logo) {
-          <app-card-logo
-            [logoUrl]="logo"
-            [name]="name"
-          ></app-card-logo>
+          <app-card-logo [logoUrl]="logo" [name]="name"></app-card-logo>
         }
         @if (period && utils.dateRangeString(period)) {
-          <div
-            class="label"
-            [ngClass]="{ dan: dan }"
-            >
+          <div class="label" [ngClass]="{ dan: dan }">
             @if (isExpired) {
               <div class="expiredOverlay"></div>
             }
@@ -75,7 +65,7 @@ import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.c
         }
       </div>
     </header>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

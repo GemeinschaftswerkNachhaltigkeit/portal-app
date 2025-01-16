@@ -115,21 +115,24 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
       this.changeDatePickerLang(event.lang);
     });
 
-    effect(() => {
-      if (this.featureState() !== 'PENDING') {
-        const filters = this.eventsService.getFilters();
-        this.searchControl.setValue({
-          query: (filters['query'] || '') as string,
-          location: (filters['location'] || '') as string
-        });
-        const start = (filters['startDate'] as string) || '';
-        this.selected = start ? DateTime.fromISO(start) : DateTime.now();
-        this.eventsService.setCurrentMonthOfCalendar(this.selected);
-        this.triggerSearchOnQueryParamsChange();
+    effect(
+      () => {
+        if (this.featureState() !== 'PENDING') {
+          const filters = this.eventsService.getFilters();
+          this.searchControl.setValue({
+            query: (filters['query'] || '') as string,
+            location: (filters['location'] || '') as string
+          });
+          const start = (filters['startDate'] as string) || '';
+          this.selected = start ? DateTime.fromISO(start) : DateTime.now();
+          this.eventsService.setCurrentMonthOfCalendar(this.selected);
+          this.triggerSearchOnQueryParamsChange();
+        }
+      },
+      {
+        allowSignalWrites: true
       }
-    }, {
-      allowSignalWrites: true
-    });
+    );
   }
 
   changeDatePickerLang(locale: string) {

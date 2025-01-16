@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
     <div
       class="menu-entry-wrapper mat-button"
       [ngClass]="{ underline: underline, last: last }"
-      >
+    >
       @if (new) {
         <app-new-badge></app-new-badge>
       }
@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
         <a
           class="menu-entry font-2"
           [ngClass]="{ blue: blue, isActive: active }"
-          >
+        >
           <ng-container *ngTemplateOutlet="content"></ng-container>
         </a>
       } @else {
@@ -30,7 +30,7 @@ import { RouterModule } from '@angular/router';
             [routerLinkActive]="'active'"
             class="menu-entry font-2"
             [ngClass]="{ blue: blue }"
-            >
+          >
             <ng-container *ngTemplateOutlet="content"></ng-container>
           </a>
         } @else {
@@ -40,13 +40,11 @@ import { RouterModule } from '@angular/router';
         }
       }
     </div>
-    
-    
-    
+
     <ng-template #content>
       <ng-content></ng-content>
     </ng-template>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

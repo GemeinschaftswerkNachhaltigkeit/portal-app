@@ -26,11 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     ])
   ],
   standalone: true,
-  imports: [
-    CdkAccordionModule,
-    MenuEntryComponent,
-    MatIconModule
-],
+  imports: [CdkAccordionModule, MenuEntryComponent, MatIconModule],
   template: `
     <header (click)="toggle()" class="header">
       <app-menu-entry [button]="true" [active]="expanded" [new]="new">

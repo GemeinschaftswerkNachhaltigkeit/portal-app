@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { OutlinedIconComponent } from '../base/outlined-icon.component';
@@ -9,11 +8,9 @@ import { OutlinedIconComponent } from '../base/outlined-icon.component';
   imports: [OutlinedIconComponent],
   template: `
     @if (form.get(controlName)?.valid && form.get(controlName)?.dirty) {
-      <app-outlined-icon
-        >done</app-outlined-icon
-        >
-      }
-    `,
+      <app-outlined-icon>done</app-outlined-icon>
+    }
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl, ValidationErrors } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';

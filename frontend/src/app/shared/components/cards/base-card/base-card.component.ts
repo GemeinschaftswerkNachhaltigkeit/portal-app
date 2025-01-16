@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
-import { CardService } from '../../../../map/services/card.service';
+import { CardService } from '../../../../map/data/card.service';
 import Activity from '../../../models/actvitiy';
 import Organisation from '../../../models/organisation';
 import { CommonModule } from '@angular/common';

@@ -49,50 +49,48 @@ import { MatInputModule } from '@angular/material/input';
         <mat-panel-description>
           <app-filter-count-badge [active]="hasDateRange()" (clicked)="clear()">
             @if (hasDateRange()) {
-              <span class="check"
-                ><mat-icon>check</mat-icon></span
-                >
-              }
-              @if (!hasDateRange()) {
-                <span>-</span>
-              }
-            </app-filter-count-badge></mat-panel-description
-            >
-          </mat-expansion-panel-header>
-    
-          <mat-checkbox
-            (change)="handlePermanentFilter($event)"
-            [checked]="isPermanent()"
-            >{{ 'labels.permanent' | translate }}</mat-checkbox
-            >
-            <div [ngClass]="{ hidden: isPermanent() }">
-              <mat-form-field appearance="outline">
-                <mat-date-range-input
-                  [formGroup]="dateRange"
-                  [rangePicker]="dateRangePicker"
-                  >
-                  <input
-                    matStartDate
-                    [placeholder]="'map.labels.startDate' | translate"
-                    formControlName="start"
-                    [readonly]="true"
-                    />
-                  <input
-                    matEndDate
-                    [placeholder]="'map.labels.endDate' | translate"
-                    formControlName="end"
-                    [readonly]="true"
-                    />
-                </mat-date-range-input>
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="dateRangePicker"
-                ></mat-datepicker-toggle>
-                <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
-              </mat-form-field>
-            </div>
-          </mat-expansion-panel>
-    `,
+              <span class="check"><mat-icon>check</mat-icon></span>
+            }
+            @if (!hasDateRange()) {
+              <span>-</span>
+            }
+          </app-filter-count-badge></mat-panel-description
+        >
+      </mat-expansion-panel-header>
+
+      <mat-checkbox
+        (change)="handlePermanentFilter($event)"
+        [checked]="isPermanent()"
+        >{{ 'labels.permanent' | translate }}</mat-checkbox
+      >
+      <div [ngClass]="{ hidden: isPermanent() }">
+        <mat-form-field appearance="outline">
+          <mat-date-range-input
+            [formGroup]="dateRange"
+            [rangePicker]="dateRangePicker"
+          >
+            <input
+              matStartDate
+              [placeholder]="'map.labels.startDate' | translate"
+              formControlName="start"
+              [readonly]="true"
+            />
+            <input
+              matEndDate
+              [placeholder]="'map.labels.endDate' | translate"
+              formControlName="end"
+              [readonly]="true"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="dateRangePicker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  `,
   styles: `
     @use 'palette' as *;
     @use 'theme' as *;

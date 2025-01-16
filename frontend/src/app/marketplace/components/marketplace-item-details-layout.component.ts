@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { MarketplaceItemAnimation } from 'src/app/shared/components/animations/marketplace-item-animation';
 import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';

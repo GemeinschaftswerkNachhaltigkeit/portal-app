@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -7,21 +6,21 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [MatIconModule],
   template: `<div class="no-data" [style]="{ 'border-color': color }">
-      @if (showIcon) {
-        <div class="icon-wrapper">
-          <div class="bg-icon">
-            <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
-          </div>
-          <div class="fg-icon" [style]="{ color: color }">
-            <mat-icon class="material-icons-outlined">{{ fgIcon }}</mat-icon>
-          </div>
+    @if (showIcon) {
+      <div class="icon-wrapper">
+        <div class="bg-icon">
+          <mat-icon class="material-icons-outlined">{{ bgIcon }}</mat-icon>
         </div>
-      }
-      <div class="msg">
-        <h3 class="title">{{ title }}</h3>
-        <p class="text"><ng-content></ng-content></p>
+        <div class="fg-icon" [style]="{ color: color }">
+          <mat-icon class="material-icons-outlined">{{ fgIcon }}</mat-icon>
+        </div>
       </div>
-    </div>`,
+    }
+    <div class="msg">
+      <h3 class="title">{{ title }}</h3>
+      <p class="text"><ng-content></ng-content></p>
+    </div>
+  </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

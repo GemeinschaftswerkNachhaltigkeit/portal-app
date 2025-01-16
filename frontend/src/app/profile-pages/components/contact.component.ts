@@ -38,7 +38,7 @@ import { RouterModule } from '@angular/router';
           orga: type === 'ORGANISATION',
           activity: type === 'ACTIVITY'
         }"
-        >
+      >
         <div class="contact-information" [ngClass]="{ noImage: !contactImage }">
           @if (contactImage) {
             <div class="image">
@@ -46,7 +46,7 @@ import { RouterModule } from '@angular/router';
                 <img
                   [src]="contactImage"
                   [alt]="profileUtils.contactString(contact)"
-                  />
+                />
               }
             </div>
           }
@@ -63,7 +63,7 @@ import { RouterModule } from '@angular/router';
                 id="contact-now"
                 class="show-contact-btn"
                 (click)="toggleShowContact()"
-                >
+              >
                 {{ 'profile.buttons.contactNow' | translate }}
               </button>
             }
@@ -159,9 +159,7 @@ import { RouterModule } from '@angular/router';
         </div>
       </div>
       @if (type === 'ACTIVITY' && activityOrga && orgaId !== 0) {
-        <div
-          class="activity-orga"
-          >
+        <div class="activity-orga">
           <div class="info-row no-icon">
             <h4 class="subtitle">
               {{ 'profile.titles.relatedOrganisation' | translate }}
@@ -187,7 +185,7 @@ import { RouterModule } from '@angular/router';
         </div>
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

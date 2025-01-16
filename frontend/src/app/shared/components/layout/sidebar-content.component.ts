@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LogoComponent } from './logo.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
@@ -7,11 +6,7 @@ import { NavActionsComponent } from './nav-actions.component';
 @Component({
   selector: 'app-sidebar-content',
   standalone: true,
-  imports: [
-    LogoComponent,
-    MainMenuComponent,
-    NavActionsComponent
-],
+  imports: [LogoComponent, MainMenuComponent, NavActionsComponent],
   template: `<div class="sidebar-content">
     <div class="logo-wrapper">
       <app-logo></app-logo>

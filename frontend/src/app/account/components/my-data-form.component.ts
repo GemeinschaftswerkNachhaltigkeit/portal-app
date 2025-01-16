@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormFieldErrorComponent,
     MatButtonModule,
     TranslateModule
-],
+  ],
   template: `
     <form
       class="form"

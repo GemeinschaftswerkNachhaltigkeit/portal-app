@@ -39,7 +39,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
     ValidCheckComponent,
     FormFieldErrorComponent,
     TranslateModule
-],
+  ],
   template: `
     <form [formGroup]="linksFormGroup">
       <mat-form-field appearance="outline">
@@ -48,7 +48,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           matInput
           [placeholder]="'forms.labels.url' | translate"
           formControlName="url"
-          />
+        />
         <app-valid-check
           [form]="linksFormGroup"
           controlName="url"
@@ -59,17 +59,15 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
           ></app-form-field-error>
         </mat-error>
       </mat-form-field>
-    
+
       @for (type of socialMediaTypes; track type) {
-        <mat-form-field
-          appearance="outline"
-          >
+        <mat-form-field appearance="outline">
           <mat-label>{{ 'forms.labels.' + type | translate }}</mat-label>
           <input
             matInput
             [placeholder]="'forms.labels.' + type | translate"
             [formControlName]="type"
-            />
+          />
           <app-valid-check
             [form]="linksFormGroup"
             [controlName]="type"
@@ -82,7 +80,7 @@ import { SocialMediaType } from 'src/app/shared/models/social-media-type';
         </mat-form-field>
       }
     </form>
-    `,
+  `,
   styles: `
     form {
       display: flex;

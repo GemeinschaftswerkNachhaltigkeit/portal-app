@@ -7,18 +7,18 @@ import { OutlinedIconComponent } from './outlined-icon.component';
   standalone: true,
   imports: [CommonModule, OutlinedIconComponent],
   template: `@if (content) {
-  <div
-    class="content-row font-2"
-    [ngClass]="{ small: small, cardFooter: cardFooter }"
+    <div
+      class="content-row font-2"
+      [ngClass]="{ small: small, cardFooter: cardFooter }"
     >
-    <div class="content">
-      <app-outlined-icon>{{ icon }}</app-outlined-icon>
-      <p class="text">
-        <mark>{{ content }}</mark>
-      </p>
+      <div class="content">
+        <app-outlined-icon>{{ icon }}</app-outlined-icon>
+        <p class="text">
+          <mark>{{ content }}</mark>
+        </p>
+      </div>
     </div>
-  </div>
-}`,
+  }`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

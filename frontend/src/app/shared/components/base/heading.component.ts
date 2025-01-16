@@ -7,51 +7,35 @@ import { Component, Input } from '@angular/core';
   imports: [CommonModule],
   template: `
     @if (type === 'h1') {
-      <h1
-        class="title"
-        [ngClass]="options()"
-        [class]="getClasses('xl')"
-        >
+      <h1 class="title" [ngClass]="options()" [class]="getClasses('xl')">
         <mark>
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </mark>
       </h1>
     }
     @if (type === 'h2') {
-      <h2
-        class="title"
-        [ngClass]="options()"
-        [class]="getClasses('lg')"
-        >
+      <h2 class="title" [ngClass]="options()" [class]="getClasses('lg')">
         <mark>
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </mark>
       </h2>
     }
     @if (type === 'h3') {
-      <h3
-        class="title"
-        [ngClass]="options()"
-        [class]="getClasses('md')"
-        >
+      <h3 class="title" [ngClass]="options()" [class]="getClasses('md')">
         <mark>
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </mark>
       </h3>
     }
     @if (type === 'h4') {
-      <h4
-        class="title"
-        [ngClass]="options()"
-        [class]="getClasses('sm')"
-        >
+      <h4 class="title" [ngClass]="options()" [class]="getClasses('sm')">
         <mark>
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </mark>
       </h4>
     }
     <ng-template #contentTpl><ng-content></ng-content></ng-template>
-    `,
+  `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

@@ -105,24 +105,24 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
           <div class="thematic-focus">
             <app-heading type="h4" size="xs" color="none"
               >{{ 'labels.tags' | translate }}:</app-heading
-              >
-              {{ getThematicFocus() }}
-            </div>
-          }
-          <div class="actions">
-            <ng-content></ng-content>
-            <a
-              [routerLink]="openLink"
-              mat-flat-button
-              color="accent"
-              class="open-link"
-              >
-              {{ openTitle | translate }}
-            </a>
+            >
+            {{ getThematicFocus() }}
           </div>
-        </aside>
-      </article>
-    `,
+        }
+        <div class="actions">
+          <ng-content></ng-content>
+          <a
+            [routerLink]="openLink"
+            mat-flat-button
+            color="accent"
+            class="open-link"
+          >
+            {{ openTitle | translate }}
+          </a>
+        </div>
+      </aside>
+    </article>
+  `,
   styles: `
     @use '@angular/material' as mat;
     @use 'palette' as *;

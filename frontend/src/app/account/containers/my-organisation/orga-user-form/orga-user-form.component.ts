@@ -42,12 +42,12 @@ import { MatSelectModule } from '@angular/material/select';
         [formGroup]="userForm"
         (submit)="submitHandler(formDirective)"
         #formDirective="ngForm"
-        >
+      >
         <div class="names">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'account.labels.firstName' | translate }}</mat-label>
             <input matInput formControlName="firstName" />
-    
+
             <mat-error>
               <app-form-field-error
                 [field]="userForm.get('firstName')"
@@ -57,7 +57,7 @@ import { MatSelectModule } from '@angular/material/select';
           <mat-form-field appearance="outline">
             <mat-label>{{ 'account.labels.lastName' | translate }}</mat-label>
             <input matInput formControlName="lastName" />
-    
+
             <mat-error>
               <app-form-field-error
                 [field]="userForm.get('lastName')"
@@ -69,7 +69,7 @@ import { MatSelectModule } from '@angular/material/select';
           <mat-form-field appearance="outline">
             <mat-label>{{ 'account.labels.email' | translate }}</mat-label>
             <input matInput formControlName="email" />
-    
+
             <mat-error>
               <app-form-field-error
                 [field]="userForm.get('email')"
@@ -97,23 +97,19 @@ import { MatSelectModule } from '@angular/material/select';
               mat-flat-button
               color="accent"
               [disabled]="userForm.invalid || (isLoading$ | async) === true"
-              >
+            >
               @if ((isLoading$ | async) === false) {
-                <span>{{
-                  'account.buttons.addNewUser' | translate
-                }}</span>
+                <span>{{ 'account.buttons.addNewUser' | translate }}</span>
               }
               @if ((isLoading$ | async) === true) {
-                <span>{{
-                  'btn.loading' | translate
-                }}</span>
+                <span>{{ 'btn.loading' | translate }}</span>
               }
             </button>
           </div>
         </div>
       </form>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

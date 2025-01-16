@@ -20,12 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-image-upload',
   standalone: true,
-  imports: [
-    DropzoneModule,
-    MatIconModule,
-    MatButtonModule,
-    TranslateModule
-],
+  imports: [DropzoneModule, MatIconModule, MatButtonModule, TranslateModule],
   template: `
     @if (config) {
       <div class="upload-wrapper">
@@ -33,10 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
         <div class="dropzone-wrapper">
           <div class="uploaded-image">
             @if (fileId) {
-              <img
-                [src]="imgService.url(fileId)"
-                alt="upload-image"
-                />
+              <img [src]="imgService.url(fileId)" alt="upload-image" />
             }
           </div>
           <dropzone
@@ -46,7 +38,7 @@ import { TranslateModule } from '@ngx-translate/core';
             (success)="onUploadSuccess($event)"
             (error)="onUploadError()"
             [class]="'type'"
-            >
+          >
           </dropzone>
         </div>
         <div class="actions">
@@ -61,13 +53,13 @@ import { TranslateModule } from '@ngx-translate/core';
         </div>
       </div>
     }
-    
+
     @if (error) {
       <span class="upload-error mat-error">
         {{ 'marketplace.labels.imageError' | translate }}</span
-        >
-      }
-    `,
+      >
+    }
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

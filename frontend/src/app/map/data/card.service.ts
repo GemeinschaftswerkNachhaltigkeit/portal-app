@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivityType } from 'src/app/shared/models/activity-type';
 import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
@@ -7,7 +7,9 @@ import { ThematicFocus } from 'src/app/shared/models/thematic-focus';
   providedIn: 'root'
 })
 export class CardService {
-  constructor(private translate: TranslateService) {}
+  private translate = inject(TranslateService);
+
+  constructor() {}
 
   topics(topics: ThematicFocus[]): string[] {
     return topics.map((t) => this.translate.instant(`thematicFocus.${t}`));

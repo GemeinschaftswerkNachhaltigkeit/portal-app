@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
     OrgaUserListStatusComponent,
     OutlinedIconComponent,
     MatButtonModule
-],
+  ],
   template: `
     @if (user) {
       <div class="user-list-entry">
@@ -48,7 +48,7 @@ import { MatButtonModule } from '@angular/material/button';
         </div>
       </div>
     }
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

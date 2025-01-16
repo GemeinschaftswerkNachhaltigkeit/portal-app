@@ -24,17 +24,14 @@ import { FormFieldErrorComponent } from './form-field-error/form-field-error.com
     MatInputModule,
     MatSelectModule,
     FormFieldErrorComponent
-],
+  ],
   template: `
     <div class="select-wrapper">
       <mat-form-field appearance="outline">
         <mat-label>{{ label }}</mat-label>
         <mat-select [formControl]="formControl" multiple>
           @for (thema of thematicFocusOpts; track thema) {
-            <mat-option
-              [value]="thema"
-              [disabled]="setOptionDisabled(thema)"
-              >
+            <mat-option [value]="thema" [disabled]="setOptionDisabled(thema)">
               {{ 'thematicFocus.' + thema | translate }}
             </mat-option>
           }
@@ -44,7 +41,7 @@ import { FormFieldErrorComponent } from './form-field-error/form-field-error.com
         </mat-error>
       </mat-form-field>
     </div>
-    `,
+  `,
   styles: `
     :host {
       width: 100%;

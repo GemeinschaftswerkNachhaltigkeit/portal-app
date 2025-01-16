@@ -30,10 +30,7 @@ import { InitiatorBadgeComponent } from './initiator-badge.component';
     }
   `,
   standalone: true,
-  imports: [
-    InitiatorBadgeComponent,
-    ProjectSustainabilityWinnerBadgeComponent
-]
+  imports: [InitiatorBadgeComponent, ProjectSustainabilityWinnerBadgeComponent]
 })
 export class OrgaBadgesComponent {
   @Input() organisation?: Organisation;

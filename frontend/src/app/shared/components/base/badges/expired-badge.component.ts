@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -7,14 +6,14 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule],
   template: `<div class="expired-badge">
-      <span #ref><ng-content></ng-content></span>
-      @if (!ref.hasChildNodes()) {
-        {{
+    <span #ref><ng-content></ng-content></span>
+    @if (!ref.hasChildNodes()) {
+      {{
         (dan ? 'labels.expiredDanActivity' : 'labels.expiredActivity')
-        | translate
-        }}
-      }
-    </div>`,
+          | translate
+      }}
+    }
+  </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

@@ -1,4 +1,3 @@
-
 import { Component, Inject } from '@angular/core';
 import {
   FormControl,
@@ -32,7 +31,7 @@ export interface MessageInput {
     MatInputModule,
     ReactiveFormsModule,
     FormFieldErrorComponent
-],
+  ],
   template: `
     <div mat-dialog-title>
       <h3 class="title">

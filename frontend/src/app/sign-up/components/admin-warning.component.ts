@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { OutlinedIconComponent } from '../../shared/components/base/outlined-icon.component';
 

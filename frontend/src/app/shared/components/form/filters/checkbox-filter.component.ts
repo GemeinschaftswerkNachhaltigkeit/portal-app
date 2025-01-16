@@ -1,4 +1,3 @@
-
 import {
   Component,
   EventEmitter,
@@ -24,20 +23,18 @@ import FilterOption from 'src/app/shared/models/filter-options';
             color="primary"
             [(ngModel)]="fv.checked"
             (ngModelChange)="checkBoxValueChangedHandler()"
+          >
+            <span class="label">
+              @if (fv.labelPrefix) {
+                <span class="prefix">{{ fv.labelPrefix }}</span>
+              }
+              {{ fv.labelKey | translate }}</span
             >
-            <span class="label"
-              >@if (fv.labelPrefix) {
-              <span class="prefix">{{
-                fv.labelPrefix
-                }}</span
-                >
-                }{{ fv.labelKey | translate }}</span
-                >
-              </mat-checkbox>
-            </li>
-          }
-        </ul>
-    `,
+          </mat-checkbox>
+        </li>
+      }
+    </ul>
+  `,
   styles: `
     @use 'theme' as *;
     .filter-checkbox-entries {

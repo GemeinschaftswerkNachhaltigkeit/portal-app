@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ContentWrapperComponent } from './content-wrapper.component';
 import { LogoComponent } from './logo.component';
@@ -13,13 +12,13 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
     LogoComponent,
     NavActionsComponent,
     MainMenuComponent
-],
+  ],
   template: `
     <header
       class="header mat-elevation-z8"
       [class.mobile]="mobile"
       role="banner"
-      >
+    >
       <app-content-wrapper [onlyX]="true">
         <div class="header-content">
           <div class="left-content">
@@ -36,7 +35,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
         </div>
       </app-content-wrapper>
     </header>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     :host {

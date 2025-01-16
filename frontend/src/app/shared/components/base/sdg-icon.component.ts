@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { SdgsService } from 'src/app/shared/services/sdgs.service';
 
@@ -8,13 +7,9 @@ import { SdgsService } from 'src/app/shared/services/sdgs.service';
   imports: [],
   template: `
     @if (goal !== undefined && goal !== null) {
-      <img
-        [src]="goalUrl"
-        [alt]="goal"
-        [class]="size"
-        />
+      <img [src]="goalUrl" [alt]="goal" [class]="size" />
     }
-    `,
+  `,
   styles: `
     :host {
       display: flex;

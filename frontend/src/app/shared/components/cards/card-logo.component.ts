@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 import { ImgService } from 'src/app/shared/services/img.service';
 
@@ -7,10 +6,16 @@ import { ImgService } from 'src/app/shared/services/img.service';
   standalone: true,
   imports: [],
   template: `<div class="logo">
-      @if (logo) {
-        <img class="logo-img" [src]="logo" alt="logo" />
-      }
-    </div>`,
+    @if (logo) {
+      <img
+        class="logo-img"
+        [src]="logo"
+        alt="logo"
+        [width]="imageDimensions?.width"
+        [height]="imageDimensions?.height"
+      />
+    }
+  </div>`,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;
@@ -43,6 +48,10 @@ export class CardLogoComponent {
   @Input() name? = '';
   @Input() logoUrl? = '';
   @Input() noBorder? = false;
+  @Input() imageDimensions?: {
+    width: number;
+    height: number;
+  };
 
   constructor(private imgService: ImgService) {}
 

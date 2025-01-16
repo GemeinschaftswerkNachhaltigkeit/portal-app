@@ -1,4 +1,3 @@
-
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -24,19 +23,17 @@ import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.
     ValidCheckComponent,
     FormFieldErrorComponent,
     MatInputModule
-],
+  ],
   template: `
     <ng-container [formGroup]="form">
       <div class="address">
         <mat-checkbox matInput formControlName="featured"
           ><span>{{
-          'marketplace.labels.featured' | translate
-        }}</span></mat-checkbox
+            'marketplace.labels.featured' | translate
+          }}</span></mat-checkbox
         >
         @if (form.get('featured')?.value) {
-          <mat-form-field
-            appearance="outline"
-            >
+          <mat-form-field appearance="outline">
             <mat-label>{{
               'marketplace.labels.featuredText' | translate
             }}</mat-label>
@@ -54,7 +51,7 @@ import { ValidCheckComponent } from 'src/app/shared/components/form/valid-check.
         }
       </div>
     </ng-container>
-    `
+  `
 })
 export class VisibilityControlsComponent implements OnInit, OnDestroy {
   @Input() formGroupName!: string;

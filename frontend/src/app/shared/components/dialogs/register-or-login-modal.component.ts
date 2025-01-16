@@ -1,4 +1,3 @@
-
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -19,12 +18,7 @@ export interface AuthModalData {
 @Component({
   selector: 'app-register-or-login-modal',
   standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    TranslateModule
-],
+  imports: [MatDialogModule, MatButtonModule, MatIconModule, TranslateModule],
   template: `
     <div mat-dialog-content class="auth-modal">
       <header class="header">

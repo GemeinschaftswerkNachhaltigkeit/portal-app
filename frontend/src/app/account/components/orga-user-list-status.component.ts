@@ -23,7 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
         <mat-icon class="material-icons-outlined">auto_delte</mat-icon>
       </div>
     }
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

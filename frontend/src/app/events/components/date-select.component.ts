@@ -21,7 +21,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateSelectHeaderComponent } from './date-select-header.component';
 import { EventCalenderEntry } from '../data/events.service';
 
-
 @Component({
   selector: 'app-date-select',
   standalone: true,

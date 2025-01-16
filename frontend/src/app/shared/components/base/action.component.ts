@@ -48,14 +48,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         (click)="clickHandler()"
         [color]="getColor()"
         [ngClass]="{ small: small, disabled: disabled, toggle: toggle }"
-        >
+      >
         @if (icon) {
           <app-outlined-icon>{{ icon }}</app-outlined-icon>
         }
       </button>
     }
     <ng-template #contentTpl><ng-content></ng-content></ng-template>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

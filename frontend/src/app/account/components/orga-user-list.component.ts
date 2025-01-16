@@ -15,7 +15,7 @@ import { OrgaUserListHeaderComponent } from './orga-user-list-header.component';
     OrgaUserListComponent,
     OrgaUserListEntryComponent,
     OrgaUserListHeaderComponent
-],
+  ],
   template: `
     <div class="user-list">
       <app-heading size="sm" type="h2" color="none">{{
@@ -28,13 +28,13 @@ import { OrgaUserListHeaderComponent } from './orga-user-list-header.component';
             <app-orga-user-list-entry
               [user]="user"
               (delete)="deleteHandler(user)"
-              >
+            >
             </app-orga-user-list-entry>
           </div>
         }
       </div>
     </div>
-    `,
+  `,
   styles: `
     @use 'theme' as *;
     @use 'palette' as *;

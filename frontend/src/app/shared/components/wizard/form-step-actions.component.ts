@@ -25,42 +25,39 @@ import { MatStepperModule } from '@angular/material/stepper';
         <div class="placeholder"></div>
       }
       @if (showPrevBtn) {
-        <button
-          mat-flat-button
-          matStepperPrevious
-          id="prev-step"
-          >
+        <button mat-flat-button matStepperPrevious id="prev-step">
           {{ 'btn.back' | translate }}
         </button>
       }
       <!--{{ errorMsg$ | async | json }}-->
-    
+
       @if (
         (stepState$ | async)?.error === true &&
         (stepState$ | async)?.formStep === formStepKey
-        ) {
-        <div
-          class="step-state-message mat-error"
-          >
+      ) {
+        <div class="step-state-message mat-error">
           {{ 'error.unknown' | translate }}
         </div>
       }
-    
+
       <div class="next-buttons">
         @if (
           (stepState$ | async)?.error === false &&
           (stepState$ | async)?.formStep === formStepKey
-          ) {
-          <div
-            class="step-state-message"
-            >
+        ) {
+          <div class="step-state-message">
             <app-outlined-icon>cloud_done</app-outlined-icon>
             {{ 'labels.saved' | translate }}
           </div>
         }
         @if (showNextBtn && nextBtnCallback === undefined) {
           <div>
-            <button mat-flat-button color="accent" matStepperNext id="next-step">
+            <button
+              mat-flat-button
+              color="accent"
+              matStepperNext
+              id="next-step"
+            >
               {{ 'btn.next' | translate }}
             </button>
             @if (last && !modification) {
@@ -71,7 +68,7 @@ import { MatStepperModule } from '@angular/material/stepper';
                 (click)="cancelHandler()"
                 [disabled]="disableNextBtn"
                 id="next-step"
-                >
+              >
                 {{ 'btn.saveCurrentState' | translate }}
               </button>
             }
@@ -86,42 +83,34 @@ import { MatStepperModule } from '@angular/material/stepper';
               (click)="nextBtnCallback()"
               [disabled]="disableNextBtn"
               id="next-step"
-              >
+            >
               <div>
                 @if (!last) {
                   <span>{{ 'btn.next' | translate }}</span>
                 }
                 @if (last && !modification) {
                   @if (type === 'organisation') {
-                    <span>{{
-                      'btn.finishOrgaWizard' | translate
-                    }}</span>
+                    <span>{{ 'btn.finishOrgaWizard' | translate }}</span>
                   }
                   @if (type === 'activity') {
-                    <span>{{
-                      'btn.finishActivityWizard' | translate
-                    }}</span>
+                    <span>{{ 'btn.finishActivityWizard' | translate }}</span>
                   }
                 }
                 @if (last && modification) {
                   @if (type === 'organisation') {
-                    <span>{{
-                      'btn.updateOrga' | translate
-                      }}</span
-                      >
-                      }@if (type === 'activity') {
-                      <span>{{
-                        'btn.updateActivity' | translate
-                      }}</span>
-                    }
+                    <span>{{ 'btn.updateOrga' | translate }}</span>
                   }
-                </div>
-              </button>
-            </div>
-          }
-        </div>
+                  @if (type === 'activity') {
+                    <span>{{ 'btn.updateActivity' | translate }}</span>
+                  }
+                }
+              </div>
+            </button>
+          </div>
+        }
       </div>
-    `,
+    </div>
+  `,
   styles: `
     .actions-container {
       display: flex;

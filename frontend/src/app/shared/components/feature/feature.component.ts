@@ -15,7 +15,7 @@ export type Features = 'menu' | 'dan-account' | 'dan-range';
         <ng-content></ng-content>
       }
     }
-    `
+  `
 })
 export class FeatureComponent {
   @Input() feature!: Features;

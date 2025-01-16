@@ -10,49 +10,49 @@ import { ActionComponent } from '../../base/action.component';
   standalone: true,
   imports: [CommonModule, ActionComponent, TranslateModule],
   template: `@if (!subscriptionFacade.activityIsSubcribed(activity?.id)) {
-  <app-action
-    [clickable]="true"
-    [stroked]="stroked"
-    [small]="small"
-    [full]="full"
-    icon="bookmark_add"
-    [onlyIcon]="onlyIcon"
-    (clicked)="bookmarkHandler()"
-    >
-    @if (!onlyIcon) {
-      <span [ngClass]="{ small: small }">
-        @if (!short) {
-          <span>{{ 'btn.bookmark' | translate }}</span>
+      <app-action
+        [clickable]="true"
+        [stroked]="stroked"
+        [small]="small"
+        [full]="full"
+        icon="bookmark_add"
+        [onlyIcon]="onlyIcon"
+        (clicked)="bookmarkHandler()"
+      >
+        @if (!onlyIcon) {
+          <span [ngClass]="{ small: small }">
+            @if (!short) {
+              <span>{{ 'btn.bookmark' | translate }}</span>
+            }
+            @if (short) {
+              <span>{{ 'btn.bookmarkShort' | translate }}</span>
+            }
+          </span>
         }
-        @if (short) {
-          <span>{{ 'btn.bookmarkShort' | translate }}</span>
-        }
-      </span>
+      </app-action>
     }
-  </app-action>
-}
-@if (subscriptionFacade.activityIsSubcribed(activity?.id)) {
-  <app-action
-    [clickable]="true"
-    [stroked]="stroked"
-    [small]="small"
-    [full]="full"
-    icon="bookmark_added"
-    [onlyIcon]="onlyIcon"
-    (clicked)="unbookmarkHandler()"
-    >
-    @if (!onlyIcon) {
-      <span [ngClass]="{ small: small }">
-        @if (!short) {
-          <span>{{ 'btn.unbookmark' | translate }}</span>
+    @if (subscriptionFacade.activityIsSubcribed(activity?.id)) {
+      <app-action
+        [clickable]="true"
+        [stroked]="stroked"
+        [small]="small"
+        [full]="full"
+        icon="bookmark_added"
+        [onlyIcon]="onlyIcon"
+        (clicked)="unbookmarkHandler()"
+      >
+        @if (!onlyIcon) {
+          <span [ngClass]="{ small: small }">
+            @if (!short) {
+              <span>{{ 'btn.unbookmark' | translate }}</span>
+            }
+            @if (short) {
+              <span>{{ 'btn.unbookmarkShort' | translate }}</span>
+            }
+          </span>
         }
-        @if (short) {
-          <span>{{ 'btn.unbookmarkShort' | translate }}</span>
-        }
-      </span>
-    }
-  </app-action>
-}`,
+      </app-action>
+    }`,
   styles: `
     :host {
       display: flex;
