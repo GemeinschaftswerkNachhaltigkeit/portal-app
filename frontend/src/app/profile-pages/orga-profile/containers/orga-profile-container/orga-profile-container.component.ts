@@ -5,7 +5,7 @@ import { SubscriptionFacadeService } from 'src/app/shared/components/subscriptio
 import Organisation from 'src/app/shared/models/organisation';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { OrgaService } from '../../orga.service';
+import { OrgaService } from '../../data/orga.service';
 import { CommonModule } from '@angular/common';
 import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 import { ProfileLayoutComponent } from 'src/app/profile-pages/components/profile-layout.component';

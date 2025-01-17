@@ -1,9 +1,9 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, EMPTY, Subject, switchMap, tap } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
-import { OrgaApiService } from './api/orga-api.service';
-import Activity from '../../shared/models/actvitiy';
-import Organisation from '../../shared/models/organisation';
+import { OrgaApiService } from './orga-api.service';
+import Activity from '../../../shared/models/actvitiy';
+import Organisation from '../../../shared/models/organisation';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import { BestPracticesDto } from 'src/app/marketplace/models/best-practices-dto';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

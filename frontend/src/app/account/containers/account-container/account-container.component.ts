@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { OrganisationService } from 'src/app/sign-up/services/organisation.service';
-import { OrgaService } from 'src/app/profile-pages/orga-profile/orga.service';
+import { OrgaService } from 'src/app/profile-pages/orga-profile/data/orga.service';
 import { AccountFacadeService } from '../../account-facade.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { CommonModule } from '@angular/common';

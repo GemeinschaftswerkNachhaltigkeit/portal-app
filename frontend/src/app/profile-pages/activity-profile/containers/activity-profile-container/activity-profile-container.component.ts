@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
 import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import Activity from 'src/app/shared/models/actvitiy';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { ActivityFacadeService } from '../../activity-facade.service';
 import { CommonModule } from '@angular/common';
 import { ProfileLayoutComponent } from 'src/app/profile-pages/components/profile-layout.component';
 import { SectionComponent } from 'src/app/profile-pages/components/section.component';
@@ -25,6 +23,8 @@ import { EventBadgesComponent } from 'src/app/shared/components/base/badges/even
 import { ContactComponent } from 'src/app/profile-pages/components/contact.component';
 import { HeroComponent } from 'src/app/profile-pages/components/hero.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivityService } from '../../data/activity.service';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-activity-profile-container',
@@ -48,21 +48,21 @@ import { MatIconModule } from '@angular/material/icon';
     ActivitySubscriptionActionComponent,
     ContactComponent,
     TranslateModule,
-    MatIconModule
+    MatIconModule,
+    SpinnerComponent
   ],
   templateUrl: './activity-profile-container.component.html',
   styleUrls: ['./activity-profile-container.component.scss']
 })
 export class ActivityProfileContainerComponent implements OnInit {
-  activity$ = this.activityFacade.activity$;
-  unsubscribe$ = new Subject();
+  activity = this.activityService.activity;
+  loading = this.activityService.loading;
 
   constructor(
     public subscription: SubscriptionFacadeService,
     private translate: TranslateService,
-    private activityFacade: ActivityFacadeService,
+    private activityService: ActivityService,
     private route: ActivatedRoute,
-    private router: Router,
     private utils: UtilsService
   ) {}
 
@@ -100,7 +100,7 @@ export class ActivityProfileContainerComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['activityId'];
-    this.activityFacade.getById(id);
+    this.activityService.getActivityById(id);
     this.utils.scrollTop();
   }
 }
