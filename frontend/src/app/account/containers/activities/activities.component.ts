@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import Activity from 'src/app/shared/models/actvitiy';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
@@ -9,9 +9,36 @@ import { LoadingService } from 'src/app/shared/services/loading.service';
 import { ActiFacadeService } from '../../acti-facade.service';
 import { ActivityUtilsService } from '../../services/activity-utils.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ListWithHeadingLayoutComponent } from 'src/app/shared/components/layout/list-with-heading-layout.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ActionComponent } from 'src/app/shared/components/base/action.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-activities',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    TranslateModule,
+    ListWithHeadingLayoutComponent,
+    CardListComponent,
+    BaseCardComponent,
+    MatPaginatorModule,
+    AlertComponent,
+    MatIconModule,
+    ActionComponent,
+    LoadingIndicatorComponent,
+    MatTooltipModule
+  ],
   templateUrl: './activities.component.html',
   styleUrls: ['./activities.component.scss']
 })

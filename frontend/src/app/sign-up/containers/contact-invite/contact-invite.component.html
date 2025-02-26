@@ -1,0 +1,43 @@
+@if ((loading$ | async) === false) {
+  <app-content-wrapper>
+    <div class="invite-content-wrapper">
+      <mat-icon class="material-icons-outlined">{{
+        action === 'ALLOW' && !invalid ? 'done' : 'close'
+      }}</mat-icon>
+      <div class="invite-content">
+        @if (action === 'ALLOW' && !invalid) {
+          <app-html-wrapper
+            [html]="(content$ | async)?.allowed || ''"
+          ></app-html-wrapper>
+        }
+        @if (action === 'DENY' && !invalid) {
+          <app-html-wrapper
+            [html]="(content$ | async)?.denied || ''"
+          ></app-html-wrapper>
+        }
+        @if (invalid) {
+          <app-html-wrapper
+            [html]="(content$ | async)?.invalid || ''"
+          ></app-html-wrapper>
+        }
+        <div>
+          @if (action === 'ALLOW') {
+            <button mat-flat-button color="accent" (click)="registerUser()">
+              {{ 'btn.registration' | translate }}
+            </button>
+          }
+          @if (action !== 'ALLOW') {
+            <button mat-flat-button color="accent" (click)="goToLandingpage()">
+              {{ 'btn.goToLandingpage' | translate }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </app-content-wrapper>
+}
+@if (loading$ | async) {
+  <app-content-wrapper size="xl">
+    <app-loading-indicator></app-loading-indicator>
+  </app-content-wrapper>
+}

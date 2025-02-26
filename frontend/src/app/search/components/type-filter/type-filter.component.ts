@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Type } from '../../data/search.service';
 import { TypeTabComponent } from '../type-tab/type-tab.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { DirectusContentService } from 'src/app/shared/services/directus-content
 @Component({
   selector: 'app-type-filter',
   standalone: true,
-  imports: [CommonModule, TypeTabComponent, TranslateModule],
+  imports: [TypeTabComponent, TranslateModule],
   templateUrl: './type-filter.component.html',
   styleUrl: './type-filter.component.scss'
 })

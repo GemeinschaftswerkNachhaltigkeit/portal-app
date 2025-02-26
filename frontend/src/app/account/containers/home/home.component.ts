@@ -5,6 +5,12 @@ import UserData from '../../models/user-data';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { Features } from 'src/app/shared/components/feature/feature.component';
 
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
+import { InfoCardComponent } from 'src/app/shared/components/cards/info-card.component';
+import { CommonModule } from '@angular/common';
+
 type HomeTile = {
   new?: boolean;
   title: string;
@@ -18,6 +24,14 @@ type HomeTile = {
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    TranslateModule,
+    RouterModule,
+    InfoCardComponent
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

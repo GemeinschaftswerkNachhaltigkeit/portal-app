@@ -1,5 +1,6 @@
-<ng-container *ngIf="paging$ | async as paging">
-  <app-calendar-layout [total]="paging.totalElements || 0">
+@let pageInfo = paging();
+@if (pageInfo) {
+  <app-calendar-layout [total]="pageInfo.totalElements || 0">
     <div calendar class="mobile-actions">
       <ng-container *ngTemplateOutlet="actions"></ng-container>
     </div>
@@ -18,48 +19,55 @@
         ></app-filter-modal-button>
       </div>
     </div>
-
     <div results>
-      <ng-container *ngIf="groups$ | async as groups">
-        <div class="group" *ngFor="let entry of groups">
-          <div class="date" *ngIf="entry.group !== 'undefined'">
-            <div class="text">
-              <div class="month-day">
-                {{
-                  entry.group
-                    | date: 'dd. MMM' : undefined : translate.currentLang
-                }}
+      @let eventGroups = groups();
+      @if (eventGroups) {
+        @for (entry of eventGroups; track entry) {
+          <div class="group">
+            @if (entry.group !== 'undefined') {
+              <div class="date">
+                <div class="text">
+                  <div class="month-day">
+                    {{
+                      entry.group
+                        | date: 'dd. MMM' : undefined : translate.currentLang
+                    }}
+                  </div>
+                  <div class="year">
+                    {{
+                      entry.group
+                        | date: 'YYYY' : undefined : translate.currentLang
+                    }}
+                  </div>
+                </div>
               </div>
-              <div class="year">
-                {{
-                  entry.group | date: 'YYYY' : undefined : translate.currentLang
-                }}
-              </div>
-            </div>
+            }
+            <app-event-list>
+              @for (event of entry.list; track event; let i = $index) {
+                <app-event
+                  [event]="event"
+                  [last]="entry.list.length === i + 1"
+                  (clicked)="handleOpen($event)"
+                ></app-event>
+              }
+            </app-event-list>
           </div>
-          <app-event-list>
-            <ng-container *ngFor="let event of entry.list; let i = index">
-              <app-event
-                [event]="event"
-                [last]="entry.list.length === i + 1"
-                (clicked)="handleOpen($event)"
-              ></app-event>
-            </ng-container>
-          </app-event-list>
-        </div>
-        <app-spinner forId="load-events" [noHeight]="true"></app-spinner>
-        <app-alert
-          *ngIf="paging.totalElements! <= 0 && (loading$ | async) === false"
-          [title]="'map.titles.noData' | translate"
-        >
-          {{ 'map.texts.noData.0' | translate }}
-        </app-alert>
+        }
+        <app-loading-indicator
+          forId="load-events"
+          [noHeight]="true"
+        ></app-loading-indicator>
+        @if (pageInfo.totalElements! <= 0 && loading() === false) {
+          <app-alert [title]="'map.titles.noData' | translate">
+            {{ 'map.texts.noData.0' | translate }}
+          </app-alert>
+        }
         <div
           class="placeholder"
-          [ngClass]="{ noElements: groups.length <= 0 }"
+          [ngClass]="{ noElements: eventGroups.length <= 0 }"
         ></div>
         <div #marker></div>
-      </ng-container>
+      }
     </div>
     <div filters>
       <app-filter-sidebar
@@ -84,11 +92,12 @@
       </app-filter-sidebar>
     </div>
   </app-calendar-layout>
-</ng-container>
+}
 
 <ng-template #actions>
-  <ng-container *ngIf="availableEvents$ | async as events">
-    <ng-container *ngIf="!isPermanent()">
+  @let events = availableEvents();
+  @if (events) {
+    @if (!isPermanent()) {
       <app-date-select
         (dateSelected)="handleDateChange($event)"
         [selected]="selected"
@@ -97,8 +106,7 @@
       <button class="today" (click)="handleToday()">
         {{ 'btn.today' | translate }}
       </button>
-    </ng-container>
-
+    }
     <div class="actions">
       <button
         class="action"
@@ -112,17 +120,17 @@
         </div>
       </button>
       <!-- <button
-        mat-flat-button
-        class="dan-button action"
-        (click)="handleNewActionDay()"
-        target="_blank"
+      mat-flat-button
+      class="dan-button action"
+      (click)="handleNewActionDay()"
+      target="_blank"
       >
-        <div class="action-content">
-          <mat-icon>add</mat-icon>
-          <span>{{ 'btn.toDan' | translate }}</span>
-          <app-new-badge></app-new-badge>
-        </div>
-      </button> -->
+      <div class="action-content">
+        <mat-icon>add</mat-icon>
+        <span>{{ 'btn.toDan' | translate }}</span>
+        <app-new-badge></app-new-badge>
+      </div>
+    </button> -->
     </div>
-  </ng-container>
+  }
 </ng-template>

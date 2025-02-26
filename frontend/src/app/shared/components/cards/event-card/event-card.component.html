@@ -1,0 +1,53 @@
+<a
+  class="card"
+  [routerLink]="['/organisations/', event.organisation?.id, event.id]"
+  >
+  <article>
+    <div class="logo">
+      @if (event.logo) {
+        <img [src]="logoUrl()" alt="logo" />
+      }
+    </div>
+
+    <div class="badge">
+      <app-event-badges [activity]="utils.asActivity(event)"></app-event-badges>
+    </div>
+    @if (event.organisation?.id) {
+      <a
+        class="orga-link"
+        [routerLink]="['/organisations', event.organisation?.id]"
+        >{{ event.organisation?.name }}</a
+        >
+      }
+      <h3 class="title">{{ event.name }}</h3>
+      <div class="description">{{ utils.excerpt(event.description) }}</div>
+    </article>
+    <footer>
+      @if (utils.dateRangeString(utils.asActivity(event).period)) {
+        <div
+          class="content-row font-2"
+          >
+          <div class="content">
+            <app-outlined-icon>event</app-outlined-icon>
+            <p class="text">
+              <mark>{{
+                utils.dateRangeString(utils.asActivity(event).period)
+              }}</mark>
+            </p>
+          </div>
+        </div>
+      }
+      @if (utils.locationString(event.location)) {
+        <div
+          class="content-row font-2"
+          >
+          <div class="content">
+            <app-outlined-icon>pin_drop</app-outlined-icon>
+            <p class="text">
+              <mark>{{ utils.locationString(event.location) }}</mark>
+            </p>
+          </div>
+        </div>
+      }
+    </footer>
+  </a>

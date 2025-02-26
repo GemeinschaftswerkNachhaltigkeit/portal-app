@@ -9,9 +9,9 @@
     <button (click)="handleCancelation()" mat-icon-button class="closeX">
       <mat-icon>clear</mat-icon>
     </button>
-    <div><app-spinner *ngIf="loading$ | async"></app-spinner></div>
-    <ng-container *ngIf="(loading$ | async) !== true">
-      <ng-container *ngIf="orgId && uuid">
+
+    @if (loading() !== true) {
+      @if (orgId && uuid) {
         <form
           [formGroup]="formGroup"
           (ngSubmit)="handleSubmit()"
@@ -27,7 +27,6 @@
                 [options]="getCategories()"
               ></app-category-control>
             </app-form-section>
-
             <app-form-section
               [title]="'marketplace.titles.step2Offer' | translate"
               [description]="'marketplace.texts.step2Offer' | translate"
@@ -39,7 +38,6 @@
                 [label]="'labels.thematicFocus' | translate"
               ></app-thematic-focus-control>
             </app-form-section>
-
             <app-form-section
               [title]="'marketplace.titles.step3Offer' | translate"
               [description]="'marketplace.texts.step3Offer' | translate"
@@ -65,7 +63,6 @@
                 ></app-upload-image>
               </div>
             </app-form-section>
-
             <app-form-section
               [title]="'marketplace.titles.step4Offer' | translate"
               [description]="'marketplace.texts.step4Offer' | translate"
@@ -96,17 +93,15 @@
                     </div>
                   </mat-radio-group>
                 </div>
-                <div
-                  class="field"
-                  *ngIf="formGroup.get('location')?.value === 'ADDRESS'"
-                >
-                  <app-address-controls
-                    formGroupName="address"
-                  ></app-address-controls>
-                </div>
+                @if (formGroup.get('location')?.value === 'ADDRESS') {
+                  <div class="field">
+                    <app-address-controls
+                      formGroupName="address"
+                    ></app-address-controls>
+                  </div>
+                }
               </div>
             </app-form-section>
-
             <app-form-section
               [title]="'marketplace.titles.step5Offer' | translate"
               [description]="'marketplace.texts.step5Offer' | translate"
@@ -116,33 +111,37 @@
                 formGroupName="contact"
               ></app-contact-controls>
             </app-form-section>
-
-            <app-form-section
-              *ngIf="accessToFeatured()"
-              [title]="'marketplace.titles.step6Offer' | translate"
-              [description]="'marketplace.texts.step6Offer' | translate"
-              colStyle="twoCols"
-            >
-              <app-visibility-controls
-                formGroupName="visibility"
-              ></app-visibility-controls>
-            </app-form-section>
+            @if (accessToFeatured()) {
+              <app-form-section
+                [title]="'marketplace.titles.step6Offer' | translate"
+                [description]="'marketplace.texts.step6Offer' | translate"
+                colStyle="twoCols"
+              >
+                <app-visibility-controls
+                  formGroupName="visibility"
+                ></app-visibility-controls>
+              </app-form-section>
+            }
           </app-form-section-list>
           <div class="actions">
             <button type="button" mat-button (click)="handleCancelation()">
               {{ 'btn.cancel' | translate }}
             </button>
             <button type="submit" mat-flat-button color="accent">
-              <span *ngIf="!isModification">{{
-                'marketplace.buttons.submitOffer' | translate
-              }}</span>
-              <span *ngIf="isModification">{{
-                'marketplace.buttons.updateOffer' | translate
-              }}</span>
+              @if (!isModification) {
+                <span>{{ 'marketplace.buttons.submitOffer' | translate }}</span>
+              }
+              @if (isModification) {
+                <span>{{ 'marketplace.buttons.updateOffer' | translate }}</span>
+              }
             </button>
           </div>
         </form>
-      </ng-container>
-    </ng-container>
+      }
+    } @else {
+      <div class="loader">
+        <app-spinner></app-spinner>
+      </div>
+    }
   </app-page-with-header-layout>
 </app-content-wrapper>

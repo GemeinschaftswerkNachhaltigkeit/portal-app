@@ -1,8 +1,0 @@
-@use 'theme' as *;
-@use 'palette' as *;
-
-:host {
-  position: absolute;
-  right: 0;
-  color: $green;
-}

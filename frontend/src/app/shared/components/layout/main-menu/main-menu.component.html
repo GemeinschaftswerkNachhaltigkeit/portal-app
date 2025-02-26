@@ -1,0 +1,84 @@
+<nav class="menu highlighted-links" [ngClass]="{ vertical: vertical }">
+  @if (navContent$ | async; as navContent) {
+    @for (item of navContent; track item.name) {
+      @if (!item.submenu) {
+        <app-menu-entry
+          [url]="getUrl(item)"
+          (routeClicked)="closeNavHandler()"
+          [underline]="mobile"
+          [new]="!!item.new"
+          [internal]="!item.lp"
+        >
+          {{ item.name }}
+        </app-menu-entry>
+      }
+      @if (item.submenu) {
+        <div class="dropdown-wrapper">
+          <app-dropdown-menu [title]="item.name" [new]="!!item.new">
+            @for (subitem of item.submenu; track subitem.name) {
+              <div>
+                <app-menu-entry
+                  [internal]="false"
+                  [url]="getUrl(subitem)"
+                  [underline]="true"
+                  [blue]="true"
+                >
+                  {{ subitem.name }}
+                </app-menu-entry>
+              </div>
+            }
+          </app-dropdown-menu>
+        </div>
+      }
+      @if (item.submenu) {
+        <div class="mobile-dropdown-wrapper">
+          <app-accordion-menu-item [title]="item.name" [new]="!!item.new">
+            @for (subitem of item.submenu; track subitem.name) {
+              <div>
+                <app-menu-entry
+                  [internal]="false"
+                  [url]="getUrl(subitem)"
+                  [underline]="true"
+                  [blue]="true"
+                >
+                  {{ subitem.name }}
+                </app-menu-entry>
+              </div>
+            }
+          </app-accordion-menu-item>
+        </div>
+      }
+    }
+  }
+
+  <div class="right-menu">
+    @if (isLoggedIn()) {
+      <app-menu-entry
+        [url]="'/account'"
+        (routeClicked)="closeNavHandler()"
+        [underline]="mobile"
+      >
+        <div class="user-content">
+          <span class="icon"
+            ><app-outlined-icon>person</app-outlined-icon></span
+          >
+          <div>{{ getUser()?.firstName + ' ' + getUser()?.lastName }}</div>
+        </div>
+      </app-menu-entry>
+    }
+    <div class="search-entry">
+      <app-menu-entry
+        [url]="'/search'"
+        (routeClicked)="closeNavHandler()"
+        [underline]="mobile"
+      >
+        <div class="search-content">
+          <span class="icon"
+            ><app-outlined-icon>search</app-outlined-icon></span
+          >
+          <div class="text">{{ 'btn.search' | translate }}</div>
+        </div>
+      </app-menu-entry>
+    </div>
+  </div>
+</nav>

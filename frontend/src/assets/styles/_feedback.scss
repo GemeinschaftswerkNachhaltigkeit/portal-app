@@ -1,16 +1,16 @@
 @use 'theme' as *;
 @use 'palette' as *;
 
-.mat-snack-bar-container {
+.mat-mdc-snack-bar-container {
   &.feedback {
     background-color: $blue-navy;
     color: white;
 
-    &-success {
+    &-success .mat-mdc-snackbar-surface {
       background-color: $green;
     }
 
-    &-error {
+    &-error .mat-mdc-snackbar-surface {
       background-color: $bordeauxe;
     }
   }

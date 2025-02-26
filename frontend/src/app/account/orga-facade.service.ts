@@ -6,7 +6,7 @@ import { Observable, Subscription, take } from 'rxjs';
 import { User } from '../auth/models/user';
 import { UserRole } from '../auth/models/user-role';
 import { AuthService } from '../auth/services/auth.service';
-import { ConfirmationService } from '../core/services/confirmation.service';
+import { ConfirmationService } from '../shared/services/confirmation.service';
 import { FeedbackService } from '../shared/components/feedback/feedback.service';
 import Organisation from '../shared/models/organisation';
 import { OrganisationStatus } from '../shared/models/organisation-status';

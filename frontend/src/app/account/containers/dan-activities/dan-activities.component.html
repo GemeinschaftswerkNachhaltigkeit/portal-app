@@ -1,6 +1,6 @@
-<ng-container *ngIf="activities$ | async as activities">
-  <ng-container *ngIf="activityWips$ | async as activityWips">
-    <ng-container *ngIf="activities">
+@if (activities$ | async; as activities) {
+  @if (activityWips$ | async; as activityWips) {
+    @if (activities) {
       <app-page-with-header-layout
         [title]="'account.titles.danActivities' | translate"
         [noEntriesTitle]="'account.titles.noDanActivities' | translate"
@@ -13,10 +13,9 @@
         <ng-container headerContent>
           {{ 'account.texts.danActivities' | translate }}
         </ng-container>
-
         <ng-container headerAction>
           <div class="actions-wrapper">
-            <ng-container *ngIf="paging$ | async as paging">
+            @if (paging$ | async; as paging) {
               <div class="buttons">
                 <button
                   class="create-button"
@@ -48,138 +47,140 @@
                 [count]="paging.totalElements || 0"
                 [total]="danLimit"
               ></app-char-count>
-            </ng-container>
+            }
           </div>
         </ng-container>
-
         <ng-container noEntriesContent>
           {{ 'account.texts.noDanActivities' | translate }}
         </ng-container>
-
-        <app-spinner></app-spinner>
-
-        <ng-container *ngIf="(loading$ | async) !== true">
+        <app-loading-indicator></app-loading-indicator>
+        @if ((loading$ | async) !== true) {
           <section class="lists">
-            <app-list-with-heading-layout
-              *ngIf="activityWips.length"
-              [title]="'account.titles.danActivitiesWips' | translate"
-            >
-              <div>
-                <app-card-list>
-                  <ng-container *ngFor="let activity of activityWips">
-                    <div class="card-wrapper">
-                      <app-base-card
-                        [entity]="activity"
-                        type="DAN"
-                        [showActions]="true"
-                        [clickable]="false"
-                        [draft]="true"
-                        (delete)="deleteWipHandler(activity.randomUniqueId)"
-                        (edit)="editWipHandler(activity.randomUniqueId)"
-                      >
-                      </app-base-card>
-                    </div>
-                  </ng-container>
-                </app-card-list>
-                <ng-container *ngIf="activityWipsPaging$ | async as wipsPaging">
-                  <div class="pager">
-                    <mat-paginator
-                      class="mat-elevation-z8"
-                      *ngIf="activities?.length"
-                      color="accent"
-                      [length]="wipsPaging?.totalElements"
-                      [pageIndex]="wipsPaging?.number"
-                      [pageSize]="wipsPaging?.size || pageSize"
-                      [pageSizeOptions]="pageSizeOptions"
-                      [showFirstLastButtons]="true"
-                      (page)="wipsPageChangedHandler($event)"
-                      aria-label="Select page"
-                    >
-                    </mat-paginator>
-                  </div>
-                </ng-container>
-              </div>
-            </app-list-with-heading-layout>
-            <app-list-with-heading-layout
-              *ngIf="activities.length"
-              [title]="'account.titles.danActivitiesFinished' | translate"
-            >
-              <div>
-                <div
-                  class="no-coordinates-hint"
-                  *ngIf="
-                    activities.length && utils.hasInvalidLocations(activities)
-                  "
-                >
-                  <app-alert
-                    [title]="
-                      'validationErrors.activitiesCoordinatesTitle' | translate
-                    "
-                    [showIcon]="true"
-                    bgIcon="travel_explore"
-                    fgIcon="priority_high"
-                  >
-                    {{ 'validationErrors.activitiesCoordinates' | translate }}
-                  </app-alert>
-                </div>
-                <app-card-list>
-                  <ng-container *ngFor="let activity of activities">
-                    <div class="card-wrapper">
-                      <app-base-card
-                        [entity]="activity"
-                        type="DAN"
-                        [showActions]="true"
-                        (delete)="deleteHandler(activity.id)"
-                        (edit)="editHandler(activity.id)"
-                        (cardClicked)="openActivity(activity)"
-                      >
-                        <ng-container more-actions>
-                          <app-action
-                            color="accent"
-                            [onlyIcon]="true"
-                            [icon]="'copy'"
-                            [tooltip]="'labels.copy' | translate"
-                            (clicked)="copyHandler(activity.id)"
-                          ></app-action>
-                        </ng-container>
-                      </app-base-card>
-                      <div
-                        class="error-badge"
-                        *ngIf="utils.noLocation(activity)"
-                      >
-                        <mat-icon
-                          color="accent"
-                          [matTooltip]="
-                            'profile.labels.noCoordinates' | translate
-                          "
-                          >error</mat-icon
+            @if (activityWips.length) {
+              <app-list-with-heading-layout
+                [title]="'account.titles.danActivitiesWips' | translate"
+              >
+                <div>
+                  <app-card-list>
+                    @for (activity of activityWips; track activity) {
+                      <div class="card-wrapper">
+                        <app-base-card
+                          [entity]="activity"
+                          type="DAN"
+                          [showActions]="true"
+                          [clickable]="false"
+                          [draft]="true"
+                          (delete)="deleteWipHandler(activity.randomUniqueId)"
+                          (edit)="editWipHandler(activity.randomUniqueId)"
                         >
+                        </app-base-card>
                       </div>
+                    }
+                  </app-card-list>
+                  @if (activityWipsPaging$ | async; as wipsPaging) {
+                    <div class="pager">
+                      @if (activities?.length) {
+                        <mat-paginator
+                          class="mat-elevation-z8"
+                          color="accent"
+                          [length]="wipsPaging?.totalElements"
+                          [pageIndex]="wipsPaging?.number"
+                          [pageSize]="wipsPaging?.size || pageSize"
+                          [pageSizeOptions]="pageSizeOptions"
+                          [showFirstLastButtons]="true"
+                          (page)="wipsPageChangedHandler($event)"
+                          aria-label="Select page"
+                        >
+                        </mat-paginator>
+                      }
                     </div>
-                  </ng-container>
-                </app-card-list>
-                <ng-container *ngIf="paging$ | async as paging">
-                  <div class="pager">
-                    <mat-paginator
-                      class="mat-elevation-z8"
-                      *ngIf="activities?.length"
-                      color="accent"
-                      [length]="paging?.totalElements"
-                      [pageIndex]="paging?.number"
-                      [pageSize]="paging?.size || pageSize"
-                      [pageSizeOptions]="pageSizeOptions"
-                      [showFirstLastButtons]="true"
-                      (page)="pageChangedHandler($event)"
-                      aria-label="Select page"
-                    >
-                    </mat-paginator>
-                  </div>
-                </ng-container>
-              </div>
-            </app-list-with-heading-layout>
+                  }
+                </div>
+              </app-list-with-heading-layout>
+            }
+            @if (activities.length) {
+              <app-list-with-heading-layout
+                [title]="'account.titles.danActivitiesFinished' | translate"
+              >
+                <div>
+                  @if (
+                    activities.length && utils.hasInvalidLocations(activities)
+                  ) {
+                    <div class="no-coordinates-hint">
+                      <app-alert
+                        [title]="
+                          'validationErrors.activitiesCoordinatesTitle'
+                            | translate
+                        "
+                        [showIcon]="true"
+                        bgIcon="travel_explore"
+                        fgIcon="priority_high"
+                      >
+                        {{
+                          'validationErrors.activitiesCoordinates' | translate
+                        }}
+                      </app-alert>
+                    </div>
+                  }
+                  <app-card-list>
+                    @for (activity of activities; track activity) {
+                      <div class="card-wrapper">
+                        <app-base-card
+                          [entity]="activity"
+                          type="DAN"
+                          [showActions]="true"
+                          (delete)="deleteHandler(activity.id)"
+                          (edit)="editHandler(activity.id)"
+                          (cardClicked)="openActivity(activity)"
+                        >
+                          <ng-container more-actions>
+                            <app-action
+                              color="accent"
+                              [onlyIcon]="true"
+                              [icon]="'copy'"
+                              [tooltip]="'labels.copy' | translate"
+                              (clicked)="copyHandler(activity.id)"
+                            ></app-action>
+                          </ng-container>
+                        </app-base-card>
+                        @if (utils.noLocation(activity)) {
+                          <div class="error-badge">
+                            <mat-icon
+                              color="accent"
+                              [matTooltip]="
+                                'profile.labels.noCoordinates' | translate
+                              "
+                              >error</mat-icon
+                            >
+                          </div>
+                        }
+                      </div>
+                    }
+                  </app-card-list>
+                  @if (paging$ | async; as paging) {
+                    <div class="pager">
+                      @if (activities?.length) {
+                        <mat-paginator
+                          class="mat-elevation-z8"
+                          color="accent"
+                          [length]="paging?.totalElements"
+                          [pageIndex]="paging?.number"
+                          [pageSize]="paging?.size || pageSize"
+                          [pageSizeOptions]="pageSizeOptions"
+                          [showFirstLastButtons]="true"
+                          (page)="pageChangedHandler($event)"
+                          aria-label="Select page"
+                        >
+                        </mat-paginator>
+                      }
+                    </div>
+                  }
+                </div>
+              </app-list-with-heading-layout>
+            }
           </section>
-        </ng-container>
+        }
       </app-page-with-header-layout>
-    </ng-container>
-  </ng-container>
-</ng-container>
+    }
+  }
+}

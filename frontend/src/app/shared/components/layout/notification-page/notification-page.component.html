@@ -6,23 +6,26 @@
       </div>
       <div>
         <div class="content-title-wrapper">
-          <app-heading *ngIf="title">
-            {{ title }}
-          </app-heading>
+          @if (title) {
+            <app-heading>
+              {{ title }}
+            </app-heading>
+          }
         </div>
         <div class="links">
           <section>
-            <app-html-wrapper
-              *ngIf="content"
-              [html]="content"
-            ></app-html-wrapper>
+            @if (content) {
+              <app-html-wrapper
+                [html]="content"
+              ></app-html-wrapper>
+            }
 
             <div class="continue-btn">
               <button
                 mat-flat-button
                 color="accent"
                 (click)="continueHandler()"
-              >
+                >
                 {{ buttonText | translate }}
               </button>
             </div>
@@ -33,16 +36,20 @@
     </div>
   </section>
 
-  <section class="column" *ngIf="advantages?.length">
-    <div class="benefits bg-blue-light">
-      <div class="title-wrapper">
-        <app-heading type="h3" color="none">
-          {{ advantagesTitle }}
-        </app-heading>
+  @if (advantages?.length) {
+    <section class="column">
+      <div class="benefits bg-blue-light">
+        <div class="title-wrapper">
+          <app-heading type="h3" color="none">
+            {{ advantagesTitle }}
+          </app-heading>
+        </div>
+        <ul>
+          @for (adv of advantages; track adv) {
+            <li>{{ adv }}</li>
+          }
+        </ul>
       </div>
-      <ul>
-        <li *ngFor="let adv of advantages">{{ adv }}</li>
-      </ul>
-    </div>
-  </section>
+    </section>
+  }
 </div>

@@ -8,15 +8,18 @@ import {
   ViewChild
 } from '@angular/core';
 import { EventsService } from '../../data/events.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LoadingService } from 'src/app/shared/services/loading.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   AdditionalFiltersData,
   AdditionalFiltersModalComponent
-} from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
+} from 'src/app/shared/components/form/filters/additional-filters-modal.component';
+import {
+  SecondaryFilters,
+  SecondaryFiltersComponent
+} from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { Subject, takeUntil } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,8 +28,40 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { environment } from 'src/environments/environment';
 import { FeaturesService } from 'src/app/shared/components/feature/features.service';
+import { CommonModule } from '@angular/common';
+import { CalendarLayoutComponent } from '../../components/calendar-layout.component';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { SearchControlsComponent } from '../../components/search-controls.component';
+import { EventListComponent } from '../../components/event-list.component';
+import { EventComponent } from '../../components/event.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { FilterSidebarComponent } from '../../components/filter-sidebar.component';
+import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
+import { MatButtonModule } from '@angular/material/button';
+import { DateSelectComponent } from '../../components/date-select.component';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-calendar',
+  standalone: true,
+  imports: [
+    CommonModule,
+    CalendarLayoutComponent,
+    TranslateModule,
+    FilterModalButtonComponent,
+    SearchControlsComponent,
+    EventListComponent,
+    EventComponent,
+    LoadingIndicatorComponent,
+    AlertComponent,
+    FilterSidebarComponent,
+    HeadingComponent,
+    SecondaryFiltersComponent,
+    MatButtonModule,
+    DateSelectComponent,
+    MatIconModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
@@ -34,11 +69,11 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
   @ViewChild('marker') marker: ElementRef;
   unsubscribe$ = new Subject();
 
-  events$ = this.eventsService.events$;
-  groups$ = this.eventsService.groupedEvents$;
-  availableEvents$ = this.eventsService.availableEvents$;
-  paging$ = this.eventsService.eventsPaging$;
-  loading$ = this.loader.isLoading$();
+  events = this.eventsService.events;
+  groups = this.eventsService.groupedEvents;
+  availableEvents = this.eventsService.availableEvents;
+  paging = this.eventsService.eventsPaging;
+  loading = this.eventsService.loading;
 
   selected: DateTime = DateTime.now();
   dateControl = new FormControl('');
@@ -80,19 +115,24 @@ export class CalendarComponent implements AfterViewInit, OnDestroy {
       this.changeDatePickerLang(event.lang);
     });
 
-    effect(() => {
-      if (this.featureState() !== 'PENDING') {
-        const filters = this.eventsService.getFilters();
-        this.searchControl.setValue({
-          query: (filters['query'] || '') as string,
-          location: (filters['location'] || '') as string
-        });
-        const start = (filters['startDate'] as string) || '';
-        this.selected = start ? DateTime.fromISO(start) : DateTime.now();
-        this.eventsService.setCurrentMonthOfCalendar(this.selected);
-        this.triggerSearchOnQueryParamsChange();
+    effect(
+      () => {
+        if (this.featureState() !== 'PENDING') {
+          const filters = this.eventsService.getFilters();
+          this.searchControl.setValue({
+            query: (filters['query'] || '') as string,
+            location: (filters['location'] || '') as string
+          });
+          const start = (filters['startDate'] as string) || '';
+          this.selected = start ? DateTime.fromISO(start) : DateTime.now();
+          this.eventsService.setCurrentMonthOfCalendar(this.selected);
+          this.triggerSearchOnQueryParamsChange();
+        }
+      },
+      {
+        allowSignalWrites: true
       }
-    });
+    );
   }
 
   changeDatePickerLang(locale: string) {

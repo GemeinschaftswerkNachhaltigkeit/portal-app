@@ -1,5 +1,5 @@
-<ng-container *ngIf="orgaSubscriptions$ | async as orgas">
-  <ng-container *ngIf="orgas">
+@if (orgaSubscriptions$ | async; as orgas) {
+  @if (orgas) {
     <app-page-with-header-layout
       [title]="'account.titles.orgaSubs' | translate"
       [noEntriesTitle]="'account.titles.noOrgaSubs' | translate"
@@ -11,18 +11,20 @@
       <ng-container noEntriesContent>{{
         'account.texts.noOrgaSubs' | translate
       }}</ng-container>
-      <app-spinner></app-spinner>
-      <app-card-list *ngIf="(loading$ | async) !== true">
-        <ng-container *ngFor="let orga of orgas">
-          <app-base-card
-            [entity]="orga"
-            type="organisation"
-            [followed]="true"
-            (cardClicked)="openOrga(orga)"
-          >
-          </app-base-card>
-        </ng-container>
-      </app-card-list>
+      <app-loading-indicator></app-loading-indicator>
+      @if ((loading$ | async) !== true) {
+        <app-card-list>
+          @for (orga of orgas; track orga) {
+            <app-base-card
+              [entity]="orga"
+              type="organisation"
+              [followed]="true"
+              (cardClicked)="openOrga(orga)"
+            >
+            </app-base-card>
+          }
+        </app-card-list>
+      }
     </app-page-with-header-layout>
-  </ng-container>
-</ng-container>
+  }
+}

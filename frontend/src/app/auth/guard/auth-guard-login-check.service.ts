@@ -5,18 +5,14 @@ import { Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthGuardWithLoginCheck {
   constructor(private authService: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.authService.isDoneLoading$.pipe(
-      filter((isDone) => isDone),
-      switchMap((_) => this.authService.isAuthenticated$),
-      map(() => true)
-    );
+  ): boolean {
+    return this.authService.isAuthenticated();
   }
 }

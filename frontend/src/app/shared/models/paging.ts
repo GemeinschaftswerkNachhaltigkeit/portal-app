@@ -1,6 +1,6 @@
 export const defaultPaginatorOptions = {
   pageSize: 25,
-  pageSizeOptions: [5, 10, 25, 100]
+  pageSizeOptions: [1, 5, 10, 25, 100]
 };
 export type PageQuerParams = {
   page?: number;

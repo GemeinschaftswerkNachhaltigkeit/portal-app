@@ -1,32 +1,82 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import Organisation from 'src/app/shared/models/organisation';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { OrgaFacadeService } from '../../orga-facade.service';
+import { OrgaService } from '../../data/orga.service';
+import { CommonModule } from '@angular/common';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { ProfileLayoutComponent } from 'src/app/profile-pages/components/profile-layout.component';
+import {
+  BreadcrumbComponent,
+  BreadcrumbsComponent
+} from 'src/app/shared/components/base/breadcrumb';
+import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
+import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
+import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
+import { ActionComponent } from 'src/app/shared/components/base/action.component';
+import { SectionComponent } from 'src/app/profile-pages/components/section.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { HtmlWrapperComponent } from 'src/app/shared/components/base/html-wrapper.component';
+import { TabsComponent } from '../../components/tabs/tabs.component';
+import { TabComponent } from '../../components/tabs/tab.component';
+import { ListItemComponent } from '../../components/list-item.component';
+import {
+  ActivitySubscriptionActionComponent,
+  OrganisationSubscriptionActionComponent
+} from 'src/app/shared/components/subscription';
+import { ContactComponent } from 'src/app/profile-pages/components/contact.component';
+import { HeroComponent } from 'src/app/profile-pages/components/hero.component';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-orga-profile-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    LoadingIndicatorComponent,
+    ProfileLayoutComponent,
+    HeroComponent,
+    BreadcrumbsComponent,
+    BreadcrumbComponent,
+    PageMenuComponent,
+    MenuItemDirective,
+    MenuItemActiveDirective,
+    RouterModule,
+    ActionComponent,
+    SectionComponent,
+    SdgIconComponent,
+    OrgaBadgesComponent,
+    HtmlWrapperComponent,
+    TabsComponent,
+    TabComponent,
+    ListItemComponent,
+    ActivitySubscriptionActionComponent,
+    OrganisationSubscriptionActionComponent,
+    ContactComponent,
+    TranslateModule,
+    SpinnerComponent
+  ],
   templateUrl: './orga-profile-container.component.html',
   styleUrls: ['./orga-profile-container.component.scss']
 })
 export class OrgaProfileContainerComponent implements OnInit {
-  orga$ = this.orgaFacade.orga$;
-  activities$ = this.orgaFacade.activites$;
-  offers$ = this.orgaFacade.offers$;
-  bp$ = this.orgaFacade.bp$;
+  public loader = inject(LoadingService);
+  public orgaService = inject(OrgaService);
+  public subscription = inject(SubscriptionFacadeService);
+  private translate = inject(TranslateService);
+  private route = inject(ActivatedRoute);
+  private utils = inject(UtilsService);
 
-  constructor(
-    private translate: TranslateService,
-    private orgaFacade: OrgaFacadeService,
-    public subscription: SubscriptionFacadeService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private utils: UtilsService,
-    public loader: LoadingService
-  ) {}
+  organisation = this.orgaService.organisation;
+  activities = this.orgaService.activities;
+  offers = this.orgaService.offers;
+  bestPractices = this.orgaService.bestPractices;
+
+  constructor() {}
 
   shareLink(orga: Organisation): string {
     const link = location.href;
@@ -72,7 +122,7 @@ export class OrgaProfileContainerComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['orgaId'];
-    this.orgaFacade.getById(id);
+    this.orgaService.getOrganisationById(id);
     this.utils.scrollTop();
   }
 }

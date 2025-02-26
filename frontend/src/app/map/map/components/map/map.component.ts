@@ -19,13 +19,70 @@ import {
 } from 'rxjs';
 import MarkerDto from '../../../models/markerDto';
 import SearchResult from '../../../models/search-result';
-import { SharedMarkerService } from '../../../services/marker.service';
-import { MapZoomService } from 'src/app/map/services/map-zoom.service';
+import { MarkerService } from '../../../data/marker.service';
+import { MapZoomService } from 'src/app/map/data/map-zoom.service';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss']
+  standalone: true,
+  imports: [MatIconModule, MatButtonModule],
+  template: `
+    <div class="map-container" #mapRef>
+      <div class="map-frame">
+        <div id="map"></div>
+      </div>
+      <button class="zoomOutBtn" (click)="zoomOutHandler()">
+        <mat-icon>zoom_out_map</mat-icon>
+      </button>
+    </div>
+  `,
+  styles: `
+    @use 'theme' as *;
+    @use 'palette' as *;
+
+    .map-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .map-frame {
+      height: 100%;
+    }
+
+    #map {
+      height: 100%;
+      font-size: 1.4rem;
+    }
+
+    .zoomOutBtn {
+      width: 33px;
+      height: 33px;
+      border-radius: 4px;
+      position: absolute;
+      right: 10px;
+      bottom: 100px;
+      z-index: 1000;
+      background-color: white;
+      border: 2px solid #aaaaaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      &:hover {
+        background-color: #eeeeee;
+        cursor: pointer;
+      }
+      mat-icon {
+        transform: scale(0.8);
+      }
+    }
+  `
 })
 export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
   @ViewChild('mapRef') mapRef: ElementRef<HTMLDivElement> | null = null;
@@ -38,7 +95,7 @@ export class MapComponent implements AfterViewInit, OnChanges, OnDestroy {
   mapInitialized = false;
 
   constructor(
-    private marker: SharedMarkerService,
+    private marker: MarkerService,
     private zoomService: MapZoomService
   ) {}
 

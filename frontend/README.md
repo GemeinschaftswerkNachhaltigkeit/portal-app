@@ -52,24 +52,19 @@ Runs:
 
 `npm run validate`
 
-# Modules
+## Work in Progress
 
-## Core Module
+### Transform components to standalone components
 
-This module is imported only once in AppModule
-
-Contains:
-
-- singleton services -> services used in the whole application (Logging, Auth ...)
-- singleton components -> components which are instanciated once but impact the application as a whole (Gloable App Layout, Main Menu and more)
-- configuration
-- exports of third party modules which are needed by the AppModule
-
-## Shared Module
-
-This module can be imported in multiple other feature modules which need functionality provided by the shared module.
-
-Contains:
-
-- Services, Directives, Components, Types ... which are reusable
-- exports commonly used angular modules (like CommonModule)
+- Search Module
+- Map Module
+- Events Module
+- Marketplace Module
+- SignUp Module
+- Profiles Module
+- DAN Module
+- Activity Module
+- Admin Module
+- Clearing Module
+- Account Module
+- Shared Components

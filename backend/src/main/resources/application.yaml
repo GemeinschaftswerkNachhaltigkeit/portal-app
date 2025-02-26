@@ -35,7 +35,7 @@ spring:
       resolve-lazily: true
 
 action-page:
-  default-recipients: gemeinschaftswerk@nachhaltigkeitsrat.de
+  default-recipients: gemeinschaftswerk-nachhaltigkeit@engagement-global.de
 
 springdoc:
   swagger-ui:

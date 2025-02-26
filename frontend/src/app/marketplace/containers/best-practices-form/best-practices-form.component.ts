@@ -1,27 +1,79 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  NgForm,
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil, debounceTime } from 'rxjs';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import {
+  ContactControlsComponent,
+  defaultContactGroupFields
+} from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { BestPracticesFacadeService } from '../../best-practices-facade.service';
 import { BestPracticesCategories } from '../../models/best-practices-categories';
 import { BestPracticesWipDto } from '../../models/best-practices-wip-dto';
 import { environment } from 'src/environments/environment';
 import { MimeTypeEnum } from 'src/app/shared/models/mimetype';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { FormSectionListComponent } from '../../components/form-section-list.component';
+import { FormSectionComponent } from '../../components/form-section.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ContentControlsComponent } from '../../components/content-controls.component';
+import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
+import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { BestPracticeFormService } from '../../best-practice-form.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-best-practices-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    FormSectionListComponent,
+    FormSectionComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    LoadingIndicatorComponent,
+    UploadImageComponent,
+    ContactControlsComponent,
+    ContentWrapperComponent,
+    TranslateModule,
+    ContentControlsComponent,
+    ThematicFocusControlComponent,
+    CategoryControlComponent,
+    SpinnerComponent
+  ],
   templateUrl: './best-practices-form.component.html',
   styleUrls: ['./best-practices-form.component.scss']
 })
 export class BestPracticesFormComponent implements OnInit, OnDestroy {
   @ViewChild('form') form!: NgForm;
+
+  public dzService = inject(DropzoneService);
+  private bestPracticeFormService = inject(BestPracticeFormService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private utils = inject(UtilsService);
 
   categories = Object.keys(BestPracticesCategories).map((key) => ({
     key,
@@ -31,24 +83,16 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   unsubscribe$ = new Subject();
   debounce$ = new Subject();
-  loading$ = this.loader.isLoading$('best-practice-loading');
-  bestPracticesWip$ = this.bestPracticesFacade.bestPracticesWip$;
-  tokenRefresh$ = this.bestPracticesFacade.tokenRefresh$;
+  loading = this.bestPracticeFormService.loading;
+  bestPracticeWip = this.bestPracticeFormService.bestPracticeWip;
   orgId: number | null = null;
   uuid: string | null = null;
-  token = this.bestPracticesFacade.token;
+  token = this.bestPracticeFormService.token;
   isModification = false;
   image = '';
 
-  constructor(
-    fb: FormBuilder,
-    public dzService: DropzoneService,
-    private bestPracticesFacade: BestPracticesFacadeService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private loader: LoadingService,
-    private utils: UtilsService
-  ) {
+  constructor(fb: FormBuilder) {
+    this.handleIntialValues();
     this.formGroup = fb.group({
       bestPractiseCategory: fb.control<string>('SUSTAINABILITY_REPORTING', {
         validators: [Validators.required]
@@ -79,11 +123,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
     this.orgId = routeParams['orgId'];
     this.uuid = routeParams['uuid'];
     this.isModification = this.route.snapshot.queryParams['edit'] === 'true';
-    this.tokenRefresh$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      this.token = this.bestPracticesFacade.token;
-    });
     this.handleSaveOnChange();
-    this.handleIntialValues();
     this.loadExistingBestPracticeWip();
   }
 
@@ -105,7 +145,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
         ','
       ),
       headers: {
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.auth.getAccessToken()}`
       }
     };
   }
@@ -116,13 +156,13 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
 
   handleDelteImage(): void {
     if (this.orgId && this.uuid) {
-      this.bestPracticesFacade.deleteImage(this.orgId, this.uuid);
+      this.bestPracticeFormService.deleteImage(this.orgId, this.uuid);
     }
   }
 
   handleSave(): void {
     if (this.orgId && this.uuid && this.form.dirty) {
-      this.bestPracticesFacade.saveBestPracticesWip(
+      this.bestPracticeFormService.saveBestPracticesWip(
         this.orgId,
         this.uuid,
         this.getPayload()
@@ -135,7 +175,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
       this.formGroup.markAllAsTouched();
     } else {
       if (this.orgId && this.uuid) {
-        this.bestPracticesFacade.releaseBestPracticesWip(
+        this.bestPracticeFormService.releaseBestPracticesWip(
           this.orgId,
           this.uuid,
           this.getPayload()
@@ -178,7 +218,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
   }
 
   private handleIntialValues(): void {
-    this.bestPracticesWip$
+    toObservable(this.bestPracticeWip)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((wipDto: BestPracticesWipDto | null) => {
         if (wipDto) {
@@ -189,7 +229,7 @@ export class BestPracticesFormComponent implements OnInit, OnDestroy {
 
   private loadExistingBestPracticeWip(): void {
     if (this.orgId && this.uuid) {
-      this.bestPracticesFacade.getBestPracticesWip(this.orgId, this.uuid);
+      this.bestPracticeFormService.getBestPracticesWip(this.orgId, this.uuid);
     }
   }
 

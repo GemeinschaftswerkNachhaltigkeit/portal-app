@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FeedbackComponent } from './feedback/feedback.component';
+import { FeedbackComponent } from './feedback.component';
 
 export type FeedbackType = 'success' | 'error';
 

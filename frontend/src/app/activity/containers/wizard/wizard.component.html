@@ -1,4 +1,4 @@
-<ng-container *ngIf="activityData$ | async as activity">
+@if (activityData$ | async; as activity) {
   <mat-stepper
     [linear]="true"
     #stepper
@@ -29,7 +29,6 @@
               [danPeriodParams]="danPeriodParams"
               [isDan]="isDan"
             ></app-master-data-form>
-
             <app-images-form
               [bannerImageTools]="true"
               [bannerImageMode]="
@@ -41,7 +40,6 @@
               (imageMode)="imageModeHandler($event)"
             ></app-images-form>
           </form>
-
           <app-actions [showPrevBtn]="false"></app-actions>
         </div>
         <app-form-advatages
@@ -50,7 +48,6 @@
         ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
-
     <mat-step
       [stepControl]="step2Form!"
       [label]="'labels.wizard.topics' | translate"
@@ -81,7 +78,6 @@
         ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
-
     <mat-step
       [stepControl]="step3Form!"
       [label]="'labels.wizard.externalLinks' | translate"
@@ -110,7 +106,6 @@
         ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
-
     <mat-step
       [stepControl]="step4Form!"
       [label]="'labels.wizard.contact' | translate"
@@ -167,51 +162,49 @@
         ></app-form-advatages>
       </app-wizard-sidebar-layout>
     </mat-step>
-
     <mat-step class="final-step">
-      <app-content-wrapper *ngIf="loading$ | async" size="xl">
-        <app-spinner></app-spinner>
-      </app-content-wrapper>
-      <app-content-wrapper
-        *ngIf="isSubmissionSuccess && (loading$ | async) === false"
-        size="xl"
-      >
-        <div class="final-step-content-wrapper">
-          <app-html-wrapper
-            [html]="(activityContent$ | async)?.completedMessage || ''"
-          ></app-html-wrapper>
-
-          <div class="actions">
-            <a mat-flat-button color="accent" [href]="shareLink()">
-              {{ 'btn.share' | translate }}
-            </a>
-            <a
-              mat-flat-button
-              color="accent"
-              [routerLink]="['/', 'account', 'activities']"
-              [queryParams]="{ update: 'success' }"
-            >
-              <span class="short">{{ 'btn.back' | translate }}</span>
-              <span class="long">{{
-                'btn.backToActivityOverview' | translate
-              }}</span>
-            </a>
+      @if (loading$ | async) {
+        <app-content-wrapper size="xl">
+          <app-loading-indicator></app-loading-indicator>
+        </app-content-wrapper>
+      }
+      @if (isSubmissionSuccess && (loading$ | async) === false) {
+        <app-content-wrapper size="xl">
+          <div class="final-step-content-wrapper">
+            <app-html-wrapper
+              [html]="(activityContent$ | async)?.completedMessage || ''"
+            ></app-html-wrapper>
+            <div class="actions">
+              <a mat-flat-button color="accent" [href]="shareLink()">
+                {{ 'btn.share' | translate }}
+              </a>
+              <a
+                mat-flat-button
+                color="accent"
+                [routerLink]="['/', 'account', 'activities']"
+                [queryParams]="{ update: 'success' }"
+              >
+                <span class="short">{{ 'btn.back' | translate }}</span>
+                <span class="long">{{
+                  'btn.backToActivityOverview' | translate
+                }}</span>
+              </a>
+            </div>
           </div>
-        </div>
-      </app-content-wrapper>
-      <app-content-wrapper
-        *ngIf="!isSubmissionSuccess && (loading$ | async) === false"
-        size="xl"
-      >
-        <div class="final-step-content-wrapper">
-          <p>
-            {{ 'error.unknown' | translate }}
-          </p>
-          <button mat-flat-button color="accent" matStepperPrevious>
-            {{ 'btn.back' | translate }}
-          </button>
-        </div>
-      </app-content-wrapper>
+        </app-content-wrapper>
+      }
+      @if (!isSubmissionSuccess && (loading$ | async) === false) {
+        <app-content-wrapper size="xl">
+          <div class="final-step-content-wrapper">
+            <p>
+              {{ 'error.unknown' | translate }}
+            </p>
+            <button mat-flat-button color="accent" matStepperPrevious>
+              {{ 'btn.back' | translate }}
+            </button>
+          </div>
+        </app-content-wrapper>
+      }
     </mat-step>
     <!-- Icon overrides. -->
     <ng-template matStepperIcon="edit">
@@ -224,4 +217,4 @@
       <mat-icon>check</mat-icon>
     </ng-template>
   </mat-stepper>
-</ng-container>
+}

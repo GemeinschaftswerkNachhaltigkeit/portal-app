@@ -1,0 +1,21 @@
+@if (orgContent$ | async; as orgContent) {
+  @if (orgData$ | async; as orgData) {
+    <app-notification-page
+      [title]="
+        isContactSameAsCurrentUser(orgData)
+          ? orgContent?.completedMessageTitle
+          : orgContent?.completedMessageVerifyContactTitle
+      "
+      [content]="
+        isContactSameAsCurrentUser(orgData)
+          ? orgContent?.completedMessage
+          : orgContent?.completedMessageVerifyContact
+      "
+      [icon]="
+        isContactSameAsCurrentUser(orgData) ? 'check' : 'perm_contact_calendar'
+      "
+      (continue)="leaveWizard()"
+      >
+    </app-notification-page>
+  }
+}

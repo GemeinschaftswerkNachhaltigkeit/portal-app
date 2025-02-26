@@ -1,37 +1,80 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
-import { TranslateService } from '@ngx-translate/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   AdditionalFiltersModalComponent,
   AdditionalFiltersData
-} from 'src/app/shared/components/form/filters/additional-filters-modal/additional-filters-modal.component';
-import { SecondaryFilters } from 'src/app/shared/components/form/filters/secondary-filters/secondary-filters.component';
+} from 'src/app/shared/components/form/filters/additional-filters-modal.component';
+import {
+  SecondaryFilters,
+  SecondaryFiltersComponent
+} from 'src/app/shared/components/form/filters/secondary-filters.component';
 import AdditionalFilters from 'src/app/shared/models/additional-filters';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { environment } from 'src/environments/environment';
-import { MarketplaceFacadeService } from '../../marketplace-facade.service';
 import { BestPracticesCategories } from '../../models/best-practices-categories';
 import { MarketplaceItemDto } from '../../models/marketplace-item-dto';
 import { MarketplaceTypes } from '../../models/marketplace-type';
 import { OfferCategories } from '../../models/offer-categories';
-import { UtilsService } from 'src/app/shared/services/utils.service';
 import { expired } from '../../marketplace-utils';
+import { CommonModule } from '@angular/common';
+import { MarketplaceLayoutComponent } from '../../components/marketplace-layout.component';
+import { AddBannerComponent } from '../../components/add-banner.component';
+import { HeadingComponent } from 'src/app/shared/components/base/heading.component';
+import { MatButtonModule } from '@angular/material/button';
+import { SearchInputComponent } from 'src/app/shared/components/form/search-input.component';
+import { FilterModalButtonComponent } from 'src/app/shared/components/form/filters/filter-modal-button.component';
+import { CardListComponent } from 'src/app/shared/components/cards/card-list.component';
+import { CardComponent } from '../../components/card.component';
+import { PartnerLinksComponent } from '../../components/partner-links.component';
+import { MarketplaceSearchService } from '../../marketplace-search.service';
+import { MarketplaceItemService } from '../../marketplace-item.service';
+import { ErrorComponent } from 'src/app/shared/components/base/error.component';
+import { MarketplaceContentService } from '../../marketplace-content.service';
 
 @Component({
   selector: 'app-marketplace-search',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MarketplaceLayoutComponent,
+    AddBannerComponent,
+    HeadingComponent,
+    MatButtonModule,
+    SecondaryFiltersComponent,
+    SearchInputComponent,
+    FilterModalButtonComponent,
+    CardListComponent,
+    CardComponent,
+    MatPaginatorModule,
+    PartnerLinksComponent,
+    TranslateModule,
+    ErrorComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './marketplace-search.component.html',
   styleUrls: ['./marketplace-search.component.scss']
 })
 export class MarketplaceSearchComponent implements OnInit {
-  links$ = this.marketplaceFacade.partnerLinks$;
-  items$ = this.marketplaceFacade.marketplaceItems$;
-  featuredItems$ = this.marketplaceFacade.featuredMarketplaceItems$;
-  loading$ = this.loader.isLoading$();
-  paging$ = this.marketplaceFacade.marketplaceItemsPaging$;
+  marketplaceSearchService = inject(MarketplaceSearchService);
+  marketplaceItemService = inject(MarketplaceItemService);
+  marketplaceContentService = inject(MarketplaceContentService);
+
+  items = this.marketplaceSearchService.items;
+  featuredItems = this.marketplaceSearchService.featuredItems;
+  loading = this.marketplaceSearchService.loading;
+  error = this.marketplaceSearchService.error;
+  paging = this.marketplaceSearchService.paging;
+  partners = this.marketplaceContentService.partners;
+
   pageSize = defaultPaginatorOptions.pageSize;
   pageSizeOptions = defaultPaginatorOptions.pageSizeOptions;
   includedFilters: SecondaryFilters[] = [
@@ -42,11 +85,8 @@ export class MarketplaceSearchComponent implements OnInit {
   searchValue = '';
 
   constructor(
-    private marketplaceFacade: MarketplaceFacadeService,
     private translate: TranslateService,
-    private loader: LoadingService,
     public dialog: MatDialog,
-    private utils: UtilsService,
     filtersService: SecondaryFitlersService
   ) {
     filtersService.setOpenFilters('marketplace-fitlers', [
@@ -56,13 +96,13 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.marketplaceFacade.getFeatured();
-    const filters = this.marketplaceFacade.getFilters();
-    this.searchValue = (filters['query'] || '') as string;
+    this.marketplaceSearchService.getFeaturedItems();
+    this.marketplaceContentService.getPartners();
+    this.searchValue = this.marketplaceSearchService.getQueryFilter();
   }
 
   getQuery(): string {
-    return this.marketplaceFacade.getFilters()['query'] as string;
+    return this.marketplaceSearchService.getQueryFilter();
   }
 
   expired(item: MarketplaceItemDto): boolean {
@@ -70,11 +110,9 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   getCategories(): (OfferCategories | BestPracticesCategories)[] {
-    const offerCats =
-      (this.marketplaceFacade.getFilters()['offerCat'] as string[]) || [];
+    const offerCats = this.marketplaceSearchService.getOfferCategoryFilter();
     const bpCats =
-      (this.marketplaceFacade.getFilters()['bestPractiseCat'] as string[]) ||
-      [];
+      this.marketplaceSearchService.getBestPractiseCategoryFilter();
     const oc: OfferCategories[] = offerCats.map((oc: string) => {
       const key = oc as keyof typeof OfferCategories;
       return OfferCategories[key];
@@ -87,7 +125,7 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   countFilters(): number {
-    return this.marketplaceFacade.countFilters();
+    return this.marketplaceSearchService.countFilters();
   }
 
   getMarketplaceCategory(item: MarketplaceItemDto): string {
@@ -99,7 +137,7 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   handlePageChanged(event: PageEvent): void {
-    this.marketplaceFacade.changePage(event.pageIndex, event.pageSize);
+    this.marketplaceSearchService.changePage(event.pageIndex, event.pageSize);
   }
 
   handleSearchValueChanged(query: string): void {
@@ -107,11 +145,11 @@ export class MarketplaceSearchComponent implements OnInit {
   }
 
   handleSearch(query: string): void {
-    this.marketplaceFacade.search({ query: query });
+    this.marketplaceSearchService.search({ query: query });
   }
 
   handleAdd(): void {
-    this.marketplaceFacade.addNewMarketplaceItem();
+    this.marketplaceItemService.addNewMarketplaceItem();
   }
 
   open(id?: number): void {
@@ -125,7 +163,7 @@ export class MarketplaceSearchComponent implements OnInit {
 
   clearAll(): void {
     this.searchValue = '';
-    this.marketplaceFacade.clearFilters();
+    this.marketplaceSearchService.clearFilters();
   }
 
   openFilters(): void {
@@ -135,23 +173,24 @@ export class MarketplaceSearchComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.marketplaceFacade.search(result);
+        this.marketplaceSearchService.search(result);
       }
     });
   }
 
   handleFiltersChanged(filters: AdditionalFilters): void {
-    this.marketplaceFacade.search(filters);
+    this.marketplaceSearchService.search(filters);
   }
 
   getFilterData(): AdditionalFiltersData {
-    const filters: AdditionalFilters = this.marketplaceFacade.getFilters();
-
     return {
       use: this.includedFilters,
-      selectedThematicFocusValues: filters['thematicFocus'],
-      selectedBestPracticeCategories: filters['bestPractiseCat'],
-      selectedOfferCategories: filters['offerCat']
+      selectedThematicFocusValues:
+        this.marketplaceSearchService.getThematicFocusFilter(),
+      selectedBestPracticeCategories:
+        this.marketplaceSearchService.getBestPractiseCategoryFilter(),
+      selectedOfferCategories:
+        this.marketplaceSearchService.getOfferCategoryFilter()
     };
   }
 }

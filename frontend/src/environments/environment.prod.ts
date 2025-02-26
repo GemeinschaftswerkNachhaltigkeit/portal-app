@@ -6,9 +6,9 @@ export let environment = {
   directusBaseUrl: 'load-from-backend',
   landingPageUrl: 'load-from-backend',
   assetsUrl: '/app/assets',
-  matomoUrl: 'https://matomo.nachhaltigkeitsrat.de',
+  matomoUrl: 'https://gemeinschaftswerk-nachhaltigkeit.de/analytics/',
   matomoTagManagerContainerId: 'jFGzL2wu',
-  matomoSiteId: 10,
+  matomoSiteId: 1,
   danId: 0,
   keycloak: {
     issuer: 'load-from-backend',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import Organisation from 'src/app/shared/models/organisation';
@@ -9,9 +9,33 @@ import { UserType } from 'src/app/shared/models/user-type';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import UserListDto from '../../models/user-list-dto';
 import { OrgaFacadeService } from '../../orga-facade.service';
+import { CommonModule } from '@angular/common';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { MatButtonModule } from '@angular/material/button';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { OutlinedIconComponent } from 'src/app/shared/components/base/outlined-icon.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { OrgaUserFormComponent } from './orga-user-form/orga-user-form.component';
+import { OrgaUserListComponent } from '../../components/orga-user-list.component';
+import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
 
 @Component({
   selector: 'app-my-organisation',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    LoadingIndicatorComponent,
+    AlertComponent,
+    OutlinedIconComponent,
+    TranslateModule,
+    BaseCardComponent,
+    OrgaUserFormComponent,
+    OrgaUserListComponent,
+    AuthenticatedDirective
+  ],
   templateUrl: './my-organisation.component.html',
   styleUrls: ['./my-organisation.component.scss']
 })

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, Observable, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { RegisterOrLoginService } from 'src/app/core/services/register-or-login.service.service';
+import { RegisterOrLoginService } from 'src/app/shared/services/register-or-login.service.service';
 import { BestPracticesDto } from 'src/app/marketplace/models/best-practices-dto';
 import { OfferDto } from 'src/app/marketplace/models/offer-dto';
 import Activity from '../../models/actvitiy';
@@ -31,11 +31,14 @@ export class SubscriptionFacadeService {
     private auth: AuthService,
     private loader: LoadingService
   ) {
-    this.auth.isDoneLoading$.subscribe((ready: boolean) => {
-      if (ready && this.auth.isLoggedIn()) {
-        this.initSubscriptionLists();
-      }
-    });
+    // this.auth.isDoneLoading$.subscribe((ready: boolean) => {
+    //   if (ready && this.auth.isLoggedIn()) {
+    //     this.initSubscriptionLists();
+    //   }
+    // });
+    if (this.auth.isLoggedIn()) {
+      this.initSubscriptionLists();
+    }
     router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe(() => {

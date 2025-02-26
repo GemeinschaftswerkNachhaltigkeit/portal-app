@@ -30,20 +30,20 @@
         </ng-container>
         <ng-container *appWithOrga>
           <!-- <ng-container *ngIf="featureService.show$('dan-account') | async">
-            <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
-              <a
-                *appMenuItem
-                class="indented"
-                [routerLink]="['/account/dan-activities']"
-                [routerLinkActive]="'active'"
-              >
-                <div class="inline">
-                  <app-new-badge></app-new-badge
-                  ><span>{{ 'account.nav.danActivities' | translate }}</span>
-                </div>
-              </a>
-            </ng-container>
-          </ng-container> -->
+              <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
+                <a
+                  *appMenuItem
+                  class="indented"
+                  [routerLink]="['/account/dan-activities']"
+                  [routerLinkActive]="'active'"
+                  >
+                  <div class="inline">
+                    <app-new-badge></app-new-badge
+                      ><span>{{ 'account.nav.danActivities' | translate }}</span>
+                    </div>
+                  </a>
+                </ng-container>
+              </ng-container> -->
 
           <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
             <a
@@ -81,7 +81,7 @@
           </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="featureService.show$('dan-account') | async">
+        @if (featureService.show$('dan-account') | async) {
           <ng-container *appWithoutOrga>
             <ng-container *appAuthenticatedExcludingRoles="['RNE_ADMIN']">
               <a
@@ -96,7 +96,7 @@
               </a>
             </ng-container>
           </ng-container>
-        </ng-container>
+        }
 
         <ng-container *appAuthenticated>
           <a
@@ -162,86 +162,86 @@
 </ng-container>
 
 <!--
-<app-content-wrapper size="xl">
-  <p>Activities:</p>
+        <app-content-wrapper size="xl">
+          <p>Activities:</p>
 
-  <div *ngIf="orga$ | async as orga">
-    <div *ngIf="activities$ | async as activities">
-      <section
-        class="article-wrapper"
-        id="activities"
-        *ngIf="activities.length"
-      >
-        <div class="activities">
-          <ng-container *ngFor="let activity of activities">
-            <ul>
-              <li>{{activity.name}}
-                <button
-                  color="primary"
-                  mat-flat-button
-                  (click)="createWipActivityForActivity(orga?.id!, activity.id!)"
+          <div *ngIf="orga$ | async as orga">
+            <div *ngIf="activities$ | async as activities">
+              <section
+                class="article-wrapper"
+                id="activities"
+                *ngIf="activities.length"
                 >
-                  update activity
-                </button>
+                <div class="activities">
+                  <ng-container *ngFor="let activity of activities">
+                    <ul>
+                      <li>{{activity.name}}
+                        <button
+                          color="primary"
+                          mat-flat-button
+                          (click)="createWipActivityForActivity(orga?.id!, activity.id!)"
+                          >
+                          update activity
+                        </button>
 
-                <button
-                  color="primary"
-                  mat-flat-button
-                  (click)="deleteActivity(orga?.id!, activity.id!)"
+                        <button
+                          color="primary"
+                          mat-flat-button
+                          (click)="deleteActivity(orga?.id!, activity.id!)"
+                          >
+                          update activity
+                        </button>
+                      </li>
+                    </ul>
+                  </ng-container>
+                </div>
+                <app-loading-indicator forId="activitiesLoading"></app-loading-indicator>
+              </section>
+            </div>
+          </div>
+
+          <hr/>
+
+          <p>Add activity:</p>
+          <section>
+            <button
+              color="accent"
+              mat-flat-button
+              (click)="createActivity()"
+              [disabled]="!activityService.isAllowedToCreateActivity()"
+              >
+              add activity
+            </button>
+          </section>
+
+          <hr />
+          <p>Organisation</p>
+
+          <section *ngIf="orga$ | async as orga">
+            <ng-container *ngIf="orga === null">
+              <button
+                color="primary"
+                mat-flat-button
+                (click)="createOrg()"
+                [disabled]="!orgService.isAllowedToCreateOrg()"
                 >
-                  update activity
-                </button>
-              </li>
-            </ul>
-          </ng-container>
-        </div>
-        <app-spinner forId="activitiesLoading"></app-spinner>
-      </section>
-    </div>
-  </div>
+                create org
+              </button>
+            </ng-container>
+            <ng-container *ngIf="orga !== null">
 
-  <hr/>
+              <span>
+                Organisation: {{ orga.name }}
+              </span>
 
-  <p>Add activity:</p>
-  <section>
-    <button
-      color="accent"
-      mat-flat-button
-      (click)="createActivity()"
-      [disabled]="!activityService.isAllowedToCreateActivity()"
-    >
-      add activity
-    </button>
-  </section>
-
-  <hr />
-  <p>Organisation</p>
-
-  <section *ngIf="orga$ | async as orga">
-    <ng-container *ngIf="orga === null">
-    <button
-      color="primary"
-      mat-flat-button
-      (click)="createOrg()"
-      [disabled]="!orgService.isAllowedToCreateOrg()"
-    >
-      create org
-    </button>
-    </ng-container>
-    <ng-container *ngIf="orga !== null">
-
-      <span>
-        Organisation: {{ orga.name }}
-      </span>
-
-      <button
-        color="primary"
-        mat-flat-button
-        (click)="updateOrg(orga.id!)"
-      >
-        org aktualisieren
-      </button>
-    </ng-container>
-  </section>
-</app-content-wrapper>
--->
+              <button
+                color="primary"
+                mat-flat-button
+                (click)="updateOrg(orga.id!)"
+                >
+                org aktualisieren
+              </button>
+            </ng-container>
+          </section>
+        </app-content-wrapper>
+        -->

@@ -1,5 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ValidCheckComponent } from '../valid-check.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormFieldErrorComponent } from '../form-field-error/form-field-error.component';
 
 export const defaultContactGroupFields = {
   firstName: ['', Validators.required],
@@ -12,7 +22,32 @@ export const defaultContactGroupFields = {
 @Component({
   selector: 'app-contact-controls',
   templateUrl: './contact-controls.component.html',
-  styleUrls: ['./contact-controls.component.scss']
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ValidCheckComponent,
+    TranslateModule,
+    FormFieldErrorComponent
+  ],
+  styles: `
+    @use 'theme' as *;
+    @use 'palette' as *;
+
+    .contact-form {
+      display: grid;
+      gap: $spacing-2;
+      .row {
+        display: grid;
+        gap: $spacing-2;
+        grid-template-columns: 1fr;
+        &.cols-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    }
+  `
 })
 export class ContactControlsComponent implements OnInit {
   @Input() formGroupName!: string;

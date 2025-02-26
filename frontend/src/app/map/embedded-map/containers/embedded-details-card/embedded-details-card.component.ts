@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { EmbeddedMapFacade } from '../../../map-facade.service';
+import { Component, inject, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import SearchResult from '../../../models/search-result';
-import { CardService } from '../../../services/card.service';
+import { CardService } from '../../../data/card.service';
 import {
   trigger,
   state,
@@ -11,12 +10,41 @@ import {
   animate,
   transition
 } from '@angular/animations';
-import { SharedMarkerService } from '../../../services/marker.service';
+import { MarkerService } from '../../../data/marker.service';
 import { ImgService } from 'src/app/shared/services/img.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { ExpiredBadgeComponent } from 'src/app/shared/components/base/badges/expired-badge.component';
+import { DetailsLinkComponent } from 'src/app/map/components/details-link.component';
+import { CardLabelComponent } from 'src/app/shared/components/cards/card-label.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CardLogoComponent } from 'src/app/shared/components/cards/card-logo.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { ContentRowComponent } from 'src/app/shared/components/base/content-row.component';
+import { SdgIconComponent } from 'src/app/shared/components/base/sdg-icon.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MapService } from 'src/app/map/data/map.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-embedded-details-card',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    LoadingIndicatorComponent,
+    ExpiredBadgeComponent,
+    DetailsLinkComponent,
+    CardLabelComponent,
+    MatIconModule,
+    CardLogoComponent,
+    OrgaBadgesComponent,
+    ContentRowComponent,
+    SdgIconComponent,
+    TranslateModule
+  ],
   templateUrl: './embedded-details-card.component.html',
   styleUrls: ['./embedded-details-card.component.scss'],
   animations: [
@@ -39,21 +67,31 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
     ])
   ]
 })
-export class EmbeddedDetailsCardComponent implements OnInit {
+export class EmbeddedDetailsCardComponent {
+  private mapService = inject(MapService);
+  private route = inject(ActivatedRoute);
+  public card = inject(CardService);
+  public utils = inject(UtilsService);
+  private marker = inject(MarkerService);
+  private imgService = inject(ImgService);
+
   @Input() mobile = false;
   currentResult?: SearchResult = undefined;
   remainingSdgsVisible = false;
   unsubscribe$ = new Subject();
 
-  constructor(
-    private mapFacade: EmbeddedMapFacade,
-    private router: Router,
-    private route: ActivatedRoute,
-    public card: CardService,
-    public utils: UtilsService,
-    private marker: SharedMarkerService,
-    private imgService: ImgService
-  ) {}
+  constructor() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['type'] && params['id']) {
+        this.mapService.getEntryByIdAndType(params['type'], +params['id']);
+      }
+    });
+    toObservable(this.mapService.currentResult)
+      .pipe(takeUntilDestroyed())
+      .subscribe((res) => {
+        this.currentResult = res || undefined;
+      });
+  }
 
   get bgImage(): string | null {
     return this.imgService.url(this.currentResult?.image);
@@ -72,7 +110,7 @@ export class EmbeddedDetailsCardComponent implements OnInit {
   }
 
   close(): void {
-    this.mapFacade.closeCard();
+    this.mapService.closeCard();
     this.marker.clearMarkerIcons();
   }
 
@@ -80,18 +118,5 @@ export class EmbeddedDetailsCardComponent implements OnInit {
     return this.card.isActivity(entity?.resultType) && entity
       ? this.utils.isExpiredActivity(entity.period)
       : false;
-  }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params['type'] && params['id']) {
-        this.mapFacade.getById(params['type'], +params['id']);
-      }
-    });
-    this.mapFacade.currentResult$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((res) => {
-        this.currentResult = res || undefined;
-      });
   }
 }

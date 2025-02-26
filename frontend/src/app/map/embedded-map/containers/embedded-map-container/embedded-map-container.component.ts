@@ -1,22 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { EmbeddedMapFacade } from '../../../map-facade.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { EmbeddedMapLayoutComponent } from '../../components/map/embedded-map-layout.component';
+import { EmbeddedDetailsCardComponent } from '../embedded-details-card/embedded-details-card.component';
+import { EmbeddedMapComponent } from '../../components/map/embedded-map.component';
+import { MapService } from 'src/app/map/data/map.service';
 
 @Component({
   selector: 'app-embedded-map-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    EmbeddedMapLayoutComponent,
+    EmbeddedDetailsCardComponent,
+    EmbeddedMapComponent
+  ],
   templateUrl: './embedded-map-container.component.html',
   styleUrls: ['./embedded-map-container.component.scss']
 })
 export class EmbeddedMapContainerComponent implements OnInit {
+  private mapService = inject(MapService);
+  private route = inject(ActivatedRoute);
+
   zoom: number | undefined;
   center: L.LatLngTuple = [0, 0];
 
-  constructor(
-    private mapFacade: EmbeddedMapFacade,
-    private readonly route: ActivatedRoute
-  ) {}
+  constructor() {}
 
-  markers$ = this.mapFacade.markers$;
+  markers = this.mapService.markers;
 
   ngOnInit() {
     // get center from url and trim spaces. If it does not exist use Germanys center point.
@@ -34,12 +45,12 @@ export class EmbeddedMapContainerComponent implements OnInit {
       (this.route.snapshot.queryParamMap.get('zoom') as unknown)
     );
 
-    this.mapFacade.setEmbedded(true);
-    this.mapFacade.setInitalFilters();
-    this.mapFacade.search();
+    this.mapService.setEmbedded(true);
+    this.mapService.setInitalFilters();
+    this.mapService.search();
   }
 
   mapMovedHandler(box: string): void {
-    this.mapFacade.setBoundingBox(box);
+    this.mapService.setBoundingBox(box);
   }
 }

@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { SearchHeaderComponent } from '../components/search-header/search-header.component';
 import { SearchService, Type } from '../data/search.service';
 import { TypeFilterComponent } from '../components/type-filter/type-filter.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ResultsHeadingComponent } from '../components/results-heading/results-heading.component';
-import { OrgaCardComponent } from 'src/app/shared/standalone/cards/orga-card/orga-card.component';
-import { EventCardComponent } from 'src/app/shared/standalone/cards/event-card/event-card.component';
-import { MarketplaceCardComponent } from 'src/app/shared/standalone/cards/marketplace-card/marketplace-card.component';
+import { OrgaCardComponent } from 'src/app/shared/components/cards/orga-card/orga-card.component';
+import { EventCardComponent } from 'src/app/shared/components/cards/event-card/event-card.component';
+import { MarketplaceCardComponent } from 'src/app/shared/components/cards/marketplace-card/marketplace-card.component';
 import { RemainingResultsHeadingComponent } from '../components/remaining-results-heading/remaining-results-heading.component';
 import { AllResultsLinkComponent } from '../components/all-results-link/all-results-link.component';
 import { OrgaResultComponent } from '../components/orga-result/orga-result.component';
@@ -16,13 +15,13 @@ import { MarketplaceResultComponent } from '../components/marketplace-result/mar
 import { NoResultsComponent } from '../components/no-results/no-results.component';
 import { LoadingService } from 'src/app/shared/services/loading.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [
-    CommonModule,
-    SharedModule,
     SearchHeaderComponent,
     TypeFilterComponent,
     ResultsHeadingComponent,
@@ -34,7 +33,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
     OrgaResultComponent,
     EventResultComponent,
     MarketplaceResultComponent,
-    NoResultsComponent
+    NoResultsComponent,
+    ContentWrapperComponent,
+    LoadingIndicatorComponent
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'

@@ -9,16 +9,32 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DropzoneService } from '../../../services/dropzone.service';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import {
+  MatButtonToggleChange,
+  MatButtonToggleModule
+} from '@angular/material/button-toggle';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 export type ImageMode = 'cover' | 'contain';
 
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
-  styleUrls: ['./upload-image.component.scss']
+  styleUrls: ['./upload-image.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    DropzoneModule,
+    MatIconModule,
+    TranslateModule
+  ]
 })
 export class UploadImageComponent implements OnInit, OnChanges {
   @Input() disabled = false;

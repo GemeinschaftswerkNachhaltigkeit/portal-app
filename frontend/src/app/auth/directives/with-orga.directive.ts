@@ -8,7 +8,8 @@ import {
 import { AuthService } from '../services/auth.service';
 
 @Directive({
-  selector: '[appWithOrga]'
+  selector: '[appWithOrga]',
+  standalone: true
 })
 export class WithOrgaDirective implements OnInit {
   hasView = false;

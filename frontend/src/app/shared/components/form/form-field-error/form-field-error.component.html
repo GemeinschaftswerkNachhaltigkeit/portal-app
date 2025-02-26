@@ -1,0 +1,130 @@
+<ng-container>
+  @if (field?.invalid && (field?.dirty || field?.touched)) {
+    @if (field?.errors?.['required']) {
+      <span>{{
+        translationPrefix + '.required' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['maxlength']) {
+      <span>{{
+        translationPrefix + '.maxLength' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['minlength']) {
+      <span>{{
+        translationPrefix + '.minLength' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['max']) {
+      <span>{{
+        translationPrefix + '.max' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['min']) {
+      <span>{{
+        translationPrefix + '.min' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['email']) {
+      <span>{{
+        translationPrefix + '.email' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordLength']) {
+      <span>{{
+        translationPrefix + '.passwordLength' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordNumber']) {
+      <span>{{
+        translationPrefix + '.passwordNumber' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordCapitalLetter']) {
+      <span>{{
+        translationPrefix + '.passwordCapitalLetter' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordLowercaseLetter']) {
+      <span>{{
+        translationPrefix + '.passwordLowercaseLetter' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordSymbol']) {
+      <span>{{
+        translationPrefix + '.passwordSymbol' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['passwordMismatch']) {
+      <span>{{
+        translationPrefix + '.passwordMismatch' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['userExists']) {
+      <span>{{
+        translationPrefix + '.userExists' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['matDatepickerMin']) {
+      <span>{{
+        translationPrefix + '.matDatepickerMin' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['leadingZeros']) {
+      <span>{{
+        translationPrefix + '.leadingZeros' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['pattern']) {
+      <span>{{
+        translationPrefix + '.pattern' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['invalidUrl']) {
+      <span>{{
+        translationPrefix + '.invalidUrl' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['invalidWysiwygContentLength']) {
+      <span>{{
+        translationPrefix + '.invalidWysiwygContentLength' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['loadingOptionsError']) {
+      <span>{{
+        translationPrefix + '.loadingOptionsError' + translationSuffix
+        | translate: translationParams
+      }}</span>
+    }
+    @if (field?.errors?.['invalidDuration']) {
+      <span>{{
+        translationPrefix + '.invalidDuration' + translationSuffix
+        | translate: getParams(field?.errors?.['invalidDuration'])
+      }}</span>
+    }
+    @if (field?.errors?.['notInDanPeriod']) {
+      <span>{{
+        translationPrefix + '.notInDanPeriod' + translationSuffix
+        | translate: getParams(field?.errors?.['notInDanPeriod'])
+      }}</span>
+    }
+  }
+</ng-container>

@@ -1,54 +1,103 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  NgForm,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { UserRole } from 'src/app/auth/models/user-role';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { defaultContactGroupFields } from 'src/app/shared/components/form/contact-controls/contact-controls.component';
+import {
+  ContactControlsComponent,
+  defaultContactGroupFields
+} from 'src/app/shared/components/form/contact-controls/contact-controls.component';
 import { urlPattern } from 'src/app/shared/components/validator/url.validator';
 import { wysiwygContentRequired } from 'src/app/shared/components/validator/wysiwyg-content-required.validator';
 import { LabeledKey } from 'src/app/shared/models/labeled-key';
 import { MimeTypeEnum } from 'src/app/shared/models/mimetype';
 import { DropzoneService } from 'src/app/shared/services/dropzone.service';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { OfferCategories } from '../../models/offer-categories';
 import { OfferWipDto } from '../../models/offer-wip-dto';
-import { OffersFacadeService } from '../../offers-facade.service';
 import { DateTime } from 'luxon';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { CategoryControlComponent } from 'src/app/shared/components/form/category-control.component';
+import { ThematicFocusControlComponent } from 'src/app/shared/components/form/thematic-focus-control.component';
+import { UploadImageComponent } from 'src/app/shared/components/form/upload-image/upload-image.component';
+import { ContentWrapperComponent } from 'src/app/shared/components/layout/content-wrapper.component';
+import { PageWithHeaderLayoutComponent } from 'src/app/shared/components/layout/page-with-header-layout.component';
+import { ContentControlsComponent } from '../../components/content-controls.component';
+import { FormSectionListComponent } from '../../components/form-section-list.component';
+import { FormSectionComponent } from '../../components/form-section.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { AddressControlsComponent } from 'src/app/shared/components/form/address-control/address-controls.component';
+import { VisibilityControlsComponent } from '../../components/visibility-controls.component';
+import { OfferFormService } from '../../offer-form.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-offers-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PageWithHeaderLayoutComponent,
+    MatButtonModule,
+    FormSectionListComponent,
+    FormSectionComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    LoadingIndicatorComponent,
+    UploadImageComponent,
+    ContactControlsComponent,
+    ContentWrapperComponent,
+    TranslateModule,
+    ContentControlsComponent,
+    ThematicFocusControlComponent,
+    CategoryControlComponent,
+    MatRadioModule,
+    AddressControlsComponent,
+    VisibilityControlsComponent,
+    SpinnerComponent
+  ],
   templateUrl: './offers-form.component.html',
   styleUrls: ['./offers-form.component.scss']
 })
 export class OffersFormComponent implements OnInit, OnDestroy {
   @ViewChild('form') form!: NgForm;
 
+  public dzService = inject(DropzoneService);
+  private offerFormSerivce = inject(OfferFormService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private utils = inject(UtilsService);
+
   formGroup: FormGroup;
-  unsubscribe$ = new Subject();
-  debounce$ = new Subject();
-  loading$ = this.loader.isLoading$('offer-loading');
-  offersWip$ = this.offersFacade.offersWip$;
-  tokenRefresh$ = this.offersFacade.tokenRefresh$;
+  loading = this.offerFormSerivce.loading;
+  offerWip = this.offerFormSerivce.offerWip;
   orgId: number | null = null;
   uuid: string | null = null;
-  token = this.offersFacade.token;
+  token = this.offerFormSerivce.token;
   isModification = false;
   image = '';
 
-  constructor(
-    fb: FormBuilder,
-    public dzService: DropzoneService,
-    private offersFacade: OffersFacadeService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private loader: LoadingService,
-    private auth: AuthService,
-    private utils: UtilsService
-  ) {
+  unsubscribe$ = new Subject();
+  debounce$ = new Subject();
+
+  constructor(fb: FormBuilder) {
+    this.handleIntialValues();
     this.formGroup = fb.group({
       offerCategory: fb.control<string>('JOBS', {
         validators: [Validators.required]
@@ -93,12 +142,8 @@ export class OffersFormComponent implements OnInit, OnDestroy {
     this.orgId = routeParams['orgId'];
     this.uuid = routeParams['uuid'];
     this.isModification = this.route.snapshot.queryParams['edit'] === 'true';
-    this.tokenRefresh$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      this.token = this.offersFacade.token;
-    });
     this.handleAddressState();
     this.handleSaveOnChange();
-    this.handleIntialValues();
     this.loadExistingOfferWip();
   }
 
@@ -138,7 +183,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
         ','
       ),
       headers: {
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.auth.getAccessToken()}`
       }
     };
   }
@@ -149,13 +194,17 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
   handleDelteImage(): void {
     if (this.orgId && this.uuid) {
-      this.offersFacade.deleteImage(this.orgId, this.uuid);
+      this.offerFormSerivce.deleteImage(this.orgId, this.uuid);
     }
   }
 
   handleSave(): void {
-    if (this.orgId && this.uuid && this.form.dirty) {
-      this.offersFacade.saveOffersWip(this.orgId, this.uuid, this.getPayload());
+    if (this.orgId && this.uuid && this.form?.dirty) {
+      this.offerFormSerivce.saveOffersWip(
+        this.orgId,
+        this.uuid,
+        this.getPayload()
+      );
     }
   }
 
@@ -164,7 +213,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
       this.formGroup.markAllAsTouched();
     } else {
       if (this.orgId && this.uuid) {
-        this.offersFacade.releaseOffersWip(
+        this.offerFormSerivce.releaseOffersWip(
           this.orgId,
           this.uuid,
           this.getPayload()
@@ -231,7 +280,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
   }
 
   private handleIntialValues(): void {
-    this.offersWip$
+    toObservable(this.offerFormSerivce.offerWip)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((wipDto: OfferWipDto | null) => {
         if (wipDto) {
@@ -242,7 +291,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
   private loadExistingOfferWip(): void {
     if (this.orgId && this.uuid) {
-      this.offersFacade.getOffersWip(this.orgId, this.uuid);
+      this.offerFormSerivce.getOffersWip(this.orgId, this.uuid);
     }
   }
 

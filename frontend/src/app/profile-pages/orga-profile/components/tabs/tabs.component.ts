@@ -10,6 +10,9 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 
 import { TabComponent } from './tab.component';
+import { CommonModule } from '@angular/common';
+import { TabButtonsComponent } from './tab-buttons.component';
+import { TabButtonComponent } from './tab-button.component';
 
 export type TabButton = {
   key: number;
@@ -18,6 +21,8 @@ export type TabButton = {
 
 @Component({
   selector: 'app-tabs',
+  standalone: true,
+  imports: [CommonModule, TabButtonsComponent, TabButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [
     `
@@ -31,24 +36,25 @@ export type TabButton = {
     <div class="tabs">
       <div class="tab-buttons">
         <app-tab-buttons>
-          <ng-container *ngFor="let button of buttons">
+          @for (button of buttons; track button) {
             <app-tab-button
               [active]="button.key === selectedTab"
               (clicked)="handleTabChange(button.key)"
               >{{ button.title }}</app-tab-button
             >
-          </ng-container>
+          }
         </app-tab-buttons>
       </div>
       <ng-container>
-        <div
-          class="tab-content-wrapper"
-          *ngFor="let el of content; let i = index"
-        >
-          <div *ngIf="i === selectedTab">
-            <ng-container *ngTemplateOutlet="el.template"></ng-container>
+        @for (el of content; track el; let i = $index) {
+          <div class="tab-content-wrapper">
+            @if (i === selectedTab) {
+              <div>
+                <ng-container *ngTemplateOutlet="el.template"></ng-container>
+              </div>
+            }
           </div>
-        </div>
+        }
       </ng-container>
     </div>
   `

@@ -1,0 +1,87 @@
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { OutlinedIconComponent } from './outlined-icon.component';
+
+@Component({
+  selector: 'app-content-row',
+  standalone: true,
+  imports: [CommonModule, OutlinedIconComponent],
+  template: `@if (content) {
+    <div
+      class="content-row font-2"
+      [ngClass]="{ small: small, cardFooter: cardFooter }"
+    >
+      <div class="content">
+        <app-outlined-icon>{{ icon }}</app-outlined-icon>
+        <p class="text">
+          <mark>{{ content }}</mark>
+        </p>
+      </div>
+    </div>
+  }`,
+  styles: `
+    @use 'theme' as *;
+    @use 'palette' as *;
+    @use '@angular/material' as mat;
+
+    $text-color: mat.m2-get-color-from-palette($wpgwn-app-primary, 500);
+
+    :host {
+      height: fit-content;
+    }
+
+    .content-row {
+      color: $text-color;
+      position: relative;
+
+      &.small {
+        font-size: 1.2rem;
+      }
+
+      p {
+        margin: 0;
+      }
+      mark {
+        box-decoration-break: clone;
+        background: transparent;
+        box-shadow:
+          0 -7px 0 inset $blue-light,
+          0 4px 0 $blue-light;
+        color: $blue-navy;
+      }
+
+      .content {
+        position: relative;
+        z-index: $z1;
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+      }
+
+      .decorator {
+        z-index: $z0;
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -6px;
+        height: 16px;
+        background-color: $blue-light;
+      }
+
+      .cardFooter {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 0 0 50%;
+      }
+    }
+  `
+})
+export class ContentRowComponent {
+  @Input() icon = 'pin_drop';
+  @Input() content? = '';
+  @Input() noDecorator = false;
+  @Input() small = false;
+  @Input() cardFooter = false;
+}

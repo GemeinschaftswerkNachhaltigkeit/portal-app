@@ -14,7 +14,9 @@
 </div>
 @if (isLoading()) {
   <div class="spinner-wrapper">
-    <div class="spinner"><app-spinner [noHeight]="true"></app-spinner></div>
+    <div class="spinner">
+      <app-loading-indicator [noHeight]="true"></app-loading-indicator>
+    </div>
   </div>
 } @else {
   @if (results().length) {

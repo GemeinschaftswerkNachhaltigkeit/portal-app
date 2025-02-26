@@ -1,27 +1,53 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 import { OrganisationService } from 'src/app/sign-up/services/organisation.service';
-import { OrgaFacadeService } from 'src/app/profile-pages/orga-profile/orga-facade.service';
+import { OrgaService } from 'src/app/profile-pages/orga-profile/data/orga.service';
 import { AccountFacadeService } from '../../account-facade.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
+import { CommonModule } from '@angular/common';
+import { AccountLayoutComponent } from '../../components/account-layout.component';
+import { PageMenuComponent } from 'src/app/shared/components/layout/page-menu/page-menu.component';
+import { MenuItemActiveDirective } from 'src/app/shared/components/layout/page-menu/menu-item-active.directive';
+import { MenuItemDirective } from 'src/app/shared/components/layout/page-menu/menu-item.directive';
+import { TranslateModule } from '@ngx-translate/core';
+import { NewBadgeComponent } from 'src/app/shared/components/base/badges/new-badge.component';
+import { AuthenticatedExcludingRolesDirective } from 'src/app/auth/directives/authenticated-excluding-roles.directive';
+import { AuthenticatedDirective } from 'src/app/auth/directives/authenticated.directive';
+import { WithOrgaDirective } from 'src/app/auth/directives/with-orga.directive';
+import { WithoutOrgaDirective } from 'src/app/auth/directives/without-orga.directive';
 
 @Component({
   selector: 'app-account-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AccountLayoutComponent,
+    PageMenuComponent,
+    MenuItemActiveDirective,
+    MenuItemDirective,
+    RouterModule,
+    TranslateModule,
+    AuthenticatedExcludingRolesDirective,
+    AuthenticatedDirective,
+    WithOrgaDirective,
+    WithoutOrgaDirective,
+    NewBadgeComponent
+  ],
   templateUrl: './account-container.component.html',
   styleUrls: ['./account-container.component.scss']
 })
 export class AccountContainerComponent {
-  activities$ = this.orgaFacade.activites$;
-  orga$ = this.orgaFacade.orga$;
+  activities = this.orgaService.activities;
+  orga = this.orgaService.organisation;
 
   constructor(
     private authService: AuthService,
     public activityService: ActivityService,
     public featureService: FeatureService,
     public orgService: OrganisationService,
-    private orgaFacade: OrgaFacadeService,
+    private orgaService: OrgaService,
     private router: Router,
     private accountFacade: AccountFacadeService
   ) {}
@@ -33,7 +59,7 @@ export class AccountContainerComponent {
   private loadOrganisationDataForLoggedInUser() {
     const currentUser = this.authService.getUser();
     if (currentUser && currentUser.orgId) {
-      this.orgaFacade.getById(currentUser.orgId);
+      this.orgaService.getOrganisationById(currentUser.orgId);
     } else {
       throw new Error('error: no activities');
     }

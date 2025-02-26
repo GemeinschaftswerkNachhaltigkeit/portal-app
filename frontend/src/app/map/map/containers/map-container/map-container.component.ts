@@ -6,22 +6,53 @@ import {
   stagger,
   query
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { SubscriptionFacadeService } from 'src/app/shared/components/subscription/subscription-facade.service';
 import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { SecondaryFitlersService } from 'src/app/shared/services/secondary-fitlers.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { InternalMapFacade } from '../../../map-facade.service';
 import { DynamicFilters } from '../../../models/search-filter';
 import SearchResult from '../../../models/search-result';
-import { SharedMarkerService } from '../../../services/marker.service';
-import { MapZoomService } from 'src/app/map/services/map-zoom.service';
+import { MarkerService } from '../../../data/marker.service';
+import { MapZoomService } from 'src/app/map/data/map-zoom.service';
+import { CommonModule } from '@angular/common';
+import { SearchFormComponent } from '../../components/search-form.component';
+import { MapLayoutComponent } from '../../components/map/map-layout.component';
+import { LoadingIndicatorComponent } from 'src/app/shared/components/base/loading-indicator.component';
+import { AlertComponent } from 'src/app/shared/components/base/alert.component';
+import { MatButtonModule } from '@angular/material/button';
+import { PaginatorWrapperComponent } from '../../components/map/paginator-wrapper.component';
+import { BaseCardComponent } from 'src/app/shared/components/cards/base-card/base-card.component';
+import { OrgaBadgesComponent } from 'src/app/shared/components/base/badges/orga-badges.component';
+import { EventBadgesComponent } from 'src/app/shared/components/base/badges/event-badges.component copy';
+import { MapComponent } from '../../components/map/map.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { DetailsCardComponent } from '../details-card/details-card.component';
+import { MapService } from 'src/app/map/data/map.service';
+import { SpinnerComponent } from 'src/app/shared/components/base/spinner.component';
 
 @Component({
   selector: 'app-map-container',
+  standalone: true,
+  imports: [
+    CommonModule,
+    SearchFormComponent,
+    MapLayoutComponent,
+    LoadingIndicatorComponent,
+    AlertComponent,
+    MatButtonModule,
+    PaginatorWrapperComponent,
+    MatPaginatorModule,
+    BaseCardComponent,
+    OrgaBadgesComponent,
+    EventBadgesComponent,
+    MapComponent,
+    TranslateModule,
+    DetailsCardComponent,
+    SpinnerComponent
+  ],
   templateUrl: './map-container.component.html',
   styleUrls: ['./map-container.component.scss'],
   animations: [
@@ -43,19 +74,17 @@ import { MapZoomService } from 'src/app/map/services/map-zoom.service';
   ]
 })
 export class MapContainerComponent implements OnInit {
-  loading$ = this.loading.isLoading$('map-search');
+  filtersService = inject(SecondaryFitlersService);
+  mapService = inject(MapService);
+  private route = inject(ActivatedRoute);
+  private marker = inject(MarkerService);
+  public subscription = inject(SubscriptionFacadeService);
+  public utils = inject(UtilsService);
+  private zoomService = inject(MapZoomService);
+  loading = this.mapService.loading;
 
-  constructor(
-    private mapFacade: InternalMapFacade,
-    private loading: LoadingService,
-    private route: ActivatedRoute,
-    private marker: SharedMarkerService,
-    public subscription: SubscriptionFacadeService,
-    public utils: UtilsService,
-    private zoomService: MapZoomService,
-    filtersService: SecondaryFitlersService
-  ) {
-    filtersService.setOpenFilters('map-filters', []);
+  constructor() {
+    this.filtersService.setOpenFilters('map-filters', []);
   }
 
   /*
@@ -66,19 +95,19 @@ export class MapContainerComponent implements OnInit {
   active = '';
 
   germanyCenter: L.LatLngTuple = [51.1642292, 10.4541194];
-  searchResults$ = this.mapFacade.searchResults$;
-  searchPaging$ = this.mapFacade.searchPaging$;
-  markers$ = this.mapFacade.markers$;
-  filters$ = this.mapFacade.filters$;
-  mapInitialised$ = this.mapFacade.mapInitialised$;
+  searchResults = this.mapService.searchResults;
+  searchPaging = this.mapService.searchResultsPaging;
+  markers = this.mapService.markers;
+  filters = this.mapService.filters;
+  mapInitialised = this.mapService.mapInitialised;
 
   ngOnInit(): void {
-    this.mapFacade.setEmbedded(false);
-    this.mapFacade.setInitalFilters();
-    this.mapFacade.search();
+    this.mapService.setEmbedded(false);
+    this.mapService.setInitalFilters();
+    this.mapService.search();
 
     this.route.queryParams.subscribe((params) => {
-      this.mapFacade.setActiveCard({
+      this.mapService.setActiveCard({
         type: params['type'],
         id: +params['id']
       });
@@ -86,36 +115,37 @@ export class MapContainerComponent implements OnInit {
   }
 
   searchChangedHandler(searchFilter: DynamicFilters): void {
-    this.mapFacade.setActiveCard(undefined);
-    this.mapFacade.search(searchFilter);
+    this.mapService.setActiveCard(undefined);
+    this.mapService.search(searchFilter);
   }
 
   pageChangedHandler(event: PageEvent): void {
-    this.mapFacade.changePage(event.pageIndex, event.pageSize);
+    this.mapService.changePage(event.pageIndex, event.pageSize);
   }
 
   mapMovedHandler(box: string): void {
-    this.mapFacade.setBoundingBox(box);
+    this.mapService.setBoundingBox(box);
+    this.mapService.search();
   }
 
   isActive(result: SearchResult): boolean {
-    return this.mapFacade.isActiveCard(result.resultType, result.id);
+    return this.mapService.isActiveCard(result.resultType, result.id);
   }
 
   openCard(result: SearchResult): void {
-    this.mapFacade.openCard(result.resultType, result.id);
+    this.mapService.openCard(result.resultType, result.id);
     this.marker.triggerMarkerActivation(result);
   }
 
   cardHover(result: SearchResult): void {
-    this.mapFacade.setHoveredCard({
+    this.mapService.setHoveredCard({
       type: result?.resultType || '',
       id: result?.id
     });
     this.marker.triggerMarkerHovered(result);
   }
   clearHovered(): void {
-    this.mapFacade.clearHoveredCard();
+    this.mapService.clearHoveredCard();
     this.marker.triggerMarkerLeaved();
   }
   resetZoomHandler(): void {

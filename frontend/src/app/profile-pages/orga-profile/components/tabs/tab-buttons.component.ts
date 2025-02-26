@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-tab-buttons',
+  standalone: true,
+  imports: [],
   styles: [
     `
       @use 'palette' as *;

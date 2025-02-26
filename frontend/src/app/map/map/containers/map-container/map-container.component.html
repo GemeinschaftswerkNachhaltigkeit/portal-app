@@ -1,111 +1,119 @@
 <app-map-layout>
   <app-search-form
     filter
-    [activeFilters]="filters$ | async"
+    [activeFilters]="filters()"
     (searchParamsChanged)="searchChangedHandler($event)"
   ></app-search-form>
 
+
   <div class="results-wrapper" results>
     <div class="results">
-      <div class="spinner-wrapper">
-        <app-spinner forId="map-search"></app-spinner>
-      </div>
-      <ng-container *ngIf="(loading$ | async) === false">
-        <div
-          class="no-data"
-          *ngIf="
-            !(searchResults$ | async)?.length &&
-            (mapInitialised$ | async) === true
-          "
-        >
-          <app-alert [title]="'map.titles.noData' | translate">
-            <div>
-              {{ 'map.texts.noData.0' | translate }}
-            </div>
-            <button
-              class="resetBtn"
-              mat-flat-button
-              color="accent"
-              (click)="resetZoomHandler()"
-            >
-              {{ 'btn.resetZoom' | translate }}
-            </button>
-          </app-alert>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="(searchResults$ | async)?.length">
-        <app-paginator-wrapper
-          [total]="paging.totalElements"
-          *ngIf="searchPaging$ | async as paging"
-        >
-          <mat-paginator
-            color="accent"
-            [length]="paging?.totalElements"
-            [pageIndex]="paging?.number"
-            [pageSize]="paging?.size || pageSize"
-            [pageSizeOptions]="pageSizeOptions"
-            [showFirstLastButtons]="true"
-            (page)="pageChangedHandler($event)"
-            aria-label="Select page"
-          >
-          </mat-paginator>
-        </app-paginator-wrapper>
-      </ng-container>
-
-      <div class="cards" [@addRemove]="(searchResults$ | async)?.length">
-        <div
-          [id]="'card-' + result.resultType + result.id"
-          class="card-entry"
-          *ngFor="let result of searchResults$ | async"
-        >
-          <div (mouseenter)="cardHover(result)" (mouseleave)="clearHovered()">
-            <app-base-card
-              [entity]="result"
-              [type]="result.resultType"
-              [narrow]="true"
-              [isActive]="isActive(result)"
-              [followed]="subscription.oganisationIsSubcribed(result.id)"
-              [bookmarked]="subscription.activityIsSubcribed(result.id)"
-              (cardClicked)="openCard(result)"
-            >
-              @if (result.resultType === 'ORGANISATION') {
-                <app-orga-badges
-                  badge
-                  [organisation]="utils.asOrga(result)"
-                ></app-orga-badges>
-              } @else {
-                <app-event-badges
-                  badge
-                  [activity]="utils.asActivity(result)"
-                ></app-event-badges>
-              }
-            </app-base-card>
+      
+      @if (!mapService.hasLoader('search')) {
+        @if (
+          !searchResults()?.length &&
+          mapInitialised() === true
+        ) {
+          <div class="no-data">
+            <app-alert [title]="'map.titles.noData' | translate">
+              <div>
+                {{ 'map.texts.noData.0' | translate }}
+              </div>
+              <button
+                class="resetBtn"
+                mat-flat-button
+                color="accent"
+                (click)="resetZoomHandler()"
+              >
+                {{ 'btn.resetZoom' | translate }}
+              </button>
+            </app-alert>
           </div>
+        }
+      } @else {
+        <div class="loader">
+          <app-spinner></app-spinner>
         </div>
+      }
+      @if (searchResults()?.length) {
+        @let paging = searchPaging();
+        @if (paging) {
+          <app-paginator-wrapper [total]="paging.totalElements">
+            <mat-paginator
+              color="accent"
+              [length]="paging?.totalElements"
+              [pageIndex]="paging?.number"
+              [pageSize]="paging?.size || pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              [showFirstLastButtons]="true"
+              (page)="pageChangedHandler($event)"
+              aria-label="Select page"
+            >
+            </mat-paginator>
+          </app-paginator-wrapper>
+        }
+      }
+
+      <div class="cards" [@addRemove]="searchResults()?.length">
+      
+        @for (result of searchResults(); track result.id) {
+          <div
+            [id]="'card-' + result.resultType + result.id"
+            class="card-entry"
+          >
+            <div (mouseenter)="cardHover(result)" (mouseleave)="clearHovered()">
+              <app-base-card
+                [entity]="result"
+                [type]="result.resultType"
+                [narrow]="true"
+                [isActive]="isActive(result)"
+                [followed]="subscription.oganisationIsSubcribed(result.id)"
+                [bookmarked]="subscription.activityIsSubcribed(result.id)"
+                (cardClicked)="openCard(result)"
+              >
+                @if (result.resultType === 'ORGANISATION') {
+                  <app-orga-badges
+                    badge
+                    [organisation]="utils.asOrga(result)"
+                  ></app-orga-badges>
+                } @else {
+                  <app-event-badges
+                    badge
+                    [activity]="utils.asActivity(result)"
+                  ></app-event-badges>
+                }
+              </app-base-card>
+            </div>
+          </div>
+        }
       </div>
 
-      <mat-paginator
-        class="mat-elevation-z8"
-        *ngIf="(searchResults$ | async)?.length"
-        color="accent"
-        [length]="(searchPaging$ | async)?.totalElements"
-        [pageIndex]="(searchPaging$ | async)?.number"
-        [pageSize]="(searchPaging$ | async)?.size || pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        [showFirstLastButtons]="true"
-        (page)="pageChangedHandler($event)"
-        aria-label="Select page"
-      >
-      </mat-paginator>
+      @if (searchResults()?.length) {
+        @let paging = searchPaging();
+        <mat-paginator
+          class="mat-elevation-z8 paginator-bottom"
+          color="accent"
+          [length]="paging?.totalElements"
+          [pageIndex]="paging?.number"
+          [pageSize]="paging?.size || pageSize"
+          [pageSizeOptions]="pageSizeOptions"
+          [showFirstLastButtons]="true"
+          (page)="pageChangedHandler($event)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      }
     </div>
   </div>
   <div map>
-    <app-map
-      *ngIf="markers$ | async as markers"
-      [center]="germanyCenter"
-      [data]="markers"
-      (mapMoved)="mapMovedHandler($event)"
-    ></app-map>
+    @let allMarkers = markers();
+    @if (allMarkers) {
+      <app-map
+        [center]="germanyCenter"
+        [data]="allMarkers"
+        (mapMoved)="mapMovedHandler($event)"
+      ></app-map>
+    }
   </div>
   <app-details-card detailsDesktop></app-details-card>
   <app-details-card detailsMobile [mobile]="true"></app-details-card>

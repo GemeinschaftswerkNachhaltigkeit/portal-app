@@ -1,179 +1,220 @@
-import { Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import EventDto from '../models/event-dto';
-import {
-  BehaviorSubject,
-  Observable,
-  filter,
-  map,
-  skip,
-  switchMap,
-  take
-} from 'rxjs';
+import { EMPTY, catchError, filter, switchMap, take, tap } from 'rxjs';
 import PagedResponse from 'src/app/shared/models/paged-response';
-import Paging, { defaultPaginatorOptions } from 'src/app/shared/models/paging';
+import { defaultPaginatorOptions } from 'src/app/shared/models/paging';
 import { EventsApiService } from './events-api.service';
 import { FeedbackService } from 'src/app/shared/components/feedback/feedback.service';
 import SearchFilter, { DynamicFilters } from '../models/search-filter';
 import { TranslateService } from '@ngx-translate/core';
 import { PersistFiltersService } from 'src/app/shared/services/persist-filters.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { LoadingService } from 'src/app/shared/services/loading.service';
 import { DateTime } from 'luxon';
-import { RegisterOrLoginService } from 'src/app/core/services/register-or-login.service.service';
+import { RegisterOrLoginService } from 'src/app/shared/services/register-or-login.service.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FeatureService } from 'src/app/shared/components/feature/feature.service';
 import { LandingpageService } from 'src/app/shared/services/landingpage.service';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export type EventCalenderEntry = { count: number; inDanPeriod: boolean };
+
+type AvailableEvents = {
+  [key: string]: EventCalenderEntry;
+} | null;
+
+interface EventState {
+  filters: SearchFilter;
+  pagedEvents: PagedResponse<EventDto> | null;
+  events: EventDto[];
+  availableEvents: AvailableEvents;
+  currentCalenderMonth: DateTime;
+  loading: boolean;
+  filtersChanged: boolean;
+  nextPage: number;
+  initialized: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  private nextPage = 0;
-  private fitlersChanged = false;
-  private searchFilters = new BehaviorSubject<SearchFilter>({});
-  private pagedEventsState = new BehaviorSubject<PagedResponse<EventDto>>({
-    content: []
+  private api = inject(EventsApiService);
+  private feedback = inject(FeedbackService);
+  private translate = inject(TranslateService);
+  private route = inject(ActivatedRoute);
+  private persistFilters = inject(PersistFiltersService);
+  private registerOrLogin = inject(RegisterOrLoginService);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private feature = inject(FeatureService);
+  private lp = inject(LandingpageService);
+
+  // state
+  private state = signal<EventState>({
+    filters: {},
+    pagedEvents: null,
+    events: [],
+    availableEvents: null,
+    currentCalenderMonth: DateTime.now().startOf('month'),
+    loading: false,
+    filtersChanged: false,
+    nextPage: 0,
+    initialized: false
   });
-  private eventsState = new BehaviorSubject<EventDto[]>([]);
-  private availableEventsState = new BehaviorSubject<{
-    [key: string]: EventCalenderEntry;
-  } | null>(null);
-  private currentCalenderMonth = new BehaviorSubject<DateTime>(
-    DateTime.now().startOf('month')
+
+  // selectors
+
+  readonly filters = computed(() => this.state().filters);
+  readonly filtersChanged = computed(() => this.state().filtersChanged);
+  readonly loading = computed(() => this.state().loading);
+  readonly nextPage = computed(() => this.state().nextPage);
+  readonly currentMonth = computed(() => this.state().currentCalenderMonth);
+  readonly events = computed(() => this.state().events);
+  readonly availableEvents = computed(() => this.state().availableEvents);
+  readonly initialized = computed(() => this.state().availableEvents);
+  readonly currentMonthOfCalendar = computed(
+    () => this.state().currentCalenderMonth
   );
-  initialized = false;
+  readonly groupedEvents = computed(() => {
+    const groups: { [date: string]: EventDto[] } = {};
+    this.events().forEach((e) => {
+      const start = e.period?.start;
+      let day: string = 'undefined';
+      if (start) {
+        day = DateTime.fromISO(start).toISODate() || '';
+      }
 
-  constructor(
-    private eventsApi: EventsApiService,
-    private feedback: FeedbackService,
-    private translate: TranslateService,
-    private route: ActivatedRoute,
-    private loader: LoadingService,
-    private persistFilters: PersistFiltersService,
-    private registerOrLogin: RegisterOrLoginService,
-    private router: Router,
-    private auth: AuthService,
-    private feature: FeatureService,
-    private lp: LandingpageService
-  ) {
-    // this.triggerSearchOnQueryParamsChange();
+      if (!groups[day]) groups[day] = [];
+      groups[day].push(e);
+    });
+    return Object.entries(groups).map((e) => {
+      return {
+        group: e[0],
+        list: e[1]
+      };
+    });
+  });
+  readonly eventsPaging = computed(() => ({
+    number: this.state().pagedEvents?.number,
+    size: this.state().pagedEvents?.size,
+    totalElements: this.state().pagedEvents?.totalElements,
+    totalPages: this.state().pagedEvents?.totalPages
+  }));
+
+  constructor() {
     this.triggerNewEventRedirect();
-
-    this.searchFilters
-      .pipe(
-        skip(1),
-        switchMap((searchParams) => {
-          this.loader.start('load-events');
-          this.loadAvailableEvents();
-          return this.eventsApi.search(searchParams, this.nextPage);
-        })
-      )
-      .subscribe({
-        next: (data: PagedResponse<EventDto>) => {
-          this.loader.stop('load-events');
-          this.initialized = true;
-          this.updateState(data);
-          this.fitlersChanged = false;
-        },
-        error: () => {
-          this.fitlersChanged = false;
-          this.loader.stop('load-events');
-          this.feedback.showFeedback(
-            'error',
-            this.translate.instant('errors.unkown')
-          );
-        }
-      });
+    this.searchEventsOnFilterChange();
+    this.featchAvailableEventsOnFilterChange();
   }
 
-  get availableEvents$(): Observable<{
-    [key: string]: EventCalenderEntry;
-  } | null> {
-    return this.availableEventsState.asObservable();
+  // actions
+
+  private startLoading() {
+    this.state.update((state) => ({
+      ...state,
+      loading: true
+    }));
   }
 
-  get events$(): Observable<EventDto[]> {
-    return this.eventsState.asObservable();
+  private stopLoading() {
+    this.state.update((state) => ({
+      ...state,
+      loading: false
+    }));
   }
 
-  get groupedEvents$(): Observable<{ group: string; list: EventDto[] }[]> {
-    return this.eventsState.asObservable().pipe(
-      map((events: EventDto[]) => {
-        const groups: { [date: string]: EventDto[] } = {};
-        events.forEach((e) => {
-          const start = e.period?.start;
-          let day: string = 'undefined';
-          if (start) {
-            day = DateTime.fromISO(start).toISODate() || '';
-          }
-
-          if (!groups[day]) groups[day] = [];
-          groups[day].push(e);
-        });
-        return Object.entries(groups).map((e) => {
-          return {
-            group: e[0],
-            list: e[1]
-          };
-        });
-      })
-    );
+  private setSearchResults(response: PagedResponse<EventDto> | null) {
+    this.state.update((state) => ({
+      ...state,
+      pagedEvents: response,
+      events: [...state.events, ...(response?.content || [])],
+      loading: false
+    }));
   }
 
-  get eventsPaging$(): Observable<Paging> {
-    return this.pagedEventsState.asObservable().pipe(
-      map((response) => ({
-        number: response.number,
-        size: response.size,
-        totalElements: response.totalElements,
-        totalPages: response.totalPages
-      }))
-    );
+  private setAvailableEvents(events: AvailableEvents) {
+    this.state.update((state) => ({
+      ...state,
+      availableEvents: events
+    }));
   }
 
-  getCurrentMonthOfCalendar(): DateTime {
-    return this.currentCalenderMonth.value;
+  private setFilterChanged(changed: boolean) {
+    this.state.update((state) => ({
+      ...state,
+      filtersChanged: changed
+    }));
+  }
+
+  private setInitialized(init: boolean) {
+    this.state.update((state) => ({
+      ...state,
+      initialized: init
+    }));
+  }
+
+  private setNextPage(page: number) {
+    this.state.update((state) => ({
+      ...state,
+      nextPage: page
+    }));
+  }
+
+  private setError(err: HttpErrorResponse) {
+    this.state.update((state) => ({
+      ...state,
+      error: {
+        message: this.getErrorMessage(err),
+        status: err.status
+      },
+      loading: false
+    }));
+    return EMPTY;
+  }
+
+  resetState() {
+    this.state.update((state) => ({
+      ...state,
+      pagedEvents: null,
+      events: [],
+      filtersChanged: false,
+      nextPage: 0
+    }));
+  }
+
+  reset(): void {
+    this.resetState();
+    this.persistFilters.setFiltersToUrl({});
+  }
+
+  setFilterState(filters: SearchFilter) {
+    this.state.update((state) => ({
+      ...state,
+      filters: filters
+    }));
+  }
+
+  setFilters() {
+    const filters = this.getFilters();
+    this.state.update((state) => ({
+      ...state,
+      filters: filters
+    }));
+  }
+
+  triggerSearch(): void {
+    if (this.initialized()) {
+      this.reset();
+      this.setFilterState({});
+    }
   }
 
   setCurrentMonthOfCalendar(month: DateTime): void {
-    this.currentCalenderMonth.next(month.startOf('month'));
-  }
-
-  loadAvailableEvents(cb?: () => void): void {
-    const month = this.currentCalenderMonth.value;
-    this.eventsApi
-      .getDates(month, this.getFilters())
-      .pipe(take(1))
-      .subscribe({
-        next: (dates) => {
-          const entries = Object.entries(dates).reduce(
-            (
-              entries: { [key: string]: EventCalenderEntry },
-              [date, count]: [string, number]
-            ) => {
-              const inDanPeriod = this.inDanPeriod(DateTime.fromISO(date));
-              entries[date] = { count, inDanPeriod };
-              return entries;
-            },
-            {}
-          );
-          this.availableEventsState.next(entries);
-          if (cb) cb();
-        },
-        error: (e) => {
-          console.log(e);
-        }
-      });
-  }
-
-  searchValuesChanged(query: string, location: string) {
-    const existingFilters = this.getFilters();
-    return (
-      query !== existingFilters['query'] ||
-      location !== existingFilters['location']
-    );
+    this.state.update((state) => ({
+      ...state,
+      currentCalenderMonth: month.startOf('month')
+    }));
   }
 
   search(searchFilter: DynamicFilters): void {
@@ -187,58 +228,18 @@ export class EventsService {
   }
 
   loadMore(): void {
-    if (!this.fitlersChanged && this.eventsState.value.length > 0) {
-      const pageInfo = this.pagedEventsState.value;
+    if (!this.filtersChanged() && this.events().length > 0) {
+      const pageInfo = this.eventsPaging();
       const itemsPerPage = defaultPaginatorOptions.pageSize;
       const total = pageInfo.totalElements ?? 0;
-      const nextPage = this.nextPage + 1;
+      const nextPage = this.nextPage() + 1;
       const hasItemsLeft = total - itemsPerPage * nextPage > 0;
       if (hasItemsLeft) {
-        this.nextPage = nextPage;
+        this.setNextPage(nextPage);
         const filters = this.getFilters();
-        this.searchFilters.next(filters);
+        this.setFilterState(filters);
       }
     }
-  }
-
-  resetState() {
-    this.fitlersChanged = true;
-    this.nextPage = 0;
-    this.eventsState.next([]);
-    this.pagedEventsState.next({ content: [] });
-  }
-
-  reset(): void {
-    this.resetState();
-    this.persistFilters.setFiltersToUrl({});
-  }
-
-  triggerSearch(): void {
-    if (this.initialized) {
-      this.reset();
-      this.searchFilters.next({});
-    }
-  }
-
-  private updateState(data: PagedResponse<EventDto>): void {
-    this.pagedEventsState.next(data);
-    this.eventsState.next([...this.eventsState.value, ...data.content]);
-  }
-
-  setFilters() {
-    const filters = this.getFilters();
-    this.searchFilters.next(filters);
-  }
-
-  private triggerSearchOnQueryParamsChange(): void {
-    this.route.queryParamMap.subscribe(() => {
-      const filters = this.getFilters();
-      this.searchFilters.next(filters);
-    });
-  }
-
-  getFilters(): DynamicFilters {
-    return this.persistFilters.getFiltersFromUrl(['thematicFocus']);
   }
 
   addNewEvent(): void {
@@ -271,6 +272,62 @@ export class EventsService {
     }
   }
 
+  // async
+  private searchEventsOnFilterChange() {
+    toObservable(this.filters)
+      .pipe(
+        tap(() => this.startLoading()),
+
+        switchMap((filters) => this.api.search(filters, this.nextPage())),
+        takeUntilDestroyed(),
+        catchError((err) => {
+          this.setFilterChanged(false);
+          this.feedback.showFeedback(
+            'error',
+            this.translate.instant('errors.unkown')
+          );
+          return this.setError(err);
+        })
+      )
+      .subscribe((response) => {
+        this.setSearchResults(response);
+        this.setInitialized(true);
+        this.setFilterChanged(true);
+      });
+  }
+
+  private featchAvailableEventsOnFilterChange() {
+    toObservable(this.filters)
+      .pipe(
+        tap(() => this.loadAvailableEvents()),
+
+        takeUntilDestroyed(),
+        catchError(() => EMPTY)
+      )
+      .subscribe(() => {});
+  }
+
+  loadAvailableEvents(cb?: () => void): void {
+    this.api
+      .getDates(this.currentMonth(), this.getFilters())
+      .pipe(take(1))
+      .subscribe((dates) => {
+        const entries = Object.entries(dates).reduce(
+          (
+            entries: { [key: string]: EventCalenderEntry },
+            [date, count]: [string, number]
+          ) => {
+            const inDanPeriod = this.inDanPeriod(DateTime.fromISO(date));
+            entries[date] = { count, inDanPeriod };
+            return entries;
+          },
+          {}
+        );
+        this.setAvailableEvents(entries);
+        if (cb) cb();
+      });
+  }
+
   private triggerNewEventRedirect(): void {
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
@@ -280,6 +337,25 @@ export class EventsService {
           this.finalizeAddNewEvent();
         }
       });
+  }
+
+  // helpers
+
+  searchValuesChanged(query: string, location: string) {
+    const existingFilters = this.getFilters();
+    return (
+      query !== existingFilters['query'] ||
+      location !== existingFilters['location']
+    );
+  }
+
+  getFilters(): DynamicFilters {
+    return this.persistFilters.getFiltersFromUrl(['thematicFocus']);
+  }
+
+  private getErrorMessage(err: HttpErrorResponse): string {
+    console.log(err);
+    return '';
   }
 
   private inDanPeriod(date: DateTime): boolean {
